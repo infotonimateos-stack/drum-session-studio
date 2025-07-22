@@ -55,11 +55,11 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="w-full h-32 flex items-center justify-center bg-white rounded-lg mb-4">
+            <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
               <img 
                 src="/lovable-uploads/motu-8pre.png" 
                 alt="MOTU 8Pre Preamps"
-                className="max-h-28 max-w-full object-contain bg-white p-2"
+                className="max-h-28 max-w-full object-contain bg-transparent"
                 style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
               />
             </div>
@@ -112,11 +112,11 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="w-full h-32 flex items-center justify-center bg-white rounded-lg mb-4">
+            <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
               <img 
                 src="/lovable-uploads/5fc42764-3380-4942-8c16-c462d1961fae.png" 
                 alt="API Neve DAD Preamps"
-                className="max-h-28 max-w-full object-contain bg-white p-2"
+                className="max-h-28 max-w-full object-contain bg-transparent"
                 style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
               />
             </div>
