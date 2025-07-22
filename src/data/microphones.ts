@@ -51,8 +51,8 @@ export const baseMicrophones: Microphone[] = [
     name: 'Sennheiser 421',
     price: 0,
     included: true,
-    description: 'Micrófono dinámico para floor tom',
-    target: 'Floor Tom',
+    description: 'Micrófono dinámico para tom 3',
+    target: 'Tom 3',
     image: '/lovable-uploads/5b4e514d-0c50-42a1-834a-3b4c1d7ab825.png'
   },
   {
