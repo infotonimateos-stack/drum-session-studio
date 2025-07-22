@@ -82,7 +82,7 @@ export const upgradeMicrophones: Microphone[] = [
     price: 89.90,
     included: false,
     description: 'Micrófono de condensador premium para voces principales',
-    target: 'Vocal Principal',
+    target: 'Room',
     image: '/lovable-uploads/018df378-819a-48fb-9962-28969e162a4f.png'
   },
   {
