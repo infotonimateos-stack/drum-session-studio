@@ -4,14 +4,16 @@ import { Badge } from "@/components/ui/badge";
 import { Check, Plus, Headphones } from "lucide-react";
 import { baseMicrophones, upgradeMicrophones } from "@/data/microphones";
 import { CartItem } from "@/types/cart";
-
 interface MicrophonesStepProps {
   addItem: (item: CartItem) => void;
   removeItem: (itemId: string) => void;
   hasItem: (itemId: string) => boolean;
 }
-
-export const MicrophonesStep = ({ addItem, removeItem, hasItem }: MicrophonesStepProps) => {
+export const MicrophonesStep = ({
+  addItem,
+  removeItem,
+  hasItem
+}: MicrophonesStepProps) => {
   const handleToggleItem = (microphone: any) => {
     const cartItem: CartItem = {
       id: microphone.id,
@@ -20,16 +22,13 @@ export const MicrophonesStep = ({ addItem, removeItem, hasItem }: MicrophonesSte
       category: "Micrófono",
       description: `${microphone.description} - ${microphone.target}`
     };
-
     if (hasItem(microphone.id)) {
       removeItem(microphone.id);
     } else {
       addItem(cartItem);
     }
   };
-
-  return (
-    <div className="space-y-12">
+  return <div className="space-y-12">
       {/* Header */}
       <div className="text-center space-y-6">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -51,22 +50,16 @@ export const MicrophonesStep = ({ addItem, removeItem, hasItem }: MicrophonesSte
         </div>
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {baseMicrophones.map((mic) => (
-            <Card key={mic.id} className="bg-gradient-to-br from-card to-muted border-success/30 hover:shadow-xl transition-all duration-300">
+          {baseMicrophones.map(mic => <Card key={mic.id} className="bg-gradient-to-br from-card to-muted border-success/30 hover:shadow-xl transition-all duration-300">
               <CardHeader className="pb-4">
                 <Badge variant="outline" className="border-success text-success mb-3 self-center text-sm px-3 py-1">
                   {mic.target}
                 </Badge>
-                {mic.image && (
-                 <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg">
-                     <img 
-                       src={mic.image} 
-                       alt={mic.name}
-                       className="max-h-28 max-w-full object-contain bg-muted/30 rounded-lg p-2"
-                       style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
-                     />
-                  </div>
-                )}
+                {mic.image && <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg">
+                     <img src={mic.image} alt={mic.name} className="max-h-28 max-w-full object-contain bg-muted/30 rounded-lg p-2" style={{
+                filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
+              }} />
+                  </div>}
               </CardHeader>
               <CardContent className="pt-0">
                 <h4 className="font-bold text-base mb-2 text-center">{mic.name}</h4>
@@ -75,8 +68,7 @@ export const MicrophonesStep = ({ addItem, removeItem, hasItem }: MicrophonesSte
                   <span className="text-sm text-success font-bold">INCLUIDO</span>
                 </div>
               </CardContent>
-            </Card>
-          ))}
+            </Card>)}
         </div>
       </div>
 
@@ -91,19 +83,9 @@ export const MicrophonesStep = ({ addItem, removeItem, hasItem }: MicrophonesSte
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-          {upgradeMicrophones.map((mic) => {
-            const isSelected = hasItem(mic.id);
-            
-            return (
-              <Card 
-                key={mic.id} 
-                className={`transition-all duration-300 hover:shadow-xl cursor-pointer transform hover:scale-105 ${
-                  isSelected 
-                    ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-xl scale-105' 
-                    : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'
-                }`}
-                onClick={() => handleToggleItem(mic)}
-              >
+          {upgradeMicrophones.map(mic => {
+          const isSelected = hasItem(mic.id);
+          return <Card key={mic.id} className={`transition-all duration-300 hover:shadow-xl cursor-pointer transform hover:scale-105 ${isSelected ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-xl scale-105' : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'}`} onClick={() => handleToggleItem(mic)}>
                 <CardHeader className="pb-4">
                   <div className="flex items-center justify-between mb-4">
                     <Badge variant="outline" className="text-sm px-3 py-1">
@@ -111,48 +93,32 @@ export const MicrophonesStep = ({ addItem, removeItem, hasItem }: MicrophonesSte
                     </Badge>
                     <span className="font-bold text-xl text-primary">€{mic.price.toFixed(2)}</span>
                   </div>
-                   {mic.image && (
-                    <div className="w-full h-40 flex items-center justify-center bg-muted/30 rounded-lg">
-                       <img 
-                         src={mic.image} 
-                         alt={mic.name}
-                         className="max-h-36 max-w-full object-contain bg-muted/30 rounded-lg p-2"
-                         style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
-                       />
-                    </div>
-                   )}
+                   {mic.image && <div className="w-full h-40 flex items-center justify-center bg-muted/30 rounded-lg">
+                       <img src={mic.image} alt={mic.name} className="max-h-36 max-w-full object-contain bg-muted/30 rounded-lg p-2" style={{
+                  filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
+                }} />
+                    </div>}
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <h4 className="font-bold text-lg text-center">{mic.name}</h4>
                   <p className="text-muted-foreground text-center leading-relaxed">{mic.description}</p>
                   
-                  <Button
-                    variant={isSelected ? "default" : "upgrade"}
-                    size="lg"
-                    className="w-full h-12 text-base font-bold"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleToggleItem(mic);
-                    }}
-                  >
-                    {isSelected ? (
-                      <>
+                  <Button variant={isSelected ? "default" : "upgrade"} size="lg" className="w-full h-12 text-base font-bold" onClick={e => {
+                e.stopPropagation();
+                handleToggleItem(mic);
+              }}>
+                    {isSelected ? <>
                         <Check className="h-5 w-5 mr-2" />
                         ✨ AÑADIDO
-                      </>
-                    ) : (
-                      <>
+                      </> : <>
                         <Plus className="h-5 w-5 mr-2" />
                         AÑADIR €{mic.price.toFixed(2)}
-                      </>
-                    )}
+                      </>}
                   </Button>
                 </CardContent>
-              </Card>
-            );
-          })}
+              </Card>;
+        })}
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
