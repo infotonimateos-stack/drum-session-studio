@@ -52,12 +52,21 @@ export const MicrophonesStep = ({ addItem, removeItem, hasItem }: MicrophonesSte
           {baseMicrophones.map((mic) => (
             <Card key={mic.id} className="bg-gradient-to-br from-card to-muted border-success/30">
               <CardHeader className="pb-2">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 mb-2">
                   <Headphones className="h-4 w-4 text-success" />
                   <Badge variant="outline" className="border-success text-success">
                     {mic.target}
                   </Badge>
                 </div>
+                {mic.image && (
+                  <div className="w-full h-20 flex items-center justify-center bg-muted/30 rounded">
+                    <img 
+                      src={mic.image} 
+                      alt={mic.name}
+                      className="max-h-16 max-w-full object-contain"
+                    />
+                  </div>
+                )}
               </CardHeader>
               <CardContent>
                 <h4 className="font-semibold text-sm mb-1">{mic.name}</h4>
@@ -95,12 +104,21 @@ export const MicrophonesStep = ({ addItem, removeItem, hasItem }: MicrophonesSte
                 onClick={() => handleToggleItem(mic)}
               >
                 <CardHeader className="pb-2">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mb-2">
                     <Badge variant="outline" className="text-xs">
                       {mic.target}
                     </Badge>
                     <span className="font-bold text-primary">€{mic.price.toFixed(2)}</span>
                   </div>
+                  {mic.image && (
+                    <div className="w-full h-24 flex items-center justify-center bg-muted/30 rounded">
+                      <img 
+                        src={mic.image} 
+                        alt={mic.name}
+                        className="max-h-20 max-w-full object-contain"
+                      />
+                    </div>
+                  )}
                 </CardHeader>
                 <CardContent>
                   <h4 className="font-semibold mb-2">{mic.name}</h4>

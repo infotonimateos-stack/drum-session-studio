@@ -7,7 +7,8 @@ export const baseMicrophones: Microphone[] = [
     price: 0,
     included: true,
     description: 'Micrófono dinámico para caja',
-    target: 'Snare Top'
+    target: 'Snare Top',
+    image: '/lovable-uploads/microphone-generic.png'
   },
   {
     id: 'beta52-kick',
@@ -15,7 +16,8 @@ export const baseMicrophones: Microphone[] = [
     price: 0,
     included: true,
     description: 'Micrófono dinámico para bombo',
-    target: 'Bombo'
+    target: 'Bombo',
+    image: '/lovable-uploads/microphone-generic.png'
   },
   {
     id: 'km184-hihat',
@@ -23,7 +25,8 @@ export const baseMicrophones: Microphone[] = [
     price: 0,
     included: true,
     description: 'Micrófono de condensador para hi-hat',
-    target: 'Hi-Hat'
+    target: 'Hi-Hat',
+    image: '/lovable-uploads/microphone-generic.png'
   },
   {
     id: 'sen421-tom1',
@@ -31,7 +34,8 @@ export const baseMicrophones: Microphone[] = [
     price: 0,
     included: true,
     description: 'Micrófono dinámico para tom 1',
-    target: 'Tom 1'
+    target: 'Tom 1',
+    image: '/lovable-uploads/microphone-generic.png'
   },
   {
     id: 'sen421-tom2',
@@ -39,7 +43,8 @@ export const baseMicrophones: Microphone[] = [
     price: 0,
     included: true,
     description: 'Micrófono dinámico para tom 2',
-    target: 'Tom 2'
+    target: 'Tom 2',
+    image: '/lovable-uploads/microphone-generic.png'
   },
   {
     id: 'sen421-floor',
@@ -47,7 +52,8 @@ export const baseMicrophones: Microphone[] = [
     price: 0,
     included: true,
     description: 'Micrófono dinámico para floor tom',
-    target: 'Floor Tom'
+    target: 'Floor Tom',
+    image: '/lovable-uploads/microphone-generic.png'
   },
   {
     id: 'akg414-oh1',
@@ -55,7 +61,8 @@ export const baseMicrophones: Microphone[] = [
     price: 0,
     included: true,
     description: 'Micrófono de condensador overhead izquierdo',
-    target: 'Overhead L'
+    target: 'Overhead L',
+    image: '/lovable-uploads/20c9fdfa-17f5-4876-9016-cbfb6ce4c107.png'
   },
   {
     id: 'akg414-oh2',
@@ -63,7 +70,8 @@ export const baseMicrophones: Microphone[] = [
     price: 0,
     included: true,
     description: 'Micrófono de condensador overhead derecho',
-    target: 'Overhead R'
+    target: 'Overhead R',
+    image: '/lovable-uploads/20c9fdfa-17f5-4876-9016-cbfb6ce4c107.png'
   }
 ];
 
@@ -74,7 +82,8 @@ export const upgradeMicrophones: Microphone[] = [
     price: 2.99,
     included: false,
     description: 'Micrófono de condensador para bombo',
-    target: 'Bombo'
+    target: 'Bombo',
+    image: '/lovable-uploads/microphone-generic.png'
   },
   {
     id: 'd112-kick',
@@ -82,7 +91,8 @@ export const upgradeMicrophones: Microphone[] = [
     price: 3.99,
     included: false,
     description: 'Micrófono dinámico para bombo',
-    target: 'Bombo'
+    target: 'Bombo',
+    image: '/lovable-uploads/32616ea5-218a-4043-8ca0-3bf369ef8f55.png'
   },
   {
     id: 'd6-kick',
@@ -90,7 +100,8 @@ export const upgradeMicrophones: Microphone[] = [
     price: 4.99,
     included: false,
     description: 'Micrófono dinámico para bombo',
-    target: 'Bombo'
+    target: 'Bombo',
+    image: '/lovable-uploads/06149d1c-e982-40b5-b71c-ee8e791d8327.png'
   },
   {
     id: 'subkick-kick',
@@ -98,7 +109,8 @@ export const upgradeMicrophones: Microphone[] = [
     price: 5.99,
     included: false,
     description: 'Subwoofer para bombo',
-    target: 'Bombo'
+    target: 'Bombo',
+    image: '/lovable-uploads/microphone-generic.png'
   },
   {
     id: 'u47fet-kick',
@@ -106,7 +118,8 @@ export const upgradeMicrophones: Microphone[] = [
     price: 6.99,
     included: false,
     description: 'Micrófono de condensador vintage para bombo',
-    target: 'Bombo'
+    target: 'Bombo',
+    image: '/lovable-uploads/microphone-generic.png'
   },
   {
     id: 'akg414-snare',
@@ -114,7 +127,8 @@ export const upgradeMicrophones: Microphone[] = [
     price: 3.99,
     included: false,
     description: 'Micrófono de condensador para caja top',
-    target: 'Snare Top'
+    target: 'Snare Top',
+    image: '/lovable-uploads/130f3ae4-e2e6-4ff5-971f-6b8da515263e.png'
   },
   {
     id: 'sen441-snare',
@@ -122,7 +136,8 @@ export const upgradeMicrophones: Microphone[] = [
     price: 4.99,
     included: false,
     description: 'Micrófono dinámico para caja bottom',
-    target: 'Snare Bottom'
+    target: 'Snare Bottom',
+    image: '/lovable-uploads/microphone-generic.png'
   },
   {
     id: 'm160-hihat',
@@ -130,7 +145,8 @@ export const upgradeMicrophones: Microphone[] = [
     price: 4.99,
     included: false,
     description: 'Micrófono de ribbon para hi-hat',
-    target: 'Hi-Hat'
+    target: 'Hi-Hat',
+    image: '/lovable-uploads/2f72b48e-2149-413c-8cbd-bdcd2001a8a6.png'
   },
   {
     id: 'coles4038-oh',
@@ -138,7 +154,8 @@ export const upgradeMicrophones: Microphone[] = [
     price: 5.99,
     included: false,
     description: 'Par de micrófonos ribbon como overheads',
-    target: 'Overheads'
+    target: 'Overheads',
+    image: '/lovable-uploads/4d9889da-030f-4db9-876d-8b9ff0902139.png'
   },
   {
     id: 'u87-room',
@@ -146,7 +163,8 @@ export const upgradeMicrophones: Microphone[] = [
     price: 5.99,
     included: false,
     description: 'Par de micrófonos de condensador como room',
-    target: 'Room'
+    target: 'Room',
+    image: '/lovable-uploads/microphone-generic.png'
   },
   {
     id: 'km184-ride',
@@ -154,7 +172,8 @@ export const upgradeMicrophones: Microphone[] = [
     price: 3.99,
     included: false,
     description: 'Micrófono de condensador para ride',
-    target: 'Ride'
+    target: 'Ride',
+    image: '/lovable-uploads/microphone-generic.png'
   },
   {
     id: 'akg414-mono',
@@ -162,7 +181,8 @@ export const upgradeMicrophones: Microphone[] = [
     price: 3.99,
     included: false,
     description: 'Micrófono de condensador overhead mono',
-    target: 'Overhead Mono'
+    target: 'Overhead Mono',
+    image: '/lovable-uploads/0b66f613-e481-4e34-902e-c7889bb03769.png'
   },
   {
     id: 'c12-room',
@@ -170,6 +190,7 @@ export const upgradeMicrophones: Microphone[] = [
     price: 6.99,
     included: false,
     description: 'Micrófono de condensador vintage room mono',
-    target: 'Room Mono'
+    target: 'Room Mono',
+    image: '/lovable-uploads/c3aae572-234c-41c9-a967-2d00f027d2b3.png'
   }
 ];
