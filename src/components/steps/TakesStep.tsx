@@ -123,7 +123,7 @@ export const TakesStep = ({
               </ul>
             </div>
 
-            <Button variant={isExactCopySelected ? "default" : "upgrade"} className="w-full" onClick={e => {
+            <Button variant={isExactCopySelected ? "default" : "upgrade"} className="w-full h-10" onClick={e => {
             e.stopPropagation();
             handleToggleExactCopy();
           }}>
@@ -174,7 +174,7 @@ export const TakesStep = ({
               </p>
             </div>
 
-            <Button variant={isToniSelected ? "default" : "upgrade"} className="w-full" onClick={e => {
+            <Button variant={isToniSelected ? "default" : "upgrade"} className="w-full h-10" onClick={e => {
             e.stopPropagation();
             handleToggleToni();
           }}>
