@@ -29,51 +29,49 @@ export const MicrophonesStep = ({ addItem, removeItem, hasItem }: MicrophonesSte
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
       {/* Header */}
-      <div className="text-center space-y-4">
-        <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Configuración de Micrófonos
+      <div className="text-center space-y-6">
+        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          🎤 Micrófonos
         </h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          Tu kit básico incluye 8 micrófonos profesionales. Mejora tu sonido añadiendo micrófonos premium.
+        <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
+          8 micrófonos profesionales incluidos. Añade mejoras premium para un sonido excepcional.
         </p>
       </div>
 
       {/* Included Microphones */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-2 mb-4">
-          <Check className="h-5 w-5 text-success" />
-          <h3 className="text-xl font-semibold">Incluido en tu Kit Básico</h3>
-          <Badge variant="secondary">€49.90</Badge>
+      <div className="space-y-6">
+        <div className="flex items-center justify-center gap-4 mb-8">
+          <div className="flex items-center gap-3 bg-success/20 px-6 py-3 rounded-full">
+            <Check className="h-6 w-6 text-success" />
+            <h3 className="text-2xl font-bold">Kit Básico Incluido</h3>
+            <Badge variant="secondary" className="text-lg px-3 py-1">€49.90</Badge>
+          </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {baseMicrophones.map((mic) => (
-            <Card key={mic.id} className="bg-gradient-to-br from-card to-muted border-success/30">
-              <CardHeader className="pb-2">
-                <div className="flex items-center gap-2 mb-2">
-                  <Headphones className="h-4 w-4 text-success" />
-                  <Badge variant="outline" className="border-success text-success">
-                    {mic.target}
-                  </Badge>
-                </div>
+            <Card key={mic.id} className="bg-gradient-to-br from-card to-muted border-success/30 hover:shadow-xl transition-all duration-300">
+              <CardHeader className="pb-4">
+                <Badge variant="outline" className="border-success text-success mb-3 self-center text-sm px-3 py-1">
+                  {mic.target}
+                </Badge>
                 {mic.image && (
-                  <div className="w-full h-20 flex items-center justify-center bg-muted/30 rounded">
+                  <div className="w-full h-28 flex items-center justify-center bg-muted/30 rounded-lg">
                     <img 
                       src={mic.image} 
                       alt={mic.name}
-                      className="max-h-16 max-w-full object-contain"
+                      className="max-h-24 max-w-full object-contain"
                     />
                   </div>
                 )}
               </CardHeader>
-              <CardContent>
-                <h4 className="font-semibold text-sm mb-1">{mic.name}</h4>
-                <p className="text-xs text-muted-foreground mb-2">{mic.description}</p>
-                <div className="flex items-center gap-1">
-                  <Check className="h-3 w-3 text-success" />
-                  <span className="text-xs text-success font-medium">Incluido</span>
+              <CardContent className="pt-0">
+                <h4 className="font-bold text-base mb-2 text-center">{mic.name}</h4>
+                <div className="flex items-center justify-center gap-2 mt-3">
+                  <Check className="h-4 w-4 text-success" />
+                  <span className="text-sm text-success font-bold">INCLUIDO</span>
                 </div>
               </CardContent>
             </Card>
@@ -82,52 +80,54 @@ export const MicrophonesStep = ({ addItem, removeItem, hasItem }: MicrophonesSte
       </div>
 
       {/* Upgrade Microphones */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-2 mb-4">
-          <Plus className="h-5 w-5 text-primary" />
-          <h3 className="text-xl font-semibold">Mejoras Disponibles</h3>
-          <Badge variant="outline">Premium</Badge>
+      <div className="space-y-6">
+        <div className="flex items-center justify-center gap-4 mb-8">
+          <div className="flex items-center gap-3 bg-primary/20 px-6 py-3 rounded-full">
+            <Plus className="h-6 w-6 text-primary" />
+            <h3 className="text-2xl font-bold">Mejoras Premium</h3>
+            <Badge variant="outline" className="text-lg px-3 py-1">Opcional</Badge>
+          </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {upgradeMicrophones.map((mic) => {
             const isSelected = hasItem(mic.id);
             
             return (
               <Card 
                 key={mic.id} 
-                className={`transition-all duration-300 hover:shadow-lg cursor-pointer ${
+                className={`transition-all duration-300 hover:shadow-xl cursor-pointer transform hover:scale-105 ${
                   isSelected 
-                    ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-lg' 
+                    ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-xl scale-105' 
                     : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'
                 }`}
                 onClick={() => handleToggleItem(mic)}
               >
-                <CardHeader className="pb-2">
-                  <div className="flex items-center justify-between mb-2">
-                    <Badge variant="outline" className="text-xs">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <Badge variant="outline" className="text-sm px-3 py-1">
                       {mic.target}
                     </Badge>
-                    <span className="font-bold text-primary">€{mic.price.toFixed(2)}</span>
+                    <span className="font-bold text-xl text-primary">€{mic.price.toFixed(2)}</span>
                   </div>
                   {mic.image && (
-                    <div className="w-full h-24 flex items-center justify-center bg-muted/30 rounded">
+                    <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg">
                       <img 
                         src={mic.image} 
                         alt={mic.name}
-                        className="max-h-20 max-w-full object-contain"
+                        className="max-h-28 max-w-full object-contain"
                       />
                     </div>
                   )}
                 </CardHeader>
-                <CardContent>
-                  <h4 className="font-semibold mb-2">{mic.name}</h4>
-                  <p className="text-sm text-muted-foreground mb-4">{mic.description}</p>
+                <CardContent className="space-y-4">
+                  <h4 className="font-bold text-lg text-center">{mic.name}</h4>
+                  <p className="text-muted-foreground text-center leading-relaxed">{mic.description}</p>
                   
                   <Button
                     variant={isSelected ? "default" : "upgrade"}
-                    size="sm"
-                    className="w-full"
+                    size="lg"
+                    className="w-full h-12 text-base font-bold"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleToggleItem(mic);
@@ -135,13 +135,13 @@ export const MicrophonesStep = ({ addItem, removeItem, hasItem }: MicrophonesSte
                   >
                     {isSelected ? (
                       <>
-                        <Check className="h-4 w-4 mr-1" />
-                        Añadido
+                        <Check className="h-5 w-5 mr-2" />
+                        ✨ AÑADIDO
                       </>
                     ) : (
                       <>
-                        <Plus className="h-4 w-4 mr-1" />
-                        Añadir €{mic.price.toFixed(2)}
+                        <Plus className="h-5 w-5 mr-2" />
+                        AÑADIR €{mic.price.toFixed(2)}
                       </>
                     )}
                   </Button>

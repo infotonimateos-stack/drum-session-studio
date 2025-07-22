@@ -268,8 +268,8 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                       </Button>
                     </div>
                     
-                    <Button type="submit" variant="upgrade" size="lg" className="w-full">
-                      Pagar €{cartState.total.toFixed(2)}
+                    <Button type="submit" variant="upgrade" size="lg" className="w-full h-16 text-xl font-bold">
+                      💳 FINALIZAR COMPRA €{cartState.total.toFixed(2)}
                     </Button>
                   </CardContent>
                 </Card>
@@ -317,7 +317,9 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                     {/* Total */}
                     <div className="flex justify-between items-center p-3 bg-accent/20 rounded-lg">
                       <span className="font-bold text-lg">Total</span>
-                      <span className="font-bold text-xl text-primary">€{cartState.total.toFixed(2)}</span>
+                      <span className="font-bold text-xl text-primary">
+                        €{(cartState.basePrice + cartState.items.reduce((sum, item) => sum + item.price, 0)).toFixed(2)}
+                      </span>
                     </div>
                   </CardContent>
                 </Card>

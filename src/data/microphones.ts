@@ -8,7 +8,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono dinámico para caja',
     target: 'Snare Top',
-    image: '/lovable-uploads/microphone-generic.png'
+    image: '/lovable-uploads/4370868c-4d04-4df3-8984-34e4fa748a7a.png'
   },
   {
     id: 'beta52-kick',
@@ -17,7 +17,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono dinámico para bombo',
     target: 'Bombo',
-    image: '/lovable-uploads/microphone-generic.png'
+    image: '/lovable-uploads/e42e5f78-b8a0-4756-99ec-b7eb07e055ea.png'
   },
   {
     id: 'km184-hihat',
@@ -26,7 +26,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono de condensador para hi-hat',
     target: 'Hi-Hat',
-    image: '/lovable-uploads/microphone-generic.png'
+    image: '/lovable-uploads/f6c4ceb5-6a42-45d5-bd11-8ba6c4d41f32.png'
   },
   {
     id: 'sen421-tom1',
@@ -35,7 +35,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono dinámico para tom 1',
     target: 'Tom 1',
-    image: '/lovable-uploads/microphone-generic.png'
+    image: '/lovable-uploads/f493529f-6183-4040-82f1-5ccf827d1b2b.png'
   },
   {
     id: 'sen421-tom2',
@@ -44,7 +44,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono dinámico para tom 2',
     target: 'Tom 2',
-    image: '/lovable-uploads/microphone-generic.png'
+    image: '/lovable-uploads/f493529f-6183-4040-82f1-5ccf827d1b2b.png'
   },
   {
     id: 'sen421-floor',
@@ -53,7 +53,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono dinámico para floor tom',
     target: 'Floor Tom',
-    image: '/lovable-uploads/microphone-generic.png'
+    image: '/lovable-uploads/5b4e514d-0c50-42a1-834a-3b4c1d7ab825.png'
   },
   {
     id: 'akg414-oh1',
@@ -62,7 +62,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono de condensador overhead izquierdo',
     target: 'Overhead L',
-    image: '/lovable-uploads/20c9fdfa-17f5-4876-9016-cbfb6ce4c107.png'
+    image: '/lovable-uploads/931c6239-27dd-4843-ac2e-393dbdc5717b.png'
   },
   {
     id: 'akg414-oh2',
@@ -71,7 +71,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono de condensador overhead derecho',
     target: 'Overhead R',
-    image: '/lovable-uploads/20c9fdfa-17f5-4876-9016-cbfb6ce4c107.png'
+    image: '/lovable-uploads/931c6239-27dd-4843-ac2e-393dbdc5717b.png'
   }
 ];
 
@@ -83,7 +83,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Micrófono de condensador para bombo',
     target: 'Bombo',
-    image: '/lovable-uploads/microphone-generic.png'
+    image: '/lovable-uploads/e42e5f78-b8a0-4756-99ec-b7eb07e055ea.png'
   },
   {
     id: 'd112-kick',
@@ -110,7 +110,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Subwoofer para bombo',
     target: 'Bombo',
-    image: '/lovable-uploads/microphone-generic.png'
+    image: '/lovable-uploads/e42e5f78-b8a0-4756-99ec-b7eb07e055ea.png'
   },
   {
     id: 'u47fet-kick',
@@ -119,7 +119,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Micrófono de condensador vintage para bombo',
     target: 'Bombo',
-    image: '/lovable-uploads/microphone-generic.png'
+    image: '/lovable-uploads/5876e5ea-6c22-4ce6-8662-8515bd82e156.png'
   },
   {
     id: 'akg414-snare',
@@ -128,7 +128,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Micrófono de condensador para caja top',
     target: 'Snare Top',
-    image: '/lovable-uploads/130f3ae4-e2e6-4ff5-971f-6b8da515263e.png'
+    image: '/lovable-uploads/931c6239-27dd-4843-ac2e-393dbdc5717b.png'
   },
   {
     id: 'sen441-snare',
@@ -137,7 +137,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Micrófono dinámico para caja bottom',
     target: 'Snare Bottom',
-    image: '/lovable-uploads/microphone-generic.png'
+    image: '/lovable-uploads/f493529f-6183-4040-82f1-5ccf827d1b2b.png'
   },
   {
     id: 'm160-hihat',
@@ -164,7 +164,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Par de micrófonos de condensador como room',
     target: 'Room',
-    image: '/lovable-uploads/microphone-generic.png'
+    image: '/lovable-uploads/5876e5ea-6c22-4ce6-8662-8515bd82e156.png'
   },
   {
     id: 'km184-ride',
@@ -173,7 +173,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Micrófono de condensador para ride',
     target: 'Ride',
-    image: '/lovable-uploads/microphone-generic.png'
+    image: '/lovable-uploads/b1c6189b-bde4-4a7a-9e84-a26126c05561.png'
   },
   {
     id: 'akg414-mono',

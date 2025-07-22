@@ -30,52 +30,54 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
       {/* Header */}
-      <div className="text-center space-y-4">
-        <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Previos de Audio
+      <div className="text-center space-y-6">
+        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          ⚡ Previos de Audio
         </h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          Los previos determinan el carácter y la calidez de tu grabación. Elige entre básico o premium.
+        <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
+          El alma de tu sonido. Elige entre nuestros previos incluidos o mejora con los legendarios API, Neve y DAD.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
         {/* Basic Preamps */}
-        <Card className="bg-gradient-to-br from-card to-muted border-success/30">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <Check className="h-5 w-5 text-success" />
-                Básico
+        <Card className="bg-gradient-to-br from-card to-muted border-success/30 hover:shadow-xl transition-all duration-300">
+          <CardHeader className="pb-6">
+            <div className="flex items-center justify-between mb-4">
+              <CardTitle className="flex items-center gap-3 text-2xl">
+                <Check className="h-8 w-8 text-success" />
+                Kit Básico
               </CardTitle>
-              <Badge variant="secondary">Incluido</Badge>
+              <Badge variant="secondary" className="text-lg px-4 py-2">INCLUIDO</Badge>
             </div>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Zap className="h-8 w-8 text-success" />
+          <CardContent className="space-y-6">
+            <div className="flex items-center gap-4 p-4 bg-success/10 rounded-lg">
+              <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center">
+                <Zap className="h-10 w-10 text-success" />
+              </div>
               <div>
-                <h3 className="font-semibold">Focusrite OctoPre</h3>
-                <p className="text-sm text-muted-foreground">8 canales de previos limpios y transparentes</p>
+                <h3 className="font-bold text-xl">Focusrite OctoPre</h3>
+                <p className="text-muted-foreground">8 canales profesionales limpios</p>
               </div>
             </div>
             
-            <div className="space-y-2">
-              <h4 className="font-medium text-sm">Características:</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Sonido limpio y neutral</li>
-                <li>• Respuesta de frecuencia plana</li>
-                <li>• Perfecto para principiantes</li>
-                <li>• Sin costo adicional</li>
+            <div className="space-y-4">
+              <h4 className="font-bold text-lg">✓ Lo que obtienes:</h4>
+              <ul className="text-muted-foreground space-y-3 text-base">
+                <li>• <strong>Sonido limpio</strong> y transparente</li>
+                <li>• <strong>Respuesta plana</strong> ideal para mezcla</li>
+                <li>• <strong>Sin ruido</strong> ni distorsión</li>
+                <li>• <strong>Perfecto</strong> para tu primera grabación</li>
               </ul>
             </div>
 
             <div className="pt-4">
-              <div className="flex items-center gap-1">
-                <Check className="h-4 w-4 text-success" />
-                <span className="text-sm text-success font-medium">Incluido en kit básico</span>
+              <div className="flex items-center justify-center gap-2 bg-success/20 px-4 py-3 rounded-full">
+                <Check className="h-5 w-5 text-success" />
+                <span className="text-success font-bold text-lg">YA INCLUIDO</span>
               </div>
             </div>
           </CardContent>
@@ -83,44 +85,47 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
 
         {/* Pro Preamps */}
         <Card 
-          className={`transition-all duration-300 hover:shadow-lg cursor-pointer ${
+          className={`transition-all duration-300 hover:shadow-xl cursor-pointer transform hover:scale-105 ${
             isProSelected 
-              ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-lg' 
+              ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-xl scale-105' 
               : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'
           }`}
           onClick={handleTogglePro}
         >
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <Plus className="h-5 w-5 text-primary" />
+          <CardHeader className="pb-6">
+            <div className="flex items-center justify-between mb-4">
+              <CardTitle className="flex items-center gap-3 text-2xl">
+                <Plus className="h-8 w-8 text-primary" />
                 Premium
               </CardTitle>
-              <Badge variant="outline" className="text-primary">+€19.90</Badge>
+              <Badge variant="outline" className="text-primary text-lg px-4 py-2 font-bold">+€19.90</Badge>
             </div>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Zap className="h-8 w-8 text-primary" />
+          <CardContent className="space-y-6">
+            <div className="flex items-center gap-4 p-4 bg-primary/10 rounded-lg">
+              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center">
+                <Zap className="h-10 w-10 text-primary" />
+              </div>
               <div>
-                <h3 className="font-semibold">Pack Previos Pro</h3>
-                <p className="text-sm text-muted-foreground">API, Neve y DAD - El sonido de los grandes estudios</p>
+                <h3 className="font-bold text-xl">Pack Previos Legendarios</h3>
+                <p className="text-muted-foreground">API, Neve y DAD</p>
               </div>
             </div>
             
-            <div className="space-y-2">
-              <h4 className="font-medium text-sm">Características:</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• <strong>API:</strong> Punch y presencia únicos</li>
-                <li>• <strong>Neve:</strong> Calidez vintage legendaria</li>
-                <li>• <strong>DAD:</strong> Precisión digital premium</li>
-                <li>• Sonido usado en hits mundiales</li>
+            <div className="space-y-4">
+              <h4 className="font-bold text-lg">🏆 El sonido de los hits:</h4>
+              <ul className="text-muted-foreground space-y-3 text-base">
+                <li>• <strong className="text-primary">API:</strong> Punch y presencia únicos</li>
+                <li>• <strong className="text-primary">Neve:</strong> Calidez vintage legendaria</li>
+                <li>• <strong className="text-primary">DAD:</strong> Precisión digital premium</li>
+                <li>• <strong>Usado en</strong> discos de platino</li>
               </ul>
             </div>
 
             <Button
               variant={isProSelected ? "default" : "upgrade"}
-              className="w-full"
+              size="lg"
+              className="w-full h-14 text-lg font-bold"
               onClick={(e) => {
                 e.stopPropagation();
                 handleTogglePro();
@@ -128,13 +133,13 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
             >
               {isProSelected ? (
                 <>
-                  <Check className="h-4 w-4 mr-2" />
-                  Añadido al carrito
+                  <Check className="h-6 w-6 mr-2" />
+                  ✨ AÑADIDO AL CARRITO
                 </>
               ) : (
                 <>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Upgrade por €19.90
+                  <Plus className="h-6 w-6 mr-2" />
+                  UPGRADE POR €19.90
                 </>
               )}
             </Button>

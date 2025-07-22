@@ -30,52 +30,54 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
       {/* Header */}
-      <div className="text-center space-y-4">
-        <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Interface de Audio
+      <div className="text-center space-y-6">
+        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          💻 Interface de Audio
         </h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          El interface convierte tu sonido analógico a digital. La calidad del convertidor marca la diferencia.
+        <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
+          La puerta entre el mundo analógico y digital. La calidad del convertidor define tu sonido final.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
         {/* Basic Interface */}
-        <Card className="bg-gradient-to-br from-card to-muted border-success/30">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <Check className="h-5 w-5 text-success" />
-                Básico
+        <Card className="bg-gradient-to-br from-card to-muted border-success/30 hover:shadow-xl transition-all duration-300">
+          <CardHeader className="pb-6">
+            <div className="flex items-center justify-between mb-4">
+              <CardTitle className="flex items-center gap-3 text-2xl">
+                <Check className="h-8 w-8 text-success" />
+                Kit Básico
               </CardTitle>
-              <Badge variant="secondary">Incluido</Badge>
+              <Badge variant="secondary" className="text-lg px-4 py-2">INCLUIDO</Badge>
             </div>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Cpu className="h-8 w-8 text-success" />
+          <CardContent className="space-y-6">
+            <div className="flex items-center gap-4 p-4 bg-success/10 rounded-lg">
+              <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center">
+                <Cpu className="h-10 w-10 text-success" />
+              </div>
               <div>
-                <h3 className="font-semibold">Focusrite OctoPre</h3>
-                <p className="text-sm text-muted-foreground">Interface ADAT de 8 canales</p>
+                <h3 className="font-bold text-xl">Focusrite OctoPre</h3>
+                <p className="text-muted-foreground">Interface ADAT de 8 canales</p>
               </div>
             </div>
             
-            <div className="space-y-2">
-              <h4 className="font-medium text-sm">Especificaciones:</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• 24-bit / 192kHz</li>
-                <li>• Convertidores estándar</li>
-                <li>• Conexión ADAT</li>
-                <li>• Perfecto para proyectos básicos</li>
+            <div className="space-y-4">
+              <h4 className="font-bold text-lg">✓ Características:</h4>
+              <ul className="text-muted-foreground space-y-3 text-base">
+                <li>• <strong>24-bit / 192kHz</strong> máxima resolución</li>
+                <li>• <strong>Convertidores</strong> estándar profesionales</li>
+                <li>• <strong>Conexión ADAT</strong> estable</li>
+                <li>• <strong>Perfecto</strong> para proyectos básicos</li>
               </ul>
             </div>
 
             <div className="pt-4">
-              <div className="flex items-center gap-1">
-                <Check className="h-4 w-4 text-success" />
-                <span className="text-sm text-success font-medium">Incluido en kit básico</span>
+              <div className="flex items-center justify-center gap-2 bg-success/20 px-4 py-3 rounded-full">
+                <Check className="h-5 w-5 text-success" />
+                <span className="text-success font-bold text-lg">YA INCLUIDO</span>
               </div>
             </div>
           </CardContent>
@@ -83,50 +85,61 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
 
         {/* Premium Interface */}
         <Card 
-          className={`transition-all duration-300 hover:shadow-lg cursor-pointer ${
+          className={`transition-all duration-300 hover:shadow-xl cursor-pointer transform hover:scale-105 ${
             isDadSelected 
-              ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-lg' 
+              ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-xl scale-105' 
               : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'
           }`}
           onClick={handleToggleDad}
         >
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <Plus className="h-5 w-5 text-primary" />
+          <CardHeader className="pb-6">
+            <div className="flex items-center justify-between mb-4">
+              <CardTitle className="flex items-center gap-3 text-2xl">
+                <Plus className="h-8 w-8 text-primary" />
                 Premium
               </CardTitle>
-              <Badge variant="outline" className="text-primary">+€9.90</Badge>
+              <Badge variant="outline" className="text-primary text-lg px-4 py-2 font-bold">+€9.90</Badge>
             </div>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Cpu className="h-8 w-8 text-primary" />
+          <CardContent className="space-y-6">
+            <div className="w-full h-20 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
+              <img 
+                src="/lovable-uploads/93445061-0c3b-4d86-a30f-15ff4b018154.png" 
+                alt="MOTU Interface"
+                className="max-h-16 max-w-full object-contain"
+              />
+            </div>
+            
+            <div className="flex items-center gap-4 p-4 bg-primary/10 rounded-lg">
+              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center">
+                <Cpu className="h-10 w-10 text-primary" />
+              </div>
               <div>
-                <h3 className="font-semibold">DAD AX64</h3>
-                <p className="text-sm text-muted-foreground">Interface premium con convertidores de alta gama</p>
+                <h3 className="font-bold text-xl">MOTU 8Pre</h3>
+                <p className="text-muted-foreground">Interface premium profesional</p>
               </div>
             </div>
             
-            <div className="space-y-2">
-              <h4 className="font-medium text-sm">Especificaciones:</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• <strong>32-bit / 384kHz</strong> - Máxima resolución</li>
-                <li>• Convertidores premium DAD</li>
-                <li>• Rango dinámico superior</li>
-                <li>• Usado en estudios de élite mundial</li>
+            <div className="space-y-4">
+              <h4 className="font-bold text-lg">🏆 Especificaciones premium:</h4>
+              <ul className="text-muted-foreground space-y-3 text-base">
+                <li>• <strong className="text-primary">32-bit / 384kHz</strong> - Máxima resolución</li>
+                <li>• <strong className="text-primary">Convertidores premium</strong> MOTU</li>
+                <li>• <strong className="text-primary">Rango dinámico</strong> excepcional</li>
+                <li>• <strong>Usado en</strong> estudios de élite mundial</li>
               </ul>
             </div>
 
-            <div className="p-3 bg-primary/10 rounded-lg">
-              <p className="text-xs text-primary font-medium">
-                💡 Mejora significativa en claridad y definición
+            <div className="p-4 bg-primary/20 rounded-lg">
+              <p className="text-primary font-bold text-center">
+                🚀 Mejora drástica en claridad y definición
               </p>
             </div>
 
             <Button
               variant={isDadSelected ? "default" : "upgrade"}
-              className="w-full"
+              size="lg"
+              className="w-full h-14 text-lg font-bold"
               onClick={(e) => {
                 e.stopPropagation();
                 handleToggleDad();
@@ -134,13 +147,13 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
             >
               {isDadSelected ? (
                 <>
-                  <Check className="h-4 w-4 mr-2" />
-                  Añadido al carrito
+                  <Check className="h-6 w-6 mr-2" />
+                  ✨ AÑADIDO AL CARRITO
                 </>
               ) : (
                 <>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Upgrade por €9.90
+                  <Plus className="h-6 w-6 mr-2" />
+                  UPGRADE POR €9.90
                 </>
               )}
             </Button>
