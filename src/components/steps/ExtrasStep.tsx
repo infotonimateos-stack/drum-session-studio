@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Plus, Video, Share2, PlayCircle } from "lucide-react";
 import { CartItem } from "@/types/cart";
+import extrasIcon from "@/assets/extras-icon.png";
 
 interface ExtrasStepProps {
   addItem: (item: CartItem) => void;
@@ -67,8 +68,15 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
     <div className="space-y-8">
       {/* Header */}
        <div className="text-center space-y-6">
+        <div className="flex items-center justify-center mb-4">
+          <img 
+            src={extrasIcon} 
+            alt="Extras y Promoción"
+            className="w-20 h-20 object-contain"
+          />
+        </div>
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          📸 Extras y Promoción
+          Extras y Promoción
         </h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
           Potencia tu música con contenido adicional para redes sociales y promoción profesional.

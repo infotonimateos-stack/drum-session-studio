@@ -1,8 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, Cpu } from "lucide-react";
+import { Check, Plus } from "lucide-react";
 import { CartItem } from "@/types/cart";
+import interfaceIcon from "@/assets/interface-icon.png";
 
 interface InterfaceStepProps {
   addItem: (item: CartItem) => void;
@@ -33,8 +34,15 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
     <div className="space-y-12">
       {/* Header */}
       <div className="text-center space-y-6">
+        <div className="flex items-center justify-center mb-4">
+          <img 
+            src={interfaceIcon} 
+            alt="Interface de Audio"
+            className="w-20 h-20 object-contain"
+          />
+        </div>
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          💻 Interface de Audio
+          Interface de Audio
         </h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
           La puerta entre el mundo analógico y digital. La calidad del convertidor define tu sonido final.
@@ -56,16 +64,20 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
           <CardContent className="space-y-6">
             <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
               <img 
-                src="/lovable-uploads/336b755e-679f-4c19-9325-3c4f0e952191.png" 
+                src={interfaceIcon}
                 alt="Focusrite Interface"
-                className="max-h-28 max-w-full object-contain bg-transparent"
+                className="max-h-28 max-w-full object-contain bg-muted/30 rounded-lg p-2"
                 style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
               />
             </div>
             
             <div className="flex items-center gap-4 p-4 bg-success/10 rounded-lg">
-              <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center">
-                <Cpu className="h-10 w-10 text-success" />
+              <div className="w-16 h-16 bg-success/20 rounded-lg flex items-center justify-center">
+                <img 
+                  src={interfaceIcon}
+                  alt="Interface"
+                  className="h-10 w-10 object-contain"
+                />
               </div>
               <div>
                 <h3 className="font-bold text-xl">Focusrite OctoPre</h3>
@@ -113,16 +125,20 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
           <CardContent className="space-y-6">
             <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
               <img 
-                src="/lovable-uploads/0d4521a3-d112-43ce-a820-f1afe53330c8.png" 
+                src={interfaceIcon}
                 alt="DAD AX64 Interface"
-                className="max-h-28 max-w-full object-contain bg-transparent"
+                className="max-h-28 max-w-full object-contain bg-muted/30 rounded-lg p-2"
                 style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
               />
             </div>
             
             <div className="flex items-center gap-4 p-4 bg-primary/10 rounded-lg">
-              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center">
-                <Cpu className="h-10 w-10 text-primary" />
+              <div className="w-16 h-16 bg-primary/20 rounded-lg flex items-center justify-center">
+                <img 
+                  src={interfaceIcon}
+                  alt="Interface"
+                  className="h-10 w-10 object-contain"
+                />
               </div>
               <div>
                 <h3 className="font-bold text-xl">DAD AX64</h3>
