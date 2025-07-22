@@ -71,18 +71,16 @@ export const TakesStep = ({
               <Play className="h-8 w-8 text-success" />
               <div>
                 <h3 className="font-semibold">1 Toma Estándar</h3>
-                <p className="text-sm text-muted-foreground">Versión profesional basada en tu demo</p>
+                <p className="text-sm text-muted-foreground whitespace-nowrap">Versión profesional basada en tu demo</p>
               </div>
             </div>
             
             <div className="space-y-2">
-              <h4 className="font-medium text-sm">Incluye:</h4>
+              <h4 className="font-medium text-sm">Características:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
                 <li>• Interpretación profesional</li>
                 <li>• Basada en tu demo</li>
                 <li>• Sonido equilibrado</li>
-                <li>
-              </li>
               </ul>
             </div>
 

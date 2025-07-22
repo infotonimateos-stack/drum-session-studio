@@ -104,7 +104,7 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
             </div>
             
             <div className="space-y-2">
-              <h4 className="font-medium text-sm">Incluye:</h4>
+              <h4 className="font-medium text-sm">Características:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
                 <li>• Video de 15 segundos personalizado</li>
                 <li>• Mención directa de tu proyecto</li>
@@ -164,7 +164,7 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
             </div>
             
             <div className="space-y-2">
-              <h4 className="font-medium text-sm">Incluye:</h4>
+              <h4 className="font-medium text-sm">Características:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
                 <li>• Post en todas mis redes sociales</li>
                 <li>• Mención directa de tu perfil</li>
@@ -230,10 +230,9 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
             </div>
             
             <div className="space-y-2">
-              <h4 className="font-medium text-sm">Incluye:</h4>
+              <h4 className="font-medium text-sm">Características:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
                 <li>• Video de 1 minuto en el estudio</li>
-                <li>• Múltiples ángulos de cámara</li>
                 <li>• Audio sincronizado de calidad</li>
                 <li>• Contenido único para promoción</li>
               </ul>

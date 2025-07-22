@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Cart } from "@/components/Cart";
 import { StepNavigator } from "@/components/StepNavigator";
+import { StepTimeline } from "@/components/StepTimeline";
 import { MicrophonesStep } from "@/components/steps/MicrophonesStep";
 import { PreampsStep } from "@/components/steps/PreampsStep";
 import { InterfaceStep } from "@/components/steps/InterfaceStep";
@@ -86,7 +87,11 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
 
           {/* Cart Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-8">
+            <div className="sticky top-8 space-y-6">
+              <StepTimeline
+                currentStep={currentStep}
+                totalSteps={steps.length}
+              />
               <Cart 
                 cartState={cartState} 
                 removeItem={removeItem}

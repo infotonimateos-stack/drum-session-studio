@@ -88,10 +88,9 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
             </div>
             
             <div className="space-y-2">
-              <h4 className="font-medium text-sm">Incluye:</h4>
+              <h4 className="font-medium text-sm">Características:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
                 <li>• Tiempo para perfeccionar cada detalle</li>
-                <li>• Revisión completa de calidad</li>
                 <li>• Sin costo adicional</li>
                 <li>• Ideal para la mayoría de proyectos</li>
               </ul>
@@ -129,7 +128,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
               <Zap className="h-8 w-8 text-primary" />
               <div>
                 <h3 className="font-semibold">5 Días Laborables</h3>
-                <p className="text-sm text-muted-foreground">Procesamiento prioritario</p>
+                <p className="text-sm text-muted-foreground">Prioridad en la entrega</p>
               </div>
             </div>
             
@@ -137,9 +136,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
               <h4 className="font-medium text-sm">Características:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
                 <li>• Prioridad en la cola de producción</li>
-                <li>• Mismo nivel de calidad</li>
                 <li>• Perfecto para deadlines ajustados</li>
-                <li>• Comunicación directa del progreso</li>
               </ul>
             </div>
 
@@ -198,14 +195,13 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
               <ul className="text-sm text-muted-foreground space-y-1">
                 <li>• <strong>Prioridad absoluta</strong></li>
                 <li>• Trabajo dedicado exclusivo</li>
-                <li>• Comunicación continua del progreso</li>
                 <li>• Para emergencias y urgencias</li>
               </ul>
             </div>
 
             <div className="p-3 bg-accent/10 rounded-lg">
               <p className="text-xs text-accent font-medium">
-                🚀 Solo para casos de extrema urgencia
+                🚀 Para casos de extrema urgencia
               </p>
             </div>
 
