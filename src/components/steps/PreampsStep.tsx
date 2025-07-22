@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -56,8 +57,8 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
           <CardContent className="space-y-6">
             <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
               <img 
-                src="/lovable-uploads/336b755e-679f-4c19-9325-3c4f0e952191.png" 
-                alt="Focusrite Interface"
+                src="/lovable-uploads/motu-8pre.png" 
+                alt="MOTU 8Pre Preamps"
                 className="max-h-28 max-w-full object-contain bg-transparent"
                 style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
               />
@@ -68,7 +69,7 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
                 <Zap className="h-10 w-10 text-success" />
               </div>
               <div>
-                <h3 className="font-bold text-xl">Focusrite OctoPre</h3>
+                <h3 className="font-bold text-xl">MOTU 8Pre</h3>
                 <p className="text-muted-foreground">8 canales profesionales limpios</p>
               </div>
             </div>

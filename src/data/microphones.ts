@@ -1,3 +1,4 @@
+
 import { Microphone } from '@/types/cart';
 
 export const baseMicrophones: Microphone[] = [
@@ -12,12 +13,12 @@ export const baseMicrophones: Microphone[] = [
   },
   {
     id: 'beta52-kick',
-    name: 'Shure Beta 52',
+    name: 'Shure Beta 52A',
     price: 0,
     included: true,
     description: 'Micrófono dinámico para bombo',
     target: 'Bombo',
-    image: '/lovable-uploads/e42e5f78-b8a0-4756-99ec-b7eb07e055ea.png'
+    image: '/lovable-uploads/shure-beta-52a.png'
   },
   {
     id: 'km184-hihat',
@@ -26,7 +27,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono de condensador para hi-hat',
     target: 'Hi-Hat',
-    image: '/lovable-uploads/f6c4ceb5-6a42-45d5-bd11-8ba6c4d41f32.png'
+    image: '/lovable-uploads/neumann-km-184.png'
   },
   {
     id: 'sen421-tom1',
@@ -57,21 +58,21 @@ export const baseMicrophones: Microphone[] = [
   },
   {
     id: 'akg414-oh1',
-    name: 'AKG 414',
+    name: 'AKG C414',
     price: 0,
     included: true,
     description: 'Micrófono de condensador overhead izquierdo',
     target: 'Overhead L',
-    image: '/lovable-uploads/931c6239-27dd-4843-ac2e-393dbdc5717b.png'
+    image: '/lovable-uploads/akg-c-414-ltd.png'
   },
   {
     id: 'akg414-oh2',
-    name: 'AKG 414',
+    name: 'AKG C414',
     price: 0,
     included: true,
     description: 'Micrófono de condensador overhead derecho',
     target: 'Overhead R',
-    image: '/lovable-uploads/931c6239-27dd-4843-ac2e-393dbdc5717b.png'
+    image: '/lovable-uploads/akg-c-414-ltd.png'
   }
 ];
 
@@ -86,13 +87,13 @@ export const upgradeMicrophones: Microphone[] = [
     image: '/lovable-uploads/018df378-819a-48fb-9962-28969e162a4f.png'
   },
   {
-    id: 'shure-beta91a',
-    name: 'Shure Beta 91A',
-    price: 39.90,
+    id: 'audix-d6',
+    name: 'Audix D6',
+    price: 29.90,
     included: false,
-    description: 'Micrófono específicamente diseñado para bombo',
+    description: 'Micrófono dinámico especializado para bombo',
     target: 'Bombo',
-    image: '/lovable-uploads/46e97fb2-1e58-4f21-b83d-86c1a0f0fa05.png'
+    image: '/lovable-uploads/audix-d6.png'
   },
   {
     id: 'shure-boundary',
@@ -114,12 +115,12 @@ export const upgradeMicrophones: Microphone[] = [
   },
   {
     id: 'akg414-snare',
-    name: 'AKG 414',
+    name: 'AKG C414 XLS',
     price: 3.99,
     included: false,
     description: 'Micrófono de condensador para caja top',
     target: 'Snare Top',
-    image: '/lovable-uploads/931c6239-27dd-4843-ac2e-393dbdc5717b.png'
+    image: '/lovable-uploads/akg-c-414-xls.png'
   },
   {
     id: 'sen441-snare',
@@ -137,7 +138,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Micrófono de ribbon para hi-hat',
     target: 'Hi-Hat',
-    image: '/lovable-uploads/2f72b48e-2149-413c-8cbd-bdcd2001a8a6.png'
+    image: '/lovable-uploads/beyerdynamic-m-160.png'
   },
   {
     id: 'coles4038-oh',
@@ -146,7 +147,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Par de micrófonos ribbon como overheads',
     target: 'Overheads',
-    image: '/lovable-uploads/4d9889da-030f-4db9-876d-8b9ff0902139.png'
+    image: '/lovable-uploads/coles-4038-pair.png'
   },
   {
     id: 'u87-room',
@@ -164,16 +165,16 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Micrófono de condensador para ride',
     target: 'Ride',
-    image: '/lovable-uploads/b1c6189b-bde4-4a7a-9e84-a26126c05561.png'
+    image: '/lovable-uploads/neumann-km-184.png'
   },
   {
     id: 'akg414-mono',
-    name: 'AKG 414',
+    name: 'AKG C414 XLII',
     price: 3.99,
     included: false,
     description: 'Micrófono de condensador overhead mono',
     target: 'Overhead Mono',
-    image: '/lovable-uploads/0b66f613-e481-4e34-902e-c7889bb03769.png'
+    image: '/lovable-uploads/akg-c-414-xlii.png'
   },
   {
     id: 'c12-room',
