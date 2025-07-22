@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Plus, Play, Copy, User } from "lucide-react";
 import { CartItem } from "@/types/cart";
-import takesIcon from "@/assets/takes-icon.png";
 interface TakesStepProps {
   addItem: (item: CartItem) => void;
   removeItem: (itemId: string) => void;
@@ -47,13 +46,6 @@ export const TakesStep = ({
   return <div className="space-y-8">
       {/* Header */}
       <div className="text-center space-y-4">
-        <div className="flex items-center justify-center mb-4">
-          <img 
-            src={takesIcon} 
-            alt="Número de Tomas"
-            className="w-16 h-16 object-contain"
-          />
-        </div>
         <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
           Número de Tomas
         </h2>

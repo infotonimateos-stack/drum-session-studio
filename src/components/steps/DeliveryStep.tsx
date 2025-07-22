@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Plus, Clock, Zap, Rocket } from "lucide-react";
 import { CartItem } from "@/types/cart";
-import deliveryIcon from "@/assets/delivery-icon.png";
 
 interface DeliveryStepProps {
   addItem: (item: CartItem) => void;
@@ -59,13 +58,6 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
     <div className="space-y-8">
       {/* Header */}
       <div className="text-center space-y-4">
-        <div className="flex items-center justify-center mb-4">
-          <img 
-            src={deliveryIcon} 
-            alt="Plazo de Entrega"
-            className="w-16 h-16 object-contain"
-          />
-        </div>
         <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
           Plazo de Entrega
         </h2>

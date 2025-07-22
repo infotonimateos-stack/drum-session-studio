@@ -1,9 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus } from "lucide-react";
+import { Check, Plus, Zap } from "lucide-react";
 import { CartItem } from "@/types/cart";
-import converterIcon from "@/assets/converter-icon.png";
 
 interface PreampsStepProps {
   addItem: (item: CartItem) => void;
@@ -34,15 +33,8 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
     <div className="space-y-12">
       {/* Header */}
       <div className="text-center space-y-6">
-        <div className="flex items-center justify-center mb-4">
-          <img 
-            src={converterIcon} 
-            alt="Previos de Audio"
-            className="w-20 h-20 object-contain"
-          />
-        </div>
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Previos de Audio
+          ⚡ Previos de Audio
         </h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
           El alma de tu sonido. Elige entre nuestros previos incluidos o mejora con los legendarios API, Neve y DAD.
@@ -64,20 +56,16 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
           <CardContent className="space-y-6">
             <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
               <img 
-                src={converterIcon}
+                src="/lovable-uploads/336b755e-679f-4c19-9325-3c4f0e952191.png" 
                 alt="Focusrite Interface"
-                className="max-h-28 max-w-full object-contain bg-muted/30 rounded-lg p-2"
+                className="max-h-28 max-w-full object-contain bg-transparent"
                 style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
               />
             </div>
             
             <div className="flex items-center gap-4 p-4 bg-success/10 rounded-lg">
-              <div className="w-16 h-16 bg-success/20 rounded-lg flex items-center justify-center">
-                <img 
-                  src={converterIcon}
-                  alt="Previos"
-                  className="h-10 w-10 object-contain"
-                />
+              <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center">
+                <Zap className="h-10 w-10 text-success" />
               </div>
               <div>
                 <h3 className="font-bold text-xl">Focusrite OctoPre</h3>
@@ -125,20 +113,16 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
           <CardContent className="space-y-6">
             <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
               <img 
-                src="/lovable-uploads/preamps-new.jpg"
+                src="/lovable-uploads/5fc42764-3380-4942-8c16-c462d1961fae.png" 
                 alt="API Neve DAD Preamps"
-                className="max-h-28 max-w-full object-contain bg-muted/30 rounded-lg p-2"
+                className="max-h-28 max-w-full object-contain bg-transparent"
                 style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
               />
             </div>
             
             <div className="flex items-center gap-4 p-4 bg-primary/10 rounded-lg">
-              <div className="w-16 h-16 bg-primary/20 rounded-lg flex items-center justify-center">
-                <img 
-                  src={converterIcon}
-                  alt="Previos"
-                  className="h-10 w-10 object-contain"
-                />
+              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center">
+                <Zap className="h-10 w-10 text-primary" />
               </div>
               <div>
                 <h3 className="font-bold text-xl">Pack Previos Legendarios</h3>
