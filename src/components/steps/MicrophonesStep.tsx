@@ -59,12 +59,12 @@ export const MicrophonesStep = ({ addItem, removeItem, hasItem }: MicrophonesSte
                 </Badge>
                 {mic.image && (
                  <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg">
-                    <img 
-                      src={mic.image} 
-                      alt={mic.name}
-                      className="max-h-28 max-w-full object-contain bg-transparent"
-                      style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
-                    />
+                     <img 
+                       src={mic.image} 
+                       alt={mic.name}
+                       className="max-h-28 max-w-full object-contain bg-muted/30 rounded-lg p-2"
+                       style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
+                     />
                   </div>
                 )}
               </CardHeader>
@@ -113,12 +113,12 @@ export const MicrophonesStep = ({ addItem, removeItem, hasItem }: MicrophonesSte
                   </div>
                    {mic.image && (
                     <div className="w-full h-40 flex items-center justify-center bg-muted/30 rounded-lg">
-                      <img 
-                        src={mic.image} 
-                        alt={mic.name}
-                        className="max-h-36 max-w-full object-contain bg-transparent"
-                        style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
-                      />
+                       <img 
+                         src={mic.image} 
+                         alt={mic.name}
+                         className="max-h-36 max-w-full object-contain bg-muted/30 rounded-lg p-2"
+                         style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
+                       />
                     </div>
                    )}
                 </CardHeader>
