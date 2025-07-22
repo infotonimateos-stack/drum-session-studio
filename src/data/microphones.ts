@@ -77,49 +77,40 @@ export const baseMicrophones: Microphone[] = [
 
 export const upgradeMicrophones: Microphone[] = [
   {
-    id: 'beta91-kick',
-    name: 'Shure Beta 91',
-    price: 2.99,
+    id: 'neumann-u87',
+    name: 'Neumann U87',
+    price: 89.90,
     included: false,
-    description: 'Micrófono de condensador para bombo',
-    target: 'Bombo',
-    image: '/lovable-uploads/e42e5f78-b8a0-4756-99ec-b7eb07e055ea.png'
+    description: 'Micrófono de condensador premium para voces principales',
+    target: 'Vocal Principal',
+    image: '/lovable-uploads/018df378-819a-48fb-9962-28969e162a4f.png'
   },
   {
-    id: 'd112-kick',
-    name: 'AKG D112',
-    price: 3.99,
+    id: 'shure-beta91a',
+    name: 'Shure Beta 91A',
+    price: 39.90,
     included: false,
-    description: 'Micrófono dinámico para bombo',
+    description: 'Micrófono específicamente diseñado para bombo',
     target: 'Bombo',
-    image: '/lovable-uploads/32616ea5-218a-4043-8ca0-3bf369ef8f55.png'
+    image: '/lovable-uploads/46e97fb2-1e58-4f21-b83d-86c1a0f0fa05.png'
   },
   {
-    id: 'd6-kick',
-    name: 'Audix D6',
-    price: 4.99,
+    id: 'shure-boundary',
+    name: 'Shure Boundary Mic',
+    price: 45.90,
     included: false,
-    description: 'Micrófono dinámico para bombo',
-    target: 'Bombo',
-    image: '/lovable-uploads/06149d1c-e982-40b5-b71c-ee8e791d8327.png'
+    description: 'Micrófono de superficie para grabación ambiental',
+    target: 'Ambiente',
+    image: '/lovable-uploads/903f1003-c2ac-486f-970e-14aeef1bdc43.png'
   },
   {
-    id: 'subkick-kick',
-    name: 'Solomon SubKick',
-    price: 5.99,
+    id: 'shotgun-mic',
+    name: 'Shotgun Microphone',
+    price: 69.90,
     included: false,
-    description: 'Subwoofer para bombo',
-    target: 'Bombo',
-    image: '/lovable-uploads/e42e5f78-b8a0-4756-99ec-b7eb07e055ea.png'
-  },
-  {
-    id: 'u47fet-kick',
-    name: 'Neumann U47 FET',
-    price: 6.99,
-    included: false,
-    description: 'Micrófono de condensador vintage para bombo',
-    target: 'Bombo',
-    image: '/lovable-uploads/5876e5ea-6c22-4ce6-8662-8515bd82e156.png'
+    description: 'Micrófono direccional de alta precisión',
+    target: 'Direccional',
+    image: '/lovable-uploads/fca524ef-3281-4a16-91f2-2ce2fefe7d2b.png'
   },
   {
     id: 'akg414-snare',

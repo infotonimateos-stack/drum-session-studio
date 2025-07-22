@@ -66,11 +66,11 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="text-center space-y-4">
-        <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Extras y Promoción
+       <div className="text-center space-y-6">
+        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          📸 Extras y Promoción
         </h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+        <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
           Potencia tu música con contenido adicional para redes sociales y promoción profesional.
         </p>
       </div>
@@ -115,7 +115,8 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
 
             <Button
               variant={isVideoGreetingSelected ? "default" : "upgrade"}
-              className="w-full"
+              size="lg"
+              className="w-full h-12 text-base font-bold"
               onClick={(e) => {
                 e.stopPropagation();
                 handleToggleVideoGreeting();
@@ -123,13 +124,13 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
             >
               {isVideoGreetingSelected ? (
                 <>
-                  <Check className="h-4 w-4 mr-2" />
-                  Añadido
+                  <Check className="h-5 w-5 mr-2" />
+                  ✨ AÑADIDO
                 </>
               ) : (
                 <>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Añadir €3.90
+                  <Plus className="h-5 w-5 mr-2" />
+                  AÑADIR €3.90
                 </>
               )}
             </Button>
@@ -181,7 +182,8 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
 
             <Button
               variant={isSocialShareSelected ? "default" : "upgrade"}
-              className="w-full"
+              size="lg"
+              className="w-full h-12 text-base font-bold"
               onClick={(e) => {
                 e.stopPropagation();
                 handleToggleSocialShare();
@@ -189,13 +191,13 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
             >
               {isSocialShareSelected ? (
                 <>
-                  <Check className="h-4 w-4 mr-2" />
-                  Añadido
+                  <Check className="h-5 w-5 mr-2" />
+                  ✨ AÑADIDO
                 </>
               ) : (
                 <>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Añadir €29.90
+                  <Plus className="h-5 w-5 mr-2" />
+                  AÑADIR €29.90
                 </>
               )}
             </Button>
@@ -246,7 +248,8 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
 
             <Button
               variant={isPerformanceVideoSelected ? "default" : "upgrade"}
-              className="w-full"
+              size="lg"
+              className="w-full h-12 text-base font-bold"
               onClick={(e) => {
                 e.stopPropagation();
                 handleTogglePerformanceVideo();
@@ -254,13 +257,13 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
             >
               {isPerformanceVideoSelected ? (
                 <>
-                  <Check className="h-4 w-4 mr-2" />
-                  Añadido
+                  <Check className="h-5 w-5 mr-2" />
+                  ✨ AÑADIDO
                 </>
               ) : (
                 <>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Añadir €29.90
+                  <Plus className="h-5 w-5 mr-2" />
+                  AÑADIR €29.90
                 </>
               )}
             </Button>

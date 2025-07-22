@@ -54,6 +54,15 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
+            <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
+              <img 
+                src="/lovable-uploads/336b755e-679f-4c19-9325-3c4f0e952191.png" 
+                alt="Focusrite Interface"
+                className="max-h-28 max-w-full object-contain bg-transparent"
+                style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
+              />
+            </div>
+            
             <div className="flex items-center gap-4 p-4 bg-success/10 rounded-lg">
               <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center">
                 <Cpu className="h-10 w-10 text-success" />
@@ -102,11 +111,12 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="w-full h-20 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
+            <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
               <img 
-                src="/lovable-uploads/93445061-0c3b-4d86-a30f-15ff4b018154.png" 
-                alt="MOTU Interface"
-                className="max-h-16 max-w-full object-contain"
+                src="/lovable-uploads/0d4521a3-d112-43ce-a820-f1afe53330c8.png" 
+                alt="DAD AX64 Interface"
+                className="max-h-28 max-w-full object-contain bg-transparent"
+                style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
               />
             </div>
             
@@ -115,7 +125,7 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
                 <Cpu className="h-10 w-10 text-primary" />
               </div>
               <div>
-                <h3 className="font-bold text-xl">MOTU 8Pre</h3>
+                <h3 className="font-bold text-xl">DAD AX64</h3>
                 <p className="text-muted-foreground">Interface premium profesional</p>
               </div>
             </div>
@@ -124,7 +134,7 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
               <h4 className="font-bold text-lg">🏆 Especificaciones premium:</h4>
               <ul className="text-muted-foreground space-y-3 text-base">
                 <li>• <strong className="text-primary">32-bit / 384kHz</strong> - Máxima resolución</li>
-                <li>• <strong className="text-primary">Convertidores premium</strong> MOTU</li>
+                <li>• <strong className="text-primary">Convertidores premium</strong> DAD</li>
                 <li>• <strong className="text-primary">Rango dinámico</strong> excepcional</li>
                 <li>• <strong>Usado en</strong> estudios de élite mundial</li>
               </ul>

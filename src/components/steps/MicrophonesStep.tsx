@@ -58,11 +58,12 @@ export const MicrophonesStep = ({ addItem, removeItem, hasItem }: MicrophonesSte
                   {mic.target}
                 </Badge>
                 {mic.image && (
-                  <div className="w-full h-28 flex items-center justify-center bg-muted/30 rounded-lg">
+                 <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg">
                     <img 
                       src={mic.image} 
                       alt={mic.name}
-                      className="max-h-24 max-w-full object-contain"
+                      className="max-h-28 max-w-full object-contain bg-transparent"
+                      style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
                     />
                   </div>
                 )}
@@ -110,15 +111,16 @@ export const MicrophonesStep = ({ addItem, removeItem, hasItem }: MicrophonesSte
                     </Badge>
                     <span className="font-bold text-xl text-primary">€{mic.price.toFixed(2)}</span>
                   </div>
-                  {mic.image && (
-                    <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg">
+                   {mic.image && (
+                    <div className="w-full h-40 flex items-center justify-center bg-muted/30 rounded-lg">
                       <img 
                         src={mic.image} 
                         alt={mic.name}
-                        className="max-h-28 max-w-full object-contain"
+                        className="max-h-36 max-w-full object-contain bg-transparent"
+                        style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
                       />
                     </div>
-                  )}
+                   )}
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <h4 className="font-bold text-lg text-center">{mic.name}</h4>

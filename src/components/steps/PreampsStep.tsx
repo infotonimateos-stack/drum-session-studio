@@ -54,6 +54,15 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
+            <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
+              <img 
+                src="/lovable-uploads/336b755e-679f-4c19-9325-3c4f0e952191.png" 
+                alt="Focusrite Interface"
+                className="max-h-28 max-w-full object-contain bg-transparent"
+                style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
+              />
+            </div>
+            
             <div className="flex items-center gap-4 p-4 bg-success/10 rounded-lg">
               <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center">
                 <Zap className="h-10 w-10 text-success" />
@@ -102,6 +111,15 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
+            <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
+              <img 
+                src="/lovable-uploads/5fc42764-3380-4942-8c16-c462d1961fae.png" 
+                alt="API Neve DAD Preamps"
+                className="max-h-28 max-w-full object-contain bg-transparent"
+                style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
+              />
+            </div>
+            
             <div className="flex items-center gap-4 p-4 bg-primary/10 rounded-lg">
               <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center">
                 <Zap className="h-10 w-10 text-primary" />

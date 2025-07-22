@@ -269,7 +269,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                     </div>
                     
                     <Button type="submit" variant="upgrade" size="lg" className="w-full h-16 text-xl font-bold">
-                      💳 FINALIZAR COMPRA €{cartState.total.toFixed(2)}
+                      💳 FINALIZAR COMPRA €{(cartState.basePrice + cartState.items.reduce((sum, item) => sum + item.price, 0)).toFixed(2)}
                     </Button>
                   </CardContent>
                 </Card>
@@ -290,9 +290,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                         <p className="font-medium text-sm">Kit Básico de Grabación</p>
                         <p className="text-xs text-muted-foreground">8 micrófonos + previos + interface</p>
                       </div>
-                      <span className="font-bold text-primary">
-                        €{(cartState.basePrice + cartState.items.reduce((sum, item) => sum + item.price, 0)).toFixed(2)}
-                      </span>
+                      <span className="font-bold text-primary">€{cartState.basePrice.toFixed(2)}</span>
                     </div>
 
                     {/* Added Items */}
