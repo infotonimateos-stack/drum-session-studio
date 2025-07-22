@@ -150,7 +150,7 @@ export const upgradeMicrophones: Microphone[] = [
   },
   {
     id: 'coles4038-oh',
-    name: 'Par Coles 4038',
+    name: 'Coles 4038 Stereo Set',
     price: 5.99,
     included: false,
     description: 'Par de micrófonos ribbon como overheads',
@@ -159,7 +159,7 @@ export const upgradeMicrophones: Microphone[] = [
   },
   {
     id: 'u87-room',
-    name: 'Par Neumann U87',
+    name: 'Neumann U87 Stereo Set',
     price: 5.99,
     included: false,
     description: 'Par de micrófonos de condensador como room',
