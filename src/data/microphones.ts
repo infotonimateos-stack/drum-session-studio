@@ -100,7 +100,7 @@ export const upgradeMicrophones: Microphone[] = [
     price: 45.90,
     included: false,
     description: 'Micrófono de superficie para grabación ambiental',
-    target: 'Ambiente',
+    target: 'Subkick',
     image: '/lovable-uploads/903f1003-c2ac-486f-970e-14aeef1bdc43.png'
   },
   {
