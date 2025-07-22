@@ -105,11 +105,11 @@ export const upgradeMicrophones: Microphone[] = [
   },
   {
     id: 'shotgun-mic',
-    name: 'Shotgun Microphone',
+    name: 'Sennheiser 441',
     price: 69.90,
     included: false,
-    description: 'Micrófono direccional de alta precisión',
-    target: 'Direccional',
+    description: 'Micrófono dinámico para caja bottom',
+    target: 'Snare Bottom',
     image: '/lovable-uploads/fca524ef-3281-4a16-91f2-2ce2fefe7d2b.png'
   },
   {
@@ -126,8 +126,8 @@ export const upgradeMicrophones: Microphone[] = [
     name: 'Sennheiser 441',
     price: 4.99,
     included: false,
-    description: 'Micrófono dinámico para caja bottom',
-    target: 'Snare Bottom',
+    description: 'Micrófono dinámico para tom 3',
+    target: 'Tom 3',
     image: '/lovable-uploads/f493529f-6183-4040-82f1-5ccf827d1b2b.png'
   },
   {

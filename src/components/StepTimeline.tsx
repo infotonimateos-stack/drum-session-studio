@@ -29,10 +29,16 @@ export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => 
       
       <Progress value={progress} className="h-2" />
       
-      <div className="space-y-2">
+      <div className="relative">
         {steps.map((step, index) => (
-          <div key={index} className="flex items-center gap-2">
-            <div className={`w-4 h-4 rounded-full flex items-center justify-center text-xs ${
+          <div key={index} className="relative flex items-center gap-2 pb-3 last:pb-0">
+            {/* Connecting line */}
+            {index < steps.length - 1 && (
+              <div className={`absolute left-2 top-4 w-0.5 h-3 ${
+                index < currentStep ? 'bg-success' : 'bg-muted'
+              }`} />
+            )}
+            <div className={`w-4 h-4 rounded-full flex items-center justify-center text-xs relative z-10 ${
               index < currentStep 
                 ? 'bg-success text-success-foreground'
                 : index === currentStep

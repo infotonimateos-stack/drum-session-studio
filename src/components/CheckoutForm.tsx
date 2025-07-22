@@ -51,9 +51,9 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
             </h1>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="max-w-2xl mx-auto">
             {/* Form */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="space-y-6">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Personal Info */}
                 <Card className="bg-gradient-to-br from-card to-muted">
@@ -267,64 +267,11 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                         </div>
                       </Button>
                     </div>
-                    
-                    <Button type="submit" variant="upgrade" size="lg" className="w-full h-16 text-xl font-bold">
-                      💳 FINALIZAR COMPRA €{(cartState.basePrice + cartState.items.reduce((sum, item) => sum + item.price, 0)).toFixed(2)}
-                    </Button>
                   </CardContent>
                 </Card>
               </form>
             </div>
 
-            {/* Order Summary */}
-            <div className="lg:col-span-1">
-              <div className="sticky top-8">
-                <Card className="bg-gradient-to-br from-card to-muted">
-                  <CardHeader>
-                    <CardTitle>Resumen del Pedido</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {/* Base Package */}
-                    <div className="flex justify-between items-center p-3 bg-primary/10 rounded-lg">
-                      <div>
-                        <p className="font-medium text-sm">Kit Básico de Grabación</p>
-                        <p className="text-xs text-muted-foreground">8 micrófonos + previos + interface</p>
-                      </div>
-                      <span className="font-bold text-primary">€{cartState.basePrice.toFixed(2)}</span>
-                    </div>
-
-                    {/* Added Items */}
-                    {cartState.items.length > 0 && (
-                      <>
-                        <Separator />
-                        <div className="space-y-2 max-h-64 overflow-y-auto">
-                          {cartState.items.map((item) => (
-                            <div key={item.id} className="flex justify-between items-center p-2 bg-muted/30 rounded-md">
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium truncate">{item.name}</p>
-                                <Badge variant="outline" className="text-xs mt-1">
-                                  {item.category}
-                                </Badge>
-                              </div>
-                              <span className="text-sm font-medium ml-2">€{item.price.toFixed(2)}</span>
-                            </div>
-                          ))}
-                        </div>
-                        <Separator />
-                      </>
-                    )}
-                    
-                    {/* Total */}
-                    <div className="flex justify-between items-center p-3 bg-accent/20 rounded-lg">
-                      <span className="font-bold text-lg">Total</span>
-                      <span className="font-bold text-xl text-primary">
-                        €{(cartState.basePrice + cartState.items.reduce((sum, item) => sum + item.price, 0)).toFixed(2)}
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
           </div>
         </div>
       </div>
