@@ -18,7 +18,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono dinámico para bombo',
     target: 'Bombo',
-    image: '/lovable-uploads/shure-beta-52a.png'
+    image: '/lovable-uploads/4370868c-4d04-4df3-8984-34e4fa748a7a.png'
   },
   {
     id: 'km184-hihat',
@@ -27,7 +27,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono de condensador para hi-hat',
     target: 'Hi-Hat',
-    image: '/lovable-uploads/neumann-km-184.png'
+    image: '/lovable-uploads/931c6239-27dd-4843-ac2e-393dbdc5717b.png'
   },
   {
     id: 'sen421-tom1',
@@ -63,7 +63,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono de condensador overhead izquierdo',
     target: 'Overhead L',
-    image: '/lovable-uploads/akg-c-414-ltd.png'
+    image: '/lovable-uploads/06149d1c-e982-40b5-b71c-ee8e791d8327.png'
   },
   {
     id: 'akg414-oh2',
@@ -72,7 +72,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono de condensador overhead derecho',
     target: 'Overhead R',
-    image: '/lovable-uploads/akg-c-414-ltd.png'
+    image: '/lovable-uploads/06149d1c-e982-40b5-b71c-ee8e791d8327.png'
   }
 ];
 
@@ -93,7 +93,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Micrófono dinámico especializado para bombo',
     target: 'Bombo',
-    image: '/lovable-uploads/audix-d6.png'
+    image: '/lovable-uploads/abfcc59b-cba1-498b-8351-2d0d16ba1c97.png'
   },
   {
     id: 'shure-boundary',
@@ -120,7 +120,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Micrófono de condensador para caja top',
     target: 'Snare Top',
-    image: '/lovable-uploads/akg-c-414-xls.png'
+    image: '/lovable-uploads/130f3ae4-e2e6-4ff5-971f-6b8da515263e.png'
   },
   {
     id: 'sen441-snare',
@@ -138,7 +138,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Micrófono de ribbon para hi-hat',
     target: 'Hi-Hat',
-    image: '/lovable-uploads/beyerdynamic-m-160.png'
+    image: '/lovable-uploads/20c9fdfa-17f5-4876-9016-cbfb6ce4c107.png'
   },
   {
     id: 'coles4038-oh',
@@ -147,7 +147,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Par de micrófonos ribbon como overheads',
     target: 'Overheads',
-    image: '/lovable-uploads/coles-4038-pair.png'
+    image: '/lovable-uploads/336b755e-679f-4c19-9325-3c4f0e952191.png'
   },
   {
     id: 'u87-room',
@@ -165,7 +165,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Micrófono de condensador para ride',
     target: 'Ride',
-    image: '/lovable-uploads/neumann-km-184.png'
+    image: '/lovable-uploads/931c6239-27dd-4843-ac2e-393dbdc5717b.png'
   },
   {
     id: 'akg414-mono',
@@ -174,7 +174,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Micrófono de condensador overhead mono',
     target: 'Overhead Mono',
-    image: '/lovable-uploads/akg-c-414-xlii.png'
+    image: '/lovable-uploads/2f72b48e-2149-413c-8cbd-bdcd2001a8a6.png'
   },
   {
     id: 'c12-room',

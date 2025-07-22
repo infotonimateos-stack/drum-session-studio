@@ -57,7 +57,7 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
           <CardContent className="space-y-6">
             <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
               <img 
-                src="/lovable-uploads/motu-8pre.png" 
+                src="/lovable-uploads/93445061-0c3b-4d86-a30f-15ff4b018154.png" 
                 alt="MOTU 8Pre Interface"
                 className="max-h-28 max-w-full object-contain bg-transparent"
                 style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
