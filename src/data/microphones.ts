@@ -114,6 +114,15 @@ export const upgradeMicrophones: Microphone[] = [
     target: 'Bombo',
     image: '/lovable-uploads/abfcc59b-cba1-498b-8351-2d0d16ba1c97.png'
   },
+  {
+    id: 'beta91-kick-in',
+    name: 'Shure Beta 91A',
+    price: 2.99,
+    included: false,
+    description: 'Micrófono de condensador interno para bombo',
+    target: 'Bombo In',
+    image: '/lovable-uploads/4370868c-4d04-4df3-8984-34e4fa748a7a.png'
+  },
   // SNARE TOP upgrades
   {
     id: 'akg414-snare',
