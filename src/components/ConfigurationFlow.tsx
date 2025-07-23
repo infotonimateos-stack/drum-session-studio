@@ -11,6 +11,7 @@ import { VideoStep } from "@/components/steps/VideoStep";
 import { TakesStep } from "@/components/steps/TakesStep";
 import { DeliveryStep } from "@/components/steps/DeliveryStep";
 import { ExtrasStep } from "@/components/steps/ExtrasStep";
+import { CheckoutSummary } from "@/components/CheckoutSummary";
 import { useCart } from "@/hooks/useCart";
 import drumKitStudio from "@/assets/drum-kit-studio.jpg";
 
@@ -18,8 +19,11 @@ interface ConfigurationFlowProps {
   onCheckout: () => void;
 }
 
+type FlowMode = 'configuration' | 'checkout';
+
 export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [mode, setMode] = useState<FlowMode>('configuration');
   const { cartState, addItem, removeItem, hasItem } = useCart();
 
   const steps = [
@@ -44,16 +48,16 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
       component: <VideoStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
     },
     { 
-      title: "Extras", 
-      component: <ExtrasStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
-    },
-    { 
       title: "Tomas", 
       component: <TakesStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
     },
     { 
       title: "Entrega", 
       component: <DeliveryStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
+    },
+    { 
+      title: "Extras", 
+      component: <ExtrasStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
     }
   ];
 
@@ -72,15 +76,40 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   };
 
   const handleCheckout = () => {
+    setMode('checkout');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleBackToConfiguration = () => {
+    setMode('configuration');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleConfirmOrder = () => {
     onCheckout();
   };
 
+  // Show checkout summary
+  if (mode === 'checkout') {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-warm-cream/30 to-warm-peach/20">
+        <div className="container mx-auto px-4 py-8">
+          <CheckoutSummary
+            cartState={cartState}
+            onConfirmOrder={handleConfirmOrder}
+            onBack={handleBackToConfiguration}
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-muted/50">
+    <div className="min-h-screen bg-gradient-to-br from-warm-cream/30 to-warm-peach/20">
       <div className="container mx-auto px-4 py-8">
         {/* Header Section */}
         <div className="mb-8">
-          <Card className="overflow-hidden bg-gradient-to-br from-card to-muted/30 shadow-xl">
+          <Card className="overflow-hidden bg-gradient-to-br from-warm-peach/20 to-warm-apricot/30 shadow-xl border-warm-coral/30">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
               <div className="space-y-4">
                 <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -108,7 +137,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Timeline and Cart Sidebar - Left */}
           <div className="lg:col-span-1">
-            <div className="sticky top-8 space-y-6">
+            <div className="sticky top-4 space-y-6 max-h-screen overflow-y-auto">
               <StepTimeline
                 currentStep={currentStep}
                 totalSteps={steps.length}
@@ -123,7 +152,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
 
           {/* Main Content - Right */}
           <div className="lg:col-span-3">
-            <Card className="overflow-hidden bg-gradient-to-br from-card to-muted/30 shadow-xl">
+            <Card className="overflow-hidden bg-gradient-to-br from-warm-peach/10 to-warm-blush/10 shadow-xl border-warm-coral/20">
               {/* Step Content */}
               <div className="p-8 min-h-[600px]">
                 {steps[currentStep].component}

@@ -13,32 +13,25 @@ interface VideoStepProps {
 export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
   const videoItems: CartItem[] = [
     {
-      id: 'video-saludo',
-      name: 'Video - Saludo para redes sociales',
-      price: 1.99,
+      id: 'social-greeting',
+      name: 'Saludo para Redes Sociales',
+      price: 4.99,
       category: 'Video',
       description: 'Video personalizado para tus redes sociales'
     },
     {
-      id: 'video-llamada-premium',
-      name: 'Video - Llamada PREMIUM',
-      price: 49.90,
-      category: 'Video',
-      description: 'Llamada de video premium personalizada'
-    },
-    {
-      id: 'video-tocando-30s',
-      name: 'Video tocando 30 segundos',
-      price: 19.90,
+      id: 'playing-video',
+      name: 'Video 30s Tocando',
+      price: 9.99,
       category: 'Video',
       description: 'Video de 30 segundos tocando tu canción'
     },
     {
-      id: 'compartir-insta',
+      id: 'instagram-share',
       name: 'Compartir en Instagram',
-      price: 19.90,
+      price: 2.99,
       category: 'Video',
-      description: 'Compartir tu sesión en mi Instagram'
+      description: 'Publicación en mi Instagram con tu canción'
     }
   ];
 
@@ -52,13 +45,11 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
 
   const getIcon = (itemId: string) => {
     switch (itemId) {
-      case 'video-saludo':
+      case 'social-greeting':
         return <Video className="h-5 w-5" />;
-      case 'video-llamada-premium':
-        return <Phone className="h-5 w-5" />;
-      case 'video-tocando-30s':
+      case 'playing-video':
         return <PlayCircle className="h-5 w-5" />;
-      case 'compartir-insta':
+      case 'instagram-share':
         return <Share2 className="h-5 w-5" />;
       default:
         return <Plus className="h-5 w-5" />;
@@ -67,14 +58,12 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
 
   const getItemColor = (itemId: string) => {
     switch (itemId) {
-      case 'video-saludo':
-        return 'from-green-500/20 to-blue-500/20 border-green-500/30';
-      case 'video-llamada-premium':
-        return 'from-purple-500/20 to-pink-500/20 border-purple-500/30';
-      case 'video-tocando-30s':
-        return 'from-orange-500/20 to-red-500/20 border-orange-500/30';
-      case 'compartir-insta':
-        return 'from-pink-500/20 to-purple-500/20 border-pink-500/30';
+      case 'social-greeting':
+        return 'from-orange-200/40 to-amber-200/40 border-orange-300/50';
+      case 'playing-video':
+        return 'from-rose-200/40 to-pink-200/40 border-rose-300/50';
+      case 'instagram-share':
+        return 'from-purple-200/40 to-violet-200/40 border-purple-300/50';
       default:
         return 'from-card to-muted';
     }

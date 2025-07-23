@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, FileText } from "lucide-react";
+import { Check, Plus, FileText, Video, Phone } from "lucide-react";
 import { CartItem } from "@/types/cart";
 
 interface ExtrasStepProps {
@@ -13,11 +13,25 @@ interface ExtrasStepProps {
 export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) => {
   const extrasItems: CartItem[] = [
     {
-      id: 'partitura',
+      id: 'sheet-music',
       name: 'Partitura',
       price: 0.99,
       category: 'Extras',
-      description: 'Partitura profesional de tu canción'
+      description: 'Un guión muy simple, meramente un recuerdo gracioso'
+    },
+    {
+      id: 'videocall-10min',
+      name: 'Videollamada 10 minutos',
+      price: 5.99,
+      category: 'Extras',
+      description: 'Para discutir detalles del proyecto'
+    },
+    {
+      id: 'videocall-premium',
+      name: 'Videollamada Premium Multicámara',
+      price: 100.00,
+      category: 'Extras',
+      description: 'Sistema multicámara con audio y video en directo, producción en tiempo real'
     }
   ];
 
@@ -42,69 +56,96 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
       </div>
 
       {/* Extras Items */}
-      <div className="flex justify-center">
-        <div className="max-w-md">
-          {extrasItems.map((item) => {
-            const isSelected = hasItem(item.id);
-            
-            return (
-              <Card 
-                key={item.id}
-                className={`transition-all duration-300 hover:shadow-xl cursor-pointer transform hover:scale-105 ${
-                  isSelected 
-                    ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-xl scale-105' 
-                    : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'
-                }`}
-                onClick={() => handleToggleItem(item)}
-              >
-                <CardHeader className="pb-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <CardTitle className="flex items-center gap-3 text-xl">
-                      <FileText className="h-6 w-6" />
-                      {item.name}
-                    </CardTitle>
-                    <Badge variant="outline" className="text-primary font-bold text-lg px-3 py-1">
-                      €{item.price.toFixed(2)}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <p className="text-muted-foreground text-center">
-                    {item.description}
-                  </p>
-                  
-                  <div className="p-4 bg-muted/50 rounded-lg text-center">
-                    <p className="text-sm text-muted-foreground">
-                      📝 Perfecto para músicos que quieren la notación completa de su canción
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {extrasItems.map((item) => {
+          const isSelected = hasItem(item.id);
+          
+          const getIcon = (itemId: string) => {
+            switch (itemId) {
+              case 'sheet-music':
+                return <FileText className="h-5 w-5" />;
+              case 'videocall-10min':
+                return <Video className="h-5 w-5" />;
+              case 'videocall-premium':
+                return <Phone className="h-5 w-5" />;
+              default:
+                return <Plus className="h-5 w-5" />;
+            }
+          };
+
+          const getItemColor = (itemId: string) => {
+            switch (itemId) {
+              case 'sheet-music':
+                return 'from-amber-100/60 to-yellow-100/60 border-amber-200/50';
+              case 'videocall-10min':
+                return 'from-emerald-100/60 to-teal-100/60 border-emerald-200/50';
+              case 'videocall-premium':
+                return 'from-rose-100/60 to-pink-100/60 border-rose-200/50';
+              default:
+                return 'from-card to-muted';
+            }
+          };
+          
+          return (
+            <Card 
+              key={item.id}
+              className={`transition-all duration-300 hover:shadow-xl cursor-pointer transform hover:scale-105 ${
+                isSelected 
+                  ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-xl scale-105' 
+                  : `bg-gradient-to-br ${getItemColor(item.id)} hover:border-primary/50`
+              }`}
+              onClick={() => handleToggleItem(item)}
+            >
+              <CardHeader className="pb-4">
+                <div className="flex items-center justify-between mb-2">
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    {getIcon(item.id)}
+                    {item.name}
+                  </CardTitle>
+                  <Badge variant="outline" className="text-primary font-bold">
+                    €{item.price.toFixed(2)}
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-muted-foreground text-sm">
+                  {item.description}
+                </p>
+                
+                {/* Special highlight for premium items */}
+                {item.price >= 100 && (
+                  <div className="p-3 bg-gradient-to-r from-rose-100 to-pink-100 rounded-lg border border-rose-200">
+                    <p className="text-rose-700 font-semibold text-sm text-center">
+                      ⭐ Experiencia Premium Única
                     </p>
                   </div>
-                  
-                  <Button
-                    variant={isSelected ? "default" : "outline"}
-                    size="lg"
-                    className="w-full"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleToggleItem(item);
-                    }}
-                  >
-                    {isSelected ? (
-                      <>
-                        <Check className="h-5 w-5 mr-2" />
-                        ✨ Añadido
-                      </>
-                    ) : (
-                      <>
-                        <Plus className="h-5 w-5 mr-2" />
-                        Añadir por €{item.price.toFixed(2)}
-                      </>
-                    )}
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+                )}
+                
+                <Button
+                  variant={isSelected ? "default" : "outline"}
+                  size="sm"
+                  className="w-full"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleToggleItem(item);
+                  }}
+                >
+                  {isSelected ? (
+                    <>
+                      <Check className="h-4 w-4 mr-2" />
+                      Añadido
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="h-4 w-4 mr-2" />
+                      Añadir
+                    </>
+                  )}
+                </Button>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
     </div>
   );

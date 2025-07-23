@@ -13,46 +13,11 @@ interface ProductionStepProps {
 export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepProps) => {
   const productionItems: CartItem[] = [
     {
-      id: 'beat-detective',
-      name: 'Beat Detective',
-      price: 2.99,
-      category: 'Producción',
-      description: 'Corrección de timing profesional'
-    },
-    {
       id: 'tiempo-adicional',
-      name: 'Tiempo Adicional (hasta 8 min)',
+      name: 'Tiempo Adicional (canciones 4-8 min)',
       price: 2.99,
       category: 'Producción',
-      description: 'Extiende tu canción hasta 8 minutos'
-    },
-    {
-      id: 'toma-adicional',
-      name: 'Toma Adicional',
-      price: 29.99,
-      category: 'Producción',
-      description: 'Grabación de una toma extra'
-    },
-    {
-      id: 'revisiones',
-      name: 'Revisiones',
-      price: 19.99,
-      category: 'Producción',
-      description: 'Revisión y ajustes posteriores'
-    },
-    {
-      id: 'clonar-demo',
-      name: 'Clonar mi Demo',
-      price: 19.99,
-      category: 'Producción',
-      description: 'Recrear exactamente tu demo'
-    },
-    {
-      id: 'entrega-expres',
-      name: 'Entrega Exprés (3-5 días)',
-      price: 9.99,
-      category: 'Producción',
-      description: 'Entrega prioritaria rápida'
+      description: 'Para canciones entre 4 y 8 minutos de duración'
     },
     {
       id: 'work-mix',
