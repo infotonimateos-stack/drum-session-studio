@@ -118,7 +118,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   Comienza con nuestra <strong>configuración básica</strong> que incluye todo lo esencial para una grabación profesional. 
                   Luego puedes <strong>personalizar y mejorar</strong> cada aspecto según tus necesidades específicas: 
-                  desde micrófonos premium hasta previos de alta gama.
+                  desde micrófonos básicos hasta previos de alta gama.
                 </p>
                 <p className="text-sm text-muted-foreground">
                   💡 <em>Cada elemento se puede actualizar individualmente para crear tu setup perfecto</em>
