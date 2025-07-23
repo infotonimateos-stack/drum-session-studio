@@ -34,9 +34,9 @@ export const MicrophonesStep = ({
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
           🎤 Micrófonos
         </h2>
-        <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
-          8 micrófonos profesionales incluidos. Añade mejoras premium para un sonido excepcional.
-        </p>
+            <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
+              Incluye 8 micrófonos profesionales. Añade mejoras premium para lograr un sonido excepcional.
+            </p>
       </div>
 
       {/* Included Microphones */}
