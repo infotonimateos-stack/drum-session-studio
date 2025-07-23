@@ -15,7 +15,7 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
   const proPreampsPack: CartItem = {
     id: 'preamps-pro',
     name: 'Pack Previos Pro: API, Neve y DAD',
-    price: 19.90,
+    price: 6.99,
     category: 'Previos',
     description: 'Previos analógicos premium para un sonido vintage y profesional'
   };
@@ -108,7 +108,7 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
                 <Plus className="h-8 w-8 text-primary" />
                 Premium
               </CardTitle>
-              <Badge variant="outline" className="text-primary text-lg px-4 py-2 font-bold">+€19.90</Badge>
+              <Badge variant="outline" className="text-primary text-lg px-4 py-2 font-bold">+€6.99</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -158,7 +158,7 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
               ) : (
                 <>
                   <Plus className="h-6 w-6 mr-2" />
-                  UPGRADE POR €19.90
+                  UPGRADE POR €6.99
                 </>
               )}
             </Button>

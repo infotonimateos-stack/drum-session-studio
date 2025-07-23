@@ -15,7 +15,7 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
   const dadInterface: CartItem = {
     id: 'interface-dad',
     name: 'DAD AX64',
-    price: 9.90,
+    price: 6.99,
     category: 'Interface',
     description: 'Interface de audio profesional con convertidores premium'
   };
@@ -108,7 +108,7 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
                 <Plus className="h-8 w-8 text-primary" />
                 Premium
               </CardTitle>
-              <Badge variant="outline" className="text-primary text-lg px-4 py-2 font-bold">+€9.90</Badge>
+              <Badge variant="outline" className="text-primary text-lg px-4 py-2 font-bold">+€6.99</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -164,7 +164,7 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
               ) : (
                 <>
                   <Plus className="h-6 w-6 mr-2" />
-                  UPGRADE POR €9.90
+                  UPGRADE POR €6.99
                 </>
               )}
             </Button>

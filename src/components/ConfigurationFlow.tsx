@@ -6,6 +6,8 @@ import { StepTimeline } from "@/components/StepTimeline";
 import { MicrophonesStep } from "@/components/steps/MicrophonesStep";
 import { PreampsStep } from "@/components/steps/PreampsStep";
 import { InterfaceStep } from "@/components/steps/InterfaceStep";
+import { ProductionStep } from "@/components/steps/ProductionStep";
+import { VideoStep } from "@/components/steps/VideoStep";
 import { TakesStep } from "@/components/steps/TakesStep";
 import { DeliveryStep } from "@/components/steps/DeliveryStep";
 import { ExtrasStep } from "@/components/steps/ExtrasStep";
@@ -34,16 +36,24 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
       component: <InterfaceStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
     },
     { 
+      title: "Producción", 
+      component: <ProductionStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
+    },
+    { 
+      title: "Video", 
+      component: <VideoStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
+    },
+    { 
+      title: "Extras", 
+      component: <ExtrasStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
+    },
+    { 
       title: "Tomas", 
       component: <TakesStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
     },
     { 
       title: "Entrega", 
       component: <DeliveryStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
-    },
-    { 
-      title: "Extras", 
-      component: <ExtrasStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
     }
   ];
 
