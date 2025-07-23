@@ -89,10 +89,10 @@ export const upgradeMicrophones: Microphone[] = [
   },
   {
     id: 'subkick-kick',
-    name: 'Solomicron SubKick',
+    name: 'Solomon SubKick',
     price: 2.99,
     included: false,
-    description: 'Micrófono subkick para bombo',
+    description: 'Subgraves naturales y con pegada',
     target: 'Bombo',
     image: '/lovable-uploads/903f1003-c2ac-486f-970e-14aeef1bdc43.png'
   },
@@ -101,8 +101,8 @@ export const upgradeMicrophones: Microphone[] = [
     name: 'Neumann U47 FET',
     price: 4.99,
     included: false,
-    description: 'Micrófono de condensador vintage para bombo',
-    target: 'Bombo',
+    description: 'El bombo suena mejor con una leyenda delante',
+    target: 'Bombo Out',
     image: '/lovable-uploads/018df378-819a-48fb-9962-28969e162a4f.png'
   },
   {
@@ -110,18 +110,9 @@ export const upgradeMicrophones: Microphone[] = [
     name: 'Audix D6',
     price: 2.99,
     included: false,
-    description: 'Micrófono dinámico especializado para bombo',
-    target: 'Bombo',
-    image: '/lovable-uploads/abfcc59b-cba1-498b-8351-2d0d16ba1c97.png'
-  },
-  {
-    id: 'beta91-kick-in',
-    name: 'Shure Beta 91A',
-    price: 2.99,
-    included: false,
-    description: 'Micrófono de condensador interno para bombo',
-    target: 'Bombo In',
-    image: '/lovable-uploads/4370868c-4d04-4df3-8984-34e4fa748a7a.png'
+    description: 'Punch moderno con carácter yankee',
+    target: 'Bombo Out',
+    image: '/lovable-uploads/28ff47cf-fb28-405a-b5ae-f8351abb1a14.png'
   },
   // SNARE TOP upgrades
   {
@@ -129,7 +120,7 @@ export const upgradeMicrophones: Microphone[] = [
     name: 'AKG C414',
     price: 2.99,
     included: false,
-    description: 'Micrófono de condensador para caja top',
+    description: 'Claridad, naturalidad y pegada',
     target: 'Snare Top',
     image: '/lovable-uploads/130f3ae4-e2e6-4ff5-971f-6b8da515263e.png'
   },
@@ -139,7 +130,7 @@ export const upgradeMicrophones: Microphone[] = [
     name: 'Sennheiser 441',
     price: 2.99,
     included: false,
-    description: 'Micrófono dinámico para caja bottom',
+    description: 'El clásico que capta cada susurro del bordón',
     target: 'Snare Bottom',
     image: '/lovable-uploads/fca524ef-3281-4a16-91f2-2ce2fefe7d2b.png'
   },
@@ -149,9 +140,9 @@ export const upgradeMicrophones: Microphone[] = [
     name: 'Beyerdynamic M160',
     price: 2.99,
     included: false,
-    description: 'Micrófono de ribbon para hi-hat',
-    target: 'Hi-Hat',
-    image: '/lovable-uploads/20c9fdfa-17f5-4876-9016-cbfb6ce4c107.png'
+    description: 'El ribbon que doma los agudos',
+    target: 'Hi-Hat Ribbon',
+    image: '/lovable-uploads/2f8c9e9a-db5c-497d-bc87-3d2b7e78fa5d.png'
   },
   // RIDE upgrades
   {
@@ -159,9 +150,9 @@ export const upgradeMicrophones: Microphone[] = [
     name: 'Neumann KM184',
     price: 2.99,
     included: false,
-    description: 'Micrófono de condensador para ride',
+    description: 'Ride con brillo y definición impecable',
     target: 'Ride',
-    image: '/lovable-uploads/931c6239-27dd-4843-ac2e-393dbdc5717b.png'
+    image: '/lovable-uploads/4264fd03-c9ae-4fbb-865a-5c9470aeb91e.png'
   },
   // OVERHEADS upgrades
   {
@@ -169,8 +160,8 @@ export const upgradeMicrophones: Microphone[] = [
     name: 'Coles 4038',
     price: 4.99,
     included: false,
-    description: 'Micrófonos ribbon como overheads',
-    target: 'Overheads',
+    description: 'Textura vintage, profundidad y ese toque UK',
+    target: 'Overheads Ribbon',
     image: '/lovable-uploads/336b755e-679f-4c19-9325-3c4f0e952191.png'
   },
   // OVERHEAD single upgrades
@@ -179,17 +170,17 @@ export const upgradeMicrophones: Microphone[] = [
     name: 'Telefunken C12',
     price: 6.99,
     included: false,
-    description: 'Micrófono de condensador vintage overhead mono',
-    target: 'Overhead Mono',
+    description: 'El room de los grandes discos',
+    target: 'Room Mono',
     image: '/lovable-uploads/c3aae572-234c-41c9-a967-2d00f027d2b3.png'
   },
   // ROOM upgrades
   {
     id: 'u87-room',
-    name: 'Neumann U87',
+    name: 'Neumann U87 Stereo Set',
     price: 6.99,
     included: false,
-    description: 'Micrófono de condensador para room',
+    description: 'La leyenda mundial del room estéreo',
     target: 'Room',
     image: '/lovable-uploads/018df378-819a-48fb-9962-28969e162a4f.png'
   }
