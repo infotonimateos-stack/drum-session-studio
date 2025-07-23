@@ -84,7 +84,7 @@ export const upgradeMicrophones: Microphone[] = [
     price: 2.99,
     included: false,
     description: 'Micrófono de condensador para bombo',
-    target: 'Bombo',
+    target: 'Bombo In',
     image: '/lovable-uploads/4370868c-4d04-4df3-8984-34e4fa748a7a.png'
   },
   {
