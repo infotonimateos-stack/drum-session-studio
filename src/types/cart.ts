@@ -28,7 +28,7 @@ export interface Microphone {
   included: boolean;
   description: string;
   target: string;
-  iconType?: string;
+  image?: string;
 }
 
 export interface OrderForm {
