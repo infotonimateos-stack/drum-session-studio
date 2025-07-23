@@ -60,12 +60,14 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   const handlePreviousStep = () => {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const handleNextStep = () => {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -104,7 +106,22 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
           </Card>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Main Content */}
+          {/* Timeline and Cart Sidebar - Left */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-8 space-y-6">
+              <StepTimeline
+                currentStep={currentStep}
+                totalSteps={steps.length}
+              />
+              <Cart 
+                cartState={cartState} 
+                removeItem={removeItem}
+                onCheckout={handleCheckout}
+              />
+            </div>
+          </div>
+
+          {/* Main Content - Right */}
           <div className="lg:col-span-3">
             <Card className="overflow-hidden bg-gradient-to-br from-card to-muted/30 shadow-xl">
               {/* Step Content */}
@@ -121,21 +138,6 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                 onCheckout={handleCheckout}
               />
             </Card>
-          </div>
-
-          {/* Cart Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-8 space-y-6">
-              <StepTimeline
-                currentStep={currentStep}
-                totalSteps={steps.length}
-              />
-              <Cart 
-                cartState={cartState} 
-                removeItem={removeItem}
-                onCheckout={handleCheckout}
-              />
-            </div>
           </div>
         </div>
       </div>
