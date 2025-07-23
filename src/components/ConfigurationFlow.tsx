@@ -13,7 +13,7 @@ import { DeliveryStep } from "@/components/steps/DeliveryStep";
 import { ExtrasStep } from "@/components/steps/ExtrasStep";
 import { CheckoutSummary } from "@/components/CheckoutSummary";
 import { useCart } from "@/hooks/useCart";
-import drumKitStudio from "@/assets/drum-kit-studio.jpg";
+import drumKitStudio from "@/assets/drum-kit-studio-realistic.jpg";
 
 interface ConfigurationFlowProps {
   onCheckout: () => void;
@@ -137,7 +137,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Timeline and Cart Sidebar - Left */}
           <div className="lg:col-span-1">
-            <div className="sticky top-4 space-y-6 max-h-screen overflow-y-auto">
+            <div className="sticky top-20 space-y-6 max-h-[calc(100vh-6rem)] overflow-y-auto">
               <StepTimeline
                 currentStep={currentStep}
                 totalSteps={steps.length}

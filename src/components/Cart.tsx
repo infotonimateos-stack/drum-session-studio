@@ -65,15 +65,6 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
           <span className="font-bold text-xl text-primary">€{cartState.total.toFixed(2)}</span>
         </div>
 
-        {onCheckout && (
-          <Button 
-            variant="upgrade" 
-            className="w-full py-3 text-base font-semibold"
-            onClick={onCheckout}
-          >
-            Proceder al Checkout
-          </Button>
-        )}
       </CardContent>
     </Card>
   );

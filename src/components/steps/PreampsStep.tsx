@@ -31,7 +31,7 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
   };
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 bg-gradient-to-br from-warm-coral/20 to-warm-blush/15 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-6">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">

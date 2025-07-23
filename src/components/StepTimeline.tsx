@@ -10,7 +10,9 @@ export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => 
   const steps = [
     "Micrófonos",
     "Previos", 
-    "Interfaz",
+    "Interface",
+    "Producción",
+    "Video",
     "Tomas",
     "Entrega",
     "Extras"

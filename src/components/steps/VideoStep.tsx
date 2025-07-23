@@ -17,21 +17,21 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
       name: 'Saludo para Redes Sociales',
       price: 4.99,
       category: 'Video',
-      description: 'Video personalizado para tus redes sociales'
+      description: 'Saludo de 15 segundos donde se nombra tu proyecto'
     },
     {
       id: 'playing-video',
-      name: 'Video 30s Tocando',
-      price: 9.99,
+      name: 'Video 1 minuto Tocando',
+      price: 29.90,
       category: 'Video',
-      description: 'Video de 30 segundos tocando tu canción'
+      description: 'Video de 1 minuto tocando tu canción'
     },
     {
       id: 'instagram-share',
       name: 'Compartir en Instagram',
-      price: 2.99,
+      price: 29.90,
       category: 'Video',
-      description: 'Publicación en mi Instagram con tu canción'
+      description: 'Video de 15 segundos que compartiré en mi perfil (30k followers) nombrando tu proyecto e invitando a seguirte'
     }
   ];
 
@@ -59,18 +59,18 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
   const getItemColor = (itemId: string) => {
     switch (itemId) {
       case 'social-greeting':
-        return 'from-orange-200/40 to-amber-200/40 border-orange-300/50';
+        return 'from-warm-peach/40 to-warm-coral/30 border-warm-peach/50';
       case 'playing-video':
-        return 'from-rose-200/40 to-pink-200/40 border-rose-300/50';
+        return 'from-warm-coral/40 to-warm-blush/30 border-warm-coral/50';
       case 'instagram-share':
-        return 'from-purple-200/40 to-violet-200/40 border-purple-300/50';
+        return 'from-warm-blush/40 to-warm-apricot/30 border-warm-blush/50';
       default:
         return 'from-card to-muted';
     }
   };
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 bg-gradient-to-br from-warm-peach/20 to-warm-apricot/30 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-6">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -102,7 +102,7 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
                     {getIcon(item.id)}
                     {item.name}
                   </CardTitle>
-                  <Badge variant="outline" className="text-primary font-bold text-lg px-3 py-1">
+                  <Badge variant="outline" className="text-primary font-bold text-base px-3 py-1 whitespace-nowrap">
                     €{item.price.toFixed(2)}
                   </Badge>
                 </div>
@@ -113,7 +113,7 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
                 </p>
                 
                 {/* Special highlight for premium items */}
-                {item.price > 15 && (
+                {item.price >= 25 && (
                   <div className="p-3 bg-primary/10 rounded-lg">
                     <p className="text-primary font-semibold text-sm text-center">
                       ⭐ Servicio Premium

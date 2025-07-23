@@ -31,7 +31,7 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
   };
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 bg-gradient-to-br from-warm-apricot/25 to-warm-cream/20 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-6">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">

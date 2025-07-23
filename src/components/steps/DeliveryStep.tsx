@@ -55,7 +55,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 bg-gradient-to-br from-warm-blush/20 to-warm-apricot/15 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-4">
         <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">

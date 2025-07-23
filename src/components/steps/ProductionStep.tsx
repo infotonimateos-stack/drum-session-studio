@@ -59,7 +59,7 @@ export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepP
   };
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 bg-gradient-to-br from-warm-peach/15 to-warm-coral/20 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-6">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">

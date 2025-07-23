@@ -43,7 +43,7 @@ export const TakesStep = ({
       addItem(toniInterpretation);
     }
   };
-  return <div className="space-y-8">
+  return <div className="space-y-8 bg-gradient-to-br from-warm-cream/30 to-warm-blush/20 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-4">
         <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -71,7 +71,7 @@ export const TakesStep = ({
               <Play className="h-8 w-8 text-success" />
               <div>
                 <h3 className="font-semibold">1 Toma Estándar</h3>
-                <p className="text-sm text-muted-foreground whitespace-nowrap">Versión profesional basada en tu demo</p>
+                <p className="text-sm text-muted-foreground">Versión profesional basada en tu demo</p>
               </div>
             </div>
             
@@ -101,21 +101,14 @@ export const TakesStep = ({
                 <Copy className="h-5 w-5 text-primary" />
                 Copia Exacta
               </CardTitle>
-              <Badge variant="outline" className="text-primary">+€24.90</Badge>
+              <Badge variant="outline" className="text-primary font-bold whitespace-nowrap">+€24.90</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Copy className="h-8 w-8 text-primary" />
-              <div>
-                <h3 className="font-semibold">Recreación Fiel</h3>
-                <p className="text-sm text-muted-foreground">Copia exacta de tu demo original</p>
-              </div>
-            </div>
-            
             <div className="space-y-2">
               <h4 className="font-medium text-sm">Características:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
+                <li>• Recreación fiel de tu demo</li>
                 <li>• Cada fill idéntico al original</li>
                 <li>• Mismo feeling y groove</li>
                 <li>• Respeta todos los matices</li>
@@ -146,21 +139,14 @@ export const TakesStep = ({
                 <User className="h-5 w-5 text-primary" />
                 Interpretación Pro
               </CardTitle>
-              <Badge variant="outline" className="text-primary">+€19.90</Badge>
+              <Badge variant="outline" className="text-primary font-bold whitespace-nowrap">+€19.90</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex items-center gap-3">
-              <User className="h-8 w-8 text-primary" />
-              <div>
-                <h3 className="font-semibold">Versión Toni Mateos</h3>
-                <p className="text-sm text-muted-foreground">Interpretación personal y creativa</p>
-              </div>
-            </div>
-            
             <div className="space-y-2">
               <h4 className="font-medium text-sm">Características:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
+                <li>• Versión Toni Mateos</li>
                 <li>• Interpretación creativa</li>
                 <li>• Fills y variaciones únicas</li>
                 <li>• Combínala con otras opciones</li>
