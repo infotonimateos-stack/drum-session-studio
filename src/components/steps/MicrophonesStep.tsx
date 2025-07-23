@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Check, Plus, Headphones } from "lucide-react";
 import { baseMicrophones, upgradeMicrophones } from "@/data/microphones";
 import { CartItem } from "@/types/cart";
+import { microphoneIcons, MicrophoneIconType } from "@/components/icons/MicrophoneIcons";
 interface MicrophonesStepProps {
   addItem: (item: CartItem) => void;
   removeItem: (itemId: string) => void;
@@ -55,11 +56,14 @@ export const MicrophonesStep = ({
                 <Badge variant="outline" className="border-success text-success mb-3 self-center text-sm px-3 py-1">
                   {mic.target}
                 </Badge>
-                {mic.image && <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg">
-                     <img src={mic.image} alt={mic.name} className="max-h-28 max-w-full object-contain bg-muted/30 rounded-lg p-2" style={{
-                filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
-              }} />
-                  </div>}
+                {mic.iconType && (() => {
+                  const IconComponent = microphoneIcons[mic.iconType as MicrophoneIconType];
+                  return IconComponent ? (
+                    <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg">
+                      <IconComponent size={100} />
+                    </div>
+                  ) : null;
+                })()}
               </CardHeader>
               <CardContent className="pt-0">
                 <h4 className="font-bold text-base mb-2 text-center">{mic.name}</h4>
@@ -93,11 +97,14 @@ export const MicrophonesStep = ({
                     </Badge>
                     <span className="font-bold text-xl text-primary">€{mic.price.toFixed(2)}</span>
                   </div>
-                   {mic.image && <div className="w-full h-40 flex items-center justify-center bg-muted/30 rounded-lg">
-                       <img src={mic.image} alt={mic.name} className="max-h-36 max-w-full object-contain bg-muted/30 rounded-lg p-2" style={{
-                  filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
-                }} />
-                    </div>}
+                   {mic.iconType && (() => {
+                     const IconComponent = microphoneIcons[mic.iconType as MicrophoneIconType];
+                     return IconComponent ? (
+                       <div className="w-full h-40 flex items-center justify-center bg-muted/30 rounded-lg">
+                         <IconComponent size={120} />
+                       </div>
+                     ) : null;
+                   })()}
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <h4 className="font-bold text-lg text-center">{mic.name}</h4>
