@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Star } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Cart } from "@/components/Cart";
 import { StepNavigator } from "@/components/StepNavigator";
@@ -112,9 +113,15 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
           <Card className="overflow-hidden bg-gradient-to-br from-warm-peach/20 to-warm-apricot/30 shadow-xl border-warm-coral/30">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
               <div className="space-y-4">
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  Configura tu Sesión
-                </h1>
+                <div className="flex items-center gap-4 flex-wrap">
+                  <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    Configura tu Sesión
+                  </h1>
+                  <div className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
+                    <Star className="w-4 h-4 fill-current" />
+                    desde 49,90 euros
+                  </div>
+                </div>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   Comienza con nuestra <strong>configuración básica</strong> que incluye todo lo esencial para una grabación profesional. 
                   Luego puedes <strong>personalizar y mejorar</strong> cada aspecto según tus necesidades específicas: 
