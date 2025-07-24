@@ -32,12 +32,6 @@ export const AboutTab = () => {
 
         {/* Experience */}
         <Card className="bg-gradient-to-br from-card to-muted">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Award className="h-5 w-5 text-primary" />
-              Experiencia
-            </CardTitle>
-          </CardHeader>
           <CardContent>
             <img 
               src="/lovable-uploads/14fbb514-5136-49fb-b57c-0c478aad347d.png" 
