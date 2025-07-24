@@ -30,7 +30,7 @@ export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
           <div className="flex items-center gap-3">
             <img src={microphoneIcon} alt="Studio Icon" className="h-8 w-8" />
             <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Toni Mateos Drums Studio
+              Toni Mateos Online Drums Recording
             </h1>
           </div>
           <Button
