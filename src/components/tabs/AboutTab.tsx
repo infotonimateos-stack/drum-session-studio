@@ -31,13 +31,6 @@ export const AboutTab = () => {
               He trabajado con artistas de diversos géneros musicales, desde rock alternativo 
               hasta pop comercial, siempre buscando el sonido perfecto para cada proyecto.
             </p>
-            <div className="flex flex-wrap gap-2 pt-4">
-              <Badge variant="secondary">Rock</Badge>
-              <Badge variant="secondary">Pop</Badge>
-              <Badge variant="secondary">Indie</Badge>
-              <Badge variant="secondary">Alternative</Badge>
-              <Badge variant="secondary">Metal</Badge>
-            </div>
           </CardContent>
         </Card>
 
