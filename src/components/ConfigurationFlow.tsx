@@ -14,7 +14,7 @@ import { DeliveryStep } from "@/components/steps/DeliveryStep";
 import { ExtrasStep } from "@/components/steps/ExtrasStep";
 import { CheckoutSummary } from "@/components/CheckoutSummary";
 import { useCart } from "@/hooks/useCart";
-import drumKitStudio from "@/assets/drum-kit-custom-mics.jpg";
+import drumKitStudio from "@/assets/drum-kit-configurable.jpg";
 
 interface ConfigurationFlowProps {
   onCheckout: () => void;
