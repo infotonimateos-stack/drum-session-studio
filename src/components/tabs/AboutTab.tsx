@@ -27,10 +27,6 @@ export const AboutTab = () => {
             <p className="text-muted-foreground">
               Con más de 30 años de experiencia como baterista de sesión, Toni ha grabado y/o tocado con artistas de la talla de John Legend, Paul Carrack, Juanes, Alejandro Sanz, Joaquín Sabina, Jarabe de Palo, Miguel Ríos, Antonio Orozco, Miguel Bosé, Franco De Vita, Ana Torroja, David Bisbal, Malú, Ana Belén... Es también el batería del TV show La Voz, habiendo acompañado a Alejandro Fernandez, Ricky Martin, Jarabe de Palo... Ha grabado más de 1000 álbumes en los últimos años.
             </p>
-            <p className="text-muted-foreground">
-              He trabajado con artistas de diversos géneros musicales, desde rock alternativo 
-              hasta pop comercial, siempre buscando el sonido perfecto para cada proyecto.
-            </p>
           </CardContent>
         </Card>
 
