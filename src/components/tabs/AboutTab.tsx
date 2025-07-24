@@ -38,24 +38,12 @@ export const AboutTab = () => {
               Experiencia
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <Clock className="h-4 w-4 text-primary" />
-                <span className="font-semibold">+15 años</span>
-                <span className="text-muted-foreground">de experiencia profesional</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Music className="h-4 w-4 text-primary" />
-                <span className="font-semibold">+500 canciones</span>
-                <span className="text-muted-foreground">grabadas</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <User className="h-4 w-4 text-primary" />
-                <span className="font-semibold">30K seguidores</span>
-                <span className="text-muted-foreground">en redes sociales</span>
-              </div>
-            </div>
+          <CardContent>
+            <img 
+              src="/lovable-uploads/14fbb514-5136-49fb-b57c-0c478aad347d.png" 
+              alt="Toni Mateos" 
+              className="w-full h-64 object-cover rounded-lg"
+            />
           </CardContent>
         </Card>
       </div>
