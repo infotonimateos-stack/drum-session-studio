@@ -1,8 +1,33 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { User, Music, Award, Clock } from "lucide-react";
+import { User, Music, Award, Clock, Drum } from "lucide-react";
+import { PieChart, Pie, Cell, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend } from 'recharts';
 
 export const AboutTab = () => {
+  // Datos para el gráfico de estilos musicales
+  const musicalStylesData = [
+    { name: 'Rock', value: 25, color: '#e11d48' },
+    { name: 'Pop', value: 20, color: '#3b82f6' },
+    { name: 'Ballad', value: 15, color: '#8b5cf6' },
+    { name: 'Worship', value: 12, color: '#06b6d4' },
+    { name: 'Funk', value: 10, color: '#f59e0b' },
+    { name: 'Blues', value: 8, color: '#6366f1' },
+    { name: 'Heavy', value: 5, color: '#ef4444' },
+    { name: 'Jazz', value: 3, color: '#10b981' },
+    { name: 'Flamenco', value: 1.5, color: '#f97316' },
+    { name: 'Regional', value: 0.5, color: '#84cc16' }
+  ];
+
+  // Datos para el gráfico radar de habilidades
+  const skillsData = [
+    { skill: 'Groove', A: 95 },
+    { skill: 'Sonido', A: 90 },
+    { skill: 'Pegada', A: 88 },
+    { skill: 'Versatilidad', A: 92 },
+    { skill: 'Precisión', A: 85 },
+    { skill: 'Creatividad', A: 87 }
+  ];
+
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">
       <div className="text-center space-y-4">
@@ -38,6 +63,83 @@ export const AboutTab = () => {
               alt="Toni Mateos" 
               className="w-full h-full object-cover rounded-lg"
             />
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Infografías */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Estilos Musicales */}
+        <Card className="bg-gradient-to-br from-card to-muted">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Music className="h-5 w-5 text-primary" />
+              Estilos Musicales que Domino
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-80 relative">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={musicalStylesData}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={100}
+                    fill="#8884d8"
+                    dataKey="value"
+                    label={({ name, value }) => `${name}: ${value}%`}
+                    labelLine={false}
+                  >
+                    {musicalStylesData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+              {/* Icono del baterista en el centro */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="bg-background rounded-full p-4 shadow-lg">
+                  <Drum className="h-12 w-12 text-primary" />
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Habilidades del Baterista */}
+        <Card className="bg-gradient-to-br from-card to-muted">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Award className="h-5 w-5 text-primary" />
+              Mis Habilidades como Baterista
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart data={skillsData}>
+                  <PolarGrid stroke="hsl(var(--muted-foreground))" />
+                  <PolarAngleAxis 
+                    dataKey="skill" 
+                    tick={{ fill: 'hsl(var(--foreground))', fontSize: 12 }}
+                  />
+                  <PolarRadiusAxis 
+                    angle={0} 
+                    domain={[0, 100]} 
+                    tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 10 }}
+                  />
+                  <Radar
+                    name="Habilidades"
+                    dataKey="A"
+                    stroke="hsl(var(--primary))"
+                    fill="hsl(var(--primary))"
+                    fillOpacity={0.3}
+                    strokeWidth={2}
+                  />
+                </RadarChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
       </div>
