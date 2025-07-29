@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { User, Music, Award, Clock, Drum, Star, Tv, Disc, Users, Heart, Dog, Home, MapPin, Calendar, Check, X, Sparkles, MessageCircle, Zap } from "lucide-react";
-import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
+import { User, Music, Award, Clock, Drum, Star, Tv, Disc, Users, Heart, Dog, Home, MapPin, Calendar, Check, X, Sparkles, MessageCircle, Zap, Target, Headphones, Volume2, TrendingUp } from "lucide-react";
+import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, PieChart, Pie, Cell } from 'recharts';
 
 export const AboutTab = () => {
   // Datos para el gráfico radar de habilidades ajustado
@@ -11,150 +11,161 @@ export const AboutTab = () => {
     { skill: 'Sonido', A: 90 },
     { skill: 'Pegada', A: 88 },
     { skill: 'Versatilidad', A: 92 },
-    { skill: 'Precisión', A: 92 },
-    { skill: 'Creatividad', A: 82 }
+    { skill: 'Precisión', A: 94 },
+    { skill: 'Creatividad', A: 78 }
   ];
 
-  // Datos para estilos musicales como barras
+  // Datos para estilos musicales más visual
   const stylesData = [
-    { style: 'Rock', level: 95 },
-    { style: 'Pop', level: 92 },
-    { style: 'Ballad', level: 88 },
-    { style: 'Worship', level: 85 },
-    { style: 'Funk', level: 90 },
-    { style: 'Blues', level: 87 },
-    { style: 'Heavy', level: 80 },
-    { style: 'Jazz', level: 75 },
-    { style: 'Flamenco', level: 70 },
-    { style: 'Regional', level: 78 }
+    { name: 'Rock', value: 95, icon: '🎸' },
+    { name: 'Pop', value: 92, icon: '🎵' },
+    { name: 'Ballad', value: 88, icon: '💕' },
+    { name: 'Worship', value: 85, icon: '🙏' },
+    { name: 'Funk', value: 90, icon: '🕺' },
+    { name: 'Blues', value: 87, icon: '🎷' },
+    { name: 'Heavy', value: 80, icon: '⚡' },
+    { name: 'Jazz', value: 75, icon: '🎺' },
+    { name: 'Flamenco', value: 70, icon: '💃' },
+    { name: 'Regional', value: 78, icon: '🌍' }
   ];
 
-  const fortalezas = ['Comunicativo', 'Respondo Rápido', 'Al Servicio de la Música'];
   const debilidades = ['Metal Progresivo', 'Compases de Amalgama', 'Solos de Batería'];
-
   const artistasDirecto = ['Alejandro Sanz', 'Juanes', 'Miguel Bosé', 'Antonio Orozco', 'Franco de Vita'];
   const artistasGrabacion = ['Alejandro Sanz', 'Jarabe de Palo', 'John Legend', 'Melendi'];
 
   return (
-    <div className="container mx-auto px-4 py-8 space-y-8">
-      {/* Header */}
-      <div className="text-center space-y-4">
-        <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Toni Mateos
-        </h2>
-        <p className="text-xl text-muted-foreground">
-          Baterista Profesional • Grabaciones Remotas de Alta Calidad
-        </p>
+    <div className="container mx-auto px-4 py-8 space-y-12">
+      {/* Hero Header con animación */}
+      <div className="text-center space-y-6 relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 rounded-3xl blur-3xl"></div>
+        <div className="relative z-10">
+          <h1 className="text-6xl font-black bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-pulse">
+            TONI MATEOS
+          </h1>
+          <div className="flex items-center justify-center gap-4 mt-4">
+            <Drum className="h-8 w-8 text-primary animate-bounce" />
+            <p className="text-2xl font-bold text-muted-foreground">
+              Baterista Profesional • Grabaciones Remotas de Alta Calidad
+            </p>
+            <Drum className="h-8 w-8 text-primary animate-bounce" style={{ animationDelay: '0.5s' }} />
+          </div>
+        </div>
       </div>
 
-      {/* DNI Falso / Ficha Técnica */}
-      <Card className="bg-gradient-to-br from-card to-muted border-2 border-primary/20">
+      {/* Contadores Principales - Estilo infográfico */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="relative overflow-hidden rounded-3xl p-8 bg-gradient-to-br from-blue-500 to-blue-700 border-2 border-blue-300/30 shadow-2xl transform hover:scale-105 transition-all duration-300">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+          <div className="relative z-10 text-center text-white">
+            <Calendar className="h-16 w-16 mx-auto mb-4 drop-shadow-lg animate-pulse" />
+            <div className="text-6xl font-black mb-2 drop-shadow-lg">30</div>
+            <div className="text-xl font-bold drop-shadow">Años de Experiencia</div>
+          </div>
+          <div className="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-white/10 blur-xl"></div>
+        </div>
+
+        <div className="relative overflow-hidden rounded-3xl p-8 bg-gradient-to-br from-green-500 to-emerald-700 border-2 border-green-300/30 shadow-2xl transform hover:scale-105 transition-all duration-300">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+          <div className="relative z-10 text-center text-white">
+            <Disc className="h-16 w-16 mx-auto mb-4 drop-shadow-lg animate-spin" style={{ animationDuration: '3s' }} />
+            <div className="text-6xl font-black mb-2 drop-shadow-lg">+1000</div>
+            <div className="text-xl font-bold drop-shadow">Discos Grabados</div>
+          </div>
+          <div className="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-white/10 blur-xl"></div>
+        </div>
+
+        <div className="relative overflow-hidden rounded-3xl p-8 bg-gradient-to-br from-purple-500 to-purple-700 border-2 border-purple-300/30 shadow-2xl transform hover:scale-105 transition-all duration-300">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+          <div className="relative z-10 text-center text-white">
+            <Music className="h-16 w-16 mx-auto mb-4 drop-shadow-lg animate-bounce" />
+            <div className="text-6xl font-black mb-2 drop-shadow-lg">+800</div>
+            <div className="text-xl font-bold drop-shadow">Canciones/Año</div>
+          </div>
+          <div className="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-white/10 blur-xl"></div>
+        </div>
+
+        <div className="relative overflow-hidden rounded-3xl p-8 bg-gradient-to-br from-orange-500 to-red-600 border-2 border-orange-300/30 shadow-2xl transform hover:scale-105 transition-all duration-300">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+          <div className="relative z-10 text-center text-white">
+            <Tv className="h-16 w-16 mx-auto mb-4 drop-shadow-lg animate-pulse" />
+            <div className="text-6xl font-black mb-2 drop-shadow-lg">+500</div>
+            <div className="text-xl font-bold drop-shadow">Shows TV "La Voz"</div>
+          </div>
+          <div className="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-white/10 blur-xl"></div>
+        </div>
+      </div>
+
+      {/* Ficha Técnica - DNI Estilo */}
+      <Card className="bg-gradient-to-br from-card via-muted/50 to-card border-4 border-primary/30 shadow-2xl">
         <CardContent className="p-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-            <div className="md:col-span-1">
-              <img 
-                src="/lovable-uploads/14fbb514-5136-49fb-b57c-0c478aad347d.png" 
-                alt="Toni Mateos" 
-                className="w-48 h-48 object-cover rounded-lg mx-auto border-4 border-primary/30"
-              />
+            <div className="md:col-span-1 text-center">
+              <div className="relative inline-block">
+                <img 
+                  src="/lovable-uploads/14fbb514-5136-49fb-b57c-0c478aad347d.png" 
+                  alt="Toni Mateos" 
+                  className="w-56 h-56 object-cover rounded-2xl border-6 border-primary/50 shadow-2xl transform hover:scale-105 transition-all duration-300"
+                />
+                <div className="absolute -bottom-4 -right-4 bg-primary text-primary-foreground rounded-full p-3 shadow-lg">
+                  <Drum className="h-6 w-6" />
+                </div>
+              </div>
             </div>
-            <div className="md:col-span-2 space-y-4">
-              <h3 className="text-2xl font-bold text-primary mb-6">Ficha Técnica del Artista</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                <div className="flex items-center gap-2">
-                  <User className="h-4 w-4 text-primary" />
-                  <span className="font-semibold">Nombre:</span> Toni Mateos
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-primary" />
-                  <span className="font-semibold">Nacimiento:</span> Barcelona, España
-                </div>
-                <div className="flex items-center gap-2">
-                  <Home className="h-4 w-4 text-primary" />
-                  <span className="font-semibold">Estudio:</span> Cardedeu, Barcelona
-                </div>
-                <div className="flex items-center gap-2">
-                  <Heart className="h-4 w-4 text-primary" />
-                  <span className="font-semibold">Estado Civil:</span> Casado
-                </div>
-                <div className="flex items-center gap-2">
-                  <Users className="h-4 w-4 text-primary" />
-                  <span className="font-semibold">Hijos:</span> 2
-                </div>
-                <div className="flex items-center gap-2">
-                  <Dog className="h-4 w-4 text-primary" />
-                  <span className="font-semibold">Perros:</span> 3
-                </div>
+            <div className="md:col-span-2 space-y-6">
+              <h3 className="text-4xl font-black text-primary mb-8 text-center md:text-left">FICHA TÉCNICA DEL ARTISTA</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {[
+                  { icon: User, label: "Nombre", value: "Toni Mateos" },
+                  { icon: MapPin, label: "Nacimiento", value: "Barcelona, España" },
+                  { icon: Home, label: "Estudio", value: "Cardedeu, Barcelona" },
+                  { icon: Heart, label: "Estado Civil", value: "Casado" },
+                  { icon: Users, label: "Hijos", value: "2" },
+                  { icon: Dog, label: "Perros", value: "3" }
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center gap-4 p-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl border border-primary/20 hover:border-primary/40 transition-all duration-300">
+                    <item.icon className="h-6 w-6 text-primary" />
+                    <div>
+                      <span className="font-bold text-primary">{item.label}:</span>
+                      <span className="ml-2 font-semibold">{item.value}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Contadores Principales */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="bg-gradient-to-br from-blue-500/10 to-blue-600/20 border-blue-500/30">
-          <CardContent className="p-6 text-center">
-            <Calendar className="h-8 w-8 text-blue-500 mx-auto mb-2" />
-            <h3 className="text-3xl font-bold text-blue-500">30</h3>
-            <p className="text-sm text-muted-foreground">Años de Experiencia</p>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-gradient-to-br from-green-500/10 to-green-600/20 border-green-500/30">
-          <CardContent className="p-6 text-center">
-            <Disc className="h-8 w-8 text-green-500 mx-auto mb-2" />
-            <h3 className="text-3xl font-bold text-green-500">+1000</h3>
-            <p className="text-sm text-muted-foreground">Discos Grabados</p>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-gradient-to-br from-purple-500/10 to-purple-600/20 border-purple-500/30">
-          <CardContent className="p-6 text-center">
-            <Music className="h-8 w-8 text-purple-500 mx-auto mb-2" />
-            <h3 className="text-3xl font-bold text-purple-500">+800</h3>
-            <p className="text-sm text-muted-foreground">Canciones/Año</p>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-gradient-to-br from-orange-500/10 to-orange-600/20 border-orange-500/30">
-          <CardContent className="p-6 text-center">
-            <Tv className="h-8 w-8 text-orange-500 mx-auto mb-2" />
-            <h3 className="text-3xl font-bold text-orange-500">+500</h3>
-            <p className="text-sm text-muted-foreground">Shows TV "La Voz"</p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Habilidades como Baterista */}
-      <Card className="bg-gradient-to-br from-card to-muted">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Award className="h-5 w-5 text-primary" />
-            Mis Habilidades como Baterista
+      {/* Habilidades como Baterista - Radar Chart */}
+      <Card className="bg-gradient-to-br from-accent/10 via-card to-primary/10 border-2 border-accent/30 shadow-xl">
+        <CardHeader className="text-center">
+          <CardTitle className="flex items-center justify-center gap-3 text-3xl font-black">
+            <Award className="h-8 w-8 text-primary animate-pulse" />
+            MIS HABILIDADES COMO BATERISTA
+            <Award className="h-8 w-8 text-primary animate-pulse" />
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-80">
+          <div className="h-96">
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart data={skillsData}>
-                <PolarGrid stroke="hsl(var(--muted-foreground))" />
+                <PolarGrid stroke="hsl(var(--primary))" strokeWidth={2} />
                 <PolarAngleAxis 
                   dataKey="skill" 
-                  tick={{ fill: 'hsl(var(--foreground))', fontSize: 12 }}
+                  tick={{ fill: 'hsl(var(--foreground))', fontSize: 14, fontWeight: 'bold' }}
                 />
                 <PolarRadiusAxis 
-                  angle={0} 
+                  angle={90} 
                   domain={[0, 100]} 
-                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 10 }}
+                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
                 />
                 <Radar
                   name="Habilidades"
                   dataKey="A"
                   stroke="hsl(var(--primary))"
                   fill="hsl(var(--primary))"
-                  fillOpacity={0.3}
-                  strokeWidth={2}
+                  fillOpacity={0.4}
+                  strokeWidth={4}
                 />
               </RadarChart>
             </ResponsiveContainer>
@@ -162,63 +173,72 @@ export const AboutTab = () => {
         </CardContent>
       </Card>
 
-      {/* Estilos Musicales - Barras de Progreso */}
-      <Card className="bg-gradient-to-br from-card to-muted">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Music className="h-5 w-5 text-primary" />
-            Versatilidad en Estilos Musicales
+      {/* Estilos Musicales - Nueva visualización */}
+      <Card className="bg-gradient-to-br from-card to-muted/50 border-2 border-primary/20 shadow-xl">
+        <CardHeader className="text-center">
+          <CardTitle className="flex items-center justify-center gap-3 text-3xl font-black">
+            <Music className="h-8 w-8 text-primary animate-bounce" />
+            VERSATILIDAD EN ESTILOS MUSICALES
+            <Music className="h-8 w-8 text-primary animate-bounce" />
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          {stylesData.map((style, index) => (
-            <div key={style.style} className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span className="font-medium">{style.style}</span>
-                <span className="text-muted-foreground">{style.level}%</span>
+        <CardContent>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {stylesData.map((style, index) => (
+              <div key={style.name} className="text-center p-4 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 hover:border-primary/40 transition-all duration-300 transform hover:scale-105">
+                <div className="text-4xl mb-2">{style.icon}</div>
+                <div className="font-bold text-lg mb-2">{style.name}</div>
+                <div className="relative h-3 bg-muted rounded-full overflow-hidden mb-2">
+                  <div 
+                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-1000 ease-out"
+                    style={{ width: `${style.value}%` }}
+                  ></div>
+                </div>
+                <div className="text-sm font-bold text-primary">{style.value}%</div>
               </div>
-              <Progress value={style.level} className="h-2" />
-            </div>
-          ))}
+            ))}
+          </div>
         </CardContent>
       </Card>
 
-      {/* Artistas */}
+      {/* Artistas - Diseño mejorado */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Artistas en Directo */}
-        <Card className="bg-gradient-to-br from-card to-muted">
+        <Card className="bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-teal-500/10 border-2 border-green-500/30 shadow-xl">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Users className="h-5 w-5 text-primary" />
-              Artistas en Directo
+            <CardTitle className="flex items-center justify-center gap-3 text-2xl font-black text-green-700">
+              <Users className="h-6 w-6 animate-pulse" />
+              ARTISTAS EN DIRECTO
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 gap-3">
+            <div className="space-y-4">
               {artistasDirecto.map((artista, index) => (
-                <div key={index} className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
-                  <Star className="h-4 w-4 text-yellow-500" />
-                  <span className="font-medium">{artista}</span>
+                <div key={index} className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-xl border border-green-500/30 transform hover:scale-105 transition-all duration-300">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center">
+                    <Star className="h-6 w-6 text-white" />
+                  </div>
+                  <span className="font-bold text-lg text-green-800">{artista}</span>
                 </div>
               ))}
             </div>
           </CardContent>
         </Card>
 
-        {/* Artistas Grabaciones */}
-        <Card className="bg-gradient-to-br from-card to-muted">
+        <Card className="bg-gradient-to-br from-blue-500/10 via-indigo-500/10 to-purple-500/10 border-2 border-blue-500/30 shadow-xl">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Disc className="h-5 w-5 text-primary" />
-              Artistas en Grabaciones
+            <CardTitle className="flex items-center justify-center gap-3 text-2xl font-black text-blue-700">
+              <Disc className="h-6 w-6 animate-spin" style={{ animationDuration: '3s' }} />
+              ARTISTAS EN GRABACIONES
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 gap-3">
+            <div className="space-y-4">
               {artistasGrabacion.map((artista, index) => (
-                <div key={index} className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
-                  <Star className="h-4 w-4 text-yellow-500" />
-                  <span className="font-medium">{artista}</span>
+                <div key={index} className="flex items-center gap-4 p-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl border border-blue-500/30 transform hover:scale-105 transition-all duration-300">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                    <Star className="h-6 w-6 text-white" />
+                  </div>
+                  <span className="font-bold text-lg text-blue-800">{artista}</span>
                 </div>
               ))}
             </div>
@@ -228,45 +248,48 @@ export const AboutTab = () => {
 
       {/* Fortalezas y Debilidades */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Fortalezas */}
-        <Card className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 border-green-500/20">
+        <Card className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 border-4 border-green-500/40 shadow-2xl">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-green-600">
-              <Sparkles className="h-5 w-5" />
-              Mis Fortalezas
+            <CardTitle className="flex items-center justify-center gap-3 text-2xl font-black text-green-600">
+              <Sparkles className="h-8 w-8 animate-pulse" />
+              MIS FORTALEZAS
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-6">
               {[
-                { icon: MessageCircle, text: 'Comunicativo' },
-                { icon: Zap, text: 'Respondo Rápido' },
-                { icon: Heart, text: 'Al Servicio de la Música' }
+                { icon: MessageCircle, text: 'Comunicativo', emoji: '💬' },
+                { icon: Zap, text: 'Respondo Rápido', emoji: '⚡' },
+                { icon: Heart, text: 'Al Servicio de la Música', emoji: '🎵' }
               ].map((fortaleza, index) => (
-                <div key={index} className="flex items-center gap-3 p-3 bg-green-500/10 rounded-lg">
-                  <Check className="h-5 w-5 text-green-600" />
-                  <fortaleza.icon className="h-4 w-4 text-green-600" />
-                  <span className="font-medium text-green-700">{fortaleza.text}</span>
+                <div key={index} className="flex items-center gap-4 p-6 bg-gradient-to-r from-green-500/30 to-emerald-500/30 rounded-2xl border-2 border-green-500/50 transform hover:scale-105 transition-all duration-300">
+                  <div className="text-3xl">{fortaleza.emoji}</div>
+                  <Check className="h-8 w-8 text-green-600" />
+                  <span className="font-black text-xl text-green-700">{fortaleza.text}</span>
                 </div>
               ))}
             </div>
           </CardContent>
         </Card>
 
-        {/* Debilidades */}
-        <Card className="bg-gradient-to-br from-red-500/10 to-rose-500/10 border-red-500/20">
+        <Card className="bg-gradient-to-br from-red-500/20 to-rose-500/20 border-4 border-red-500/40 shadow-2xl">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-red-600">
-              <X className="h-5 w-5" />
-              Áreas de Mejora
+            <CardTitle className="flex items-center justify-center gap-3 text-2xl font-black text-red-600">
+              <X className="h-8 w-8 animate-pulse" />
+              ÁREAS DE MEJORA
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              {debilidades.map((debilidad, index) => (
-                <div key={index} className="flex items-center gap-3 p-3 bg-red-500/10 rounded-lg">
-                  <X className="h-5 w-5 text-red-600" />
-                  <span className="font-medium text-red-700">{debilidad}</span>
+            <div className="space-y-6">
+              {[
+                { text: 'Metal Progresivo', emoji: '🤘' },
+                { text: 'Compases de Amalgama', emoji: '🔢' },
+                { text: 'Solos de Batería', emoji: '🥁' }
+              ].map((debilidad, index) => (
+                <div key={index} className="flex items-center gap-4 p-6 bg-gradient-to-r from-red-500/30 to-rose-500/30 rounded-2xl border-2 border-red-500/50 transform hover:scale-105 transition-all duration-300">
+                  <div className="text-3xl">{debilidad.emoji}</div>
+                  <X className="h-8 w-8 text-red-600" />
+                  <span className="font-black text-xl text-red-700">{debilidad.text}</span>
                 </div>
               ))}
             </div>
