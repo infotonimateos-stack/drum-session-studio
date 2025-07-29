@@ -206,7 +206,7 @@ export const AboutTab = () => {
         <Card className="bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-teal-500/10 border-2 border-green-500/30 shadow-xl">
           <CardHeader>
             <CardTitle className="flex items-center justify-center gap-3 text-2xl font-black text-green-700">
-              <Users className="h-6 w-6 animate-pulse" />
+              <Volume2 className="h-8 w-8 animate-pulse" />
               ARTISTAS EN DIRECTO
             </CardTitle>
           </CardHeader>
@@ -220,6 +220,11 @@ export const AboutTab = () => {
                   <span className="font-bold text-lg text-green-800">{artista}</span>
                 </div>
               ))}
+              <div className="mt-6 p-4 bg-gradient-to-r from-green-600/30 to-emerald-600/30 rounded-2xl border-2 border-green-600/50 text-center">
+                <TrendingUp className="h-8 w-8 mx-auto mb-2 text-green-700" />
+                <div className="text-2xl font-black text-green-800">+2000</div>
+                <div className="text-sm font-bold text-green-700">BANDAS Y ARTISTAS MÁS</div>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -227,7 +232,7 @@ export const AboutTab = () => {
         <Card className="bg-gradient-to-br from-blue-500/10 via-indigo-500/10 to-purple-500/10 border-2 border-blue-500/30 shadow-xl">
           <CardHeader>
             <CardTitle className="flex items-center justify-center gap-3 text-2xl font-black text-blue-700">
-              <Disc className="h-6 w-6 animate-spin" style={{ animationDuration: '3s' }} />
+              <Headphones className="h-8 w-8 animate-pulse" />
               ARTISTAS EN GRABACIONES
             </CardTitle>
           </CardHeader>
@@ -241,55 +246,70 @@ export const AboutTab = () => {
                   <span className="font-bold text-lg text-blue-800">{artista}</span>
                 </div>
               ))}
+              <div className="mt-6 p-4 bg-gradient-to-r from-blue-600/30 to-purple-600/30 rounded-2xl border-2 border-blue-600/50 text-center">
+                <Target className="h-8 w-8 mx-auto mb-2 text-blue-700" />
+                <div className="text-2xl font-black text-blue-800">+CIENTOS</div>
+                <div className="text-sm font-bold text-blue-700">DE ARTISTAS MÁS</div>
+              </div>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Fortalezas y Debilidades */}
+      {/* Fortalezas y Debilidades - Diseño diferenciado */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <Card className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 border-4 border-green-500/40 shadow-2xl">
+        <Card className="relative overflow-hidden bg-gradient-to-br from-yellow-400/20 via-amber-300/20 to-orange-400/20 border-4 border-yellow-500/50 shadow-2xl">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-400/20 rounded-full -translate-y-16 translate-x-16"></div>
           <CardHeader>
-            <CardTitle className="flex items-center justify-center gap-3 text-2xl font-black text-green-600">
-              <Sparkles className="h-8 w-8 animate-pulse" />
+            <CardTitle className="flex items-center justify-center gap-3 text-2xl font-black text-yellow-700">
+              <Award className="h-10 w-10 text-yellow-600 animate-bounce" />
               MIS FORTALEZAS
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-6">
+            <div className="space-y-4">
               {[
-                { icon: MessageCircle, text: 'Comunicativo', emoji: '💬' },
-                { icon: Zap, text: 'Respondo Rápido', emoji: '⚡' },
-                { icon: Heart, text: 'Al Servicio de la Música', emoji: '🎵' }
+                { text: 'Comunicativo', emoji: '💬' },
+                { text: 'Respondo Rápido', emoji: '⚡' },
+                { text: 'Al Servicio de la Música', emoji: '🎵' }
               ].map((fortaleza, index) => (
-                <div key={index} className="flex items-center gap-4 p-6 bg-gradient-to-r from-green-500/30 to-emerald-500/30 rounded-2xl border-2 border-green-500/50 transform hover:scale-105 transition-all duration-300">
-                  <div className="text-3xl">{fortaleza.emoji}</div>
-                  <Check className="h-8 w-8 text-green-600" />
-                  <span className="font-black text-xl text-green-700">{fortaleza.text}</span>
+                <div key={index} className="flex items-center gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl border-2 border-yellow-400/40 shadow-lg transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
+                  <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center shadow-lg">
+                    <div className="text-2xl">{fortaleza.emoji}</div>
+                  </div>
+                  <span className="font-black text-lg text-yellow-800">{fortaleza.text}</span>
+                  <div className="ml-auto">
+                    <Check className="h-8 w-8 text-green-600" />
+                  </div>
                 </div>
               ))}
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-red-500/20 to-rose-500/20 border-4 border-red-500/40 shadow-2xl">
+        <Card className="relative overflow-hidden bg-gradient-to-br from-slate-400/20 via-gray-300/20 to-zinc-400/20 border-4 border-slate-500/50 shadow-2xl">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-slate-400/20 rounded-full -translate-y-16 translate-x-16"></div>
           <CardHeader>
-            <CardTitle className="flex items-center justify-center gap-3 text-2xl font-black text-red-600">
-              <X className="h-8 w-8 animate-pulse" />
+            <CardTitle className="flex items-center justify-center gap-3 text-2xl font-black text-slate-700">
+              <Target className="h-10 w-10 text-slate-600 animate-pulse" />
               ÁREAS DE MEJORA
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-6">
+            <div className="space-y-4">
               {[
                 { text: 'Metal Progresivo', emoji: '🤘' },
                 { text: 'Compases de Amalgama', emoji: '🔢' },
                 { text: 'Solos de Batería', emoji: '🥁' }
               ].map((debilidad, index) => (
-                <div key={index} className="flex items-center gap-4 p-6 bg-gradient-to-r from-red-500/30 to-rose-500/30 rounded-2xl border-2 border-red-500/50 transform hover:scale-105 transition-all duration-300">
-                  <div className="text-3xl">{debilidad.emoji}</div>
-                  <X className="h-8 w-8 text-red-600" />
-                  <span className="font-black text-xl text-red-700">{debilidad.text}</span>
+                <div key={index} className="flex items-center gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl border-2 border-slate-400/40 shadow-lg transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
+                  <div className="w-16 h-16 bg-gradient-to-br from-slate-400 to-gray-500 rounded-full flex items-center justify-center shadow-lg">
+                    <div className="text-2xl">{debilidad.emoji}</div>
+                  </div>
+                  <span className="font-black text-lg text-slate-800">{debilidad.text}</span>
+                  <div className="ml-auto">
+                    <Clock className="h-8 w-8 text-slate-600" />
+                  </div>
                 </div>
               ))}
             </div>
