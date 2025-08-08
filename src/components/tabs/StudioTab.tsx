@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Building, Headphones, Zap, Shield } from "lucide-react";
 
 export const StudioTab = () => {
@@ -64,37 +64,150 @@ export const StudioTab = () => {
               Equipamiento
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-3">
-              <div>
-                <h4 className="font-semibold text-sm mb-2">Micrófonos</h4>
-                <div className="flex flex-wrap gap-1">
-                  <Badge variant="outline" className="text-xs">Neumann U87</Badge>
-                  <Badge variant="outline" className="text-xs">AKG 414</Badge>
-                  <Badge variant="outline" className="text-xs">Shure SM57</Badge>
-                  <Badge variant="outline" className="text-xs">Coles 4038</Badge>
-                </div>
-              </div>
-              <div>
-                <h4 className="font-semibold text-sm mb-2">Previos</h4>
-                <div className="flex flex-wrap gap-1">
-                  <Badge variant="outline" className="text-xs">API 3124+</Badge>
-                  <Badge variant="outline" className="text-xs">Neve 1073</Badge>
-                  <Badge variant="outline" className="text-xs">DAD AX64</Badge>
-                </div>
-              </div>
-              <div>
-                <h4 className="font-semibold text-sm mb-2">Software</h4>
-                <div className="flex flex-wrap gap-1">
-                  <Badge variant="outline" className="text-xs">Pro Tools HDX</Badge>
-                  <Badge variant="outline" className="text-xs">Logic Pro X</Badge>
-                  <Badge variant="outline" className="text-xs">Plugins UAD</Badge>
-                </div>
-              </div>
-            </div>
+          <CardContent>
+            <Accordion type="multiple" className="w-full">
+              <AccordionItem value="microfonos">
+                <AccordionTrigger>Micrófonos</AccordionTrigger>
+                <AccordionContent>
+                  <ul className="grid sm:grid-cols-2 gap-2 text-sm">
+                    <li>1 x Telefunken C12</li>
+                    <li>1 x Neumann U47 FET</li>
+                    <li>2 x Neumann U87 Ai Stereo Set</li>
+                    <li>2 x Coles 4038 Ribbon Mics</li>
+                    <li>2 x Neumann KM 184 Stereo set</li>
+                    <li>2 x AKG 414 XLII Stereo Set</li>
+                    <li>2 x AKG 414 LTD Nilon capsule Stereo Set</li>
+                    <li>1 x AKG 414 XLS</li>
+                    <li>4 x Sennheiser 421</li>
+                    <li>1 x Shure Beta 52</li>
+                    <li>1 x Audix D6</li>
+                    <li>1 x Beyerdinamyc M160</li>
+                    <li>1 x Solomon LoFreq</li>
+                    <li>1 x Sennheiser MD441-U</li>
+                    <li>3 x Shure SM57</li>
+                    <li>1 x Shure SM81</li>
+                    <li>1 x Sennheiser E602II</li>
+                    <li>1 x Sennheiser E604</li>
+                    <li>1 x Shure Beta 56</li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="convertidores">
+                <AccordionTrigger>Convertidores</AccordionTrigger>
+                <AccordionContent>
+                  <ul className="list-disc pl-5 text-sm">
+                    <li>DAD AX64 Digital Audio Denmark</li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="daw">
+                <AccordionTrigger>DAW</AccordionTrigger>
+                <AccordionContent>
+                  <p className="text-sm">
+                    Pro Tools 2024 en Apple iMac 27″ Core i5 3,2GHz 32GB RAM
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="monitores">
+                <AccordionTrigger>Monitores</AccordionTrigger>
+                <AccordionContent>
+                  <ul className="list-disc pl-5 text-sm">
+                    <li>2 x Yamaha HS8</li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="preamps">
+                <AccordionTrigger>Preamplificadores</AccordionTrigger>
+                <AccordionContent>
+                  <ul className="list-disc pl-5 text-sm">
+                    <li>12 x API 3124+</li>
+                    <li>2 x NEVE 1073</li>
+                    <li>16 x DAD AX64 Digital Audio Denmark</li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="bateria">
+                <AccordionTrigger>Batería (DW)</AccordionTrigger>
+                <AccordionContent>
+                  <p className="text-sm mb-2">DW Collectors, Performance & Design Series</p>
+                  <ul className="grid sm:grid-cols-2 gap-2 text-sm">
+                    <li>Bd 20 x 16″</li>
+                    <li>Bd 22 x 18″</li>
+                    <li>Bd 24 x 18″</li>
+                    <li>Tom 10″</li>
+                    <li>Tom 12″</li>
+                    <li>Tom 14″</li>
+                    <li>Tom 16″</li>
+                    <li>Tom 18″</li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="platos">
+                <AccordionTrigger>Platos</AccordionTrigger>
+                <AccordionContent>
+                  <ul className="list-disc pl-5 text-sm">
+                    <li>Zildjian K Series</li>
+                    <li>Zildjian A Series</li>
+                    <li>Zildjian K Custom Series</li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="cajas">
+                <AccordionTrigger>Cajas</AccordionTrigger>
+                <AccordionContent>
+                  <ul className="grid sm:grid-cols-2 gap-2 text-sm">
+                    <li>Dw Collectors Series 14 x 6,5″</li>
+                    <li>Dw Performance Series 14 x 5,5″</li>
+                    <li>Dw Performance Series 14 x 6,5″</li>
+                    <li>Dw Performance Series 14 x 8″</li>
+                    <li>Pdp 10 x 5″</li>
+                    <li>Pearl Steve Ferrone Signature 14 x 6,5″</li>
+                    <li>Pearl Piccolo 14 x 4″</li>
+                    <li>Pearl Vinnie Paul Signature Series 14 x 8″</li>
+                    <li>Premier Signia 1998 14 x 7″</li>
+                    <li>Ludwig Supraphonic 1968 14 x 52</li>
+                    <li>Mapex Black Panther Stainless Steel 14 x 5,5″</li>
+                    <li>Mapex Black Panther 14 x 5″</li>
+                    <li>Mapex Black Panther 13 x 5″</li>
+                    <li>Mapex Black Panther 12 x 5″</li>
+                    <li>Ludwig Black Beauty 14 x 6,5″</li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </CardContent>
         </Card>
       </div>
+
+      {/* Galería del Estudio */}
+      <Card className="bg-gradient-to-br from-card to-muted">
+        <CardHeader>
+          <CardTitle>Galería del Estudio</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <img
+              src="/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.png"
+              alt="Estudio de batería: kit microfoneado vista 1"
+              loading="lazy"
+              className="w-full h-auto rounded-md"
+            />
+            <img
+              src="/lovable-uploads/85028cc6-173f-44cd-a28f-5aeec1c79bed.png"
+              alt="Estudio de batería: sala tratada vista 2"
+              loading="lazy"
+              className="w-full h-auto rounded-md"
+            />
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Process */}
       <Card className="bg-gradient-to-br from-card to-muted">
