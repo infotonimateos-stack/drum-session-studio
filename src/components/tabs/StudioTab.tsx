@@ -212,7 +212,7 @@ export const StudioTab = () => {
       {/* Process */}
       <Card className="bg-gradient-to-br from-card to-muted">
         <CardHeader>
-          <CardTitle>Proceso de Grabación</CardTitle>
+          <CardTitle>¿Cómo funciona?</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -222,7 +222,7 @@ export const StudioTab = () => {
               </div>
               <h4 className="font-semibold">Análisis</h4>
               <p className="text-sm text-muted-foreground">
-                Estudio tu demo y referencias para entender el sonido que buscas
+                Configura tu setup según tus necesidades (desde 49,90 euros!)
               </p>
             </div>
             <div className="text-center space-y-3">
@@ -231,7 +231,7 @@ export const StudioTab = () => {
               </div>
               <h4 className="font-semibold">Configuración</h4>
               <p className="text-sm text-muted-foreground">
-                Selecciono y configuro los micrófonos y equipos específicos
+                Envíanos todo el material que necesitamos para empezar tu grabación
               </p>
             </div>
             <div className="text-center space-y-3">
@@ -240,7 +240,7 @@ export const StudioTab = () => {
               </div>
               <h4 className="font-semibold">Grabación</h4>
               <p className="text-sm text-muted-foreground">
-                Grabo las tomas necesarias con la máxima calidad y atención al detalle
+                Te enviamos las pistas de batería por Wetransfer con la máxima calidad
               </p>
             </div>
           </div>
