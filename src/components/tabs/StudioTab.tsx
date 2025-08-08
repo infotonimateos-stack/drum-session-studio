@@ -1,14 +1,16 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Building, Headphones, Zap, Shield } from "lucide-react";
+import { useTranslation } from "react-i18next";
 export const StudioTab = () => {
+  const { t } = useTranslation();
   return <div className="container mx-auto px-4 py-8 space-y-8">
       <div className="text-center space-y-4">
         <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          El Estudio
+          {t("studio.title")}
         </h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Un espacio diseñado específicamente para capturar el mejor sonido de batería
+          {t("studio.subtitle")}
         </p>
       </div>
 
@@ -194,7 +196,7 @@ export const StudioTab = () => {
       {/* Process */}
       <Card className="bg-gradient-to-br from-card to-muted">
         <CardHeader>
-          <CardTitle>¿Cómo funciona?</CardTitle>
+          <CardTitle>{t("studio.processTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -202,27 +204,27 @@ export const StudioTab = () => {
               <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
                 <span className="text-primary font-bold">1</span>
               </div>
-              <h4 className="font-semibold">Configuración</h4>
+              <h4 className="font-semibold">{t("studio.step1Title")}</h4>
               <p className="text-sm text-muted-foreground">
-                Configura tu setup según tus necesidades (desde 49,90 euros!)
+                {t("studio.step1Text")}
               </p>
             </div>
             <div className="text-center space-y-3">
               <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
                 <span className="text-primary font-bold">2</span>
               </div>
-              <h4 className="font-semibold">Envíanos el material</h4>
+              <h4 className="font-semibold">{t("studio.step2Title")}</h4>
               <p className="text-sm text-muted-foreground">
-                Envíanos todo el material que necesitamos para empezar tu grabación
+                {t("studio.step2Text")}
               </p>
             </div>
             <div className="text-center space-y-3">
               <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
                 <span className="text-primary font-bold">3</span>
               </div>
-              <h4 className="font-semibold">Grabación y envío de pistas</h4>
+              <h4 className="font-semibold">{t("studio.step3Title")}</h4>
               <p className="text-sm text-muted-foreground">
-                Te enviamos las pistas de batería por Wetransfer con la máxima calidad
+                {t("studio.step3Text")}
               </p>
             </div>
           </div>

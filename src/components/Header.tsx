@@ -1,8 +1,9 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Headphones, Sun, Moon } from "lucide-react";
+import { Sun, Moon } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import microphoneIcon from "@/assets/microphone-icon.png";
+import { LanguageSelector } from "@/components/LanguageSelector";
+import { useTranslation } from "react-i18next";
 
 interface HeaderProps {
   activeTab: string;
@@ -11,15 +12,16 @@ interface HeaderProps {
 
 export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
   const { theme, setTheme } = useTheme()
+  const { t } = useTranslation();
   
   const tabs = [
-    { id: "configure", label: "Configura tu Sesión" },
-    { id: "about", label: "Quién Soy" },
-    { id: "studio", label: "El Estudio" },
-    { id: "samples", label: "Descarga una Muestra" },
-    { id: "tutorials", label: "Tutoriales" },
-    { id: "faq", label: "Preguntas Frecuentes" },
-    { id: "contact", label: "Contacto" }
+    { id: "configure", label: t("nav.configure") },
+    { id: "about", label: t("nav.about") },
+    { id: "studio", label: t("nav.studio") },
+    { id: "samples", label: t("nav.samples") },
+    { id: "tutorials", label: t("nav.tutorials") },
+    { id: "faq", label: t("nav.faq") },
+    { id: "contact", label: t("nav.contact") }
   ];
 
   return (
@@ -30,21 +32,24 @@ export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
           <div className="flex items-center gap-3">
             <img src={microphoneIcon} alt="Studio Icon" className="h-8 w-8" />
             <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Toni Mateos Online Drums Recording
+              {t("header.brand")}
             </h1>
           </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            className="h-8 w-8 px-0"
-          >
-            {theme === "light" ? (
-              <Moon className="h-4 w-4" />
-            ) : (
-              <Sun className="h-4 w-4" />
-            )}
-          </Button>
+          <div className="flex items-center gap-2">
+            <LanguageSelector />
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+              className="h-8 w-8 px-0"
+            >
+              {theme === "light" ? (
+                <Moon className="h-4 w-4" />
+              ) : (
+                <Sun className="h-4 w-4" />
+              )}
+            </Button>
+          </div>
         </div>
         
         {/* Navigation Tabs */}

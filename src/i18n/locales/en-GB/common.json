@@ -1,0 +1,31 @@
+{
+  "header": { "brand": "Toni Mateos Online Drums Recording" },
+  "nav": {
+    "configure": "Configure your Session",
+    "about": "About Me",
+    "studio": "The Studio",
+    "samples": "Download a Sample",
+    "tutorials": "Tutorials",
+    "faq": "FAQ",
+    "contact": "Contact"
+  },
+  "samples": {
+    "heading": "Download our sample tracks",
+    "subheading": "Mix them in your studio and check the quality of our recordings",
+    "cardTitle": "Download the sample stems",
+    "cardDesc": "Download high-quality stems (24-bit/48kHz)",
+    "button": "Download sample stems",
+    "imageAlt": "Hyper-realistic Pro Tools session with colourful tracks – drum samples"
+  },
+  "studio": {
+    "title": "The Studio",
+    "subtitle": "A space designed specifically to capture the best drum sound",
+    "processTitle": "How does it work?",
+    "step1Title": "Setup",
+    "step1Text": "Configure your setup according to your needs (from €49.90!)",
+    "step2Title": "Send us your materials",
+    "step2Text": "Send everything we need to start your recording",
+    "step3Title": "Recording and delivery",
+    "step3Text": "We send the drum stems via WeTransfer in maximum quality"
+  }
+}

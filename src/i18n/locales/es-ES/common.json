@@ -1,0 +1,31 @@
+{
+  "header": { "brand": "Toni Mateos Online Drums Recording" },
+  "nav": {
+    "configure": "Configura tu Sesión",
+    "about": "Quién Soy",
+    "studio": "El Estudio",
+    "samples": "Descarga una Muestra",
+    "tutorials": "Tutoriales",
+    "faq": "Preguntas Frecuentes",
+    "contact": "Contacto"
+  },
+  "samples": {
+    "heading": "Descarga nuestras pistas de muestra",
+    "subheading": "Mézclalas en tu estudio y comprueba la calidad de nuestras grabaciones",
+    "cardTitle": "Descarga las pistas de muestra",
+    "cardDesc": "Descarga las pistas en alta calidad (24-bit/48kHz)",
+    "button": "Descargar pistas de muestra",
+    "imageAlt": "Imagen hiperrealista de una sesión de Pro Tools con pistas de colores - muestras de batería"
+  },
+  "studio": {
+    "title": "El Estudio",
+    "subtitle": "Un espacio diseñado específicamente para capturar el mejor sonido de batería",
+    "processTitle": "¿Cómo funciona?",
+    "step1Title": "Configuración",
+    "step1Text": "Configura tu setup según tus necesidades (desde 49,90 euros!)",
+    "step2Title": "Envíanos el material",
+    "step2Text": "Envíanos todo el material que necesitamos para empezar tu grabación",
+    "step3Title": "Grabación y envío de pistas",
+    "step3Text": "Te enviamos las pistas de batería por Wetransfer con la máxima calidad"
+  }
+}
