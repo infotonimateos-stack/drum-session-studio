@@ -15,7 +15,7 @@ import { ExtrasStep } from "@/components/steps/ExtrasStep";
 import { CheckoutSummary } from "@/components/CheckoutSummary";
 import { useCart } from "@/hooks/useCart";
 import drumKitStudio from "@/assets/drum-kit-configurable.jpg";
-
+import { useTranslation } from "react-i18next";
 interface ConfigurationFlowProps {
   onCheckout: () => void;
 }
@@ -26,38 +26,39 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [mode, setMode] = useState<FlowMode>('configuration');
   const { cartState, addItem, removeItem, hasItem } = useCart();
+  const { t } = useTranslation();
 
   const steps = [
     { 
-      title: "Micrófonos", 
+      title: t("config.steps.microphones"), 
       component: <MicrophonesStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
     },
     { 
-      title: "Previos", 
+      title: t("config.steps.preamps"), 
       component: <PreampsStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
     },
     { 
-      title: "Interface", 
+      title: t("config.steps.interface"), 
       component: <InterfaceStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
     },
     { 
-      title: "Producción", 
+      title: t("config.steps.production"), 
       component: <ProductionStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
     },
     { 
-      title: "Video", 
+      title: t("config.steps.video"), 
       component: <VideoStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
     },
     { 
-      title: "Tomas", 
+      title: t("config.steps.takes"), 
       component: <TakesStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
     },
     { 
-      title: "Entrega", 
+      title: t("config.steps.delivery"), 
       component: <DeliveryStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
     },
     { 
-      title: "Extras", 
+      title: t("config.steps.extras"), 
       component: <ExtrasStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} />
     }
   ];
@@ -115,26 +116,24 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
               <div className="space-y-4">
                 <div className="flex items-center gap-4 flex-wrap">
                   <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                    Configura tu Sesión
+                    {t("config.heroTitle")}
                   </h1>
                   <div className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
                     <Star className="w-4 h-4 fill-current" />
-                    desde 49,90 euros
+                    {t("config.priceFrom")}
                   </div>
                 </div>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Comienza con nuestra <strong>configuración básica</strong> que incluye todo lo esencial para una grabación profesional. 
-                  Luego puedes <strong>personalizar y mejorar</strong> cada aspecto según tus necesidades específicas: 
-                  desde micrófonos premium hasta previos de alta gama.
+                  {t("config.heroP1")}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  💡 <em>Cada elemento se puede actualizar individualmente para crear tu setup perfecto</em>
+                  {t("config.heroP2")}
                 </p>
               </div>
               <div className="flex items-center justify-center">
                 <img 
                   src={drumKitStudio} 
-                  alt="Batería microfoneada en estudio profesional" 
+                  alt={t("config.imgAlt")} 
                   className="rounded-lg shadow-lg object-cover w-full h-48 lg:h-64"
                 />
               </div>

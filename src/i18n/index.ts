@@ -120,7 +120,7 @@ void i18n
   .init({
     resources,
     lng: "es-ES", // default language
-    fallbackLng: "en-GB",
+    fallbackLng: "es-ES", // fall back to Spanish for any missing keys
     supportedLngs,
     defaultNS: "common",
     interpolation: { escapeValue: false },
@@ -184,7 +184,7 @@ async function translateObject(obj: Dict, target: string): Promise<Dict> {
 }
 
 async function ensureBundle(lng: string) {
-  if (lng === "es-ES" || lng === "en-GB" || i18n.hasResourceBundle(lng, "common")) return;
+  if (lng === "es-ES" || i18n.hasResourceBundle(lng, "common")) return;
   const key = cacheKey(lng);
   const cached = localStorage.getItem(key);
   let bundle: Dict | null = null;
@@ -202,7 +202,7 @@ async function ensureBundle(lng: string) {
 let loadingLng: string | null = null;
 i18n.on("languageChanged", async (lng) => {
   setHtmlAttrs(lng);
-  if (lng === "es-ES" || lng === "en-GB" || i18n.hasResourceBundle(lng, "common")) return;
+  if (lng === "es-ES" || i18n.hasResourceBundle(lng, "common")) return;
   if (loadingLng === lng) return;
   loadingLng = lng;
   await ensureBundle(lng);
