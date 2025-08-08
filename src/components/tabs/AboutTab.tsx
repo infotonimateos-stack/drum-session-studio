@@ -290,7 +290,7 @@ export const AboutTab = () => {
         <Card className="relative overflow-hidden bg-gradient-to-br from-slate-400/20 via-gray-300/20 to-zinc-400/20 border-4 border-slate-500/50 shadow-2xl">
           <div className="absolute top-0 right-0 w-32 h-32 bg-slate-400/20 rounded-full -translate-y-16 translate-x-16"></div>
           <CardHeader>
-            <CardTitle className="flex items-center justify-center gap-3 text-2xl font-black text-slate-700">
+            <CardTitle className="flex items-center justify-center gap-3 text-2xl font-black text-foreground">
               <Target className="h-10 w-10 text-slate-600 animate-pulse" />
               ÁREAS DE MEJORA
             </CardTitle>
