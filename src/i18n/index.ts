@@ -137,6 +137,77 @@ const setHtmlAttrs = (lng: string) => {
 };
 
 setHtmlAttrs(i18n.language);
-i18n.on("languageChanged", setHtmlAttrs);
+
+// Auto-translate missing languages based on Spanish base strings
+// Lightweight client-side machine translation using LibreTranslate
+// Note: You may refine or replace this later with curated files
+
+type Dict = Record<string, any>;
+const baseEsCommon: Dict = (resources as any)["es-ES"].common;
+
+const mapToLT = (lng: string) => {
+  const code = lng.split("-")[0];
+  if (code === "nb") return "no"; // Norwegian
+  return code;
+};
+
+const cacheKey = (lng: string) => `i18n-cache-${lng}-common-v1`;
+
+async function translateText(text: string, target: string): Promise<string> {
+  try {
+    const res = await fetch("https://libretranslate.com/translate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ q: text, source: "es", target, format: "text" })
+    });
+    const data = await res.json();
+    return data?.translatedText || text;
+  } catch {
+    return text; // Fallback: original text if API fails
+  }
+}
+
+async function translateObject(obj: Dict, target: string): Promise<Dict> {
+  const entries = await Promise.all(
+    Object.entries(obj).map(async ([k, v]) => {
+      if (typeof v === "string") {
+        const t = await translateText(v, target);
+        return [k, t];
+      } else if (v && typeof v === "object") {
+        const nested = await translateObject(v as Dict, target);
+        return [k, nested];
+      }
+      return [k, v];
+    })
+  );
+  return Object.fromEntries(entries);
+}
+
+async function ensureBundle(lng: string) {
+  if (lng === "es-ES" || lng === "en-GB" || i18n.hasResourceBundle(lng, "common")) return;
+  const key = cacheKey(lng);
+  const cached = localStorage.getItem(key);
+  let bundle: Dict | null = null;
+  if (cached) {
+    try { bundle = JSON.parse(cached); } catch {}
+  }
+  if (!bundle) {
+    const target = mapToLT(lng);
+    bundle = await translateObject(baseEsCommon, target);
+    try { localStorage.setItem(key, JSON.stringify(bundle)); } catch {}
+  }
+  i18n.addResourceBundle(lng, "common", bundle!, true, true);
+}
+
+let loadingLng: string | null = null;
+i18n.on("languageChanged", async (lng) => {
+  setHtmlAttrs(lng);
+  if (lng === "es-ES" || lng === "en-GB" || i18n.hasResourceBundle(lng, "common")) return;
+  if (loadingLng === lng) return;
+  loadingLng = lng;
+  await ensureBundle(lng);
+  await i18n.reloadResources([lng], ["common"]);
+  loadingLng = null;
+});
 
 export default i18n;
