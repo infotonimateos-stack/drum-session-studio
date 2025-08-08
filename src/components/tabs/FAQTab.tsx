@@ -1,8 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { HelpCircle, Clock, Music, Headphones, CreditCard, FileText } from "lucide-react";
-
+import { useTranslate } from "@/hooks/useTranslate";
 export const FAQTab = () => {
+  const tr = useTranslate();
   const faqCategories = [
     {
       icon: Music,
@@ -90,10 +91,10 @@ export const FAQTab = () => {
     <div className="container mx-auto px-4 py-8 space-y-8">
       <div className="text-center space-y-4">
         <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Preguntas Frecuentes
+          {tr("Preguntas Frecuentes")}
         </h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Encuentra respuestas a las preguntas más comunes sobre el proceso de grabación
+          {tr("Encuentra respuestas a las preguntas más comunes sobre el proceso de grabación")}
         </p>
       </div>
 
@@ -103,7 +104,7 @@ export const FAQTab = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
                 <category.icon className="h-6 w-6 text-primary" />
-                {category.title}
+                {tr(category.title)}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -111,10 +112,10 @@ export const FAQTab = () => {
                 {category.faqs.map((faq, faqIndex) => (
                   <AccordionItem key={faqIndex} value={`item-${categoryIndex}-${faqIndex}`}>
                     <AccordionTrigger className="text-left hover:text-primary">
-                      {faq.question}
+                      {tr(faq.question)}
                     </AccordionTrigger>
                     <AccordionContent className="text-muted-foreground leading-relaxed">
-                      {faq.answer}
+                      {tr(faq.answer)}
                     </AccordionContent>
                   </AccordionItem>
                 ))}
@@ -130,17 +131,16 @@ export const FAQTab = () => {
           <div className="flex justify-center">
             <HelpCircle className="h-12 w-12 text-primary" />
           </div>
-          <h3 className="text-2xl font-bold">¿No encuentras tu respuesta?</h3>
+          <h3 className="text-2xl font-bold">{tr("¿No encuentras tu respuesta?")}</h3>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Si tienes alguna pregunta específica sobre tu proyecto o el proceso de grabación, 
-            no dudes en contactarme directamente. Estaré encantado de ayudarte.
+            {tr("Si tienes alguna pregunta específica sobre tu proyecto o el proceso de grabación, no dudes en contactarme directamente. Estaré encantado de ayudarte.")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl h-10 px-4 py-2">
-              Enviar Mensaje
+              {tr("Enviar Mensaje")}
             </button>
             <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-card hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
-              WhatsApp Directo
+              {tr("WhatsApp Directo")}
             </button>
           </div>
         </CardContent>

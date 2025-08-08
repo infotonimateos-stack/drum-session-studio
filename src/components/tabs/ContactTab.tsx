@@ -4,16 +4,18 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, Instagram, Youtube, Music } from "lucide-react";
+import { useTranslate } from "@/hooks/useTranslate";
 
 export const ContactTab = () => {
+  const tr = useTranslate();
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">
       <div className="text-center space-y-4">
         <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Contacto
+          {tr("Contacto")}
         </h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          ¿Tienes alguna pregunta? Estoy aquí para ayudarte con tu proyecto musical
+          {tr("¿Tienes alguna pregunta? Estoy aquí para ayudarte con tu proyecto musical")}
         </p>
       </div>
 
@@ -23,34 +25,34 @@ export const ContactTab = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Mail className="h-5 w-5 text-primary" />
-              Envía un Mensaje
+              {tr("Envía un Mensaje")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Nombre</Label>
-                <Input id="name" placeholder="Tu nombre completo" />
+                <Label htmlFor="name">{tr("Nombre")}</Label>
+                <Input id="name" placeholder={tr("Tu nombre completo")} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{tr("Email")}</Label>
                 <Input id="email" type="email" placeholder="tu@email.com" />
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="subject">Asunto</Label>
-              <Input id="subject" placeholder="¿En qué puedo ayudarte?" />
+              <Label htmlFor="subject">{tr("Asunto")}</Label>
+              <Input id="subject" placeholder={tr("¿En qué puedo ayudarte?")} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="message">Mensaje</Label>
+              <Label htmlFor="message">{tr("Mensaje")}</Label>
               <Textarea 
                 id="message" 
-                placeholder="Cuéntame sobre tu proyecto musical..."
+                placeholder={tr("Cuéntame sobre tu proyecto musical...")}
                 className="min-h-[120px]"
               />
             </div>
             <Button variant="upgrade" className="w-full">
-              Enviar Mensaje
+              {tr("Enviar Mensaje")}
             </Button>
           </CardContent>
         </Card>
@@ -60,13 +62,13 @@ export const ContactTab = () => {
           {/* Contact Info */}
           <Card className="bg-gradient-to-br from-card to-muted">
             <CardHeader>
-              <CardTitle>Información de Contacto</CardTitle>
+              <CardTitle>{tr("Información de Contacto")}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-primary" />
                 <div>
-                  <p className="font-semibold">Email</p>
+                  <p className="font-semibold">{tr("Email")}</p>
                   <p className="text-sm text-muted-foreground">toni@tonimateos.com</p>
                 </div>
               </div>
@@ -80,8 +82,8 @@ export const ContactTab = () => {
               <div className="flex items-center gap-3">
                 <MapPin className="h-5 w-5 text-primary" />
                 <div>
-                  <p className="font-semibold">Ubicación</p>
-                  <p className="text-sm text-muted-foreground">Barcelona, España</p>
+                  <p className="font-semibold">{tr("Ubicación")}</p>
+                  <p className="text-sm text-muted-foreground">{tr("Barcelona, España")}</p>
                 </div>
               </div>
             </CardContent>
@@ -90,7 +92,7 @@ export const ContactTab = () => {
           {/* Social Media */}
           <Card className="bg-gradient-to-br from-card to-muted">
             <CardHeader>
-              <CardTitle>Sígueme en Redes</CardTitle>
+              <CardTitle>{tr("Sígueme en Redes")}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <Button variant="outline" className="w-full justify-start gap-3">
@@ -112,9 +114,9 @@ export const ContactTab = () => {
           <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20">
             <CardContent className="pt-6">
               <div className="text-center space-y-2">
-                <h4 className="font-semibold text-primary">Tiempo de Respuesta</h4>
+                <h4 className="font-semibold text-primary">{tr("Tiempo de Respuesta")}</h4>
                 <p className="text-sm text-muted-foreground">
-                  Respondo a todos los mensajes en menos de 24 horas
+                  {tr("Respondo a todos los mensajes en menos de 24 horas")}
                 </p>
               </div>
             </CardContent>
