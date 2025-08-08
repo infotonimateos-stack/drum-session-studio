@@ -1,10 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Building, Headphones, Zap, Shield } from "lucide-react";
-
 export const StudioTab = () => {
-  return (
-    <div className="container mx-auto px-4 py-8 space-y-8">
+  return <div className="container mx-auto px-4 py-8 space-y-8">
       <div className="text-center space-y-4">
         <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
           El Estudio
@@ -29,27 +27,21 @@ export const StudioTab = () => {
                 <Shield className="h-5 w-5 text-primary mt-0.5" />
                 <div>
                   <h4 className="font-semibold">Acústica Profesional</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Sala tratada acústicamente con paneles específicos para batería
-                  </p>
+                  <p className="text-sm text-muted-foreground">Sala diseñada y tratada acústicamente por los mejores ingenieros acústicos para un sonido profesional impecable.</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Headphones className="h-5 w-5 text-primary mt-0.5" />
                 <div>
-                  <h4 className="font-semibold">Monitoreo de Alta Gama</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Monitores Yamaha HS8 y auriculares de referencia
-                  </p>
+                  <h4 className="font-semibold">Sala de 50m2 y 3,5m de altura</h4>
+                  <p className="text-sm text-muted-foreground">Para conseguir un sonido gigante!</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Zap className="h-5 w-5 text-primary mt-0.5" />
                 <div>
                   <h4 className="font-semibold">Cadena de Audio Premium</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Previos API, Neve y DAD con convertidores de última generación
-                  </p>
+                  <p className="text-sm text-muted-foreground">Microfonía Clase A, Previos API, Neve y DAD con convertidores de última generación</p>
                 </div>
               </div>
             </div>
@@ -193,18 +185,8 @@ export const StudioTab = () => {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <img
-              src="/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.png"
-              alt="Estudio de batería: kit microfoneado vista 1"
-              loading="lazy"
-              className="w-full h-auto rounded-md"
-            />
-            <img
-              src="/lovable-uploads/85028cc6-173f-44cd-a28f-5aeec1c79bed.png"
-              alt="Estudio de batería: sala tratada vista 2"
-              loading="lazy"
-              className="w-full h-auto rounded-md"
-            />
+            <img src="/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.png" alt="Estudio de batería: kit microfoneado vista 1" loading="lazy" className="w-full h-auto rounded-md" />
+            <img src="/lovable-uploads/85028cc6-173f-44cd-a28f-5aeec1c79bed.png" alt="Estudio de batería: sala tratada vista 2" loading="lazy" className="w-full h-auto rounded-md" />
           </div>
         </CardContent>
       </Card>
@@ -220,7 +202,7 @@ export const StudioTab = () => {
               <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
                 <span className="text-primary font-bold">1</span>
               </div>
-              <h4 className="font-semibold">Análisis</h4>
+              <h4 className="font-semibold">Configuración</h4>
               <p className="text-sm text-muted-foreground">
                 Configura tu setup según tus necesidades (desde 49,90 euros!)
               </p>
@@ -229,7 +211,7 @@ export const StudioTab = () => {
               <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
                 <span className="text-primary font-bold">2</span>
               </div>
-              <h4 className="font-semibold">Configuración</h4>
+              <h4 className="font-semibold">Envíanos el material</h4>
               <p className="text-sm text-muted-foreground">
                 Envíanos todo el material que necesitamos para empezar tu grabación
               </p>
@@ -238,7 +220,7 @@ export const StudioTab = () => {
               <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
                 <span className="text-primary font-bold">3</span>
               </div>
-              <h4 className="font-semibold">Grabación</h4>
+              <h4 className="font-semibold">Grabación y envío de pistas</h4>
               <p className="text-sm text-muted-foreground">
                 Te enviamos las pistas de batería por Wetransfer con la máxima calidad
               </p>
@@ -246,6 +228,5 @@ export const StudioTab = () => {
           </div>
         </CardContent>
       </Card>
-    </div>
-  );
+    </div>;
 };
