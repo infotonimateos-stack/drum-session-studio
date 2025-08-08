@@ -2,8 +2,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Play, Clock, Eye, Book } from "lucide-react";
+import { useTranslate } from "@/hooks/useTranslate";
 
 export const TutorialsTab = () => {
+  const tr = useTranslate();
   const tutorials = [
     {
       id: "recording-tips",
@@ -68,10 +70,10 @@ export const TutorialsTab = () => {
     <div className="container mx-auto px-4 py-8 space-y-8">
       <div className="text-center space-y-4">
         <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Tutoriales
+          {tr("Tutoriales")}
         </h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Aprende técnicas profesionales de grabación, mezcla y producción de batería
+          {tr("Aprende técnicas profesionales de grabación, mezcla y producción de batería")}
         </p>
       </div>
 
@@ -80,12 +82,12 @@ export const TutorialsTab = () => {
         <CardContent className="p-6">
           <div className="flex items-center gap-3 mb-4">
             <Book className="h-6 w-6 text-primary" />
-            <h3 className="text-lg font-semibold">Tutorial Destacado</h3>
+            <h3 className="text-lg font-semibold">{tr("Tutorial Destacado")}</h3>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
             <div className="space-y-3">
-              <h4 className="text-xl font-bold">{tutorials[2].title}</h4>
-              <p className="text-muted-foreground">{tutorials[2].description}</p>
+              <h4 className="text-xl font-bold">{tr(tutorials[2].title)}</h4>
+              <p className="text-muted-foreground">{tr(tutorials[2].description)}</p>
               <div className="flex items-center gap-4 text-sm">
                 <div className="flex items-center gap-1">
                   <Clock className="h-4 w-4" />
@@ -93,10 +95,10 @@ export const TutorialsTab = () => {
                 </div>
                 <div className="flex items-center gap-1">
                   <Eye className="h-4 w-4" />
-                  {tutorials[2].views} visualizaciones
+                  {tutorials[2].views} {tr("visualizaciones")}
                 </div>
                 <Badge className={getLevelColor(tutorials[2].level)}>
-                  {tutorials[2].level}
+                  {tr(tutorials[2].level)}
                 </Badge>
               </div>
             </div>

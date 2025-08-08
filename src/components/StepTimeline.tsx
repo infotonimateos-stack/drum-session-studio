@@ -1,5 +1,6 @@
 import { Progress } from "@/components/ui/progress";
 import { Check } from "lucide-react";
+import { useTranslate } from "@/hooks/useTranslate";
 
 interface StepTimelineProps {
   currentStep: number;
@@ -7,15 +8,16 @@ interface StepTimelineProps {
 }
 
 export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => {
+  const tr = useTranslate();
   const steps = [
-    "Micrófonos",
-    "Previos", 
-    "Interface",
-    "Producción",
-    "Video",
-    "Tomas",
-    "Entrega",
-    "Extras"
+    tr("Micrófonos"),
+    tr("Previos"), 
+    tr("Interface"),
+    tr("Producción"),
+    tr("Video"),
+    tr("Tomas"),
+    tr("Entrega"),
+    tr("Extras")
   ];
 
   const progress = ((currentStep + 1) / totalSteps) * 100;
@@ -23,7 +25,7 @@ export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => 
   return (
     <div className="bg-gradient-to-br from-warm-peach/10 to-warm-blush/10 border-warm-coral/20 rounded-lg p-4 space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-sm">Progreso de Configuración</h3>
+        <h3 className="font-semibold text-sm">{tr("Progreso de Configuración")}</h3>
         <span className="text-xs text-muted-foreground">
           {currentStep + 1}/{totalSteps}
         </span>

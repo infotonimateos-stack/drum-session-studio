@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, ShoppingCart } from "lucide-react";
+import { useTranslate } from "@/hooks/useTranslate";
 
 interface StepNavigatorProps {
   currentStep: number;
@@ -18,6 +19,7 @@ export const StepNavigator = ({
 }: StepNavigatorProps) => {
   const isFirstStep = currentStep === 0;
   const isLastStep = currentStep === totalSteps - 1;
+  const tr = useTranslate();
 
   return (
     <div className="flex justify-between items-center p-6 bg-gradient-to-r from-card to-muted border-t border-border">
@@ -28,7 +30,8 @@ export const StepNavigator = ({
         className="flex items-center gap-2"
       >
         <ChevronLeft className="h-4 w-4" />
-        Anterior
+        {tr("Anterior")}
+
       </Button>
 
       <div className="flex space-x-2">
@@ -53,7 +56,8 @@ export const StepNavigator = ({
           className="flex items-center gap-2"
         >
           <ShoppingCart className="h-4 w-4" />
-          Finalizar Compra
+          {tr("Finalizar Compra")}
+
         </Button>
       ) : (
         <Button
@@ -61,7 +65,7 @@ export const StepNavigator = ({
           onClick={onNextStep}
           className="flex items-center gap-2"
         >
-          Siguiente
+          {tr("Siguiente")}
           <ChevronRight className="h-4 w-4" />
         </Button>
       )}

@@ -35,6 +35,23 @@ const resources = {
         step2Text: "Envíanos todo el material que necesitamos para empezar tu grabación",
         step3Title: "Grabación y envío de pistas",
         step3Text: "Te enviamos las pistas de batería por Wetransfer con la máxima calidad"
+      },
+      config: {
+        steps: {
+          microphones: "Micrófonos",
+          preamps: "Previos",
+          interface: "Interface",
+          production: "Producción",
+          video: "Video",
+          takes: "Tomas",
+          delivery: "Entrega",
+          extras: "Extras"
+        },
+        heroTitle: "Configura tu Sesión",
+        priceFrom: "desde 49,90 euros",
+        heroP1: "Comienza con nuestra configuración básica que incluye todo lo esencial para una grabación profesional.",
+        heroP2: "💡 Cada elemento se puede actualizar individualmente para crear tu setup perfecto",
+        imgAlt: "Batería microfoneada en estudio profesional"
       }
     }
   },
