@@ -49,12 +49,12 @@ export const baseMicrophones: Microphone[] = [
   },
   {
     id: 'sen421-floor',
-    name: 'Sennheiser 421',
+    name: 'Sennheiser 602',
     price: 0,
     included: true,
     description: 'Micrófono dinámico para tom 3',
     target: 'Tom 3',
-    image: '/lovable-uploads/5b4e514d-0c50-42a1-834a-3b4c1d7ab825.png'
+    image: '/lovable-uploads/be0bd794-2388-4066-837e-67f300cc20cf.png'
   },
   {
     id: 'akg414-oh1',
