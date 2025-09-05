@@ -86,14 +86,16 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
               onClick={() => handleToggleItem(item)}
             >
               <CardHeader className="pb-4">
-                <div className="flex items-center justify-between mb-2">
+                <div className="space-y-3">
                   <CardTitle className="flex items-center gap-2 text-lg">
                     {getIcon(item.id)}
                     {item.name}
                   </CardTitle>
-                  <Badge variant="outline" className="text-primary font-bold text-xl px-4 py-2">
-                    €{item.price.toFixed(2)}
-                  </Badge>
+                  <div className="flex justify-center">
+                    <Badge variant="outline" className="text-primary font-bold text-xl px-4 py-2">
+                      €{item.price.toFixed(2)}
+                    </Badge>
+                  </div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
