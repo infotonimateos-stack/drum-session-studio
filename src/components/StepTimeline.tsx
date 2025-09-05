@@ -25,7 +25,7 @@ export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => 
   return (
     <div className="bg-gradient-to-br from-warm-peach/10 to-warm-blush/10 border-warm-coral/20 rounded-lg p-4 space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-sm">{tr("Progreso de Configuración")}</h3>
+        <h3 className="font-semibold text-sm">Progreso de configuración</h3>
         <span className="text-xs text-muted-foreground">
           {currentStep + 1}/{totalSteps}
         </span>
