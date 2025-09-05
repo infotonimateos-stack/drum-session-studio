@@ -132,7 +132,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
               </div>
               <div className="flex items-center justify-center">
                 <img 
-                  src="/lovable-uploads/2f72b48e-2149-413c-8cbd-bdcd2001a8a6.png" 
+                  src="/lovable-uploads/3beb9f76-a64e-4bec-a58b-9b8f4990203b.png" 
                   alt={t("config.imgAlt")} 
                   className="rounded-lg shadow-lg object-cover w-full h-48 lg:h-64"
                 />
