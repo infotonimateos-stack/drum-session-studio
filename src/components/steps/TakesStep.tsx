@@ -80,7 +80,7 @@ export const TakesStep = ({
               <h4 className="font-medium text-sm">Características:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
                 <li>• Interpretación profesional</li>
-                <li>• Basada en tu demo</li>
+                <li>• Basada en tu demo (parecida, pero no idéntica)</li>
                 <li>• Sonido equilibrado</li>
               </ul>
             </div>
