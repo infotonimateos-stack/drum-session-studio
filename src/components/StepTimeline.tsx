@@ -29,7 +29,7 @@ export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => 
           <Settings className="h-4 w-4 text-primary" />
           <h3 className="font-semibold text-sm">Progreso de la configuración</h3>
           <span className="text-xs font-medium bg-gradient-to-r from-warm-coral to-warm-blush bg-clip-text text-transparent">
-            {Math.round(progress)}%
+            {Math.round(progress)}%  
           </span>
         </div>
         <span className="text-xs text-muted-foreground">
