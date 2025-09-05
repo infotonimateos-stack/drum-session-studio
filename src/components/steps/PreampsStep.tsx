@@ -74,7 +74,7 @@ export const PreampsStep = ({
                 <li>• <strong>Sonido limpio</strong> y transparente</li>
                 <li>• <strong>Respuesta plana</strong></li>
                 <li>• <strong>Sin ruido</strong> ni distorsión</li>
-                <li>• <strong>Perfecto</strong> para tu primera grabación</li>
+                <li>• <strong>Perfecto</strong> para tus primeras producciones</li>
               </ul>
             </div>
 
