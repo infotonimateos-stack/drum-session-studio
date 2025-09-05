@@ -89,7 +89,8 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
             
             <div className="space-y-2">
               <h4 className="font-medium text-sm">Características:</h4>
-               <ul className="text-sm text-muted-foreground space-y-1">
+              <ul className="text-sm text-muted-foreground space-y-1">
+                <li>• Tiempo para perfeccionar cada detalle</li>
                 <li>• Sin costo adicional</li>
                 <li>• Ideal para la mayoría de proyectos</li>
               </ul>
@@ -116,7 +117,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2">
-                <span className="text-2xl">🥢</span>
+                <Zap className="h-5 w-5 text-primary" />
                 Express
               </CardTitle>
               <Badge variant="outline" className="text-primary">+€5.90</Badge>
@@ -124,7 +125,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center gap-3">
-              <span className="text-4xl">🥢</span>
+              <Zap className="h-8 w-8 text-primary" />
               <div>
                 <h3 className="font-semibold">5 Días Laborables</h3>
                 <p className="text-sm text-muted-foreground">Prioridad en la entrega</p>
@@ -174,7 +175,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2">
-                <span className="text-2xl">🥢</span>
+                <Rocket className="h-5 w-5 text-accent" />
                 Ultra Express
               </CardTitle>
               <Badge variant="outline" className="text-accent">+€39.90</Badge>
@@ -182,7 +183,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center gap-3">
-              <span className="text-4xl">🥢</span>
+              <Rocket className="h-8 w-8 text-accent" />
               <div>
                 <h3 className="font-semibold">2 Días Laborables</h3>
                 <p className="text-sm text-muted-foreground">Máxima prioridad absoluta</p>
