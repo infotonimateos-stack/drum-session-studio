@@ -62,11 +62,11 @@ export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepP
     <div className="space-y-12 bg-gradient-to-br from-warm-peach/15 to-warm-coral/20 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-6">
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex items-center justify-center gap-1">
           <img 
             src="/lovable-uploads/c0e04fe9-29fa-457e-985a-9666f0ec7656.png" 
             alt="Headphones icon" 
-            className="w-16 h-16"
+            className="w-48 h-48"
           />
           <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Servicios de Producción
