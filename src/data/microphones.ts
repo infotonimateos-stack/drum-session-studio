@@ -63,7 +63,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono de condensador overhead izquierdo',
     target: 'Overhead L',
-    image: '/lovable-uploads/06149d1c-e982-40b5-b71c-ee8e791d8327.png'
+    image: '/lovable-uploads/1bdd2634-dd4f-4938-b946-912b2291448e.png'
   },
   {
     id: 'akg414-oh2',
@@ -72,7 +72,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono de condensador overhead derecho',
     target: 'Overhead R',
-    image: '/lovable-uploads/06149d1c-e982-40b5-b71c-ee8e791d8327.png'
+    image: '/lovable-uploads/1bdd2634-dd4f-4938-b946-912b2291448e.png'
   }
 ];
 
