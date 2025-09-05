@@ -182,6 +182,6 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'La leyenda mundial del room estéreo',
     target: 'Room',
-    image: '/lovable-uploads/018df378-819a-48fb-9962-28969e162a4f.png'
+    image: '/lovable-uploads/00a0018b-61ad-4b06-9b25-644b23a116df.png'
   }
 ];
