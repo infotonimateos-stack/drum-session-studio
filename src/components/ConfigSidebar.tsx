@@ -27,7 +27,7 @@ export function ConfigSidebar({
       <SidebarHeader className="border-b border-border p-3">
       </SidebarHeader>
       
-      <SidebarContent className="p-3 pt-6 space-y-4 overflow-hidden">
+      <SidebarContent className="p-3 pt-10 space-y-4 overflow-hidden">
         <StepTimeline
           currentStep={currentStep}
           totalSteps={totalSteps}
