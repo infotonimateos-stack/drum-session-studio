@@ -81,7 +81,7 @@ export const TakesStep = ({
               <ul className="text-sm text-muted-foreground space-y-1">
                 <li>• Interpretación profesional</li>
                 <li>• Basada en tu demo (parecida, pero no idéntica)</li>
-                <li>• Sonido equilibrado</li>
+                <li>• Corregida y editada con Beat Detective</li>
               </ul>
             </div>
 
