@@ -31,7 +31,7 @@ export const baseMicrophones: Microphone[] = [
   },
   {
     id: 'sen421-tom1',
-    name: 'Sennheiser 421',
+    name: 'Sennheiser 602',
     price: 0,
     included: true,
     description: 'Micrófono dinámico para tom 1',
@@ -40,7 +40,7 @@ export const baseMicrophones: Microphone[] = [
   },
   {
     id: 'sen421-tom2',
-    name: 'Sennheiser 421',
+    name: 'Sennheiser 602',
     price: 0,
     included: true,
     description: 'Micrófono dinámico para tom 2',
