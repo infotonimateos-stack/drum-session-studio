@@ -51,11 +51,11 @@ export const InterfaceStep = ({
   return <div className="space-y-12 bg-gradient-to-br from-warm-apricot/25 to-warm-cream/20 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-6">
-        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-6">
+        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-8">
           <img 
             src={processedIconUrl || "/lovable-uploads/53c6239d-a2ad-4218-b08e-c2a176eac089.png"} 
             alt="Interface de Audio" 
-            className="h-20 w-20 object-contain" 
+            className="h-60 w-60 object-contain" 
           />
           Interface de Audio
         </h2>
