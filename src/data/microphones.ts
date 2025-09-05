@@ -27,7 +27,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono de condensador para hi-hat',
     target: 'Hi-Hat',
-    image: '/lovable-uploads/931c6239-27dd-4843-ac2e-393dbdc5717b.png'
+    image: '/lovable-uploads/c71ecd5d-bac0-4a3e-a9c6-3b4c7577248b.png'
   },
   {
     id: 'sen421-tom1',
