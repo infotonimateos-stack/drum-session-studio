@@ -1,11 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, Cpu, Edit } from "lucide-react";
+import { Check, Plus, Cpu } from "lucide-react";
 import { CartItem } from "@/types/cart";
 import { useState, useEffect } from "react";
 import { processImageFromUrl } from "@/utils/backgroundRemoval";
-import { ImageEditor } from "@/components/ImageEditor";
 interface InterfaceStepProps {
   addItem: (item: CartItem) => void;
   removeItem: (itemId: string) => void;
@@ -17,8 +16,6 @@ export const InterfaceStep = ({
   hasItem
 }: InterfaceStepProps) => {
   const [processedIconUrl, setProcessedIconUrl] = useState<string | null>(null);
-  const [showImageEditor, setShowImageEditor] = useState(false);
-  const [editedImageUrl, setEditedImageUrl] = useState<string | null>(null);
   
   const dadInterface: CartItem = {
     id: 'interface-dad',
@@ -80,34 +77,11 @@ export const InterfaceStep = ({
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4 relative group">
-              <img 
-                src={editedImageUrl || "/lovable-uploads/93445061-0c3b-4d86-a30f-15ff4b018154.png"} 
-                alt="MOTU 8Pre Interface" 
-                className="max-h-28 max-w-full object-contain bg-transparent" 
-                style={{
-                  filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
-                }} 
-              />
-              <Button
-                variant="outline"
-                size="sm"
-                className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                onClick={() => setShowImageEditor(!showImageEditor)}
-              >
-                <Edit className="h-4 w-4" />
-              </Button>
+            <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
+              <img src="/lovable-uploads/93445061-0c3b-4d86-a30f-15ff4b018154.png" alt="MOTU 8Pre Interface" className="max-h-28 max-w-full object-contain bg-transparent" style={{
+              filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
+            }} />
             </div>
-            
-            {showImageEditor && (
-              <ImageEditor
-                originalImageUrl="/lovable-uploads/93445061-0c3b-4d86-a30f-15ff4b018154.png"
-                onImageEdited={(url) => {
-                  setEditedImageUrl(url);
-                  setShowImageEditor(false);
-                }}
-              />
-            )}
             
             <div className="flex items-center gap-4 p-4 bg-success/10 rounded-lg">
               <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center">
