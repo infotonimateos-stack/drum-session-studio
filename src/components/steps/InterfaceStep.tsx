@@ -50,14 +50,9 @@ export const InterfaceStep = ({
   }, []);
   return <div className="space-y-12 bg-gradient-to-br from-warm-apricot/25 to-warm-cream/20 rounded-xl p-8">
       {/* Header */}
-      <div className="text-center space-y-4">
-        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-6">
-          <img 
-            src="/lovable-uploads/0de754df-90d3-49fe-b9df-9d10250b037c.png" 
-            alt="Interface de Audio" 
-            className="h-48 w-48 object-contain" 
-          />
-          Interface de Audio
+      <div className="text-center space-y-6">
+        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          🎛️ Interface de Audio
         </h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
           La puerta entre el mundo analógico y digital. La calidad del convertidor define tu sonido final.
