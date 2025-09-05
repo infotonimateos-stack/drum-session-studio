@@ -20,13 +20,13 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
         </CardTitle>
       </CardHeader>
       <CardContent className="flex-1 overflow-y-auto space-y-4">
-        {/* Base Package */}
+        {/* Order Total */}
         <div className="flex justify-between items-center p-3 bg-primary/10 rounded-lg">
           <div>
-            <p className="font-medium text-sm">Kit Básico de Grabación</p>
-            <p className="text-xs text-muted-foreground">8 micrófonos incluidos</p>
+            <p className="font-medium text-sm">Total del Pedido</p>
+            <p className="text-xs text-muted-foreground">Base + extras</p>
           </div>
-          <span className="font-bold text-primary">€{cartState.basePrice.toFixed(2)}</span>
+          <span className="font-bold text-primary text-xl">€{cartState.total.toFixed(2)}</span>
         </div>
 
         {/* Added Items */}
