@@ -23,12 +23,12 @@ export function ConfigSidebar({
   onCheckout,
 }: ConfigSidebarProps) {
   return (
-    <Sidebar className="w-80 border-r border-border bg-card/50 backdrop-blur-sm">
-      <SidebarHeader className="border-b border-border p-4">
-        <h2 className="text-lg font-semibold text-foreground">Configuración</h2>
+    <Sidebar className="w-72 border-r border-border bg-card/50 backdrop-blur-sm">
+      <SidebarHeader className="border-b border-border p-3">
+        <h2 className="text-sm font-semibold text-foreground">Progreso de Configuración</h2>
       </SidebarHeader>
       
-      <SidebarContent className="p-4 space-y-6">
+      <SidebarContent className="p-3 space-y-4 overflow-hidden">
         <StepTimeline
           currentStep={currentStep}
           totalSteps={totalSteps}
