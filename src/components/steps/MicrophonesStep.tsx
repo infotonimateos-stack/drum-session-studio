@@ -4,8 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { Check, Plus, Headphones } from "lucide-react";
 import { baseMicrophones, upgradeMicrophones } from "@/data/microphones";
 import { CartItem } from "@/types/cart";
-import { useBackgroundRemoval } from "@/hooks/useBackgroundRemoval";
-import { useEffect, useState } from "react";
 interface MicrophonesStepProps {
   addItem: (item: CartItem) => void;
   removeItem: (itemId: string) => void;
@@ -16,26 +14,6 @@ export const MicrophonesStep = ({
   removeItem,
   hasItem
 }: MicrophonesStepProps) => {
-  const { processImage } = useBackgroundRemoval();
-  const [processedImage, setProcessedImage] = useState<string>("");
-
-  // Process the Neumann U47 FET image on component mount
-  useEffect(() => {
-    const processNeumannImage = async () => {
-      const neumannMic = upgradeMicrophones.find(mic => mic.id === 'u47fet-kick');
-      if (neumannMic?.image) {
-        try {
-          const processed = await processImage(neumannMic.image);
-          setProcessedImage(processed);
-        } catch (error) {
-          console.error('Failed to process Neumann image:', error);
-        }
-      }
-    };
-    
-    processNeumannImage();
-  }, [processImage]);
-
   const handleToggleItem = (microphone: any) => {
     const cartItem: CartItem = {
       id: microphone.id,
@@ -44,7 +22,6 @@ export const MicrophonesStep = ({
       category: "Micrófono",
       description: `${microphone.description} - ${microphone.target}`
     };
-
     if (hasItem(microphone.id)) {
       removeItem(microphone.id);
     } else {
@@ -115,11 +92,7 @@ export const MicrophonesStep = ({
                     <span className="font-bold text-xl text-primary">€{mic.price.toFixed(2)}</span>
                   </div>
                    {mic.image && <div className="w-full h-40 flex items-center justify-center bg-gray-50/30 rounded-lg">
-                        <img 
-                          src={mic.id === 'u47fet-kick' && processedImage ? processedImage : mic.image} 
-                          alt={mic.name} 
-                          className="max-h-36 max-w-full object-contain rounded-lg p-2" 
-                        />
+                        <img src={mic.image} alt={mic.name} className="max-h-36 max-w-full object-contain rounded-lg p-2" />
                      </div>}
                 </CardHeader>
                 <CardContent className="space-y-4">
