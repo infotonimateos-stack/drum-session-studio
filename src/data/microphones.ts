@@ -172,7 +172,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'El room de los grandes discos',
     target: 'Room Mono',
-    image: '/lovable-uploads/c3aae572-234c-41c9-a967-2d00f027d2b3.png'
+    image: '/lovable-uploads/89d7fda0-70d4-4957-add9-d89e796317e2.png'
   },
   // ROOM upgrades
   {
