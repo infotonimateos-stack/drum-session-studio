@@ -14,7 +14,7 @@ import { DeliveryStep } from "@/components/steps/DeliveryStep";
 import { ExtrasStep } from "@/components/steps/ExtrasStep";
 import { CheckoutSummary } from "@/components/CheckoutSummary";
 import { useCart } from "@/hooks/useCart";
-import drumKitStudio from "@/assets/drum-kit-configurable.jpg";
+// Using uploaded studio photo
 import { useTranslation } from "react-i18next";
 interface ConfigurationFlowProps {
   onCheckout: () => void;
@@ -132,7 +132,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
               </div>
               <div className="flex items-center justify-center">
                 <img 
-                  src={drumKitStudio} 
+                  src="/lovable-uploads/2f72b48e-2149-413c-8cbd-bdcd2001a8a6.png" 
                   alt={t("config.imgAlt")} 
                   className="rounded-lg shadow-lg object-cover w-full h-48 lg:h-64"
                 />
