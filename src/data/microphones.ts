@@ -94,7 +94,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Subgraves naturales y con pegada',
     target: 'Bombo',
-    image: '/lovable-uploads/903f1003-c2ac-486f-970e-14aeef1bdc43.png'
+    image: '/lovable-uploads/a7c203e3-9444-4ecc-811a-6abb0a890cda.png'
   },
   {
     id: 'u47fet-kick',
