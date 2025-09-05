@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, Clock, Car, Rocket } from "lucide-react";
+import { Check, Plus, Clock, Plane, Rocket } from "lucide-react";
 import { CartItem } from "@/types/cart";
 
 interface DeliveryStepProps {
@@ -117,8 +117,8 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
           <CardHeader>
             <div className="flex items-center justify-center">
               <CardTitle className="flex items-center gap-1">
-                <Car className="h-12 w-12 text-orange-500" />
-                Express
+                <Plane className="h-12 w-12 text-orange-500" />
+                Rápido
               </CardTitle>
             </div>
             <div className="flex justify-center">
@@ -177,7 +177,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
             <div className="flex items-center justify-center">
               <CardTitle className="flex items-center gap-1">
                 <Rocket className="h-12 w-12 text-accent" />
-                Ultra Express
+                Express
               </CardTitle>
             </div>
             <div className="flex justify-center">
