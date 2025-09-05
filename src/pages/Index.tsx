@@ -49,7 +49,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-rainbow">
+    <div className="min-h-screen bg-gradient-to-br from-background via-card to-background">
       <Header activeTab={activeTab} onTabChange={setActiveTab} />
       {renderContent()}
     </div>

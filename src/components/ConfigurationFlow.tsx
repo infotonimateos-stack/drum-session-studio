@@ -94,7 +94,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   // Show checkout summary
   if (mode === 'checkout') {
     return (
-      <div className="min-h-screen bg-gradient-cosmic">
+      <div className="min-h-screen bg-gradient-to-br from-warm-cream/30 to-warm-peach/20">
         <div className="container mx-auto px-4 py-8">
           <CheckoutSummary
             cartState={cartState}
@@ -108,7 +108,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen bg-gradient-cosmic flex w-full">
+      <div className="min-h-screen bg-gradient-to-br from-warm-cream/30 to-warm-peach/20 flex w-full">
         <ConfigSidebar
           currentStep={currentStep}
           totalSteps={steps.length}
@@ -126,7 +126,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
             
             {/* Header Section */}
             <div className="mb-8">
-              <Card className="overflow-hidden bg-gradient-lavender shadow-colorful border-pastel-lavender/50">
+              <Card className="overflow-hidden bg-gradient-to-br from-warm-peach/20 to-warm-apricot/30 shadow-xl border-warm-coral/30">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
                   <div className="space-y-4">
                     <div className="flex items-center gap-4 flex-wrap">
@@ -157,7 +157,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
             </div>
 
             {/* Main Content */}
-            <Card className="overflow-hidden bg-gradient-mint shadow-colorful border-pastel-mint/50">
+            <Card className="overflow-hidden bg-gradient-to-br from-warm-peach/10 to-warm-blush/10 shadow-xl border-warm-coral/20">
               {/* Step Content */}
               <div className="p-8 min-h-[600px]">
                 {steps[currentStep].component}

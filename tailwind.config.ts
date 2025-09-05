@@ -56,23 +56,11 @@ export default {
 					DEFAULT: 'hsl(var(--success))',
 					foreground: 'hsl(var(--success-foreground))'
 				},
-				// Enhanced warm colors
 				'warm-peach': 'hsl(var(--warm-peach))',
 				'warm-coral': 'hsl(var(--warm-coral))',
 				'warm-apricot': 'hsl(var(--warm-apricot))',
 				'warm-cream': 'hsl(var(--warm-cream))',
 				'warm-blush': 'hsl(var(--warm-blush))',
-				// New pastel rainbow palette
-				'pastel-lavender': 'hsl(var(--pastel-lavender))',
-				'pastel-mint': 'hsl(var(--pastel-mint))',
-				'pastel-rose': 'hsl(var(--pastel-rose))',
-				'pastel-sky': 'hsl(var(--pastel-sky))',
-				'pastel-lemon': 'hsl(var(--pastel-lemon))',
-				'pastel-lilac': 'hsl(var(--pastel-lilac))',
-				'pastel-sage': 'hsl(var(--pastel-sage))',
-				'pastel-peach': 'hsl(var(--pastel-peach))',
-				'pastel-aqua': 'hsl(var(--pastel-aqua))',
-				'pastel-butter': 'hsl(var(--pastel-butter))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -83,25 +71,6 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				}
-			},
-			backgroundImage: {
-				'gradient-primary': 'var(--gradient-primary)',
-				'gradient-secondary': 'var(--gradient-secondary)',
-				'gradient-card': 'var(--gradient-card)',
-				'gradient-hero': 'var(--gradient-hero)',
-				'gradient-warm': 'var(--gradient-warm)',
-				'gradient-peach': 'var(--gradient-peach)',
-				'gradient-rainbow': 'var(--gradient-rainbow)',
-				'gradient-sunset': 'var(--gradient-sunset)',
-				'gradient-ocean': 'var(--gradient-ocean)',
-				'gradient-lavender': 'var(--gradient-lavender)',
-				'gradient-mint': 'var(--gradient-mint)',
-				'gradient-cosmic': 'var(--gradient-cosmic)',
-			},
-			boxShadow: {
-				'glow': 'var(--shadow-glow)',
-				'card': 'var(--shadow-card)',
-				'colorful': 'var(--shadow-colorful)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

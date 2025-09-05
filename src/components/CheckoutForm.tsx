@@ -265,7 +265,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-sunset">
+    <div className="min-h-screen bg-gradient-to-br from-background to-muted/50">
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
@@ -284,7 +284,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
             <div className="space-y-6">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Personal Info */}
-                <Card className="bg-gradient-ocean shadow-colorful border-pastel-aqua/50">
+                <Card className="bg-gradient-to-br from-card to-muted">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <User className="h-5 w-5 text-primary" />
@@ -336,7 +336,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
 
                 {/* Invoice Info */}
                 {needsInvoice && (
-                  <Card className="bg-gradient-lavender shadow-colorful border-pastel-lilac/50">
+                  <Card className="bg-gradient-to-br from-card to-muted">
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
                         <Building className="h-5 w-5 text-primary" />
@@ -357,7 +357,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                 )}
 
                 {/* Audio Files */}
-                <Card className="bg-gradient-mint shadow-colorful border-pastel-sage/50">
+                <Card className="bg-gradient-to-br from-card to-muted">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <FileAudio className="h-5 w-5 text-primary" />
@@ -393,7 +393,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                 </Card>
 
                 {/* Audio Settings */}
-                <Card className="bg-gradient-sunset shadow-colorful border-pastel-lemon/50">
+                <Card className="bg-gradient-to-br from-card to-muted">
                   <CardHeader>
                     <CardTitle>Configuración de Audio</CardTitle>
                   </CardHeader>
@@ -451,7 +451,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                 </Card>
 
                 {/* Payment Method */}
-                <Card className="bg-gradient-peach shadow-colorful border-pastel-rose/50">
+                <Card className="bg-gradient-to-br from-card to-muted">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <CreditCard className="h-5 w-5 text-primary" />

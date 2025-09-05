@@ -8,84 +8,63 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 315 45% 96%;
-    --foreground: 240 15% 25%;
+    --background: 25 40% 96%;
+    --foreground: 25 20% 20%;
 
-    --card: 320 60% 97%;
-    --card-foreground: 240 15% 25%;
+    --card: 28 50% 98%;
+    --card-foreground: 25 20% 20%;
 
-    --popover: 320 60% 97%;
-    --popover-foreground: 240 15% 25%;
+    --popover: 28 50% 98%;
+    --popover-foreground: 25 20% 20%;
 
-    --primary: 280 85% 65%;
+    --primary: 15 75% 55%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 200 70% 75%;
-    --secondary-foreground: 240 25% 25%;
+    --secondary: 30 45% 85%;
+    --secondary-foreground: 25 30% 25%;
 
-    --muted: 210 50% 90%;
-    --muted-foreground: 220 25% 45%;
+    --muted: 35 35% 90%;
+    --muted-foreground: 30 25% 45%;
 
-    --accent: 340 75% 70%;
+    --accent: 40 70% 60%;
     --accent-foreground: 0 0% 98%;
 
-    /* Vibrant pastel colors */
-    --warm-peach: 20 90% 82%;
-    --warm-coral: 15 85% 70%;
-    --warm-apricot: 30 85% 78%;
-    --warm-cream: 45 70% 88%;
-    --warm-blush: 350 75% 80%;
-    
-    /* New pastel rainbow colors */
-    --pastel-lavender: 260 70% 85%;
-    --pastel-mint: 160 65% 80%;
-    --pastel-rose: 340 80% 82%;
-    --pastel-sky: 200 75% 85%;
-    --pastel-lemon: 55 85% 85%;
-    --pastel-lilac: 290 60% 85%;
-    --pastel-sage: 140 45% 80%;
-    --pastel-peach: 25 90% 82%;
-    --pastel-aqua: 180 65% 82%;
-    --pastel-butter: 50 80% 88%;
+    /* Warm pastel colors */
+    --warm-peach: 20 85% 85%;
+    --warm-coral: 15 70% 75%;
+    --warm-apricot: 30 80% 80%;
+    --warm-cream: 45 60% 90%;
+    --warm-blush: 350 60% 85%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 320 30% 85%;
-    --input: 320 30% 85%;
-    --ring: 280 85% 65%;
+    --border: 25 20% 85%;
+    --input: 25 20% 85%;
+    --ring: 25 95% 53%;
 
-    --success: 140 70% 60%;
+    --success: 120 60% 50%;
     --success-foreground: 0 0% 98%;
 
-    /* Vibrant gradient collection */
-    --gradient-primary: linear-gradient(135deg, hsl(280 85% 65%), hsl(340 75% 70%));
-    --gradient-secondary: linear-gradient(135deg, hsl(200 70% 75%), hsl(260 70% 85%));
-    --gradient-card: linear-gradient(145deg, hsl(320 60% 97%), hsl(280 50% 95%));
-    --gradient-hero: linear-gradient(180deg, hsl(315 45% 96%), hsl(280 40% 92%));
-    --gradient-warm: linear-gradient(135deg, hsl(20 90% 82%), hsl(30 85% 78%));
-    --gradient-peach: linear-gradient(145deg, hsl(15 85% 70%), hsl(350 75% 80%));
-    --gradient-rainbow: linear-gradient(135deg, hsl(280 85% 65%), hsl(340 75% 70%), hsl(20 90% 82%), hsl(55 85% 85%), hsl(160 65% 80%), hsl(200 75% 85%));
-    --gradient-sunset: linear-gradient(135deg, hsl(340 80% 82%), hsl(25 90% 82%), hsl(55 85% 85%));
-    --gradient-ocean: linear-gradient(135deg, hsl(200 75% 85%), hsl(180 65% 82%), hsl(160 65% 80%));
-    --gradient-lavender: linear-gradient(135deg, hsl(260 70% 85%), hsl(290 60% 85%), hsl(340 80% 82%));
-    --gradient-mint: linear-gradient(135deg, hsl(160 65% 80%), hsl(140 45% 80%), hsl(180 65% 82%));
-    --gradient-cosmic: linear-gradient(135deg, hsl(280 85% 65%), hsl(260 70% 85%), hsl(200 75% 85%), hsl(180 65% 82%));
+    --gradient-primary: linear-gradient(135deg, hsl(15 75% 55%), hsl(40 70% 60%));
+    --gradient-card: linear-gradient(145deg, hsl(28 50% 98%), hsl(30 45% 85%));
+    --gradient-hero: linear-gradient(180deg, hsl(25 40% 96%), hsl(35 35% 90%));
+    --gradient-warm: linear-gradient(135deg, hsl(20 85% 85%), hsl(30 80% 80%));
+    --gradient-peach: linear-gradient(145deg, hsl(15 70% 75%), hsl(350 60% 85%));
     
-    --shadow-glow: 0 0 40px hsl(280 85% 65% / 0.4);
-    --shadow-card: 0 8px 40px hsl(280 30% 15% / 0.15);
-    --shadow-colorful: 0 15px 50px hsl(340 75% 70% / 0.25);
+    --shadow-glow: 0 0 30px hsl(25 95% 53% / 0.3);
+    --shadow-card: 0 8px 30px hsl(25 30% 15% / 0.1);
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 320 60% 97%;
-    --sidebar-foreground: 240 15% 25%;
-    --sidebar-primary: 280 85% 65%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 260 70% 90%;
-    --sidebar-accent-foreground: 240 15% 25%;
-    --sidebar-border: 320 30% 88%;
-    --sidebar-ring: 280 85% 65%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
