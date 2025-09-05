@@ -12,14 +12,14 @@ interface CartProps {
 
 export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
   return (
-    <Card className="w-full bg-gradient-to-br from-card to-muted border-border shadow-lg">
+    <Card className="w-full h-full bg-gradient-to-br from-card to-muted border-border shadow-lg flex flex-col">
       <CardHeader className="pb-4">
         <CardTitle className="flex items-center gap-2 text-lg">
           <ShoppingCart className="h-5 w-5 text-primary" />
           Resumen del Pedido
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="flex-1 flex flex-col space-y-4 overflow-hidden">
         {/* Base Package */}
         <div className="flex justify-between items-center p-3 bg-primary/10 rounded-lg">
           <div>
@@ -33,7 +33,7 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
         {cartState.items.length > 0 && (
           <>
             <Separator />
-            <div className="space-y-2 max-h-64 overflow-y-auto">
+            <div className="space-y-2 flex-1 overflow-y-auto min-h-0">
               {cartState.items.map((item) => (
                 <div key={item.id} className="flex justify-between items-center p-2 hover:bg-muted/50 rounded-md group">
                   <div className="flex-1 min-w-0">
