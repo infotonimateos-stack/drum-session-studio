@@ -176,7 +176,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
           <CardHeader>
             <div className="flex items-center justify-center">
               <CardTitle className="flex items-center gap-1">
-                <Rocket className="h-12 w-12 text-accent" />
+                <Rocket className="h-12 w-12 text-red-500" />
                 Express
               </CardTitle>
             </div>
