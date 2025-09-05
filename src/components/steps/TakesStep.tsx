@@ -112,7 +112,6 @@ export const TakesStep = ({
                 <li>• Una toma adicional, versión "Toni Mateos"</li>
                 <li>• Interpretación creativa</li>
                 <li>• Fills y variaciones únicas</li>
-                <li>• Combínala con otras opciones</li>
                 <li>• Corregida y editada con Beat Detective</li>
               </ul>
             </div>
