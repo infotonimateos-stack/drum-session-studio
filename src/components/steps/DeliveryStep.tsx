@@ -59,7 +59,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
       {/* Header */}
       <div className="text-center space-y-6">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          🚚 Entrega
+          Entrega
         </h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
           ¿Cuándo necesitas tu grabación? Elige el plazo que mejor se adapte a tu proyecto.
