@@ -58,12 +58,7 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
               case 'videocall-10min':
                 return <Video className="h-5 w-5" />;
               case 'videocall-premium':
-                return (
-                  <div className="relative h-5 w-5">
-                    <Video className="h-4 w-4 absolute top-0 left-0 text-primary" />
-                    <Video className="h-4 w-4 absolute bottom-0 right-0 text-primary opacity-70" />
-                  </div>
-                );
+                return <Clapperboard className="h-5 w-5" />;
               default:
                 return <Plus className="h-5 w-5" />;
             }
