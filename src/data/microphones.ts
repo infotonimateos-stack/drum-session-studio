@@ -132,7 +132,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'El clásico que capta cada susurro del bordón',
     target: 'Snare Bottom',
-    image: '/lovable-uploads/fca524ef-3281-4a16-91f2-2ce2fefe7d2b.png'
+    image: '/lovable-uploads/6cd449d1-5e50-4516-a635-9997ed25974a.png'
   },
   // HIHAT upgrades
   {
