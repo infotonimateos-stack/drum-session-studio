@@ -36,7 +36,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono dinámico para tom 1',
     target: 'Tom 1',
-    image: '/lovable-uploads/f493529f-6183-4040-82f1-5ccf827d1b2b.png'
+    image: '/lovable-uploads/fe5dd1af-916b-40b6-a0ef-839268dcefe9.png'
   },
   {
     id: 'sen421-tom2',
@@ -45,7 +45,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono dinámico para tom 2',
     target: 'Tom 2',
-    image: '/lovable-uploads/f493529f-6183-4040-82f1-5ccf827d1b2b.png'
+    image: '/lovable-uploads/fe5dd1af-916b-40b6-a0ef-839268dcefe9.png'
   },
   {
     id: 'sen421-floor',
