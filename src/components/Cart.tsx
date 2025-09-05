@@ -29,33 +29,43 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
           <span className="font-bold text-primary text-xl">€{cartState.total.toFixed(2)}</span>
         </div>
 
-        {/* Added Items */}
-        {cartState.items.length > 0 && (
-          <>
-            <Separator />
-            <div className="space-y-2">
-              {cartState.items.map((item) => (
-                <div key={item.id} className="flex justify-between items-center p-2 hover:bg-muted/50 rounded-md group">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">{item.name}</p>
-                    <p className="text-xs text-muted-foreground">{item.category}</p>
-                  </div>
-                  <div className="flex items-center gap-2 ml-2">
-                    <span className="text-sm font-medium">€{item.price.toFixed(2)}</span>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
-                      onClick={() => removeItem(item.id)}
-                    >
-                      <Trash2 className="h-3 w-3" />
-                    </Button>
-                  </div>
-                </div>
-              ))}
+        {/* Items List */}
+        <>
+          <Separator />
+          <div className="space-y-2">
+            {/* Base Package - Always shown first */}
+            <div className="flex justify-between items-center p-2 bg-success/10 rounded-md">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium truncate">Kit Básico de Grabación</p>
+                <p className="text-xs text-muted-foreground">8 micrófonos incluidos</p>
+              </div>
+              <div className="flex items-center gap-2 ml-2">
+                <span className="text-sm font-medium">€{cartState.basePrice.toFixed(2)}</span>
+              </div>
             </div>
-          </>
-        )}
+            
+            {/* Additional Items */}
+            {cartState.items.map((item) => (
+              <div key={item.id} className="flex justify-between items-center p-2 hover:bg-muted/50 rounded-md group">
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium truncate">{item.name}</p>
+                  <p className="text-xs text-muted-foreground">{item.category}</p>
+                </div>
+                <div className="flex items-center gap-2 ml-2">
+                  <span className="text-sm font-medium">€{item.price.toFixed(2)}</span>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
+                    onClick={() => removeItem(item.id)}
+                  >
+                    <Trash2 className="h-3 w-3" />
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
 
         <Separator />
         
