@@ -21,7 +21,7 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
     },
     {
       id: 'videocall-premium',
-      name: 'Videollamada Premium Multicámara',
+      name: 'Retransmisión multicam',
       price: 100.00,
       category: 'Extras',
       description: 'Sistema multicámara con audio y video en directo, producción en tiempo real'
