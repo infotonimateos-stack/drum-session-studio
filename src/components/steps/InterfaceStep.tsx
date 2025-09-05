@@ -31,10 +31,7 @@ export const InterfaceStep = ({
   return <div className="space-y-12 bg-gradient-to-br from-warm-apricot/25 to-warm-cream/20 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-6">
-        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-4">
-          <img src="/lovable-uploads/f357eff5-387e-41d8-bacb-0f54d7d8eadd.png" alt="Interface" className="w-12 h-12" />
-          Interface de Audio
-        </h2>
+        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">💻 Interface de Audio</h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
           La puerta entre el mundo analógico y digital. La calidad del convertidor define tu sonido final.
         </p>
@@ -101,7 +98,7 @@ export const InterfaceStep = ({
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
-              <img src="/lovable-uploads/f357eff5-387e-41d8-bacb-0f54d7d8eadd.png" alt="DAD AX64 Interface" className="max-h-28 max-w-full object-contain bg-transparent" style={{
+              <img src="/lovable-uploads/0d4521a3-d112-43ce-a820-f1afe53330c8.png" alt="DAD AX64 Interface" className="max-h-28 max-w-full object-contain bg-transparent" style={{
               filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
             }} />
             </div>
