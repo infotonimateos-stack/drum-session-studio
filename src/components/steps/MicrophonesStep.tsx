@@ -45,7 +45,7 @@ export const MicrophonesStep = ({
           <div className="flex items-center gap-3 bg-success/20 px-6 py-3 rounded-full">
             <Check className="h-6 w-6 text-success" />
             <h3 className="text-2xl font-bold">Kit Básico Incluido</h3>
-            <Badge variant="secondary" className="text-lg px-3 py-1">€49.90</Badge>
+            <Badge variant="secondary" className="text-2xl px-5 py-2">€49.90</Badge>
           </div>
         </div>
         

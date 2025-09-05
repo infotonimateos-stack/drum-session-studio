@@ -103,7 +103,7 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
                     {getIcon(item.id)}
                     {item.name}
                   </CardTitle>
-                  <Badge variant="outline" className="text-primary font-bold text-base px-3 py-1 whitespace-nowrap">
+                  <Badge variant="outline" className="text-primary font-bold text-xl px-4 py-2 whitespace-nowrap">
                     €{item.price.toFixed(2)}
                   </Badge>
                 </div>

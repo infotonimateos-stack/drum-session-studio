@@ -91,7 +91,7 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
                     {getIcon(item.id)}
                     {item.name}
                   </CardTitle>
-                  <Badge variant="outline" className="text-primary font-bold">
+                  <Badge variant="outline" className="text-primary font-bold text-xl px-4 py-2">
                     €{item.price.toFixed(2)}
                   </Badge>
                 </div>
