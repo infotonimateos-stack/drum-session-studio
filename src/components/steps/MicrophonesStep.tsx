@@ -50,7 +50,7 @@ export const MicrophonesStep = ({
         </div>
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {baseMicrophones.map(mic => <Card key={mic.id} className="bg-gradient-to-br from-card to-muted border-success/30 hover:shadow-xl transition-all duration-300">
+          {baseMicrophones.map(mic => <Card key={mic.id} className="bg-gradient-to-br from-card/50 to-muted/30 border-success/30 hover:shadow-xl transition-all duration-300">
               <CardHeader className="pb-4">
                 <Badge variant="outline" className="border-success text-success mb-3 self-center text-sm px-3 py-1">
                   {mic.target}
