@@ -56,7 +56,7 @@ export const MicrophonesStep = ({
                   {mic.target}
                 </Badge>
                 {mic.image && <div className="w-full h-32 flex items-center justify-center bg-white rounded-lg">
-                     <img src={mic.image} alt={mic.name} className="max-h-28 max-w-full object-contain bg-muted/30 rounded-lg p-2" style={{
+                     <img src={mic.image} alt={mic.name} className="max-h-28 max-w-full object-contain rounded-lg p-2" style={{
                 filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
               }} />
                   </div>}
@@ -94,7 +94,7 @@ export const MicrophonesStep = ({
                     <span className="font-bold text-xl text-primary">€{mic.price.toFixed(2)}</span>
                   </div>
                    {mic.image && <div className="w-full h-40 flex items-center justify-center bg-white rounded-lg">
-                       <img src={mic.image} alt={mic.name} className="max-h-36 max-w-full object-contain bg-muted/30 rounded-lg p-2" style={{
+                       <img src={mic.image} alt={mic.name} className="max-h-36 max-w-full object-contain rounded-lg p-2" style={{
                   filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
                 }} />
                     </div>}
