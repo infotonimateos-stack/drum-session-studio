@@ -27,15 +27,15 @@ export function ConfigSidebar({
       <SidebarHeader className="border-b border-border p-3">
       </SidebarHeader>
       
-      <SidebarContent className="p-3 pt-24 space-y-4 flex flex-col h-full">
-        <div className="flex-shrink-0">
+      <SidebarContent className="p-3 pt-24 h-full flex flex-col overflow-hidden">
+        <div className="flex-shrink-0 mb-4">
           <StepTimeline
             currentStep={currentStep}
             totalSteps={totalSteps}
           />
         </div>
         
-        <div className="flex-1 min-h-0">
+        <div className="flex-1 overflow-hidden">
           <Cart 
             cartState={cartState} 
             removeItem={removeItem}
