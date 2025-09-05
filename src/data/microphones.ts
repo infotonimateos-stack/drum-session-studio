@@ -54,7 +54,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono dinámico para tom 3',
     target: 'Tom 3',
-    image: '/lovable-uploads/fe5dd1af-916b-40b6-a0ef-839268dcefe9.png'
+    image: '/lovable-uploads/be0bd794-2388-4066-837e-67f300cc20cf.png'
   },
   {
     id: 'akg414-oh1',
