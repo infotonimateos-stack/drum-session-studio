@@ -98,7 +98,7 @@ export const InterfaceStep = ({
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
-              <img src="/lovable-uploads/0d4521a3-d112-43ce-a820-f1afe53330c8.png" alt="DAD AX64 Interface" className="max-h-28 max-w-full object-contain bg-transparent" style={{
+              <img src="/lovable-uploads/f357eff5-387e-41d8-bacb-0f54d7d8eadd.png" alt="DAD AX64 Interface" className="max-h-28 max-w-full object-contain bg-transparent" style={{
               filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
             }} />
             </div>
