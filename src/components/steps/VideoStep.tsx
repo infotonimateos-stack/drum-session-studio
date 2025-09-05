@@ -17,7 +17,7 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
       name: 'Saludo para Redes Sociales',
       price: 4.99,
       category: 'Video',
-      description: 'Saludo de 15 segundos donde se nombra tu proyecto'
+      description: 'Saludo de 15 segundos donde se nombra tu proyecto, para que lo compartas en tus redes'
     },
     {
       id: 'playing-video',
