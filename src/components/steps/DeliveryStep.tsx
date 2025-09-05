@@ -122,7 +122,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
               </CardTitle>
             </div>
             <div className="flex justify-center">
-              <Badge variant="outline" className="text-primary text-xl px-4 py-2">+€5.90</Badge>
+              <Badge variant="outline" className="text-primary text-xl px-4 py-2">€5.90</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -181,7 +181,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
               </CardTitle>
             </div>
             <div className="flex justify-center">
-              <Badge variant="outline" className="text-accent text-xl px-4 py-2">+€39.90</Badge>
+              <Badge variant="outline" className="text-accent text-xl px-4 py-2">€39.90</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">

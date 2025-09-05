@@ -95,7 +95,7 @@ export const PreampsStep = ({
                 <Plus className="h-8 w-8 text-primary" />
                 Premium
               </CardTitle>
-              <Badge variant="outline" className="text-primary text-2xl px-6 py-3 font-bold">+€6.99</Badge>
+              <Badge variant="outline" className="text-primary text-2xl px-6 py-3 font-bold">€6.99</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-6">

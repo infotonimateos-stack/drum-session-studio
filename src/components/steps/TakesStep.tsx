@@ -102,7 +102,7 @@ export const TakesStep = ({
                 <Crown className="h-5 w-5 text-primary" />
                 Interpretación Pro
               </CardTitle>
-              <Badge variant="outline" className="text-primary font-bold text-xl px-4 py-2 whitespace-nowrap">+€19.90</Badge>
+              <Badge variant="outline" className="text-primary font-bold text-xl px-4 py-2 whitespace-nowrap">€19.90</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -145,7 +145,7 @@ export const TakesStep = ({
                 <Copy className="h-5 w-5 text-primary" />
                 Copia Exacta
               </CardTitle>
-              <Badge variant="outline" className="text-primary font-bold text-xl px-4 py-2 whitespace-nowrap">+€49.90</Badge>
+              <Badge variant="outline" className="text-primary font-bold text-xl px-4 py-2 whitespace-nowrap">€49.90</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
