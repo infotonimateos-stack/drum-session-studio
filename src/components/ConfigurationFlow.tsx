@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Star } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { Cart } from "@/components/Cart";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { ConfigSidebar } from "@/components/ConfigSidebar";
 import { StepNavigator } from "@/components/StepNavigator";
-import { StepTimeline } from "@/components/StepTimeline";
 import { MicrophonesStep } from "@/components/steps/MicrophonesStep";
 import { PreampsStep } from "@/components/steps/PreampsStep";
 import { InterfaceStep } from "@/components/steps/InterfaceStep";
@@ -14,7 +14,6 @@ import { DeliveryStep } from "@/components/steps/DeliveryStep";
 import { ExtrasStep } from "@/components/steps/ExtrasStep";
 import { CheckoutSummary } from "@/components/CheckoutSummary";
 import { useCart } from "@/hooks/useCart";
-// Using uploaded studio photo
 import { useTranslation } from "react-i18next";
 interface ConfigurationFlowProps {
   onCheckout: () => void;
@@ -107,57 +106,56 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-warm-cream/30 to-warm-peach/20">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header Section */}
-        <div className="mb-8">
-          <Card className="overflow-hidden bg-gradient-to-br from-warm-peach/20 to-warm-apricot/30 shadow-xl border-warm-coral/30">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 flex-wrap">
-                  <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                    {t("config.heroTitle")}
-                  </h1>
-                  <div className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
-                    <Star className="w-4 h-4 fill-current" />
-                    {t("config.priceFrom")}
+    <SidebarProvider>
+      <div className="min-h-screen bg-gradient-to-br from-warm-cream/30 to-warm-peach/20 flex w-full">
+        <ConfigSidebar
+          currentStep={currentStep}
+          totalSteps={steps.length}
+          cartState={cartState}
+          removeItem={removeItem}
+          onCheckout={handleCheckout}
+        />
+        
+        <main className="flex-1 overflow-auto">
+          <div className="container mx-auto px-4 py-8">
+            {/* Sidebar trigger for mobile */}
+            <div className="lg:hidden mb-4">
+              <SidebarTrigger className="mb-4" />
+            </div>
+            
+            {/* Header Section */}
+            <div className="mb-8">
+              <Card className="overflow-hidden bg-gradient-to-br from-warm-peach/20 to-warm-apricot/30 shadow-xl border-warm-coral/30">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4 flex-wrap">
+                      <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                        {t("config.heroTitle")}
+                      </h1>
+                      <div className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
+                        <Star className="w-4 h-4 fill-current" />
+                        {t("config.priceFrom")}
+                      </div>
+                    </div>
+                    <p className="text-lg text-muted-foreground leading-relaxed">
+                      {t("config.heroP1")}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {t("config.heroP2")}
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <img 
+                      src="/lovable-uploads/3beb9f76-a64e-4bec-a58b-9b8f4990203b.png" 
+                      alt={t("config.imgAlt")} 
+                      className="rounded-lg shadow-lg object-cover object-[center_top_10%] w-full h-48 lg:h-64"
+                    />
                   </div>
                 </div>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  {t("config.heroP1")}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  {t("config.heroP2")}
-                </p>
-              </div>
-              <div className="flex items-center justify-center">
-                <img 
-                  src="/lovable-uploads/3beb9f76-a64e-4bec-a58b-9b8f4990203b.png" 
-                  alt={t("config.imgAlt")} 
-                  className="rounded-lg shadow-lg object-cover object-[center_top_10%] w-full h-48 lg:h-64"
-                />
-              </div>
+              </Card>
             </div>
-          </Card>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Timeline and Cart Sidebar - Left */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-20 space-y-6 max-h-[calc(100vh-6rem)] overflow-y-auto">
-              <StepTimeline
-                currentStep={currentStep}
-                totalSteps={steps.length}
-              />
-              <Cart 
-                cartState={cartState} 
-                removeItem={removeItem}
-                onCheckout={handleCheckout}
-              />
-            </div>
-          </div>
 
-          {/* Main Content - Right */}
-          <div className="lg:col-span-3">
+            {/* Main Content */}
             <Card className="overflow-hidden bg-gradient-to-br from-warm-peach/10 to-warm-blush/10 shadow-xl border-warm-coral/20">
               {/* Step Content */}
               <div className="p-8 min-h-[600px]">
@@ -174,8 +172,8 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
               />
             </Card>
           </div>
-        </div>
+        </main>
       </div>
-    </div>
+    </SidebarProvider>
   );
 };
