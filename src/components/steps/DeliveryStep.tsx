@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, Clock, Music } from "lucide-react";
+import { Check, Plus, Clock } from "lucide-react";
 import { CartItem } from "@/types/cart";
 
 interface DeliveryStepProps {
@@ -70,18 +70,18 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
         {/* Standard Delivery */}
         <Card className="bg-gradient-to-br from-card to-muted border-success/30">
           <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <Check className="h-5 w-5 text-success" />
+            <div className="flex items-center justify-center">
+              <CardTitle className="text-center">
                 Estándar
               </CardTitle>
+            </div>
+            <div className="flex justify-center">
               <Badge variant="secondary">Incluido</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Clock className="h-8 w-8 text-success" />
-              <div>
+            <div className="flex justify-center">
+              <div className="text-center">
                 <h3 className="font-semibold">10 Días Laborables</h3>
                 <p className="text-sm text-muted-foreground">Plazo estándar de producción</p>
               </div>
@@ -114,18 +114,18 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
           onClick={handleToggle5Days}
         >
           <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <Music className="h-5 w-5 text-orange-500" />
+            <div className="flex items-center justify-center">
+              <CardTitle className="text-center">
                 Express
               </CardTitle>
+            </div>
+            <div className="flex justify-center">
               <Badge variant="outline" className="text-primary">+€5.90</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Music className="h-8 w-8 text-orange-500" />
-              <div>
+            <div className="flex justify-center">
+              <div className="text-center">
                 <h3 className="font-semibold">5 Días Laborables</h3>
                 <p className="text-sm text-muted-foreground">Prioridad en la entrega</p>
               </div>
@@ -172,18 +172,18 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
           onClick={handleToggle2Days}
         >
           <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <Music className="h-5 w-5 text-orange-500" />
+            <div className="flex items-center justify-center">
+              <CardTitle className="text-center">
                 Ultra Express
               </CardTitle>
+            </div>
+            <div className="flex justify-center">
               <Badge variant="outline" className="text-accent">+€39.90</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Music className="h-8 w-8 text-orange-500" />
-              <div>
+            <div className="flex justify-center">
+              <div className="text-center">
                 <h3 className="font-semibold">2 Días Laborables</h3>
                 <p className="text-sm text-muted-foreground">Máxima prioridad absoluta</p>
               </div>
