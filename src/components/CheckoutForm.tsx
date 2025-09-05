@@ -312,7 +312,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                           <SelectContent>
                             {countryCodes.map((country) => (
                               <SelectItem key={country.code} value={country.code}>
-                                {country.code} {country.country}
+                                {country.country} ({country.code})
                               </SelectItem>
                             ))}
                           </SelectContent>
