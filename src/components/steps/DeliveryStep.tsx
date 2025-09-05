@@ -71,8 +71,8 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
         <Card className="bg-gradient-to-br from-card to-muted border-success/30">
           <CardHeader>
             <div className="flex items-center justify-center">
-              <CardTitle className="flex items-center gap-2">
-                <img src="/lovable-uploads/841a1a2f-0999-44b3-9a2a-4a97ad64f750.png" alt="Check" className="h-20 w-20" />
+              <CardTitle className="flex items-center gap-1">
+                <img src="/lovable-uploads/841a1a2f-0999-44b3-9a2a-4a97ad64f750.png" alt="Check" className="h-12 w-12" />
                 Estándar
               </CardTitle>
             </div>
