@@ -18,7 +18,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono dinámico para bombo',
     target: 'Bombo',
-    image: '/lovable-uploads/4370868c-4d04-4df3-8984-34e4fa748a7a.png'
+    image: '/lovable-uploads/ca2e274f-b7d9-43bc-becb-7c13d65def45.png'
   },
   {
     id: 'km184-hihat',
