@@ -103,7 +103,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'El bombo suena mejor con una leyenda delante',
     target: 'Bombo Out',
-    image: '/lovable-uploads/018df378-819a-48fb-9962-28969e162a4f.png'
+    image: '/lovable-uploads/cc3c1cd6-c682-46c1-bc65-1683a99bf106.png'
   },
   {
     id: 'audix-d6',
