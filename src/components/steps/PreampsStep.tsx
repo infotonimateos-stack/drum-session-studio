@@ -72,7 +72,7 @@ export const PreampsStep = ({
               <h4 className="font-bold text-lg">✓ Lo que obtienes:</h4>
               <ul className="text-muted-foreground space-y-3 text-base">
                 <li>• <strong>Sonido limpio</strong> y transparente</li>
-                <li>• <strong>Respuesta plana</strong> ideal para mezcla</li>
+                <li>• <strong>Respuesta plana</strong></li>
                 <li>• <strong>Sin ruido</strong> ni distorsión</li>
                 <li>• <strong>Perfecto</strong> para tu primera grabación</li>
               </ul>
