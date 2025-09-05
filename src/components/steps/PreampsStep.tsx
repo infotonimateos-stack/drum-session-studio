@@ -32,7 +32,7 @@ export const PreampsStep = ({
       {/* Header */}
       <div className="text-center space-y-6">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          ⚡ Previos de Audio
+          ⚡ Previos
         </h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
           El alma de tu sonido. Elige entre nuestros previos incluidos o mejora con los legendarios API, Neve y DAD.

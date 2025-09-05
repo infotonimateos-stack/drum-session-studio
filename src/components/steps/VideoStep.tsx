@@ -74,7 +74,7 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
       {/* Header */}
       <div className="text-center space-y-6">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          🎥 Servicios de Video
+          🎥 Video
         </h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
           Servicios audiovisuales para complementar tu experiencia y promover tu música.

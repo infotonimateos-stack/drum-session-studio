@@ -45,12 +45,11 @@ export const TakesStep = ({
   };
   return <div className="space-y-8 bg-gradient-to-br from-warm-cream/30 to-warm-blush/20 rounded-xl p-8">
       {/* Header */}
-      <div className="text-center space-y-4">
-        <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-3">
-          <img src="/lovable-uploads/21a8aa74-64cd-41c0-810e-3ce0ac3d388a.png" alt="Folder icon" className="w-12 h-12" />
-          Número de Tomas
+      <div className="text-center space-y-6">
+        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          🎵 Tomas
         </h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+        <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
           Decide cuántas versiones quieres de tu canción. Cada toma aporta una perspectiva única.
         </p>
       </div>
