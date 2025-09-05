@@ -3,7 +3,7 @@ import {
   SidebarContent,
   SidebarHeader,
 } from "@/components/ui/sidebar";
-
+import { StepTimeline } from "@/components/StepTimeline";
 import { Cart } from "@/components/Cart";
 import { CartState } from "@/types/cart";
 
@@ -28,6 +28,10 @@ export function ConfigSidebar({
       </SidebarHeader>
       
       <SidebarContent className="p-3 space-y-4 overflow-hidden">
+        <StepTimeline
+          currentStep={currentStep}
+          totalSteps={totalSteps}
+        />
         
         <Cart 
           cartState={cartState} 
