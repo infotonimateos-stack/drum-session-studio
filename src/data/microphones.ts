@@ -84,7 +84,8 @@ export const upgradeMicrophones: Microphone[] = [
     price: 2.99,
     included: false,
     description: 'Ataque y definición, sin perder los graves',
-    target: 'Bombo In'
+    target: 'Bombo In',
+    image: '/lovable-uploads/3b12e8f7-dfec-4a1e-8d63-b6b57d32d345.png'
   },
   {
     id: 'subkick-kick',
