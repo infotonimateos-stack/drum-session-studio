@@ -67,9 +67,9 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
           const getItemColor = (itemId: string) => {
             switch (itemId) {
               case 'videocall-10min':
-                return 'from-emerald-100/60 to-teal-100/60 border-emerald-200/50';
+                return 'from-emerald-200/80 to-teal-200/80 border-emerald-300/70';
               case 'videocall-premium':
-                return 'from-rose-100/60 to-pink-100/60 border-rose-200/50';
+                return 'from-rose-200/80 to-pink-200/80 border-rose-300/70';
               default:
                 return 'from-card to-muted';
             }
