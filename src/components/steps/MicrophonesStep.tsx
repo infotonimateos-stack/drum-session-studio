@@ -4,31 +4,16 @@ import { Badge } from "@/components/ui/badge";
 import { Check, Plus, Headphones } from "lucide-react";
 import { baseMicrophones, upgradeMicrophones } from "@/data/microphones";
 import { CartItem } from "@/types/cart";
-import { useBackgroundRemoval } from "@/hooks/useBackgroundRemoval";
-import { useEffect } from "react";
-
 interface MicrophonesStepProps {
   addItem: (item: CartItem) => void;
   removeItem: (itemId: string) => void;
   hasItem: (itemId: string) => boolean;
 }
-
 export const MicrophonesStep = ({
   addItem,
   removeItem,
   hasItem
 }: MicrophonesStepProps) => {
-  const { processImage, processedImages, processing } = useBackgroundRemoval();
-
-  // Process all images on component mount
-  useEffect(() => {
-    [...baseMicrophones, ...upgradeMicrophones].forEach(mic => {
-      if (mic.image) {
-        processImage(mic.image, mic.id);
-      }
-    });
-  }, [processImage]);
-
   const handleToggleItem = (microphone: any) => {
     const cartItem: CartItem = {
       id: microphone.id,
@@ -43,7 +28,6 @@ export const MicrophonesStep = ({
       addItem(cartItem);
     }
   };
-
   return <div className="space-y-12 bg-gradient-to-br from-warm-cream/20 to-warm-peach/10 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-6">
@@ -72,16 +56,10 @@ export const MicrophonesStep = ({
                   {mic.target}
                 </Badge>
                 {mic.image && <div className="w-full h-32 flex items-center justify-center bg-white rounded-lg">
-                     <img 
-                       src={processedImages[mic.id] || mic.image} 
-                       alt={mic.name} 
-                       className="max-h-28 max-w-full object-contain rounded-lg p-2" 
-                       style={{
-                         filter: processing[mic.id] ? 'blur(2px)' : 'none',
-                         transition: 'filter 0.3s ease'
-                       }}
-                     />
-                   </div>}
+                     <img src={mic.image} alt={mic.name} className="max-h-28 max-w-full object-contain rounded-lg p-2" style={{
+                filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
+              }} />
+                  </div>}
               </CardHeader>
               <CardContent className="pt-0">
                 <h4 className="font-bold text-base mb-2 text-center">{mic.name}</h4>
@@ -116,16 +94,10 @@ export const MicrophonesStep = ({
                     <span className="font-bold text-xl text-primary">€{mic.price.toFixed(2)}</span>
                   </div>
                    {mic.image && <div className="w-full h-40 flex items-center justify-center bg-white rounded-lg">
-                        <img 
-                          src={processedImages[mic.id] || mic.image} 
-                          alt={mic.name} 
-                          className="max-h-36 max-w-full object-contain rounded-lg p-2"
-                          style={{
-                            filter: processing[mic.id] ? 'blur(2px)' : 'none',
-                            transition: 'filter 0.3s ease'
-                          }}
-                        />
-                     </div>}
+                       <img src={mic.image} alt={mic.name} className="max-h-36 max-w-full object-contain rounded-lg p-2" style={{
+                  filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
+                }} />
+                    </div>}
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <h4 className="font-bold text-lg text-center">{mic.name}</h4>
