@@ -16,7 +16,7 @@ export const TakesStep = ({
   const exactCopyTake: CartItem = {
     id: 'take-exact-copy',
     name: 'Copia Exacta de tu Demo',
-    price: 24.90,
+    price: 49.90,
     category: 'Tomas',
     description: 'Recreación fiel de tu demo con todos los detalles'
   };
@@ -102,7 +102,7 @@ export const TakesStep = ({
                 <Copy className="h-5 w-5 text-primary" />
                 Copia Exacta
               </CardTitle>
-              <Badge variant="outline" className="text-primary font-bold whitespace-nowrap">+€24.90</Badge>
+              <Badge variant="outline" className="text-primary font-bold whitespace-nowrap">+€49.90</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -126,7 +126,7 @@ export const TakesStep = ({
                   Añadido
                 </> : <>
                   <Plus className="h-4 w-4 mr-2" />
-                  Añadir €24.90
+                  Añadir €49.90
                 </>}
             </Button>
           </CardContent>
