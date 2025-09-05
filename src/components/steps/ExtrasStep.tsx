@@ -13,13 +13,6 @@ interface ExtrasStepProps {
 export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) => {
   const extrasItems: CartItem[] = [
     {
-      id: 'sheet-music',
-      name: 'Partitura',
-      price: 0.99,
-      category: 'Extras',
-      description: 'Un guión muy simple, meramente un recuerdo gracioso'
-    },
-    {
       id: 'videocall-10min',
       name: 'Videollamada 10 minutos',
       price: 5.99,
@@ -62,8 +55,6 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
           
           const getIcon = (itemId: string) => {
             switch (itemId) {
-              case 'sheet-music':
-                return <FileText className="h-5 w-5" />;
               case 'videocall-10min':
                 return <Video className="h-5 w-5" />;
               case 'videocall-premium':
@@ -75,8 +66,6 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
 
           const getItemColor = (itemId: string) => {
             switch (itemId) {
-              case 'sheet-music':
-                return 'from-amber-100/60 to-yellow-100/60 border-amber-200/50';
               case 'videocall-10min':
                 return 'from-emerald-100/60 to-teal-100/60 border-emerald-200/50';
               case 'videocall-premium':
