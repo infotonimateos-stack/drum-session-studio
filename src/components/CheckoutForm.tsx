@@ -265,7 +265,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-muted/50">
+    <div className="min-h-screen bg-gradient-to-br from-warm-cream/30 to-warm-peach/20">
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
