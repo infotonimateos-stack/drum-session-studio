@@ -120,7 +120,7 @@ export const PreampsStep = ({
               <ul className="text-muted-foreground space-y-3 text-base">
                 <li>• <strong className="text-primary">API:</strong> Punch y presencia únicos</li>
                 <li>• <strong className="text-primary">Neve:</strong> Calidez vintage legendaria</li>
-                <li>• <strong className="text-primary">DAD:</strong> Precisión digital premium</li>
+                <li>• <strong className="text-primary">DAD:</strong> Claridad y Transparencia Pristina</li>
                 <li>• <strong>Usado en</strong> discos de platino</li>
               </ul>
             </div>
