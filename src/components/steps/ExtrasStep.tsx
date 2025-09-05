@@ -67,9 +67,9 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
           const getItemColor = (itemId: string) => {
             switch (itemId) {
               case 'videocall-10min':
-                return 'from-emerald-300 to-teal-300 border-emerald-400';
+                return 'from-warm-peach/40 to-warm-coral/30 border-warm-peach/50';
               case 'videocall-premium':
-                return 'from-rose-300 to-pink-300 border-rose-400';
+                return 'from-warm-coral/40 to-warm-blush/30 border-warm-coral/50';
               default:
                 return 'from-card to-muted';
             }
@@ -103,8 +103,8 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
                 
                 {/* Special highlight for premium items */}
                 {item.price >= 100 && (
-                  <div className="p-3 bg-gradient-to-r from-rose-100 to-pink-100 rounded-lg border border-rose-200">
-                    <p className="text-rose-700 font-semibold text-sm text-center">
+                  <div className="p-3 bg-gradient-to-r from-warm-peach/20 to-warm-coral/20 rounded-lg border border-warm-peach/30">
+                    <p className="text-primary font-semibold text-sm text-center">
                       ⭐ Experiencia Premium Única
                     </p>
                   </div>
