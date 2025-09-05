@@ -1,5 +1,5 @@
 import { Progress } from "@/components/ui/progress";
-import { Check } from "lucide-react";
+import { Check, Settings } from "lucide-react";
 import { useTranslate } from "@/hooks/useTranslate";
 
 interface StepTimelineProps {
@@ -25,7 +25,13 @@ export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => 
   return (
     <div className="bg-gradient-to-br from-warm-peach/10 to-warm-blush/10 border-warm-coral/20 rounded-lg p-4 space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-sm">Progreso de configuración</h3>
+        <div className="flex items-center gap-2">
+          <Settings className="h-4 w-4 text-primary" />
+          <h3 className="font-semibold text-sm">Progreso de la configuración</h3>
+          <span className="text-xs font-medium bg-gradient-to-r from-warm-coral to-warm-blush bg-clip-text text-transparent">
+            {Math.round(progress)}%
+          </span>
+        </div>
         <span className="text-xs text-muted-foreground">
           {currentStep + 1}/{totalSteps}
         </span>
@@ -62,11 +68,6 @@ export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => 
               }`}>
                 {step}
               </span>
-              {index === currentStep && (
-                <span className="text-xs font-medium bg-gradient-to-r from-warm-coral to-warm-blush bg-clip-text text-transparent">
-                  {Math.round(progress)}%
-                </span>
-              )}
             </div>
           </div>
         ))}
