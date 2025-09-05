@@ -113,7 +113,7 @@ export const TakesStep = ({
                 <li>• Cada fill idéntico al original</li>
                 <li>• Mismo feeling y groove</li>
                 <li>• Respeta todos los matices</li>
-                <li>• Para proyectos profesionales</li>
+                <li>• Corregida y editada con Beat Detective</li>
               </ul>
             </div>
 
@@ -151,7 +151,7 @@ export const TakesStep = ({
                 <li>• Interpretación creativa</li>
                 <li>• Fills y variaciones únicas</li>
                 <li>• Combínala con otras opciones</li>
-                <li>• Puede mejorar tu canción</li>
+                <li>• Corregida y editada con Beat Detective</li>
               </ul>
             </div>
 
