@@ -9,7 +9,7 @@ export const baseMicrophones: Microphone[] = [
     included: true,
     description: 'Micrófono dinámico para caja',
     target: 'Snare Top',
-    image: '/lovable-uploads/f16d8869-816a-4340-8e57-19f78e433d93.png'
+    image: '/lovable-uploads/a68edfb6-4a0d-4868-a372-ab01320da016.png'
   },
   {
     id: 'beta52-kick',
