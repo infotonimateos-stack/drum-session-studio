@@ -162,7 +162,7 @@ export const upgradeMicrophones: Microphone[] = [
     included: false,
     description: 'Textura vintage, profundidad y ese toque UK',
     target: 'Overheads Ribbon',
-    image: '/lovable-uploads/336b755e-679f-4c19-9325-3c4f0e952191.png'
+    image: '/lovable-uploads/226d949c-ce5f-44cb-8d99-c34e5e50c02c.png'
   },
   // OVERHEAD single upgrades
   {
