@@ -1,17 +1,18 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Plus, Zap } from "lucide-react";
 import { CartItem } from "@/types/cart";
-
 interface PreampsStepProps {
   addItem: (item: CartItem) => void;
   removeItem: (itemId: string) => void;
   hasItem: (itemId: string) => boolean;
 }
-
-export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) => {
+export const PreampsStep = ({
+  addItem,
+  removeItem,
+  hasItem
+}: PreampsStepProps) => {
   const proPreampsPack: CartItem = {
     id: 'preamps-pro',
     name: 'Pack Previos Pro: API, Neve y DAD',
@@ -19,9 +20,7 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
     category: 'Previos',
     description: 'Previos analógicos premium para un sonido vintage y profesional'
   };
-
   const isProSelected = hasItem(proPreampsPack.id);
-
   const handleTogglePro = () => {
     if (isProSelected) {
       removeItem(proPreampsPack.id);
@@ -29,9 +28,7 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
       addItem(proPreampsPack);
     }
   };
-
-  return (
-    <div className="space-y-12 bg-gradient-to-br from-warm-coral/20 to-warm-blush/15 rounded-xl p-8">
+  return <div className="space-y-12 bg-gradient-to-br from-warm-coral/20 to-warm-blush/15 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-6">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -56,12 +53,9 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
-              <img 
-                src="/lovable-uploads/93445061-0c3b-4d86-a30f-15ff4b018154.png" 
-                alt="MOTU 8Pre Preamps"
-                className="max-h-28 max-w-full object-contain bg-transparent"
-                style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
-              />
+              <img src="/lovable-uploads/93445061-0c3b-4d86-a30f-15ff4b018154.png" alt="MOTU 8Pre Preamps" className="max-h-28 max-w-full object-contain bg-transparent" style={{
+              filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
+            }} />
             </div>
             
             <div className="flex items-center gap-4 p-4 bg-success/10 rounded-lg">
@@ -70,7 +64,7 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
               </div>
               <div>
                 <h3 className="font-bold text-xl">MOTU 8Pre</h3>
-                <p className="text-muted-foreground">8 canales profesionales limpios</p>
+                <p className="text-muted-foreground">8 canales profesionales</p>
               </div>
             </div>
             
@@ -94,14 +88,7 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
         </Card>
 
         {/* Pro Preamps */}
-        <Card 
-          className={`transition-all duration-300 hover:shadow-xl cursor-pointer transform hover:scale-105 ${
-            isProSelected 
-              ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-xl scale-105' 
-              : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'
-          }`}
-          onClick={handleTogglePro}
-        >
+        <Card className={`transition-all duration-300 hover:shadow-xl cursor-pointer transform hover:scale-105 ${isProSelected ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-xl scale-105' : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'}`} onClick={handleTogglePro}>
           <CardHeader className="pb-6">
             <div className="flex items-center justify-between mb-4">
               <CardTitle className="flex items-center gap-3 text-2xl">
@@ -113,12 +100,9 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
-              <img 
-                src="/lovable-uploads/5fc42764-3380-4942-8c16-c462d1961fae.png" 
-                alt="API Neve DAD Preamps"
-                className="max-h-28 max-w-full object-contain bg-transparent"
-                style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
-              />
+              <img src="/lovable-uploads/5fc42764-3380-4942-8c16-c462d1961fae.png" alt="API Neve DAD Preamps" className="max-h-28 max-w-full object-contain bg-transparent" style={{
+              filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
+            }} />
             </div>
             
             <div className="flex items-center gap-4 p-4 bg-primary/10 rounded-lg">
@@ -141,30 +125,20 @@ export const PreampsStep = ({ addItem, removeItem, hasItem }: PreampsStepProps) 
               </ul>
             </div>
 
-            <Button
-              variant={isProSelected ? "default" : "upgrade"}
-              size="lg"
-              className="w-full h-14 text-lg font-bold"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleTogglePro();
-              }}
-            >
-              {isProSelected ? (
-                <>
+            <Button variant={isProSelected ? "default" : "upgrade"} size="lg" className="w-full h-14 text-lg font-bold" onClick={e => {
+            e.stopPropagation();
+            handleTogglePro();
+          }}>
+              {isProSelected ? <>
                   <Check className="h-6 w-6 mr-2" />
                   ✨ AÑADIDO AL CARRITO
-                </>
-              ) : (
-                <>
+                </> : <>
                   <Plus className="h-6 w-6 mr-2" />
                   UPGRADE POR €6.99
-                </>
-              )}
+                </>}
             </Button>
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
