@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, Play, Copy, Crown } from "lucide-react";
+import { Check, Plus, Play, Copy, Crown, Folder } from "lucide-react";
 import { CartItem } from "@/types/cart";
 interface TakesStepProps {
   addItem: (item: CartItem) => void;
@@ -46,8 +46,9 @@ export const TakesStep = ({
   return <div className="space-y-8 bg-gradient-to-br from-warm-cream/30 to-warm-blush/20 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-6">
-        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          🎵 Tomas
+        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-3">
+          <Folder className="h-12 w-12 text-primary" />
+          Tomas
         </h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
           Decide cuántas versiones quieres de tu canción. Cada toma aporta una perspectiva única.
