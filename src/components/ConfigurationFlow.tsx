@@ -87,6 +87,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   };
 
   const handleConfirmOrder = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     onCheckout();
   };
 
