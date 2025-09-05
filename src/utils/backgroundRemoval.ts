@@ -73,7 +73,7 @@ export const removeBackground = async (imageElement: HTMLImageElement): Promise<
     // Draw original image
     outputCtx.drawImage(canvas, 0, 0);
     
-    // Apply the mask
+    // Apply the mask with reduced sensitivity
     const outputImageData = outputCtx.getImageData(
       0, 0,
       outputCanvas.width,
@@ -81,10 +81,12 @@ export const removeBackground = async (imageElement: HTMLImageElement): Promise<
     );
     const data = outputImageData.data;
     
-    // Apply inverted mask to alpha channel
+    // Apply inverted mask to alpha channel with conservative threshold
     for (let i = 0; i < result[0].mask.data.length; i++) {
-      // Invert the mask value (1 - value) to keep the subject instead of the background
-      const alpha = Math.round((1 - result[0].mask.data[i]) * 255);
+      // Use a more conservative threshold to preserve microphone details
+      const maskValue = result[0].mask.data[i];
+      // Only remove pixels that are very likely to be background (threshold of 0.7)
+      const alpha = maskValue > 0.7 ? 0 : 255;
       data[i * 4 + 3] = alpha;
     }
     
