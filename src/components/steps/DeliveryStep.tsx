@@ -72,7 +72,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
           <CardHeader>
             <div className="flex items-center justify-center">
               <CardTitle className="flex items-center gap-2">
-                <img src="/lovable-uploads/841a1a2f-0999-44b3-9a2a-4a97ad64f750.png" alt="Check" className="h-5 w-5" />
+                <img src="/lovable-uploads/841a1a2f-0999-44b3-9a2a-4a97ad64f750.png" alt="Check" className="h-20 w-20" />
                 Estándar
               </CardTitle>
             </div>
