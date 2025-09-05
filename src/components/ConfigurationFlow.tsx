@@ -134,7 +134,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                 <img 
                   src="/lovable-uploads/3beb9f76-a64e-4bec-a58b-9b8f4990203b.png" 
                   alt={t("config.imgAlt")} 
-                  className="rounded-lg shadow-lg object-cover w-full h-48 lg:h-64"
+                  className="rounded-lg shadow-lg object-cover object-top w-full h-48 lg:h-64"
                 />
               </div>
             </div>
