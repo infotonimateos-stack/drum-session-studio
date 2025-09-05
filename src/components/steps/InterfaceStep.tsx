@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Plus, Cpu } from "lucide-react";
 import { CartItem } from "@/types/cart";
+import { useState, useEffect } from "react";
+import { processImageFromUrl } from "@/utils/backgroundRemoval";
 interface InterfaceStepProps {
   addItem: (item: CartItem) => void;
   removeItem: (itemId: string) => void;
@@ -13,6 +15,8 @@ export const InterfaceStep = ({
   removeItem,
   hasItem
 }: InterfaceStepProps) => {
+  const [processedIconUrl, setProcessedIconUrl] = useState<string | null>(null);
+  
   const dadInterface: CartItem = {
     id: 'interface-dad',
     name: 'DAD AX64',
@@ -20,7 +24,9 @@ export const InterfaceStep = ({
     category: 'Interface',
     description: 'Interface de audio profesional con convertidores premium'
   };
+  
   const isDadSelected = hasItem(dadInterface.id);
+  
   const handleToggleDad = () => {
     if (isDadSelected) {
       removeItem(dadInterface.id);
@@ -28,11 +34,29 @@ export const InterfaceStep = ({
       addItem(dadInterface);
     }
   };
+
+  useEffect(() => {
+    const processIcon = async () => {
+      try {
+        const processed = await processImageFromUrl('/lovable-uploads/53c6239d-a2ad-4218-b08e-c2a176eac089.png');
+        setProcessedIconUrl(processed);
+      } catch (error) {
+        console.error('Failed to process icon:', error);
+        // Keep original icon as fallback
+      }
+    };
+    
+    processIcon();
+  }, []);
   return <div className="space-y-12 bg-gradient-to-br from-warm-apricot/25 to-warm-cream/20 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-6">
-        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-4">
-          <img src="/lovable-uploads/53c6239d-a2ad-4218-b08e-c2a176eac089.png" alt="Interface de Audio" className="h-12 w-12" />
+        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-6">
+          <img 
+            src={processedIconUrl || "/lovable-uploads/53c6239d-a2ad-4218-b08e-c2a176eac089.png"} 
+            alt="Interface de Audio" 
+            className="h-20 w-20 object-contain" 
+          />
           Interface de Audio
         </h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
