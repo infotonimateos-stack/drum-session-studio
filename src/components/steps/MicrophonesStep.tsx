@@ -55,7 +55,7 @@ export const MicrophonesStep = ({
                 <Badge variant="outline" className="border-success text-success mb-3 self-center text-sm px-3 py-1">
                   {mic.target}
                 </Badge>
-                {mic.image && <div className="w-full h-32 flex items-center justify-center bg-gray-50/30 rounded-lg">
+                {mic.image && <div className="w-full h-32 flex items-center justify-center bg-white rounded-lg">
                      <img src={mic.image} alt={mic.name} className="max-h-28 max-w-full object-contain rounded-lg p-2" />
                    </div>}
               </CardHeader>
