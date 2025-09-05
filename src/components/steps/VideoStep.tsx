@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, Video, Phone, PlayCircle, Share2 } from "lucide-react";
+import { Check, Plus, Video, Phone, PlayCircle, Share2, Film } from "lucide-react";
 import { CartItem } from "@/types/cart";
 
 interface VideoStepProps {
@@ -73,8 +73,9 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
     <div className="space-y-12 bg-gradient-to-br from-warm-peach/20 to-warm-apricot/30 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-6">
-        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          🎥 Video
+        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-3">
+          <Film className="h-12 w-12 text-primary" />
+          Video
         </h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
           Servicios audiovisuales para complementar tu experiencia y promover tu música.
