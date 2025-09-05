@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, Play, Copy, User } from "lucide-react";
+import { Check, Plus, Play, Copy, Crown } from "lucide-react";
 import { CartItem } from "@/types/cart";
 interface TakesStepProps {
   addItem: (item: CartItem) => void;
@@ -99,7 +99,7 @@ export const TakesStep = ({
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2">
-                <User className="h-5 w-5 text-primary" />
+                <Crown className="h-5 w-5 text-primary" />
                 Interpretación Pro
               </CardTitle>
               <Badge variant="outline" className="text-primary font-bold whitespace-nowrap">+€19.90</Badge>
@@ -109,7 +109,7 @@ export const TakesStep = ({
             <div className="space-y-2">
               <h4 className="font-medium text-sm">Características:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Versión Toni Mateos</li>
+                <li>• Una toma adicional, versión "Toni Mateos"</li>
                 <li>• Interpretación creativa</li>
                 <li>• Fills y variaciones únicas</li>
                 <li>• Combínala con otras opciones</li>
