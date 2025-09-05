@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, Clock, Zap, Target, Package } from "lucide-react";
+import { Check, Plus, Clock, Zap, Target, Package, Headphones } from "lucide-react";
 import { CartItem } from "@/types/cart";
 
 interface ProductionStepProps {
@@ -62,8 +62,9 @@ export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepP
     <div className="space-y-12 bg-gradient-to-br from-warm-peach/15 to-warm-coral/20 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-6">
-        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          🎛️ Producción
+        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-3">
+          <Headphones className="h-12 w-12 text-primary" />
+          Producción
         </h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
           Servicios adicionales para perfeccionar tu grabación y adaptarla a tus necesidades específicas.
