@@ -24,14 +24,14 @@ export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepP
       name: 'Work Mix',
       price: 2.99,
       category: 'Producción',
-      description: 'Mezcla de trabajo para ensayos'
+      description: 'Premezcla de batería (wav stereo)'
     },
     {
       id: 'sample-pack',
       name: 'Sample Pack',
       price: 4.99,
       category: 'Producción',
-      description: 'Pack de samples de tu sesión'
+      description: 'Te enviamos los sonidos por separado, a diferentes volúmenes, de tu sesión'
     }
   ];
 
