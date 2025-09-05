@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, FileText, Video, Phone } from "lucide-react";
+import { Check, Plus, FileText, Video, Phone, Clapperboard } from "lucide-react";
 import { CartItem } from "@/types/cart";
 
 interface ExtrasStepProps {
@@ -58,7 +58,12 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
               case 'videocall-10min':
                 return <Video className="h-5 w-5" />;
               case 'videocall-premium':
-                return <Phone className="h-5 w-5" />;
+                return (
+                  <div className="relative h-5 w-5">
+                    <Video className="h-4 w-4 absolute top-0 left-0 text-primary" />
+                    <Video className="h-4 w-4 absolute bottom-0 right-0 text-primary opacity-70" />
+                  </div>
+                );
               default:
                 return <Plus className="h-5 w-5" />;
             }
