@@ -58,7 +58,7 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
               case 'videocall-10min':
                 return <Video className="h-5 w-5" />;
               case 'videocall-premium':
-                return <Camera className="h-5 w-5" />;
+                return <Video className="h-5 w-5" />;
               default:
                 return <Plus className="h-5 w-5" />;
             }
