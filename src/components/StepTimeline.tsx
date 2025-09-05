@@ -31,49 +31,6 @@ export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => 
         </span>
       </div>
       
-      {/* Circular Progress */}
-      <div className="flex justify-center">
-        <div className="relative w-24 h-24">
-          <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
-            {/* Background circle */}
-            <circle 
-              cx="50" 
-              cy="50" 
-              r="40" 
-              fill="none" 
-              stroke="hsl(var(--warm-cream))" 
-              strokeWidth="6"
-              className="opacity-30"
-            />
-            {/* Progress circle */}
-            <circle 
-              cx="50" 
-              cy="50" 
-              r="40" 
-              fill="none" 
-              stroke="url(#progressGradient)" 
-              strokeWidth="6" 
-              strokeLinecap="round"
-              strokeDasharray={`${2 * Math.PI * 40}`}
-              strokeDashoffset={`${2 * Math.PI * 40 * (1 - progress / 100)}`}
-              className="transition-all duration-500 ease-out"
-            />
-            <defs>
-              <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="hsl(var(--warm-peach))" />
-                <stop offset="50%" stopColor="hsl(var(--warm-coral))" />
-                <stop offset="100%" stopColor="hsl(var(--warm-blush))" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-xl font-bold bg-gradient-to-r from-warm-coral to-warm-blush bg-clip-text text-transparent">
-              {Math.round(progress)}%
-            </span>
-          </div>
-        </div>
-      </div>
-      
       <Progress value={progress} className="h-2" />
       
       <div className="relative">
@@ -98,12 +55,19 @@ export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => 
                 index + 1
               )}
             </div>
-            <span className={`text-xs ${
-              index === currentStep ? 'text-primary font-medium' : 
-              index < currentStep ? 'text-success' : 'text-muted-foreground'
-            }`}>
-              {step}
-            </span>
+            <div className="flex items-center gap-2">
+              <span className={`text-xs ${
+                index === currentStep ? 'text-primary font-medium' : 
+                index < currentStep ? 'text-success' : 'text-muted-foreground'
+              }`}>
+                {step}
+              </span>
+              {index === currentStep && (
+                <span className="text-xs font-medium bg-gradient-to-r from-warm-coral to-warm-blush bg-clip-text text-transparent">
+                  {Math.round(progress)}%
+                </span>
+              )}
+            </div>
           </div>
         ))}
       </div>
