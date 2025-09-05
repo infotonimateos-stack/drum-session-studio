@@ -94,44 +94,6 @@ export const TakesStep = ({
           </CardContent>
         </Card>
 
-        {/* Exact Copy */}
-        <Card className={`transition-all duration-300 hover:shadow-lg cursor-pointer ${isExactCopySelected ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-lg' : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'}`} onClick={handleToggleExactCopy}>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <Copy className="h-5 w-5 text-primary" />
-                Copia Exacta
-              </CardTitle>
-              <Badge variant="outline" className="text-primary font-bold whitespace-nowrap">+€49.90</Badge>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <h4 className="font-medium text-sm">Características:</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Recreación fiel de tu demo</li>
-                <li>• Cada fill idéntico al original</li>
-                <li>• Mismo feeling y groove</li>
-                <li>• Respeta todos los matices</li>
-                <li>• Corregida y editada con Beat Detective</li>
-              </ul>
-            </div>
-
-            <Button variant={isExactCopySelected ? "default" : "upgrade"} className="w-full h-10" onClick={e => {
-            e.stopPropagation();
-            handleToggleExactCopy();
-          }}>
-              {isExactCopySelected ? <>
-                  <Check className="h-4 w-4 mr-2" />
-                  Añadido
-                </> : <>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Añadir €49.90
-                </>}
-            </Button>
-          </CardContent>
-        </Card>
-
         {/* Toni's Interpretation */}
         <Card className={`transition-all duration-300 hover:shadow-lg cursor-pointer ${isToniSelected ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-lg' : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'}`} onClick={handleToggleToni}>
           <CardHeader>
@@ -171,6 +133,44 @@ export const TakesStep = ({
                 </> : <>
                   <Plus className="h-4 w-4 mr-2" />
                   Añadir €19.90
+                </>}
+            </Button>
+          </CardContent>
+        </Card>
+
+        {/* Exact Copy */}
+        <Card className={`transition-all duration-300 hover:shadow-lg cursor-pointer ${isExactCopySelected ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-lg' : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'}`} onClick={handleToggleExactCopy}>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle className="flex items-center gap-2">
+                <Copy className="h-5 w-5 text-primary" />
+                Copia Exacta
+              </CardTitle>
+              <Badge variant="outline" className="text-primary font-bold whitespace-nowrap">+€49.90</Badge>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <h4 className="font-medium text-sm">Características:</h4>
+              <ul className="text-sm text-muted-foreground space-y-1">
+                <li>• Una toma adicional, fiel a tu demo</li>
+                <li>• Cada fill idéntico al original</li>
+                <li>• Mismo feeling y groove</li>
+                <li>• Respeta todos los matices</li>
+                <li>• Corregida y editada con Beat Detective</li>
+              </ul>
+            </div>
+
+            <Button variant={isExactCopySelected ? "default" : "upgrade"} className="w-full h-10" onClick={e => {
+            e.stopPropagation();
+            handleToggleExactCopy();
+          }}>
+              {isExactCopySelected ? <>
+                  <Check className="h-4 w-4 mr-2" />
+                  Añadido
+                </> : <>
+                  <Plus className="h-4 w-4 mr-2" />
+                  Añadir €49.90
                 </>}
             </Button>
           </CardContent>
