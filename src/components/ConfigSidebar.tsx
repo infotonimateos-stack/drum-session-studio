@@ -25,7 +25,6 @@ export function ConfigSidebar({
   return (
     <Sidebar className="w-72 border-r border-border bg-card/50 backdrop-blur-sm">
       <SidebarHeader className="border-b border-border p-3">
-        <h2 className="text-sm font-semibold text-foreground">Progreso de Configuración</h2>
       </SidebarHeader>
       
       <SidebarContent className="p-3 space-y-4 overflow-hidden">
