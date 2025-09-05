@@ -53,7 +53,7 @@ export const InterfaceStep = ({
       <div className="text-center space-y-6">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-8">
           <img 
-            src={processedIconUrl || "/lovable-uploads/53c6239d-a2ad-4218-b08e-c2a176eac089.png"} 
+            src="/lovable-uploads/0de754df-90d3-49fe-b9df-9d10250b037c.png" 
             alt="Interface de Audio" 
             className="h-60 w-60 object-contain" 
           />
