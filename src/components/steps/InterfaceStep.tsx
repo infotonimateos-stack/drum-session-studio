@@ -1,17 +1,18 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Plus, Cpu } from "lucide-react";
 import { CartItem } from "@/types/cart";
-
 interface InterfaceStepProps {
   addItem: (item: CartItem) => void;
   removeItem: (itemId: string) => void;
   hasItem: (itemId: string) => boolean;
 }
-
-export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepProps) => {
+export const InterfaceStep = ({
+  addItem,
+  removeItem,
+  hasItem
+}: InterfaceStepProps) => {
   const dadInterface: CartItem = {
     id: 'interface-dad',
     name: 'DAD AX64',
@@ -19,9 +20,7 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
     category: 'Interface',
     description: 'Interface de audio profesional con convertidores premium'
   };
-
   const isDadSelected = hasItem(dadInterface.id);
-
   const handleToggleDad = () => {
     if (isDadSelected) {
       removeItem(dadInterface.id);
@@ -29,14 +28,10 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
       addItem(dadInterface);
     }
   };
-
-  return (
-    <div className="space-y-12 bg-gradient-to-br from-warm-apricot/25 to-warm-cream/20 rounded-xl p-8">
+  return <div className="space-y-12 bg-gradient-to-br from-warm-apricot/25 to-warm-cream/20 rounded-xl p-8">
       {/* Header */}
       <div className="text-center space-y-6">
-        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          💻 Interface de Audio
-        </h2>
+        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">💻 Interface de Audio</h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
           La puerta entre el mundo analógico y digital. La calidad del convertidor define tu sonido final.
         </p>
@@ -56,12 +51,9 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
-              <img 
-                src="/lovable-uploads/93445061-0c3b-4d86-a30f-15ff4b018154.png" 
-                alt="MOTU 8Pre Interface"
-                className="max-h-28 max-w-full object-contain bg-transparent"
-                style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
-              />
+              <img src="/lovable-uploads/93445061-0c3b-4d86-a30f-15ff4b018154.png" alt="MOTU 8Pre Interface" className="max-h-28 max-w-full object-contain bg-transparent" style={{
+              filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
+            }} />
             </div>
             
             <div className="flex items-center gap-4 p-4 bg-success/10 rounded-lg">
@@ -94,14 +86,7 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
         </Card>
 
         {/* Premium Interface */}
-        <Card 
-          className={`transition-all duration-300 hover:shadow-xl cursor-pointer transform hover:scale-105 ${
-            isDadSelected 
-              ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-xl scale-105' 
-              : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'
-          }`}
-          onClick={handleToggleDad}
-        >
+        <Card className={`transition-all duration-300 hover:shadow-xl cursor-pointer transform hover:scale-105 ${isDadSelected ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-xl scale-105' : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'}`} onClick={handleToggleDad}>
           <CardHeader className="pb-6">
             <div className="flex items-center justify-between mb-4">
               <CardTitle className="flex items-center gap-3 text-2xl">
@@ -113,12 +98,9 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="w-full h-32 flex items-center justify-center bg-muted/30 rounded-lg mb-4">
-              <img 
-                src="/lovable-uploads/0d4521a3-d112-43ce-a820-f1afe53330c8.png" 
-                alt="DAD AX64 Interface"
-                className="max-h-28 max-w-full object-contain bg-transparent"
-                style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))' }}
-              />
+              <img src="/lovable-uploads/0d4521a3-d112-43ce-a820-f1afe53330c8.png" alt="DAD AX64 Interface" className="max-h-28 max-w-full object-contain bg-transparent" style={{
+              filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.1))'
+            }} />
             </div>
             
             <div className="flex items-center gap-4 p-4 bg-primary/10 rounded-lg">
@@ -147,30 +129,20 @@ export const InterfaceStep = ({ addItem, removeItem, hasItem }: InterfaceStepPro
               </p>
             </div>
 
-            <Button
-              variant={isDadSelected ? "default" : "upgrade"}
-              size="lg"
-              className="w-full h-14 text-lg font-bold"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleToggleDad();
-              }}
-            >
-              {isDadSelected ? (
-                <>
+            <Button variant={isDadSelected ? "default" : "upgrade"} size="lg" className="w-full h-14 text-lg font-bold" onClick={e => {
+            e.stopPropagation();
+            handleToggleDad();
+          }}>
+              {isDadSelected ? <>
                   <Check className="h-6 w-6 mr-2" />
                   ✨ AÑADIDO AL CARRITO
-                </>
-              ) : (
-                <>
+                </> : <>
                   <Plus className="h-6 w-6 mr-2" />
                   UPGRADE POR €6.99
-                </>
-              )}
+                </>}
             </Button>
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
