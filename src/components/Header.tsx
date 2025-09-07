@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
-import microphoneIcon from "@/assets/microphone-icon.png";
+const logoUrl = "/lovable-uploads/890c7bbc-79ba-4df4-8441-4cbf232e9b5c.png";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { useTranslation } from "react-i18next";
 
@@ -30,7 +30,7 @@ export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
         {/* Logo and Title */}
         <div className="flex items-center justify-between py-4 border-b border-border/30">
           <div className="flex items-center gap-3">
-            <img src={microphoneIcon} alt="Studio Icon" className="h-8 w-8" />
+            <img src={logoUrl} alt="Toni Mateos Logo" className="h-8 w-8" />
             <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               {t("header.brand")}
             </h1>
