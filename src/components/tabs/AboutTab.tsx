@@ -3,6 +3,11 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { User, Music, Award, Clock, Drum, Star, Tv, Disc, Users, Heart, Dog, Home, MapPin, Calendar, Check, Target, Headphones, Volume2, TrendingUp, Zap, Mic, Trophy, MessageCircle, PlayCircle, Palette, Briefcase } from "lucide-react";
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
+import alejandroSanzImg from '@/assets/alejandro-sanz.jpg';
+import juanesImg from '@/assets/juanes.jpg';
+import miguelBoseImg from '@/assets/miguel-bose.jpg';
+import antonioOrozcoImg from '@/assets/antonio-orozco.jpg';
+import johnLegendImg from '@/assets/john-legend.jpg';
 
 export const AboutTab = () => {
   // Datos para el gráfico radar de habilidades
@@ -29,8 +34,19 @@ export const AboutTab = () => {
     { name: 'Regional', value: 78 }
   ];
 
-  const artistasDirecto = ['Alejandro Sanz', 'Juanes', 'Miguel Bosé', 'Antonio Orozco', 'Franco de Vita'];
-  const artistasGrabacion = ['Alejandro Sanz', 'Jarabe de Palo', 'John Legend', 'Melendi'];
+  const artistasDirecto = [
+    { name: 'Alejandro Sanz', image: alejandroSanzImg },
+    { name: 'Juanes', image: juanesImg },
+    { name: 'Miguel Bosé', image: miguelBoseImg },
+    { name: 'Antonio Orozco', image: antonioOrozcoImg },
+    { name: 'Franco de Vita', image: null }
+  ];
+  const artistasGrabacion = [
+    { name: 'Alejandro Sanz', image: alejandroSanzImg },
+    { name: 'Jarabe de Palo', image: null },
+    { name: 'John Legend', image: johnLegendImg },
+    { name: 'Melendi', image: null }
+  ];
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-16">
@@ -168,32 +184,6 @@ export const AboutTab = () => {
         </div>
       </section>
 
-      {/* Estilos Musicales - Rediseño moderno */}
-      <section className="space-y-8">
-        <div className="text-center">
-          <h2 className="text-4xl font-black text-primary mb-4">Versatilidad Musical</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Del rock más potente al jazz más sutil, adapto mi estilo a cada género musical.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {stylesData.map((style, index) => (
-            <Card key={style.name} className="group relative overflow-hidden p-6 bg-gradient-to-br from-card to-muted/30 border border-border/50 hover:border-primary/50 transition-all duration-300 hover:scale-105">
-              <div className="text-center space-y-4">
-                <div className="text-3xl font-black text-primary">{style.name}</div>
-                <div className="relative">
-                  <div className="w-16 h-16 mx-auto bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center border-4 border-primary/30">
-                    <span className="text-2xl font-black text-primary">{style.value}</span>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                </div>
-                <div className="text-sm text-muted-foreground">Nivel de dominio</div>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
 
       {/* Colaboraciones - Diseño premium */}
       <section className="grid lg:grid-cols-2 gap-8">
@@ -208,10 +198,14 @@ export const AboutTab = () => {
           <CardContent className="relative z-10 space-y-4">
             {artistasDirecto.map((artista, index) => (
               <div key={index} className="flex items-center gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-green-300/50 hover:border-green-500/70 transition-all duration-300">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center">
-                  <Star className="h-6 w-6 text-white" />
+                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center overflow-hidden">
+                  {artista.image ? (
+                    <img src={artista.image} alt={artista.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <Star className="h-6 w-6 text-white" />
+                  )}
                 </div>
-                <span className="font-bold text-lg text-green-800">{artista}</span>
+                <span className="font-bold text-lg text-green-800">{artista.name}</span>
               </div>
             ))}
             <div className="mt-6 p-6 bg-gradient-to-r from-green-600/20 to-emerald-600/20 rounded-2xl border-2 border-green-600/40 text-center">
@@ -233,10 +227,14 @@ export const AboutTab = () => {
           <CardContent className="relative z-10 space-y-4">
             {artistasGrabacion.map((artista, index) => (
               <div key={index} className="flex items-center gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-blue-300/50 hover:border-blue-500/70 transition-all duration-300">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                  <Mic className="h-6 w-6 text-white" />
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center overflow-hidden">
+                  {artista.image ? (
+                    <img src={artista.image} alt={artista.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <Mic className="h-6 w-6 text-white" />
+                  )}
                 </div>
-                <span className="font-bold text-lg text-blue-800">{artista}</span>
+                <span className="font-bold text-lg text-blue-800">{artista.name}</span>
               </div>
             ))}
             <div className="mt-6 p-6 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl border-2 border-blue-600/40 text-center">
