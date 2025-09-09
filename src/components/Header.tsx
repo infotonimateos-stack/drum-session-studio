@@ -28,39 +28,40 @@ export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
     <header className="sticky top-0 z-50 bg-gradient-to-r from-background via-card to-background border-b border-border/50 backdrop-blur-sm">
       <div className="container mx-auto px-4">
         {/* Logo and Title */}
-        <div className="flex items-center justify-between py-4 border-b border-border/30">
-          <div className="flex items-center gap-3">
-            <img src={logoUrl} alt="Toni Mateos Logo" className="h-8 w-8" />
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+        <div className="flex items-center justify-between py-3 sm:py-4 border-b border-border/30">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+            <img src={logoUrl} alt="Toni Mateos Logo" className="h-6 w-6 sm:h-8 sm:w-8 flex-shrink-0" />
+            <h1 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent truncate">
               {t("header.brand")}
             </h1>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
             <LanguageSelector />
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              className="h-8 w-8 px-0"
+              className="h-7 w-7 sm:h-8 sm:w-8 px-0"
             >
               {theme === "light" ? (
-                <Moon className="h-4 w-4" />
+                <Moon className="h-3 w-3 sm:h-4 sm:w-4" />
               ) : (
-                <Sun className="h-4 w-4" />
+                <Sun className="h-3 w-3 sm:h-4 sm:w-4" />
               )}
             </Button>
           </div>
         </div>
         
         {/* Navigation Tabs */}
-        <nav className="py-4">
-          <div className="flex flex-wrap justify-center gap-2">
+        <nav className="py-2 sm:py-4">
+          <div className="flex flex-wrap justify-center gap-1 sm:gap-2">
             {tabs.map((tab) => (
               <Button
                 key={tab.id}
                 variant={activeTab === tab.id ? "default" : "ghost"}
                 onClick={() => onTabChange(tab.id)}
-                className={`text-sm font-medium transition-all duration-200 ${
+                size="sm"
+                className={`text-xs sm:text-sm font-medium transition-all duration-200 px-2 sm:px-4 ${
                   activeTab === tab.id 
                     ? "shadow-lg" 
                     : "hover:bg-accent/20"
