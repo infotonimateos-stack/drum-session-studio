@@ -89,7 +89,7 @@ export const AboutTab = () => {
       {/* Perfil Personal - Rediseño completo */}
       <section className="grid lg:grid-cols-2 gap-12 items-start">
         <div className="relative">
-          <div className="aspect-square relative overflow-hidden rounded-3xl border-4 border-primary/30 shadow-2xl">
+          <div className="w-80 h-80 mx-auto relative overflow-hidden rounded-3xl border-4 border-primary/30 shadow-2xl">
             <img 
               src="/lovable-uploads/034fd0a0-541a-4538-93eb-4467b4a6b561.png" 
               alt="Toni Mateos" 
@@ -245,112 +245,11 @@ export const AboutTab = () => {
             
             <div className="p-6 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl border-2 border-blue-600/40 text-center">
               <Target className="h-10 w-10 mx-auto mb-3 text-blue-700" />
-              <div className="text-3xl font-black text-blue-800">+100</div>
-              <div className="text-sm font-bold text-blue-700">Más colaboraciones</div>
+              <div className="text-3xl font-black text-blue-800">+1000</div>
+              <div className="text-sm font-bold text-blue-700">discos grabados</div>
             </div>
           </CardContent>
         </Card>
-      </section>
-
-      {/* Fortalezas y Filosofía - Rediseño completo */}
-      <section className="grid lg:grid-cols-2 gap-8">
-        <Card className="relative overflow-hidden bg-gradient-to-br from-amber-400/20 via-yellow-300/20 to-orange-400/20 border-4 border-amber-500/50">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(251,191,36,0.3),_transparent_50%)]"></div>
-          <CardHeader className="relative z-10">
-            <CardTitle className="flex items-center gap-3 text-2xl font-black text-amber-700">
-              <Trophy className="h-10 w-10" />
-              Mis Fortalezas
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="relative z-10 space-y-6">
-            {[
-              { 
-                title: 'Comunicativo', 
-                description: 'Entiendo perfectamente lo que necesitas para tu música',
-                icon: MessageCircle,
-                color: 'text-amber-600'
-              },
-              { 
-                title: 'Respuesta Rápida', 
-                description: 'Tiempos de entrega que respetan tus deadlines',
-                icon: Zap,
-                color: 'text-amber-600'
-              },
-              { 
-                title: 'Al Servicio de la Música', 
-                description: 'Cada beat está pensado para realzar tu composición',
-                icon: Music,
-                color: 'text-amber-600'
-              }
-            ].map((fortaleza, index) => (
-              <div key={index} className="group p-6 bg-white/70 backdrop-blur-sm rounded-2xl border-2 border-amber-400/40 hover:border-amber-500/60 transition-all duration-300">
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <fortaleza.icon className={`h-7 w-7 text-white`} />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-black text-xl text-amber-800 mb-2">{fortaleza.title}</h4>
-                    <p className="text-amber-700 leading-relaxed">{fortaleza.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-
-        <Card className="relative overflow-hidden bg-gradient-to-br from-slate-400/20 via-gray-300/20 to-zinc-400/20 border-4 border-slate-500/50">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(148,163,184,0.3),_transparent_50%)]"></div>
-          <CardHeader className="relative z-10">
-            <CardTitle className="flex items-center gap-3 text-2xl font-black text-slate-700">
-              <Target className="h-10 w-10" />
-              Áreas de Crecimiento
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="relative z-10 space-y-6">
-            {[
-              { 
-                title: 'Metal Progresivo', 
-                description: 'Explorando nuevas técnicas en géneros complejos',
-                icon: Award,
-                color: 'text-slate-600'
-              },
-              { 
-                title: 'Compases de Amalgama', 
-                description: 'Perfeccionando ritmos no convencionales',
-                icon: Clock,
-                color: 'text-slate-600'
-              },
-              { 
-                title: 'Solos de Batería', 
-                description: 'Desarrollando mi expresión como solista',
-                icon: Drum,
-                color: 'text-slate-600'
-              }
-            ].map((area, index) => (
-              <div key={index} className="group p-6 bg-white/70 backdrop-blur-sm rounded-2xl border-2 border-slate-400/40 hover:border-slate-500/60 transition-all duration-300">
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-slate-400 to-gray-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <area.icon className={`h-7 w-7 text-white`} />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-black text-xl text-slate-800 mb-2">{area.title}</h4>
-                    <p className="text-slate-700 leading-relaxed">{area.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-      </section>
-
-      {/* Call to Action Final */}
-      <section className="text-center space-y-8 py-16">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-4xl font-black text-primary mb-6">¿Listo para crear música juntos?</h2>
-          <p className="text-xl text-muted-foreground leading-relaxed">
-            Cada proyecto es único, como cada artista. Mi compromiso es encontrar el ritmo perfecto que haga brillar tu música.
-          </p>
-        </div>
       </section>
     </div>
   );
