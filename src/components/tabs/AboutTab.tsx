@@ -214,7 +214,7 @@ export const AboutTab = () => {
             <div className="p-6 bg-gradient-to-r from-green-600/20 to-emerald-600/20 rounded-2xl border-2 border-green-600/40 text-center">
               <TrendingUp className="h-10 w-10 mx-auto mb-3 text-green-700" />
               <div className="text-3xl font-black text-green-800">+2000</div>
-              <div className="text-sm font-bold text-green-700">Más artistas colaborando</div>
+              <div className="text-sm font-bold text-green-700">artistas en directo</div>
             </div>
           </CardContent>
         </Card>
