@@ -195,20 +195,23 @@ export const AboutTab = () => {
               Artistas en Directo
             </CardTitle>
           </CardHeader>
-          <CardContent className="relative z-10 space-y-4">
-            {artistasDirecto.map((artista, index) => (
-              <div key={index} className="flex items-center gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-green-300/50 hover:border-green-500/70 transition-all duration-300">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center overflow-hidden">
-                  {artista.image ? (
-                    <img src={artista.image} alt={artista.name} className="w-full h-full object-cover" />
-                  ) : (
-                    <Star className="h-6 w-6 text-white" />
-                  )}
-                </div>
-                <span className="font-bold text-lg text-green-800">{artista.name}</span>
-              </div>
-            ))}
-            <div className="mt-6 p-6 bg-gradient-to-r from-green-600/20 to-emerald-600/20 rounded-2xl border-2 border-green-600/40 text-center">
+          <CardContent className="relative z-10 space-y-6">
+            <div className="relative aspect-video rounded-2xl overflow-hidden border-2 border-green-500/40">
+              <img 
+                src="/lovable-uploads/55129f4b-46e1-40c1-998a-89373ed12824.png" 
+                alt="Batería en escenario con luces dramáticas" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            </div>
+            
+            <div className="p-6 bg-white/70 backdrop-blur-sm rounded-2xl border-2 border-green-400/40">
+              <p className="text-lg font-bold text-green-800 leading-relaxed text-center">
+                Alejandro Sanz, Miguel Bosé, Juanes, Antonio Orozco, Ana Torroja, Franco de Vita, Pastora Soler, Manuel Carrasco, Sergio Dalma...
+              </p>
+            </div>
+            
+            <div className="p-6 bg-gradient-to-r from-green-600/20 to-emerald-600/20 rounded-2xl border-2 border-green-600/40 text-center">
               <TrendingUp className="h-10 w-10 mx-auto mb-3 text-green-700" />
               <div className="text-3xl font-black text-green-800">+2000</div>
               <div className="text-sm font-bold text-green-700">Más artistas colaborando</div>
