@@ -57,7 +57,7 @@ export const AboutTab = () => {
         
         <div className="relative z-10 text-center space-y-8 max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-4 px-6 py-3 bg-primary/10 backdrop-blur-sm rounded-full border border-primary/30">
-            <Drum className="h-6 w-6 text-primary animate-spin" style={{ animationDuration: '3s' }} />
+            <Drum className="h-6 w-6 text-primary" />
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Baterista Profesional</span>
           </div>
           
