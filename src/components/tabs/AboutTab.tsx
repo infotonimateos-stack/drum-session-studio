@@ -227,20 +227,23 @@ export const AboutTab = () => {
               Artistas en Estudio
             </CardTitle>
           </CardHeader>
-          <CardContent className="relative z-10 space-y-4">
-            {artistasGrabacion.map((artista, index) => (
-              <div key={index} className="flex items-center gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-blue-300/50 hover:border-blue-500/70 transition-all duration-300">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center overflow-hidden">
-                  {artista.image ? (
-                    <img src={artista.image} alt={artista.name} className="w-full h-full object-cover" />
-                  ) : (
-                    <Mic className="h-6 w-6 text-white" />
-                  )}
-                </div>
-                <span className="font-bold text-lg text-blue-800">{artista.name}</span>
-              </div>
-            ))}
-            <div className="mt-6 p-6 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl border-2 border-blue-600/40 text-center">
+          <CardContent className="relative z-10 space-y-6">
+            <div className="relative aspect-video rounded-2xl overflow-hidden border-2 border-blue-500/40">
+              <img 
+                src="/lovable-uploads/0651ca59-4628-48cc-934c-517cee1400c6.png" 
+                alt="Estudio de grabación profesional con batería acústica" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            </div>
+            
+            <div className="p-6 bg-white/70 backdrop-blur-sm rounded-2xl border-2 border-blue-400/40">
+              <p className="text-lg font-bold text-blue-800 leading-relaxed text-center">
+                Alejandro Sanz, Jarabe de Palo, Raphael, Melendi, Sergio Dalma, Antonio Orozco, Rozalén, Pastora soler, Marwán,
+              </p>
+            </div>
+            
+            <div className="p-6 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl border-2 border-blue-600/40 text-center">
               <Target className="h-10 w-10 mx-auto mb-3 text-blue-700" />
               <div className="text-3xl font-black text-blue-800">+100</div>
               <div className="text-sm font-bold text-blue-700">Más colaboraciones</div>
