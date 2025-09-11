@@ -185,7 +185,7 @@ export const StudioTab = () => {
                     <li>Pearl Piccolo 14 x 4″</li>
                     <li>Pearl Vinnie Paul Signature Series 14 x 8″</li>
                     <li>Premier Signia 1998 14 x 7″</li>
-                    <li>Ludwig Supraphonic 1968 14 x 52</li>
+                    
                     <li>Mapex Black Panther Stainless Steel 14 x 5,5″</li>
                     <li>Mapex Black Panther 14 x 5″</li>
                     <li>Mapex Black Panther 13 x 5″</li>
