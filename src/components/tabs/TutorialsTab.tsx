@@ -10,34 +10,18 @@ export const TutorialsTab = () => {
   const cursos = [
     {
       id: "mezcla-avanzada",
-      title: "CURSO DE MEZCLA DE BATERÍAS",
-      instructor: "Alex Carretero",
-      duration: "101 minutos",
+      title: "CURSO AVANZADO DE MEZCLA DE BATERÍAS",
+      instructor: "Luis del Toro",
+      duration: "1h 45min",
       format: "Video descargable",
-      contenido: [
-        "Pistas de batería gratuitas",
-        "Estructura de ganancias", 
-        "Fase y Polaridad",
-        "Panorama",
-        "Bleeding",
-        "Bombo IN, OUT, SUBKICK",
-        "Snare TOP+BOTTOM",
-        "Overheads",
-        "Toms",
-        "Room",
-        "Hi hat y Ride",
-        "Subgrupo, Master, Print"
-      ],
+      styles: ["Pop", "World Music"],
       price: {
-        eur: "9,90 €",
-        usd: "12 USD",
-        cop: "44K pesos colombianos",
-        mxn: "235 pesos mexicanos",
-        ars: "1140 pesos argentinos",
-        clp: "9280 pesos chilenos",
-        other: "otras monedas disponibles"
+        eur: "19,90 €",
+        usd: "20,94 USD",
+        cop: "100.200 pesos colombianos",
+        mxn: "400 pesos mexicanos"
       },
-      description: "Aprende a mezclar tus baterías de manera profesional, y lleva tu música a otro nivel.",
+      description: "Consigue los resultados profesionales que esperabas con este curso completo de mezcla de baterías.",
       url: "https://store.payloadz.com/details/2677048-music-other-curso-avanzado-mezcla-de-baterias.html",
       image: "/lovable-uploads/47653ee7-a23b-4807-80f6-1f266435b83a.png"
     },
@@ -109,18 +93,17 @@ export const TutorialsTab = () => {
                   </div>
                   
                   {/* Contenido específico por curso */}
-                  {curso.contenido && (
+                  {curso.styles && (
                     <div className="space-y-3">
                       <div className="flex items-center gap-2">
                         <Globe className="h-5 w-5 text-accent" />
-                        <span className="font-semibold">Contenido del curso:</span>
+                        <span className="font-semibold">Dos estilos diferentes:</span>
                       </div>
-                      <div className="grid grid-cols-1 gap-2">
-                        {curso.contenido.map((item) => (
-                          <div key={item} className="flex items-center gap-2 text-sm">
-                            <span className="text-success">✅</span>
-                            <span>{item}</span>
-                          </div>
+                      <div className="flex gap-2">
+                        {curso.styles.map((style) => (
+                          <Badge key={style} variant="outline" className="bg-accent/10 text-accent border-accent/30">
+                            {style}
+                          </Badge>
                         ))}
                       </div>
                     </div>
