@@ -142,13 +142,16 @@ export const StudioTab = () => {
               </AccordionItem>
 
               <AccordionItem value="bateria">
-                <AccordionTrigger>Batería (DW)</AccordionTrigger>
+                <AccordionTrigger>Batería (DW, Yamaha, Ludwig)</AccordionTrigger>
                 <AccordionContent>
                   <p className="text-sm mb-2">DW Collectors, Performance & Design Series</p>
                   <ul className="grid sm:grid-cols-2 gap-2 text-sm">
+                    <li>BD 16 x 12″</li>
                     <li>Bd 20 x 16″</li>
                     <li>Bd 22 x 18″</li>
                     <li>Bd 24 x 18″</li>
+                    <li>BD 26 x 14″</li>
+                    <li>Tom 10″</li>
                     <li>Tom 10″</li>
                     <li>Tom 12″</li>
                     <li>Tom 14″</li>
