@@ -106,6 +106,7 @@ export const StudioTab = () => {
                 <AccordionContent>
                   <ul className="list-disc pl-5 text-sm">
                     <li>DAD AX64 Digital Audio Denmark</li>
+                    <li>Motu 8 preamp</li>
                   </ul>
                 </AccordionContent>
               </AccordionItem>
@@ -135,6 +136,7 @@ export const StudioTab = () => {
                     <li>12 x API 3124+</li>
                     <li>2 x NEVE 1073</li>
                     <li>16 x DAD AX64 Digital Audio Denmark</li>
+                    <li>Motu 8 preamp</li>
                   </ul>
                 </AccordionContent>
               </AccordionItem>
