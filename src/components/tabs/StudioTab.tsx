@@ -14,6 +14,20 @@ export const StudioTab = () => {
         </p>
       </div>
 
+      {/* Galería del Estudio */}
+      <Card className="bg-gradient-to-br from-card to-muted">
+        <CardHeader>
+          <CardTitle>Galería del Estudio</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <img src="/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.png" alt="Estudio de batería: kit microfoneado vista 1" loading="lazy" className="w-full h-auto rounded-md" />
+            <img src="/lovable-uploads/85028cc6-173f-44cd-a28f-5aeec1c79bed.png" alt="Estudio de batería: sala tratada vista 2" loading="lazy" className="w-full h-auto rounded-md" />
+            <img src="/lovable-uploads/e499070f-a9d9-4586-bc17-dedc7a19da05.png" alt="Equipamiento profesional de audio: rack con previos API y otros procesadores" loading="lazy" className="w-full h-48 object-cover object-top rounded-md" />
+          </div>
+        </CardContent>
+      </Card>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Studio Features */}
         <Card className="bg-gradient-to-br from-card to-muted">
