@@ -239,7 +239,7 @@ export const AboutTab = () => {
             
             <div className="p-6 bg-white/70 backdrop-blur-sm rounded-2xl border-2 border-blue-400/40">
               <p className="text-lg font-bold text-blue-800 leading-relaxed text-center">
-                Alejandro Sanz, Jarabe de Palo, Raphael, Melendi, Sergio Dalma, Antonio Orozco, Rozalén, Pastora soler, Marwán,
+                Alejandro Sanz, Jarabe de Palo, Raphael, Melendi, Sergio Dalma, Antonio Orozco, Rozalén, Pastora soler, Marwán...
               </p>
             </div>
             
