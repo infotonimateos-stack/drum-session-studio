@@ -13,9 +13,9 @@ export const AboutTab = () => {
   // Datos para el gráfico radar de habilidades
   const skillsData = [
     { skill: 'Groove', A: 95 },
-    { skill: 'Sonido', A: 90 },
-    { skill: 'Pegada', A: 88 },
-    { skill: 'Versatilidad', A: 92 },
+    { skill: 'Sonido', A: 93 },
+    { skill: 'Pegada', A: 93 },
+    { skill: 'Versatilidad', A: 93 },
     { skill: 'Precisión', A: 94 },
     { skill: 'Creatividad', A: 78 }
   ];
