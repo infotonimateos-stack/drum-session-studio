@@ -90,7 +90,7 @@ export const TutorialsTab = () => {
         originalPrice: "12,99 €"
       },
       description: "Aprende a editar baterías y percusión de forma fácil y profesional con Beat Detective.",
-      url: "#",
+      url: "https://store.payloadz.com/details/2655204-music-rock-curso-beat-detective.html",
       image: "/lovable-uploads/2c18e9ea-d4a6-4ca0-9525-525a6b9943cb.png"
     }
   ];
