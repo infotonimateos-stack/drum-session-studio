@@ -7,81 +7,127 @@ export const FAQTab = () => {
   const faqCategories = [
     {
       icon: Music,
-      title: "Proceso de Grabación",
+      title: "Servicio y General",
       faqs: [
         {
-          question: "¿Qué necesito enviar para empezar mi proyecto?",
-          answer: "Necesitas enviar tu maqueta sin batería en formato WAV o MP3, y si tienes una demo de referencia con batería, también la incluyes. Además, especifica el tempo, referencias de sonido y cualquier indicación especial."
+          question: "¿En qué consiste el servicio de grabación de baterías online?",
+          answer: "Consiste en la grabación profesional de baterías acústicas para tus canciones. Podemos grabar baterías para tus canciones. Aprovechando las nuevas tecnologías, nuestros podemos hacerlo desde nuestro estudio con la máxima calidad y probar la grabación por internet a cualquier parte del mundo. De esa manera se aprovechan hasta un 70% de los costes, obteniendo un sonido profesional."
         },
         {
-          question: "¿Puedo hacer cambios después de recibir la primera versión?",
-          answer: "Sí, incluyo una revisión en el precio. Si necesitas cambios mayores después de la revisión incluida, podemos acordar un precio adicional según la complejidad."
+          question: "¿Cuál es el equipamiento de estudio que usan las baterías?",
+          answer: "Con el mejor. Micrófonos, baterías, cajas, etc. Puedes verlo en nuestra sección \"Estudio\""
         },
         {
-          question: "¿En qué formatos recibo los archivos finales?",
-          answer: "Recibes los archivos en el formato que elijas: WAV 24-bit/48kHz (estándar), o puedes solicitar otros formatos como 16-bit/44.1kHz para distribución digital."
+          question: "¿Quién graba las baterías?",
+          answer: "Toni Mateos. Cuenta con más de 30 años de experiencia y más de 1000 álbumes grabados, entre los que se encuentran John Legend, Alejandro Sanz, Jarabe de Palo, Raphael, Rozalén, Antonio Orozco, Pastora Soler..."
         },
         {
-          question: "¿Qué pasa si no tengo demo de batería?",
-          answer: "No hay problema. Puedo trabajar solo con tu maqueta sin batería y crear la parte de batería basándome en tu música y referencias que me proporciones."
-        }
-      ]
-    },
-    {
-      icon: Clock,
-      title: "Tiempos y Entrega",
-      faqs: [
-        {
-          question: "¿Cuánto tiempo toma el proceso completo?",
-          answer: "El plazo estándar es de 10 días laborables. Ofrezco opciones express de 5 días (+€5.90) y ultra express de 2 días (+€39.90) para proyectos urgentes."
+          question: "¿Qué estilos pueden grabar?",
+          answer: "La mayoría: pop, rock, funk, jazz, blues, swing, R&B, hip hop, rap, folk, country, ballad, salsa, samba, bossa nova, ritmos latinos, etc... Por el momento no grabamos metal."
         },
         {
-          question: "¿Qué pasa si necesito mi proyecto antes del plazo acordado?",
-          answer: "Puedes contactarme para ver si es posible adelantar la entrega. Si está dentro de mis posibilidades, no hay costo adicional. Para garantía de entrega rápida, recomiendo elegir una opción express al hacer el pedido."
-        },
-        {
-          question: "¿Trabajas los fines de semana?",
-          answer: "Los plazos se calculan en días laborables (lunes a viernes). Sin embargo, a menudo trabajo fines de semana, lo que puede acelerar tu proyecto sin costo adicional."
-        }
-      ]
-    },
-    {
-      icon: Headphones,
-      title: "Calidad y Sonido",
-      faqs: [
-        {
-          question: "¿Qué diferencia hay entre los previos básicos y premium?",
-          answer: "Los previos básicos (Focusrite OctoPre) ofrecen un sonido limpio y transparente. Los premium (API, Neve, DAD) añaden carácter, calidez y el color vintage que caracteriza las producciones profesionales."
-        },
-        {
-          question: "¿Todos los micrófonos se graban simultáneamente?",
-          answer: "Sí, utilizo una configuración multimicrófono que captura todos los elementos de la batería simultáneamente, lo que preserva la naturalidad y la cohesión del sonido."
-        },
-        {
-          question: "¿Puedo elegir micrófonos específicos para mi proyecto?",
-          answer: "Absolutamente. En el configurador puedes añadir micrófonos premium específicos. También puedes contactarme si tienes preferencias particulares no listadas en las opciones."
+          question: "¿Ofrecen garantía de satisfacción?",
+          answer: "Absolutamente. Si no quedas satisfecho, te devolvemos el 100% de tu dinero."
         }
       ]
     },
     {
       icon: CreditCard,
-      title: "Pagos y Facturación",
+      title: "Precio y Pago",
       faqs: [
         {
-          question: "¿Qué métodos de pago aceptas?",
-          answer: "Acepto tarjeta de crédito/débito, transferencia bancaria y PayPal. El pago se procesa de forma segura a través de Stripe."
+          question: "¿Cuál es el precio?",
+          answer: "Tú lo decides, configurando la sesión de grabación que mejor se ajuste a tus necesidades."
         },
         {
-          question: "¿Cuándo debo pagar?",
-          answer: "El pago se realiza al hacer el pedido, antes de comenzar la grabación. Esto me permite reservar el tiempo necesario para tu proyecto."
+          question: "La moneda de mi país no es el euro, ¿eso es un problema?",
+          answer: "No. Nosotros aceptamos pagos de cualquier país del mundo."
         },
         {
-          question: "¿Ofreces factura?",
-          answer: "Sí, puedes solicitar factura durante el proceso de compra. Necesitaré tus datos fiscales completos (dirección y NIF/RUT/RUC/EIN según tu país)."
+          question: "¿Cómo se realiza el pago?",
+          answer: "Por Paypal, transferencia bancaria, o tarjeta de crédito."
+        }
+      ]
+    },
+    {
+      icon: Clock,
+      title: "Proceso y Grabación",
+      faqs: [
+        {
+          question: "¿Podremos hablar sobre los detalles antes de la grabación?",
+          answer: "Por supuesto. Nos encantaría conectar contigo por Whatsapp o email y que nos cuentes con detalle qué tipo de sonido es el que te gusta. Si necesitas que hagamos una videollamada, puedes solicitarla en nuestro configurador de precios."
         },
         {
-          question: "¿Hay garantía de devolución?",
-          answer: "Si por algún motivo no estás satisfecho con el resultado y no podemos llegar a una solución, ofrezco devolución completa del dinero."
+          question: "¿Cómo recibiré la grabación?",
+          answer: "Después de grabar para ti, recibirás un email para descargar todas las pistas."
+        },
+        {
+          question: "¿Envían la batería \"mezclada\"?",
+          answer: "No, nosotros grabamos multi-pistas, listo para que la mezcles tú."
+        },
+        {
+          question: "¿Recibiré las pistas editadas?",
+          answer: "Sí, cuantizadas con el Beat Detective para que estén perfectamente a tiempo y sin errores. Listas para mezclar."
+        },
+        {
+          question: "¿Hay algo de la grabación que no me gusta, ¿puedo modificarlo?",
+          answer: "No, las modificaciones no están contempladas."
+        },
+        {
+          question: "¿Puedo pedir una muestra gratuita de una de tus pistas?",
+          answer: "Sí, puedes descargar pistas de muestra en el apartado \"Descarga una muestra\""
+        },
+        {
+          question: "¿Cuánto tardaré en recibir las pistas?",
+          answer: "Puedes decidirlo tú, en nuestro configurador de precios."
+        }
+      ]
+    },
+    {
+      icon: Headphones,
+      title: "Aspectos Técnicos",
+      faqs: [
+        {
+          question: "¿Las pistas están procesadas con algún tipo de EQ, compresión o efecto?",
+          answer: "No. Recibirás las pistas \"en crudo\"."
+        },
+        {
+          question: "¿Qué formato tienen las pistas de batería? ¿Son compatibles con mi DAW?",
+          answer: "Te enviamos archivos en formato wav, totalmente compatibles con cualquier software de grabación y mezcla (Pro Tools, Logic, Cubase, Reaper...)."
+        },
+        {
+          question: "¿Cuál será el bit/sample rate de las pistas?",
+          answer: "El que tú nos digas."
+        },
+        {
+          question: "¿Cómo sabré los micros y previos que han utilizado en mi grabación?",
+          answer: "Recibirás una ficha técnica donde te explicaremos los micros, previos conversor que hemos utilizado para cada canal."
+        }
+      ]
+    },
+    {
+      icon: FileText,
+      title: "Requisitos y Composición",
+      faqs: [
+        {
+          question: "Tengo una canción con la batería ya orquestada (midi, loops...). ¿Pueden copiarla exactamente?",
+          answer: "Sí, sin problema. Deberás contratarlo en nuestro configurador de precios. También tienes la opción de que grabemos una batería muy parecida, aunque no idéntica (incluida en el plan básico), o que grabemos una toma adicional con ideas nuevas y frescas."
+        },
+        {
+          question: "Tengo una canción casi terminada, pero no he programado la batería. ¿Es eso un problema?",
+          answer: "No, nosotros podemos componer la batería de tu canción. Contacta con nosotros y perfilaremos los detalles."
+        },
+        {
+          question: "¿Es necesario que mi canción esté grabada con metrónomo click?",
+          answer: "Sí."
+        },
+        {
+          question: "¿Qué debo enviar para que empiecen a grabar mi canción?",
+          answer: "Pocas cosas: un archivo de audio estéreo en formato wav de tu canción SIN BATERÍA; un archivo de audio estéreo en formato wav de tu canción SOLO LA BATERÍA (programación midi, loops, etc...); El bit/Sample rate de tu proyecto; El tempo exacto en BPMs (si el tempo tiene variaciones, necesitaremos el archivo tempo map .mid)"
+        },
+        {
+          question: "¿Es necesario que mi producción esté acabada para que graben las baterías?",
+          answer: "No, en absoluto."
         }
       ]
     }
