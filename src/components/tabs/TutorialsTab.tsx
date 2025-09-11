@@ -30,7 +30,7 @@ export const TutorialsTab = () => {
       format: "Video MP4",
       microphones: ["2 micrófonos", "3 micrófonos", "4 micrófonos", "6 micrófonos", "8 micrófonos", "11 micrófonos"],
       price: {
-        eur: "12 €"
+        eur: "9,90 €"
       },
       description: "Aprende a grabar baterías de manera profesional, incluso con pocos micrófonos.",
       url: "https://store.payloadz.com/details/2666816-music-popular-curso-grabacion-de-baterias.html",
