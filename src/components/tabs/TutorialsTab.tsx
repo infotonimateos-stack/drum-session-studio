@@ -16,10 +16,7 @@ export const TutorialsTab = () => {
       format: "Video descargable",
       styles: ["Pop", "World Music"],
       price: {
-        eur: "19,90 €",
-        usd: "20,94 USD",
-        cop: "100.200 pesos colombianos",
-        mxn: "400 pesos mexicanos"
+        eur: "19,90 €"
       },
       description: "Consigue los resultados profesionales que esperabas con este curso completo de mezcla de baterías.",
       url: "https://store.payloadz.com/details/2677048-music-other-curso-avanzado-mezcla-de-baterias.html",
@@ -33,12 +30,7 @@ export const TutorialsTab = () => {
       format: "Video MP4",
       microphones: ["2 micrófonos", "3 micrófonos", "4 micrófonos", "6 micrófonos", "8 micrófonos", "11 micrófonos"],
       price: {
-        usd: "12 USD",
-        cop: "44K pesos colombianos",
-        mxn: "235 pesos mexicanos",
-        ars: "1140 pesos argentinos",
-        clp: "9280 pesos chilenos",
-        other: "otras monedas disponibles"
+        eur: "12 €"
       },
       description: "Aprende a grabar baterías de manera profesional, incluso con pocos micrófonos.",
       url: "https://store.payloadz.com/details/2666816-music-popular-curso-grabacion-de-baterias.html",
@@ -65,17 +57,41 @@ export const TutorialsTab = () => {
         "Subgrupo, Master, Print"
       ],
       price: {
-        eur: "9,90 €",
-        usd: "12 USD",
-        cop: "44K pesos colombianos",
-        mxn: "235 pesos mexicanos",
-        ars: "1140 pesos argentinos",
-        clp: "9280 pesos chilenos",
-        other: "otras monedas disponibles"
+        eur: "9,90 €"
       },
       description: "Aprende a mezclar tus baterías de manera profesional, y lleva tu música a otro nivel.",
       url: "#",
       image: "/lovable-uploads/b68b9884-03e0-40e8-8f4e-21e5ce19fc08.png"
+    },
+    {
+      id: "beat-detective",
+      title: "CURSO BEAT DETECTIVE",
+      instructor: "Toni Mateos",
+      duration: "35 minutos",
+      format: "Video MP4",
+      content: [
+        "¿Qué es Beat Detective y para qué sirve?",
+        "Pros y Contras de Beat Detective",
+        "Descargar GRATIS las pistas de batería sobre las que trabajaremos y su ficha técnica",
+        "Importación de pistas",
+        "Panorama, EQ y compresión",
+        "Grid, Tempo y Subdivisión",
+        "Subgrupos",
+        "Fases",
+        "Playlists",
+        "Separar Clips",
+        "Cuantizar",
+        "Suavizado de edición",
+        "Consolidar",
+        "Resolución de problemas típicos"
+      ],
+      price: {
+        eur: "3,99 €",
+        originalPrice: "12,99 €"
+      },
+      description: "Aprende a editar baterías y percusión de forma fácil y profesional con Beat Detective.",
+      url: "#",
+      image: "/lovable-uploads/2c18e9ea-d4a6-4ca0-9525-525a6b9943cb.png"
     }
   ];
 
@@ -179,16 +195,15 @@ export const TutorialsTab = () => {
                   <div className="bg-gradient-to-r from-muted to-card p-6 rounded-2xl border border-border/50">
                     <div className="flex items-center gap-2 mb-3">
                       <DollarSign className="h-5 w-5 text-success" />
-                      <span className="font-bold text-lg">Precios:</span>
+                      <span className="font-bold text-lg">Precio:</span>
                     </div>
                     <div className="space-y-1 text-sm">
-                      {curso.price.eur && <div className="font-semibold">{curso.price.eur}</div>}
-                      {curso.price.usd && <div className="font-semibold">{curso.price.usd}</div>}
-                      {curso.price.cop && <div className="text-muted-foreground">{curso.price.cop}</div>}
-                      {curso.price.mxn && <div className="text-muted-foreground">{curso.price.mxn}</div>}
-                      {curso.price.ars && <div className="text-muted-foreground">{curso.price.ars}</div>}
-                      {curso.price.clp && <div className="text-muted-foreground">{curso.price.clp}</div>}
-                      {curso.price.other && <div className="text-xs text-muted-foreground italic">{curso.price.other}</div>}
+                      <div className="font-semibold text-lg">{curso.price.eur}</div>
+                      {curso.price.originalPrice && (
+                        <div className="text-muted-foreground line-through text-sm">
+                          {curso.price.originalPrice}
+                        </div>
+                      )}
                     </div>
                   </div>
                   
