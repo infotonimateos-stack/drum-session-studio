@@ -60,7 +60,7 @@ export const TutorialsTab = () => {
         eur: "9,90 €"
       },
       description: "Aprende a mezclar tus baterías de manera profesional, y lleva tu música a otro nivel.",
-      url: "#",
+      url: "https://store.payloadz.com/details/2667272-music-other-curso-mezcla-de-baterias.html",
       image: "/lovable-uploads/b68b9884-03e0-40e8-8f4e-21e5ce19fc08.png"
     },
     {
