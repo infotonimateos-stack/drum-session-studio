@@ -51,7 +51,11 @@ export const ContactTab = () => {
                 className="min-h-[120px]"
               />
             </div>
-            <Button variant="upgrade" className="w-full">
+            <Button 
+              variant="upgrade" 
+              className="w-full"
+              onClick={() => window.location.href = 'mailto:info@tonimateos.com'}
+            >
               {tr("Enviar Mensaje")}
             </Button>
           </CardContent>
@@ -69,14 +73,14 @@ export const ContactTab = () => {
                 <Mail className="h-5 w-5 text-primary" />
                 <div>
                   <p className="font-semibold">{tr("Email")}</p>
-                  <p className="text-sm text-muted-foreground">toni@tonimateos.com</p>
+                  <p className="text-sm text-muted-foreground">info@tonimateos.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-primary" />
                 <div>
                   <p className="font-semibold">WhatsApp</p>
-                  <p className="text-sm text-muted-foreground">+34 XXX XXX XXX</p>
+                  <p className="text-sm text-muted-foreground">+34670605604</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
