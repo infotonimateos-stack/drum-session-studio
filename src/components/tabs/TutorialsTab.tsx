@@ -43,6 +43,39 @@ export const TutorialsTab = () => {
       description: "Aprende a grabar baterías de manera profesional, incluso con pocos micrófonos.",
       url: "https://store.payloadz.com/details/2666816-music-popular-curso-grabacion-de-baterias.html",
       image: "/lovable-uploads/be94b2c6-9a7e-4eb4-bafc-5059556359a3.png"
+    },
+    {
+      id: "mezcla-baterias",
+      title: "CURSO DE MEZCLA DE BATERÍAS",
+      instructor: "Alex Carretero",
+      duration: "101 minutos",
+      format: "Video MP4",
+      content: [
+        "Pistas de batería gratuitas",
+        "Estructura de ganancias", 
+        "Fase y Polaridad",
+        "Panorama",
+        "Bleeding",
+        "Bombo IN, OUT, SUBKICK",
+        "Snare TOP+BOTTOM",
+        "Overheads",
+        "Toms",
+        "Room",
+        "Hi hat y Ride",
+        "Subgrupo, Master, Print"
+      ],
+      price: {
+        eur: "9,90 €",
+        usd: "12 USD",
+        cop: "44K pesos colombianos",
+        mxn: "235 pesos mexicanos",
+        ars: "1140 pesos argentinos",
+        clp: "9280 pesos chilenos",
+        other: "otras monedas disponibles"
+      },
+      description: "Aprende a mezclar tus baterías de manera profesional, y lleva tu música a otro nivel.",
+      url: "#",
+      image: "/lovable-uploads/be94b2c6-9a7e-4eb4-bafc-5059556359a3.png"
     }
   ];
 
@@ -53,7 +86,7 @@ export const TutorialsTab = () => {
           Cursos Profesionales
         </h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Aprende técnicas profesionales de grabación y mezcla de baterías con Luis del Toro
+          Aprende técnicas profesionales de grabación y mezcla de baterías con expertos de la industria
         </p>
       </div>
 
@@ -120,6 +153,23 @@ export const TutorialsTab = () => {
                           <div key={mic} className="flex items-center gap-2 text-sm">
                             <span className="text-success">✅</span>
                             <span>{mic}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {curso.content && (
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <Video className="h-5 w-5 text-accent" />
+                        <span className="font-semibold">Contenido del curso:</span>
+                      </div>
+                      <div className="grid grid-cols-1 gap-2">
+                        {curso.content.map((item) => (
+                          <div key={item} className="flex items-center gap-2 text-sm">
+                            <span className="text-success">✅</span>
+                            <span>{item}</span>
                           </div>
                         ))}
                       </div>
