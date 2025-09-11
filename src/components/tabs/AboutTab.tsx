@@ -91,8 +91,8 @@ export const AboutTab = () => {
         <div className="relative">
           <div className="w-80 h-80 mx-auto relative overflow-hidden rounded-3xl border-4 border-primary/30 shadow-2xl">
             <img 
-              src="/lovable-uploads/034fd0a0-541a-4538-93eb-4467b4a6b561.png" 
-              alt="Toni Mateos" 
+              src="/lovable-uploads/164db8a3-2c9a-4229-9784-24c6199db820.png" 
+              alt="Toni Mateos"
               className="w-full h-full object-cover hover:scale-105 transition-all duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
