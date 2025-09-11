@@ -75,7 +75,7 @@ export const TutorialsTab = () => {
       },
       description: "Aprende a mezclar tus baterías de manera profesional, y lleva tu música a otro nivel.",
       url: "#",
-      image: "/lovable-uploads/be94b2c6-9a7e-4eb4-bafc-5059556359a3.png"
+      image: "/lovable-uploads/b68b9884-03e0-40e8-8f4e-21e5ce19fc08.png"
     }
   ];
 
