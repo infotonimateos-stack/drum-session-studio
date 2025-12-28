@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ShoppingCart, CreditCard } from "lucide-react";
+import { ShoppingCart, CreditCard, Loader2 } from "lucide-react";
 import { CartState } from "@/types/cart";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 interface CheckoutSummaryProps {
   cartState: CartState;
@@ -12,6 +15,8 @@ interface CheckoutSummaryProps {
 }
 
 export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutSummaryProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const groupedItems = cartState.items.reduce((acc, item) => {
     if (!acc[item.category]) {
       acc[item.category] = [];
@@ -19,6 +24,37 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
     acc[item.category].push(item);
     return acc;
   }, {} as Record<string, typeof cartState.items>);
+
+  const handlePayment = async () => {
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('create-payment', {
+        body: {
+          items: cartState.items,
+          basePrice: cartState.basePrice,
+          total: cartState.total,
+        },
+      });
+
+      if (error) {
+        console.error('Payment error:', error);
+        toast.error('Error al procesar el pago. Por favor, inténtalo de nuevo.');
+        return;
+      }
+
+      if (data?.url) {
+        // Redirect to Stripe Checkout
+        window.location.href = data.url;
+      } else {
+        toast.error('No se pudo crear la sesión de pago.');
+      }
+    } catch (err) {
+      console.error('Payment error:', err);
+      toast.error('Error al conectar con el servidor de pagos.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
@@ -131,18 +167,29 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
 
               <div className="space-y-3 pt-4">
                 <Button 
-                  onClick={onConfirmOrder}
+                  onClick={handlePayment}
+                  disabled={isLoading}
                   className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-lg py-6"
                   size="lg"
                 >
-                  <CreditCard className="h-5 w-5 mr-2" />
-                  Finalizar Compra
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                      Procesando...
+                    </>
+                  ) : (
+                    <>
+                      <CreditCard className="h-5 w-5 mr-2" />
+                      Pagar €{cartState.total.toFixed(2)}
+                    </>
+                  )}
                 </Button>
                 
                 <Button 
                   onClick={onBack}
                   variant="outline"
                   className="w-full"
+                  disabled={isLoading}
                 >
                   ← Volver a Configurar
                 </Button>
