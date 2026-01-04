@@ -45,7 +45,7 @@ export const MicrophonesStep = ({
           <div className="flex items-center gap-3 bg-success/20 px-6 py-3 rounded-full">
             <Check className="h-6 w-6 text-success" />
             <h3 className="text-2xl font-bold">Kit Básico Incluido</h3>
-            <Badge variant="secondary" className="text-2xl px-5 py-2">€49.90</Badge>
+            <Badge variant="secondary" className="text-2xl px-5 py-2">49.90 €</Badge>
           </div>
         </div>
         
@@ -89,7 +89,7 @@ export const MicrophonesStep = ({
                     <Badge variant="outline" className="text-sm px-3 py-1">
                       {mic.target}
                     </Badge>
-                    <span className="font-bold text-xl text-primary">€{mic.price.toFixed(2)}</span>
+                    <span className="font-bold text-xl text-primary">{mic.price.toFixed(2)} €</span>
                   </div>
                    {mic.image && <div className="w-full h-40 flex items-center justify-center bg-white rounded-lg">
                         <img src={mic.image} alt={mic.name} className="max-h-36 max-w-full object-contain rounded-lg p-2" />
@@ -108,7 +108,7 @@ export const MicrophonesStep = ({
                         ✨ AÑADIDO
                       </> : <>
                         <Plus className="h-5 w-5 mr-2" />
-                        AÑADIR €{mic.price.toFixed(2)}
+                        AÑADIR {mic.price.toFixed(2)} €
                       </>}
                   </Button>
                 </CardContent>

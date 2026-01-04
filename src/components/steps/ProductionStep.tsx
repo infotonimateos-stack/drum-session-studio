@@ -93,7 +93,7 @@ export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepP
                     {item.name}
                   </CardTitle>
                   <Badge variant="outline" className="text-primary font-bold text-xl px-4 py-2">
-                    €{item.price.toFixed(2)}
+                    {item.price.toFixed(2)} €
                   </Badge>
                 </div>
               </CardHeader>

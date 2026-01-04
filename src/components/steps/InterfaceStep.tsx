@@ -115,7 +115,7 @@ export const InterfaceStep = ({
                 <Plus className="h-8 w-8 text-primary" />
                 Premium
               </CardTitle>
-              <Badge variant="outline" className="text-primary text-2xl px-6 py-3 font-bold">€6.99</Badge>
+              <Badge variant="outline" className="text-primary text-2xl px-6 py-3 font-bold">6.99 €</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -160,7 +160,7 @@ export const InterfaceStep = ({
                   ✨ AÑADIDO AL CARRITO
                 </> : <>
                   <Plus className="h-6 w-6 mr-2" />
-                  UPGRADE POR €6.99
+                  UPGRADE POR 6.99 €
                 </>}
             </Button>
           </CardContent>
