@@ -104,7 +104,7 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
                     {item.name}
                   </CardTitle>
                   <Badge variant="outline" className="text-primary font-bold text-xl px-4 py-2 whitespace-nowrap">
-                    €{item.price.toFixed(2)}
+                    {item.price.toFixed(2)} €
                   </Badge>
                 </div>
               </CardHeader>
@@ -139,7 +139,7 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
                   ) : (
                     <>
                       <Plus className="h-5 w-5 mr-2" />
-                      Añadir por €{item.price.toFixed(2)}
+                      Añadir por {item.price.toFixed(2)} €
                     </>
                   )}
                 </Button>

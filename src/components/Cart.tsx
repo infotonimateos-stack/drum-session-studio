@@ -26,7 +26,7 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
             <p className="font-medium text-sm">Total del Pedido</p>
             <p className="text-xs text-muted-foreground">Base + extras</p>
           </div>
-          <span className="font-bold text-primary text-xl">€{cartState.total.toFixed(2)}</span>
+          <span className="font-bold text-primary text-xl">{cartState.total.toFixed(2)} €</span>
         </div>
 
         {/* Items List */}
@@ -40,7 +40,7 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
                 <p className="text-xs text-muted-foreground">8 micrófonos incluidos</p>
               </div>
               <div className="flex items-center gap-2 ml-2">
-                <span className="text-sm font-medium">€{cartState.basePrice.toFixed(2)}</span>
+                <span className="text-sm font-medium">{cartState.basePrice.toFixed(2)} €</span>
               </div>
             </div>
             
@@ -52,7 +52,7 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
                   <p className="text-xs text-muted-foreground">{item.category}</p>
                 </div>
                 <div className="flex items-center gap-2 ml-2">
-                  <span className="text-sm font-medium">€{item.price.toFixed(2)}</span>
+                  <span className="text-sm font-medium">{item.price.toFixed(2)} €</span>
                   <Button
                     variant="ghost"
                     size="icon"
@@ -72,7 +72,7 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
         {/* Total */}
         <div className="flex justify-between items-center p-3 bg-accent/20 rounded-lg">
           <span className="font-bold text-lg">Total</span>
-          <span className="font-bold text-xl text-primary">€{cartState.total.toFixed(2)}</span>
+          <span className="font-bold text-xl text-primary">{cartState.total.toFixed(2)} €</span>
         </div>
 
       </CardContent>

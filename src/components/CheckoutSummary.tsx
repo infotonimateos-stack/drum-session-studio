@@ -87,7 +87,7 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
               </div>
               <div className="mt-4 flex justify-between items-center">
                 <span className="font-semibold">Precio base:</span>
-                <Badge variant="secondary" className="text-lg">€{cartState.basePrice.toFixed(2)}</Badge>
+                <Badge variant="secondary" className="text-lg">{cartState.basePrice.toFixed(2)} €</Badge>
               </div>
             </CardContent>
           </Card>
@@ -111,7 +111,7 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                         )}
                       </div>
                       <Badge variant="outline" className="text-primary font-bold">
-                        €{item.price.toFixed(2)}
+                        {item.price.toFixed(2)} €
                       </Badge>
                     </div>
                   ))}
@@ -142,7 +142,7 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span>Paquete básico:</span>
-                  <span>€{cartState.basePrice.toFixed(2)}</span>
+                  <span>{cartState.basePrice.toFixed(2)} €</span>
                 </div>
                 
                 {cartState.items.length > 0 && (
@@ -151,7 +151,7 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                     {cartState.items.map((item) => (
                       <div key={item.id} className="flex justify-between text-sm">
                         <span>{item.name}:</span>
-                        <span>€{item.price.toFixed(2)}</span>
+                        <span>{item.price.toFixed(2)} €</span>
                       </div>
                     ))}
                   </>
@@ -161,7 +161,7 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                 
                 <div className="flex justify-between text-lg font-bold">
                   <span>Total:</span>
-                  <span className="text-primary">€{cartState.total.toFixed(2)}</span>
+                  <span className="text-primary">{cartState.total.toFixed(2)} €</span>
                 </div>
               </div>
 
@@ -180,7 +180,7 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                   ) : (
                     <>
                       <CreditCard className="h-5 w-5 mr-2" />
-                      Pagar €{cartState.total.toFixed(2)}
+                      Pagar {cartState.total.toFixed(2)} €
                     </>
                   )}
                 </Button>
