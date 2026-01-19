@@ -10,10 +10,13 @@ const logStep = (step: string, details?: any) => {
   console.log(`[CREATE-PAYPAL-ORDER] ${step}${detailsStr}`);
 };
 
+// Use sandbox for testing, change to api-m.paypal.com for production
+const PAYPAL_API_BASE = "https://api-m.sandbox.paypal.com";
+
 const getPayPalAccessToken = async (clientId: string, clientSecret: string): Promise<string> => {
   const auth = btoa(`${clientId}:${clientSecret}`);
   
-  const response = await fetch("https://api-m.paypal.com/v1/oauth2/token", {
+  const response = await fetch(`${PAYPAL_API_BASE}/v1/oauth2/token`, {
     method: "POST",
     headers: {
       "Authorization": `Basic ${auth}`,
@@ -94,7 +97,7 @@ serve(async (req) => {
     const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
 
     // Create PayPal order
-    const orderResponse = await fetch("https://api-m.paypal.com/v2/checkout/orders", {
+    const orderResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders`, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${accessToken}`,
