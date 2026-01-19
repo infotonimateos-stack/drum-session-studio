@@ -16,6 +16,7 @@ interface CheckoutSummaryProps {
 
 export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutSummaryProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'paypal'>('card');
 
   const groupedItems = cartState.items.reduce((acc, item) => {
     if (!acc[item.category]) {
@@ -25,7 +26,7 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
     return acc;
   }, {} as Record<string, typeof cartState.items>);
 
-  const handlePayment = async () => {
+  const handleStripePayment = async () => {
     setIsLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke('create-payment', {
@@ -37,22 +38,59 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
       });
 
       if (error) {
-        console.error('Payment error:', error);
-        toast.error('Error al procesar el pago. Por favor, inténtalo de nuevo.');
+        console.error('Stripe payment error:', error);
+        toast.error('Error al procesar el pago con tarjeta. Por favor, inténtalo de nuevo.');
         return;
       }
 
       if (data?.url) {
-        // Redirect to Stripe Checkout
         window.location.href = data.url;
       } else {
         toast.error('No se pudo crear la sesión de pago.');
       }
     } catch (err) {
-      console.error('Payment error:', err);
+      console.error('Stripe payment error:', err);
       toast.error('Error al conectar con el servidor de pagos.');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handlePayPalPayment = async () => {
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('create-paypal-order', {
+        body: {
+          items: cartState.items,
+          basePrice: cartState.basePrice,
+          total: cartState.total,
+        },
+      });
+
+      if (error) {
+        console.error('PayPal payment error:', error);
+        toast.error('Error al procesar el pago con PayPal. Por favor, inténtalo de nuevo.');
+        return;
+      }
+
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        toast.error('No se pudo crear la orden de PayPal.');
+      }
+    } catch (err) {
+      console.error('PayPal payment error:', err);
+      toast.error('Error al conectar con PayPal.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handlePayment = () => {
+    if (paymentMethod === 'card') {
+      handleStripePayment();
+    } else {
+      handlePayPalPayment();
     }
   };
 
@@ -165,11 +203,49 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                 </div>
               </div>
 
+              {/* Payment Method Selection */}
+              <div className="space-y-3 pt-2">
+                <p className="text-sm font-medium text-center text-muted-foreground">Método de pago</p>
+                <div className="grid grid-cols-2 gap-2">
+                  <Button
+                    type="button"
+                    variant={paymentMethod === 'card' ? 'default' : 'outline'}
+                    onClick={() => setPaymentMethod('card')}
+                    disabled={isLoading}
+                    className={`h-14 ${paymentMethod === 'card' ? 'ring-2 ring-primary ring-offset-2' : ''}`}
+                  >
+                    <div className="flex flex-col items-center gap-1">
+                      <CreditCard className="h-5 w-5" />
+                      <span className="text-xs">Tarjeta</span>
+                    </div>
+                  </Button>
+                  <Button
+                    type="button"
+                    variant={paymentMethod === 'paypal' ? 'default' : 'outline'}
+                    onClick={() => setPaymentMethod('paypal')}
+                    disabled={isLoading}
+                    className={`h-14 ${paymentMethod === 'paypal' ? 'ring-2 ring-primary ring-offset-2' : ''}`}
+                  >
+                    <div className="flex flex-col items-center gap-1">
+                      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .771-.66h6.487c2.025 0 3.538.507 4.497 1.507.921.961 1.261 2.217 1.046 3.849l-.016.112-.012.084.052.028c.628.349 1.115.809 1.446 1.371.35.593.528 1.336.528 2.207 0 1.015-.207 1.913-.616 2.668-.386.71-.93 1.31-1.618 1.783a6.08 6.08 0 0 1-2.167.936c-.772.181-1.635.274-2.562.274H12.2a.967.967 0 0 0-.955.816l-.033.196-.585 3.716-.027.14a.966.966 0 0 1-.955.79H7.076z"/>
+                        <path d="M18.79 7.586c.035-.214.052-.434.052-.66 0-2.188-1.423-3.866-4.596-3.866H7.215a.967.967 0 0 0-.955.816l-2.8 17.762a.784.784 0 0 0 .774.91h4.283l1.075-6.82.033-.196a.967.967 0 0 1 .955-.816h1.481c3.255 0 5.802-1.322 6.545-5.148.022-.113.041-.223.058-.332.213-1.358.077-2.284-.532-2.946a3.21 3.21 0 0 0-.342-.304z"/>
+                      </svg>
+                      <span className="text-xs">PayPal</span>
+                    </div>
+                  </Button>
+                </div>
+              </div>
+
               <div className="space-y-3 pt-4">
                 <Button 
                   onClick={handlePayment}
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-lg py-6"
+                  className={`w-full text-lg py-6 ${
+                    paymentMethod === 'paypal' 
+                      ? 'bg-[#0070ba] hover:bg-[#005ea6] text-white' 
+                      : 'bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90'
+                  }`}
                   size="lg"
                 >
                   {isLoading ? (
@@ -177,10 +253,18 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                       <Loader2 className="h-5 w-5 mr-2 animate-spin" />
                       Procesando...
                     </>
+                  ) : paymentMethod === 'paypal' ? (
+                    <>
+                      <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .771-.66h6.487c2.025 0 3.538.507 4.497 1.507.921.961 1.261 2.217 1.046 3.849l-.016.112-.012.084.052.028c.628.349 1.115.809 1.446 1.371.35.593.528 1.336.528 2.207 0 1.015-.207 1.913-.616 2.668-.386.71-.93 1.31-1.618 1.783a6.08 6.08 0 0 1-2.167.936c-.772.181-1.635.274-2.562.274H12.2a.967.967 0 0 0-.955.816l-.033.196-.585 3.716-.027.14a.966.966 0 0 1-.955.79H7.076z"/>
+                        <path d="M18.79 7.586c.035-.214.052-.434.052-.66 0-2.188-1.423-3.866-4.596-3.866H7.215a.967.967 0 0 0-.955.816l-2.8 17.762a.784.784 0 0 0 .774.91h4.283l1.075-6.82.033-.196a.967.967 0 0 1 .955-.816h1.481c3.255 0 5.802-1.322 6.545-5.148.022-.113.041-.223.058-.332.213-1.358.077-2.284-.532-2.946a3.21 3.21 0 0 0-.342-.304z"/>
+                      </svg>
+                      Pagar con PayPal {cartState.total.toFixed(2)} €
+                    </>
                   ) : (
                     <>
                       <CreditCard className="h-5 w-5 mr-2" />
-                      Pagar {cartState.total.toFixed(2)} €
+                      Pagar con Tarjeta {cartState.total.toFixed(2)} €
                     </>
                   )}
                 </Button>
