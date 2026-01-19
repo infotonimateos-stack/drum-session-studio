@@ -241,7 +241,7 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                 <Button 
                   onClick={handlePayment}
                   disabled={isLoading}
-                  className={`w-full text-lg py-6 ${
+                  className={`w-full h-14 text-sm sm:text-base ${
                     paymentMethod === 'paypal' 
                       ? 'bg-[#0070ba] hover:bg-[#005ea6] text-white' 
                       : 'bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90'
@@ -249,23 +249,22 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                   size="lg"
                 >
                   {isLoading ? (
-                    <>
-                      <Loader2 className="h-5 w-5 mr-2 animate-spin" />
-                      Procesando...
-                    </>
+                    <span className="flex items-center justify-center gap-2">
+                      <Loader2 className="h-4 w-4 animate-spin flex-shrink-0" />
+                      <span>Procesando...</span>
+                    </span>
                   ) : paymentMethod === 'paypal' ? (
-                    <>
-                      <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                    <span className="flex items-center justify-center gap-2">
+                      <svg className="h-4 w-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .771-.66h6.487c2.025 0 3.538.507 4.497 1.507.921.961 1.261 2.217 1.046 3.849l-.016.112-.012.084.052.028c.628.349 1.115.809 1.446 1.371.35.593.528 1.336.528 2.207 0 1.015-.207 1.913-.616 2.668-.386.71-.93 1.31-1.618 1.783a6.08 6.08 0 0 1-2.167.936c-.772.181-1.635.274-2.562.274H12.2a.967.967 0 0 0-.955.816l-.033.196-.585 3.716-.027.14a.966.966 0 0 1-.955.79H7.076z"/>
-                        <path d="M18.79 7.586c.035-.214.052-.434.052-.66 0-2.188-1.423-3.866-4.596-3.866H7.215a.967.967 0 0 0-.955.816l-2.8 17.762a.784.784 0 0 0 .774.91h4.283l1.075-6.82.033-.196a.967.967 0 0 1 .955-.816h1.481c3.255 0 5.802-1.322 6.545-5.148.022-.113.041-.223.058-.332.213-1.358.077-2.284-.532-2.946a3.21 3.21 0 0 0-.342-.304z"/>
                       </svg>
-                      Pagar con PayPal {cartState.total.toFixed(2)} €
-                    </>
+                      <span className="truncate">PayPal {cartState.total.toFixed(2)} €</span>
+                    </span>
                   ) : (
-                    <>
-                      <CreditCard className="h-5 w-5 mr-2" />
-                      Pagar con Tarjeta {cartState.total.toFixed(2)} €
-                    </>
+                    <span className="flex items-center justify-center gap-2">
+                      <CreditCard className="h-4 w-4 flex-shrink-0" />
+                      <span className="truncate">Tarjeta {cartState.total.toFixed(2)} €</span>
+                    </span>
                   )}
                 </Button>
                 
