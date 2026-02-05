@@ -211,7 +211,7 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
 
               {/* Tax Information Notice */}
               <div className="bg-muted/50 rounded-lg p-3 text-xs text-muted-foreground text-center border border-border/50">
-                <p>💡 Los impuestos indirectos (IVA/VAT) se calcularán en el siguiente paso basándose en su ubicación y tipo de cliente.</p>
+                <p>💡 Los precios mostrados no incluyen impuestos indirectos. El IVA o impuesto equivalente aplicable se calculará y desglosará en la pantalla de pago basándose en su ubicación y tipo de cliente.</p>
               </div>
 
               {/* Payment Method Selection */}
