@@ -73,7 +73,7 @@ serve(async (req) => {
     const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
     logStep("Origin determined", { origin });
 
-    // Create checkout session configuration
+    // Create checkout session configuration with automatic tax calculation
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
       line_items: lineItems,
       mode: "payment",
@@ -81,6 +81,10 @@ serve(async (req) => {
       cancel_url: `${origin}/`,
       locale: "es",
       payment_method_types: ["card"],
+      // Enable automatic tax calculation based on customer location
+      automatic_tax: { enabled: true },
+      // Enable tax ID collection for B2B customers (VAT/ROI)
+      tax_id_collection: { enabled: true },
     };
 
     // Add customer email if provided

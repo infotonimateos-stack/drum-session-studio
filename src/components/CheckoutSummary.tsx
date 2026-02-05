@@ -209,6 +209,11 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                 </div>
               </div>
 
+              {/* Tax Information Notice */}
+              <div className="bg-muted/50 rounded-lg p-3 text-xs text-muted-foreground text-center border border-border/50">
+                <p>💡 Los impuestos indirectos (IVA/VAT) se calcularán en el siguiente paso basándose en su ubicación y tipo de cliente.</p>
+              </div>
+
               {/* Payment Method Selection */}
               <div className="space-y-3 pt-2">
                 <p className="text-sm font-medium text-center text-muted-foreground">Método de pago</p>
