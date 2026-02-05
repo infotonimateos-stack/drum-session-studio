@@ -3,7 +3,7 @@ import Stripe from "https://esm.sh/stripe@18.5.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
 const logStep = (step: string, details?: any) => {
@@ -69,12 +69,16 @@ serve(async (req) => {
 
     logStep("Line items created", { count: lineItems.length });
 
+    // Get origin with fallback
+    const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
+    logStep("Origin determined", { origin });
+
     // Create checkout session configuration
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
       line_items: lineItems,
       mode: "payment",
-      success_url: `${req.headers.get("origin")}/payment-success`,
-      cancel_url: `${req.headers.get("origin")}/`,
+      success_url: `${origin}/payment-success`,
+      cancel_url: `${origin}/`,
       locale: "es",
       payment_method_types: ["card"],
     };
