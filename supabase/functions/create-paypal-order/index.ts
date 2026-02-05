@@ -10,8 +10,8 @@ const logStep = (step: string, details?: any) => {
   console.log(`[CREATE-PAYPAL-ORDER] ${step}${detailsStr}`);
 };
 
-// Use sandbox for testing, change to api-m.paypal.com for production
-const PAYPAL_API_BASE = "https://api-m.sandbox.paypal.com";
+// Production PayPal API
+const PAYPAL_API_BASE = "https://api-m.paypal.com";
 
 const getPayPalAccessToken = async (clientId: string, clientSecret: string): Promise<string> => {
   const auth = btoa(`${clientId}:${clientSecret}`);
