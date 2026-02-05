@@ -40,18 +40,21 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
       if (error) {
         console.error('Stripe payment error:', error);
         toast.error('Error al procesar el pago con tarjeta. Por favor, inténtalo de nuevo.');
+        setIsLoading(false);
         return;
       }
 
       if (data?.url) {
-        window.location.href = data.url;
+        // Open in new tab so we can reset loading state
+        window.open(data.url, '_blank');
+        setIsLoading(false);
       } else {
         toast.error('No se pudo crear la sesión de pago.');
+        setIsLoading(false);
       }
     } catch (err) {
       console.error('Stripe payment error:', err);
       toast.error('Error al conectar con el servidor de pagos.');
-    } finally {
       setIsLoading(false);
     }
   };
@@ -70,18 +73,21 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
       if (error) {
         console.error('PayPal payment error:', error);
         toast.error('Error al procesar el pago con PayPal. Por favor, inténtalo de nuevo.');
+        setIsLoading(false);
         return;
       }
 
       if (data?.url) {
-        window.location.href = data.url;
+        // Open in new tab so we can reset loading state
+        window.open(data.url, '_blank');
+        setIsLoading(false);
       } else {
         toast.error('No se pudo crear la orden de PayPal.');
+        setIsLoading(false);
       }
     } catch (err) {
       console.error('PayPal payment error:', err);
       toast.error('Error al conectar con PayPal.');
-    } finally {
       setIsLoading(false);
     }
   };
