@@ -26,9 +26,9 @@ serve(async (req) => {
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
 
-    // Get the request body with cart data
-    const { items, basePrice, total, customerEmail } = await req.json();
-    logStep("Received cart data", { itemCount: items?.length, basePrice, total, customerEmail });
+    // Get the request body with cart data including country for tax calculation
+    const { items, basePrice, total, customerEmail, customerCountry } = await req.json();
+    logStep("Received cart data", { itemCount: items?.length, basePrice, total, customerEmail, customerCountry });
 
     if (!total || total <= 0) {
       throw new Error("Invalid total amount");
@@ -75,6 +75,37 @@ serve(async (req) => {
     const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
     logStep("Origin determined", { origin });
 
+    // Create a Stripe customer with country pre-set for tax calculation
+    let customerId: string | undefined;
+    if (customerCountry || customerEmail) {
+      const customerData: Stripe.CustomerCreateParams = {};
+      
+      if (customerEmail) {
+        customerData.email = customerEmail;
+      }
+      
+      if (customerCountry) {
+        customerData.address = {
+          country: customerCountry,
+        };
+        // Also set tax location hint
+        customerData.tax = {
+          validate_location: "deferred",
+        };
+      }
+      
+      const customer = await stripe.customers.create(customerData);
+      customerId = customer.id;
+      logStep("Customer created with country", { customerId, country: customerCountry });
+    }
+
+    // EU countries for shipping address collection (forces country selection early)
+    const euCountries: Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[] = [
+      "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", 
+      "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", 
+      "PL", "PT", "RO", "SK", "SI", "ES", "SE", "GB", "CH", "NO", "IS"
+    ];
+
     // Create checkout session configuration with automatic tax calculation
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
       line_items: lineItems,
@@ -85,14 +116,25 @@ serve(async (req) => {
       payment_method_types: ["card"],
       // REQUIRED: Collect billing address to determine tax location
       billing_address_collection: "required",
+      // Force country selection early in the checkout flow
+      shipping_address_collection: {
+        allowed_countries: euCountries,
+      },
       // Enable automatic tax calculation based on customer location
       automatic_tax: { enabled: true },
       // Enable tax ID collection for B2B customers (VAT/ROI)
       tax_id_collection: { enabled: true },
     };
 
-    // Add customer email if provided
-    if (customerEmail) {
+    // If we created a customer, attach them and allow address updates
+    if (customerId) {
+      sessionConfig.customer = customerId;
+      sessionConfig.customer_update = {
+        address: "auto",
+        name: "auto",
+      };
+    } else if (customerEmail) {
+      // Fallback: just set email if no customer created
       sessionConfig.customer_email = customerEmail;
     }
 
