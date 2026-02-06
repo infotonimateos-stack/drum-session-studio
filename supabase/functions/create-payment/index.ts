@@ -37,7 +37,7 @@ serve(async (req) => {
     // Build line items for Stripe
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
-    // Add base package
+    // Add base package with tax_behavior for automatic tax calculation
     lineItems.push({
       price_data: {
         currency: "eur",
@@ -46,11 +46,12 @@ serve(async (req) => {
           description: "Grabación profesional de batería, configuración básica de micrófonos, entrega estándar (10 días), 1 toma básica incluida",
         },
         unit_amount: Math.round(basePrice * 100), // Convert to cents
+        tax_behavior: "exclusive", // Tax will be added on top of this price
       },
       quantity: 1,
     });
 
-    // Add each cart item as a line item
+    // Add each cart item as a line item with tax_behavior
     if (items && items.length > 0) {
       for (const item of items) {
         lineItems.push({
@@ -61,6 +62,7 @@ serve(async (req) => {
               description: item.description || `${item.category}`,
             },
             unit_amount: Math.round(item.price * 100), // Convert to cents
+            tax_behavior: "exclusive", // Tax will be added on top of this price
           },
           quantity: 1,
         });
@@ -81,6 +83,8 @@ serve(async (req) => {
       cancel_url: `${origin}/`,
       locale: "es",
       payment_method_types: ["card"],
+      // REQUIRED: Collect billing address to determine tax location
+      billing_address_collection: "required",
       // Enable automatic tax calculation based on customer location
       automatic_tax: { enabled: true },
       // Enable tax ID collection for B2B customers (VAT/ROI)
