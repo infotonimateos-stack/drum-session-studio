@@ -96,8 +96,7 @@ serve(async (req) => {
 
     const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
 
-    // Create PayPal order with tax calculation enabled
-    // PayPal will calculate taxes based on shipping address provided by customer
+    // Create PayPal order - simple configuration, total is final price
     const orderResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders`, {
       method: "POST",
       headers: {
@@ -115,11 +114,6 @@ serve(async (req) => {
                 currency_code: "EUR",
                 value: total.toFixed(2),
               },
-              // Tax will be calculated by PayPal based on customer address
-              tax_total: {
-                currency_code: "EUR",
-                value: "0.00",
-              },
             },
           },
           items: paypalItems,
@@ -128,7 +122,7 @@ serve(async (req) => {
           brand_name: "Drum Session Studio",
           locale: "es-ES",
           landing_page: "NO_PREFERENCE",
-          shipping_preference: "GET_FROM_FILE", // Request address for tax calculation
+          shipping_preference: "NO_SHIPPING",
           user_action: "PAY_NOW",
           return_url: `${origin}/payment-success?method=paypal`,
           cancel_url: `${origin}/`,
