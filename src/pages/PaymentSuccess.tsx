@@ -39,6 +39,16 @@ export default function PaymentSuccess() {
             </p>
           </div>
 
+          <div className="bg-muted/30 rounded-lg p-4 border border-border/50">
+            <p className="text-sm text-muted-foreground">
+              🧾 Si necesitas una <strong>factura oficial</strong>, por favor contacta con nosotros en{" "}
+              <a href="mailto:info@tonimateos.com" className="text-primary hover:underline font-medium">
+                info@tonimateos.com
+              </a>{" "}
+              facilitando tus datos fiscales.
+            </p>
+          </div>
+
           <Button 
             onClick={() => navigate("/")}
             className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"

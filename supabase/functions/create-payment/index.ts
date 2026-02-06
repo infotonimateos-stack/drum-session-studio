@@ -73,7 +73,7 @@ serve(async (req) => {
     const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
     logStep("Origin determined", { origin });
 
-    // Create checkout session - simple configuration without automatic tax
+    // Create checkout session - simple configuration without automatic tax or invoices
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
       line_items: lineItems,
       mode: "payment",
@@ -81,6 +81,8 @@ serve(async (req) => {
       cancel_url: `${origin}/`,
       locale: "es",
       payment_method_types: ["card"],
+      // Disable automatic invoice creation - only receipts will be sent
+      invoice_creation: { enabled: false },
     };
 
     // Add customer email if provided
