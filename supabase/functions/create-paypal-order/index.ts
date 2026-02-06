@@ -52,10 +52,12 @@ serve(async (req) => {
     logStep("PayPal credentials verified");
 
     // Get the request body with cart data
-    const { items, basePrice, total } = await req.json();
-    logStep("Received cart data", { itemCount: items?.length, basePrice, total });
+    const { items, basePrice, total, paypalFee, totalWithFee } = await req.json();
+    logStep("Received cart data", { itemCount: items?.length, basePrice, total, paypalFee, totalWithFee });
 
-    if (!total || total <= 0) {
+    const finalTotal = totalWithFee || total;
+    
+    if (!finalTotal || finalTotal <= 0) {
       throw new Error("Invalid total amount");
     }
 
@@ -92,7 +94,20 @@ serve(async (req) => {
       }
     }
 
-    logStep("PayPal items created", { count: paypalItems.length });
+    // Add PayPal fee if present
+    if (paypalFee && paypalFee > 0) {
+      paypalItems.push({
+        name: "Gastos de gestión PayPal",
+        description: "Recargo del 5% por uso de PayPal",
+        unit_amount: {
+          currency_code: "EUR",
+          value: paypalFee.toFixed(2),
+        },
+        quantity: "1",
+      });
+    }
+
+    logStep("PayPal items created", { count: paypalItems.length, includesFee: paypalFee > 0 });
 
     const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
 
@@ -108,11 +123,11 @@ serve(async (req) => {
         purchase_units: [{
           amount: {
             currency_code: "EUR",
-            value: total.toFixed(2),
+            value: finalTotal.toFixed(2),
             breakdown: {
               item_total: {
                 currency_code: "EUR",
-                value: total.toFixed(2),
+                value: finalTotal.toFixed(2),
               },
             },
           },

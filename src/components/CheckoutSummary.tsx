@@ -18,6 +18,12 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
   const [isLoading, setIsLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'paypal'>('card');
 
+  // PayPal fee calculation (5%)
+  const PAYPAL_FEE_PERCENTAGE = 0.05;
+  const paypalFee = cartState.total * PAYPAL_FEE_PERCENTAGE;
+  const totalWithPayPalFee = cartState.total + paypalFee;
+  const displayTotal = paymentMethod === 'paypal' ? totalWithPayPalFee : cartState.total;
+
   const groupedItems = cartState.items.reduce((acc, item) => {
     if (!acc[item.category]) {
       acc[item.category] = [];
@@ -66,6 +72,8 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
           items: cartState.items,
           basePrice: cartState.basePrice,
           total: cartState.total,
+          paypalFee: paypalFee,
+          totalWithFee: totalWithPayPalFee,
         },
       });
 
@@ -201,9 +209,17 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                 
                 <Separator className="my-4" />
                 
+                {/* PayPal Fee - only shown when PayPal is selected */}
+                {paymentMethod === 'paypal' && (
+                  <div className="flex justify-between text-sm text-amber-600 dark:text-amber-400">
+                    <span>Gastos de gestión PayPal (5%):</span>
+                    <span>+{paypalFee.toFixed(2)} €</span>
+                  </div>
+                )}
+                
                 <div className="flex justify-between text-lg font-bold">
                   <span>Total:</span>
-                  <span className="text-primary">{cartState.total.toFixed(2)} €</span>
+                  <span className="text-primary">{displayTotal.toFixed(2)} €</span>
                 </div>
               </div>
 
@@ -239,6 +255,10 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                     </div>
                   </Button>
                 </div>
+                {/* PayPal fee disclaimer */}
+                <p className="text-xs text-center text-amber-600 dark:text-amber-400">
+                  Pago con PayPal: incluye un 5% de gastos de gestión adicionales
+                </p>
               </div>
 
               <div className="space-y-3 pt-4">
@@ -262,7 +282,7 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                       <svg className="h-4 w-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .771-.66h6.487c2.025 0 3.538.507 4.497 1.507.921.961 1.261 2.217 1.046 3.849l-.016.112-.012.084.052.028c.628.349 1.115.809 1.446 1.371.35.593.528 1.336.528 2.207 0 1.015-.207 1.913-.616 2.668-.386.71-.93 1.31-1.618 1.783a6.08 6.08 0 0 1-2.167.936c-.772.181-1.635.274-2.562.274H12.2a.967.967 0 0 0-.955.816l-.033.196-.585 3.716-.027.14a.966.966 0 0 1-.955.79H7.076z"/>
                       </svg>
-                      <span className="truncate">PayPal {cartState.total.toFixed(2)} €</span>
+                      <span className="truncate">PayPal {totalWithPayPalFee.toFixed(2)} €</span>
                     </span>
                   ) : (
                     <span className="flex items-center justify-center gap-2">
