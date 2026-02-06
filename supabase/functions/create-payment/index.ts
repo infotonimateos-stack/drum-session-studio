@@ -26,37 +26,31 @@ serve(async (req) => {
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
 
-    // Get the request body with cart data including country for tax calculation
-    const { items, basePrice, total, customerEmail, customerCountry } = await req.json();
-    logStep("Received cart data", { itemCount: items?.length, basePrice, total, customerEmail, customerCountry });
+    // Get the request body with cart data
+    const { items, basePrice, total, customerEmail } = await req.json();
+    logStep("Received cart data", { itemCount: items?.length, basePrice, total, customerEmail });
 
     if (!total || total <= 0) {
       throw new Error("Invalid total amount");
     }
 
-    // Build line items for Stripe
+    // Build line items for Stripe (prices include tax internally)
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
-    // Tax code for digital audio services (electronically supplied services)
-    // txcd_10201000 = Digital products - Audio/Visual
-    const digitalServicesTaxCode = "txcd_10201000";
-
-    // Add base package with tax_behavior and tax_code for automatic tax calculation
+    // Add base package
     lineItems.push({
       price_data: {
         currency: "eur",
         product_data: {
           name: "Paquete Básico - Grabación de Batería",
           description: "Grabación profesional de batería, configuración básica de micrófonos, entrega estándar (10 días), 1 toma básica incluida",
-          tax_code: digitalServicesTaxCode,
         },
         unit_amount: Math.round(basePrice * 100),
-        tax_behavior: "exclusive",
       },
       quantity: 1,
     });
 
-    // Add each cart item as a line item with tax_behavior and tax_code
+    // Add each cart item as a line item
     if (items && items.length > 0) {
       for (const item of items) {
         lineItems.push({
@@ -65,10 +59,8 @@ serve(async (req) => {
             product_data: {
               name: item.name,
               description: item.description || `${item.category}`,
-              tax_code: digitalServicesTaxCode,
             },
             unit_amount: Math.round(item.price * 100),
-            tax_behavior: "exclusive",
           },
           quantity: 1,
         });
@@ -81,26 +73,7 @@ serve(async (req) => {
     const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
     logStep("Origin determined", { origin });
 
-    // Create a Stripe customer with full address for tax calculation
-    let customerId: string | undefined;
-    if (customerCountry) {
-      const customer = await stripe.customers.create({
-        email: customerEmail || undefined,
-        address: {
-          country: customerCountry,
-          // City is needed for tax calculation in some jurisdictions
-          city: "Madrid", // Default city, will be updated in checkout
-          line1: "Pending",
-        },
-        tax: {
-          validate_location: "deferred",
-        },
-      });
-      customerId = customer.id;
-      logStep("Customer created with country", { customerId, country: customerCountry });
-    }
-
-    // Create checkout session - simplified configuration for digital products
+    // Create checkout session - simple configuration without automatic tax
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
       line_items: lineItems,
       mode: "payment",
@@ -108,22 +81,10 @@ serve(async (req) => {
       cancel_url: `${origin}/`,
       locale: "es",
       payment_method_types: ["card"],
-      // REQUIRED: Collect billing address to determine tax location
-      billing_address_collection: "required",
-      // Enable automatic tax calculation
-      automatic_tax: { enabled: true },
-      // Enable tax ID collection for B2B customers (VAT/ROI)
-      tax_id_collection: { enabled: true },
     };
 
-    // If we created a customer, attach them
-    if (customerId) {
-      sessionConfig.customer = customerId;
-      sessionConfig.customer_update = {
-        address: "auto",
-        name: "auto",
-      };
-    } else if (customerEmail) {
+    // Add customer email if provided
+    if (customerEmail) {
       sessionConfig.customer_email = customerEmail;
     }
 

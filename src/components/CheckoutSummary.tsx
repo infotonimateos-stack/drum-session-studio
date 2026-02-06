@@ -7,7 +7,6 @@ import { ShoppingCart, CreditCard, Loader2 } from "lucide-react";
 import { CartState } from "@/types/cart";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { CountrySelector } from "./CountrySelector";
 
 interface CheckoutSummaryProps {
   cartState: CartState;
@@ -18,7 +17,6 @@ interface CheckoutSummaryProps {
 export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutSummaryProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'paypal'>('card');
-  const [customerCountry, setCustomerCountry] = useState<string>("");
 
   const groupedItems = cartState.items.reduce((acc, item) => {
     if (!acc[item.category]) {
@@ -29,11 +27,6 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
   }, {} as Record<string, typeof cartState.items>);
 
   const handleStripePayment = async () => {
-    if (!customerCountry) {
-      toast.error('Por favor, selecciona tu país de residencia fiscal antes de continuar.');
-      return;
-    }
-
     setIsLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke('create-payment', {
@@ -41,7 +34,6 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
           items: cartState.items,
           basePrice: cartState.basePrice,
           total: cartState.total,
-          customerCountry,
         },
       });
 
@@ -67,11 +59,6 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
   };
 
   const handlePayPalPayment = async () => {
-    if (!customerCountry) {
-      toast.error('Por favor, selecciona tu país de residencia fiscal antes de continuar.');
-      return;
-    }
-
     setIsLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke('create-paypal-order', {
@@ -79,7 +66,6 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
           items: cartState.items,
           basePrice: cartState.basePrice,
           total: cartState.total,
-          customerCountry,
         },
       });
 
@@ -219,20 +205,6 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                   <span>Total:</span>
                   <span className="text-primary">{cartState.total.toFixed(2)} €</span>
                 </div>
-              </div>
-
-              {/* Tax Information Notice */}
-              <div className="bg-muted/50 rounded-lg p-3 text-xs text-muted-foreground text-center border border-border/50">
-                <p>💡 Los precios mostrados no incluyen impuestos indirectos. El IVA o impuesto equivalente aplicable se calculará y desglosará en la pantalla de pago basándose en su ubicación y tipo de cliente.</p>
-              </div>
-
-              {/* Country Selection for Tax Calculation */}
-              <div className="pt-2">
-                <CountrySelector 
-                  value={customerCountry} 
-                  onChange={setCustomerCountry}
-                  disabled={isLoading}
-                />
               </div>
 
               {/* Payment Method Selection */}
