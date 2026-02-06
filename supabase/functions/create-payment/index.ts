@@ -132,6 +132,7 @@ serve(async (req) => {
       sessionConfig.customer_update = {
         address: "auto",
         name: "auto",
+        shipping: "auto", // Required when using shipping_address_collection with automatic_tax
       };
     } else if (customerEmail) {
       // Fallback: just set email if no customer created
