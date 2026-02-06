@@ -1,22 +1,119 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Home } from "lucide-react";
+import { CheckCircle, Home, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function PaymentSuccess() {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [searchParams] = useSearchParams();
+  const [isCapturing, setIsCapturing] = useState(false);
+  const [captureComplete, setCaptureComplete] = useState(false);
+  const [captureError, setCaptureError] = useState<string | null>(null);
 
   useEffect(() => {
     // Scroll to top on mount
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+
+    // Check if this is a PayPal return
+    const paymentMethod = searchParams.get('method');
+    const token = searchParams.get('token'); // PayPal order ID is passed as token
+
+    if (paymentMethod === 'paypal' && token) {
+      capturePayPalOrder(token);
+    } else {
+      // Stripe payment - already captured, just show success
+      setCaptureComplete(true);
+    }
+  }, [searchParams]);
+
+  const capturePayPalOrder = async (orderId: string) => {
+    setIsCapturing(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('capture-paypal-order', {
+        body: { orderId },
+      });
+
+      if (error) {
+        console.error('PayPal capture error:', error);
+        setCaptureError('Error al confirmar el pago de PayPal.');
+      } else if (data?.success) {
+        console.log('PayPal capture successful:', data);
+        setCaptureComplete(true);
+      } else {
+        setCaptureError(data?.error || 'Error desconocido al capturar el pago.');
+      }
+    } catch (err) {
+      console.error('PayPal capture error:', err);
+      setCaptureError('Error al conectar con el servidor.');
+    } finally {
+      setIsCapturing(false);
+    }
+  };
+
+  // Show loading state while capturing PayPal order
+  if (isCapturing) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-warm-cream/30 to-warm-peach/20 flex items-center justify-center p-4">
+        <Card className="max-w-lg w-full bg-gradient-to-br from-warm-peach/30 to-warm-apricot/30 border-primary/30 shadow-2xl">
+          <CardContent className="py-16 text-center">
+            <Loader2 className="w-16 h-16 mx-auto text-primary animate-spin mb-6" />
+            <h2 className="text-2xl font-bold text-primary mb-2">Confirmando tu pago...</h2>
+            <p className="text-muted-foreground">Por favor, espera un momento.</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // Show error state if capture failed
+  if (captureError) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-warm-cream/30 to-warm-peach/20 flex items-center justify-center p-4">
+        <Card className="max-w-lg w-full bg-gradient-to-br from-destructive/10 to-destructive/5 border-destructive/30 shadow-2xl">
+          <CardHeader className="text-center pb-4">
+            <div className="mx-auto w-20 h-20 bg-destructive/20 rounded-full flex items-center justify-center mb-4">
+              <span className="text-4xl">⚠️</span>
+            </div>
+            <CardTitle className="text-3xl font-bold text-destructive">
+              Error en el Pago
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6 text-center">
+            <p className="text-lg text-muted-foreground">
+              {captureError}
+            </p>
+            
+            <div className="bg-background/50 rounded-lg p-4">
+              <p className="text-sm text-muted-foreground">
+                Por favor, contacta con nosotros en{" "}
+                <a href="mailto:info@tonimateos.com" className="text-primary hover:underline font-medium">
+                  info@tonimateos.com
+                </a>{" "}
+                para resolver este problema.
+              </p>
+            </div>
+
+            <Button 
+              onClick={() => navigate("/")}
+              className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
+              size="lg"
+            >
+              <Home className="w-5 h-5 mr-2" />
+              Volver al Inicio
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-warm-cream/30 to-warm-peach/20 flex items-center justify-center p-4">
-      <Card className="max-w-lg w-full bg-gradient-to-br from-success/10 to-emerald-100/50 border-success/30 shadow-2xl">
+      <Card className="max-w-lg w-full bg-gradient-to-br from-success/10 to-success/5 border-success/30 shadow-2xl">
         <CardHeader className="text-center pb-4">
           <div className="mx-auto w-20 h-20 bg-success/20 rounded-full flex items-center justify-center mb-4">
             <CheckCircle className="w-12 h-12 text-success" />
