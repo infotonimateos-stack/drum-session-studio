@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import Stripe from "https://esm.sh/stripe@14.21.0";
+import Stripe from "https://esm.sh/stripe@14.21.0?target=deno";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -24,7 +24,7 @@ serve(async (req) => {
     if (!stripeKey) throw new Error("STRIPE_SECRET_KEY is not set");
     logStep("Stripe key verified");
 
-    const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
+    const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
 
     // Get the request body with cart data including country for tax calculation
     const { items, basePrice, total, customerEmail, customerCountry } = await req.json();
@@ -48,10 +48,10 @@ serve(async (req) => {
         product_data: {
           name: "Paquete Básico - Grabación de Batería",
           description: "Grabación profesional de batería, configuración básica de micrófonos, entrega estándar (10 días), 1 toma básica incluida",
-          tax_code: digitalServicesTaxCode, // Required for Stripe Tax to calculate rates
+          tax_code: digitalServicesTaxCode,
         },
-        unit_amount: Math.round(basePrice * 100), // Convert to cents
-        tax_behavior: "exclusive", // Tax will be added on top of this price
+        unit_amount: Math.round(basePrice * 100),
+        tax_behavior: "exclusive",
       },
       quantity: 1,
     });
@@ -65,10 +65,10 @@ serve(async (req) => {
             product_data: {
               name: item.name,
               description: item.description || `${item.category}`,
-              tax_code: digitalServicesTaxCode, // Required for Stripe Tax to calculate rates
+              tax_code: digitalServicesTaxCode,
             },
-            unit_amount: Math.round(item.price * 100), // Convert to cents
-            tax_behavior: "exclusive", // Tax will be added on top of this price
+            unit_amount: Math.round(item.price * 100),
+            tax_behavior: "exclusive",
           },
           quantity: 1,
         });
@@ -81,38 +81,26 @@ serve(async (req) => {
     const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
     logStep("Origin determined", { origin });
 
-    // Create a Stripe customer with country pre-set for tax calculation
+    // Create a Stripe customer with full address for tax calculation
     let customerId: string | undefined;
-    if (customerCountry || customerEmail) {
-      const customerData: Stripe.CustomerCreateParams = {};
-      
-      if (customerEmail) {
-        customerData.email = customerEmail;
-      }
-      
-      if (customerCountry) {
-        customerData.address = {
+    if (customerCountry) {
+      const customer = await stripe.customers.create({
+        email: customerEmail || undefined,
+        address: {
           country: customerCountry,
-        };
-        // Also set tax location hint
-        customerData.tax = {
+          // City is needed for tax calculation in some jurisdictions
+          city: "Madrid", // Default city, will be updated in checkout
+          line1: "Pending",
+        },
+        tax: {
           validate_location: "deferred",
-        };
-      }
-      
-      const customer = await stripe.customers.create(customerData);
+        },
+      });
       customerId = customer.id;
       logStep("Customer created with country", { customerId, country: customerCountry });
     }
 
-    // EU countries for shipping address collection (forces country selection early)
-    const euCountries: Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[] = [
-      "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", 
-      "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", 
-      "PL", "PT", "RO", "SK", "SI", "ES", "SE", "GB", "CH", "NO", "IS"
-    ];
-
-    // Create checkout session configuration with automatic tax calculation
+    // Create checkout session - simplified configuration for digital products
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
       line_items: lineItems,
       mode: "payment",
@@ -122,26 +110,20 @@ serve(async (req) => {
       payment_method_types: ["card"],
       // REQUIRED: Collect billing address to determine tax location
       billing_address_collection: "required",
-      // Force country selection early in the checkout flow
-      shipping_address_collection: {
-        allowed_countries: euCountries,
-      },
-      // Enable automatic tax calculation based on customer location
+      // Enable automatic tax calculation
       automatic_tax: { enabled: true },
       // Enable tax ID collection for B2B customers (VAT/ROI)
       tax_id_collection: { enabled: true },
     };
 
-    // If we created a customer, attach them and allow address updates
+    // If we created a customer, attach them
     if (customerId) {
       sessionConfig.customer = customerId;
       sessionConfig.customer_update = {
         address: "auto",
         name: "auto",
-        shipping: "auto", // Required when using shipping_address_collection with automatic_tax
       };
     } else if (customerEmail) {
-      // Fallback: just set email if no customer created
       sessionConfig.customer_email = customerEmail;
     }
 
