@@ -1,5 +1,5 @@
-import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import Stripe from "https://esm.sh/stripe@18.5.0";
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import Stripe from "https://esm.sh/stripe@14.21.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -37,13 +37,18 @@ serve(async (req) => {
     // Build line items for Stripe
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
-    // Add base package with tax_behavior for automatic tax calculation
+    // Tax code for digital audio services (electronically supplied services)
+    // txcd_10201000 = Digital products - Audio/Visual
+    const digitalServicesTaxCode = "txcd_10201000";
+
+    // Add base package with tax_behavior and tax_code for automatic tax calculation
     lineItems.push({
       price_data: {
         currency: "eur",
         product_data: {
           name: "Paquete Básico - Grabación de Batería",
           description: "Grabación profesional de batería, configuración básica de micrófonos, entrega estándar (10 días), 1 toma básica incluida",
+          tax_code: digitalServicesTaxCode, // Required for Stripe Tax to calculate rates
         },
         unit_amount: Math.round(basePrice * 100), // Convert to cents
         tax_behavior: "exclusive", // Tax will be added on top of this price
@@ -51,7 +56,7 @@ serve(async (req) => {
       quantity: 1,
     });
 
-    // Add each cart item as a line item with tax_behavior
+    // Add each cart item as a line item with tax_behavior and tax_code
     if (items && items.length > 0) {
       for (const item of items) {
         lineItems.push({
@@ -60,6 +65,7 @@ serve(async (req) => {
             product_data: {
               name: item.name,
               description: item.description || `${item.category}`,
+              tax_code: digitalServicesTaxCode, // Required for Stripe Tax to calculate rates
             },
             unit_amount: Math.round(item.price * 100), // Convert to cents
             tax_behavior: "exclusive", // Tax will be added on top of this price
