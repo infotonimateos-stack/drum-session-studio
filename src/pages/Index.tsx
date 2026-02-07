@@ -8,6 +8,7 @@ import { SamplesTab } from "@/components/tabs/SamplesTab";
 import { TutorialsTab } from "@/components/tabs/TutorialsTab";
 import { FAQTab } from "@/components/tabs/FAQTab";
 import { ContactTab } from "@/components/tabs/ContactTab";
+import { Footer } from "@/components/Footer";
 import { useCart } from "@/hooks/useCart";
 
 const Index = () => {
@@ -49,9 +50,12 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-card to-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-card to-background flex flex-col">
       <Header activeTab={activeTab} onTabChange={setActiveTab} />
-      {renderContent()}
+      <div className="flex-1">
+        {renderContent()}
+      </div>
+      <Footer />
     </div>
   );
 };

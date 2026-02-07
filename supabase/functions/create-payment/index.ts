@@ -77,7 +77,7 @@ serve(async (req) => {
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
       line_items: lineItems,
       mode: "payment",
-      success_url: `${origin}/payment-success`,
+      success_url: `${origin}/success`,
       cancel_url: `${origin}/`,
       locale: "es",
       payment_method_types: ["card"],

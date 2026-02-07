@@ -139,7 +139,7 @@ serve(async (req) => {
           landing_page: "NO_PREFERENCE",
           shipping_preference: "NO_SHIPPING",
           user_action: "PAY_NOW",
-          return_url: `${origin}/payment-success?method=paypal`,
+          return_url: `${origin}/success?method=paypal`,
           cancel_url: `${origin}/`,
         },
       }),
