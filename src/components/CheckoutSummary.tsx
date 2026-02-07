@@ -3,10 +3,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { Checkbox } from "@/components/ui/checkbox";
 import { ShoppingCart, CreditCard, Loader2 } from "lucide-react";
 import { CartState } from "@/types/cart";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 interface CheckoutSummaryProps {
   cartState: CartState;
@@ -17,6 +19,7 @@ interface CheckoutSummaryProps {
 export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutSummaryProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'paypal'>('card');
+  const [acceptedPrivacyPolicy, setAcceptedPrivacyPolicy] = useState(false);
 
   // PayPal fee calculation (5%)
   const PAYPAL_FEE_PERCENTAGE = 0.05;
@@ -261,13 +264,39 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                 </p>
               </div>
 
+              {/* Privacy Policy Consent */}
+              <div className="space-y-3 pt-4 border-t border-border/50">
+                <div className="flex items-start space-x-3">
+                  <Checkbox
+                    id="privacy-policy"
+                    checked={acceptedPrivacyPolicy}
+                    onCheckedChange={(checked) => setAcceptedPrivacyPolicy(checked === true)}
+                    className="mt-1"
+                  />
+                  <label 
+                    htmlFor="privacy-policy" 
+                    className="text-sm text-muted-foreground leading-relaxed cursor-pointer"
+                  >
+                    He leído y acepto la{" "}
+                    <Link 
+                      to="/politica-privacidad" 
+                      target="_blank"
+                      className="text-primary hover:underline font-medium"
+                    >
+                      Política de Privacidad
+                    </Link>{" "}
+                    de Antonio Mateos.
+                  </label>
+                </div>
+              </div>
+
               <div className="space-y-3 pt-4">
                 <Button 
                   onClick={handlePayment}
-                  disabled={isLoading}
+                  disabled={isLoading || !acceptedPrivacyPolicy}
                   className={`w-full h-14 text-sm sm:text-base ${
                     paymentMethod === 'paypal' 
-                      ? 'bg-[#0070ba] hover:bg-[#005ea6] text-white' 
+                      ? 'bg-[#0070ba] hover:bg-[#005ea6] text-white disabled:bg-[#0070ba]/50' 
                       : 'bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90'
                   }`}
                   size="lg"
@@ -291,6 +320,12 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                     </span>
                   )}
                 </Button>
+                
+                {!acceptedPrivacyPolicy && (
+                  <p className="text-xs text-center text-muted-foreground">
+                    Debes aceptar la Política de Privacidad para continuar
+                  </p>
+                )}
                 
                 <Button 
                   onClick={onBack}
