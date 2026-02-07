@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
-import protoolsImage from "@/assets/protools-tracks-hero.jpg";
+import protoolsImage from "@/assets/protools-studio.png";
 import { useTranslation } from "react-i18next";
 
 export const SamplesTab = () => {
