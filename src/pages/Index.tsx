@@ -10,6 +10,7 @@ import { FAQTab } from "@/components/tabs/FAQTab";
 import { ContactTab } from "@/components/tabs/ContactTab";
 import { Footer } from "@/components/Footer";
 import { useCart } from "@/hooks/useCart";
+import { SEOHead } from "@/components/SEOHead";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("configure");
@@ -51,6 +52,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-card to-background flex flex-col">
+      <SEOHead />
       <Header activeTab={activeTab} onTabChange={setActiveTab} />
       <div className="flex-1">
         {renderContent()}

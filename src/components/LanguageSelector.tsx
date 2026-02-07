@@ -10,36 +10,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu";
-
-const languages = [
-  { code: "es-ES", label: "Español", flag: "🇪🇸" },
-  { code: "en-GB", label: "English", flag: "🇬🇧" },
-  { code: "zh-CN", label: "中文", flag: "🇨🇳" },
-  { code: "hi-IN", label: "हिंदी", flag: "🇮🇳" },
-  { code: "ar-SA", label: "العربية", flag: "🇸🇦" },
-  { code: "pt-BR", label: "Português (BR)", flag: "🇧🇷" },
-  { code: "pt-PT", label: "Português (PT)", flag: "🇵🇹" },
-  { code: "ru-RU", label: "Русский", flag: "🇷🇺" },
-  { code: "ja-JP", label: "日本語", flag: "🇯🇵" },
-  { code: "de-DE", label: "Deutsch", flag: "🇩🇪" },
-  { code: "fr-FR", label: "Français", flag: "🇫🇷" },
-  { code: "ko-KR", label: "한국어", flag: "🇰🇷" },
-  { code: "it-IT", label: "Italiano", flag: "🇮🇹" },
-  { code: "tr-TR", label: "Türkçe", flag: "🇹🇷" },
-  { code: "vi-VN", label: "Tiếng Việt", flag: "🇻🇳" },
-  { code: "pl-PL", label: "Polski", flag: "🇵🇱" },
-  { code: "nl-NL", label: "Nederlands", flag: "🇳🇱" },
-  { code: "uk-UA", label: "Українська", flag: "🇺🇦" },
-  { code: "id-ID", label: "Bahasa Indonesia", flag: "🇮🇩" },
-  { code: "th-TH", label: "ไทย", flag: "🇹🇭" },
-];
+import { languageConfig, changeLanguage } from "@/i18n";
 
 export const LanguageSelector = () => {
   const { i18n, t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
-  const current = languages.find((l) => l.code === i18n.language) || languages[0];
+  const current = languageConfig.find((l) => l.code === i18n.language) || languageConfig[0];
 
-  const change = async (lng: string) => {
+  const handleChange = async (lng: string) => {
     if (lng === i18n.language) return;
     
     // Show loading for non-cached languages
@@ -48,7 +26,7 @@ export const LanguageSelector = () => {
     }
     
     try {
-      await i18n.changeLanguage(lng);
+      await changeLanguage(lng);
     } finally {
       setIsLoading(false);
     }
@@ -63,21 +41,21 @@ export const LanguageSelector = () => {
           ) : (
             <Globe className="h-4 w-4" />
           )}
-          <span className="hidden sm:inline-block text-sm">{current.flag} {current.label}</span>
+          <span className="hidden sm:inline-block text-sm">{current.flag} {current.name}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-52 max-h-80 overflow-y-auto">
-        <DropdownMenuLabel>{t("language.title")}</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("language.title", "Seleccionar idioma")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {languages.map((lang) => (
+        {languageConfig.map((lang) => (
           <DropdownMenuItem 
             key={lang.code} 
-            onClick={() => change(lang.code)}
+            onClick={() => handleChange(lang.code)}
             className={i18n.language === lang.code ? "bg-accent" : ""}
             disabled={isLoading}
           >
             <span className="mr-2">{lang.flag}</span>
-            <span>{lang.label}</span>
+            <span>{lang.name}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
