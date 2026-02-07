@@ -4,6 +4,7 @@ import { initReactI18next } from "react-i18next";
 // Import translation files
 import esCommon from "./locales/es-ES/common.json";
 import enCommon from "./locales/en-GB/common.json";
+import deCommon from "./locales/de-DE/common.json";
 
 const LANGUAGE_KEY = "drum-studio-language";
 
@@ -69,6 +70,7 @@ const getSavedLanguage = (): string => {
 const resources: Record<string, { common: typeof esCommon }> = {
   "es-ES": { common: esCommon },
   "en-GB": { common: enCommon },
+  "de-DE": { common: deCommon },
 };
 
 void i18n
@@ -165,8 +167,9 @@ async function translateObject(obj: TranslationDict, targetLang: string): Promis
 
 // Load or generate translations for a language
 async function ensureBundle(lng: string): Promise<void> {
-  // Skip if already loaded or is base language
-  if (lng === "es-ES" || lng === "en-GB" || i18n.hasResourceBundle(lng, "common")) {
+  // Skip if already loaded or has manual translations
+  const manualTranslations = ["es-ES", "en-GB", "de-DE"];
+  if (manualTranslations.includes(lng) || i18n.hasResourceBundle(lng, "common")) {
     return;
   }
 
@@ -212,8 +215,9 @@ i18n.on("languageChanged", async (lng) => {
     // localStorage not available
   }
 
-  // Load translations if needed
-  if (lng !== "es-ES" && lng !== "en-GB" && !i18n.hasResourceBundle(lng, "common")) {
+  // Load translations if needed (skip languages with manual translations)
+  const manualTranslations = ["es-ES", "en-GB", "de-DE"];
+  if (!manualTranslations.includes(lng) && !i18n.hasResourceBundle(lng, "common")) {
     if (loadingLng === lng) return;
     loadingLng = lng;
     await ensureBundle(lng);
