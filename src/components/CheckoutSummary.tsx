@@ -9,6 +9,7 @@ import { CartState } from "@/types/cart";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface CheckoutSummaryProps {
   cartState: CartState;
@@ -17,6 +18,7 @@ interface CheckoutSummaryProps {
 }
 
 export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutSummaryProps) => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'paypal'>('card');
   const [acceptedPrivacyPolicy, setAcceptedPrivacyPolicy] = useState(false);
@@ -48,7 +50,7 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
 
       if (error) {
         console.error('Stripe payment error:', error);
-        toast.error('Error al procesar el pago con tarjeta. Por favor, inténtalo de nuevo.');
+        toast.error(t("checkout.stripeError"));
         setIsLoading(false);
         return;
       }
@@ -57,12 +59,12 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
         window.open(data.url, '_blank');
         setIsLoading(false);
       } else {
-        toast.error('No se pudo crear la sesión de pago.');
+        toast.error(t("checkout.sessionError"));
         setIsLoading(false);
       }
     } catch (err) {
       console.error('Stripe payment error:', err);
-      toast.error('Error al conectar con el servidor de pagos.');
+      toast.error(t("checkout.connectionError"));
       setIsLoading(false);
     }
   };
@@ -82,7 +84,7 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
 
       if (error) {
         console.error('PayPal payment error:', error);
-        toast.error('Error al procesar el pago con PayPal. Por favor, inténtalo de nuevo.');
+        toast.error(t("checkout.paypalError"));
         setIsLoading(false);
         return;
       }
@@ -91,12 +93,12 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
         window.open(data.url, '_blank');
         setIsLoading(false);
       } else {
-        toast.error('No se pudo crear la orden de PayPal.');
+        toast.error(t("checkout.paypalOrderError"));
         setIsLoading(false);
       }
     } catch (err) {
       console.error('PayPal payment error:', err);
-      toast.error('Error al conectar con PayPal.');
+      toast.error(t("checkout.connectionError"));
       setIsLoading(false);
     }
   };
@@ -114,10 +116,10 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
       {/* Header */}
       <div className="text-center space-y-4">
         <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          🛒 Resumen del Pedido
+          {t("checkout.title")}
         </h2>
         <p className="text-muted-foreground text-lg">
-          Revisa tu configuración antes de finalizar la compra
+          {t("checkout.subtitle")}
         </p>
       </div>
 
@@ -128,18 +130,18 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
           <Card className="bg-gradient-to-br from-success/10 to-emerald-100/50 border-success/30">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-success">
-                ✅ Paquete Básico Incluido
+                {t("checkout.basePackage")}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2 text-sm">
-                <p>• Grabación profesional de batería</p>
-                <p>• Configuración básica de micrófonos</p>
-                <p>• Entrega estándar (10 días)</p>
-                <p>• 1 Toma básica incluida</p>
+                <p>• {t("checkout.basePackageDesc1")}</p>
+                <p>• {t("checkout.basePackageDesc2")}</p>
+                <p>• {t("checkout.basePackageDesc3")}</p>
+                <p>• {t("checkout.basePackageDesc4")}</p>
               </div>
               <div className="mt-4 flex justify-between items-center">
-                <span className="font-semibold">Precio base:</span>
+                <span className="font-semibold">{t("checkout.basePrice")}</span>
                 <Badge variant="secondary" className="text-lg">{cartState.basePrice.toFixed(2)} €</Badge>
               </div>
             </CardContent>
@@ -178,7 +180,7 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
               <CardContent className="py-12 text-center">
                 <ShoppingCart className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
                 <p className="text-muted-foreground">
-                  Solo el paquete básico seleccionado
+                  {t("checkout.emptyCart")}
                 </p>
               </CardContent>
             </Card>
@@ -189,12 +191,12 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
         <div className="lg:col-span-1">
           <Card className="bg-gradient-to-br from-gradient-warm sticky top-8">
             <CardHeader>
-              <CardTitle className="text-center">💰 Total del Pedido</CardTitle>
+              <CardTitle className="text-center">{t("checkout.orderTotal")}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span>Paquete básico:</span>
+                  <span>{t("checkout.basicPackage")}</span>
                   <span>{cartState.basePrice.toFixed(2)} €</span>
                 </div>
                 
@@ -215,20 +217,20 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                 {/* PayPal Fee - only shown when PayPal is selected */}
                 {paymentMethod === 'paypal' && (
                   <div className="flex justify-between text-sm text-amber-600 dark:text-amber-400">
-                    <span>Gastos de gestión PayPal (5%):</span>
+                    <span>{t("checkout.paypalFee")}</span>
                     <span>+{paypalFee.toFixed(2)} €</span>
                   </div>
                 )}
                 
                 <div className="flex justify-between text-lg font-bold">
-                  <span>Total:</span>
+                  <span>{t("checkout.total")}</span>
                   <span className="text-primary">{displayTotal.toFixed(2)} €</span>
                 </div>
               </div>
 
               {/* Payment Method Selection */}
               <div className="space-y-3 pt-4">
-                <p className="text-sm font-medium text-center text-muted-foreground">Método de pago</p>
+                <p className="text-sm font-medium text-center text-muted-foreground">{t("checkout.paymentMethod")}</p>
                 <div className="grid grid-cols-2 gap-2">
                   <Button
                     type="button"
@@ -239,7 +241,7 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                   >
                     <div className="flex flex-col items-center gap-1">
                       <CreditCard className="h-5 w-5" />
-                      <span className="text-xs">Tarjeta</span>
+                      <span className="text-xs">{t("checkout.card")}</span>
                     </div>
                   </Button>
                   <Button
@@ -254,13 +256,13 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                         <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .771-.66h6.487c2.025 0 3.538.507 4.497 1.507.921.961 1.261 2.217 1.046 3.849l-.016.112-.012.084.052.028c.628.349 1.115.809 1.446 1.371.35.593.528 1.336.528 2.207 0 1.015-.207 1.913-.616 2.668-.386.71-.93 1.31-1.618 1.783a6.08 6.08 0 0 1-2.167.936c-.772.181-1.635.274-2.562.274H12.2a.967.967 0 0 0-.955.816l-.033.196-.585 3.716-.027.14a.966.966 0 0 1-.955.79H7.076z"/>
                         <path d="M18.79 7.586c.035-.214.052-.434.052-.66 0-2.188-1.423-3.866-4.596-3.866H7.215a.967.967 0 0 0-.955.816l-2.8 17.762a.784.784 0 0 0 .774.91h4.283l1.075-6.82.033-.196a.967.967 0 0 1 .955-.816h1.481c3.255 0 5.802-1.322 6.545-5.148.022-.113.041-.223.058-.332.213-1.358.077-2.284-.532-2.946a3.21 3.21 0 0 0-.342-.304z"/>
                       </svg>
-                      <span className="text-xs">PayPal</span>
+                      <span className="text-xs">{t("checkout.paypal")}</span>
                     </div>
                   </Button>
                 </div>
                 {/* PayPal fee disclaimer */}
                 <p className="text-xs text-center text-amber-600 dark:text-amber-400">
-                  Pago con PayPal: incluye un 5% de gastos de gestión adicionales
+                  {t("checkout.paypalDisclaimer")}
                 </p>
               </div>
 
@@ -277,15 +279,15 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                     htmlFor="privacy-policy" 
                     className="text-sm text-muted-foreground leading-relaxed cursor-pointer"
                   >
-                    He leído y acepto la{" "}
+                    {t("checkout.privacyConsent")}{" "}
                     <Link 
                       to="/politica-privacidad" 
                       target="_blank"
                       className="text-primary hover:underline font-medium"
                     >
-                      Política de Privacidad
+                      {t("checkout.privacyPolicy")}
                     </Link>{" "}
-                    de Antonio Mateos.
+                    {t("checkout.of")}
                   </label>
                 </div>
               </div>
@@ -304,7 +306,7 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                   {isLoading ? (
                     <span className="flex items-center justify-center gap-2">
                       <Loader2 className="h-4 w-4 animate-spin flex-shrink-0" />
-                      <span>Procesando...</span>
+                      <span>{t("checkout.processing")}</span>
                     </span>
                   ) : paymentMethod === 'paypal' ? (
                     <span className="flex items-center justify-center gap-2">
@@ -316,14 +318,14 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                   ) : (
                     <span className="flex items-center justify-center gap-2">
                       <CreditCard className="h-4 w-4 flex-shrink-0" />
-                      <span className="truncate">Tarjeta {cartState.total.toFixed(2)} €</span>
+                      <span className="truncate">{t("checkout.card")} {cartState.total.toFixed(2)} €</span>
                     </span>
                   )}
                 </Button>
                 
                 {!acceptedPrivacyPolicy && (
                   <p className="text-xs text-center text-muted-foreground">
-                    Debes aceptar la Política de Privacidad para continuar
+                    {t("checkout.mustAcceptPrivacy")}
                   </p>
                 )}
                 
@@ -333,12 +335,12 @@ export const CheckoutSummary = ({ cartState, onConfirmOrder, onBack }: CheckoutS
                   className="w-full"
                   disabled={isLoading}
                 >
-                  ← Volver a Configurar
+                  {t("checkout.backToConfig")}
                 </Button>
               </div>
 
               <div className="text-xs text-center text-muted-foreground pt-4">
-                🔒 Pago seguro · Satisfacción garantizada
+                {t("checkout.securePayment")}
               </div>
             </CardContent>
           </Card>

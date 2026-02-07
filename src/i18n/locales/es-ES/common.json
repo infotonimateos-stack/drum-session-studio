@@ -1,5 +1,7 @@
 {
-  "header": { "brand": "Toni Mateos Online Drums Recording" },
+  "header": { 
+    "brand": "Toni Mateos Online Drums Recording" 
+  },
   "nav": {
     "configure": "Configura tu Sesión",
     "about": "Quién Soy",
@@ -27,5 +29,90 @@
     "step2Text": "Envíanos todo el material que necesitamos para empezar tu grabación",
     "step3Title": "Grabación y envío de pistas",
     "step3Text": "Te enviamos las pistas de batería por Wetransfer con la máxima calidad"
+  },
+  "config": {
+    "steps": {
+      "microphones": "Micrófonos",
+      "preamps": "Previos",
+      "interface": "Interface",
+      "production": "Producción",
+      "video": "Video",
+      "takes": "Tomas",
+      "delivery": "Entrega",
+      "extras": "Extras"
+    },
+    "heroTitle": "Configura tu Sesión",
+    "priceFrom": "desde 49,90 euros",
+    "heroP1": "Comienza con nuestra configuración básica que incluye todo lo esencial para una grabación profesional.",
+    "heroP2": "💡 Cada elemento se puede actualizar individualmente para crear tu setup perfecto",
+    "imgAlt": "Batería microfoneada en estudio profesional"
+  },
+  "checkout": {
+    "title": "🛒 Resumen del Pedido",
+    "subtitle": "Revisa tu configuración antes de finalizar la compra",
+    "basePackage": "✅ Paquete Básico Incluido",
+    "basePackageDesc1": "Grabación profesional de batería",
+    "basePackageDesc2": "Configuración básica de micrófonos",
+    "basePackageDesc3": "Entrega estándar (10 días)",
+    "basePackageDesc4": "1 Toma básica incluida",
+    "basePrice": "Precio base:",
+    "upgrades": "🎵 {{category}}",
+    "emptyCart": "Solo el paquete básico seleccionado",
+    "orderTotal": "💰 Total del Pedido",
+    "basicPackage": "Paquete básico:",
+    "paypalFee": "Gastos de gestión PayPal (5%):",
+    "total": "Total:",
+    "paymentMethod": "Método de pago",
+    "card": "Tarjeta",
+    "paypal": "PayPal",
+    "paypalDisclaimer": "Pago con PayPal: incluye un 5% de gastos de gestión adicionales",
+    "privacyConsent": "He leído y acepto la",
+    "privacyPolicy": "Política de Privacidad",
+    "of": "de Antonio Mateos.",
+    "mustAcceptPrivacy": "Debes aceptar la Política de Privacidad para continuar",
+    "processing": "Procesando...",
+    "backToConfig": "← Volver a Configurar",
+    "securePayment": "🔒 Pago seguro · Satisfacción garantizada",
+    "stripeError": "Error al procesar el pago con tarjeta. Por favor, inténtalo de nuevo.",
+    "paypalError": "Error al procesar el pago con PayPal. Por favor, inténtalo de nuevo.",
+    "sessionError": "No se pudo crear la sesión de pago.",
+    "paypalOrderError": "No se pudo crear la orden de PayPal.",
+    "connectionError": "Error al conectar con el servidor de pagos."
+  },
+  "success": {
+    "confirming": "Confirmando tu pago...",
+    "pleaseWait": "Por favor, espera un momento.",
+    "errorTitle": "Error en el Pago",
+    "errorContact": "Por favor, contacta con nosotros en",
+    "errorResolve": "para resolver este problema.",
+    "backHome": "Volver al Inicio",
+    "title": "¡Pago Completado!",
+    "thankYou": "Gracias por tu compra. Tu pedido de grabación de batería ha sido confirmado.",
+    "materialsTitle": "📋 Para empezar la grabación necesitamos:",
+    "material1Title": "Archivo WAV estéreo",
+    "material1Desc": "de tu canción",
+    "material1Highlight": "SIN BATERÍA",
+    "material2Title": "Archivo WAV estéreo",
+    "material2Desc": "de tu canción",
+    "material2Highlight": "SOLO LA BATERÍA DEMO",
+    "material2Note": "(si no la tienes, la crearemos para ti)",
+    "material3": "El bit/sample rate de tu proyecto (frecuencia de muestreo y bits)",
+    "material4": "El tempo exacto en BPMs (o archivo MIDI tempo map si contiene cambios de tempo)",
+    "material5": "Indicaciones sobre la sonoridad, estilo, etc. si lo consideras oportuno (puedes añadir links de YouTube o Spotify)",
+    "sendTo": "📧 Envía todo a:",
+    "invoiceNote": "🧾 Si necesitas una factura oficial, por favor contacta con nosotros en",
+    "invoiceData": "facilitando tus datos fiscales.",
+    "questions": "¿Tienes alguna pregunta? Contáctanos en",
+    "paypalConfirmError": "Error al confirmar el pago de PayPal.",
+    "unknownError": "Error desconocido al capturar el pago.",
+    "serverError": "Error al conectar con el servidor."
+  },
+  "footer": {
+    "legalNotice": "Aviso Legal",
+    "privacyPolicy": "Política de Privacidad",
+    "cookiesPolicy": "Política de Cookies"
+  },
+  "language": {
+    "title": "Idioma / Language"
   }
 }

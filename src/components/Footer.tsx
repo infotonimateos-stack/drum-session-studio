@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
+import { useTranslation } from "react-i18next";
 
 export const Footer = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -14,21 +16,21 @@ export const Footer = () => {
               to="/aviso-legal" 
               className="text-muted-foreground hover:text-primary transition-colors"
             >
-              Aviso Legal
+              {t("footer.legalNotice")}
             </Link>
             <Separator orientation="vertical" className="h-4 hidden md:block" />
             <Link 
               to="/politica-privacidad" 
               className="text-muted-foreground hover:text-primary transition-colors"
             >
-              Política de Privacidad
+              {t("footer.privacyPolicy")}
             </Link>
             <Separator orientation="vertical" className="h-4 hidden md:block" />
             <Link 
               to="/politica-cookies" 
               className="text-muted-foreground hover:text-primary transition-colors"
             >
-              Política de Cookies
+              {t("footer.cookiesPolicy")}
             </Link>
           </nav>
 

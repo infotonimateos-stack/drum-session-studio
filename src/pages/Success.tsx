@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, Home, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Footer } from "@/components/Footer";
+import { useTranslation } from "react-i18next";
 
 export default function Success() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [isCapturing, setIsCapturing] = useState(false);
@@ -35,16 +37,16 @@ export default function Success() {
 
       if (error) {
         console.error('PayPal capture error:', error);
-        setCaptureError('Error al confirmar el pago de PayPal.');
+        setCaptureError(t("success.paypalConfirmError"));
       } else if (data?.success) {
         console.log('PayPal capture successful:', data);
         setCaptureComplete(true);
       } else {
-        setCaptureError(data?.error || 'Error desconocido al capturar el pago.');
+        setCaptureError(data?.error || t("success.unknownError"));
       }
     } catch (err) {
       console.error('PayPal capture error:', err);
-      setCaptureError('Error al conectar con el servidor.');
+      setCaptureError(t("success.serverError"));
     } finally {
       setIsCapturing(false);
     }
@@ -57,8 +59,8 @@ export default function Success() {
           <Card className="max-w-lg w-full bg-gradient-to-br from-warm-peach/30 to-warm-apricot/30 border-primary/30 shadow-2xl">
             <CardContent className="py-16 text-center">
               <Loader2 className="w-16 h-16 mx-auto text-primary animate-spin mb-6" />
-              <h2 className="text-2xl font-bold text-primary mb-2">Confirmando tu pago...</h2>
-              <p className="text-muted-foreground">Por favor, espera un momento.</p>
+              <h2 className="text-2xl font-bold text-primary mb-2">{t("success.confirming")}</h2>
+              <p className="text-muted-foreground">{t("success.pleaseWait")}</p>
             </CardContent>
           </Card>
         </div>
@@ -77,7 +79,7 @@ export default function Success() {
                 <span className="text-4xl">⚠️</span>
               </div>
               <CardTitle className="text-3xl font-bold text-destructive">
-                Error en el Pago
+                {t("success.errorTitle")}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6 text-center">
@@ -87,11 +89,11 @@ export default function Success() {
               
               <div className="bg-background/50 rounded-lg p-4">
                 <p className="text-sm text-muted-foreground">
-                  Por favor, contacta con nosotros en{" "}
+                  {t("success.errorContact")}{" "}
                   <a href="mailto:info@tonimateos.com" className="text-primary hover:underline font-medium">
                     info@tonimateos.com
                   </a>{" "}
-                  para resolver este problema.
+                  {t("success.errorResolve")}
                 </p>
               </div>
 
@@ -101,7 +103,7 @@ export default function Success() {
                 size="lg"
               >
                 <Home className="w-5 h-5 mr-2" />
-                Volver al Inicio
+                {t("success.backHome")}
               </Button>
             </CardContent>
           </Card>
@@ -120,57 +122,57 @@ export default function Success() {
               <CheckCircle className="w-12 h-12 text-success" />
             </div>
             <CardTitle className="text-3xl font-bold text-success">
-              ¡Pago Completado!
+              {t("success.title")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <p className="text-lg text-center text-muted-foreground">
-              Gracias por tu compra. Tu pedido de grabación de batería ha sido confirmado.
+              {t("success.thankYou")}
             </p>
             
             {/* Materials Required Section - Prominent */}
             <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl p-6 border-2 border-primary/30">
               <h2 className="text-2xl font-bold text-primary text-center mb-6">
-                📋 Para empezar la grabación necesitamos:
+                {t("success.materialsTitle")}
               </h2>
               
               <ul className="space-y-4 text-base">
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center text-primary font-bold">1</span>
                   <span className="pt-1">
-                    <strong>Archivo WAV estéreo</strong> de tu canción <span className="text-primary font-semibold">SIN BATERÍA</span>
+                    <strong>{t("success.material1Title")}</strong> {t("success.material1Desc")} <span className="text-primary font-semibold">{t("success.material1Highlight")}</span>
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center text-primary font-bold">2</span>
                   <span className="pt-1">
-                    <strong>Archivo WAV estéreo</strong> de tu canción <span className="text-primary font-semibold">SOLO LA BATERÍA DEMO</span>
-                    <span className="block text-sm text-muted-foreground mt-1">(si no la tienes, la crearemos para ti)</span>
+                    <strong>{t("success.material2Title")}</strong> {t("success.material2Desc")} <span className="text-primary font-semibold">{t("success.material2Highlight")}</span>
+                    <span className="block text-sm text-muted-foreground mt-1">{t("success.material2Note")}</span>
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center text-primary font-bold">3</span>
                   <span className="pt-1">
-                    El <strong>bit/sample rate</strong> de tu proyecto (frecuencia de muestreo y bits)
+                    {t("success.material3")}
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center text-primary font-bold">4</span>
                   <span className="pt-1">
-                    El <strong>tempo exacto en BPMs</strong> (o archivo MIDI tempo map si contiene cambios de tempo)
+                    {t("success.material4")}
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center text-primary font-bold">5</span>
                   <span className="pt-1">
-                    <strong>Indicaciones sobre la sonoridad, estilo, etc.</strong> si lo consideras oportuno (puedes añadir links de YouTube o Spotify)
+                    {t("success.material5")}
                   </span>
                 </li>
               </ul>
 
               <div className="mt-6 p-4 bg-background/60 rounded-lg text-center">
                 <p className="text-lg font-medium">
-                  📧 Envía todo a:{" "}
+                  {t("success.sendTo")}{" "}
                   <a 
                     href="mailto:info@tonimateos.com" 
                     className="text-primary hover:underline font-bold text-xl"
@@ -183,11 +185,11 @@ export default function Success() {
 
             <div className="bg-muted/30 rounded-lg p-4 border border-border/50 text-center">
               <p className="text-sm text-muted-foreground">
-                🧾 Si necesitas una <strong>factura oficial</strong>, por favor contacta con nosotros en{" "}
+                {t("success.invoiceNote")}{" "}
                 <a href="mailto:info@tonimateos.com" className="text-primary hover:underline font-medium">
                   info@tonimateos.com
                 </a>{" "}
-                facilitando tus datos fiscales.
+                {t("success.invoiceData")}
               </p>
             </div>
 
@@ -197,11 +199,11 @@ export default function Success() {
               size="lg"
             >
               <Home className="w-5 h-5 mr-2" />
-              Volver al Inicio
+              {t("success.backHome")}
             </Button>
 
             <p className="text-xs text-muted-foreground text-center">
-              ¿Tienes alguna pregunta? Contáctanos en info@tonimateos.com
+              {t("success.questions")} info@tonimateos.com
             </p>
           </CardContent>
         </Card>
