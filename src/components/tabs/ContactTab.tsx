@@ -4,10 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, Instagram, Youtube, Music } from "lucide-react";
-import { useTranslate } from "@/hooks/useTranslate";
+import { useTranslation } from "react-i18next";
 
 export const ContactTab = () => {
-  const tr = useTranslate();
+  const { t } = useTranslation();
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">
       <div className="text-center space-y-4">

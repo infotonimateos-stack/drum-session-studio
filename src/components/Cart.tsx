@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Trash2, ShoppingCart } from "lucide-react";
 import { CartState } from "@/types/cart";
+import { useTranslation } from "react-i18next";
 
 interface CartProps {
   cartState: CartState;
@@ -11,20 +12,22 @@ interface CartProps {
 }
 
 export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
+  const { t } = useTranslation();
+
   return (
     <Card className="w-full h-full bg-gradient-to-br from-card to-muted border-border shadow-lg flex flex-col overflow-hidden">
       <CardHeader className="pb-4 flex-shrink-0">
         <CardTitle className="flex items-center gap-2 text-lg">
           <ShoppingCart className="h-5 w-5 text-primary" />
-          Resumen del Pedido
+          {t("cart.orderSummary")}
         </CardTitle>
       </CardHeader>
       <CardContent className="flex-1 overflow-y-auto space-y-4">
         {/* Order Total */}
         <div className="flex justify-between items-center p-3 bg-primary/10 rounded-lg">
           <div>
-            <p className="font-medium text-sm">Total del Pedido</p>
-            <p className="text-xs text-muted-foreground">Base + extras</p>
+            <p className="font-medium text-sm">{t("cart.orderTotal")}</p>
+            <p className="text-xs text-muted-foreground">{t("cart.basePlusExtras")}</p>
           </div>
           <span className="font-bold text-primary text-xl">{cartState.total.toFixed(2)} €</span>
         </div>
@@ -36,8 +39,8 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
             {/* Base Package - Always shown first */}
             <div className="flex justify-between items-center p-2 bg-success/10 rounded-md">
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium truncate">Kit Básico de Grabación</p>
-                <p className="text-xs text-muted-foreground">8 micrófonos incluidos</p>
+                <p className="text-sm font-medium truncate">{t("cart.basicKit")}</p>
+                <p className="text-xs text-muted-foreground">{t("cart.microphonesIncluded")}</p>
               </div>
               <div className="flex items-center gap-2 ml-2">
                 <span className="text-sm font-medium">{cartState.basePrice.toFixed(2)} €</span>
@@ -71,7 +74,7 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
         
         {/* Total */}
         <div className="flex justify-between items-center p-3 bg-accent/20 rounded-lg">
-          <span className="font-bold text-lg">Total</span>
+          <span className="font-bold text-lg">{t("cart.total")}</span>
           <span className="font-bold text-xl text-primary">{cartState.total.toFixed(2)} €</span>
         </div>
 

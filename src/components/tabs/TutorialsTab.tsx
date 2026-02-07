@@ -2,10 +2,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Play, Clock, DollarSign, Globe, Video, ShoppingCart, ExternalLink } from "lucide-react";
-import { useTranslate } from "@/hooks/useTranslate";
+import { useTranslation } from "react-i18next";
 
 export const TutorialsTab = () => {
-  const tr = useTranslate();
+  const { t } = useTranslation();
   
   const cursos = [
     {

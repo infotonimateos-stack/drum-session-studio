@@ -1,8 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, Video, Phone, PlayCircle, Share2, Film } from "lucide-react";
+import { Check, Plus, Video, PlayCircle, Share2, Film } from "lucide-react";
 import { CartItem } from "@/types/cart";
+import { useTranslation } from "react-i18next";
 
 interface VideoStepProps {
   addItem: (item: CartItem) => void;
@@ -11,27 +12,29 @@ interface VideoStepProps {
 }
 
 export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
+  const { t } = useTranslation();
+
   const videoItems: CartItem[] = [
     {
       id: 'social-greeting',
-      name: 'Saludo para Redes Sociales',
+      name: t("video.socialGreeting"),
       price: 4.99,
-      category: 'Video',
-      description: 'Saludo de 15 segundos donde se nombra tu proyecto, para que lo compartas en tus redes'
+      category: t("config.steps.video"),
+      description: t("video.socialGreetingDesc")
     },
     {
       id: 'playing-video',
-      name: 'Video 1 minuto Tocando',
+      name: t("video.playingVideo"),
       price: 29.90,
-      category: 'Video',
-      description: 'Video de 1 minuto tocando tu canción'
+      category: t("config.steps.video"),
+      description: t("video.playingVideoDesc")
     },
     {
       id: 'instagram-share',
-      name: 'Compartir en Instagram',
+      name: t("video.instagramShare"),
       price: 29.90,
-      category: 'Video',
-      description: 'Video de 15 segundos que compartiré en mi perfil (30k followers) nombrando tu proyecto e invitando a seguirte'
+      category: t("config.steps.video"),
+      description: t("video.instagramShareDesc")
     }
   ];
 
@@ -75,10 +78,10 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
       <div className="text-center space-y-6">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-3">
           <Film className="h-12 w-12 text-primary" />
-          Video
+          {t("video.title")}
         </h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
-          Servicios audiovisuales para complementar tu experiencia y promover tu música.
+          {t("video.subtitle")}
         </p>
       </div>
 
@@ -117,7 +120,7 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
                 {item.price >= 25 && (
                   <div className="p-3 bg-primary/10 rounded-lg">
                     <p className="text-primary font-semibold text-sm text-center">
-                      ⭐ Servicio Premium
+                      {t("video.premiumService")}
                     </p>
                   </div>
                 )}
@@ -134,12 +137,12 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
                   {isSelected ? (
                     <>
                       <Check className="h-5 w-5 mr-2" />
-                      ✨ Añadido
+                      {t("video.added")}
                     </>
                   ) : (
                     <>
                       <Plus className="h-5 w-5 mr-2" />
-                      Añadir por {item.price.toFixed(2)} €
+                      {t("video.addFor")} {item.price.toFixed(2)} €
                     </>
                   )}
                 </Button>

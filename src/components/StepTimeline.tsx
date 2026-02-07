@@ -1,6 +1,6 @@
 import { Progress } from "@/components/ui/progress";
 import { Check, Settings } from "lucide-react";
-import { useTranslate } from "@/hooks/useTranslate";
+import { useTranslation } from "react-i18next";
 
 interface StepTimelineProps {
   currentStep: number;
@@ -8,16 +8,17 @@ interface StepTimelineProps {
 }
 
 export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => {
-  const tr = useTranslate();
+  const { t } = useTranslation();
+
   const steps = [
-    tr("Micrófonos"),
-    tr("Previos"), 
-    tr("Interface"),
-    tr("Producción"),
-    tr("Video"),
-    tr("Tomas"),
-    tr("Entrega"),
-    tr("Extras")
+    t("config.steps.microphones"),
+    t("config.steps.preamps"), 
+    t("config.steps.interface"),
+    t("config.steps.production"),
+    t("config.steps.video"),
+    t("config.steps.takes"),
+    t("config.steps.delivery"),
+    t("config.steps.extras")
   ];
 
   const progress = ((currentStep + 1) / totalSteps) * 100;
@@ -27,7 +28,7 @@ export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => 
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Settings className="h-4 w-4 text-primary" />
-          <h3 className="font-semibold text-sm">Progreso de la configuración</h3>
+          <h3 className="font-semibold text-sm">{t("config.progress")}</h3>
           <span className="text-xs font-medium bg-gradient-to-r from-warm-coral to-warm-blush bg-clip-text text-transparent">
             {Math.round(progress)}%    
           </span>

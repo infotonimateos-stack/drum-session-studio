@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Plus, Clock, Zap, Target, Package, Headphones } from "lucide-react";
 import { CartItem } from "@/types/cart";
+import { useTranslation } from "react-i18next";
 
 interface ProductionStepProps {
   addItem: (item: CartItem) => void;
@@ -11,27 +12,29 @@ interface ProductionStepProps {
 }
 
 export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepProps) => {
+  const { t } = useTranslation();
+
   const productionItems: CartItem[] = [
     {
       id: 'tiempo-adicional',
-      name: 'Tiempo Adicional (canciones 4-8 min)',
+      name: t("production.additionalTime"),
       price: 2.99,
-      category: 'Producción',
-      description: 'Para canciones entre 4 y 8 minutos de duración'
+      category: t("config.steps.production"),
+      description: t("production.additionalTimeDesc")
     },
     {
       id: 'work-mix',
-      name: 'Work Mix',
+      name: t("production.workMix"),
       price: 2.99,
-      category: 'Producción',
-      description: 'Premezcla de batería (wav stereo)'
+      category: t("config.steps.production"),
+      description: t("production.workMixDesc")
     },
     {
       id: 'sample-pack',
-      name: 'Sample Pack',
+      name: t("production.samplePack"),
       price: 4.99,
-      category: 'Producción',
-      description: 'Te enviamos los sonidos por separado, a diferentes volúmenes, de tu sesión'
+      category: t("config.steps.production"),
+      description: t("production.samplePackDesc")
     }
   ];
 
@@ -45,12 +48,10 @@ export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepP
 
   const getIcon = (itemId: string) => {
     switch (itemId) {
-      case 'beat-detective':
-        return <Target className="h-5 w-5" />;
       case 'tiempo-adicional':
         return <Clock className="h-5 w-5" />;
-      case 'entrega-expres':
-        return <Zap className="h-5 w-5" />;
+      case 'work-mix':
+        return <Headphones className="h-5 w-5" />;
       case 'sample-pack':
         return <Package className="h-5 w-5" />;
       default:
@@ -64,10 +65,10 @@ export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepP
       <div className="text-center space-y-6">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-3">
           <Headphones className="h-12 w-12 text-primary" />
-          Producción
+          {t("production.title")}
         </h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
-          Servicios adicionales para perfeccionar tu grabación y adaptarla a tus necesidades específicas.
+          {t("production.subtitle")}
         </p>
       </div>
 
@@ -114,12 +115,12 @@ export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepP
                   {isSelected ? (
                     <>
                       <Check className="h-4 w-4 mr-2" />
-                      Añadido
+                      {t("production.added")}
                     </>
                   ) : (
                     <>
                       <Plus className="h-4 w-4 mr-2" />
-                      Añadir
+                      {t("production.add")}
                     </>
                   )}
                 </Button>
