@@ -1,5 +1,7 @@
 {
-  "header": { "brand": "Toni Mateos Online Drums Recording" },
+  "header": { 
+    "brand": "Toni Mateos Online Drums Recording" 
+  },
   "nav": {
     "configure": "Configure your Session",
     "about": "About Me",
@@ -22,10 +24,95 @@
     "subtitle": "A space designed specifically to capture the best drum sound",
     "processTitle": "How does it work?",
     "step1Title": "Setup",
-    "step1Text": "Configure your setup according to your needs (from 49.90 €!)",
+    "step1Text": "Configure your setup according to your needs (from €49.90!)",
     "step2Title": "Send us your materials",
     "step2Text": "Send everything we need to start your recording",
     "step3Title": "Recording and delivery",
     "step3Text": "We send the drum stems via WeTransfer in maximum quality"
+  },
+  "config": {
+    "steps": {
+      "microphones": "Microphones",
+      "preamps": "Preamps",
+      "interface": "Interface",
+      "production": "Production",
+      "video": "Video",
+      "takes": "Takes",
+      "delivery": "Delivery",
+      "extras": "Extras"
+    },
+    "heroTitle": "Configure your Session",
+    "priceFrom": "from €49.90",
+    "heroP1": "Start with our basic setup that includes everything essential for a professional recording.",
+    "heroP2": "💡 Each element can be upgraded individually to create your perfect setup",
+    "imgAlt": "Mic'd drum kit in professional studio"
+  },
+  "checkout": {
+    "title": "🛒 Order Summary",
+    "subtitle": "Review your configuration before completing your purchase",
+    "basePackage": "✅ Basic Package Included",
+    "basePackageDesc1": "Professional drum recording",
+    "basePackageDesc2": "Basic microphone setup",
+    "basePackageDesc3": "Standard delivery (10 days)",
+    "basePackageDesc4": "1 Basic take included",
+    "basePrice": "Base price:",
+    "upgrades": "🎵 {{category}}",
+    "emptyCart": "Only the basic package selected",
+    "orderTotal": "💰 Order Total",
+    "basicPackage": "Basic package:",
+    "paypalFee": "PayPal processing fee (5%):",
+    "total": "Total:",
+    "paymentMethod": "Payment method",
+    "card": "Card",
+    "paypal": "PayPal",
+    "paypalDisclaimer": "PayPal payment: includes a 5% additional processing fee",
+    "privacyConsent": "I have read and accept the",
+    "privacyPolicy": "Privacy Policy",
+    "of": "of Antonio Mateos.",
+    "mustAcceptPrivacy": "You must accept the Privacy Policy to continue",
+    "processing": "Processing...",
+    "backToConfig": "← Back to Configuration",
+    "securePayment": "🔒 Secure payment · Satisfaction guaranteed",
+    "stripeError": "Error processing card payment. Please try again.",
+    "paypalError": "Error processing PayPal payment. Please try again.",
+    "sessionError": "Could not create payment session.",
+    "paypalOrderError": "Could not create PayPal order.",
+    "connectionError": "Error connecting to payment server."
+  },
+  "success": {
+    "confirming": "Confirming your payment...",
+    "pleaseWait": "Please wait a moment.",
+    "errorTitle": "Payment Error",
+    "errorContact": "Please contact us at",
+    "errorResolve": "to resolve this issue.",
+    "backHome": "Back to Home",
+    "title": "Payment Complete!",
+    "thankYou": "Thank you for your purchase. Your drum recording order has been confirmed.",
+    "materialsTitle": "📋 To start the recording we need:",
+    "material1Title": "Stereo WAV file",
+    "material1Desc": "of your song",
+    "material1Highlight": "WITHOUT DRUMS",
+    "material2Title": "Stereo WAV file",
+    "material2Desc": "of your song",
+    "material2Highlight": "DRUMS DEMO ONLY",
+    "material2Note": "(if you don't have it, we'll create it for you)",
+    "material3": "The bit/sample rate of your project (sample rate and bit depth)",
+    "material4": "The exact tempo in BPMs (or MIDI tempo map file if it contains tempo changes)",
+    "material5": "Notes about the sound, style, etc. if you wish (you can add YouTube or Spotify links)",
+    "sendTo": "📧 Send everything to:",
+    "invoiceNote": "🧾 If you need an official invoice, please contact us at",
+    "invoiceData": "providing your tax details.",
+    "questions": "Have any questions? Contact us at",
+    "paypalConfirmError": "Error confirming PayPal payment.",
+    "unknownError": "Unknown error capturing payment.",
+    "serverError": "Error connecting to server."
+  },
+  "footer": {
+    "legalNotice": "Legal Notice",
+    "privacyPolicy": "Privacy Policy",
+    "cookiesPolicy": "Cookies Policy"
+  },
+  "language": {
+    "title": "Idioma / Language"
   }
 }
