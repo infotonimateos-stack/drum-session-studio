@@ -17,7 +17,7 @@
     "cardTitle": "Download the sample stems",
     "cardDesc": "Download high-quality stems (24-bit/48kHz)",
     "button": "Download sample stems",
-    "imageAlt": "Hyper-realistic Pro Tools session with colourful tracks – drum samples"
+    "imageAlt": "Hyper-realistic Pro Tools session with colorful tracks"
   },
   "studio": {
     "title": "The Studio",
@@ -45,7 +45,141 @@
     "priceFrom": "from €49.90",
     "heroP1": "Start with our basic setup that includes everything essential for a professional recording.",
     "heroP2": "💡 Each element can be upgraded individually to create your perfect setup",
-    "imgAlt": "Mic'd drum kit in professional studio"
+    "imgAlt": "Mic'd drum kit in professional studio",
+    "progress": "Configuration progress"
+  },
+  "microphones": {
+    "title": "🎤 Microphones",
+    "subtitle": "Includes 8 professional microphones. Add premium upgrades for exceptional sound.",
+    "basicKit": "Basic Kit Included",
+    "included": "INCLUDED",
+    "premiumUpgrades": "Premium Upgrades",
+    "optional": "Optional",
+    "added": "✨ ADDED",
+    "add": "ADD",
+    "category": "Microphone"
+  },
+  "preamps": {
+    "title": "⚡ Preamps",
+    "subtitle": "The soul of your sound. Choose between our included preamps or upgrade to the legendary API, Neve and DAD.",
+    "basicKit": "Basic Kit",
+    "included": "INCLUDED",
+    "premium": "Premium",
+    "motuDesc": "8 professional channels",
+    "whatYouGet": "✓ What you get:",
+    "cleanSound": "Clean and transparent sound",
+    "flatResponse": "Flat response",
+    "noNoise": "No noise or distortion",
+    "perfectFor": "Perfect for your first productions",
+    "alreadyIncluded": "ALREADY INCLUDED",
+    "legendaryPack": "Legendary Preamps Pack",
+    "apiNeveDAD": "API, Neve and DAD",
+    "hitsSound": "🏆 The sound of hits:",
+    "apiDesc": "Unique punch and presence",
+    "neveDesc": "Legendary vintage warmth",
+    "dadDesc": "Pristine clarity and transparency",
+    "usedIn": "Used in platinum records",
+    "addedToCart": "✨ ADDED TO CART",
+    "upgradeFor": "UPGRADE FOR"
+  },
+  "interface": {
+    "title": "🎛️ Audio Interface",
+    "subtitle": "The gateway between analog and digital. Converter quality defines your final sound.",
+    "basicKit": "Basic Kit",
+    "included": "INCLUDED",
+    "premium": "Premium",
+    "motuDesc": "8-channel ADAT Interface",
+    "features": "✓ Features:",
+    "feat1": "24-bit / 192kHz maximum resolution",
+    "feat2": "Professional standard converters",
+    "feat3": "Stable ADAT connection",
+    "feat4": "Perfect for basic projects",
+    "alreadyIncluded": "ALREADY INCLUDED",
+    "dadDesc": "Premium professional interface",
+    "premiumSpecs": "🏆 Premium specs:",
+    "spec1": "32-bit / 384kHz - Maximum resolution",
+    "spec2": "Premium DAD converters",
+    "spec3": "Exceptional dynamic range",
+    "spec4": "Used in elite studios worldwide",
+    "upgradeText": "🚀 Dramatic improvement in clarity and definition",
+    "addedToCart": "✨ ADDED TO CART",
+    "upgradeFor": "UPGRADE FOR"
+  },
+  "production": {
+    "title": "Production",
+    "subtitle": "Additional services to perfect your recording and adapt it to your specific needs.",
+    "additionalTime": "Additional Time (songs 4-8 min)",
+    "additionalTimeDesc": "For songs between 4 and 8 minutes long",
+    "workMix": "Work Mix",
+    "workMixDesc": "Drum premix (stereo wav)",
+    "samplePack": "Sample Pack",
+    "samplePackDesc": "We send you the sounds separately, at different volumes, from your session",
+    "added": "Added",
+    "add": "Add"
+  },
+  "video": {
+    "title": "Video",
+    "subtitle": "Audiovisual services to complement your experience and promote your music.",
+    "socialGreeting": "Social Media Greeting",
+    "socialGreetingDesc": "15-second greeting mentioning your project, to share on your social media",
+    "playingVideo": "1 Minute Playing Video",
+    "playingVideoDesc": "1-minute video playing your song",
+    "instagramShare": "Share on Instagram",
+    "instagramShareDesc": "15-second video I'll share on my profile (30k followers) mentioning your project and inviting people to follow you",
+    "premiumService": "⭐ Premium Service",
+    "added": "✨ Added",
+    "addFor": "Add for"
+  },
+  "takes": {
+    "title": "Takes",
+    "subtitle": "Decide how many versions of your song you want. Each take brings a unique perspective.",
+    "basic": "Basic",
+    "included": "Included",
+    "standardTake": "1 Standard Take",
+    "standardTakeDesc": "Professional version based on your demo",
+    "features": "Features:",
+    "feat1": "Professional interpretation",
+    "feat2": "Based on your demo (similar, but not identical)",
+    "feat3": "Corrected and edited with Beat Detective",
+    "includedInKit": "Included in basic kit",
+    "proInterpretation": "Pro Interpretation",
+    "proFeat1": "An additional take, \"Toni Mateos\" version",
+    "proFeat2": "Creative interpretation",
+    "proFeat3": "Unique fills and variations",
+    "proFeat4": "Corrected and edited with Beat Detective",
+    "recommended": "🎵 Recommended: Two perspectives of your song",
+    "exactCopy": "Exact Copy",
+    "exactCopyName": "Exact Copy of your Demo",
+    "exactFeat1": "An additional take, faithful to your demo",
+    "exactFeat2": "Every fill identical to the original",
+    "exactFeat3": "Same feeling and groove",
+    "exactFeat4": "Respects all nuances",
+    "exactFeat5": "Corrected and edited with Beat Detective",
+    "added": "Added",
+    "add": "Add"
+  },
+  "delivery": {
+    "title": "📦 Delivery",
+    "subtitle": "Choose the delivery time that best suits your project.",
+    "standard": "Standard Delivery",
+    "express": "Express Delivery"
+  },
+  "extras": {
+    "title": "✨ Extras",
+    "subtitle": "Add additional services to take your recording to the next level."
+  },
+  "cart": {
+    "orderSummary": "Order Summary",
+    "orderTotal": "Order Total",
+    "basePlusExtras": "Base + extras",
+    "basicKit": "Basic Recording Kit",
+    "microphonesIncluded": "8 microphones included",
+    "total": "Total"
+  },
+  "stepNav": {
+    "previous": "Previous",
+    "next": "Next",
+    "checkout": "Checkout"
   },
   "checkout": {
     "title": "🛒 Order Summary",
@@ -56,7 +190,6 @@
     "basePackageDesc3": "Standard delivery (10 days)",
     "basePackageDesc4": "1 Basic take included",
     "basePrice": "Base price:",
-    "upgrades": "🎵 {{category}}",
     "emptyCart": "Only the basic package selected",
     "orderTotal": "💰 Order Total",
     "basicPackage": "Basic package:",
@@ -113,6 +246,29 @@
     "cookiesPolicy": "Cookies Policy"
   },
   "language": {
-    "title": "Idioma / Language"
+    "title": "Language"
+  },
+  "about": {
+    "professionalDrummer": "Professional Drummer",
+    "tagline": "30 years creating the perfect rhythm for your songs. From Barcelona to the world.",
+    "discs": "+1000 Records",
+    "tvShows": "+500 TV Shows",
+    "songsYear": "+800 Songs/Year",
+    "myHistory": "My Story",
+    "historyText": "With 30 years of professional experience, I have had the privilege of working with some of the most recognized artists in Spanish music. My studio in Cardedeu, Barcelona, has become the place where the rhythms that accompany the emotions of millions of people are born.",
+    "maritalStatus": "Marital Status",
+    "married": "Married",
+    "children": "Children",
+    "pets": "Pets",
+    "dogs": "3 Dogs",
+    "studio": "Studio",
+    "mySkills": "My Skills",
+    "skillsSubtitle": "Every beat tells a story. These are the skills that allow me to bring your music to life.",
+    "liveArtists": "Live Artists",
+    "studioArtists": "Studio Artists",
+    "liveArtistsCount": "+2000",
+    "liveArtistsLabel": "live artists",
+    "recordedDiscs": "+1000",
+    "recordedDiscsLabel": "recorded albums"
   }
 }

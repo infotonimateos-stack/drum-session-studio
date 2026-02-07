@@ -1,9 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { HelpCircle, Clock, Music, Headphones, CreditCard, FileText } from "lucide-react";
-import { useTranslate } from "@/hooks/useTranslate";
+import { useTranslation } from "react-i18next";
+
 export const FAQTab = () => {
-  const tr = useTranslate();
+  const { t } = useTranslation();
   const faqCategories = [
     {
       icon: Music,
