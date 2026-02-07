@@ -138,10 +138,10 @@ export const FAQTab = () => {
     <div className="container mx-auto px-4 py-8 space-y-8">
       <div className="text-center space-y-4">
         <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          {tr("Preguntas Frecuentes")}
+          {t("Preguntas Frecuentes")}
         </h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          {tr("Encuentra respuestas a las preguntas más comunes sobre el proceso de grabación")}
+          {t("Encuentra respuestas a las preguntas más comunes sobre el proceso de grabación")}
         </p>
       </div>
 
@@ -151,7 +151,7 @@ export const FAQTab = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
                 <category.icon className="h-6 w-6 text-primary" />
-                {tr(category.title)}
+                {t(category.title)}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -159,10 +159,10 @@ export const FAQTab = () => {
                 {category.faqs.map((faq, faqIndex) => (
                   <AccordionItem key={faqIndex} value={`item-${categoryIndex}-${faqIndex}`}>
                     <AccordionTrigger className="text-left hover:text-primary">
-                      {tr(faq.question)}
+                      {t(faq.question)}
                     </AccordionTrigger>
                     <AccordionContent className="text-muted-foreground leading-relaxed">
-                      {tr(faq.answer)}
+                      {t(faq.answer)}
                     </AccordionContent>
                   </AccordionItem>
                 ))}
@@ -178,22 +178,22 @@ export const FAQTab = () => {
           <div className="flex justify-center">
             <HelpCircle className="h-12 w-12 text-primary" />
           </div>
-          <h3 className="text-2xl font-bold">{tr("¿No encuentras tu respuesta?")}</h3>
+          <h3 className="text-2xl font-bold">{t("¿No encuentras tu respuesta?")}</h3>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            {tr("Si tienes alguna pregunta específica sobre tu proyecto o el proceso de grabación, no dudes en contactarme directamente. Estaré encantado de ayudarte.")}
+            {t("Si tienes alguna pregunta específica sobre tu proyecto o el proceso de grabación, no dudes en contactarme directamente. Estaré encantado de ayudarte.")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl h-10 px-4 py-2"
               onClick={() => window.location.href = 'mailto:info@tonimateos.com'}
             >
-              {tr("Enviar Mensaje")}
+              {t("Enviar Mensaje")}
             </button>
             <button 
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-card hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
               onClick={() => window.open('https://wa.me/34670605604', '_blank')}
             >
-              {tr("WhatsApp Directo")}
+              {t("WhatsApp Directo")}
             </button>
           </div>
         </CardContent>
