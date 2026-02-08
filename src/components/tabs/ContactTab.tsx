@@ -77,16 +77,18 @@ export const ContactTab = () => {
                   <p className="text-sm text-muted-foreground">info@tonimateos.com</p>
                 </div>
               </div>
-              <div 
-                className="flex items-center gap-3 cursor-pointer hover:bg-accent/20 p-2 rounded-lg transition-colors"
-                onClick={() => window.open('https://wa.me/34670605604', '_blank')}
+              <a
+                href="https://wa.me/34670605604"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 hover:bg-accent/20 p-2 rounded-lg transition-colors"
               >
                 <Phone className="h-5 w-5 text-primary" />
                 <div>
                   <p className="font-semibold">WhatsApp</p>
                   <p className="text-sm text-muted-foreground">+34670605604</p>
                 </div>
-              </div>
+              </a>
               <div className="flex items-center gap-3">
                 <MapPin className="h-5 w-5 text-primary" />
                 <div>

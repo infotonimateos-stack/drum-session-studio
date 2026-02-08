@@ -44,23 +44,17 @@ export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
           </div>
           <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
             <LanguageSelector />
-            <Button
-              variant="ghost"
-              size="sm"
-              asChild
-              className="h-7 sm:h-8 px-2 sm:px-3 gap-1.5 text-accent hover:text-accent/80 hover:bg-accent/10"
+            <a
+              href="https://wa.me/34670605604"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Contactar por WhatsApp"
+              title="Contactar por WhatsApp"
+              className="inline-flex items-center justify-center h-7 sm:h-8 px-2 sm:px-3 gap-1.5 text-accent hover:text-accent/80 hover:bg-accent/10 rounded-md text-sm font-medium transition-colors"
             >
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Contactar por WhatsApp"
-                title="Contactar por WhatsApp"
-              >
-                <MessageCircle className="h-4 w-4 fill-current" />
-                <span className="hidden sm:inline text-xs font-medium">WhatsApp</span>
-              </a>
-            </Button>
+              <MessageCircle className="h-4 w-4 fill-current" />
+              <span className="hidden sm:inline text-xs font-medium">WhatsApp</span>
+            </a>
             <Button
               variant="ghost"
               size="sm"
