@@ -25,7 +25,7 @@ export const MicrophonesStep = ({
       name: microphone.name,
       price: microphone.price,
       category: t("microphones.category"),
-      description: `${microphone.description} - ${microphone.target}`
+      description: `${t(microphone.descriptionKey)} - ${t(microphone.targetKey)}`
     };
     if (hasItem(microphone.id)) {
       removeItem(microphone.id);
@@ -61,7 +61,7 @@ export const MicrophonesStep = ({
             <Card key={mic.id} className="bg-gradient-to-br from-card/50 to-muted/30 border-success/30 hover:shadow-xl transition-all duration-300">
               <CardHeader className="pb-4">
                 <Badge variant="outline" className="border-success text-success mb-3 self-center text-sm px-3 py-1">
-                  {mic.target}
+                  {t(mic.targetKey)}
                 </Badge>
                 {mic.image && (
                   <div className="w-full h-32 flex items-center justify-center bg-white rounded-lg">
@@ -107,7 +107,7 @@ export const MicrophonesStep = ({
                 <CardHeader className="pb-4">
                   <div className="flex items-center justify-between mb-4">
                     <Badge variant="outline" className="text-sm px-3 py-1">
-                      {mic.target}
+                      {t(mic.targetKey)}
                     </Badge>
                     <span className="font-bold text-xl text-primary">{mic.price.toFixed(2)} €</span>
                   </div>
@@ -119,7 +119,7 @@ export const MicrophonesStep = ({
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <h4 className="font-bold text-lg text-center">{mic.name}</h4>
-                  <p className="text-muted-foreground text-center leading-relaxed">{mic.description}</p>
+                  <p className="text-muted-foreground text-center leading-relaxed">{t(mic.descriptionKey)}</p>
                   
                   <Button 
                     variant={isSelected ? "default" : "upgrade"} 
