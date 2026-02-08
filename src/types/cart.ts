@@ -26,8 +26,8 @@ export interface Microphone {
   name: string;
   price: number;
   included: boolean;
-  description: string;
-  target: string;
+  descriptionKey: string;
+  targetKey: string;
   image?: string;
 }
 
