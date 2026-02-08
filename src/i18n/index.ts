@@ -75,7 +75,7 @@ const getSavedLanguage = (): string => {
   return detectBrowserLanguage();
 };
 
-const resources: Record<string, { common: typeof esCommon }> = {
+const resources: Record<string, { common: Record<string, unknown> }> = {
   "es-ES": { common: esCommon },
   "en-GB": { common: enCommon },
   "de-DE": { common: deCommon },
