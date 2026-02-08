@@ -5,6 +5,14 @@ import { initReactI18next } from "react-i18next";
 import esCommon from "./locales/es-ES/common.json";
 import enCommon from "./locales/en-GB/common.json";
 import deCommon from "./locales/de-DE/common.json";
+import frCommon from "./locales/fr-FR/common.json";
+import jaCommon from "./locales/ja-JP/common.json";
+import zhCommon from "./locales/zh-CN/common.json";
+import itCommon from "./locales/it-IT/common.json";
+import ptCommon from "./locales/pt-BR/common.json";
+import nlCommon from "./locales/nl-NL/common.json";
+import koCommon from "./locales/ko-KR/common.json";
+import svCommon from "./locales/sv-SE/common.json";
 
 const LANGUAGE_KEY = "drum-studio-language";
 
@@ -71,6 +79,14 @@ const resources: Record<string, { common: typeof esCommon }> = {
   "es-ES": { common: esCommon },
   "en-GB": { common: enCommon },
   "de-DE": { common: deCommon },
+  "fr-FR": { common: frCommon },
+  "ja-JP": { common: jaCommon },
+  "zh-CN": { common: zhCommon },
+  "it-IT": { common: itCommon },
+  "pt-BR": { common: ptCommon },
+  "nl-NL": { common: nlCommon },
+  "ko-KR": { common: koCommon },
+  "sv-SE": { common: svCommon },
 };
 
 void i18n
@@ -168,7 +184,7 @@ async function translateObject(obj: TranslationDict, targetLang: string): Promis
 // Load or generate translations for a language
 async function ensureBundle(lng: string): Promise<void> {
   // Skip if already loaded or has manual translations
-  const manualTranslations = ["es-ES", "en-GB", "de-DE"];
+  const manualTranslations = ["es-ES", "en-GB", "de-DE", "fr-FR", "ja-JP", "zh-CN", "it-IT", "pt-BR", "nl-NL", "ko-KR", "sv-SE"];
   if (manualTranslations.includes(lng) || i18n.hasResourceBundle(lng, "common")) {
     return;
   }
@@ -216,7 +232,7 @@ i18n.on("languageChanged", async (lng) => {
   }
 
   // Load translations if needed (skip languages with manual translations)
-  const manualTranslations = ["es-ES", "en-GB", "de-DE"];
+  const manualTranslations = ["es-ES", "en-GB", "de-DE", "fr-FR", "ja-JP", "zh-CN", "it-IT", "pt-BR", "nl-NL", "ko-KR", "sv-SE"];
   if (!manualTranslations.includes(lng) && !i18n.hasResourceBundle(lng, "common")) {
     if (loadingLng === lng) return;
     loadingLng = lng;
