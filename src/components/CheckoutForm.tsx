@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Upload, FileAudio, CreditCard, Building, User, ArrowLeft } from "lucide-react";
 import { CartState } from "@/types/cart";
+import { useTranslation } from "react-i18next";
 
 interface CheckoutFormProps {
   cartState: CartState;
@@ -17,6 +18,7 @@ interface CheckoutFormProps {
 }
 
 export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
+  const { t } = useTranslation();
   const [needsInvoice, setNeedsInvoice] = useState(false);
   const [noDrumsDemo, setNoDrumsDemo] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("card");
@@ -272,10 +274,10 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
           <div className="flex items-center gap-4 mb-8">
             <Button variant="outline" onClick={onBack} className="gap-2">
               <ArrowLeft className="h-4 w-4" />
-              Volver
+              {t("checkoutForm.back")}
             </Button>
             <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Finalizar Compra
+              {t("checkoutForm.title")}
             </h1>
           </div>
 
@@ -288,26 +290,26 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <User className="h-5 w-5 text-primary" />
-                      Información Personal
+                      {t("checkoutForm.personalInfo")}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="fullName">Nombre Completo *</Label>
+                        <Label htmlFor="fullName">{t("checkoutForm.fullName")} *</Label>
                         <Input id="fullName" required />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="email">Email *</Label>
+                        <Label htmlFor="email">{t("checkoutForm.email")} *</Label>
                         <Input id="email" type="email" required />
                       </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="countryCode">Código País</Label>
+                        <Label htmlFor="countryCode">{t("checkoutForm.countryCode")}</Label>
                         <Select>
                           <SelectTrigger>
-                            <SelectValue placeholder="Selecciona" />
+                            <SelectValue placeholder={t("checkoutForm.select")} />
                           </SelectTrigger>
                           <SelectContent>
                             {countryCodes.map((country) => (
@@ -319,7 +321,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                         </Select>
                       </div>
                       <div className="md:col-span-2 space-y-2">
-                        <Label htmlFor="phone">Teléfono *</Label>
+                        <Label htmlFor="phone">{t("checkoutForm.phone")} *</Label>
                         <Input id="phone" required />
                       </div>
                     </div>
@@ -329,7 +331,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                         checked={needsInvoice}
                         onCheckedChange={(checked) => setNeedsInvoice(checked as boolean)}
                       />
-                      <Label htmlFor="needsInvoice">Necesito factura</Label>
+                      <Label htmlFor="needsInvoice">{t("checkoutForm.needsInvoice")}</Label>
                     </div>
                   </CardContent>
                 </Card>
@@ -340,16 +342,16 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
                         <Building className="h-5 w-5 text-primary" />
-                        Datos de Facturación
+                        {t("checkoutForm.billingInfo")}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="address">Dirección Completa *</Label>
+                        <Label htmlFor="address">{t("checkoutForm.fullAddress")} *</Label>
                         <Textarea id="address" required />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="taxId">NIF / RUT / RUC / EIN *</Label>
+                        <Label htmlFor="taxId">{t("checkoutForm.taxId")} *</Label>
                         <Input id="taxId" required />
                       </div>
                     </CardContent>
@@ -361,23 +363,23 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <FileAudio className="h-5 w-5 text-primary" />
-                      Archivos de Audio
+                      {t("checkoutForm.audioFiles")}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="trackWithoutDrums">Maqueta SIN batería * (WAV/MP3)</Label>
+                      <Label htmlFor="trackWithoutDrums">{t("checkoutForm.trackWithoutDrums")} * (WAV/MP3)</Label>
                       <div className="border-2 border-dashed border-border rounded-lg p-4 text-center hover:border-primary/50 transition-colors">
                         <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                        <p className="text-sm text-muted-foreground">Arrastra tu archivo aquí o haz clic para seleccionar</p>
+                        <p className="text-sm text-muted-foreground">{t("checkoutForm.dragOrClick")}</p>
                       </div>
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="drumsOnlyTrack">Maqueta SOLO batería (WAV/MP3)</Label>
+                      <Label htmlFor="drumsOnlyTrack">{t("checkoutForm.drumsOnlyTrack")} (WAV/MP3)</Label>
                       <div className="border-2 border-dashed border-border rounded-lg p-4 text-center hover:border-primary/50 transition-colors">
                         <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                        <p className="text-sm text-muted-foreground">Arrastra tu archivo aquí o haz clic para seleccionar</p>
+                        <p className="text-sm text-muted-foreground">{t("checkoutForm.dragOrClick")}</p>
                       </div>
                     </div>
 
@@ -387,7 +389,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                         checked={noDrumsDemo}
                         onCheckedChange={(checked) => setNoDrumsDemo(checked as boolean)}
                       />
-                      <Label htmlFor="noDrumsDemo">No dispongo de batería demo</Label>
+                      <Label htmlFor="noDrumsDemo">{t("checkoutForm.noDrumsDemo")}</Label>
                     </div>
                   </CardContent>
                 </Card>
@@ -395,15 +397,15 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                 {/* Audio Settings */}
                 <Card className="bg-gradient-to-br from-card to-muted">
                   <CardHeader>
-                    <CardTitle>Configuración de Audio</CardTitle>
+                    <CardTitle>{t("checkoutForm.audioSettings")}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="bitDepth">Profundidad de Bits</Label>
+                        <Label htmlFor="bitDepth">{t("checkoutForm.bitDepth")}</Label>
                         <Select>
                           <SelectTrigger>
-                            <SelectValue placeholder="Selecciona" />
+                            <SelectValue placeholder={t("checkoutForm.select")} />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="16">16 bits</SelectItem>
@@ -413,10 +415,10 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                         </Select>
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="sampleRate">Frecuencia de Muestreo (kHz)</Label>
+                        <Label htmlFor="sampleRate">{t("checkoutForm.sampleRate")}</Label>
                         <Select>
                           <SelectTrigger>
-                            <SelectValue placeholder="Selecciona" />
+                            <SelectValue placeholder={t("checkoutForm.select")} />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="44.1">44.1 kHz</SelectItem>
@@ -429,21 +431,21 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="tempo">Tempo (BPM)</Label>
+                      <Label htmlFor="tempo">{t("checkoutForm.tempo")}</Label>
                       <Input id="tempo" placeholder="120" />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="tempoMap">Tempo Map (MIDI) - Solo si el tempo es variable</Label>
+                      <Label htmlFor="tempoMap">{t("checkoutForm.tempoMap")}</Label>
                       <div className="border-2 border-dashed border-border rounded-lg p-4 text-center hover:border-primary/50 transition-colors">
                         <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                        <p className="text-sm text-muted-foreground">Archivo MIDI opcional</p>
+                        <p className="text-sm text-muted-foreground">{t("checkoutForm.optionalMidi")}</p>
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="instructions">Indicaciones Especiales</Label>
+                      <Label htmlFor="instructions">{t("checkoutForm.specialInstructions")}</Label>
                       <Textarea 
                         id="instructions" 
-                        placeholder="Referencias de YouTube/Spotify, sonoridad deseada, estilo específico, etc."
+                        placeholder={t("checkoutForm.instructionsPlaceholder")}
                         className="min-h-[100px]"
                       />
                     </div>
@@ -455,7 +457,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <CreditCard className="h-5 w-5 text-primary" />
-                      Método de Pago
+                      {t("checkoutForm.paymentMethod")}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
@@ -468,7 +470,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                       >
                         <div className="text-center">
                           <CreditCard className="h-6 w-6 mx-auto mb-1" />
-                          <span className="text-sm">Tarjeta</span>
+                          <span className="text-sm">{t("checkoutForm.cardPayment")}</span>
                         </div>
                       </Button>
                       <Button
@@ -479,7 +481,7 @@ export const CheckoutForm = ({ cartState, onBack }: CheckoutFormProps) => {
                       >
                         <div className="text-center">
                           <Building className="h-6 w-6 mx-auto mb-1" />
-                          <span className="text-sm">Transferencia</span>
+                          <span className="text-sm">{t("checkoutForm.transfer")}</span>
                         </div>
                       </Button>
                       <Button
