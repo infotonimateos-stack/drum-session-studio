@@ -47,7 +47,7 @@ export const LanguageSelector = () => {
       <DropdownMenuContent align="end" className="w-52 max-h-80 overflow-y-auto">
         <DropdownMenuLabel>{t("language.title", "Seleccionar idioma")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {[...languageConfig].sort((a, b) => a.name.localeCompare(b.name)).map((lang) => (
+        {[languageConfig.find(l => l.code === "es-ES")!, ...languageConfig.filter(l => l.code !== "es-ES").sort((a, b) => a.name.localeCompare(b.name))].map((lang) => (
           <DropdownMenuItem 
             key={lang.code} 
             onClick={() => handleChange(lang.code)}
