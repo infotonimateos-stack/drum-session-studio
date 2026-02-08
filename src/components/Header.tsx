@@ -10,6 +10,11 @@ interface HeaderProps {
   onTabChange: (tab: string) => void;
 }
 
+const handleTabClick = (tab: string, onTabChange: (tab: string) => void) => {
+  onTabChange(tab);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
 export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
   const { theme, setTheme } = useTheme()
   const { t } = useTranslation();
@@ -59,7 +64,7 @@ export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
               <Button
                 key={tab.id}
                 variant={activeTab === tab.id ? "default" : "ghost"}
-                onClick={() => onTabChange(tab.id)}
+                onClick={() => handleTabClick(tab.id, onTabChange)}
                 size="sm"
                 className={`text-xs sm:text-sm font-medium transition-all duration-200 px-2 sm:px-4 ${
                   activeTab === tab.id 
