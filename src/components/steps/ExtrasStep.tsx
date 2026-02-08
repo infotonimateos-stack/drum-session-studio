@@ -1,8 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, FileText, Video, Phone, Clapperboard, Camera, MonitorSpeaker, Smartphone } from "lucide-react";
+import { Check, Plus, Smartphone, Video } from "lucide-react";
 import { CartItem } from "@/types/cart";
+import { useTranslation } from "react-i18next";
 
 interface ExtrasStepProps {
   addItem: (item: CartItem) => void;
@@ -11,20 +12,22 @@ interface ExtrasStepProps {
 }
 
 export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) => {
+  const { t } = useTranslation();
+
   const extrasItems: CartItem[] = [
     {
       id: 'videocall-10min',
-      name: 'Videollamada 10 minutos',
+      name: t("extras.videocall10"),
       price: 5.99,
-      category: 'Extras',
-      description: 'Para discutir detalles del proyecto'
+      category: t("config.steps.extras"),
+      description: t("extras.videocall10Desc")
     },
     {
       id: 'videocall-premium',
-      name: 'Retransmisión multicam',
+      name: t("extras.multicam"),
       price: 100.00,
-      category: 'Extras',
-      description: 'Sistema multicámara con audio y video en directo, producción en tiempo real'
+      category: t("config.steps.extras"),
+      description: t("extras.multicamDesc")
     }
   ];
 
@@ -41,10 +44,10 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
       {/* Header */}
       <div className="text-center space-y-6">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          ➕ Extras
+          {t("extras.title")}
         </h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
-          Servicios adicionales para complementar tu experiencia musical.
+          {t("extras.subtitle")}
         </p>
       </div>
 
@@ -107,7 +110,7 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
                 {item.price >= 100 && (
                   <div className="p-3 bg-gradient-to-r from-warm-peach/20 to-warm-coral/20 rounded-lg border border-warm-peach/30">
                     <p className="text-primary font-semibold text-sm text-center">
-                      ⭐ Experiencia Premium Única
+                      ⭐ {t("extras.premiumExperience")}
                     </p>
                   </div>
                 )}
@@ -124,12 +127,12 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
                   {isSelected ? (
                     <>
                       <Check className="h-4 w-4 mr-2" />
-                      Añadido
+                      {t("extras.added")}
                     </>
                   ) : (
                     <>
                       <Plus className="h-4 w-4 mr-2" />
-                      Añadir
+                      {t("extras.add")}
                     </>
                   )}
                 </Button>

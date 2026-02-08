@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { User, Music, Award, Clock, Drum, Star, Tv, Disc, Users, Heart, Dog, Home, MapPin, Calendar, Check, Target, Headphones, Volume2, TrendingUp, Zap, Mic, Trophy, MessageCircle, PlayCircle, Palette, Briefcase } from "lucide-react";
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
 import alejandroSanzImg from '@/assets/alejandro-sanz.jpg';
@@ -8,16 +7,19 @@ import juanesImg from '@/assets/juanes.jpg';
 import miguelBoseImg from '@/assets/miguel-bose.jpg';
 import antonioOrozcoImg from '@/assets/antonio-orozco.jpg';
 import johnLegendImg from '@/assets/john-legend.jpg';
+import { useTranslation } from "react-i18next";
 
 export const AboutTab = () => {
+  const { t } = useTranslation();
+
   // Datos para el gráfico radar de habilidades
   const skillsData = [
-    { skill: 'Groove', A: 95 },
-    { skill: 'Sonido', A: 93 },
-    { skill: 'Pegada', A: 93 },
-    { skill: 'Versatilidad', A: 93 },
-    { skill: 'Precisión', A: 94 },
-    { skill: 'Creatividad', A: 78 }
+    { skill: t("about.skillGroove"), A: 95 },
+    { skill: t("about.skillSound"), A: 93 },
+    { skill: t("about.skillPunch"), A: 93 },
+    { skill: t("about.skillVersatility"), A: 93 },
+    { skill: t("about.skillPrecision"), A: 94 },
+    { skill: t("about.skillCreativity"), A: 78 }
   ];
 
   // Datos para estilos musicales
@@ -34,23 +36,9 @@ export const AboutTab = () => {
     { name: 'Regional', value: 78 }
   ];
 
-  const artistasDirecto = [
-    { name: 'Alejandro Sanz', image: alejandroSanzImg },
-    { name: 'Juanes', image: juanesImg },
-    { name: 'Miguel Bosé', image: miguelBoseImg },
-    { name: 'Antonio Orozco', image: antonioOrozcoImg },
-    { name: 'Franco de Vita', image: null }
-  ];
-  const artistasGrabacion = [
-    { name: 'Alejandro Sanz', image: alejandroSanzImg },
-    { name: 'Jarabe de Palo', image: null },
-    { name: 'John Legend', image: johnLegendImg },
-    { name: 'Melendi', image: null }
-  ];
-
   return (
     <div className="container mx-auto px-4 py-8 space-y-16">
-      {/* Hero Section - Completamente nuevo */}
+      {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/20 to-secondary/20 animate-pulse"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_40%,_hsl(var(--background))_100%)]"></div>
@@ -58,7 +46,7 @@ export const AboutTab = () => {
         <div className="relative z-10 text-center space-y-8 max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-4 px-6 py-3 bg-primary/10 backdrop-blur-sm rounded-full border border-primary/30">
             <Drum className="h-6 w-6 text-primary" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Baterista Profesional</span>
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">{t("about.professionalDrummer")}</span>
           </div>
           
           <h1 className="text-7xl md:text-8xl font-black bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent leading-tight">
@@ -66,27 +54,27 @@ export const AboutTab = () => {
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            30 años creando el ritmo perfecto para tus canciones. Desde Barcelona para el mundo.
+            {t("about.tagline")}
           </p>
           
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <Badge variant="outline" className="px-4 py-2 text-lg">
               <Star className="h-4 w-4 mr-2" />
-              +1000 Discos
+              {t("about.discs")}
             </Badge>
             <Badge variant="outline" className="px-4 py-2 text-lg">
               <Tv className="h-4 w-4 mr-2" />
-              +500 Shows TV
+              {t("about.tvShows")}
             </Badge>
             <Badge variant="outline" className="px-4 py-2 text-lg">
               <Music className="h-4 w-4 mr-2" />
-              +800 Canciones/Año
+              {t("about.songsYear")}
             </Badge>
           </div>
         </div>
       </section>
 
-      {/* Perfil Personal - Rediseño completo */}
+      {/* Perfil Personal */}
       <section className="grid lg:grid-cols-2 gap-12 items-start">
         <div className="relative">
           <div className="w-80 h-80 mx-auto relative overflow-hidden rounded-3xl border-4 border-primary/30 shadow-2xl">
@@ -98,25 +86,25 @@ export const AboutTab = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
             <div className="absolute bottom-6 left-6 text-white">
               <h3 className="text-2xl font-bold">Toni Mateos</h3>
-              <p className="text-lg opacity-90">Barcelona, España</p>
+              <p className="text-lg opacity-90">{t("about.locationBarcelona")}</p>
             </div>
           </div>
         </div>
         
         <div className="space-y-8">
           <div>
-            <h2 className="text-4xl font-black text-primary mb-6">Mi Historia</h2>
+            <h2 className="text-4xl font-black text-primary mb-6">{t("about.myHistory")}</h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              Con 30 años de experiencia profesional, he tenido el privilegio de trabajar con algunos de los artistas más reconocidos de la música en español. Mi estudio en Cardedeu, Barcelona, se ha convertido en el lugar donde nacen los ritmos que acompañan las emociones de millones de personas.
+              {t("about.historyText")}
             </p>
           </div>
           
           <div className="grid grid-cols-2 gap-6">
             {[
-              { icon: Heart, label: "Estado Civil", value: "Casado" },
-              { icon: Users, label: "Hijos", value: "2" },
-              { icon: Dog, label: "Mascotas", value: "3 Perros" },
-              { icon: Home, label: "Estudio", value: "Cardedeu, BCN" }
+              { icon: Heart, label: t("about.maritalStatus"), value: t("about.married") },
+              { icon: Users, label: t("about.children"), value: "2" },
+              { icon: Dog, label: t("about.pets"), value: t("about.dogs") },
+              { icon: Home, label: t("about.studio"), value: "Cardedeu, BCN" }
             ].map((item, index) => (
               <div key={index} className="p-6 bg-gradient-to-br from-card to-muted/50 rounded-2xl border border-border/50 hover:border-primary/30 transition-all duration-300">
                 <item.icon className="h-8 w-8 text-primary mb-3" />
@@ -128,12 +116,12 @@ export const AboutTab = () => {
         </div>
       </section>
 
-      {/* Habilidades Profesionales - Nuevo enfoque */}
+      {/* Habilidades Profesionales */}
       <section className="space-y-8">
         <div className="text-center">
-          <h2 className="text-4xl font-black text-primary mb-4">Mis Habilidades</h2>
+          <h2 className="text-4xl font-black text-primary mb-4">{t("about.mySkills")}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Cada beat cuenta una historia. Estas son las habilidades que me permiten dar vida a tu música.
+            {t("about.skillsSubtitle")}
           </p>
         </div>
         
@@ -153,7 +141,7 @@ export const AboutTab = () => {
                     tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
                   />
                   <Radar
-                    name="Habilidades"
+                    name={t("about.skills")}
                     dataKey="A"
                     stroke="hsl(var(--primary))"
                     fill="hsl(var(--primary))"
@@ -184,22 +172,21 @@ export const AboutTab = () => {
         </div>
       </section>
 
-
-      {/* Colaboraciones - Diseño premium */}
+      {/* Colaboraciones */}
       <section className="grid lg:grid-cols-2 gap-8">
         <Card className="relative overflow-hidden bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-teal-500/10 border-2 border-green-500/30">
           <div className="absolute top-0 right-0 w-40 h-40 bg-green-400/20 rounded-full blur-2xl -translate-y-20 translate-x-20"></div>
           <CardHeader className="relative z-10">
             <CardTitle className="flex items-center gap-3 text-2xl font-black text-green-700">
               <Volume2 className="h-8 w-8" />
-              Artistas en Directo
+              {t("about.liveArtists")}
             </CardTitle>
           </CardHeader>
           <CardContent className="relative z-10 space-y-6">
             <div className="relative aspect-video rounded-2xl overflow-hidden border-2 border-green-500/40">
               <img 
                 src="/lovable-uploads/55129f4b-46e1-40c1-998a-89373ed12824.png" 
-                alt="Batería en escenario con luces dramáticas" 
+                alt={t("about.liveStageAlt")}
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
@@ -213,8 +200,8 @@ export const AboutTab = () => {
             
             <div className="p-6 bg-gradient-to-r from-green-600/20 to-emerald-600/20 rounded-2xl border-2 border-green-600/40 text-center">
               <TrendingUp className="h-10 w-10 mx-auto mb-3 text-green-700" />
-              <div className="text-3xl font-black text-green-800">+2000</div>
-              <div className="text-sm font-bold text-green-700">artistas en directo</div>
+              <div className="text-3xl font-black text-green-800">{t("about.liveArtistsCount")}</div>
+              <div className="text-sm font-bold text-green-700">{t("about.liveArtistsLabel")}</div>
             </div>
           </CardContent>
         </Card>
@@ -224,14 +211,14 @@ export const AboutTab = () => {
           <CardHeader className="relative z-10">
             <CardTitle className="flex items-center gap-3 text-2xl font-black text-blue-700">
               <Headphones className="h-8 w-8" />
-              Artistas en Estudio
+              {t("about.studioArtists")}
             </CardTitle>
           </CardHeader>
           <CardContent className="relative z-10 space-y-6">
             <div className="relative aspect-video rounded-2xl overflow-hidden border-2 border-blue-500/40">
               <img 
                 src="/lovable-uploads/0651ca59-4628-48cc-934c-517cee1400c6.png" 
-                alt="Estudio de grabación profesional con batería acústica" 
+                alt={t("about.studioAlt")}
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
@@ -239,14 +226,14 @@ export const AboutTab = () => {
             
             <div className="p-6 bg-white/70 backdrop-blur-sm rounded-2xl border-2 border-blue-400/40">
               <p className="text-lg font-bold text-blue-800 leading-relaxed text-center">
-                Alejandro Sanz, Jarabe de Palo, Raphael, Melendi, Sergio Dalma, Antonio Orozco, Rozalén, Pastora soler, Marwán...
+                Alejandro Sanz, Jarabe de Palo, Raphael, Melendi, Sergio Dalma, Antonio Orozco, Rozalén, Pastora Soler, Marwán...
               </p>
             </div>
             
             <div className="p-6 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl border-2 border-blue-600/40 text-center">
               <Target className="h-10 w-10 mx-auto mb-3 text-blue-700" />
-              <div className="text-3xl font-black text-blue-800">+1000</div>
-              <div className="text-sm font-bold text-blue-700">discos grabados</div>
+              <div className="text-3xl font-black text-blue-800">{t("about.recordedDiscs")}</div>
+              <div className="text-sm font-bold text-blue-700">{t("about.recordedDiscsLabel")}</div>
             </div>
           </CardContent>
         </Card>

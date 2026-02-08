@@ -1,8 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, Clock, Plane, Rocket } from "lucide-react";
+import { Check, Plus, Plane, Rocket } from "lucide-react";
 import { CartItem } from "@/types/cart";
+import { useTranslation } from "react-i18next";
 
 interface DeliveryStepProps {
   addItem: (item: CartItem) => void;
@@ -11,20 +12,22 @@ interface DeliveryStepProps {
 }
 
 export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps) => {
+  const { t } = useTranslation();
+
   const express5Days: CartItem = {
     id: 'delivery-5days',
-    name: 'Entrega Express 5 días',
+    name: t("delivery.express5Name"),
     price: 5.90,
-    category: 'Entrega',
-    description: 'Entrega garantizada en 5 días laborables'
+    category: t("config.steps.delivery"),
+    description: t("delivery.express5Desc")
   };
 
   const express2Days: CartItem = {
     id: 'delivery-2days',
-    name: 'Entrega Ultra Express 2 días',
+    name: t("delivery.express2Name"),
     price: 39.90,
-    category: 'Entrega',
-    description: 'Entrega prioritaria en 2 días laborables'
+    category: t("config.steps.delivery"),
+    description: t("delivery.express2Desc")
   };
 
   const is5DaysSelected = hasItem(express5Days.id);
@@ -59,10 +62,10 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
       {/* Header */}
       <div className="text-center space-y-6">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Entrega
+          {t("delivery.title")}
         </h2>
         <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
-          ¿Cuándo necesitas tu grabación? Elige el plazo que mejor se adapte a tu proyecto.
+          {t("delivery.subtitle")}
         </p>
       </div>
 
@@ -73,33 +76,33 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
             <div className="flex items-center justify-center">
               <CardTitle className="flex items-center gap-1">
                 <img src="/lovable-uploads/841a1a2f-0999-44b3-9a2a-4a97ad64f750.png" alt="Check" className="h-12 w-12" />
-                Estándar
+                {t("delivery.standardTitle")}
               </CardTitle>
             </div>
             <div className="flex justify-center">
-              <Badge variant="secondary">Incluido</Badge>
+              <Badge variant="secondary">{t("delivery.included")}</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex justify-center">
               <div className="text-center">
-                <h3 className="font-semibold">10 Días Laborables</h3>
-                <p className="text-sm text-muted-foreground">Plazo estándar de producción</p>
+                <h3 className="font-semibold">{t("delivery.standard10Days")}</h3>
+                <p className="text-sm text-muted-foreground">{t("delivery.standardTimeDesc")}</p>
               </div>
             </div>
             
             <div className="space-y-2">
-              <h4 className="font-medium text-sm">Características:</h4>
+              <h4 className="font-medium text-sm">{t("delivery.features")}</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Sin costo adicional</li>
-                <li>• Ideal para la mayoría de proyectos</li>
+                <li>• {t("delivery.noCost")}</li>
+                <li>• {t("delivery.idealProjects")}</li>
               </ul>
             </div>
 
             <div className="pt-4">
               <div className="flex items-center gap-1">
                 <Check className="h-4 w-4 text-success" />
-                <span className="text-sm text-success font-medium">Incluido en kit básico</span>
+                <span className="text-sm text-success font-medium">{t("delivery.includedInKit")}</span>
               </div>
             </div>
           </CardContent>
@@ -118,7 +121,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
             <div className="flex items-center justify-center">
               <CardTitle className="flex items-center gap-1">
                 <Plane className="h-12 w-12 text-orange-500" />
-                Rápido
+                {t("delivery.fastTitle")}
               </CardTitle>
             </div>
             <div className="flex justify-center">
@@ -128,16 +131,16 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
           <CardContent className="space-y-4">
             <div className="flex justify-center">
               <div className="text-center">
-                <h3 className="font-semibold">5 Días Laborables</h3>
-                <p className="text-sm text-muted-foreground">Prioridad en la entrega</p>
+                <h3 className="font-semibold">{t("delivery.fast5Days")}</h3>
+                <p className="text-sm text-muted-foreground">{t("delivery.fastTimeDesc")}</p>
               </div>
             </div>
             
             <div className="space-y-2">
-              <h4 className="font-medium text-sm">Características:</h4>
+              <h4 className="font-medium text-sm">{t("delivery.features")}</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Prioridad en la cola de producción</li>
-                <li>• Perfecto para deadlines ajustados</li>
+                <li>• {t("delivery.priorityQueue")}</li>
+                <li>• {t("delivery.deadlines")}</li>
               </ul>
             </div>
 
@@ -152,12 +155,12 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
               {is5DaysSelected ? (
                 <>
                   <Check className="h-4 w-4 mr-2" />
-                  Seleccionado
+                  {t("delivery.selected")}
                 </>
               ) : (
                 <>
                   <Plus className="h-4 w-4 mr-2" />
-                  Upgrade 5.90 €
+                  {t("delivery.upgradeFor")} 5.90 €
                 </>
               )}
             </Button>
@@ -177,7 +180,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
             <div className="flex items-center justify-center">
               <CardTitle className="flex items-center gap-1">
                 <Rocket className="h-12 w-12 text-red-500" />
-                Express
+                {t("delivery.expressTitle")}
               </CardTitle>
             </div>
             <div className="flex justify-center">
@@ -187,23 +190,23 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
           <CardContent className="space-y-4">
             <div className="flex justify-center">
               <div className="text-center">
-                <h3 className="font-semibold">2 Días Laborables</h3>
-                <p className="text-sm text-muted-foreground">Máxima prioridad absoluta</p>
+                <h3 className="font-semibold">{t("delivery.express2Days")}</h3>
+                <p className="text-sm text-muted-foreground">{t("delivery.expressTimeDesc")}</p>
               </div>
             </div>
             
             <div className="space-y-2">
-              <h4 className="font-medium text-sm">Características:</h4>
+              <h4 className="font-medium text-sm">{t("delivery.features")}</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• <strong>Prioridad absoluta</strong></li>
-                <li>• Trabajo dedicado exclusivo</li>
-                <li>• Para emergencias y urgencias</li>
+                <li>• <strong>{t("delivery.absolutePriority")}</strong></li>
+                <li>• {t("delivery.dedicatedWork")}</li>
+                <li>• {t("delivery.emergencies")}</li>
               </ul>
             </div>
 
             <div className="p-3 bg-accent/10 rounded-lg">
               <p className="text-xs text-accent font-medium">
-                🚀 Para casos de extrema urgencia
+                🚀 {t("delivery.extremeUrgency")}
               </p>
             </div>
 
@@ -218,12 +221,12 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
               {is2DaysSelected ? (
                 <>
                   <Check className="h-4 w-4 mr-2" />
-                  Seleccionado
+                  {t("delivery.selected")}
                 </>
               ) : (
                 <>
                   <Plus className="h-4 w-4 mr-2" />
-                  Upgrade 39.90 €
+                  {t("delivery.upgradeFor")} 39.90 €
                 </>
               )}
             </Button>
