@@ -2,9 +2,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Building, Headphones, Zap, Shield } from "lucide-react";
 import { useTranslation } from "react-i18next";
+
 export const StudioTab = () => {
   const { t } = useTranslation();
-  return <div className="container mx-auto px-4 py-8 space-y-8">
+  
+  return (
+    <div className="container mx-auto px-4 py-8 space-y-8">
       <div className="text-center space-y-4">
         <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
           {t("studio.title")}
@@ -17,13 +20,13 @@ export const StudioTab = () => {
       {/* Galería del Estudio */}
       <Card className="bg-gradient-to-br from-card to-muted">
         <CardHeader>
-          <CardTitle>Galería del Estudio</CardTitle>
+          <CardTitle>{t("studio.gallery")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <img src="/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.png" alt="Estudio de batería: kit microfoneado vista 1" loading="lazy" className="w-full h-48 object-cover rounded-md" />
-            <img src="/lovable-uploads/85028cc6-173f-44cd-a28f-5aeec1c79bed.png" alt="Estudio de batería: sala tratada vista 2" loading="lazy" className="w-full h-48 object-cover rounded-md" />
-            <img src="/lovable-uploads/e499070f-a9d9-4586-bc17-dedc7a19da05.png" alt="Equipamiento profesional de audio: rack con previos API y otros procesadores" loading="lazy" className="w-full h-48 object-cover object-top rounded-md" />
+            <img src="/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.png" alt={t("studio.galleryAlt1")} loading="lazy" className="w-full h-48 object-cover rounded-md" />
+            <img src="/lovable-uploads/85028cc6-173f-44cd-a28f-5aeec1c79bed.png" alt={t("studio.galleryAlt2")} loading="lazy" className="w-full h-48 object-cover rounded-md" />
+            <img src="/lovable-uploads/e499070f-a9d9-4586-bc17-dedc7a19da05.png" alt={t("studio.galleryAlt3")} loading="lazy" className="w-full h-48 object-cover object-top rounded-md" />
           </div>
         </CardContent>
       </Card>
@@ -34,7 +37,7 @@ export const StudioTab = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Building className="h-5 w-5 text-primary" />
-              Características del Estudio
+              {t("studio.featuresTitle")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -42,22 +45,22 @@ export const StudioTab = () => {
               <div className="flex items-start gap-3">
                 <Shield className="h-5 w-5 text-primary mt-0.5" />
                 <div>
-                  <h4 className="font-semibold">Acústica Profesional</h4>
-                  <p className="text-sm text-muted-foreground">Sala diseñada y tratada acústicamente por los mejores ingenieros acústicos para un sonido profesional impecable.</p>
+                  <h4 className="font-semibold">{t("studio.acousticsTitle")}</h4>
+                  <p className="text-sm text-muted-foreground">{t("studio.acousticsDesc")}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Headphones className="h-5 w-5 text-primary mt-0.5" />
                 <div>
-                  <h4 className="font-semibold">Sala de 50m2 y 3,5m de altura</h4>
-                  <p className="text-sm text-muted-foreground">Para conseguir un sonido gigante!</p>
+                  <h4 className="font-semibold">{t("studio.roomSizeTitle")}</h4>
+                  <p className="text-sm text-muted-foreground">{t("studio.roomSizeDesc")}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Zap className="h-5 w-5 text-primary mt-0.5" />
                 <div>
-                  <h4 className="font-semibold">Cadena de Audio Premium</h4>
-                  <p className="text-sm text-muted-foreground">Microfonía Clase A, Previos API, Neve y DAD con convertidores de última generación</p>
+                  <h4 className="font-semibold">{t("studio.audioChainTitle")}</h4>
+                  <p className="text-sm text-muted-foreground">{t("studio.audioChainDesc")}</p>
                 </div>
               </div>
             </div>
@@ -69,13 +72,13 @@ export const StudioTab = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Headphones className="h-5 w-5 text-primary" />
-              Equipamiento
+              {t("studio.equipmentTitle")}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <Accordion type="multiple" className="w-full">
               <AccordionItem value="microfonos">
-                <AccordionTrigger>Micrófonos</AccordionTrigger>
+                <AccordionTrigger>{t("studio.microphones")}</AccordionTrigger>
                 <AccordionContent>
                   <ul className="grid sm:grid-cols-2 gap-2 text-sm">
                     <li>1 x Telefunken C12</li>
@@ -89,7 +92,7 @@ export const StudioTab = () => {
                     <li>4 x Sennheiser 421</li>
                     <li>1 x Shure Beta 52</li>
                     <li>1 x Audix D6</li>
-                    <li>1 x Beyerdinamyc M160</li>
+                    <li>1 x Beyerdynamic M160</li>
                     <li>1 x Solomon LoFreq</li>
                     <li>1 x Sennheiser MD441-U</li>
                     <li>3 x Shure SM57</li>
@@ -102,7 +105,7 @@ export const StudioTab = () => {
               </AccordionItem>
 
               <AccordionItem value="convertidores">
-                <AccordionTrigger>Convertidores</AccordionTrigger>
+                <AccordionTrigger>{t("studio.converters")}</AccordionTrigger>
                 <AccordionContent>
                   <ul className="list-disc pl-5 text-sm">
                     <li>DAD AX64 Digital Audio Denmark</li>
@@ -121,7 +124,7 @@ export const StudioTab = () => {
               </AccordionItem>
 
               <AccordionItem value="monitores">
-                <AccordionTrigger>Monitores</AccordionTrigger>
+                <AccordionTrigger>{t("studio.monitors")}</AccordionTrigger>
                 <AccordionContent>
                   <ul className="list-disc pl-5 text-sm">
                     <li>2 x Yamaha HS8</li>
@@ -130,7 +133,7 @@ export const StudioTab = () => {
               </AccordionItem>
 
               <AccordionItem value="preamps">
-                <AccordionTrigger>Preamplificadores</AccordionTrigger>
+                <AccordionTrigger>{t("studio.preamps")}</AccordionTrigger>
                 <AccordionContent>
                   <ul className="list-disc pl-5 text-sm">
                     <li>12 x API 3124+</li>
@@ -142,7 +145,7 @@ export const StudioTab = () => {
               </AccordionItem>
 
               <AccordionItem value="bateria">
-                <AccordionTrigger>Batería (DW, Yamaha, Ludwig)</AccordionTrigger>
+                <AccordionTrigger>{t("studio.drums")}</AccordionTrigger>
                 <AccordionContent>
                   <p className="text-sm mb-2">DW Collectors, Performance & Design Series</p>
                   <ul className="grid sm:grid-cols-2 gap-2 text-sm">
@@ -162,7 +165,7 @@ export const StudioTab = () => {
               </AccordionItem>
 
               <AccordionItem value="platos">
-                <AccordionTrigger>Platos</AccordionTrigger>
+                <AccordionTrigger>{t("studio.cymbals")}</AccordionTrigger>
                 <AccordionContent>
                   <ul className="list-disc pl-5 text-sm">
                     <li>Zildjian K Series</li>
@@ -173,7 +176,7 @@ export const StudioTab = () => {
               </AccordionItem>
 
               <AccordionItem value="cajas">
-                <AccordionTrigger>Cajas</AccordionTrigger>
+                <AccordionTrigger>{t("studio.snares")}</AccordionTrigger>
                 <AccordionContent>
                   <ul className="grid sm:grid-cols-2 gap-2 text-sm">
                     <li>Dw Collectors Series 14 x 6,5″</li>
@@ -185,7 +188,6 @@ export const StudioTab = () => {
                     <li>Pearl Piccolo 14 x 4″</li>
                     <li>Pearl Vinnie Paul Signature Series 14 x 8″</li>
                     <li>Premier Signia 1998 14 x 7″</li>
-                    
                     <li>Mapex Black Panther Stainless Steel 14 x 5,5″</li>
                     <li>Mapex Black Panther 14 x 5″</li>
                     <li>Mapex Black Panther 13 x 5″</li>
@@ -198,7 +200,6 @@ export const StudioTab = () => {
           </CardContent>
         </Card>
       </div>
-
 
       {/* Process */}
       <Card className="bg-gradient-to-br from-card to-muted">
@@ -237,5 +238,6 @@ export const StudioTab = () => {
           </div>
         </CardContent>
       </Card>
-    </div>;
+    </div>
+  );
 };
