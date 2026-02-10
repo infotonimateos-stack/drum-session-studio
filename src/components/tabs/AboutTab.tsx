@@ -1,26 +1,18 @@
 import { Badge } from "@/components/ui/badge";
-import { Drum, Star, Tv, Music, Volume2, Headphones, Target, TrendingUp, Heart, Users, Dog, Home } from "lucide-react";
-import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
+import { Star, Tv, Music, Volume2, Headphones, Target, TrendingUp, Heart, Users, Dog } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export const AboutTab = () => {
   const { t } = useTranslation();
 
-  const skillsData = [
-    { skill: t("about.skillGroove"), A: 95 },
-    { skill: t("about.skillSound"), A: 93 },
-    { skill: t("about.skillPunch"), A: 93 },
-    { skill: t("about.skillVersatility"), A: 93 },
-    { skill: t("about.skillPrecision"), A: 94 },
-    { skill: t("about.skillCreativity"), A: 78 }
-  ];
-
   const personalInfo = [
     { icon: Heart, label: t("about.maritalStatus"), value: t("about.married") },
     { icon: Users, label: t("about.children"), value: "2" },
-    { icon: Dog, label: t("about.pets"), value: t("about.dogs") },
-    { icon: Home, label: t("about.studio"), value: "Cardedeu, BCN" }
+    { icon: Dog, label: t("about.pets"), value: t("about.dogs") }
   ];
+
+
+
 
   return (
     <div className="container mx-auto px-4 py-16 max-w-5xl space-y-24">
@@ -79,53 +71,8 @@ export const AboutTab = () => {
         </div>
       </section>
 
-      {/* Skills */}
-      <section className="space-y-8">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-2">{t("about.mySkills")}</h2>
-          <p className="text-sm text-muted-foreground">{t("about.skillsSubtitle")}</p>
-        </div>
 
-        <div className="grid md:grid-cols-2 gap-10 items-center">
-          <div className="h-72 -ml-4">
-            <ResponsiveContainer width="100%" height="100%">
-              <RadarChart data={skillsData}>
-                <PolarGrid stroke="hsl(var(--border))" />
-                <PolarAngleAxis
-                  dataKey="skill"
-                  tick={{ fill: 'hsl(var(--foreground))', fontSize: 12 }}
-                />
-                <PolarRadiusAxis angle={90} domain={[0, 100]} tick={false} axisLine={false} />
-                <Radar
-                  name={t("about.skills")}
-                  dataKey="A"
-                  stroke="hsl(var(--primary))"
-                  fill="hsl(var(--primary))"
-                  fillOpacity={0.25}
-                  strokeWidth={2}
-                />
-              </RadarChart>
-            </ResponsiveContainer>
-          </div>
 
-          <div className="space-y-3">
-            {skillsData.map((skill) => (
-              <div key={skill.skill}>
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="font-medium">{skill.skill}</span>
-                  <span className="text-primary font-bold">{skill.A}%</span>
-                </div>
-                <div className="w-full bg-muted/50 rounded-full h-1.5">
-                  <div
-                    className="h-full bg-primary rounded-full"
-                    style={{ width: `${skill.A}%` }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Collaborations */}
       <section className="grid md:grid-cols-2 gap-8">
