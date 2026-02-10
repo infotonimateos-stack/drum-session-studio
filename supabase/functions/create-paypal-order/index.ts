@@ -10,7 +10,6 @@ const logStep = (step: string, details?: any) => {
   console.log(`[CREATE-PAYPAL-ORDER] ${step}${detailsStr}`);
 };
 
-// Production PayPal API
 const PAYPAL_API_BASE = "https://api-m.paypal.com";
 
 const getPayPalAccessToken = async (clientId: string, clientSecret: string): Promise<string> => {
@@ -35,7 +34,6 @@ const getPayPalAccessToken = async (clientId: string, clientSecret: string): Pro
 };
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -51,24 +49,26 @@ serve(async (req) => {
     }
     logStep("PayPal credentials verified");
 
-    // Get the request body with cart data
     const { items, basePrice, total, paypalFee, totalWithFee } = await req.json();
     logStep("Received cart data", { itemCount: items?.length, basePrice, total, paypalFee, totalWithFee });
 
+    // Input validation
     const finalTotal = totalWithFee || total;
-    
-    if (!finalTotal || finalTotal <= 0) {
+    if (!finalTotal || typeof finalTotal !== "number" || finalTotal <= 0 || finalTotal > 10000) {
       throw new Error("Invalid total amount");
     }
+    if (!basePrice || typeof basePrice !== "number" || basePrice <= 0 || basePrice > 10000) {
+      throw new Error("Invalid base price");
+    }
+    if (items && (!Array.isArray(items) || items.length > 50)) {
+      throw new Error("Invalid items");
+    }
 
-    // Get PayPal access token
     const accessToken = await getPayPalAccessToken(clientId, clientSecret);
     logStep("PayPal access token obtained");
 
-    // Build item details for PayPal
     const paypalItems = [];
     
-    // Add base package
     paypalItems.push({
       name: "Paquete Básico - Grabación de Batería",
       description: "Grabación profesional de batería",
@@ -79,12 +79,14 @@ serve(async (req) => {
       quantity: "1",
     });
 
-    // Add cart items
     if (items && items.length > 0) {
       for (const item of items) {
+        if (!item.name || typeof item.price !== "number" || item.price < 0 || item.price > 10000) {
+          throw new Error("Invalid item data");
+        }
         paypalItems.push({
-          name: item.name.substring(0, 127), // PayPal has a 127 char limit
-          description: (item.description || item.category).substring(0, 127),
+          name: String(item.name).substring(0, 127),
+          description: String(item.description || item.category || "").substring(0, 127),
           unit_amount: {
             currency_code: "EUR",
             value: item.price.toFixed(2),
@@ -94,8 +96,7 @@ serve(async (req) => {
       }
     }
 
-    // Add PayPal fee if present
-    if (paypalFee && paypalFee > 0) {
+    if (paypalFee && typeof paypalFee === "number" && paypalFee > 0 && paypalFee < 1000) {
       paypalItems.push({
         name: "Gastos de gestión PayPal",
         description: "Recargo del 5% por uso de PayPal",
@@ -107,11 +108,10 @@ serve(async (req) => {
       });
     }
 
-    logStep("PayPal items created", { count: paypalItems.length, includesFee: paypalFee > 0 });
+    logStep("PayPal items created", { count: paypalItems.length });
 
     const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
 
-    // Create PayPal order - simple configuration, total is final price
     const orderResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders`, {
       method: "POST",
       headers: {
@@ -154,7 +154,6 @@ serve(async (req) => {
     const orderData = await orderResponse.json();
     logStep("PayPal order created", { orderId: orderData.id });
 
-    // Find the approval URL
     const approvalLink = orderData.links.find((link: any) => link.rel === "approve");
     
     if (!approvalLink) {

@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.2";
 import { Resend } from "npm:resend@2.0.0";
 
 const corsHeaders = {
@@ -19,13 +20,42 @@ interface OrderEmailRequest {
 }
 
 const handler = async (req: Request): Promise<Response> => {
-  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
     logStep("Function started");
+
+    // Verify the caller is a service role (internal call from other edge functions)
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader?.startsWith("Bearer ")) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const token = authHeader.replace("Bearer ", "");
+    const supabase = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_ANON_KEY") ?? "",
+      { global: { headers: { Authorization: authHeader } } }
+    );
+
+    // getClaims will succeed for both service_role and authenticated users
+    const { data: claimsData, error: claimsError } = await supabase.auth.getClaims(token);
+    
+    // Only allow service_role calls (from other edge functions)
+    if (claimsError || !claimsData?.claims || claimsData.claims.role !== "service_role") {
+      logStep("Unauthorized: not a service role call", { role: claimsData?.claims?.role });
+      return new Response(JSON.stringify({ error: "Forbidden: internal use only" }), {
+        status: 403,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    logStep("Service role authorization verified");
 
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
     if (!resendApiKey) {
@@ -39,8 +69,13 @@ const handler = async (req: Request): Promise<Response> => {
     logStep("Received request", { customerEmail, paymentMethod, orderId });
 
     // Validate required fields
-    if (!customerEmail) {
-      throw new Error("Customer email is required");
+    if (!customerEmail || typeof customerEmail !== "string" || customerEmail.length > 255) {
+      throw new Error("Invalid customer email");
+    }
+
+    // Basic email format check
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)) {
+      throw new Error("Invalid email format");
     }
 
     const greeting = customerName ? `¡Hola ${customerName}!` : "¡Hola!";

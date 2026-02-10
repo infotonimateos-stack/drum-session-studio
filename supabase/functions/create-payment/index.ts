@@ -12,7 +12,6 @@ const logStep = (step: string, details?: any) => {
 };
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -26,18 +25,26 @@ serve(async (req) => {
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
 
-    // Get the request body with cart data
     const { items, basePrice, total, customerEmail } = await req.json();
     logStep("Received cart data", { itemCount: items?.length, basePrice, total, customerEmail });
 
-    if (!total || total <= 0) {
+    // Input validation
+    if (!total || typeof total !== "number" || total <= 0 || total > 10000) {
       throw new Error("Invalid total amount");
     }
+    if (!basePrice || typeof basePrice !== "number" || basePrice <= 0 || basePrice > 10000) {
+      throw new Error("Invalid base price");
+    }
+    if (items && (!Array.isArray(items) || items.length > 50)) {
+      throw new Error("Invalid items");
+    }
+    if (customerEmail && (typeof customerEmail !== "string" || customerEmail.length > 255)) {
+      throw new Error("Invalid email");
+    }
 
-    // Build line items for Stripe (prices include tax internally)
+    // Build line items for Stripe
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
-    // Add base package
     lineItems.push({
       price_data: {
         currency: "eur",
@@ -50,15 +57,17 @@ serve(async (req) => {
       quantity: 1,
     });
 
-    // Add each cart item as a line item
     if (items && items.length > 0) {
       for (const item of items) {
+        if (!item.name || typeof item.price !== "number" || item.price < 0 || item.price > 10000) {
+          throw new Error("Invalid item data");
+        }
         lineItems.push({
           price_data: {
             currency: "eur",
             product_data: {
-              name: item.name,
-              description: item.description || `${item.category}`,
+              name: String(item.name).substring(0, 200),
+              description: String(item.description || item.category || "").substring(0, 500),
             },
             unit_amount: Math.round(item.price * 100),
           },
@@ -69,11 +78,9 @@ serve(async (req) => {
 
     logStep("Line items created", { count: lineItems.length });
 
-    // Get origin with fallback
     const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
     logStep("Origin determined", { origin });
 
-    // Create checkout session - simple configuration without automatic tax or invoices
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
       line_items: lineItems,
       mode: "payment",
@@ -81,16 +88,13 @@ serve(async (req) => {
       cancel_url: `${origin}/`,
       locale: "es",
       payment_method_types: ["card"],
-      // Disable automatic invoice creation - only receipts will be sent
       invoice_creation: { enabled: false },
     };
 
-    // Add customer email if provided
     if (customerEmail) {
       sessionConfig.customer_email = customerEmail;
     }
 
-    // Create the checkout session
     const session = await stripe.checkout.sessions.create(sessionConfig);
     logStep("Checkout session created", { sessionId: session.id, url: session.url });
 

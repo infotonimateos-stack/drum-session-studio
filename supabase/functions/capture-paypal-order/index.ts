@@ -10,7 +10,6 @@ const logStep = (step: string, details?: any) => {
   console.log(`[CAPTURE-PAYPAL-ORDER] ${step}${detailsStr}`);
 };
 
-// Production PayPal API
 const PAYPAL_API_BASE = "https://api-m.paypal.com";
 
 const getPayPalAccessToken = async (clientId: string, clientSecret: string): Promise<string> => {
@@ -35,7 +34,6 @@ const getPayPalAccessToken = async (clientId: string, clientSecret: string): Pro
 };
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -54,16 +52,15 @@ serve(async (req) => {
     const { orderId } = await req.json();
     logStep("Received order ID", { orderId });
 
-    if (!orderId) {
-      throw new Error("Order ID is required");
+    // Validate orderId format and length
+    if (!orderId || typeof orderId !== "string" || orderId.length > 100 || !/^[A-Za-z0-9]+$/.test(orderId)) {
+      throw new Error("Invalid order ID");
     }
 
-    // Get PayPal access token
     const accessToken = await getPayPalAccessToken(clientId, clientSecret);
     logStep("PayPal access token obtained");
 
-    // First, get the order details to check status
-    const orderDetailsResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${orderId}`, {
+    const orderDetailsResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${encodeURIComponent(orderId)}`, {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${accessToken}`,
@@ -80,14 +77,12 @@ serve(async (req) => {
     const orderDetails = await orderDetailsResponse.json();
     logStep("Order details retrieved", { status: orderDetails.status });
 
-    // If already captured, just return success with payer info
     if (orderDetails.status === "COMPLETED") {
       logStep("Order already captured");
       
       const payerEmail = orderDetails.payer?.email_address;
       const payerName = orderDetails.payer?.name?.given_name;
 
-      // Send confirmation email
       if (payerEmail) {
         await sendConfirmationEmail(payerEmail, payerName, orderId);
       }
@@ -103,8 +98,7 @@ serve(async (req) => {
       });
     }
 
-    // Capture the order if not yet captured
-    const captureResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${orderId}/capture`, {
+    const captureResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${encodeURIComponent(orderId)}/capture`, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${accessToken}`,
@@ -121,13 +115,11 @@ serve(async (req) => {
     const captureData = await captureResponse.json();
     logStep("PayPal order captured", { status: captureData.status });
 
-    // Get payer information
     const payerEmail = captureData.payer?.email_address;
     const payerName = captureData.payer?.name?.given_name;
 
     logStep("Payer info", { payerEmail, payerName });
 
-    // Send confirmation email if capture was successful
     if (captureData.status === "COMPLETED" && payerEmail) {
       await sendConfirmationEmail(payerEmail, payerName, orderId);
     }
@@ -158,10 +150,10 @@ async function sendConfirmationEmail(email: string, name: string | undefined, or
 
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
-    const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY");
+    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
-    if (!supabaseUrl || !supabaseAnonKey) {
-      logStep("Missing Supabase configuration for email sending");
+    if (!supabaseUrl || !serviceRoleKey) {
+      logStep("Missing configuration for email sending");
       return;
     }
 
@@ -169,7 +161,7 @@ async function sendConfirmationEmail(email: string, name: string | undefined, or
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${supabaseAnonKey}`,
+        "Authorization": `Bearer ${serviceRoleKey}`,
       },
       body: JSON.stringify({
         customerEmail: email,
@@ -182,6 +174,6 @@ async function sendConfirmationEmail(email: string, name: string | undefined, or
     const emailResult = await emailResponse.json();
     logStep("Email function response", emailResult);
   } catch (error) {
-    logStep("Failed to send confirmation email", { error: error.message });
+    logStep("Failed to send confirmation email", { error: (error as Error).message });
   }
 }
