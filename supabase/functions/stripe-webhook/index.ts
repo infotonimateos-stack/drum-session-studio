@@ -17,32 +17,33 @@ serve(async (req) => {
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
 
-    // Get the webhook signature
+    // Require webhook signature verification
     const signature = req.headers.get("stripe-signature");
     const webhookSecret = Deno.env.get("STRIPE_WEBHOOK_SECRET");
+
+    if (!webhookSecret) {
+      logStep("STRIPE_WEBHOOK_SECRET is not configured");
+      return new Response(JSON.stringify({ error: "Webhook not configured" }), { status: 500 });
+    }
+
+    if (!signature) {
+      logStep("Missing stripe-signature header");
+      return new Response(JSON.stringify({ error: "Missing signature" }), { status: 400 });
+    }
 
     const body = await req.text();
 
     let event: Stripe.Event;
-
-    // Verify signature if webhook secret is configured
-    if (webhookSecret && signature) {
-      try {
-        event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
-        logStep("Webhook signature verified");
-      } catch (err) {
-        logStep("Webhook signature verification failed", { error: err.message });
-        return new Response(JSON.stringify({ error: "Invalid signature" }), { status: 400 });
-      }
-    } else {
-      // For development/testing without signature verification
-      event = JSON.parse(body);
-      logStep("Processing webhook without signature verification");
+    try {
+      event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
+      logStep("Webhook signature verified");
+    } catch (err) {
+      logStep("Webhook signature verification failed", { error: (err as Error).message });
+      return new Response(JSON.stringify({ error: "Invalid signature" }), { status: 400 });
     }
 
     logStep("Event received", { type: event.type, id: event.id });
 
-    // Handle checkout.session.completed event
     if (event.type === "checkout.session.completed") {
       const session = event.data.object as Stripe.Checkout.Session;
       
@@ -52,22 +53,20 @@ serve(async (req) => {
         paymentStatus: session.payment_status
       });
 
-      // Only send email if payment was successful
       if (session.payment_status === "paid") {
         const customerEmail = session.customer_email || session.customer_details?.email;
         const customerName = session.customer_details?.name;
 
         if (customerEmail) {
-          // Call the send-order-email function
           const supabaseUrl = Deno.env.get("SUPABASE_URL");
-          const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY");
+          const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
-          if (supabaseUrl && supabaseAnonKey) {
+          if (supabaseUrl && serviceRoleKey) {
             const emailResponse = await fetch(`${supabaseUrl}/functions/v1/send-order-email`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${supabaseAnonKey}`,
+                "Authorization": `Bearer ${serviceRoleKey}`,
               },
               body: JSON.stringify({
                 customerEmail,
@@ -80,7 +79,7 @@ serve(async (req) => {
             const emailResult = await emailResponse.json();
             logStep("Email function response", emailResult);
           } else {
-            logStep("Missing Supabase configuration for email sending");
+            logStep("Missing configuration for email sending");
           }
         } else {
           logStep("No customer email found in session");
@@ -93,8 +92,8 @@ serve(async (req) => {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    logStep("ERROR", { message: error.message });
-    return new Response(JSON.stringify({ error: error.message }), {
+    logStep("ERROR", { message: (error as Error).message });
+    return new Response(JSON.stringify({ error: (error as Error).message }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
