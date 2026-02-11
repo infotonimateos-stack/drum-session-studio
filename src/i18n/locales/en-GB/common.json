@@ -175,8 +175,11 @@
     "videocall10Desc": "To discuss project details",
     "multicam": "Multicam Broadcast",
     "multicamDesc": "Multi-camera system with live audio and video, real-time production",
-    "partitura": "Session Score Sheet",
-    "partituraDesc": "We'll send you a photograph of the original score or script used during your song's recording session. These are real handwritten annotations and working scripts (not perfectly edited scores), serving as an authentic and unique keepsake of the creative process in the studio.",
+    "partitura": "Score Sheet",
+    "partituraDesc": "",
+    "partituraDesc1": "Real document: photograph of the original handwritten script used during the session.",
+    "partituraDesc2": "Fully handcrafted: authentic working annotations (not a perfect digital edition).",
+    "partituraDesc3": "Unique keepsake: an exclusive testimony of your song's creative process in the studio.",
     "premiumExperience": "Unique Premium Experience",
     "added": "Added",
     "add": "Add"

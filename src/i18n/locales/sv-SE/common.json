@@ -72,8 +72,11 @@
     "videocall10Desc": "För att diskutera projektdetaljer",
     "multicam": "Multicam-sändning",
     "multicamDesc": "Multikamerasystem med live-ljud och video, realtidsproduktion",
-    "partitura": "Sessionspartitur",
-    "partituraDesc": "Vi skickar dig ett fotografi av det originalpartitur eller manus som användes under inspelningen av din låt. Det handlar om äkta handskrivna anteckningar och arbetsmanuskript (inte perfekt redigerade partitur), som fungerar som ett autentiskt och unikt minne av den kreativa processen i studion.",
+    "partitura": "Partitur",
+    "partituraDesc": "",
+    "partituraDesc1": "Äkta dokument: fotografi av det handskrivna originalmanus som användes under sessionen.",
+    "partituraDesc2": "Helt hantverksmässigt: autentiska arbetsanteckningar (inte en perfekt digital utgåva).",
+    "partituraDesc3": "Unikt minne: ett exklusivt vittnesbörd om den kreativa processen bakom din låt i studion.",
     "premiumExperience": "Unik Premiumupplevelse",
     "added": "Tillagd",
     "add": "Lägg till"
