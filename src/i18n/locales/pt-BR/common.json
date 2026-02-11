@@ -175,8 +175,11 @@
     "videocall10Desc": "Para discutir detalhes do projeto",
     "multicam": "Transmissão multicam",
     "multicamDesc": "Sistema multicâmera com áudio e vídeo ao vivo, produção em tempo real",
-    "partitura": "Partitura da sessão",
-    "partituraDesc": "Enviaremos uma fotografia da partitura ou roteiro original utilizado durante a sessão de gravação da sua música. São anotações manuscritas e roteiros de trabalho reais (não partituras perfeitamente editadas), que servem como uma lembrança autêntica e única do processo criativo no estúdio.",
+    "partitura": "Partitura",
+    "partituraDesc": "",
+    "partituraDesc1": "Documento real: fotografia do roteiro original manuscrito usado durante a sessão.",
+    "partituraDesc2": "Totalmente artesanal: anotações de trabalho autênticas (não é uma edição digital perfeita).",
+    "partituraDesc3": "Lembrança única: um testemunho exclusivo do processo criativo da sua música no estúdio.",
     "premiumExperience": "Experiência Premium Única",
     "added": "Adicionado",
     "add": "Adicionar"

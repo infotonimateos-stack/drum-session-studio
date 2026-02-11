@@ -173,8 +173,11 @@
     "videocall10Desc": "Om projectdetails te bespreken",
     "multicam": "Multicam uitzending",
     "multicamDesc": "Multicamerasysteem met live audio en video, realtime productie",
-    "partitura": "Sessiepartituur",
-    "partituraDesc": "We sturen je een foto van de originele partituur of het script dat tijdens de opnamesessie van je nummer is gebruikt. Het gaat om echte handgeschreven aantekeningen en werkscripts (geen perfect bewerkte partituren), die dienen als een authentiek en uniek aandenken aan het creatieve proces in de studio.",
+    "partitura": "Partituur",
+    "partituraDesc": "",
+    "partituraDesc1": "Echt document: foto van het originele handgeschreven script gebruikt tijdens de sessie.",
+    "partituraDesc2": "Volledig ambachtelijk: authentieke werkaantekeningen (geen perfecte digitale editie).",
+    "partituraDesc3": "Uniek aandenken: een exclusief getuigenis van het creatieve proces van je nummer in de studio.",
     "premiumExperience": "Unieke Premium Ervaring",
     "added": "Toegevoegd",
     "add": "Toevoegen"

@@ -175,8 +175,11 @@
     "videocall10Desc": "Pour discuter des détails du projet",
     "multicam": "Diffusion multicam",
     "multicamDesc": "Système multi-caméras avec audio et vidéo en direct, production en temps réel",
-    "partitura": "Partition de la session",
-    "partituraDesc": "Nous vous enverrons une photographie de la partition ou du script original utilisé lors de la session d'enregistrement de votre chanson. Il s'agit d'annotations manuscrites et de scripts de travail réels (pas de partitions parfaitement éditées), servant de souvenir authentique et unique du processus créatif en studio.",
+    "partitura": "Partition",
+    "partituraDesc": "",
+    "partituraDesc1": "Document réel : photographie du script manuscrit original utilisé pendant la session.",
+    "partituraDesc2": "Entièrement artisanal : annotations de travail authentiques (pas une édition numérique parfaite).",
+    "partituraDesc3": "Souvenir unique : un témoignage exclusif du processus créatif de votre chanson en studio.",
     "premiumExperience": "Expérience Premium Unique",
     "added": "Ajouté",
     "add": "Ajouter"

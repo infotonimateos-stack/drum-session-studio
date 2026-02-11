@@ -219,8 +219,11 @@
     "multicam": "Retransmisión multicam",
     "multicamDesc": "Sistema multicámara con audio y video en directo, producción en tiempo real",
     "premiumExperience": "Experiencia Premium Única",
-    "partitura": "Partitura del proceso",
-    "partituraDesc": "Te enviaremos una fotografía de la partitura o guion original utilizado durante la sesión de grabación de tu canción. Se trata de anotaciones manuscritas y guiones de trabajo reales (no partituras de edición perfecta), que sirven como un recuerdo auténtico y único del proceso creativo en el estudio.",
+    "partitura": "Partitura",
+    "partituraDesc": "",
+    "partituraDesc1": "Documento real: fotografía del guion original manuscrito usado durante la sesión.",
+    "partituraDesc2": "Todo artesanal: anotaciones de trabajo auténticas (no es una edición digital perfecta).",
+    "partituraDesc3": "Recuerdo único: un testimonio exclusivo del proceso creativo de tu canción en el estudio.",
     "added": "Añadido",
     "add": "Añadir"
   },

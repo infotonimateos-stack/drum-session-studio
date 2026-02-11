@@ -119,7 +119,15 @@ const AmpliarPedido = () => {
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p className="text-muted-foreground text-sm">{item.description}</p>
+          {item.id === 'partitura-proceso' ? (
+            <ul className="text-muted-foreground text-sm space-y-1.5 list-none">
+              <li>📄 {t("extras.partituraDesc1")}</li>
+              <li>✍️ {t("extras.partituraDesc2")}</li>
+              <li>🎵 {t("extras.partituraDesc3")}</li>
+            </ul>
+          ) : (
+            <p className="text-muted-foreground text-sm">{item.description}</p>
+          )}
           <Button variant={selected ? "default" : "outline"} size="sm" className="w-full" onClick={(e) => { e.stopPropagation(); toggleItem(item); }}>
             {selected ? <><Check className="h-4 w-4 mr-2" />{t("extras.added")}</> : <><Plus className="h-4 w-4 mr-2" />{t("extras.add")}</>}
           </Button>
