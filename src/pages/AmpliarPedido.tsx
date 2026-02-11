@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -15,6 +14,7 @@ import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { upgradeMicrophones } from "@/data/microphones";
+import { ProductCard } from "@/components/ProductCard";
 import logo from "@/assets/logo.png";
 
 const AmpliarPedido = () => {
@@ -39,7 +39,6 @@ const AmpliarPedido = () => {
     }
   };
 
-  // Mutually exclusive delivery
   const toggleDelivery = (item: CartItem, otherId: string) => {
     if (hasItem(item.id)) {
       setItems(prev => prev.filter(i => i.id !== item.id));
@@ -78,6 +77,17 @@ const AmpliarPedido = () => {
     { id: 'partitura-proceso', name: t("extras.partitura"), price: 1.99, category: t("config.steps.extras"), description: t("extras.partituraDesc") },
   ];
 
+  const iconMap: Record<string, React.ReactNode> = {
+    'tiempo-adicional': <Clock className="h-10 w-10" />,
+    'work-mix': <Headphones className="h-10 w-10" />,
+    'social-greeting': <Video className="h-10 w-10" />,
+    'playing-video': <PlayCircle className="h-10 w-10" />,
+    'instagram-share': <Share2 className="h-10 w-10" />,
+    'take-exact-copy': <Copy className="h-10 w-10" />,
+    'videocall-10min': <Smartphone className="h-10 w-10" />,
+    'partitura-proceso': <FileMusic className="h-10 w-10" />,
+  };
+
   // --- PAYMENT ---
   const handlePayment = async () => {
     if (items.length === 0) { toast.error("Selecciona al menos un servicio"); return; }
@@ -93,47 +103,6 @@ const AmpliarPedido = () => {
       else { toast.error(t("checkout.sessionError")); }
     } catch { toast.error(t("checkout.connectionError")); }
     setIsLoading(false);
-  };
-
-  // --- RENDER HELPERS ---
-  const ServiceCard = ({ item, icon }: { item: CartItem; icon: React.ReactNode }) => {
-    const selected = hasItem(item.id);
-    return (
-      <Card
-        className={`transition-all duration-300 hover:shadow-xl cursor-pointer transform hover:scale-105 ${
-          selected
-            ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-xl scale-105'
-            : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'
-        }`}
-        onClick={() => toggleItem(item)}
-      >
-        <CardHeader className="pb-4">
-          <div className="flex items-center justify-between mb-2">
-            <CardTitle className="flex items-center gap-2 text-lg">
-              {icon}
-              {item.name}
-            </CardTitle>
-            <Badge variant="outline" className="text-primary font-bold text-xl px-4 py-2 whitespace-nowrap">
-              {item.price.toFixed(2)} €
-            </Badge>
-          </div>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {item.id === 'partitura-proceso' ? (
-            <ul className="text-muted-foreground text-sm space-y-1.5 list-none">
-              <li>📄 {t("extras.partituraDesc1")}</li>
-              <li>✍️ {t("extras.partituraDesc2")}</li>
-              <li>🎵 {t("extras.partituraDesc3")}</li>
-            </ul>
-          ) : (
-            <p className="text-muted-foreground text-sm">{item.description}</p>
-          )}
-          <Button variant={selected ? "default" : "outline"} size="sm" className="w-full" onClick={(e) => { e.stopPropagation(); toggleItem(item); }}>
-            {selected ? <><Check className="h-4 w-4 mr-2" />{t("extras.added")}</> : <><Plus className="h-4 w-4 mr-2" />{t("extras.add")}</>}
-          </Button>
-        </CardContent>
-      </Card>
-    );
   };
 
   return (
@@ -161,115 +130,125 @@ const AmpliarPedido = () => {
         </div>
 
         {/* MICROPHONES */}
-        <section className="space-y-6 bg-gradient-to-br from-warm-cream/20 to-warm-peach/10 rounded-xl p-8">
+        <section className="space-y-6">
           <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             🎤 {t("microphones.premiumUpgrades")}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {micItems.map(item => {
               const mic = upgradeMicrophones.find(m => m.id === item.id);
-              const selected = hasItem(item.id);
               return (
-                <Card key={item.id}
-                  className={`transition-all duration-300 hover:shadow-xl cursor-pointer transform hover:scale-105 ${
-                    selected ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-xl scale-105' : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'
-                  }`}
-                  onClick={() => toggleItem(item)}
-                >
-                  <CardHeader className="pb-4">
-                    <div className="flex items-center justify-between mb-4">
-                      <Badge variant="outline" className="text-sm px-3 py-1">{mic ? t(mic.targetKey) : ''}</Badge>
-                      <span className="font-bold text-xl text-primary">{item.price.toFixed(2)} €</span>
-                    </div>
-                    {mic?.image && (
-                      <div className="w-full h-40 flex items-center justify-center bg-white rounded-lg">
-                        <img src={mic.image} alt={item.name} className="max-h-36 max-w-full object-contain rounded-lg p-2" />
-                      </div>
-                    )}
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <h4 className="font-bold text-lg text-center">{item.name}</h4>
-                    <p className="text-muted-foreground text-center leading-relaxed">{t(mic?.descriptionKey || '')}</p>
-                    <Button variant={selected ? "default" : "outline"} size="lg" className="w-full h-12 text-base font-bold" onClick={e => { e.stopPropagation(); toggleItem(item); }}>
-                      {selected ? <><Check className="h-5 w-5 mr-2" />{t("microphones.added")}</> : <><Plus className="h-5 w-5 mr-2" />{t("microphones.add")} {item.price.toFixed(2)} €</>}
-                    </Button>
-                  </CardContent>
-                </Card>
+                <ProductCard
+                  key={item.id}
+                  category={mic ? t(mic.targetKey) : t("microphones.category")}
+                  price={item.price}
+                  name={item.name}
+                  description={mic ? t(mic.descriptionKey) : item.description}
+                  image={mic?.image}
+                  isSelected={hasItem(item.id)}
+                  onToggle={() => toggleItem(item)}
+                  addLabel={t("video.addFor")}
+                  addedLabel={t("microphones.added")}
+                />
               );
             })}
           </div>
         </section>
 
         {/* PRODUCTION */}
-        <section className="space-y-6 bg-gradient-to-br from-warm-peach/15 to-warm-coral/20 rounded-xl p-8">
+        <section className="space-y-6">
           <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-3">
             <Headphones className="h-8 w-8 text-primary" /> {t("production.title")}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <ServiceCard item={productionItems[0]} icon={<Clock className="h-5 w-5" />} />
-            <ServiceCard item={productionItems[1]} icon={<Headphones className="h-5 w-5" />} />
+            {productionItems.map(item => (
+              <ProductCard
+                key={item.id}
+                category={item.category}
+                price={item.price}
+                name={item.name}
+                description={item.description}
+                icon={iconMap[item.id]}
+                isSelected={hasItem(item.id)}
+                onToggle={() => toggleItem(item)}
+                addLabel={t("video.addFor")}
+                addedLabel={t("production.added")}
+              />
+            ))}
           </div>
         </section>
 
         {/* VIDEO */}
-        <section className="space-y-6 bg-gradient-to-br from-warm-peach/20 to-warm-apricot/30 rounded-xl p-8">
+        <section className="space-y-6">
           <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-3">
             <Film className="h-8 w-8 text-primary" /> {t("video.title")}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <ServiceCard item={videoItems[0]} icon={<Video className="h-5 w-5" />} />
-            <ServiceCard item={videoItems[1]} icon={<PlayCircle className="h-5 w-5" />} />
-            <ServiceCard item={videoItems[2]} icon={<Share2 className="h-5 w-5" />} />
+            {videoItems.map(item => (
+              <ProductCard
+                key={item.id}
+                category={item.category}
+                price={item.price}
+                name={item.name}
+                description={item.description}
+                icon={iconMap[item.id]}
+                isSelected={hasItem(item.id)}
+                onToggle={() => toggleItem(item)}
+                addLabel={t("video.addFor")}
+                addedLabel={t("video.added")}
+              />
+            ))}
           </div>
         </section>
 
-        {/* TAKES - Exact Copy only */}
-        <section className="space-y-6 bg-gradient-to-br from-warm-cream/30 to-warm-blush/20 rounded-xl p-8">
+        {/* TAKES */}
+        <section className="space-y-6">
           <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             {t("takes.title")}
           </h2>
           <div className="max-w-lg mx-auto">
-            <ServiceCard item={takesItem} icon={<Copy className="h-5 w-5" />} />
+            <ProductCard
+              category={takesItem.category}
+              price={takesItem.price}
+              name={takesItem.name}
+              description={takesItem.description}
+              icon={iconMap[takesItem.id]}
+              isSelected={hasItem(takesItem.id)}
+              onToggle={() => toggleItem(takesItem)}
+              addLabel={t("video.addFor")}
+              addedLabel={t("takes.added")}
+            />
           </div>
         </section>
 
         {/* DELIVERY */}
-        <section className="space-y-6 bg-gradient-to-br from-warm-blush/20 to-warm-apricot/15 rounded-xl p-8">
+        <section className="space-y-6">
           <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             {t("delivery.title")}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {/* 5 days */}
-            <Card className={`transition-all duration-300 hover:shadow-lg cursor-pointer ${hasItem(deliveryExpress5.id) ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-lg' : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'}`}
-              onClick={() => toggleDelivery(deliveryExpress5, deliveryExpress2.id)}>
-              <CardHeader>
-                <div className="flex items-center justify-center"><CardTitle className="flex items-center gap-1"><Plane className="h-10 w-10 text-orange-500" /> {t("delivery.fastTitle")}</CardTitle></div>
-                <div className="flex justify-center"><Badge variant="outline" className="text-primary text-xl px-4 py-2">5.90 €</Badge></div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-center font-semibold">{t("delivery.fast5Days")}</p>
-                <p className="text-sm text-muted-foreground text-center">{t("delivery.fastTimeDesc")}</p>
-                <Button variant={hasItem(deliveryExpress5.id) ? "default" : "outline"} className="w-full" onClick={e => { e.stopPropagation(); toggleDelivery(deliveryExpress5, deliveryExpress2.id); }}>
-                  {hasItem(deliveryExpress5.id) ? <><Check className="h-4 w-4 mr-2" />{t("delivery.selected")}</> : <><Plus className="h-4 w-4 mr-2" />{t("delivery.upgradeFor")} 5.90 €</>}
-                </Button>
-              </CardContent>
-            </Card>
-            {/* 2 days */}
-            <Card className={`transition-all duration-300 hover:shadow-lg cursor-pointer ${hasItem(deliveryExpress2.id) ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-lg' : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'}`}
-              onClick={() => toggleDelivery(deliveryExpress2, deliveryExpress5.id)}>
-              <CardHeader>
-                <div className="flex items-center justify-center"><CardTitle className="flex items-center gap-1"><Rocket className="h-10 w-10 text-red-500" /> {t("delivery.expressTitle")}</CardTitle></div>
-                <div className="flex justify-center"><Badge variant="outline" className="text-accent text-xl px-4 py-2">39.90 €</Badge></div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-center font-semibold">{t("delivery.express2Days")}</p>
-                <p className="text-sm text-muted-foreground text-center">{t("delivery.expressTimeDesc")}</p>
-                <div className="p-3 bg-accent/10 rounded-lg"><p className="text-xs text-accent font-medium">🚀 {t("delivery.extremeUrgency")}</p></div>
-                <Button variant={hasItem(deliveryExpress2.id) ? "default" : "outline"} className="w-full" onClick={e => { e.stopPropagation(); toggleDelivery(deliveryExpress2, deliveryExpress5.id); }}>
-                  {hasItem(deliveryExpress2.id) ? <><Check className="h-4 w-4 mr-2" />{t("delivery.selected")}</> : <><Plus className="h-4 w-4 mr-2" />{t("delivery.upgradeFor")} 39.90 €</>}
-                </Button>
-              </CardContent>
-            </Card>
+            <ProductCard
+              category={t("config.steps.delivery")}
+              price={deliveryExpress5.price}
+              name={t("delivery.fastTitle")}
+              description={`${t("delivery.fast5Days")} · ${t("delivery.fastTimeDesc")}`}
+              icon={<Plane className="h-10 w-10" />}
+              isSelected={hasItem(deliveryExpress5.id)}
+              onToggle={() => toggleDelivery(deliveryExpress5, deliveryExpress2.id)}
+              addLabel={t("video.addFor")}
+              addedLabel={t("delivery.selected")}
+            />
+            <ProductCard
+              category={t("config.steps.delivery")}
+              price={deliveryExpress2.price}
+              name={t("delivery.expressTitle")}
+              description={`${t("delivery.express2Days")} · ${t("delivery.expressTimeDesc")}`}
+              icon={<Rocket className="h-10 w-10" />}
+              isSelected={hasItem(deliveryExpress2.id)}
+              onToggle={() => toggleDelivery(deliveryExpress2, deliveryExpress5.id)}
+              addLabel={t("video.addFor")}
+              addedLabel={t("delivery.selected")}
+            />
           </div>
         </section>
 
@@ -279,8 +258,32 @@ const AmpliarPedido = () => {
             {t("extras.title")}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <ServiceCard item={extrasItems[0]} icon={<Smartphone className="h-5 w-5" />} />
-            <ServiceCard item={extrasItems[1]} icon={<FileMusic className="h-5 w-5" />} />
+            <ProductCard
+              category={extrasItems[0].category}
+              price={extrasItems[0].price}
+              name={extrasItems[0].name}
+              description={extrasItems[0].description}
+              icon={iconMap[extrasItems[0].id]}
+              isSelected={hasItem(extrasItems[0].id)}
+              onToggle={() => toggleItem(extrasItems[0])}
+              addLabel={t("video.addFor")}
+              addedLabel={t("extras.added")}
+            />
+            <ProductCard
+              category={extrasItems[1].category}
+              price={extrasItems[1].price}
+              name={extrasItems[1].name}
+              descriptionList={[
+                { emoji: '📄', text: t("extras.partituraDesc1") },
+                { emoji: '✍️', text: t("extras.partituraDesc2") },
+                { emoji: '🎵', text: t("extras.partituraDesc3") },
+              ]}
+              icon={iconMap[extrasItems[1].id]}
+              isSelected={hasItem(extrasItems[1].id)}
+              onToggle={() => toggleItem(extrasItems[1])}
+              addLabel={t("video.addFor")}
+              addedLabel={t("extras.added")}
+            />
           </div>
         </section>
 
