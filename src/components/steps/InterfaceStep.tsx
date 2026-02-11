@@ -61,7 +61,11 @@ export const InterfaceStep = ({
           category={t("config.steps.interface")}
           price={dadInterface.price}
           name="DAD AX64"
-          description={t("interface.dadDesc")}
+          descriptionList={[
+            { emoji: "🎯", text: t("interface.dadPoint1") },
+            { emoji: "🔊", text: t("interface.dadPoint2") },
+            { emoji: "🏆", text: t("interface.dadPoint3") },
+          ]}
           image="/lovable-uploads/0d4521a3-d112-43ce-a820-f1afe53330c8.png"
           isSelected={isDadSelected}
           onToggle={handleToggleDad}

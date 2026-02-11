@@ -59,7 +59,7 @@ export const ProductCard = ({
           </span>
         )}
         {included && (
-          <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-[hsl(var(--card-dark-included))]/20 text-[hsl(var(--card-dark-included))]">
+          <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-[hsl(var(--card-dark-included))]/20 text-success">
             0.00 €
           </span>
         )}
