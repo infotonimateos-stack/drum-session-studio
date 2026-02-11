@@ -36,23 +36,25 @@ serve(async (req) => {
 
     // Input validation
     if (!total || typeof total !== "number" || total <= 0 || total > 15000) throw new Error("Invalid total amount");
-    if (!basePrice || typeof basePrice !== "number" || basePrice <= 0 || basePrice > 10000) throw new Error("Invalid base price");
+    if (typeof basePrice !== "number" || basePrice < 0 || basePrice > 10000) throw new Error("Invalid base price");
     if (items && (!Array.isArray(items) || items.length > 50)) throw new Error("Invalid items");
 
     // Build line items
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
-    lineItems.push({
-      price_data: {
-        currency: "eur",
-        product_data: {
-          name: "Paquete Básico - Grabación de Batería",
-          description: "Grabación profesional de batería, configuración básica de micrófonos, entrega estándar (10 días), 1 toma básica incluida",
+    if (basePrice > 0) {
+      lineItems.push({
+        price_data: {
+          currency: "eur",
+          product_data: {
+            name: "Paquete Básico - Grabación de Batería",
+            description: "Grabación profesional de batería, configuración básica de micrófonos, entrega estándar (10 días), 1 toma básica incluida",
+          },
+          unit_amount: Math.round(basePrice * 100),
         },
-        unit_amount: Math.round(basePrice * 100),
-      },
-      quantity: 1,
-    });
+        quantity: 1,
+      });
+    }
 
     if (items && items.length > 0) {
       for (const item of items) {

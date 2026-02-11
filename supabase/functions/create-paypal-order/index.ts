@@ -55,7 +55,7 @@ serve(async (req) => {
 
     // Input validation
     if (!total || typeof total !== "number" || total <= 0 || total > 15000) throw new Error("Invalid total amount");
-    if (!basePrice || typeof basePrice !== "number" || basePrice <= 0 || basePrice > 10000) throw new Error("Invalid base price");
+    if (typeof basePrice !== "number" || basePrice < 0 || basePrice > 10000) throw new Error("Invalid base price");
     if (items && (!Array.isArray(items) || items.length > 50)) throw new Error("Invalid items");
 
     const accessToken = await getPayPalAccessToken(clientId, clientSecret);
@@ -63,12 +63,14 @@ serve(async (req) => {
 
     // Build PayPal items
     const paypalItems = [];
-    paypalItems.push({
-      name: "Paquete Básico - Grabación de Batería",
-      description: "Grabación profesional de batería",
-      unit_amount: { currency_code: "EUR", value: basePrice.toFixed(2) },
-      quantity: "1",
-    });
+    if (basePrice > 0) {
+      paypalItems.push({
+        name: "Paquete Básico - Grabación de Batería",
+        description: "Grabación profesional de batería",
+        unit_amount: { currency_code: "EUR", value: basePrice.toFixed(2) },
+        quantity: "1",
+      });
+    }
 
     if (items && items.length > 0) {
       for (const item of items) {

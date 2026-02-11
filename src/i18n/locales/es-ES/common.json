@@ -558,6 +558,7 @@
     "subtotal": "Subtotal:",
     "selectCountryToCalc": "Selecciona un país para calcular los impuestos",
     "continue": "Continuar al pago →",
-    "taxes": "Impuestos:"
+    "taxes": "Impuestos:",
+    "taxCalcNext": "Los impuestos se calcularán en el siguiente paso"
   }
 }

@@ -373,6 +373,7 @@
     "subtotal": "Subtotal:",
     "selectCountryToCalc": "Select a country to calculate taxes",
     "continue": "Continue to payment →",
-    "taxes": "Taxes:"
+    "taxes": "Taxes:",
+    "taxCalcNext": "Taxes will be calculated in the next step"
   }
 }
