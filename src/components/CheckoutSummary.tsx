@@ -22,7 +22,9 @@ interface CheckoutSummaryProps {
 export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack }: CheckoutSummaryProps) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<'card' | 'paypal'>('card');
+  // Stripe hidden but kept for future reactivation
+  const showStripe = false;
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'paypal'>('paypal');
   const [acceptedPrivacyPolicy, setAcceptedPrivacyPolicy] = useState(false);
 
   // Tax calculation from billing data
@@ -31,8 +33,9 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
   const subtotalWithTax = cartState.total + taxAmount;
 
   // PayPal fee on subtotal+tax
+  // PayPal fee always applies since PayPal is the only payment method
   const PAYPAL_FEE_PERCENTAGE = 0.05;
-  const paypalFee = paymentMethod === 'paypal' ? subtotalWithTax * PAYPAL_FEE_PERCENTAGE : 0;
+  const paypalFee = subtotalWithTax * PAYPAL_FEE_PERCENTAGE;
   const displayTotal = subtotalWithTax + paypalFee;
 
   const groupedItems = cartState.items.reduce((acc, item) => {
@@ -84,7 +87,8 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
   };
 
   const handlePayment = () => {
-    paymentMethod === 'card' ? handleStripePayment() : handlePayPalPayment();
+    // All payments go through PayPal now (Stripe kept for future reactivation)
+    handlePayPalPayment();
   };
 
   return (
@@ -184,13 +188,11 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
                   <span>{taxAmount > 0 ? `+${taxAmount.toFixed(2)} €` : '0.00 €'}</span>
                 </div>
 
-                {/* PayPal Fee */}
-                {paymentMethod === 'paypal' && (
-                  <div className="flex justify-between text-sm text-amber-600 dark:text-amber-400">
-                    <span>{t("checkout.paypalFee")}</span>
-                    <span>+{paypalFee.toFixed(2)} €</span>
-                  </div>
-                )}
+                {/* PayPal Fee - always shown */}
+                <div className="flex justify-between text-sm text-amber-600 dark:text-amber-400">
+                  <span>{t("checkout.paypalFee")}</span>
+                  <span>+{paypalFee.toFixed(2)} €</span>
+                </div>
 
                 <Separator className="my-2" />
                 <div className="flex justify-between text-lg font-bold">
@@ -199,21 +201,28 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
                 </div>
               </div>
 
-              {/* Payment Method Selection */}
+              {/* Payment Buttons - PayPal only */}
               <div className="space-y-3 pt-4">
                 <p className="text-sm font-medium text-center text-muted-foreground">{t("checkout.paymentMethod")}</p>
-                <div className="grid grid-cols-2 gap-2">
-                  <Button type="button" variant={paymentMethod === 'card' ? 'default' : 'outline'} onClick={() => setPaymentMethod('card')} disabled={isLoading} className={`h-14 ${paymentMethod === 'card' ? 'ring-2 ring-primary ring-offset-2' : ''}`}>
-                    <div className="flex flex-col items-center gap-1"><CreditCard className="h-5 w-5" /><span className="text-xs">{t("checkout.card")}</span></div>
-                  </Button>
-                  <Button type="button" variant={paymentMethod === 'paypal' ? 'default' : 'outline'} onClick={() => setPaymentMethod('paypal')} disabled={isLoading} className={`h-14 ${paymentMethod === 'paypal' ? 'ring-2 ring-primary ring-offset-2' : ''}`}>
-                    <div className="flex flex-col items-center gap-1">
+                <div className="grid grid-cols-1 gap-3">
+                  {/* PayPal Account Button */}
+                  <Button type="button" onClick={() => { setPaymentMethod('paypal'); }} disabled={isLoading}
+                    className="h-14 bg-[#FFC439] hover:bg-[#f0b830] text-[#003087] font-bold ring-2 ring-[#FFC439]/50 ring-offset-2">
+                    <div className="flex items-center justify-center gap-2">
                       <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .771-.66h6.487c2.025 0 3.538.507 4.497 1.507.921.961 1.261 2.217 1.046 3.849l-.016.112-.012.084.052.028c.628.349 1.115.809 1.446 1.371.35.593.528 1.336.528 2.207 0 1.015-.207 1.913-.616 2.668-.386.71-.93 1.31-1.618 1.783a6.08 6.08 0 0 1-2.167.936c-.772.181-1.635.274-2.562.274H12.2a.967.967 0 0 0-.955.816l-.033.196-.585 3.716-.027.14a.966.966 0 0 1-.955.79H7.076z"/></svg>
-                      <span className="text-xs">{t("checkout.paypal")}</span>
+                      <span className="text-sm font-bold">PayPal</span>
+                    </div>
+                  </Button>
+                  {/* Card via PayPal Button */}
+                  <Button type="button" onClick={() => { setPaymentMethod('paypal'); }} disabled={isLoading}
+                    className="h-14 bg-[#2C2E2F] hover:bg-[#1a1c1d] text-white font-bold">
+                    <div className="flex items-center justify-center gap-2">
+                      <CreditCard className="h-5 w-5" />
+                      <span className="text-sm font-bold">{t("checkout.debitOrCredit")}</span>
                     </div>
                   </Button>
                 </div>
-                <p className="text-xs text-center text-amber-600 dark:text-amber-400">{t("checkout.paypalDisclaimer")}</p>
+                <p className="text-xs text-center text-muted-foreground">{t("checkout.paypalSecureInfo")}</p>
               </div>
 
               {/* Privacy Policy Consent */}
@@ -229,15 +238,13 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
               </div>
 
               <div className="space-y-3 pt-4">
-                <Button onClick={handlePayment} disabled={isLoading || !acceptedPrivacyPolicy}
-                  className={`w-full h-14 text-sm sm:text-base ${paymentMethod === 'paypal' ? 'bg-[#0070ba] hover:bg-[#005ea6] text-white disabled:bg-[#0070ba]/50' : 'bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90'}`}
+              <Button onClick={handlePayment} disabled={isLoading || !acceptedPrivacyPolicy}
+                  className="w-full h-14 text-sm sm:text-base bg-[#0070ba] hover:bg-[#005ea6] text-white disabled:bg-[#0070ba]/50"
                   size="lg">
                   {isLoading ? (
                     <span className="flex items-center justify-center gap-2"><Loader2 className="h-4 w-4 animate-spin flex-shrink-0" /><span>{t("checkout.processing")}</span></span>
-                  ) : paymentMethod === 'paypal' ? (
-                    <span className="flex items-center justify-center gap-2 truncate">PayPal {displayTotal.toFixed(2)} €</span>
                   ) : (
-                    <span className="flex items-center justify-center gap-2"><CreditCard className="h-4 w-4 flex-shrink-0" /><span className="truncate">{t("checkout.card")} {displayTotal.toFixed(2)} €</span></span>
+                    <span className="flex items-center justify-center gap-2 truncate">{t("checkout.payNow")} {displayTotal.toFixed(2)} €</span>
                   )}
                 </Button>
                 {!acceptedPrivacyPolicy && <p className="text-xs text-center text-muted-foreground">{t("checkout.mustAcceptPrivacy")}</p>}
