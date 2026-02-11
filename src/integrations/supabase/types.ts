@@ -14,7 +14,75 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      orders: {
+        Row: {
+          base_price: number
+          client_type: string
+          country_code: string
+          created_at: string
+          currency: string
+          id: string
+          items: Json
+          payment_id: string | null
+          payment_method: string
+          payment_status: string
+          paypal_fee: number
+          postal_code: string | null
+          subtotal: number
+          tax_amount: number
+          tax_rate: number
+          tax_rule: string
+          total: number
+          vat_number: string | null
+          vies_response: Json | null
+          vies_valid: boolean | null
+        }
+        Insert: {
+          base_price: number
+          client_type: string
+          country_code: string
+          created_at?: string
+          currency?: string
+          id?: string
+          items?: Json
+          payment_id?: string | null
+          payment_method: string
+          payment_status?: string
+          paypal_fee?: number
+          postal_code?: string | null
+          subtotal: number
+          tax_amount?: number
+          tax_rate?: number
+          tax_rule: string
+          total: number
+          vat_number?: string | null
+          vies_response?: Json | null
+          vies_valid?: boolean | null
+        }
+        Update: {
+          base_price?: number
+          client_type?: string
+          country_code?: string
+          created_at?: string
+          currency?: string
+          id?: string
+          items?: Json
+          payment_id?: string | null
+          payment_method?: string
+          payment_status?: string
+          paypal_fee?: number
+          postal_code?: string | null
+          subtotal?: number
+          tax_amount?: number
+          tax_rate?: number
+          tax_rule?: string
+          total?: number
+          vat_number?: string | null
+          vies_response?: Json | null
+          vies_valid?: boolean | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

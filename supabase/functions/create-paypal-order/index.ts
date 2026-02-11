@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -14,7 +15,6 @@ const PAYPAL_API_BASE = "https://api-m.paypal.com";
 
 const getPayPalAccessToken = async (clientId: string, clientSecret: string): Promise<string> => {
   const auth = btoa(`${clientId}:${clientSecret}`);
-  
   const response = await fetch(`${PAYPAL_API_BASE}/v1/oauth2/token`, {
     method: "POST",
     headers: {
@@ -23,12 +23,10 @@ const getPayPalAccessToken = async (clientId: string, clientSecret: string): Pro
     },
     body: "grant_type=client_credentials",
   });
-
   if (!response.ok) {
     const error = await response.text();
     throw new Error(`Failed to get PayPal access token: ${error}`);
   }
-
   const data = await response.json();
   return data.access_token;
 };
@@ -43,72 +41,53 @@ serve(async (req) => {
 
     const clientId = Deno.env.get("PAYPAL_CLIENT_ID");
     const clientSecret = Deno.env.get("PAYPAL_CLIENT_SECRET");
-    
-    if (!clientId || !clientSecret) {
-      throw new Error("PayPal credentials are not configured");
-    }
-    logStep("PayPal credentials verified");
+    if (!clientId || !clientSecret) throw new Error("PayPal credentials are not configured");
 
-    const { items, basePrice, total, paypalFee, totalWithFee } = await req.json();
-    logStep("Received cart data", { itemCount: items?.length, basePrice, total, paypalFee, totalWithFee });
+    const {
+      items, basePrice, subtotal, total,
+      taxRate, taxAmount, taxRule, taxLabel,
+      paypalFee,
+      billingCountry, billingPostalCode, clientType,
+      vatNumber, viesValid,
+    } = await req.json();
+
+    logStep("Received data", { itemCount: items?.length, subtotal, taxAmount, paypalFee, total });
 
     // Input validation
-    const finalTotal = totalWithFee || total;
-    if (!finalTotal || typeof finalTotal !== "number" || finalTotal <= 0 || finalTotal > 10000) {
-      throw new Error("Invalid total amount");
-    }
-    if (!basePrice || typeof basePrice !== "number" || basePrice <= 0 || basePrice > 10000) {
-      throw new Error("Invalid base price");
-    }
-    if (items && (!Array.isArray(items) || items.length > 50)) {
-      throw new Error("Invalid items");
-    }
+    if (!total || typeof total !== "number" || total <= 0 || total > 15000) throw new Error("Invalid total amount");
+    if (!basePrice || typeof basePrice !== "number" || basePrice <= 0 || basePrice > 10000) throw new Error("Invalid base price");
+    if (items && (!Array.isArray(items) || items.length > 50)) throw new Error("Invalid items");
 
     const accessToken = await getPayPalAccessToken(clientId, clientSecret);
     logStep("PayPal access token obtained");
 
+    // Build PayPal items
     const paypalItems = [];
-    
     paypalItems.push({
       name: "Paquete Básico - Grabación de Batería",
       description: "Grabación profesional de batería",
-      unit_amount: {
-        currency_code: "EUR",
-        value: basePrice.toFixed(2),
-      },
+      unit_amount: { currency_code: "EUR", value: basePrice.toFixed(2) },
       quantity: "1",
     });
 
     if (items && items.length > 0) {
       for (const item of items) {
-        if (!item.name || typeof item.price !== "number" || item.price < 0 || item.price > 10000) {
-          throw new Error("Invalid item data");
-        }
+        if (!item.name || typeof item.price !== "number" || item.price < 0 || item.price > 10000) throw new Error("Invalid item data");
         paypalItems.push({
           name: String(item.name).substring(0, 127),
           description: String(item.description || item.category || "").substring(0, 127),
-          unit_amount: {
-            currency_code: "EUR",
-            value: item.price.toFixed(2),
-          },
+          unit_amount: { currency_code: "EUR", value: item.price.toFixed(2) },
           quantity: "1",
         });
       }
     }
 
-    if (paypalFee && typeof paypalFee === "number" && paypalFee > 0 && paypalFee < 1000) {
-      paypalItems.push({
-        name: "Gastos de gestión PayPal",
-        description: "Recargo del 5% por uso de PayPal",
-        unit_amount: {
-          currency_code: "EUR",
-          value: paypalFee.toFixed(2),
-        },
-        quantity: "1",
-      });
-    }
+    // Calculate item_total (base + addons)
+    const itemTotal = basePrice + (items || []).reduce((s: number, i: any) => s + (i.price || 0), 0);
+    const safeTaxAmount = typeof taxAmount === "number" ? taxAmount : 0;
+    const safePaypalFee = typeof paypalFee === "number" && paypalFee > 0 ? paypalFee : 0;
 
-    logStep("PayPal items created", { count: paypalItems.length });
+    logStep("Breakdown", { itemTotal, safeTaxAmount, safePaypalFee, total });
 
     const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
 
@@ -123,12 +102,11 @@ serve(async (req) => {
         purchase_units: [{
           amount: {
             currency_code: "EUR",
-            value: finalTotal.toFixed(2),
+            value: total.toFixed(2),
             breakdown: {
-              item_total: {
-                currency_code: "EUR",
-                value: finalTotal.toFixed(2),
-              },
+              item_total: { currency_code: "EUR", value: itemTotal.toFixed(2) },
+              tax_total: { currency_code: "EUR", value: safeTaxAmount.toFixed(2) },
+              handling: { currency_code: "EUR", value: safePaypalFee.toFixed(2) },
             },
           },
           items: paypalItems,
@@ -155,12 +133,39 @@ serve(async (req) => {
     logStep("PayPal order created", { orderId: orderData.id });
 
     const approvalLink = orderData.links.find((link: any) => link.rel === "approve");
-    
-    if (!approvalLink) {
-      throw new Error("No approval URL found in PayPal response");
+    if (!approvalLink) throw new Error("No approval URL found in PayPal response");
+
+    // Save order to DB
+    try {
+      const supabaseUrl = Deno.env.get("SUPABASE_URL");
+      const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+      if (supabaseUrl && supabaseServiceKey) {
+        const supabase = createClient(supabaseUrl, supabaseServiceKey);
+        await supabase.from("orders").insert({
+          payment_method: "paypal",
+          payment_id: orderData.id,
+          payment_status: "pending",
+          items: items || [],
+          base_price: basePrice,
+          subtotal: subtotal || itemTotal,
+          tax_amount: safeTaxAmount,
+          tax_rate: taxRate || 0,
+          paypal_fee: safePaypalFee,
+          total: total,
+          country_code: billingCountry || 'ES',
+          postal_code: billingPostalCode || null,
+          client_type: clientType || 'particular',
+          vat_number: vatNumber || null,
+          vies_valid: viesValid ?? null,
+          tax_rule: taxRule || 'spain_peninsula',
+        });
+        logStep("Order saved to DB");
+      }
+    } catch (dbErr) {
+      logStep("DB save error (non-fatal)", { message: String(dbErr) });
     }
 
-    return new Response(JSON.stringify({ 
+    return new Response(JSON.stringify({
       url: approvalLink.href,
       orderId: orderData.id,
     }), {
