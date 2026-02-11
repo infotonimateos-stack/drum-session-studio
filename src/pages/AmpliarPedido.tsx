@@ -367,12 +367,10 @@ const AmpliarPedido = () => {
         </section>
       </main>
 
-      {/* Footer with legal info */}
+      {/* Footer */}
       <footer className="border-t bg-card/50 mt-16">
         <div className="container mx-auto px-4 py-8 text-center space-y-3">
-          <p className="text-sm text-muted-foreground font-medium">Groove Factory Studios SL · NIF: B42915165</p>
-          <p className="text-xs text-muted-foreground">C/ Mosteruelo, 2. Litos, Zamora. España · info@tonimateos.com</p>
-          <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
+          <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground">
             <Link to="/aviso-legal" className="hover:text-primary transition-colors">{t("footer.legalNotice")}</Link>
             <span>·</span>
             <Link to="/politica-privacidad" className="hover:text-primary transition-colors">{t("footer.privacyPolicy")}</Link>
