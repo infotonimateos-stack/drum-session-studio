@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Check, Plus } from "lucide-react";
-import { ReactNode } from "react";
+import { ReactNode, cloneElement, isValidElement } from "react";
 
 interface ProductCardProps {
   category: string;
@@ -76,8 +76,12 @@ export const ProductCard = ({
             />
           </div>
         ) : icon ? (
-          <div className="w-20 h-20 flex items-center justify-center rounded-xl bg-card-dark-muted/15 text-card-dark-foreground">
-            {icon}
+          <div className="w-20 h-20 flex items-center justify-center rounded-xl bg-card-dark-muted/15">
+            {isValidElement(icon)
+              ? cloneElement(icon as React.ReactElement<any>, {
+                  className: `h-10 w-10 ${included ? "text-success" : "text-[hsl(var(--card-dark-btn-from))]"}`,
+                })
+              : icon}
           </div>
         ) : null}
       </div>
