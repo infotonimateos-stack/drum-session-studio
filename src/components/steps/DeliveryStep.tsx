@@ -1,6 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Check, Plane, Rocket } from "lucide-react";
+import { Package, Plane, Rocket } from "lucide-react";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
@@ -63,34 +61,18 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Standard Delivery - included card */}
-        <Card className="bg-gradient-to-br from-card to-muted border-success/30">
-          <CardHeader>
-            <div className="flex items-center justify-center">
-              <CardTitle className="flex items-center gap-1">
-                <img src="/lovable-uploads/841a1a2f-0999-44b3-9a2a-4a97ad64f750.png" alt="Check" className="h-12 w-12" />
-                {t("delivery.standardTitle")}
-              </CardTitle>
-            </div>
-            <div className="flex justify-center">
-              <Badge variant="secondary">{t("delivery.included")}</Badge>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="text-center">
-              <h3 className="font-semibold">{t("delivery.standard10Days")}</h3>
-              <p className="text-sm text-muted-foreground">{t("delivery.standardTimeDesc")}</p>
-            </div>
-            <ul className="text-sm text-muted-foreground space-y-1">
-              <li>• {t("delivery.noCost")}</li>
-              <li>• {t("delivery.idealProjects")}</li>
-            </ul>
-            <div className="flex items-center gap-1">
-              <Check className="h-4 w-4 text-success" />
-              <span className="text-sm text-success font-medium">{t("delivery.includedInKit")}</span>
-            </div>
-          </CardContent>
-        </Card>
+        {/* Standard Delivery - included */}
+        <ProductCard
+          category={t("config.steps.delivery")}
+          price={0}
+          name={t("delivery.standardTitle")}
+          description={`${t("delivery.standard10Days")} · ${t("delivery.noCost")} · ${t("delivery.idealProjects")}`}
+          icon={<Package className="h-10 w-10" />}
+          isSelected={false}
+          onToggle={() => {}}
+          included
+          includedLabel={t("delivery.includedInKit")}
+        />
 
         {/* 5 Days Express */}
         <ProductCard

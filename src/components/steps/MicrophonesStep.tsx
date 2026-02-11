@@ -1,6 +1,5 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Plus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, Headphones } from "lucide-react";
 import { baseMicrophones, upgradeMicrophones } from "@/data/microphones";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
@@ -49,8 +48,7 @@ export const MicrophonesStep = ({
       {/* Included Microphones */}
       <div className="space-y-6">
         <div className="flex items-center justify-center gap-4 mb-8">
-          <div className="flex items-center gap-3 bg-success/20 px-6 py-3 rounded-full">
-            <Check className="h-6 w-6 text-success" />
+          <div className="flex items-center gap-3 bg-[hsl(var(--card-dark-included))]/20 px-6 py-3 rounded-full">
             <h3 className="text-2xl font-bold">{t("microphones.basicKit")}</h3>
             <Badge variant="secondary" className="text-2xl px-5 py-2">49.90 €</Badge>
           </div>
@@ -58,25 +56,18 @@ export const MicrophonesStep = ({
         
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {baseMicrophones.map(mic => (
-            <Card key={mic.id} className="bg-gradient-to-br from-card/50 to-muted/30 border-success/30 hover:shadow-xl transition-all duration-300">
-              <CardHeader className="pb-4">
-                <Badge variant="outline" className="border-success text-success mb-3 self-center text-sm px-3 py-1">
-                  {t(mic.targetKey)}
-                </Badge>
-                {mic.image && (
-                  <div className="w-full h-32 flex items-center justify-center bg-white rounded-lg">
-                    <img src={mic.image} alt={mic.name} className="max-h-28 max-w-full object-contain rounded-lg p-2" />
-                  </div>
-                )}
-              </CardHeader>
-              <CardContent className="pt-0">
-                <h4 className="font-bold text-base mb-2 text-center">{mic.name}</h4>
-                <div className="flex items-center justify-center gap-2 mt-3">
-                  <Check className="h-4 w-4 text-success" />
-                  <span className="text-sm text-success font-bold">{t("microphones.included")}</span>
-                </div>
-              </CardContent>
-            </Card>
+            <ProductCard
+              key={mic.id}
+              category={t(mic.targetKey)}
+              price={0}
+              name={mic.name}
+              description={t(mic.descriptionKey)}
+              image={mic.image}
+              isSelected={false}
+              onToggle={() => {}}
+              included
+              includedLabel={t("microphones.included")}
+            />
           ))}
         </div>
       </div>
