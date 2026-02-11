@@ -270,18 +270,27 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
               {/* Payment Method Selection */}
               <div className="space-y-3 pt-4">
                 <p className="text-sm font-medium text-center text-muted-foreground">{t("checkout.paymentMethod")}</p>
-                <div className="grid grid-cols-1 gap-3">
+                <div className="grid grid-cols-1 gap-2">
                   {/* PayPal Account Button */}
                   <Button type="button" onClick={() => setPaymentMethod('paypal')} disabled={isLoading}
-                    className={`h-14 bg-[#FFC439] hover:bg-[#f0b830] text-[#003087] font-bold ${paymentMethod === 'paypal' ? 'ring-2 ring-[#FFC439]/50 ring-offset-2' : 'opacity-60'}`}>
+                    className={`h-12 bg-[#FFC439] hover:bg-[#f0b830] text-[#003087] font-bold ${paymentMethod === 'paypal' ? 'ring-2 ring-[#FFC439]/50 ring-offset-2' : 'opacity-60'}`}>
                     <div className="flex items-center justify-center gap-2">
                       <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .771-.66h6.487c2.025 0 3.538.507 4.497 1.507.921.961 1.261 2.217 1.046 3.849l-.016.112-.012.084.052.028c.628.349 1.115.809 1.446 1.371.35.593.528 1.336.528 2.207 0 1.015-.207 1.913-.616 2.668-.386.71-.93 1.31-1.618 1.783a6.08 6.08 0 0 1-2.167.936c-.772.181-1.635.274-2.562.274H12.2a.967.967 0 0 0-.955.816l-.033.196-.585 3.716-.027.14a.966.966 0 0 1-.955.79H7.076z"/></svg>
-                      <span className="text-sm font-bold">PayPal / {t("checkout.debitOrCredit")}</span>
+                      <span className="text-sm font-bold">PayPal</span>
+                    </div>
+                  </Button>
+                  {/* Card via PayPal Button */}
+                  <Button type="button" onClick={() => setPaymentMethod('paypal')} disabled={isLoading}
+                    className={`h-12 bg-[#2C2E2F] hover:bg-[#1a1c1d] text-white font-bold ${paymentMethod === 'paypal' ? 'ring-2 ring-[#2C2E2F]/50 ring-offset-2' : 'opacity-60'}`}>
+                    <div className="flex items-center justify-center gap-2">
+                      <CreditCard className="h-5 w-5" />
+                      <span className="text-sm font-bold">{t("checkout.debitOrCredit")}</span>
                     </div>
                   </Button>
                   {/* Bank Transfer Button */}
                   <Button type="button" onClick={() => setPaymentMethod('transfer')} disabled={isLoading}
-                    className={`h-14 bg-[#2C2E2F] hover:bg-[#1a1c1d] text-white font-bold ${paymentMethod === 'transfer' ? 'ring-2 ring-primary/50 ring-offset-2' : 'opacity-60'}`}>
+                    className={`h-12 border font-bold ${paymentMethod === 'transfer' ? 'ring-2 ring-primary/50 ring-offset-2 bg-primary/10 text-primary border-primary/30' : 'opacity-60 bg-muted/10 text-muted-foreground border-border'}`}
+                    variant="outline">
                     <div className="flex items-center justify-center gap-2">
                       <Landmark className="h-5 w-5" />
                       <span className="text-sm font-bold">{t("transfer.bankTransfer")}</span>
@@ -307,14 +316,14 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
 
               <div className="space-y-3 pt-4">
                 <Button onClick={handlePayment} disabled={isLoading || !acceptedPrivacyPolicy}
-                  className={`w-full h-14 text-sm sm:text-base font-bold ${paymentMethod === 'transfer' ? 'bg-primary hover:bg-primary/90 text-primary-foreground' : 'bg-[#0070ba] hover:bg-[#005ea6] text-white disabled:bg-[#0070ba]/50'}`}
+                  className={`w-full h-14 font-bold ${paymentMethod === 'transfer' ? 'bg-primary hover:bg-primary/90 text-primary-foreground' : 'bg-[#0070ba] hover:bg-[#005ea6] text-white disabled:bg-[#0070ba]/50'}`}
                   size="lg">
                   {isLoading ? (
                     <span className="flex items-center justify-center gap-2"><Loader2 className="h-4 w-4 animate-spin flex-shrink-0" /><span>{t("checkout.processing")}</span></span>
                   ) : paymentMethod === 'transfer' ? (
-                    <span className="flex items-center justify-center gap-2 truncate"><Landmark className="h-4 w-4" /> {t("transfer.confirmOrder")} {displayTotal.toFixed(2)} €</span>
+                    <span className="flex items-center justify-center gap-2"><Landmark className="h-4 w-4" /> {t("transfer.confirmOrder")}</span>
                   ) : (
-                    <span className="flex items-center justify-center gap-2 truncate">{t("checkout.payNow")} {displayTotal.toFixed(2)} €</span>
+                    <span className="flex items-center justify-center gap-2">{t("checkout.payNow")} {displayTotal.toFixed(2)} €</span>
                   )}
                 </Button>
                 {!acceptedPrivacyPolicy && <p className="text-xs text-center text-muted-foreground">{t("checkout.mustAcceptPrivacy")}</p>}
