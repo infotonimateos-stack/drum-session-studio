@@ -91,7 +91,7 @@ const handler = async (req: Request): Promise<Response> => {
 <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
   <div style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); padding: 30px; border-radius: 12px 12px 0 0; text-align: center;">
     <h1 style="color: white; margin: 0; font-size: 24px;">🥁 Drum Session Studio</h1>
-    <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0;">Toni Mateos</p>
+    <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0;">Groove Factory Studios SL</p>
   </div>
   
   <div style="background: white; padding: 30px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
@@ -114,7 +114,7 @@ const handler = async (req: Request): Promise<Response> => {
     <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; text-align: center;">
       <p style="color: #666; font-size: 14px; margin: 0;">Un saludo,</p>
       <p style="color: #ea580c; font-weight: bold; font-size: 16px; margin: 5px 0 0 0;">Toni Mateos</p>
-      <p style="color: #888; font-size: 12px; margin: 5px 0 0 0;">Drum Session Studio</p>
+      <p style="color: #888; font-size: 12px; margin: 5px 0 0 0;">Groove Factory Studios SL</p>
     </div>
   </div>
   
@@ -128,9 +128,9 @@ const handler = async (req: Request): Promise<Response> => {
     `;
 
     const emailResponse = await resend.emails.send({
-      from: "Toni Mateos <info@tonimateos.com>",
+      from: "Groove Factory Studios <info@tonimateos.com>",
       to: [customerEmail],
-      subject: "Instrucciones para tu grabación de baterías por Toni Mateos",
+      subject: "Instrucciones para tu grabación de baterías - Groove Factory Studios",
       html: emailHtml,
     });
 
