@@ -48,18 +48,18 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
   };
 
   return (
-    <div className="space-y-12 bg-gradient-to-br from-warm-peach/20 to-warm-apricot/30 rounded-xl p-8">
-      <div className="text-center space-y-6">
-        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-3">
-          <Film className="h-12 w-12 text-primary" />
+    <div className="space-y-8 sm:space-y-12 bg-gradient-to-br from-warm-peach/20 to-warm-apricot/30 rounded-xl p-4 sm:p-8">
+      <div className="text-center space-y-4 sm:space-y-6">
+        <h2 className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-2 sm:gap-3">
+          <Film className="h-8 w-8 sm:h-12 sm:w-12 text-primary" />
           {t("video.title")}
         </h2>
-        <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
+        <p className="text-muted-foreground text-base sm:text-xl max-w-3xl mx-auto leading-relaxed">
           {t("video.subtitle")}
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 max-w-5xl mx-auto">
         {videoItems.map((item) => (
           <ProductCard
             key={item.id}

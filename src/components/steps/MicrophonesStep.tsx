@@ -36,28 +36,28 @@ export const MicrophonesStep = ({
   };
 
   return (
-    <div className="space-y-12 bg-gradient-to-br from-warm-cream/20 to-warm-peach/10 rounded-xl p-8">
+    <div className="space-y-8 sm:space-y-12 bg-gradient-to-br from-warm-cream/20 to-warm-peach/10 rounded-xl p-4 sm:p-8">
       {/* Header */}
-      <div className="text-center space-y-6">
-        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+      <div className="text-center space-y-4 sm:space-y-6">
+        <h2 className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
           {t("microphones.title")}
         </h2>
-        <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
+        <p className="text-muted-foreground text-base sm:text-xl max-w-3xl mx-auto leading-relaxed">
           {t("microphones.subtitle")}
         </p>
       </div>
 
-      {/* Included Microphones — original light card style */}
-      <div className="space-y-6">
-        <div className="flex items-center justify-center gap-4 mb-8">
-          <div className="flex items-center gap-3 bg-success/20 px-6 py-3 rounded-full">
-            <Check className="h-6 w-6 text-success" />
-            <h3 className="text-2xl font-bold">{t("microphones.basicKit")}</h3>
-            <Badge variant="secondary" className="text-2xl px-5 py-2">49.90 €</Badge>
+      {/* Included Microphones */}
+      <div className="space-y-4 sm:space-y-6">
+        <div className="flex items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+          <div className="flex items-center gap-2 sm:gap-3 bg-success/20 px-4 sm:px-6 py-2 sm:py-3 rounded-full flex-wrap justify-center">
+            <Check className="h-5 w-5 sm:h-6 sm:w-6 text-success" />
+            <h3 className="text-xl sm:text-2xl font-bold">{t("microphones.basicKit")}</h3>
+            <Badge variant="secondary" className="text-lg sm:text-2xl px-3 sm:px-5 py-1 sm:py-2">49.90 €</Badge>
           </div>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           {baseMicrophones.map(mic => (
             <Card key={mic.id} className="bg-gradient-to-br from-card/50 to-muted/30 border-success/30 hover:shadow-xl transition-all duration-300">
               <CardHeader className="pb-4">
@@ -83,16 +83,16 @@ export const MicrophonesStep = ({
       </div>
 
       {/* Upgrade Microphones */}
-      <div className="space-y-6">
-        <div className="flex items-center justify-center gap-4 mb-8">
-          <div className="flex items-center gap-3 bg-primary/20 px-6 py-3 rounded-full">
-            <Plus className="h-6 w-6 text-primary" />
-            <h3 className="text-2xl font-bold">{t("microphones.premiumUpgrades")}</h3>
-            <Badge variant="outline" className="text-lg px-3 py-1">{t("microphones.optional")}</Badge>
+      <div className="space-y-4 sm:space-y-6">
+        <div className="flex items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+          <div className="flex items-center gap-2 sm:gap-3 bg-primary/20 px-4 sm:px-6 py-2 sm:py-3 rounded-full flex-wrap justify-center">
+            <Plus className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+            <h3 className="text-xl sm:text-2xl font-bold">{t("microphones.premiumUpgrades")}</h3>
+            <Badge variant="outline" className="text-base sm:text-lg px-3 py-1">{t("microphones.optional")}</Badge>
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-8">
           {upgradeMicrophones.map(mic => (
             <ProductCard
               key={mic.id}
