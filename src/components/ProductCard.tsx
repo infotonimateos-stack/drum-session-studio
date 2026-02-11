@@ -109,13 +109,10 @@ export const ProductCard = ({
       {/* Button — always pinned to the bottom */}
       <div className="px-5 pb-4 mt-auto">
         {included ? (
-          <Button
-            disabled
-            className="w-full h-12 text-base font-bold rounded-xl uppercase tracking-wide bg-[hsl(var(--card-dark-included))] text-white cursor-default hover:bg-[hsl(var(--card-dark-included))]"
-          >
-            <Check className="h-5 w-5 mr-2" />
-            {includedLabel}
-          </Button>
+          <div className="w-full h-12 flex items-center justify-center rounded-xl bg-[hsl(var(--card-dark-included))]">
+            <Check className="h-5 w-5 mr-2 text-success" />
+            <span className="text-success font-bold text-base">Incluido</span>
+          </div>
         ) : (
           <Button
             className={`w-full h-12 text-base font-bold rounded-xl transition-all duration-200 ${
