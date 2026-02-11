@@ -5,7 +5,6 @@ import { Separator } from "@/components/ui/separator";
 import { Landmark, Copy, Mail, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 
 interface BankTransferConfirmationProps {
   orderId: string;
@@ -136,9 +135,7 @@ export const BankTransferConfirmation = ({ orderId, total, onBackHome }: BankTra
       </Card>
 
       <div className="text-center">
-        <Link to="/">
-          <Button size="lg" className="h-14 px-8">{t("success.backHome")}</Button>
-        </Link>
+        <Button size="lg" className="h-14 px-8" onClick={() => window.location.href = '/'}>{t("success.backHome")}</Button>
       </div>
     </div>
   );
