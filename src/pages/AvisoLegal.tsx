@@ -35,8 +35,9 @@ export default function AvisoLegal() {
                   los datos identificativos del titular de este sitio web:
                 </p>
                 <ul className="list-disc pl-6 text-muted-foreground space-y-1">
-                  <li><strong>Titular:</strong> Antonio Mateos</li>
-                  <li><strong>Domicilio:</strong> C/ Mosteruelo, 2, 49334, Litos, Zamora, España</li>
+                  <li><strong>Razón Social:</strong> Groove Factory Studios SL</li>
+                  <li><strong>NIF:</strong> B42915165</li>
+                  <li><strong>Domicilio Social:</strong> C/ Mosteruelo, 2, 49334, Litos, Zamora, España</li>
                   <li><strong>Correo electrónico:</strong> info@tonimateos.com</li>
                 </ul>
               </section>
@@ -44,7 +45,7 @@ export default function AvisoLegal() {
               <section>
                 <h2 className="text-xl font-semibold text-foreground">2. Objeto y Ámbito de Aplicación</h2>
                 <p className="text-muted-foreground">
-                  El presente Aviso Legal regula el uso del sitio web, del cual Antonio Mateos es titular. 
+                  El presente Aviso Legal regula el uso del sitio web, del cual Groove Factory Studios SL es titular. 
                   La navegación por este sitio web atribuye la condición de usuario del mismo e implica la aceptación 
                   plena y sin reservas de todas y cada una de las disposiciones incluidas en este Aviso Legal.
                 </p>
@@ -55,7 +56,7 @@ export default function AvisoLegal() {
                 <p className="text-muted-foreground">
                   Todos los contenidos del sitio web, incluyendo textos, fotografías, gráficos, imágenes, iconos, 
                   tecnología, software, así como su diseño gráfico y códigos fuente, constituyen una obra cuya propiedad 
-                  pertenece a Antonio Mateos, sin que puedan entenderse cedidos al usuario ninguno de los derechos de 
+                  pertenece a Groove Factory Studios SL, sin que puedan entenderse cedidos al usuario ninguno de los derechos de 
                   explotación sobre los mismos más allá de lo estrictamente necesario para el correcto uso de la web.
                 </p>
               </section>
@@ -76,7 +77,7 @@ export default function AvisoLegal() {
                 <h2 className="text-xl font-semibold text-foreground">5. Legislación Aplicable y Jurisdicción</h2>
                 <p className="text-muted-foreground">
                   Las presentes condiciones se rigen por la legislación española. Para la resolución de cualquier controversia 
-                  que pudiera derivarse del acceso al sitio web, el usuario y Antonio Mateos acuerdan someterse a los Juzgados 
+                  que pudiera derivarse del acceso al sitio web, el usuario y Groove Factory Studios SL acuerdan someterse a los Juzgados 
                   y Tribunales del domicilio del usuario, siempre que el mismo esté ubicado en territorio español.
                 </p>
               </section>

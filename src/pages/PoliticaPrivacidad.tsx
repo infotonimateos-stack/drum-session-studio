@@ -33,8 +33,9 @@ export default function PoliticaPrivacidad() {
                   El responsable del tratamiento de los datos personales recogidos a través de este sitio web es:
                 </p>
                 <ul className="list-disc pl-6 text-muted-foreground space-y-1">
-                  <li><strong>Responsable:</strong> Antonio Mateos</li>
-                  <li><strong>Domicilio:</strong> C/ Mosteruelo, 2, 49334, Litos, Zamora, España</li>
+                  <li><strong>Razón Social:</strong> Groove Factory Studios SL</li>
+                  <li><strong>NIF:</strong> B42915165</li>
+                  <li><strong>Domicilio Social:</strong> C/ Mosteruelo, 2, 49334, Litos, Zamora, España</li>
                   <li><strong>Correo electrónico:</strong> info@tonimateos.com</li>
                 </ul>
               </section>
@@ -110,7 +111,7 @@ export default function PoliticaPrivacidad() {
               <section>
                 <h2 className="text-xl font-semibold text-foreground">7. Seguridad</h2>
                 <p className="text-muted-foreground">
-                  Antonio Mateos ha adoptado las medidas técnicas y organizativas necesarias para garantizar la 
+                  Groove Factory Studios SL ha adoptado las medidas técnicas y organizativas necesarias para garantizar la 
                   seguridad de los datos personales y evitar su alteración, pérdida, tratamiento o acceso no autorizado.
                 </p>
               </section>

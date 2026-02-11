@@ -36,7 +36,7 @@ export const Footer = () => {
 
           {/* Copyright and Contact */}
           <div className="text-center md:text-right text-sm text-muted-foreground">
-            <p>© {currentYear} Antonio Mateos</p>
+            <p>© {currentYear} Groove Factory Studios SL</p>
             <p className="mt-1">
               <a 
                 href="mailto:info@tonimateos.com" 
