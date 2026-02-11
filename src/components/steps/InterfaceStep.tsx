@@ -32,18 +32,17 @@ export const InterfaceStep = ({
   };
 
   return (
-    <div className="space-y-12 bg-gradient-to-br from-warm-apricot/25 to-warm-cream/20 rounded-xl p-8">
-      <div className="text-center space-y-6">
-        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+    <div className="space-y-8 sm:space-y-12 bg-gradient-to-br from-warm-apricot/25 to-warm-cream/20 rounded-xl p-4 sm:p-8">
+      <div className="text-center space-y-4 sm:space-y-6">
+        <h2 className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
           {t("interface.title")}
         </h2>
-        <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
+        <p className="text-muted-foreground text-base sm:text-xl max-w-3xl mx-auto leading-relaxed">
           {t("interface.subtitle")}
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-        {/* Basic Interface - included */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 max-w-6xl mx-auto">
         <ProductCard
           category={t("config.steps.interface")}
           price={0}
@@ -56,7 +55,6 @@ export const InterfaceStep = ({
           includedLabel={t("interface.alreadyIncluded")}
         />
 
-        {/* Premium Interface */}
         <ProductCard
           category={t("config.steps.interface")}
           price={dadInterface.price}

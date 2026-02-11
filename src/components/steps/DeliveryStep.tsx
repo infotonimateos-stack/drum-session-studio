@@ -50,18 +50,17 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
   };
 
   return (
-    <div className="space-y-8 bg-gradient-to-br from-warm-blush/20 to-warm-apricot/15 rounded-xl p-8">
-      <div className="text-center space-y-6">
-        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+    <div className="space-y-6 sm:space-y-8 bg-gradient-to-br from-warm-blush/20 to-warm-apricot/15 rounded-xl p-4 sm:p-8">
+      <div className="text-center space-y-4 sm:space-y-6">
+        <h2 className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
           {t("delivery.title")}
         </h2>
-        <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
+        <p className="text-muted-foreground text-base sm:text-xl max-w-3xl mx-auto leading-relaxed">
           {t("delivery.subtitle")}
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Standard Delivery - included */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         <ProductCard
           category={t("config.steps.delivery")}
           price={0}
@@ -74,7 +73,6 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
           includedLabel={t("delivery.includedInKit")}
         />
 
-        {/* 5 Days Express */}
         <ProductCard
           category={t("config.steps.delivery")}
           price={express5Days.price}
@@ -87,7 +85,6 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
           addedLabel={t("delivery.selected")}
         />
 
-        {/* 2 Days Ultra Express */}
         <ProductCard
           category={t("config.steps.delivery")}
           price={express2Days.price}

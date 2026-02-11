@@ -128,20 +128,20 @@ export const BillingStep = ({
   };
 
   return (
-    <div className="space-y-8 max-w-4xl mx-auto">
-      <div className="text-center space-y-4">
-        <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-3">
-          <Receipt className="h-10 w-10 text-primary" />
+    <div className="space-y-6 sm:space-y-8 max-w-4xl mx-auto">
+      <div className="text-center space-y-3 sm:space-y-4">
+        <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-2 sm:gap-3">
+          <Receipt className="h-8 w-8 sm:h-10 sm:w-10 text-primary" />
           {t("billing.title")}
         </h2>
-        <p className="text-muted-foreground text-lg">{t("billing.subtitle")}</p>
+        <p className="text-muted-foreground text-base sm:text-lg">{t("billing.subtitle")}</p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8">
         {/* Form */}
         <div className="lg:col-span-3 space-y-6">
           <div
-            className="rounded-2xl p-6 space-y-6"
+            className="rounded-2xl p-4 sm:p-6 space-y-5 sm:space-y-6"
             style={{ background: "hsl(var(--card-dark))" }}
           >
             {/* Country */}
@@ -168,7 +168,8 @@ export const BillingStep = ({
                 value={postalCode}
                 onChange={e => setPostalCode(e.target.value.replace(/[^a-zA-Z0-9\s-]/g, '').substring(0, 10))}
                 placeholder={country === 'ES' ? '28001' : '10115'}
-                className="bg-card-dark/80 border-card-dark-muted/30 text-card-dark-foreground placeholder:text-card-dark-muted/50"
+                inputMode="numeric"
+                className="bg-card-dark/80 border-card-dark-muted/30 text-card-dark-foreground placeholder:text-card-dark-muted/50 h-12 text-base"
               />
               {country === 'ES' && postalCode && (
                 <p className="text-xs text-card-dark-muted">
@@ -223,7 +224,8 @@ export const BillingStep = ({
                     value={vatNumber}
                     onChange={e => setVatNumber(e.target.value.replace(/[^a-zA-Z0-9]/g, '').substring(0, 20))}
                     placeholder={`${country}123456789`}
-                    className="bg-card-dark/80 border-card-dark-muted/30 text-card-dark-foreground placeholder:text-card-dark-muted/50 flex-1"
+                    inputMode="text"
+                    className="bg-card-dark/80 border-card-dark-muted/30 text-card-dark-foreground placeholder:text-card-dark-muted/50 flex-1 h-12 text-base"
                   />
                   <Button
                     onClick={handleValidateVies}

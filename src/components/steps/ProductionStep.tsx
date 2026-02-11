@@ -57,18 +57,18 @@ export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepP
   };
 
   return (
-    <div className="space-y-12 bg-gradient-to-br from-warm-peach/15 to-warm-coral/20 rounded-xl p-8">
-      <div className="text-center space-y-6">
-        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-3">
-          <Headphones className="h-12 w-12 text-primary" />
+    <div className="space-y-8 sm:space-y-12 bg-gradient-to-br from-warm-peach/15 to-warm-coral/20 rounded-xl p-4 sm:p-8">
+      <div className="text-center space-y-4 sm:space-y-6">
+        <h2 className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-2 sm:gap-3">
+          <Headphones className="h-8 w-8 sm:h-12 sm:w-12 text-primary" />
           {t("production.title")}
         </h2>
-        <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
+        <p className="text-muted-foreground text-base sm:text-xl max-w-3xl mx-auto leading-relaxed">
           {t("production.subtitle")}
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
         <ProductCard
           category={includedItem.category}
           price={includedItem.price}
