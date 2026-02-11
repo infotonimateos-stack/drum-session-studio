@@ -14,6 +14,9 @@ interface ProductCardProps {
   onToggle: () => void;
   addLabel?: string;
   addedLabel?: string;
+  /** When true, renders a non-interactive "✓ YA INCLUIDO" green button */
+  included?: boolean;
+  includedLabel?: string;
 }
 
 export const ProductCard = ({
@@ -28,25 +31,38 @@ export const ProductCard = ({
   onToggle,
   addLabel = "Añadir por",
   addedLabel = "Añadido",
+  included = false,
+  includedLabel = "YA INCLUIDO",
 }: ProductCardProps) => {
   return (
     <div
-      className={`relative flex flex-col h-full rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-2xl transform hover:scale-[1.03] ${
-        isSelected
-          ? "ring-2 ring-primary shadow-2xl scale-[1.03]"
-          : "hover:ring-1 hover:ring-card-dark-price/40"
+      className={`relative flex flex-col h-full rounded-2xl overflow-hidden transition-all duration-300 ${
+        included
+          ? "ring-1 ring-[hsl(var(--card-dark-included))]/40"
+          : `cursor-pointer hover:shadow-2xl transform hover:scale-[1.03] ${
+              isSelected
+                ? "ring-2 ring-primary shadow-2xl scale-[1.03]"
+                : "hover:ring-1 hover:ring-card-dark-price/40"
+            }`
       }`}
       style={{ background: "hsl(var(--card-dark))" }}
-      onClick={onToggle}
+      onClick={included ? undefined : onToggle}
     >
       {/* Top row: category + price */}
       <div className="flex items-center justify-between px-5 pt-4 pb-1">
         <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-card-dark-muted/20 text-card-dark-muted">
           {category}
         </span>
-        <span className="text-xl font-bold text-card-dark-price">
-          {price.toFixed(2)} €
-        </span>
+        {!included && (
+          <span className="text-xl font-bold text-card-dark-price">
+            {price.toFixed(2)} €
+          </span>
+        )}
+        {included && (
+          <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-[hsl(var(--card-dark-included))]/20 text-[hsl(var(--card-dark-included))]">
+            0.00 €
+          </span>
+        )}
       </div>
 
       {/* Image or Icon */}
@@ -92,29 +108,39 @@ export const ProductCard = ({
 
       {/* Button — always pinned to the bottom */}
       <div className="px-5 pb-4 mt-auto">
-        <Button
-          className={`w-full h-12 text-base font-bold rounded-xl transition-all duration-200 ${
-            isSelected
-              ? "bg-primary text-primary-foreground hover:bg-primary/90"
-              : "bg-gradient-to-r from-[hsl(var(--card-dark-btn-from))] to-[hsl(var(--card-dark-btn-to))] text-white hover:shadow-lg"
-          }`}
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggle();
-          }}
-        >
-          {isSelected ? (
-            <>
-              <Check className="h-5 w-5 mr-2" />
-              {addedLabel}
-            </>
-          ) : (
-            <>
-              <Plus className="h-5 w-5 mr-2" />
-              {addLabel} {price.toFixed(2)} €
-            </>
-          )}
-        </Button>
+        {included ? (
+          <Button
+            disabled
+            className="w-full h-12 text-base font-bold rounded-xl uppercase tracking-wide bg-[hsl(var(--card-dark-included))] text-white cursor-default hover:bg-[hsl(var(--card-dark-included))]"
+          >
+            <Check className="h-5 w-5 mr-2" />
+            {includedLabel}
+          </Button>
+        ) : (
+          <Button
+            className={`w-full h-12 text-base font-bold rounded-xl transition-all duration-200 ${
+              isSelected
+                ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                : "bg-gradient-to-r from-[hsl(var(--card-dark-btn-from))] to-[hsl(var(--card-dark-btn-to))] text-white hover:shadow-lg"
+            }`}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggle();
+            }}
+          >
+            {isSelected ? (
+              <>
+                <Check className="h-5 w-5 mr-2" />
+                {addedLabel}
+              </>
+            ) : (
+              <>
+                <Plus className="h-5 w-5 mr-2" />
+                {addLabel} {price.toFixed(2)} €
+              </>
+            )}
+          </Button>
+        )}
       </div>
     </div>
   );

@@ -43,6 +43,7 @@ All colors MUST be HSL.
     --card-dark-price: 38 65% 70%;
     --card-dark-btn-from: 15 75% 55%;
     --card-dark-btn-to: 25 85% 55%;
+    --card-dark-included: 145 35% 28%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
