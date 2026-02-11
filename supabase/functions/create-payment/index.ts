@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@14.21.0?target=deno";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -21,28 +22,24 @@ serve(async (req) => {
 
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeKey) throw new Error("STRIPE_SECRET_KEY is not set");
-    logStep("Stripe key verified");
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
 
-    const { items, basePrice, total, customerEmail } = await req.json();
-    logStep("Received cart data", { itemCount: items?.length, basePrice, total, customerEmail });
+    const {
+      items, basePrice, subtotal, total,
+      taxRate, taxAmount, taxRule, taxLabel,
+      billingCountry, billingPostalCode, clientType,
+      vatNumber, viesValid, customerEmail,
+    } = await req.json();
+
+    logStep("Received data", { itemCount: items?.length, subtotal, taxRate, taxAmount, total });
 
     // Input validation
-    if (!total || typeof total !== "number" || total <= 0 || total > 10000) {
-      throw new Error("Invalid total amount");
-    }
-    if (!basePrice || typeof basePrice !== "number" || basePrice <= 0 || basePrice > 10000) {
-      throw new Error("Invalid base price");
-    }
-    if (items && (!Array.isArray(items) || items.length > 50)) {
-      throw new Error("Invalid items");
-    }
-    if (customerEmail && (typeof customerEmail !== "string" || customerEmail.length > 255)) {
-      throw new Error("Invalid email");
-    }
+    if (!total || typeof total !== "number" || total <= 0 || total > 15000) throw new Error("Invalid total amount");
+    if (!basePrice || typeof basePrice !== "number" || basePrice <= 0 || basePrice > 10000) throw new Error("Invalid base price");
+    if (items && (!Array.isArray(items) || items.length > 50)) throw new Error("Invalid items");
 
-    // Build line items for Stripe
+    // Build line items
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
     lineItems.push({
@@ -59,9 +56,7 @@ serve(async (req) => {
 
     if (items && items.length > 0) {
       for (const item of items) {
-        if (!item.name || typeof item.price !== "number" || item.price < 0 || item.price > 10000) {
-          throw new Error("Invalid item data");
-        }
+        if (!item.name || typeof item.price !== "number" || item.price < 0 || item.price > 10000) throw new Error("Invalid item data");
         lineItems.push({
           price_data: {
             currency: "eur",
@@ -76,10 +71,24 @@ serve(async (req) => {
       }
     }
 
+    // Add tax line item if applicable
+    if (taxAmount && typeof taxAmount === "number" && taxAmount > 0) {
+      lineItems.push({
+        price_data: {
+          currency: "eur",
+          product_data: {
+            name: taxLabel || `Impuestos (${taxRate}%)`,
+            description: `Impuestos aplicables según la normativa fiscal`,
+          },
+          unit_amount: Math.round(taxAmount * 100),
+        },
+        quantity: 1,
+      });
+    }
+
     logStep("Line items created", { count: lineItems.length });
 
     const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
-    logStep("Origin determined", { origin });
 
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
       line_items: lineItems,
@@ -91,12 +100,40 @@ serve(async (req) => {
       invoice_creation: { enabled: false },
     };
 
-    if (customerEmail) {
-      sessionConfig.customer_email = customerEmail;
-    }
+    if (customerEmail) sessionConfig.customer_email = customerEmail;
 
     const session = await stripe.checkout.sessions.create(sessionConfig);
-    logStep("Checkout session created", { sessionId: session.id, url: session.url });
+    logStep("Checkout session created", { sessionId: session.id });
+
+    // Save order to DB
+    try {
+      const supabaseUrl = Deno.env.get("SUPABASE_URL");
+      const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+      if (supabaseUrl && supabaseServiceKey) {
+        const supabase = createClient(supabaseUrl, supabaseServiceKey);
+        await supabase.from("orders").insert({
+          payment_method: "stripe",
+          payment_id: session.id,
+          payment_status: "pending",
+          items: items || [],
+          base_price: basePrice,
+          subtotal: subtotal || basePrice + (items || []).reduce((s: number, i: any) => s + (i.price || 0), 0),
+          tax_amount: taxAmount || 0,
+          tax_rate: taxRate || 0,
+          paypal_fee: 0,
+          total: total,
+          country_code: billingCountry || 'ES',
+          postal_code: billingPostalCode || null,
+          client_type: clientType || 'particular',
+          vat_number: vatNumber || null,
+          vies_valid: viesValid ?? null,
+          tax_rule: taxRule || 'spain_peninsula',
+        });
+        logStep("Order saved to DB");
+      }
+    } catch (dbErr) {
+      logStep("DB save error (non-fatal)", { message: String(dbErr) });
+    }
 
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

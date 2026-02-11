@@ -538,5 +538,26 @@
     "paymentMethod": "Método de Pago",
     "cardPayment": "Tarjeta",
     "transfer": "Transferencia"
+  },
+  "billing": {
+    "title": "Datos de Facturación",
+    "subtitle": "Completa tus datos para calcular los impuestos aplicables",
+    "country": "País",
+    "selectCountry": "Selecciona un país",
+    "postalCode": "Código Postal",
+    "clientType": "Tipo de Cliente",
+    "particular": "Particular",
+    "empresa": "Empresa",
+    "vatNumber": "Número de IVA (VAT)",
+    "validate": "Validar VIES",
+    "viesValid": "✅ VAT válido — Inversión del Sujeto Pasivo",
+    "reverseCharge": "Se aplica Inversión del Sujeto Pasivo (0% IVA)",
+    "viesInvalid": "❌ VAT no válido",
+    "viesInvalidDesc": "Se aplicará el IVA del país correspondiente",
+    "breakdown": "Desglose del Precio",
+    "subtotal": "Subtotal:",
+    "selectCountryToCalc": "Selecciona un país para calcular los impuestos",
+    "continue": "Continuar al pago →",
+    "taxes": "Impuestos:"
   }
 }

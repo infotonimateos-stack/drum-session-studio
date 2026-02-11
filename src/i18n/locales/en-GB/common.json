@@ -353,5 +353,26 @@
     "paymentMethod": "Payment Method",
     "cardPayment": "Card",
     "transfer": "Bank Transfer"
+  },
+  "billing": {
+    "title": "Billing Information",
+    "subtitle": "Complete your details to calculate applicable taxes",
+    "country": "Country",
+    "selectCountry": "Select a country",
+    "postalCode": "Postal Code",
+    "clientType": "Client Type",
+    "particular": "Individual",
+    "empresa": "Company",
+    "vatNumber": "VAT Number",
+    "validate": "Validate VIES",
+    "viesValid": "✅ Valid VAT — Reverse Charge applies",
+    "reverseCharge": "Reverse Charge mechanism applies (0% VAT)",
+    "viesInvalid": "❌ Invalid VAT",
+    "viesInvalidDesc": "The local VAT rate for the corresponding country will be applied",
+    "breakdown": "Price Breakdown",
+    "subtotal": "Subtotal:",
+    "selectCountryToCalc": "Select a country to calculate taxes",
+    "continue": "Continue to payment →",
+    "taxes": "Taxes:"
   }
 }
