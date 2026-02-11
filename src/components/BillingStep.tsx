@@ -31,7 +31,7 @@ interface BillingStepProps {
   onBack: () => void;
   subtotal: number;
   paypalFeePercent: number;
-  paymentMethod: 'card' | 'paypal';
+  paymentMethod: 'card' | 'paypal' | 'transfer';
 }
 
 export const BillingStep = ({

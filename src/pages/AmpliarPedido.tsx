@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Clock, Headphones, Video, PlayCircle, Share2,
-  Copy, Plane, Rocket, Smartphone, FileMusic, CreditCard, Loader2, ShoppingCart, Film
+  Copy, Plane, Rocket, Smartphone, FileMusic, CreditCard, Loader2, ShoppingCart, Film, Landmark
 } from "lucide-react";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
@@ -16,6 +16,7 @@ import { LanguageSelector } from "@/components/LanguageSelector";
 import { upgradeMicrophones } from "@/data/microphones";
 import { ProductCard } from "@/components/ProductCard";
 import { BillingStep, BillingData } from "@/components/BillingStep";
+import { BankTransferConfirmation } from "@/components/BankTransferConfirmation";
 import logo from "@/assets/logo.png";
 
 type Phase = 'select' | 'billing';
@@ -25,10 +26,11 @@ const AmpliarPedido = () => {
   const [items, setItems] = useState<CartItem[]>([]);
   const [phase, setPhase] = useState<Phase>('select');
   const showStripe = false; // Stripe hidden, kept for future reactivation
-  const [paymentMethod, setPaymentMethod] = useState<'card' | 'paypal'>('paypal');
+  const [paymentMethod, setPaymentMethod] = useState<'paypal' | 'transfer'>('paypal');
   const [acceptedPrivacyPolicy, setAcceptedPrivacyPolicy] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [billingData, setBillingData] = useState<BillingData | null>(null);
+  const [transferOrderId, setTransferOrderId] = useState<string | null>(null);
 
   const subtotal = items.reduce((sum, i) => sum + i.price, 0);
 
@@ -95,9 +97,9 @@ const AmpliarPedido = () => {
   const taxRate = billingData?.taxResult.taxRate ?? 0;
   const taxAmount = subtotal * (taxRate / 100);
   const subtotalWithTax = subtotal + taxAmount;
-  // PayPal fee always applies since PayPal is the only payment method
+  // PayPal fee only when paying via PayPal
   const PAYPAL_FEE_PERCENTAGE = 0.05;
-  const paypalFee = subtotalWithTax * PAYPAL_FEE_PERCENTAGE;
+  const paypalFee = paymentMethod === 'paypal' ? subtotalWithTax * PAYPAL_FEE_PERCENTAGE : 0;
   const displayTotal = subtotalWithTax + paypalFee;
 
   // --- BILLING HANDLERS ---
@@ -137,11 +139,10 @@ const AmpliarPedido = () => {
     viesValid: billingData?.viesValid ?? null,
   });
 
-  const handlePayment = async () => {
+  const handlePayPalPayment = async () => {
     if (items.length === 0 || !billingData) return;
     setIsLoading(true);
     try {
-      // All payments go through PayPal (Stripe kept for future reactivation)
       const { data, error } = await supabase.functions.invoke('create-paypal-order', {
         body: { ...buildOrderPayload(), paypalFee, paymentMethod: 'paypal' },
       });
@@ -150,6 +151,48 @@ const AmpliarPedido = () => {
       else { toast.error(t("checkout.paypalOrderError")); }
     } catch { toast.error(t("checkout.connectionError")); }
     setIsLoading(false);
+  };
+
+  const handleBankTransfer = async () => {
+    if (items.length === 0 || !billingData) return;
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase.from('orders').insert({
+        items: items as any,
+        base_price: 0,
+        subtotal,
+        tax_rate: taxRate,
+        tax_amount: taxAmount,
+        tax_rule: billingData.taxResult.taxRule,
+        total: displayTotal,
+        country_code: billingData.country,
+        postal_code: billingData.postalCode,
+        client_type: billingData.clientType,
+        vat_number: billingData.vatNumber || null,
+        vies_valid: billingData.viesValid ?? null,
+        payment_method: 'transfer',
+        payment_status: 'awaiting_transfer',
+        paypal_fee: 0,
+      }).select('id').single();
+
+      if (error) {
+        toast.error(t("checkout.connectionError"));
+        setIsLoading(false);
+        return;
+      }
+      setTransferOrderId(data.id);
+    } catch {
+      toast.error(t("checkout.connectionError"));
+    }
+    setIsLoading(false);
+  };
+
+  const handlePayment = async () => {
+    if (paymentMethod === 'transfer') {
+      handleBankTransfer();
+    } else {
+      handlePayPalPayment();
+    }
   };
 
   return (
@@ -394,8 +437,14 @@ const AmpliarPedido = () => {
               paymentMethod={paymentMethod}
             />
 
-            {/* Payment section — only after billing is complete */}
-            {billingData && (
+            {/* Show bank transfer confirmation or payment section */}
+            {transferOrderId ? (
+              <BankTransferConfirmation
+                orderId={transferOrderId}
+                total={displayTotal}
+                onBackHome={() => window.location.href = '/'}
+              />
+            ) : billingData && (
               <section className="max-w-xl mx-auto">
                 <Card className="bg-gradient-to-br from-gradient-warm">
                   <CardHeader>
@@ -428,11 +477,20 @@ const AmpliarPedido = () => {
                       <span>{taxAmount > 0 ? `+${taxAmount.toFixed(2)} €` : '0.00 €'}</span>
                     </div>
 
-                    {/* PayPal Fee - always shown */}
-                    <div className="flex justify-between text-sm text-amber-600 dark:text-amber-400">
-                      <span>{t("checkout.paypalFee")}</span>
-                      <span>+{paypalFee.toFixed(2)} €</span>
-                    </div>
+                    {/* PayPal Fee - only when PayPal selected */}
+                    {paymentMethod === 'paypal' && (
+                      <div className="flex justify-between text-sm text-amber-600 dark:text-amber-400">
+                        <span>{t("checkout.paypalFee")}</span>
+                        <span>+{paypalFee.toFixed(2)} €</span>
+                      </div>
+                    )}
+
+                    {paymentMethod === 'transfer' && (
+                      <div className="flex justify-between text-sm text-green-600 dark:text-green-400">
+                        <span>{t("transfer.noFee")}</span>
+                        <span>0.00 €</span>
+                      </div>
+                    )}
 
                     <Separator />
 
@@ -441,28 +499,28 @@ const AmpliarPedido = () => {
                       <span className="text-primary">{displayTotal.toFixed(2)} €</span>
                     </div>
 
-                    {/* Payment Buttons - PayPal only */}
+                    {/* Payment Method Selection */}
                     <div className="space-y-3 pt-4">
                       <p className="text-sm font-medium text-center text-muted-foreground">{t("checkout.paymentMethod")}</p>
                       <div className="grid grid-cols-1 gap-3">
-                        {/* PayPal Account Button */}
                         <Button type="button" onClick={() => setPaymentMethod('paypal')} disabled={isLoading}
-                          className="h-14 bg-[#FFC439] hover:bg-[#f0b830] text-[#003087] font-bold ring-2 ring-[#FFC439]/50 ring-offset-2">
+                          className={`h-14 bg-[#FFC439] hover:bg-[#f0b830] text-[#003087] font-bold ${paymentMethod === 'paypal' ? 'ring-2 ring-[#FFC439]/50 ring-offset-2' : 'opacity-60'}`}>
                           <div className="flex items-center justify-center gap-2">
                             <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .771-.66h6.487c2.025 0 3.538.507 4.497 1.507.921.961 1.261 2.217 1.046 3.849l-.016.112-.012.084.052.028c.628.349 1.115.809 1.446 1.371.35.593.528 1.336.528 2.207 0 1.015-.207 1.913-.616 2.668-.386.71-.93 1.31-1.618 1.783a6.08 6.08 0 0 1-2.167.936c-.772.181-1.635.274-2.562.274H12.2a.967.967 0 0 0-.955.816l-.033.196-.585 3.716-.027.14a.966.966 0 0 1-.955.79H7.076z"/></svg>
-                            <span className="text-sm font-bold">PayPal</span>
+                            <span className="text-sm font-bold">PayPal / {t("checkout.debitOrCredit")}</span>
                           </div>
                         </Button>
-                        {/* Card via PayPal Button */}
-                        <Button type="button" onClick={() => setPaymentMethod('paypal')} disabled={isLoading}
-                          className="h-14 bg-[#2C2E2F] hover:bg-[#1a1c1d] text-white font-bold">
+                        <Button type="button" onClick={() => setPaymentMethod('transfer')} disabled={isLoading}
+                          className={`h-14 bg-[#2C2E2F] hover:bg-[#1a1c1d] text-white font-bold ${paymentMethod === 'transfer' ? 'ring-2 ring-primary/50 ring-offset-2' : 'opacity-60'}`}>
                           <div className="flex items-center justify-center gap-2">
-                            <CreditCard className="h-5 w-5" />
-                            <span className="text-sm font-bold">{t("checkout.debitOrCredit")}</span>
+                            <Landmark className="h-5 w-5" />
+                            <span className="text-sm font-bold">{t("transfer.bankTransfer")}</span>
                           </div>
                         </Button>
                       </div>
-                      <p className="text-xs text-center text-muted-foreground">{t("checkout.paypalSecureInfo")}</p>
+                      <p className="text-xs text-center text-muted-foreground">
+                        {paymentMethod === 'paypal' ? t("checkout.paypalSecureInfo") : t("transfer.noFeeInfo")}
+                      </p>
                     </div>
 
                     {/* Privacy consent */}
@@ -478,10 +536,12 @@ const AmpliarPedido = () => {
                     </div>
 
                     <Button onClick={handlePayment} disabled={isLoading || !acceptedPrivacyPolicy || items.length === 0}
-                      className="w-full h-14 text-sm sm:text-base bg-[#0070ba] hover:bg-[#005ea6] text-white disabled:bg-[#0070ba]/50"
+                      className={`w-full h-14 text-sm sm:text-base font-bold ${paymentMethod === 'transfer' ? 'bg-primary hover:bg-primary/90 text-primary-foreground' : 'bg-[#0070ba] hover:bg-[#005ea6] text-white disabled:bg-[#0070ba]/50'}`}
                       size="lg">
                       {isLoading ? (
                         <span className="flex items-center justify-center gap-2"><Loader2 className="h-4 w-4 animate-spin" />{t("checkout.processing")}</span>
+                      ) : paymentMethod === 'transfer' ? (
+                        <span className="flex items-center justify-center gap-2"><Landmark className="h-4 w-4" /> {t("transfer.confirmOrder")} {displayTotal.toFixed(2)} €</span>
                       ) : (
                         <span className="flex items-center justify-center gap-2">{t("checkout.payNow")} {displayTotal.toFixed(2)} €</span>
                       )}
