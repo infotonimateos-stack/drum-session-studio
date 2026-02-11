@@ -45,7 +45,7 @@ export const ProductCard = ({
                 : "hover:ring-1 hover:ring-card-dark-price/40"
             }`
       }`}
-      style={{ background: "hsl(var(--card-dark))" }}
+      style={{ background: included ? "hsl(145 25% 18%)" : "hsl(var(--card-dark))" }}
       onClick={included ? undefined : onToggle}
     >
       {/* Top row: category + price */}
