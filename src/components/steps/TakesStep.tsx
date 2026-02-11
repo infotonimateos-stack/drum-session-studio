@@ -1,9 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, Play, Copy, Crown, Folder } from "lucide-react";
+import { Check, Play, Copy, Crown, Folder } from "lucide-react";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
+import { ProductCard } from "@/components/ProductCard";
 
 interface TakesStepProps {
   addItem: (item: CartItem) => void;
@@ -38,24 +38,17 @@ export const TakesStep = ({
   const isToniSelected = hasItem(toniInterpretation.id);
 
   const handleToggleExactCopy = () => {
-    if (isExactCopySelected) {
-      removeItem(exactCopyTake.id);
-    } else {
-      addItem(exactCopyTake);
-    }
+    if (isExactCopySelected) removeItem(exactCopyTake.id);
+    else addItem(exactCopyTake);
   };
 
   const handleToggleToni = () => {
-    if (isToniSelected) {
-      removeItem(toniInterpretation.id);
-    } else {
-      addItem(toniInterpretation);
-    }
+    if (isToniSelected) removeItem(toniInterpretation.id);
+    else addItem(toniInterpretation);
   };
 
   return (
     <div className="space-y-8 bg-gradient-to-br from-warm-cream/30 to-warm-blush/20 rounded-xl p-8">
-      {/* Header */}
       <div className="text-center space-y-6">
         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center justify-center gap-3">
           <Folder className="h-12 w-12 text-primary" />
@@ -67,7 +60,7 @@ export const TakesStep = ({
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Basic Take */}
+        {/* Basic Take - included */}
         <Card className="bg-gradient-to-br from-card to-muted border-success/30">
           <CardHeader>
             <div className="flex items-center justify-between">
@@ -86,135 +79,43 @@ export const TakesStep = ({
                 <p className="text-sm text-muted-foreground">{t("takes.standardTakeDesc")}</p>
               </div>
             </div>
-            
-            <div className="space-y-2">
-              <h4 className="font-medium text-sm">{t("takes.features")}</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• {t("takes.feat1")}</li>
-                <li>• {t("takes.feat2")}</li>
-                <li>• {t("takes.feat3")}</li>
-              </ul>
-            </div>
-
-            <div className="pt-4">
-              <div className="flex items-center gap-1">
-                <Check className="h-4 w-4 text-success" />
-                <span className="text-sm text-success font-medium">{t("takes.includedInKit")}</span>
-              </div>
+            <ul className="text-sm text-muted-foreground space-y-1">
+              <li>• {t("takes.feat1")}</li>
+              <li>• {t("takes.feat2")}</li>
+              <li>• {t("takes.feat3")}</li>
+            </ul>
+            <div className="flex items-center gap-1">
+              <Check className="h-4 w-4 text-success" />
+              <span className="text-sm text-success font-medium">{t("takes.includedInKit")}</span>
             </div>
           </CardContent>
         </Card>
 
         {/* Toni's Interpretation */}
-        <Card 
-          className={`transition-all duration-300 hover:shadow-lg cursor-pointer ${
-            isToniSelected 
-              ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-lg' 
-              : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'
-          }`} 
-          onClick={handleToggleToni}
-        >
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <Crown className="h-5 w-5 text-primary" />
-                {t("takes.proInterpretation")}
-              </CardTitle>
-              <Badge variant="outline" className="text-primary font-bold text-xl px-4 py-2 whitespace-nowrap">19.90 €</Badge>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <h4 className="font-medium text-sm">{t("takes.features")}</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• {t("takes.proFeat1")}</li>
-                <li>• {t("takes.proFeat2")}</li>
-                <li>• {t("takes.proFeat3")}</li>
-                <li>• {t("takes.proFeat4")}</li>
-              </ul>
-            </div>
-
-            <div className="p-3 bg-primary/10 rounded-lg">
-              <p className="text-xs text-primary font-medium">
-                {t("takes.recommended")}
-              </p>
-            </div>
-
-            <Button 
-              variant={isToniSelected ? "default" : "upgrade"} 
-              className="w-full h-10 text-lg" 
-              onClick={e => {
-                e.stopPropagation();
-                handleToggleToni();
-              }}
-            >
-              {isToniSelected ? (
-                <>
-                  <Check className="h-4 w-4 mr-2" />
-                  {t("takes.added")}
-                </>
-              ) : (
-                <>
-                  <Plus className="h-4 w-4 mr-2" />
-                  {t("takes.add")} 19.90 €
-                </>
-              )}
-            </Button>
-          </CardContent>
-        </Card>
+        <ProductCard
+          category={t("config.steps.takes")}
+          price={toniInterpretation.price}
+          name={t("takes.proInterpretation")}
+          description={`${t("takes.proFeat1")} · ${t("takes.proFeat2")} · ${t("takes.proFeat3")}`}
+          icon={<Crown className="h-10 w-10" />}
+          isSelected={isToniSelected}
+          onToggle={handleToggleToni}
+          addLabel={t("video.addFor")}
+          addedLabel={t("takes.added")}
+        />
 
         {/* Exact Copy */}
-        <Card 
-          className={`transition-all duration-300 hover:shadow-lg cursor-pointer ${
-            isExactCopySelected 
-              ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-lg' 
-              : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'
-          }`} 
-          onClick={handleToggleExactCopy}
-        >
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <Copy className="h-5 w-5 text-primary" />
-                {t("takes.exactCopy")}
-              </CardTitle>
-              <Badge variant="outline" className="text-primary font-bold text-xl px-4 py-2 whitespace-nowrap">49.90 €</Badge>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <h4 className="font-medium text-sm">{t("takes.features")}</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• {t("takes.exactFeat1")}</li>
-                <li>• {t("takes.exactFeat2")}</li>
-                <li>• {t("takes.exactFeat3")}</li>
-                <li>• {t("takes.exactFeat4")}</li>
-                <li>• {t("takes.exactFeat5")}</li>
-              </ul>
-            </div>
-
-            <Button 
-              variant={isExactCopySelected ? "default" : "upgrade"} 
-              className="w-full h-10 text-lg" 
-              onClick={e => {
-                e.stopPropagation();
-                handleToggleExactCopy();
-              }}
-            >
-              {isExactCopySelected ? (
-                <>
-                  <Check className="h-4 w-4 mr-2" />
-                  {t("takes.added")}
-                </>
-              ) : (
-                <>
-                  <Plus className="h-4 w-4 mr-2" />
-                  {t("takes.add")} 49.90 €
-                </>
-              )}
-            </Button>
-          </CardContent>
-        </Card>
+        <ProductCard
+          category={t("config.steps.takes")}
+          price={exactCopyTake.price}
+          name={t("takes.exactCopy")}
+          description={`${t("takes.exactFeat1")} · ${t("takes.exactFeat2")} · ${t("takes.exactFeat3")}`}
+          icon={<Copy className="h-10 w-10" />}
+          isSelected={isExactCopySelected}
+          onToggle={handleToggleExactCopy}
+          addLabel={t("video.addFor")}
+          addedLabel={t("takes.added")}
+        />
       </div>
     </div>
   );

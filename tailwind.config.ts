@@ -61,6 +61,12 @@ export default {
 				'warm-apricot': 'hsl(var(--warm-apricot))',
 				'warm-cream': 'hsl(var(--warm-cream))',
 				'warm-blush': 'hsl(var(--warm-blush))',
+				'card-dark': {
+					DEFAULT: 'hsl(var(--card-dark))',
+					foreground: 'hsl(var(--card-dark-foreground))',
+					muted: 'hsl(var(--card-dark-muted))',
+					price: 'hsl(var(--card-dark-price))',
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',

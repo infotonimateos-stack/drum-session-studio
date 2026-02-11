@@ -1,10 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Check, Plus, Headphones } from "lucide-react";
 import { baseMicrophones, upgradeMicrophones } from "@/data/microphones";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
+import { ProductCard } from "@/components/ProductCard";
 
 interface MicrophonesStepProps {
   addItem: (item: CartItem) => void;
@@ -92,60 +92,20 @@ export const MicrophonesStep = ({
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-          {upgradeMicrophones.map(mic => {
-            const isSelected = hasItem(mic.id);
-            return (
-              <Card 
-                key={mic.id} 
-                className={`transition-all duration-300 hover:shadow-xl cursor-pointer transform hover:scale-105 ${
-                  isSelected 
-                    ? 'bg-gradient-to-br from-primary/20 to-accent/20 border-primary shadow-xl scale-105' 
-                    : 'bg-gradient-to-br from-card to-muted hover:border-primary/50'
-                }`} 
-                onClick={() => handleToggleItem(mic)}
-              >
-                <CardHeader className="pb-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <Badge variant="outline" className="text-sm px-3 py-1">
-                      {t(mic.targetKey)}
-                    </Badge>
-                    <span className="font-bold text-xl text-primary">{mic.price.toFixed(2)} €</span>
-                  </div>
-                  {mic.image && (
-                    <div className="w-full h-40 flex items-center justify-center bg-white rounded-lg">
-                      <img src={mic.image} alt={mic.name} className="max-h-36 max-w-full object-contain rounded-lg p-2" />
-                    </div>
-                  )}
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <h4 className="font-bold text-lg text-center">{mic.name}</h4>
-                  <p className="text-muted-foreground text-center leading-relaxed">{t(mic.descriptionKey)}</p>
-                  
-                  <Button 
-                    variant={isSelected ? "default" : "upgrade"} 
-                    size="lg" 
-                    className="w-full h-12 text-base font-bold" 
-                    onClick={e => {
-                      e.stopPropagation();
-                      handleToggleItem(mic);
-                    }}
-                  >
-                    {isSelected ? (
-                      <>
-                        <Check className="h-5 w-5 mr-2" />
-                        {t("microphones.added")}
-                      </>
-                    ) : (
-                      <>
-                        <Plus className="h-5 w-5 mr-2" />
-                        {t("microphones.add")} {mic.price.toFixed(2)} €
-                      </>
-                    )}
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
+          {upgradeMicrophones.map(mic => (
+            <ProductCard
+              key={mic.id}
+              category={t(mic.targetKey)}
+              price={mic.price}
+              name={mic.name}
+              description={t(mic.descriptionKey)}
+              image={mic.image}
+              isSelected={hasItem(mic.id)}
+              onToggle={() => handleToggleItem(mic)}
+              addLabel={t("video.addFor")}
+              addedLabel={t("microphones.added")}
+            />
+          ))}
         </div>
       </div>
     </div>

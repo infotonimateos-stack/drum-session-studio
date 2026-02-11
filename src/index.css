@@ -36,6 +36,14 @@ All colors MUST be HSL.
     --warm-cream: 45 60% 90%;
     --warm-blush: 350 60% 85%;
 
+    /* Dark product card tokens */
+    --card-dark: 20 8% 12%;
+    --card-dark-foreground: 38 45% 82%;
+    --card-dark-muted: 30 12% 58%;
+    --card-dark-price: 38 65% 70%;
+    --card-dark-btn-from: 15 75% 55%;
+    --card-dark-btn-to: 25 85% 55%;
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
