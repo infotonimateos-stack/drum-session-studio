@@ -34,7 +34,7 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
       name: t("extras.partitura"),
       price: 1.99,
       category: t("config.steps.extras"),
-      description: '',
+      description: t("extras.partituraDesc"),
       icon: <FileMusic className="h-10 w-10" />,
     }
   ];
@@ -65,16 +65,7 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
             category={item.category}
             price={item.price}
             name={item.name}
-            description={item.id !== 'partitura-proceso' ? item.description : undefined}
-            descriptionList={
-              item.id === 'partitura-proceso'
-                ? [
-                    { emoji: '📄', text: t("extras.partituraDesc1") },
-                    { emoji: '✍️', text: t("extras.partituraDesc2") },
-                    { emoji: '🎵', text: t("extras.partituraDesc3") },
-                  ]
-                : undefined
-            }
+            description={item.description}
             icon={item.icon}
             isSelected={hasItem(item.id)}
             onToggle={() => handleToggleItem(item)}
