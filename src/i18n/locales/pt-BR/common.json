@@ -170,7 +170,16 @@
   },
   "extras": {
     "title": "✨ Extras",
-    "subtitle": "Adicione serviços extras para levar sua gravação ao próximo nível."
+    "subtitle": "Adicione serviços extras para levar sua gravação ao próximo nível.",
+    "videocall10": "Videochamada 10 minutos",
+    "videocall10Desc": "Para discutir detalhes do projeto",
+    "multicam": "Transmissão multicam",
+    "multicamDesc": "Sistema multicâmera com áudio e vídeo ao vivo, produção em tempo real",
+    "partitura": "Partitura da sessão",
+    "partituraDesc": "Enviaremos uma fotografia da partitura ou roteiro original utilizado durante a sessão de gravação da sua música. São anotações manuscritas e roteiros de trabalho reais (não partituras perfeitamente editadas), que servem como uma lembrança autêntica e única do processo criativo no estúdio.",
+    "premiumExperience": "Experiência Premium Única",
+    "added": "Adicionado",
+    "add": "Adicionar"
   },
   "cart": {
     "orderSummary": "Resumo do Pedido",

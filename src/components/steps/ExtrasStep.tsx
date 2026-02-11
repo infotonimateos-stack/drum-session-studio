@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Plus, Smartphone, Video } from "lucide-react";
+import { Check, Plus, Smartphone, Video, FileMusic } from "lucide-react";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 
@@ -28,6 +28,13 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
       price: 100.00,
       category: t("config.steps.extras"),
       description: t("extras.multicamDesc")
+    },
+    {
+      id: 'partitura-proceso',
+      name: t("extras.partitura"),
+      price: 1.99,
+      category: t("config.steps.extras"),
+      description: t("extras.partituraDesc")
     }
   ];
 
@@ -62,6 +69,8 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
                 return <Smartphone className="h-5 w-5" />;
               case 'videocall-premium':
                 return <Video className="h-5 w-5" />;
+              case 'partitura-proceso':
+                return <FileMusic className="h-5 w-5" />;
               default:
                 return <Plus className="h-5 w-5" />;
             }
@@ -73,6 +82,8 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
                 return 'from-warm-peach/40 to-warm-coral/30 border-warm-peach/50';
               case 'videocall-premium':
                 return 'from-warm-coral/40 to-warm-blush/30 border-warm-coral/50';
+              case 'partitura-proceso':
+                return 'from-amber-100/40 to-warm-peach/30 border-amber-200/50';
               default:
                 return 'from-card to-muted';
             }

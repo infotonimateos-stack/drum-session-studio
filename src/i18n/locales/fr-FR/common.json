@@ -170,7 +170,16 @@
   },
   "extras": {
     "title": "✨ Extras",
-    "subtitle": "Ajoutez des services supplémentaires pour amener votre enregistrement au niveau supérieur."
+    "subtitle": "Ajoutez des services supplémentaires pour amener votre enregistrement au niveau supérieur.",
+    "videocall10": "Appel vidéo 10 minutes",
+    "videocall10Desc": "Pour discuter des détails du projet",
+    "multicam": "Diffusion multicam",
+    "multicamDesc": "Système multi-caméras avec audio et vidéo en direct, production en temps réel",
+    "partitura": "Partition de la session",
+    "partituraDesc": "Nous vous enverrons une photographie de la partition ou du script original utilisé lors de la session d'enregistrement de votre chanson. Il s'agit d'annotations manuscrites et de scripts de travail réels (pas de partitions parfaitement éditées), servant de souvenir authentique et unique du processus créatif en studio.",
+    "premiumExperience": "Expérience Premium Unique",
+    "added": "Ajouté",
+    "add": "Ajouter"
   },
   "cart": {
     "orderSummary": "Résumé de la Commande",

@@ -170,7 +170,16 @@
   },
   "extras": {
     "title": "✨ Extras",
-    "subtitle": "Add additional services to take your recording to the next level."
+    "subtitle": "Add additional services to take your recording to the next level.",
+    "videocall10": "10-minute Video Call",
+    "videocall10Desc": "To discuss project details",
+    "multicam": "Multicam Broadcast",
+    "multicamDesc": "Multi-camera system with live audio and video, real-time production",
+    "partitura": "Session Score Sheet",
+    "partituraDesc": "We'll send you a photograph of the original score or script used during your song's recording session. These are real handwritten annotations and working scripts (not perfectly edited scores), serving as an authentic and unique keepsake of the creative process in the studio.",
+    "premiumExperience": "Unique Premium Experience",
+    "added": "Added",
+    "add": "Add"
   },
   "cart": {
     "orderSummary": "Order Summary",

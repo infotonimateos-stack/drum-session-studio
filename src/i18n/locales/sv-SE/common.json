@@ -68,14 +68,15 @@
   "extras": {
     "title": "✨ Extras",
     "subtitle": "Lägg till extra tjänster.",
-    "videocallTitle": "Videosamtal under Inspelning",
-    "videocallDesc": "Övervaka sessionen i realtid via Meet/Zoom",
-    "videocallFeatures": "Realtidsåterkoppling | Direkta ändringar | Personlig upplevelse",
-    "multicamTitle": "Professionell Multicam Video",
-    "multicamDesc": "Professionell videoproduktion av din session",
-    "multicamFeatures": "4K-kvalitet | Flera vinklar | Professionell redigering",
-    "added": "✨ Tillagd",
-    "addFor": "Lägg till för"
+    "videocall10": "10-minuters videosamtal",
+    "videocall10Desc": "För att diskutera projektdetaljer",
+    "multicam": "Multicam-sändning",
+    "multicamDesc": "Multikamerasystem med live-ljud och video, realtidsproduktion",
+    "partitura": "Sessionspartitur",
+    "partituraDesc": "Vi skickar dig ett fotografi av det originalpartitur eller manus som användes under inspelningen av din låt. Det handlar om äkta handskrivna anteckningar och arbetsmanuskript (inte perfekt redigerade partitur), som fungerar som ett autentiskt och unikt minne av den kreativa processen i studion.",
+    "premiumExperience": "Unik Premiumupplevelse",
+    "added": "Tillagd",
+    "add": "Lägg till"
   },
   "cart": { "orderSummary": "Ordersammanfattning", "orderTotal": "Ordertotal", "basePlusExtras": "Grund + extras", "basicKit": "Grund Inspelningskit", "microphonesIncluded": "8 mikrofoner inkluderade", "total": "Totalt" },
   "stepNav": { "previous": "Föregående", "next": "Nästa", "checkout": "Kassan" },
