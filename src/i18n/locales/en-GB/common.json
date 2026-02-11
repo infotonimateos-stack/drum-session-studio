@@ -381,5 +381,21 @@
     "continue": "Continue to payment →",
     "taxes": "Taxes:",
     "taxCalcNext": "Taxes will be calculated in the next step"
+  },
+  "transfer": {
+    "title": "Complete Your Bank Transfer",
+    "subtitle": "Your order has been registered. Complete the payment via bank transfer.",
+    "bankDetails": "Bank Details",
+    "beneficiary": "Beneficiary",
+    "concept": "Reference",
+    "amount": "Amount",
+    "sendProof": "Please send the transfer receipt to",
+    "confirmationMsg": "Once we have processed the payment, we will send you a confirmation message and begin your order.",
+    "orderRegistered": "Your order has been registered and is pending payment confirmation.",
+    "copied": "copied to clipboard",
+    "bankTransfer": "Bank Transfer",
+    "noFee": "No processing fee:",
+    "noFeeInfo": "Bank transfer does not include additional processing fees.",
+    "confirmOrder": "Confirm Order"
   }
 }

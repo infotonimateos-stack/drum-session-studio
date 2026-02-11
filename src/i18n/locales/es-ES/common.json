@@ -563,5 +563,21 @@
     "continue": "Continuar al pago →",
     "taxes": "Impuestos:",
     "taxCalcNext": "Los impuestos se calcularán en el siguiente paso"
+  },
+  "transfer": {
+    "title": "Realiza tu Transferencia",
+    "subtitle": "Tu pedido ha sido registrado. Completa el pago mediante transferencia bancaria.",
+    "bankDetails": "Datos Bancarios",
+    "beneficiary": "Beneficiario",
+    "concept": "Concepto",
+    "amount": "Importe",
+    "sendProof": "Por favor, envía el comprobante de la transferencia a",
+    "confirmationMsg": "En cuanto hayamos procesado el pago, te enviaremos un mensaje de confirmación y comenzaremos con tu pedido.",
+    "orderRegistered": "Tu pedido ha sido registrado correctamente y está pendiente de confirmación de pago.",
+    "copied": "copiado al portapapeles",
+    "bankTransfer": "Transferencia Bancaria",
+    "noFee": "Sin gastos de gestión:",
+    "noFeeInfo": "La transferencia bancaria no incluye gastos de gestión adicionales.",
+    "confirmOrder": "Confirmar Pedido"
   }
 }
