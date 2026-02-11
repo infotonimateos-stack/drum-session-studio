@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Clock, Headphones, Video, PlayCircle, Share2,
-  Copy, Plane, Rocket, Smartphone, FileMusic, CreditCard, Loader2, ShoppingCart, Film, Landmark, Mic
+  Copy, Plane, Rocket, Smartphone, FileMusic, CreditCard, Loader2, ShoppingCart, Film, Landmark
 } from "lucide-react";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
@@ -236,7 +236,7 @@ const AmpliarPedido = () => {
                       price={item.price}
                       name={item.name}
                       description={mic ? t(mic.descriptionKey) : item.description}
-                      icon={<Mic className="h-10 w-10" />}
+                      image={mic?.image}
                       isSelected={hasItem(item.id)}
                       onToggle={() => toggleItem(item)}
                       addLabel={t("video.addFor")}
