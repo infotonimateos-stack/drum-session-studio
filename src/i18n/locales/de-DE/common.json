@@ -170,7 +170,16 @@
   },
   "extras": {
     "title": "✨ Extras",
-    "subtitle": "Fügen Sie zusätzliche Dienste hinzu, um Ihre Aufnahme auf die nächste Stufe zu heben."
+    "subtitle": "Fügen Sie zusätzliche Dienste hinzu, um Ihre Aufnahme auf die nächste Stufe zu heben.",
+    "videocall10": "10-Minuten Videoanruf",
+    "videocall10Desc": "Zur Besprechung von Projektdetails",
+    "multicam": "Multicam-Übertragung",
+    "multicamDesc": "Mehrkamerasystem mit Live-Audio und -Video, Echtzeitproduktion",
+    "partitura": "Session-Partitur",
+    "partituraDesc": "Wir senden Ihnen ein Foto der Originalpartitur oder des Skripts, das während der Aufnahmesession Ihres Songs verwendet wurde. Es handelt sich um echte handschriftliche Notizen und Arbeitsskripte (keine perfekt editierten Partituren), die als authentisches und einzigartiges Andenken an den kreativen Prozess im Studio dienen.",
+    "premiumExperience": "Einzigartiges Premium-Erlebnis",
+    "added": "Hinzugefügt",
+    "add": "Hinzufügen"
   },
   "cart": {
     "orderSummary": "Bestellübersicht",

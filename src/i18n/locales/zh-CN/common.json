@@ -170,7 +170,16 @@
   },
   "extras": {
     "title": "✨ 附加服务",
-    "subtitle": "添加额外服务将您的录音提升到更高水平。"
+    "subtitle": "添加额外服务将您的录音提升到更高水平。",
+    "videocall10": "10分钟视频通话",
+    "videocall10Desc": "讨论项目细节",
+    "multicam": "多机位直播",
+    "multicamDesc": "多机位系统，配备实时音视频和实时制作",
+    "partitura": "录音乐谱",
+    "partituraDesc": "我们将向您发送录音过程中使用的原始乐谱或脚本的照片。这些是真实的手写注释和工作脚本（非完美编辑的乐谱），作为录音室创作过程中真实而独特的纪念品。",
+    "premiumExperience": "独特的高级体验",
+    "added": "已添加",
+    "add": "添加"
   },
   "cart": {
     "orderSummary": "订单摘要",
