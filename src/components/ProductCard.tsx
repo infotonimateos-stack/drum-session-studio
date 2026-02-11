@@ -31,7 +31,7 @@ export const ProductCard = ({
 }: ProductCardProps) => {
   return (
     <div
-      className={`relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-2xl transform hover:scale-[1.03] ${
+      className={`relative flex flex-col h-full rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-2xl transform hover:scale-[1.03] ${
         isSelected
           ? "ring-2 ring-primary shadow-2xl scale-[1.03]"
           : "hover:ring-1 hover:ring-card-dark-price/40"
@@ -40,7 +40,7 @@ export const ProductCard = ({
       onClick={onToggle}
     >
       {/* Top row: category + price */}
-      <div className="flex items-center justify-between px-5 pt-5 pb-2">
+      <div className="flex items-center justify-between px-5 pt-4 pb-1">
         <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-card-dark-muted/20 text-card-dark-muted">
           {category}
         </span>
@@ -50,7 +50,7 @@ export const ProductCard = ({
       </div>
 
       {/* Image or Icon */}
-      <div className="flex items-center justify-center px-5 py-4">
+      <div className="flex items-center justify-center px-5 py-3">
         {image ? (
           <div className="w-full h-36 flex items-center justify-center bg-white rounded-xl">
             <img
@@ -67,14 +67,14 @@ export const ProductCard = ({
       </div>
 
       {/* Title */}
-      <div className="px-5 pb-2">
+      <div className="px-5 pb-1">
         <h3 className="text-lg font-bold text-card-dark-foreground text-center">
           {name}
         </h3>
       </div>
 
-      {/* Description */}
-      <div className="px-5 pb-4">
+      {/* Description — grows to fill remaining space */}
+      <div className="px-5 pb-3 flex-1">
         {descriptionList ? (
           <ul className="text-card-dark-muted text-sm space-y-1.5 list-none">
             {descriptionList.map((item, i) => (
@@ -90,8 +90,8 @@ export const ProductCard = ({
         ) : null}
       </div>
 
-      {/* Button */}
-      <div className="px-5 pb-5">
+      {/* Button — always pinned to the bottom */}
+      <div className="px-5 pb-4 mt-auto">
         <Button
           className={`w-full h-12 text-base font-bold rounded-xl transition-all duration-200 ${
             isSelected
