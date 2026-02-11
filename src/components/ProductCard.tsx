@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Check, Plus } from "lucide-react";
-import { ReactNode, cloneElement, isValidElement } from "react";
+import { ReactNode } from "react";
 
 interface ProductCardProps {
   category: string;
@@ -8,7 +8,6 @@ interface ProductCardProps {
   name: string;
   description?: string;
   descriptionList?: { emoji: string; text: string }[];
-  /** @deprecated Use `icon` instead for dynamic color control */
   image?: string;
   icon?: ReactNode;
   isSelected: boolean;
@@ -35,22 +34,6 @@ export const ProductCard = ({
   included = false,
   includedLabel = "YA INCLUIDO",
 }: ProductCardProps) => {
-  // Dynamic icon color: green for included, orange/coral for selectable
-  const iconColorClass = included ? "text-success" : "text-[hsl(var(--card-dark-btn-from))]";
-
-  const renderIcon = () => {
-    if (icon) {
-      // Clone the icon element to inject the color class
-      if (isValidElement(icon)) {
-        return cloneElement(icon as React.ReactElement<any>, {
-          className: `h-10 w-10 ${iconColorClass}`,
-        });
-      }
-      return icon;
-    }
-    return null;
-  };
-
   return (
     <div
       className={`relative flex flex-col h-full rounded-2xl overflow-hidden transition-all duration-300 ${
@@ -82,19 +65,19 @@ export const ProductCard = ({
         )}
       </div>
 
-      {/* Icon area */}
+      {/* Image or Icon */}
       <div className="flex items-center justify-center px-5 py-3">
-        {icon ? (
-          <div className="w-20 h-20 flex items-center justify-center rounded-xl bg-card-dark-muted/15">
-            {renderIcon()}
-          </div>
-        ) : image ? (
+        {image ? (
           <div className="w-full h-36 flex items-center justify-center bg-white rounded-xl">
             <img
               src={image}
               alt={name}
               className="max-h-32 max-w-full object-contain p-2"
             />
+          </div>
+        ) : icon ? (
+          <div className="w-20 h-20 flex items-center justify-center rounded-xl bg-card-dark-muted/15 text-card-dark-foreground">
+            {icon}
           </div>
         ) : null}
       </div>
