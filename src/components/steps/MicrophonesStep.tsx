@@ -1,4 +1,4 @@
-import { Plus } from "lucide-react";
+import { Plus, Mic } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Check } from "lucide-react";
@@ -47,7 +47,7 @@ export const MicrophonesStep = ({
         </p>
       </div>
 
-      {/* Included Microphones — original light card style */}
+      {/* Included Microphones */}
       <div className="space-y-6">
         <div className="flex items-center justify-center gap-4 mb-8">
           <div className="flex items-center gap-3 bg-success/20 px-6 py-3 rounded-full">
@@ -59,25 +59,18 @@ export const MicrophonesStep = ({
         
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {baseMicrophones.map(mic => (
-            <Card key={mic.id} className="bg-gradient-to-br from-card/50 to-muted/30 border-success/30 hover:shadow-xl transition-all duration-300">
-              <CardHeader className="pb-4">
-                <Badge variant="outline" className="border-success text-success mb-3 self-center text-sm px-3 py-1">
-                  {t(mic.targetKey)}
-                </Badge>
-                {mic.image && (
-                  <div className="w-full h-32 flex items-center justify-center bg-white rounded-lg">
-                    <img src={mic.image} alt={mic.name} className="max-h-28 max-w-full object-contain rounded-lg p-2" />
-                  </div>
-                )}
-              </CardHeader>
-              <CardContent className="pt-0">
-                <h4 className="font-bold text-base mb-2 text-center">{mic.name}</h4>
-                <div className="flex items-center justify-center gap-2 mt-3">
-                  <Check className="h-4 w-4 text-success" />
-                  <span className="text-sm text-success font-bold">{t("microphones.included")}</span>
-                </div>
-              </CardContent>
-            </Card>
+            <ProductCard
+              key={mic.id}
+              category={t(mic.targetKey)}
+              price={0}
+              name={mic.name}
+              description={t(mic.descriptionKey)}
+              icon={<Mic className="h-10 w-10" />}
+              isSelected={false}
+              onToggle={() => {}}
+              included
+              includedLabel={t("microphones.included")}
+            />
           ))}
         </div>
       </div>
@@ -100,7 +93,7 @@ export const MicrophonesStep = ({
               price={mic.price}
               name={mic.name}
               description={t(mic.descriptionKey)}
-              image={mic.image}
+              icon={<Mic className="h-10 w-10" />}
               isSelected={hasItem(mic.id)}
               onToggle={() => handleToggleItem(mic)}
               addLabel={t("video.addFor")}

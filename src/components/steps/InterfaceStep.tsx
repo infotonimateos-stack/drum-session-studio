@@ -49,7 +49,7 @@ export const InterfaceStep = ({
           price={0}
           name="MOTU 8Pre"
           description={`${t("interface.motuDesc")} · ${t("interface.feat1")} · ${t("interface.feat2")}`}
-          image="/lovable-uploads/93445061-0c3b-4d86-a30f-15ff4b018154.png"
+          icon={<Cpu className="h-10 w-10" />}
           isSelected={false}
           onToggle={() => {}}
           included
@@ -62,7 +62,7 @@ export const InterfaceStep = ({
           price={dadInterface.price}
           name="DAD AX64"
           description={t("interface.dadFullDesc")}
-          image="/lovable-uploads/0d4521a3-d112-43ce-a820-f1afe53330c8.png"
+          icon={<Cpu className="h-10 w-10" />}
           isSelected={isDadSelected}
           onToggle={handleToggleDad}
           addLabel={t("video.addFor")}

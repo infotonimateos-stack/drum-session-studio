@@ -1,4 +1,4 @@
-import { Zap } from "lucide-react";
+import { SlidersHorizontal } from "lucide-react";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
@@ -49,7 +49,7 @@ export const PreampsStep = ({
           price={0}
           name="MOTU 8Pre"
           description={`${t("preamps.motuDesc")} · ${t("preamps.cleanSound")} · ${t("preamps.flatResponse")}`}
-          image="/lovable-uploads/93445061-0c3b-4d86-a30f-15ff4b018154.png"
+          icon={<SlidersHorizontal className="h-10 w-10" />}
           isSelected={false}
           onToggle={() => {}}
           included
@@ -62,7 +62,7 @@ export const PreampsStep = ({
           price={proPreampsPack.price}
           name={t("preamps.legendaryPack")}
           description={`API: ${t("preamps.apiDesc")} · Neve: ${t("preamps.neveDesc")} · DAD: ${t("preamps.dadDesc")}`}
-          image="/lovable-uploads/9ead66c6-7787-437f-bbbe-b9b7a400a1c8.png"
+          icon={<SlidersHorizontal className="h-10 w-10" />}
           isSelected={isProSelected}
           onToggle={handleTogglePro}
           addLabel={t("video.addFor")}
