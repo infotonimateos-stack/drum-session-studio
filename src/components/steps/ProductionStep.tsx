@@ -1,4 +1,4 @@
-import { Clock, Headphones, Package } from "lucide-react";
+import { Clock, Headphones, Package, Timer } from "lucide-react";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
@@ -11,6 +11,15 @@ interface ProductionStepProps {
 
 export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepProps) => {
   const { t } = useTranslation();
+
+  const includedItem = {
+    id: 'duracion-estandar',
+    name: t("production.standardDuration"),
+    category: t("config.steps.production"),
+    description: t("production.standardDurationDesc"),
+    icon: <Timer className="h-10 w-10" />,
+    price: 0,
+  };
 
   const productionItems: (CartItem & { icon: React.ReactNode })[] = [
     {
@@ -59,7 +68,18 @@ export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepP
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <ProductCard
+          category={includedItem.category}
+          price={includedItem.price}
+          name={includedItem.name}
+          description={includedItem.description}
+          icon={includedItem.icon}
+          isSelected={false}
+          onToggle={() => {}}
+          included
+          includedLabel={t("production.alreadyIncluded")}
+        />
         {productionItems.map((item) => (
           <ProductCard
             key={item.id}

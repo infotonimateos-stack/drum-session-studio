@@ -119,7 +119,10 @@
     "samplePack": "Sample Pack",
     "samplePackDesc": "We send you the sounds separately, at different volumes, from your session",
     "added": "Added",
-    "add": "Add"
+    "add": "Add",
+    "standardDuration": "Standard Duration",
+    "standardDurationDesc": "Songs between 0 and 4 minutes are already included in the base rate of the selected recording set",
+    "alreadyIncluded": "ALREADY INCLUDED"
   },
   "video": {
     "title": "Video",

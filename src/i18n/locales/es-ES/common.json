@@ -138,7 +138,10 @@
     "samplePack": "Sample Pack",
     "samplePackDesc": "Te enviamos los sonidos por separado, a diferentes volúmenes, de tu sesión",
     "added": "Añadido",
-    "add": "Añadir"
+    "add": "Añadir",
+    "standardDuration": "Duración Estándar",
+    "standardDurationDesc": "Las canciones con una duración de entre 0 y 4 minutos ya están incluidas en la tarifa base del set de grabación seleccionado",
+    "alreadyIncluded": "YA INCLUIDO"
   },
   "video": {
     "title": "Video",
