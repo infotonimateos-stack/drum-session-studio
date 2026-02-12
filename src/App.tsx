@@ -10,6 +10,7 @@ import AvisoLegal from "./pages/AvisoLegal";
 import PoliticaPrivacidad from "./pages/PoliticaPrivacidad";
 import PoliticaCookies from "./pages/PoliticaCookies";
 import AmpliarPedido from "./pages/AmpliarPedido";
+import AdminPanel from "./pages/AdminPanel";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
           <Route path="/politica-cookies" element={<PoliticaCookies />} />
           <Route path="/ampliar-pedido" element={<AmpliarPedido />} />
+          <Route path="/gfs-admin-2025" element={<AdminPanel />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
