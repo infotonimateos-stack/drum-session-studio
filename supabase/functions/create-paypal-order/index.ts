@@ -98,6 +98,9 @@ serve(async (req) => {
 
     logStep("Breakdown", { itemTotalRounded, taxRounded, feeRounded, calculatedTotal, clientTotal: total });
 
+    const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
+    const sdkMode = Boolean(requestBody.sdkMode);
+
     const orderBody: any = {
       intent: "CAPTURE",
       purchase_units: [{
