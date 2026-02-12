@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { ShoppingCart } from "lucide-react";
 import { CartState } from "@/types/cart";
 import { BillingData } from "@/components/BillingStep";
+import { InvoiceForm, InvoiceData, isInvoiceDataValid, emptyInvoiceData } from "@/components/InvoiceForm";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
@@ -27,6 +28,7 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
   const [paymentMethod, setPaymentMethod] = useState<'paypal' | 'transfer'>('paypal');
   const [acceptedPrivacyPolicy, setAcceptedPrivacyPolicy] = useState(false);
   const [transferOrderId, setTransferOrderId] = useState<string | null>(null);
+  const [invoiceData, setInvoiceData] = useState<InvoiceData>(emptyInvoiceData);
 
   const taxRate = billingData.taxResult.taxRate;
   const taxAmount = cartState.total * (taxRate / 100);
@@ -56,12 +58,17 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
     clientType: billingData.clientType,
     vatNumber: billingData.vatNumber || null,
     viesValid: billingData.viesValid ?? null,
+    invoiceData: invoiceData.needsInvoice ? invoiceData : { needsInvoice: false },
   });
 
   const handleBankTransfer = async () => {
     setIsLoading(true);
     try {
       const orderPayload = buildOrderPayload();
+      
+      // Generate invoice number
+      const { data: invoiceNumber } = await supabase.rpc('get_next_invoice_number', { p_series: 'W' });
+      
       const { data, error } = await supabase.from('orders').insert({
         items: orderPayload.items as any,
         base_price: orderPayload.basePrice,
@@ -78,6 +85,14 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
         payment_method: 'transfer',
         payment_status: 'awaiting_transfer',
         paypal_fee: 0,
+        needs_invoice: invoiceData.needsInvoice,
+        invoice_company_name: invoiceData.needsInvoice ? invoiceData.companyName : null,
+        invoice_address: invoiceData.needsInvoice ? invoiceData.address : null,
+        invoice_tax_id: invoiceData.needsInvoice ? invoiceData.taxId : null,
+        invoice_email: invoiceData.needsInvoice ? invoiceData.email : null,
+        invoice_phone: invoiceData.needsInvoice ? invoiceData.phone : null,
+        invoice_number: invoiceNumber || null,
+        invoice_series: 'W',
       }).select('id').single();
 
       if (error) { toast.error(t("checkout.connectionError")); setIsLoading(false); return; }
@@ -210,6 +225,9 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
                 </div>
               </div>
 
+              {/* Invoice Form */}
+              <InvoiceForm data={invoiceData} onChange={setInvoiceData} />
+
               {/* Privacy Policy */}
               <div className="space-y-3 pt-4 border-t border-border">
                 <div className="flex items-start space-x-3">
@@ -228,7 +246,7 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
                 orderPayload={buildOrderPayload()}
                 displayTotal={displayTotal}
                 paypalFee={paypalFee}
-                isDisabled={!acceptedPrivacyPolicy}
+                isDisabled={!acceptedPrivacyPolicy || !isInvoiceDataValid(invoiceData)}
                 paymentMethod={paymentMethod}
                 onPaymentMethodChange={setPaymentMethod}
                 onTransferPayment={handleBankTransfer}

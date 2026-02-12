@@ -18,6 +18,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { BillingStep, BillingData } from "@/components/BillingStep";
 import { BankTransferConfirmation } from "@/components/BankTransferConfirmation";
 import { PayPalPayment } from "@/components/PayPalPayment";
+import { InvoiceForm, InvoiceData, isInvoiceDataValid, emptyInvoiceData } from "@/components/InvoiceForm";
 import logo from "@/assets/logo.png";
 
 type Phase = 'select' | 'billing';
@@ -32,6 +33,7 @@ const AmpliarPedido = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [billingData, setBillingData] = useState<BillingData | null>(null);
   const [transferOrderId, setTransferOrderId] = useState<string | null>(null);
+  const [invoiceData, setInvoiceData] = useState<InvoiceData>(emptyInvoiceData);
 
   const subtotal = items.reduce((sum, i) => sum + i.price, 0);
 
@@ -138,6 +140,7 @@ const AmpliarPedido = () => {
     clientType: billingData?.clientType || 'particular',
     vatNumber: billingData?.vatNumber || null,
     viesValid: billingData?.viesValid ?? null,
+    invoiceData: invoiceData.needsInvoice ? invoiceData : { needsInvoice: false },
   });
 
   const handlePayPalPayment = async () => {
@@ -149,6 +152,9 @@ const AmpliarPedido = () => {
     if (items.length === 0 || !billingData) return;
     setIsLoading(true);
     try {
+      // Generate invoice number
+      const { data: invoiceNumber } = await supabase.rpc('get_next_invoice_number', { p_series: 'W' });
+
       const { data, error } = await supabase.from('orders').insert({
         items: items as any,
         base_price: 0,
@@ -165,6 +171,14 @@ const AmpliarPedido = () => {
         payment_method: 'transfer',
         payment_status: 'awaiting_transfer',
         paypal_fee: 0,
+        needs_invoice: invoiceData.needsInvoice,
+        invoice_company_name: invoiceData.needsInvoice ? invoiceData.companyName : null,
+        invoice_address: invoiceData.needsInvoice ? invoiceData.address : null,
+        invoice_tax_id: invoiceData.needsInvoice ? invoiceData.taxId : null,
+        invoice_email: invoiceData.needsInvoice ? invoiceData.email : null,
+        invoice_phone: invoiceData.needsInvoice ? invoiceData.phone : null,
+        invoice_number: invoiceNumber || null,
+        invoice_series: 'W',
       }).select('id').single();
 
       if (error) {
@@ -480,6 +494,9 @@ const AmpliarPedido = () => {
                       <span className="text-primary">{displayTotal.toFixed(2)} €</span>
                     </div>
 
+                    {/* Invoice Form */}
+                    <InvoiceForm data={invoiceData} onChange={setInvoiceData} />
+
                     {/* Privacy consent */}
                     <div className="space-y-3 pt-4 border-t border-border">
                       <div className="flex items-start space-x-3">
@@ -498,7 +515,7 @@ const AmpliarPedido = () => {
                       orderPayload={buildOrderPayload()}
                       displayTotal={displayTotal}
                       paypalFee={paypalFee}
-                      isDisabled={!acceptedPrivacyPolicy || items.length === 0}
+                      isDisabled={!acceptedPrivacyPolicy || items.length === 0 || !isInvoiceDataValid(invoiceData)}
                       paymentMethod={paymentMethod}
                       onPaymentMethodChange={setPaymentMethod}
                       onTransferPayment={handleBankTransfer}

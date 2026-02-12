@@ -386,6 +386,22 @@
     "taxes": "Taxes:",
     "taxCalcNext": "Taxes will be calculated in the next step"
   },
+  "invoice": {
+    "needsProfessional": "I need a professional invoice",
+    "simplifiedDefault": "If unchecked, a simplified invoice will be generated automatically.",
+    "fiscalData": "Fiscal Data for Invoice",
+    "companyName": "Company Name",
+    "companyNamePlaceholder": "Company or freelancer name",
+    "address": "Full Address",
+    "addressPlaceholder": "Street, number, city, postal code, country",
+    "taxId": "Tax ID / VAT Number",
+    "taxIdPlaceholder": "B12345678 or GB-123456789",
+    "email": "Billing email",
+    "emailPlaceholder": "billing@company.com",
+    "phone": "Contact phone",
+    "phonePlaceholder": "+44 7000 000000",
+    "fillAllFields": "Complete all fields to proceed to payment"
+  },
   "transfer": {
     "title": "Complete Your Bank Transfer",
     "subtitle": "Your order has been registered. Complete the payment via bank transfer.",
