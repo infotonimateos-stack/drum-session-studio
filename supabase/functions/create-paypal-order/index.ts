@@ -172,7 +172,7 @@ serve(async (req) => {
         const { data: invoiceNumber } = await supabase.rpc('get_next_invoice_number', { p_series: 'W' });
         logStep("Invoice number generated", { invoiceNumber });
 
-        const needsInvoice = invoiceData?.needsInvoice === true;
+         const isProfessional = invoiceData?.isProfessionalInvoice === true;
         
         await supabase.from("orders").insert({
           payment_method: "paypal",
@@ -188,15 +188,16 @@ serve(async (req) => {
           country_code: billingCountry || 'ES',
           postal_code: billingPostalCode || null,
           client_type: clientType || 'particular',
-          vat_number: vatNumber || null,
+          vat_number: isProfessional ? invoiceData.vatNumber : (vatNumber || null),
           vies_valid: viesValid ?? null,
           tax_rule: taxRule || 'spain_peninsula',
-          needs_invoice: needsInvoice,
-          invoice_company_name: needsInvoice ? invoiceData.companyName : null,
-          invoice_address: needsInvoice ? invoiceData.address : null,
-          invoice_tax_id: needsInvoice ? invoiceData.taxId : null,
-          invoice_email: needsInvoice ? invoiceData.email : null,
-          invoice_phone: needsInvoice ? invoiceData.phone : null,
+          is_professional_invoice: isProfessional,
+          business_name: isProfessional ? invoiceData.businessName : null,
+          full_address: isProfessional ? invoiceData.fullAddress : null,
+          city: isProfessional ? invoiceData.city : null,
+          state_province: isProfessional ? invoiceData.stateProvince : null,
+          billing_email: isProfessional ? invoiceData.billingEmail : null,
+          billing_phone: isProfessional ? invoiceData.billingPhone : null,
           invoice_number: invoiceNumber || null,
           invoice_series: 'W',
         });
