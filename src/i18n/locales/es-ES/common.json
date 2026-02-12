@@ -607,5 +607,14 @@
     "noFee": "Sin gastos de gestión:",
     "noFeeInfo": "La transferencia bancaria no incluye gastos de gestión adicionales.",
     "confirmOrder": "Confirmar Pedido"
+  },
+  "common": {
+    "accept": "Aceptar",
+    "cancel": "Cancelar",
+    "save": "Guardar"
+  },
+  "legal": {
+    "tax_exemption_professional": "Operación no sujeta a IVA. Inversión del sujeto pasivo",
+    "tax_exemption_export": "Operación no sujeta a IVA por reglas de localización"
   }
 }
