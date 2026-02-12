@@ -211,8 +211,6 @@ export default function AdminPanel() {
   const completedOrders = filteredOrders.filter((o) => o.payment_status === "completed").length;
 
   const handleBulkDownloadZip = async () => {
-
-  const handleBulkDownloadZip = async () => {
     if (filteredOrders.length === 0) { toast.error("No hay facturas para descargar"); return; }
     setBulkDownloading(true);
     const zip = new JSZip();
