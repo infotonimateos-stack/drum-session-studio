@@ -6,9 +6,14 @@ import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter, Archive, FileSpreadsheet, FileDown } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter, Archive, FileSpreadsheet, FileDown, CalendarIcon } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
+import { cn } from "@/lib/utils";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import html2pdf from "html2pdf.js";
@@ -70,6 +75,8 @@ export default function AdminPanel() {
   const [storedPassword, setStoredPassword] = useState("");
   const [bulkDownloading, setBulkDownloading] = useState(false);
   const [selectedOrders, setSelectedOrders] = useState<Set<string>>(new Set());
+  const [dateFrom, setDateFrom] = useState<Date | undefined>();
+  const [dateTo, setDateTo] = useState<Date | undefined>();
 
   const apiCall = useCallback(async (action: string, method: string = "GET", body?: any, params?: Record<string, string>) => {
     const url = new URL(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-api`);
@@ -118,7 +125,6 @@ export default function AdminPanel() {
   const handleLogin = async () => {
     if (!password.trim()) return;
     setStoredPassword(password);
-    // Test the password
     try {
       const url = new URL(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-api`);
       url.searchParams.set("action", "list");
@@ -198,6 +204,16 @@ export default function AdminPanel() {
     if (filterMethod !== "all" && o.payment_method !== filterMethod) return false;
     if (filterInvoice === "professional" && !o.is_professional_invoice) return false;
     if (filterInvoice === "simplified" && o.is_professional_invoice) return false;
+    if (dateFrom) {
+      const orderDate = new Date(o.created_at);
+      if (orderDate < dateFrom) return false;
+    }
+    if (dateTo) {
+      const orderDate = new Date(o.created_at);
+      const endOfDay = new Date(dateTo);
+      endOfDay.setHours(23, 59, 59, 999);
+      if (orderDate > endOfDay) return false;
+    }
     if (searchTerm) {
       const s = searchTerm.toLowerCase();
       return (
@@ -211,6 +227,7 @@ export default function AdminPanel() {
   });
 
   const totalRevenue = filteredOrders.reduce((s, o) => s + o.total, 0);
+  const totalTax = filteredOrders.reduce((s, o) => s + o.tax_amount, 0);
   const completedOrders = filteredOrders.filter((o) => o.payment_status === "completed").length;
 
   const getTargetOrders = () => {
@@ -272,13 +289,15 @@ export default function AdminPanel() {
           const data = await apiCall("invoice", "GET", undefined, { orderId: order.id });
           if (data.html) {
             const container = document.createElement("div");
-            container.style.cssText = "position:absolute;left:-9999px;top:0;width:800px;background:white;color:#333;";
+            container.style.cssText = "position:fixed;left:0;top:0;width:800px;background:#ffffff;color:#1a1a1a;z-index:-9999;opacity:0;pointer-events:none;";
             container.innerHTML = data.html;
             document.body.appendChild(container);
+            // Wait for rendering
+            await new Promise(r => setTimeout(r, 100));
             const pdfBlob = await html2pdf().from(container).set({
               margin: [15, 10, 15, 10],
               filename: `factura-${order.invoice_number || order.id.slice(0, 8)}.pdf`,
-              html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
+              html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", logging: false },
               jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
               pagebreak: { mode: ["avoid-all", "css", "legacy"] },
             }).outputPdf("blob");
@@ -290,7 +309,6 @@ export default function AdminPanel() {
       }
       if (count === 0) { toast.error("No se pudo generar ningún PDF"); setBulkDownloading(false); return; }
       if (count === 1) {
-        // Single PDF — download directly
         const files = Object.values(zip.files);
         const file = files[0];
         const blob = await file.async("blob");
@@ -405,7 +423,7 @@ export default function AdminPanel() {
 
       <div className="container mx-auto px-4 py-6 space-y-6">
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           <Card>
             <CardContent className="pt-4 pb-3 text-center">
               <p className="text-2xl font-bold text-primary">{filteredOrders.length}</p>
@@ -416,6 +434,12 @@ export default function AdminPanel() {
             <CardContent className="pt-4 pb-3 text-center">
               <p className="text-2xl font-bold text-emerald-400">{totalRevenue.toFixed(2)} €</p>
               <p className="text-xs text-muted-foreground">Facturación total</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="pt-4 pb-3 text-center">
+              <p className="text-2xl font-bold text-amber-400">{totalTax.toFixed(2)} €</p>
+              <p className="text-xs text-muted-foreground">IVA total</p>
             </CardContent>
           </Card>
           <Card>
@@ -443,6 +467,33 @@ export default function AdminPanel() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-64"
               />
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" size="sm" className={cn("w-36 justify-start text-left font-normal", !dateFrom && "text-muted-foreground")}>
+                    <CalendarIcon className="h-4 w-4 mr-1" />
+                    {dateFrom ? format(dateFrom, "dd/MM/yy") : "Desde"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar mode="single" selected={dateFrom} onSelect={setDateFrom} locale={es} initialFocus className={cn("p-3 pointer-events-auto")} />
+                </PopoverContent>
+              </Popover>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" size="sm" className={cn("w-36 justify-start text-left font-normal", !dateTo && "text-muted-foreground")}>
+                    <CalendarIcon className="h-4 w-4 mr-1" />
+                    {dateTo ? format(dateTo, "dd/MM/yy") : "Hasta"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar mode="single" selected={dateTo} onSelect={setDateTo} locale={es} initialFocus className={cn("p-3 pointer-events-auto")} />
+                </PopoverContent>
+              </Popover>
+              {(dateFrom || dateTo) && (
+                <Button variant="ghost" size="sm" onClick={() => { setDateFrom(undefined); setDateTo(undefined); }}>
+                  Limpiar fechas
+                </Button>
+              )}
               <Select value={filterStatus} onValueChange={setFilterStatus}>
                 <SelectTrigger className="w-44"><SelectValue placeholder="Estado" /></SelectTrigger>
                 <SelectContent>
@@ -490,6 +541,7 @@ export default function AdminPanel() {
                   <th className="text-left px-4 py-3 font-medium">Nº Factura</th>
                   <th className="text-left px-4 py-3 font-medium">Tipo</th>
                   <th className="text-left px-4 py-3 font-medium">Cliente</th>
+                  <th className="text-right px-4 py-3 font-medium">IVA</th>
                   <th className="text-right px-4 py-3 font-medium">Total</th>
                   <th className="text-left px-4 py-3 font-medium">Método</th>
                   <th className="text-left px-4 py-3 font-medium">Estado</th>
@@ -529,6 +581,11 @@ export default function AdminPanel() {
                         <span className="text-muted-foreground text-xs">{order.country_code} · {order.client_type}</span>
                       )}
                     </td>
+                    <td className="px-4 py-3 text-right font-mono text-xs">
+                      <span className="text-muted-foreground">{order.tax_rate}%</span>
+                      <br />
+                      {order.tax_amount.toFixed(2)} €
+                    </td>
                     <td className="px-4 py-3 text-right font-mono font-bold">{order.total.toFixed(2)} €</td>
                     <td className="px-4 py-3">
                       <Badge variant="outline" className="text-xs capitalize">{order.payment_method}</Badge>
@@ -559,7 +616,7 @@ export default function AdminPanel() {
                 ))}
                 {filteredOrders.length === 0 && (
                   <tr>
-                    <td colSpan={9} className="px-4 py-12 text-center text-muted-foreground">
+                    <td colSpan={10} className="px-4 py-12 text-center text-muted-foreground">
                       {loading ? "Cargando..." : "No se encontraron pedidos"}
                     </td>
                   </tr>
