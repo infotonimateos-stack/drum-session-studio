@@ -90,23 +90,24 @@ serve(async (req) => {
     const safeTaxAmount = typeof taxAmount === "number" ? taxAmount : 0;
     const safePaypalFee = typeof paypalFee === "number" && paypalFee > 0 ? paypalFee : 0;
 
-    logStep("Breakdown", { itemTotal, safeTaxAmount, safePaypalFee, total });
+    // Recalculate total from breakdown components to avoid rounding mismatches
+    const itemTotalRounded = parseFloat(itemTotal.toFixed(2));
+    const taxRounded = parseFloat(safeTaxAmount.toFixed(2));
+    const feeRounded = parseFloat(safePaypalFee.toFixed(2));
+    const calculatedTotal = parseFloat((itemTotalRounded + taxRounded + feeRounded).toFixed(2));
 
-    const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
-
-    // Check if this is an SDK-based request (no redirect needed)
-    const sdkMode = Boolean(requestBody.sdkMode);
+    logStep("Breakdown", { itemTotalRounded, taxRounded, feeRounded, calculatedTotal, clientTotal: total });
 
     const orderBody: any = {
       intent: "CAPTURE",
       purchase_units: [{
         amount: {
           currency_code: "EUR",
-          value: total.toFixed(2),
+          value: calculatedTotal.toFixed(2),
           breakdown: {
-            item_total: { currency_code: "EUR", value: itemTotal.toFixed(2) },
-            tax_total: { currency_code: "EUR", value: safeTaxAmount.toFixed(2) },
-            handling: { currency_code: "EUR", value: safePaypalFee.toFixed(2) },
+            item_total: { currency_code: "EUR", value: itemTotalRounded.toFixed(2) },
+            tax_total: { currency_code: "EUR", value: taxRounded.toFixed(2) },
+            handling: { currency_code: "EUR", value: feeRounded.toFixed(2) },
           },
         },
         items: paypalItems,
@@ -172,7 +173,7 @@ serve(async (req) => {
           tax_amount: safeTaxAmount,
           tax_rate: taxRate || 0,
           paypal_fee: safePaypalFee,
-          total: total,
+          total: calculatedTotal,
           country_code: billingCountry || 'ES',
           postal_code: billingPostalCode || null,
           client_type: clientType || 'particular',
