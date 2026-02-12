@@ -1,0 +1,418 @@
+import { useState, useEffect, useCallback } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter } from "lucide-react";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+
+const ADMIN_ROUTE = true; // marker
+
+interface Order {
+  id: string;
+  created_at: string;
+  invoice_number: string | null;
+  invoice_series: string | null;
+  is_professional_invoice: boolean;
+  business_name: string | null;
+  vat_number: string | null;
+  full_address: string | null;
+  city: string | null;
+  state_province: string | null;
+  billing_email: string | null;
+  billing_phone: string | null;
+  total: number;
+  subtotal: number;
+  tax_amount: number;
+  tax_rate: number;
+  paypal_fee: number;
+  payment_method: string;
+  payment_status: string;
+  country_code: string;
+  client_type: string;
+  items: any[];
+  base_price: number;
+  tax_rule: string;
+}
+
+const statusColors: Record<string, string> = {
+  pending: "bg-amber-500/20 text-amber-400 border-amber-500/30",
+  completed: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
+  cancelled: "bg-red-500/20 text-red-400 border-red-500/30",
+  awaiting_transfer: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+  refunded: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+};
+
+const statusLabels: Record<string, string> = {
+  pending: "Pendiente",
+  completed: "Completado",
+  cancelled: "Cancelado",
+  awaiting_transfer: "Esperando transferencia",
+  refunded: "Reembolsado",
+};
+
+export default function AdminPanel() {
+  const [password, setPassword] = useState("");
+  const [authenticated, setAuthenticated] = useState(false);
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [filterStatus, setFilterStatus] = useState<string>("all");
+  const [filterMethod, setFilterMethod] = useState<string>("all");
+  const [filterInvoice, setFilterInvoice] = useState<string>("all");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [storedPassword, setStoredPassword] = useState("");
+
+  const apiCall = useCallback(async (action: string, method: string = "GET", body?: any, params?: Record<string, string>) => {
+    const url = new URL(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-api`);
+    url.searchParams.set("action", action);
+    if (params) Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
+
+    const options: RequestInit = {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        "x-admin-password": storedPassword,
+        "apikey": import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+      },
+    };
+    if (body) options.body = JSON.stringify(body);
+
+    const res = await fetch(url.toString(), options);
+    if (res.status === 401) {
+      setAuthenticated(false);
+      setStoredPassword("");
+      toast.error("Sesión expirada");
+      throw new Error("Unauthorized");
+    }
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error || "Error desconocido");
+    }
+    return res.json();
+  }, [storedPassword]);
+
+  const fetchOrders = useCallback(async () => {
+    setLoading(true);
+    try {
+      const data = await apiCall("list");
+      setOrders(data.orders || []);
+    } catch (e: any) {
+      if (e.message !== "Unauthorized") toast.error("Error cargando pedidos");
+    }
+    setLoading(false);
+  }, [apiCall]);
+
+  useEffect(() => {
+    if (authenticated) fetchOrders();
+  }, [authenticated, fetchOrders]);
+
+  const handleLogin = async () => {
+    if (!password.trim()) return;
+    setStoredPassword(password);
+    // Test the password
+    try {
+      const url = new URL(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-api`);
+      url.searchParams.set("action", "list");
+      const res = await fetch(url.toString(), {
+        headers: {
+          "x-admin-password": password,
+          "apikey": import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+        },
+      });
+      if (res.status === 401) {
+        toast.error("Contraseña incorrecta");
+        setStoredPassword("");
+        return;
+      }
+      const data = await res.json();
+      setOrders(data.orders || []);
+      setAuthenticated(true);
+      sessionStorage.setItem("admin_auth", "true");
+    } catch {
+      toast.error("Error de conexión");
+      setStoredPassword("");
+    }
+  };
+
+  const handleUpdateStatus = async (orderId: string, status: string) => {
+    try {
+      await apiCall("update-status", "POST", { orderId, status });
+      toast.success(`Estado actualizado a: ${statusLabels[status]}`);
+      fetchOrders();
+    } catch {
+      toast.error("Error actualizando estado");
+    }
+  };
+
+  const handleDeleteOrder = async (orderId: string) => {
+    if (!confirm("¿Eliminar este pedido permanentemente?")) return;
+    try {
+      await apiCall("delete", "POST", { orderId });
+      toast.success("Pedido eliminado");
+      fetchOrders();
+    } catch {
+      toast.error("Error eliminando pedido");
+    }
+  };
+
+  const handleDeleteAll = async () => {
+    if (!confirm("⚠️ ¿Eliminar TODOS los pedidos y reiniciar contador de facturas? Esta acción es irreversible.")) return;
+    if (!confirm("¿Estás COMPLETAMENTE seguro? Se borrarán todos los datos.")) return;
+    try {
+      await apiCall("delete-all", "POST");
+      toast.success("Todos los pedidos eliminados y contador reiniciado a W-0001");
+      fetchOrders();
+    } catch {
+      toast.error("Error eliminando pedidos");
+    }
+  };
+
+  const handleDownloadInvoice = async (orderId: string, invoiceNumber: string | null) => {
+    try {
+      const data = await apiCall("invoice", "GET", undefined, { orderId });
+      if (!data.html) { toast.error("No se pudo generar la factura"); return; }
+      const blob = new Blob([data.html], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `factura-${invoiceNumber || orderId.slice(0, 8)}.html`;
+      a.click();
+      URL.revokeObjectURL(url);
+      toast.success("Factura descargada");
+    } catch {
+      toast.error("Error descargando factura");
+    }
+  };
+
+  const filteredOrders = orders.filter((o) => {
+    if (filterStatus !== "all" && o.payment_status !== filterStatus) return false;
+    if (filterMethod !== "all" && o.payment_method !== filterMethod) return false;
+    if (filterInvoice === "professional" && !o.is_professional_invoice) return false;
+    if (filterInvoice === "simplified" && o.is_professional_invoice) return false;
+    if (searchTerm) {
+      const s = searchTerm.toLowerCase();
+      return (
+        (o.invoice_number || "").toLowerCase().includes(s) ||
+        (o.business_name || "").toLowerCase().includes(s) ||
+        (o.billing_email || "").toLowerCase().includes(s) ||
+        o.id.toLowerCase().includes(s)
+      );
+    }
+    return true;
+  });
+
+  const totalRevenue = filteredOrders.reduce((s, o) => s + o.total, 0);
+  const completedOrders = filteredOrders.filter((o) => o.payment_status === "completed").length;
+
+  // --- LOGIN SCREEN ---
+  if (!authenticated) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <Card className="w-full max-w-sm">
+          <CardHeader className="text-center">
+            <Lock className="h-10 w-10 mx-auto text-primary mb-2" />
+            <CardTitle>Panel de Administración</CardTitle>
+            <p className="text-sm text-muted-foreground">Groove Factory Studios SL</p>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <Input
+              type="password"
+              placeholder="Contraseña de administrador"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+            />
+            <Button onClick={handleLogin} className="w-full">Acceder</Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // --- ADMIN PANEL ---
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-10">
+        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <FileText className="h-6 w-6 text-primary" />
+            <div>
+              <h1 className="font-bold text-lg">Admin — Groove Factory Studios</h1>
+              <p className="text-xs text-muted-foreground">{orders.length} pedidos · {completedOrders} completados</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" onClick={fetchOrders} disabled={loading}>
+              <RefreshCw className={`h-4 w-4 mr-1 ${loading ? "animate-spin" : ""}`} /> Refrescar
+            </Button>
+            <Button variant="destructive" size="sm" onClick={handleDeleteAll}>
+              <AlertTriangle className="h-4 w-4 mr-1" /> Borrar todo
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => { setAuthenticated(false); setStoredPassword(""); sessionStorage.removeItem("admin_auth"); }}>
+              <LogOut className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <div className="container mx-auto px-4 py-6 space-y-6">
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Card>
+            <CardContent className="pt-4 pb-3 text-center">
+              <p className="text-2xl font-bold text-primary">{filteredOrders.length}</p>
+              <p className="text-xs text-muted-foreground">Pedidos</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="pt-4 pb-3 text-center">
+              <p className="text-2xl font-bold text-emerald-400">{totalRevenue.toFixed(2)} €</p>
+              <p className="text-xs text-muted-foreground">Facturación total</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="pt-4 pb-3 text-center">
+              <p className="text-2xl font-bold">{filteredOrders.filter(o => o.is_professional_invoice).length}</p>
+              <p className="text-xs text-muted-foreground">Facturas profesionales</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="pt-4 pb-3 text-center">
+              <p className="text-2xl font-bold">{completedOrders}</p>
+              <p className="text-xs text-muted-foreground">Completados</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Filters */}
+        <Card>
+          <CardContent className="pt-4 pb-3">
+            <div className="flex flex-wrap items-center gap-3">
+              <Filter className="h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Buscar por nº factura, empresa, email..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-64"
+              />
+              <Select value={filterStatus} onValueChange={setFilterStatus}>
+                <SelectTrigger className="w-44"><SelectValue placeholder="Estado" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Todos los estados</SelectItem>
+                  <SelectItem value="pending">Pendiente</SelectItem>
+                  <SelectItem value="completed">Completado</SelectItem>
+                  <SelectItem value="awaiting_transfer">Esperando transferencia</SelectItem>
+                  <SelectItem value="cancelled">Cancelado</SelectItem>
+                  <SelectItem value="refunded">Reembolsado</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={filterMethod} onValueChange={setFilterMethod}>
+                <SelectTrigger className="w-40"><SelectValue placeholder="Método" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Todos los métodos</SelectItem>
+                  <SelectItem value="paypal">PayPal</SelectItem>
+                  <SelectItem value="transfer">Transferencia</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={filterInvoice} onValueChange={setFilterInvoice}>
+                <SelectTrigger className="w-44"><SelectValue placeholder="Tipo factura" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Todas las facturas</SelectItem>
+                  <SelectItem value="professional">Profesional</SelectItem>
+                  <SelectItem value="simplified">Simplificada</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Orders Table */}
+        <Card>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border bg-muted/30">
+                  <th className="text-left px-4 py-3 font-medium">Fecha</th>
+                  <th className="text-left px-4 py-3 font-medium">Nº Factura</th>
+                  <th className="text-left px-4 py-3 font-medium">Tipo</th>
+                  <th className="text-left px-4 py-3 font-medium">Cliente</th>
+                  <th className="text-right px-4 py-3 font-medium">Total</th>
+                  <th className="text-left px-4 py-3 font-medium">Método</th>
+                  <th className="text-left px-4 py-3 font-medium">Estado</th>
+                  <th className="text-center px-4 py-3 font-medium">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredOrders.map((order) => (
+                  <tr key={order.id} className="border-b border-border/50 hover:bg-muted/20 transition-colors">
+                    <td className="px-4 py-3 whitespace-nowrap">
+                      {new Date(order.created_at).toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "2-digit" })}
+                      <span className="text-muted-foreground ml-1 text-xs">
+                        {new Date(order.created_at).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 font-mono text-xs">
+                      {order.invoice_number || <span className="text-muted-foreground">—</span>}
+                    </td>
+                    <td className="px-4 py-3">
+                      <Badge variant="outline" className={order.is_professional_invoice ? "border-primary/50 text-primary" : "border-muted-foreground/30 text-muted-foreground"}>
+                        {order.is_professional_invoice ? "Profesional" : "Simplificada"}
+                      </Badge>
+                    </td>
+                    <td className="px-4 py-3 max-w-[200px] truncate">
+                      {order.is_professional_invoice ? (
+                        <div>
+                          <p className="font-medium truncate">{order.business_name}</p>
+                          <p className="text-xs text-muted-foreground truncate">{order.vat_number} · {order.billing_email}</p>
+                        </div>
+                      ) : (
+                        <span className="text-muted-foreground text-xs">{order.country_code} · {order.client_type}</span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 text-right font-mono font-bold">{order.total.toFixed(2)} €</td>
+                    <td className="px-4 py-3">
+                      <Badge variant="outline" className="text-xs capitalize">{order.payment_method}</Badge>
+                    </td>
+                    <td className="px-4 py-3">
+                      <Select value={order.payment_status} onValueChange={(v) => handleUpdateStatus(order.id, v)}>
+                        <SelectTrigger className={`h-7 text-xs border ${statusColors[order.payment_status] || ""}`}>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {Object.entries(statusLabels).map(([val, label]) => (
+                            <SelectItem key={val} value={val}>{label}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center justify-center gap-1">
+                        <Button variant="ghost" size="icon" className="h-7 w-7" title="Descargar factura" onClick={() => handleDownloadInvoice(order.id, order.invoice_number)}>
+                          <Download className="h-3.5 w-3.5" />
+                        </Button>
+                        <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" title="Eliminar" onClick={() => handleDeleteOrder(order.id)}>
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+                {filteredOrders.length === 0 && (
+                  <tr>
+                    <td colSpan={8} className="px-4 py-12 text-center text-muted-foreground">
+                      {loading ? "Cargando..." : "No se encontraron pedidos"}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </Card>
+      </div>
+    </div>
+  );
+}
