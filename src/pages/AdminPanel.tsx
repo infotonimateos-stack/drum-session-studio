@@ -288,25 +288,24 @@ export default function AdminPanel() {
         try {
           const data = await apiCall("invoice", "GET", undefined, { orderId: order.id });
           if (data.html) {
-            const container = document.createElement("div");
-            container.style.cssText = "position:absolute;left:-9999px;top:0;width:800px;background:#ffffff;color:#1a1a1a;z-index:9999;pointer-events:none;";
-            // Force all child elements to have visible text
-            const style = document.createElement("style");
-            style.textContent = "* { color: #1a1a1a !important; background-color: transparent !important; } body, html, div { background-color: #ffffff !important; }";
-            container.appendChild(style);
-            const content = document.createElement("div");
-            content.innerHTML = data.html;
-            container.appendChild(content);
-            document.body.appendChild(container);
-            await new Promise(r => setTimeout(r, 300));
-            const pdfBlob = await html2pdf().from(container).set({
+            // Use an iframe to isolate from page CSS/dark theme
+            const iframe = document.createElement("iframe");
+            iframe.style.cssText = "position:absolute;left:-9999px;top:0;width:800px;height:1200px;border:none;";
+            document.body.appendChild(iframe);
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+            if (!iframeDoc) { document.body.removeChild(iframe); continue; }
+            iframeDoc.open();
+            iframeDoc.write(data.html);
+            iframeDoc.close();
+            await new Promise(r => setTimeout(r, 500));
+            const pdfBlob = await html2pdf().from(iframeDoc.body).set({
               margin: [15, 10, 15, 10],
               filename: `factura-${order.invoice_number || order.id.slice(0, 8)}.pdf`,
-              html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", logging: false, scrollX: 0, scrollY: 0, windowWidth: 800 },
+              html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", logging: false },
               jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
               pagebreak: { mode: ["avoid-all", "css", "legacy"] },
             }).outputPdf("blob");
-            document.body.removeChild(container);
+            document.body.removeChild(iframe);
             zip.file(`factura-${order.invoice_number || order.id.slice(0, 8)}.pdf`, pdfBlob);
             count++;
           }
