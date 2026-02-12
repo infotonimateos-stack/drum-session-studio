@@ -254,41 +254,41 @@ export const PayPalPayment = ({
   return (
     <div className="space-y-4">
       {/* Payment method tabs */}
-      <div className="grid grid-cols-3 gap-2">
+      <div className="flex flex-col gap-2">
         <button
           type="button"
           onClick={() => onPaymentMethodChange('paypal')}
-          className={`flex flex-col items-center gap-1.5 p-3 rounded-lg border-2 transition-all text-sm font-medium ${
+          className={`flex items-center gap-3 p-4 rounded-lg border-2 transition-all text-sm font-medium ${
             paymentMethod === 'paypal'
-              ? 'border-primary bg-primary/5 text-foreground'
-              : 'border-border text-muted-foreground hover:border-border hover:bg-muted/30'
+              ? 'border-primary bg-primary/5 text-foreground ring-1 ring-primary/20'
+              : 'border-border text-muted-foreground hover:border-muted-foreground/30 hover:bg-muted/30'
           }`}
         >
-          <CreditCard className="h-5 w-5" />
+          <CreditCard className="h-5 w-5 shrink-0" />
           <span>{t("checkout.debitOrCredit")}</span>
         </button>
         <button
           type="button"
           onClick={() => onPaymentMethodChange('paypal')}
-          className={`flex flex-col items-center gap-1.5 p-3 rounded-lg border-2 transition-all text-sm font-medium ${
+          className={`flex items-center gap-3 p-4 rounded-lg border-2 transition-all text-sm font-medium ${
             paymentMethod === 'paypal'
-              ? 'border-primary bg-primary/5 text-foreground'
-              : 'border-border text-muted-foreground hover:border-border hover:bg-muted/30'
+              ? 'border-[#0070ba] bg-[#0070ba]/5 text-[#0070ba] ring-1 ring-[#0070ba]/20'
+              : 'border-border text-muted-foreground hover:border-[#0070ba]/40 hover:bg-[#0070ba]/5'
           }`}
         >
-          <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .771-.66h6.487c2.025 0 3.538.507 4.497 1.507.921.961 1.261 2.217 1.046 3.849l-.016.112-.012.084.052.028c.628.349 1.115.809 1.446 1.371.35.593.528 1.336.528 2.207 0 1.015-.207 1.913-.616 2.668-.386.71-.93 1.31-1.618 1.783a6.08 6.08 0 0 1-2.167.936c-.772.181-1.635.274-2.562.274H12.2a.967.967 0 0 0-.955.816l-.033.196-.585 3.716-.027.14a.966.966 0 0 1-.955.79H7.076z"/></svg>
-          <span>PayPal</span>
+          <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="#0070ba"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .771-.66h6.487c2.025 0 3.538.507 4.497 1.507.921.961 1.261 2.217 1.046 3.849l-.016.112-.012.084.052.028c.628.349 1.115.809 1.446 1.371.35.593.528 1.336.528 2.207 0 1.015-.207 1.913-.616 2.668-.386.71-.93 1.31-1.618 1.783a6.08 6.08 0 0 1-2.167.936c-.772.181-1.635.274-2.562.274H12.2a.967.967 0 0 0-.955.816l-.033.196-.585 3.716-.027.14a.966.966 0 0 1-.955.79H7.076z"/></svg>
+          <span className="font-bold text-[#0070ba]">PayPal</span>
         </button>
         <button
           type="button"
           onClick={() => onPaymentMethodChange('transfer')}
-          className={`flex flex-col items-center gap-1.5 p-3 rounded-lg border-2 transition-all text-sm font-medium ${
+          className={`flex items-center gap-3 p-4 rounded-lg border-2 transition-all text-sm font-medium ${
             paymentMethod === 'transfer'
-              ? 'border-primary bg-primary/5 text-foreground'
-              : 'border-border text-muted-foreground hover:border-border hover:bg-muted/30'
+              ? 'border-emerald-600 bg-emerald-600/5 text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-600/20'
+              : 'border-border text-muted-foreground hover:border-emerald-600/40 hover:bg-emerald-600/5'
           }`}
         >
-          <Landmark className="h-5 w-5" />
+          <Landmark className="h-5 w-5 shrink-0" />
           <span>{t("transfer.bankTransfer")}</span>
         </button>
       </div>
