@@ -61,8 +61,13 @@ export const PreampsStep = ({
           category={t("config.steps.preamps")}
           price={proPreampsPack.price}
           name={t("preamps.legendaryPack")}
-          description={`API: ${t("preamps.apiDesc")} · Neve: ${t("preamps.neveDesc")} · DAD: ${t("preamps.dadDesc")}`}
+          descriptionList={[
+            { emoji: "🎛️", text: `API: ${t("preamps.apiDesc")}` },
+            { emoji: "🎚️", text: `Neve: ${t("preamps.neveDesc")}` },
+            { emoji: "🔊", text: `DAD: ${t("preamps.dadDesc")}` },
+          ]}
           image="/lovable-uploads/preamps-pro-pack.png"
+          imageContain={false}
           isSelected={isProSelected}
           onToggle={handleTogglePro}
           addLabel={t("video.addFor")}

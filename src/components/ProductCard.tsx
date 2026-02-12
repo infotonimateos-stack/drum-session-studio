@@ -9,6 +9,7 @@ interface ProductCardProps {
   description?: string;
   descriptionList?: { emoji: string; text: string }[];
   image?: string;
+  imageContain?: boolean;
   icon?: ReactNode;
   isSelected: boolean;
   onToggle: () => void;
@@ -26,6 +27,7 @@ export const ProductCard = ({
   description,
   descriptionList,
   image,
+  imageContain = true,
   icon,
   isSelected,
   onToggle,
@@ -68,11 +70,11 @@ export const ProductCard = ({
       {/* Image or Icon */}
       <div className="flex items-center justify-center px-5 py-3">
         {image ? (
-          <div className="w-full h-44 flex items-center justify-center bg-white rounded-xl">
+          <div className="w-full h-44 flex items-center justify-center bg-white rounded-xl overflow-hidden">
             <img
               src={image}
               alt={name}
-              className="w-full h-full object-contain p-2"
+              className={`w-full h-full ${imageContain ? "object-contain p-2" : "object-cover"}`}
             />
           </div>
         ) : icon ? (
