@@ -62,9 +62,9 @@ export const PreampsStep = ({
           price={proPreampsPack.price}
           name={t("preamps.legendaryPack")}
           descriptionList={[
-            { emoji: "🎛️", text: `API: ${t("preamps.apiDesc")}` },
-            { emoji: "🎚️", text: `Neve: ${t("preamps.neveDesc")}` },
-            { emoji: "🔊", text: `DAD: ${t("preamps.dadDesc")}` },
+            { emoji: "", text: `API: ${t("preamps.apiDesc")}` },
+            { emoji: "", text: `Neve: ${t("preamps.neveDesc")}` },
+            { emoji: "", text: `DAD: ${t("preamps.dadDesc")}` },
           ]}
           image="/lovable-uploads/preamps-pro-pack.png"
           imageContain={false}
