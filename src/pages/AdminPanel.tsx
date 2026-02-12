@@ -5,9 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter } from "lucide-react";
+import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter, Archive, FileSpreadsheet } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import JSZip from "jszip";
+import { saveAs } from "file-saver";
 
 const ADMIN_ROUTE = true; // marker
 
@@ -64,6 +66,7 @@ export default function AdminPanel() {
   const [filterInvoice, setFilterInvoice] = useState<string>("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [storedPassword, setStoredPassword] = useState("");
+  const [bulkDownloading, setBulkDownloading] = useState(false);
 
   const apiCall = useCallback(async (action: string, method: string = "GET", body?: any, params?: Record<string, string>) => {
     const url = new URL(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-api`);
@@ -207,6 +210,67 @@ export default function AdminPanel() {
   const totalRevenue = filteredOrders.reduce((s, o) => s + o.total, 0);
   const completedOrders = filteredOrders.filter((o) => o.payment_status === "completed").length;
 
+  const handleBulkDownloadZip = async () => {
+
+  const handleBulkDownloadZip = async () => {
+    if (filteredOrders.length === 0) { toast.error("No hay facturas para descargar"); return; }
+    setBulkDownloading(true);
+    const zip = new JSZip();
+    let count = 0;
+    try {
+      for (const order of filteredOrders) {
+        try {
+          const data = await apiCall("invoice", "GET", undefined, { orderId: order.id });
+          if (data.html) {
+            const filename = `factura-${order.invoice_number || order.id.slice(0, 8)}.html`;
+            zip.file(filename, data.html);
+            count++;
+          }
+        } catch { /* skip failed */ }
+      }
+      if (count === 0) { toast.error("No se pudo generar ninguna factura"); setBulkDownloading(false); return; }
+      const blob = await zip.generateAsync({ type: "blob" });
+      saveAs(blob, `facturas-${new Date().toISOString().slice(0, 10)}.zip`);
+      toast.success(`${count} facturas descargadas en ZIP`);
+    } catch {
+      toast.error("Error generando ZIP");
+    }
+    setBulkDownloading(false);
+  };
+
+  const handleExportCSV = () => {
+    if (filteredOrders.length === 0) { toast.error("No hay datos para exportar"); return; }
+    const headers = ["Fecha", "Nº Factura", "Serie", "Tipo", "Razón Social", "NIF/VAT", "Email", "Teléfono", "Dirección", "Ciudad", "Provincia", "País", "Tipo Cliente", "Base Imponible", "Subtotal", "IVA (%)", "IVA (€)", "Comisión PayPal", "Total", "Método Pago", "Estado", "Regla Fiscal"];
+    const rows = filteredOrders.map((o) => [
+      new Date(o.created_at).toLocaleDateString("es-ES"),
+      o.invoice_number || "",
+      o.invoice_series || "",
+      o.is_professional_invoice ? "Profesional" : "Simplificada",
+      o.business_name || "",
+      o.vat_number || "",
+      o.billing_email || "",
+      o.billing_phone || "",
+      o.full_address || "",
+      o.city || "",
+      o.state_province || "",
+      o.country_code || "",
+      o.client_type || "",
+      o.base_price.toFixed(2),
+      o.subtotal.toFixed(2),
+      o.tax_rate.toFixed(2),
+      o.tax_amount.toFixed(2),
+      o.paypal_fee.toFixed(2),
+      o.total.toFixed(2),
+      o.payment_method,
+      statusLabels[o.payment_status] || o.payment_status,
+      o.tax_rule || "",
+    ]);
+    const csvContent = [headers, ...rows].map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(";")).join("\n");
+    const blob = new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=utf-8" });
+    saveAs(blob, `pedidos-${new Date().toISOString().slice(0, 10)}.csv`);
+    toast.success(`${filteredOrders.length} pedidos exportados a CSV`);
+  };
+
   // --- LOGIN SCREEN ---
   if (!authenticated) {
     return (
@@ -245,7 +309,13 @@ export default function AdminPanel() {
               <p className="text-xs text-muted-foreground">{orders.length} pedidos · {completedOrders} completados</p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
+            <Button variant="outline" size="sm" onClick={handleExportCSV}>
+              <FileSpreadsheet className="h-4 w-4 mr-1" /> CSV
+            </Button>
+            <Button variant="outline" size="sm" onClick={handleBulkDownloadZip} disabled={bulkDownloading}>
+              <Archive className={`h-4 w-4 mr-1 ${bulkDownloading ? "animate-spin" : ""}`} /> {bulkDownloading ? "Generando..." : "ZIP Facturas"}
+            </Button>
             <Button variant="outline" size="sm" onClick={fetchOrders} disabled={loading}>
               <RefreshCw className={`h-4 w-4 mr-1 ${loading ? "animate-spin" : ""}`} /> Refrescar
             </Button>
