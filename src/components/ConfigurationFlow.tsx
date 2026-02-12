@@ -77,7 +77,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   // Billing step
   if (mode === 'billing') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-warm-cream/30 to-warm-peach/20">
+      <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-8">
           <BillingStep
             onComplete={handleBillingComplete}
@@ -94,7 +94,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   // Checkout
   if (mode === 'checkout' && billingData) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-warm-cream/30 to-warm-peach/20">
+      <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-8">
           <CheckoutSummary
             cartState={cartState}
@@ -109,7 +109,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen bg-gradient-to-br from-warm-cream/30 to-warm-peach/20 flex w-full overflow-x-hidden">
+      <div className="min-h-screen bg-background flex w-full overflow-x-hidden">
         <ConfigSidebar
           currentStep={currentStep}
           totalSteps={steps.length}
@@ -123,14 +123,14 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
               <SidebarTrigger className="mb-4" />
             </div>
             <div className="mb-6 sm:mb-8">
-              <Card className="overflow-hidden bg-gradient-to-br from-warm-peach/20 to-warm-apricot/30 shadow-xl border-warm-coral/30">
+              <Card className="overflow-hidden border-border/60 shadow-sm">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8 p-4 sm:p-8">
                   <div className="space-y-3 sm:space-y-4">
                     <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
                       <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                         {t("config.heroTitle")}
                       </h1>
-                      <div className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
+                      <div className="flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
                         <Star className="w-4 h-4 fill-current" />
                         {t("config.priceFrom")}
                       </div>
@@ -144,7 +144,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                 </div>
               </Card>
             </div>
-            <Card className="overflow-hidden bg-gradient-to-br from-warm-peach/10 to-warm-blush/10 shadow-xl border-warm-coral/20">
+            <Card className="overflow-hidden border-border/60 shadow-sm">
               <div className="p-3 sm:p-8 min-h-[400px] sm:min-h-[600px]">{steps[currentStep].component}</div>
               <StepNavigator currentStep={currentStep} totalSteps={steps.length} onPreviousStep={handlePreviousStep} onNextStep={handleNextStep} onCheckout={handleCheckout} />
             </Card>

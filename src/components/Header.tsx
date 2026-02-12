@@ -36,10 +36,10 @@ export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-gradient-to-r from-background via-card to-background border-b border-border/50 backdrop-blur-sm">
+      <header className="sticky top-0 z-50 bg-background/80 border-b border-border backdrop-blur-xl">
         <div className="container mx-auto px-3 sm:px-4">
           {/* Logo row */}
-          <div className="flex items-center justify-between py-3 sm:py-4 border-b border-border/30">
+          <div className="flex items-center justify-between py-3 sm:py-4">
             <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
               <img src={logoUrl} alt="Toni Mateos Logo" className="h-6 w-6 sm:h-8 sm:w-8 flex-shrink-0" />
               <h1 className="text-base sm:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent truncate">
@@ -81,8 +81,8 @@ export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:block py-3">
-            <div className="flex flex-wrap justify-center gap-2">
+          <nav className="hidden md:block py-2">
+            <div className="flex flex-wrap justify-center gap-1">
               {tabs.map((tab) => (
                 <Button
                   key={tab.id}
