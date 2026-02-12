@@ -72,7 +72,7 @@ export const ProductCard = ({
             <img
               src={image}
               alt={name}
-              className="max-h-40 max-w-full object-contain p-2"
+              className="w-full h-full object-contain p-2"
             />
           </div>
         ) : icon ? (
