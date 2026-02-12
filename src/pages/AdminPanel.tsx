@@ -272,13 +272,15 @@ export default function AdminPanel() {
           const data = await apiCall("invoice", "GET", undefined, { orderId: order.id });
           if (data.html) {
             const container = document.createElement("div");
+            container.style.cssText = "position:absolute;left:-9999px;top:0;width:800px;background:white;color:#333;";
             container.innerHTML = data.html;
             document.body.appendChild(container);
             const pdfBlob = await html2pdf().from(container).set({
-              margin: 10,
+              margin: [15, 10, 15, 10],
               filename: `factura-${order.invoice_number || order.id.slice(0, 8)}.pdf`,
-              html2canvas: { scale: 2 },
+              html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
               jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+              pagebreak: { mode: ["avoid-all", "css", "legacy"] },
             }).outputPdf("blob");
             document.body.removeChild(container);
             zip.file(`factura-${order.invoice_number || order.id.slice(0, 8)}.pdf`, pdfBlob);
