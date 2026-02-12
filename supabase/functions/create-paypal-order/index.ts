@@ -43,13 +43,14 @@ serve(async (req) => {
     const clientSecret = Deno.env.get("PAYPAL_CLIENT_SECRET");
     if (!clientId || !clientSecret) throw new Error("PayPal credentials are not configured");
 
+    const requestBody = await req.json();
     const {
       items, basePrice, subtotal, total,
       taxRate, taxAmount, taxRule, taxLabel,
       paypalFee,
       billingCountry, billingPostalCode, clientType,
       vatNumber, viesValid,
-    } = await req.json();
+    } = requestBody;
 
     logStep("Received data", { itemCount: items?.length, subtotal, taxAmount, paypalFee, total });
 
@@ -93,36 +94,53 @@ serve(async (req) => {
 
     const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
 
+    // Check if this is an SDK-based request (no redirect needed)
+    const sdkMode = Boolean(requestBody.sdkMode);
+
+    const orderBody: any = {
+      intent: "CAPTURE",
+      purchase_units: [{
+        amount: {
+          currency_code: "EUR",
+          value: total.toFixed(2),
+          breakdown: {
+            item_total: { currency_code: "EUR", value: itemTotal.toFixed(2) },
+            tax_total: { currency_code: "EUR", value: safeTaxAmount.toFixed(2) },
+            handling: { currency_code: "EUR", value: safePaypalFee.toFixed(2) },
+          },
+        },
+        items: paypalItems,
+      }],
+    };
+
+    // Only add application_context with return/cancel URLs for redirect flow
+    if (!sdkMode) {
+      orderBody.application_context = {
+        brand_name: "Drum Session Studio",
+        locale: "es-ES",
+        landing_page: "NO_PREFERENCE",
+        shipping_preference: "NO_SHIPPING",
+        user_action: "PAY_NOW",
+        return_url: `${origin}/success?method=paypal`,
+        cancel_url: `${origin}/`,
+      };
+    } else {
+      orderBody.payment_source = {
+        card: {
+          experience_context: {
+            shipping_preference: "NO_SHIPPING",
+          },
+        },
+      };
+    }
+
     const orderResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders`, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        intent: "CAPTURE",
-        purchase_units: [{
-          amount: {
-            currency_code: "EUR",
-            value: total.toFixed(2),
-            breakdown: {
-              item_total: { currency_code: "EUR", value: itemTotal.toFixed(2) },
-              tax_total: { currency_code: "EUR", value: safeTaxAmount.toFixed(2) },
-              handling: { currency_code: "EUR", value: safePaypalFee.toFixed(2) },
-            },
-          },
-          items: paypalItems,
-        }],
-        application_context: {
-          brand_name: "Drum Session Studio",
-          locale: "es-ES",
-          landing_page: "NO_PREFERENCE",
-          shipping_preference: "NO_SHIPPING",
-          user_action: "PAY_NOW",
-          return_url: `${origin}/success?method=paypal`,
-          cancel_url: `${origin}/`,
-        },
-      }),
+      body: JSON.stringify(orderBody),
     });
 
     if (!orderResponse.ok) {
@@ -134,8 +152,9 @@ serve(async (req) => {
     const orderData = await orderResponse.json();
     logStep("PayPal order created", { orderId: orderData.id });
 
-    const approvalLink = orderData.links.find((link: any) => link.rel === "approve");
-    if (!approvalLink) throw new Error("No approval URL found in PayPal response");
+    // For SDK mode, approval link is not needed
+    const approvalLink = orderData.links?.find((link: any) => link.rel === "approve");
+    if (!sdkMode && !approvalLink) throw new Error("No approval URL found in PayPal response");
 
     // Save order to DB
     try {
@@ -168,7 +187,7 @@ serve(async (req) => {
     }
 
     return new Response(JSON.stringify({
-      url: approvalLink.href,
+      url: approvalLink?.href || null,
       orderId: orderData.id,
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
