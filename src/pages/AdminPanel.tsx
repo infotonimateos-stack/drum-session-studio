@@ -3,13 +3,15 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter, Archive, FileSpreadsheet } from "lucide-react";
+import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter, Archive, FileSpreadsheet, FileDown } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
+import html2pdf from "html2pdf.js";
 
 const ADMIN_ROUTE = true; // marker
 
@@ -67,6 +69,7 @@ export default function AdminPanel() {
   const [searchTerm, setSearchTerm] = useState("");
   const [storedPassword, setStoredPassword] = useState("");
   const [bulkDownloading, setBulkDownloading] = useState(false);
+  const [selectedOrders, setSelectedOrders] = useState<Set<string>>(new Set());
 
   const apiCall = useCallback(async (action: string, method: string = "GET", body?: any, params?: Record<string, string>) => {
     const url = new URL(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-api`);
@@ -210,21 +213,42 @@ export default function AdminPanel() {
   const totalRevenue = filteredOrders.reduce((s, o) => s + o.total, 0);
   const completedOrders = filteredOrders.filter((o) => o.payment_status === "completed").length;
 
+  const getTargetOrders = () => {
+    if (selectedOrders.size > 0) return filteredOrders.filter(o => selectedOrders.has(o.id));
+    return filteredOrders;
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedOrders.size === filteredOrders.length) {
+      setSelectedOrders(new Set());
+    } else {
+      setSelectedOrders(new Set(filteredOrders.map(o => o.id)));
+    }
+  };
+
+  const toggleSelect = (id: string) => {
+    setSelectedOrders(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  };
+
   const handleBulkDownloadZip = async () => {
-    if (filteredOrders.length === 0) { toast.error("No hay facturas para descargar"); return; }
+    const targets = getTargetOrders();
+    if (targets.length === 0) { toast.error("No hay facturas para descargar"); return; }
     setBulkDownloading(true);
     const zip = new JSZip();
     let count = 0;
     try {
-      for (const order of filteredOrders) {
+      for (const order of targets) {
         try {
           const data = await apiCall("invoice", "GET", undefined, { orderId: order.id });
           if (data.html) {
-            const filename = `factura-${order.invoice_number || order.id.slice(0, 8)}.html`;
-            zip.file(filename, data.html);
+            zip.file(`factura-${order.invoice_number || order.id.slice(0, 8)}.html`, data.html);
             count++;
           }
-        } catch { /* skip failed */ }
+        } catch { /* skip */ }
       }
       if (count === 0) { toast.error("No se pudo generar ninguna factura"); setBulkDownloading(false); return; }
       const blob = await zip.generateAsync({ type: "blob" });
@@ -232,6 +256,50 @@ export default function AdminPanel() {
       toast.success(`${count} facturas descargadas en ZIP`);
     } catch {
       toast.error("Error generando ZIP");
+    }
+    setBulkDownloading(false);
+  };
+
+  const handleBulkDownloadPdf = async () => {
+    const targets = getTargetOrders();
+    if (targets.length === 0) { toast.error("No hay facturas para descargar"); return; }
+    setBulkDownloading(true);
+    const zip = new JSZip();
+    let count = 0;
+    try {
+      for (const order of targets) {
+        try {
+          const data = await apiCall("invoice", "GET", undefined, { orderId: order.id });
+          if (data.html) {
+            const container = document.createElement("div");
+            container.innerHTML = data.html;
+            document.body.appendChild(container);
+            const pdfBlob = await html2pdf().from(container).set({
+              margin: 10,
+              filename: `factura-${order.invoice_number || order.id.slice(0, 8)}.pdf`,
+              html2canvas: { scale: 2 },
+              jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+            }).outputPdf("blob");
+            document.body.removeChild(container);
+            zip.file(`factura-${order.invoice_number || order.id.slice(0, 8)}.pdf`, pdfBlob);
+            count++;
+          }
+        } catch { /* skip */ }
+      }
+      if (count === 0) { toast.error("No se pudo generar ningún PDF"); setBulkDownloading(false); return; }
+      if (count === 1) {
+        // Single PDF — download directly
+        const files = Object.values(zip.files);
+        const file = files[0];
+        const blob = await file.async("blob");
+        saveAs(blob, file.name);
+      } else {
+        const blob = await zip.generateAsync({ type: "blob" });
+        saveAs(blob, `facturas-pdf-${new Date().toISOString().slice(0, 10)}.zip`);
+      }
+      toast.success(`${count} factura(s) descargada(s) en PDF`);
+    } catch {
+      toast.error("Error generando PDFs");
     }
     setBulkDownloading(false);
   };
@@ -308,11 +376,17 @@ export default function AdminPanel() {
             </div>
           </div>
           <div className="flex items-center gap-2 flex-wrap">
+            {selectedOrders.size > 0 && (
+              <span className="text-xs text-muted-foreground mr-1">{selectedOrders.size} seleccionados</span>
+            )}
             <Button variant="outline" size="sm" onClick={handleExportCSV}>
               <FileSpreadsheet className="h-4 w-4 mr-1" /> CSV
             </Button>
             <Button variant="outline" size="sm" onClick={handleBulkDownloadZip} disabled={bulkDownloading}>
-              <Archive className={`h-4 w-4 mr-1 ${bulkDownloading ? "animate-spin" : ""}`} /> {bulkDownloading ? "Generando..." : "ZIP Facturas"}
+              <Archive className={`h-4 w-4 mr-1 ${bulkDownloading ? "animate-spin" : ""}`} /> {bulkDownloading ? "Generando..." : "ZIP HTML"}
+            </Button>
+            <Button variant="outline" size="sm" onClick={handleBulkDownloadPdf} disabled={bulkDownloading}>
+              <FileDown className={`h-4 w-4 mr-1 ${bulkDownloading ? "animate-spin" : ""}`} /> {bulkDownloading ? "Generando..." : "PDF"}
             </Button>
             <Button variant="outline" size="sm" onClick={fetchOrders} disabled={loading}>
               <RefreshCw className={`h-4 w-4 mr-1 ${loading ? "animate-spin" : ""}`} /> Refrescar
@@ -404,6 +478,12 @@ export default function AdminPanel() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border bg-muted/30">
+                  <th className="px-3 py-3 w-10">
+                    <Checkbox
+                      checked={filteredOrders.length > 0 && selectedOrders.size === filteredOrders.length}
+                      onCheckedChange={toggleSelectAll}
+                    />
+                  </th>
                   <th className="text-left px-4 py-3 font-medium">Fecha</th>
                   <th className="text-left px-4 py-3 font-medium">Nº Factura</th>
                   <th className="text-left px-4 py-3 font-medium">Tipo</th>
@@ -416,7 +496,13 @@ export default function AdminPanel() {
               </thead>
               <tbody>
                 {filteredOrders.map((order) => (
-                  <tr key={order.id} className="border-b border-border/50 hover:bg-muted/20 transition-colors">
+                  <tr key={order.id} className={`border-b border-border/50 hover:bg-muted/20 transition-colors ${selectedOrders.has(order.id) ? "bg-muted/10" : ""}`}>
+                    <td className="px-3 py-3">
+                      <Checkbox
+                        checked={selectedOrders.has(order.id)}
+                        onCheckedChange={() => toggleSelect(order.id)}
+                      />
+                    </td>
                     <td className="px-4 py-3 whitespace-nowrap">
                       {new Date(order.created_at).toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "2-digit" })}
                       <span className="text-muted-foreground ml-1 text-xs">
@@ -471,7 +557,7 @@ export default function AdminPanel() {
                 ))}
                 {filteredOrders.length === 0 && (
                   <tr>
-                    <td colSpan={8} className="px-4 py-12 text-center text-muted-foreground">
+                    <td colSpan={9} className="px-4 py-12 text-center text-muted-foreground">
                       {loading ? "Cargando..." : "No se encontraron pedidos"}
                     </td>
                   </tr>
