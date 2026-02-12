@@ -15,7 +15,7 @@ const logStep = (step: string, details?: any) => {
 const COMPANY = {
   name: "Groove Factory Studios SL",
   taxId: "B42915165",
-  address: "C/ Mosteruelo, 2, Litos, Zamora, España",
+  address: "C/ Balançó i Boter 22, Ático (2ª plt.), 08302 Mataró (Barcelona), España",
   email: "info@tonimateos.com",
 };
 
