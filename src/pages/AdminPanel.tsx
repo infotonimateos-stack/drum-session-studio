@@ -294,29 +294,63 @@ export default function AdminPanel() {
             document.body.appendChild(iframe);
             const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
             if (!iframeDoc) { document.body.removeChild(iframe); continue; }
-            // Force light-mode: white background, black text, override ALL elements
-            const forcedStyles = `<style>
-              html, body { background-color: #ffffff !important; color: #000000 !important; color-scheme: light !important; -webkit-print-color-adjust: exact !important; }
-              * { color-scheme: light !important; }
-              body *, div, p, span, td, th, h1, h2, h3, h4, h5, h6, tr, table, thead, tbody {
-                color: #000000 !important;
-                background-color: transparent !important;
-              }
-              body { background-color: #ffffff !important; }
-              tr[style*="background:#1a1a2e"], tr[style*="background: #1a1a2e"] { background-color: #1a1a2e !important; }
-              tr[style*="background:#1a1a2e"] th, tr[style*="background:#1a1a2e"] td { color: #ffffff !important; }
-              p[style*="color:#999"], span[style*="color:#999"], p[style*="color: #999"], span[style*="color: #999"] { color: #333333 !important; }
-              p[style*="color:#666"], span[style*="color:#666"] { color: #222222 !important; }
-            </style>`;
-            const htmlWithStyles = data.html.replace('<head>', '<head>' + forcedStyles);
+            // Write clean HTML into isolated iframe — no dark mode classes
             iframeDoc.open();
-            iframeDoc.write(htmlWithStyles);
+            iframeDoc.write(data.html);
             iframeDoc.close();
-            await new Promise(r => setTimeout(r, 500));
+            // Force light color-scheme at document level
+            iframeDoc.documentElement.style.colorScheme = "light";
+            iframeDoc.documentElement.style.backgroundColor = "#ffffff";
+            iframeDoc.body.style.backgroundColor = "#ffffff";
+            iframeDoc.body.style.color = "#000000";
+            // Remove any dark class that could leak
+            iframeDoc.documentElement.classList.remove("dark");
+            await new Promise(r => setTimeout(r, 600));
             const pdfBlob = await html2pdf().from(iframeDoc.body).set({
               margin: [15, 10, 15, 10],
               filename: `factura-${order.invoice_number || order.id.slice(0, 8)}.pdf`,
-              html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", logging: false },
+              html2canvas: {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#ffffff",
+                logging: false,
+                onclone: (clonedDoc: Document) => {
+                  // Force every element to light colors at DOM level
+                  clonedDoc.documentElement.style.colorScheme = "light";
+                  clonedDoc.body.style.backgroundColor = "#ffffff";
+                  clonedDoc.body.style.color = "#000000";
+                  const allEls = clonedDoc.body.querySelectorAll("*");
+                  allEls.forEach((el: Element) => {
+                    const htmlEl = el as HTMLElement;
+                    const cs = htmlEl.style;
+                    // Preserve table header dark background
+                    if (cs.background?.includes("#1a1a2e") || cs.backgroundColor?.includes("#1a1a2e")) {
+                      cs.backgroundColor = "#1a1a2e";
+                      cs.color = "#ffffff";
+                      return;
+                    }
+                    // Force all text to black, backgrounds to transparent
+                    if (cs.color) cs.color = "#000000";
+                    if (cs.backgroundColor) cs.backgroundColor = "transparent";
+                    // Also set via computed fallback
+                    const computed = clonedDoc.defaultView?.getComputedStyle(htmlEl);
+                    if (computed) {
+                      const bg = computed.backgroundColor;
+                      if (bg && bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent" && !bg.includes("26, 26, 46")) {
+                        htmlEl.style.backgroundColor = "transparent";
+                      }
+                      const fg = computed.color;
+                      if (fg) {
+                        // Check if text is light (R > 150) → force black
+                        const m = fg.match(/rgba?\((\d+)/);
+                        if (m && parseInt(m[1]) > 150) {
+                          htmlEl.style.color = "#000000";
+                        }
+                      }
+                    }
+                  });
+                },
+              },
               jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
               pagebreak: { mode: ["avoid-all", "css", "legacy"] },
             }).outputPdf("blob");
