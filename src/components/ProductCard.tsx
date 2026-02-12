@@ -68,7 +68,7 @@ export const ProductCard = ({
       </div>
 
       {/* Image or Icon */}
-      <div className={imageContain ? "flex items-center justify-center px-5 py-3" : "px-3 py-3"}>
+      <div className={imageContain ? "flex items-center justify-center px-5 py-3" : "px-5 py-3"}>
         {image ? (
           <div className={`w-full h-44 flex items-center justify-center rounded-xl overflow-hidden ${imageContain ? "bg-white" : ""}`}>
             <img
