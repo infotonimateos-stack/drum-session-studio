@@ -26,8 +26,6 @@ declare global {
   }
 }
 
-type ExpandedMethod = 'card' | 'paypal' | null;
-
 export const PayPalPayment = ({
   orderPayload,
   displayTotal,
@@ -43,12 +41,11 @@ export const PayPalPayment = ({
   const [sdkReady, setSdkReady] = useState(false);
   const [sdkLoading, setSdkLoading] = useState(true);
   const [showTransferModal, setShowTransferModal] = useState(false);
-  const [expanded, setExpanded] = useState<ExpandedMethod>(null);
-  const [cardRendered, setCardRendered] = useState(false);
-  const [paypalRendered, setPaypalRendered] = useState(false);
   const sdkLoadedRef = useRef(false);
   const cardContainerRef = useRef<HTMLDivElement>(null);
   const paypalContainerRef = useRef<HTMLDivElement>(null);
+  const cardRenderedRef = useRef(false);
+  const paypalRenderedRef = useRef(false);
   const orderPayloadRef = useRef(orderPayload);
 
   useEffect(() => { orderPayloadRef.current = orderPayload; }, [orderPayload]);
@@ -95,73 +92,46 @@ export const PayPalPayment = ({
     })();
   }, []);
 
-  // Render CARD SDK button when expanded
+  // Render both SDK buttons immediately when SDK is ready
   useEffect(() => {
-    if (expanded !== 'card' || !sdkReady || !window.paypal || !cardContainerRef.current || cardRendered) return;
-    try {
-      const btn = window.paypal.Buttons({
-        fundingSource: window.paypal.FUNDING.CARD,
-        style: { label: 'pay', height: 55, color: 'black', shape: 'rect' },
-        createOrder: createOrderFn,
-        onApprove,
-        onError: (err: any) => { console.error("Card error:", err); toast.error(t("checkout.paypalError")); },
-      });
-      if (btn.isEligible()) {
-        cardContainerRef.current.innerHTML = '';
-        btn.render(cardContainerRef.current);
-        setCardRendered(true);
-      } else {
-        // Fallback: use redirect
-        toast.info(t("checkout.redirecting") || "Redirigiendo...");
-        handleRedirectFallback();
-      }
-    } catch (err) { console.error("Card render error:", err); }
-  }, [expanded, sdkReady, cardRendered, createOrderFn, onApprove, t]);
+    if (!sdkReady || !window.paypal) return;
 
-  // Render PAYPAL SDK button when expanded
-  useEffect(() => {
-    if (expanded !== 'paypal' || !sdkReady || !window.paypal || !paypalContainerRef.current || paypalRendered) return;
-    try {
-      const btn = window.paypal.Buttons({
-        fundingSource: window.paypal.FUNDING.PAYPAL,
-        style: { label: 'paypal', height: 55, color: 'gold', shape: 'rect' },
-        createOrder: createOrderFn,
-        onApprove,
-        onError: (err: any) => { console.error("PayPal error:", err); toast.error(t("checkout.paypalError")); },
-      });
-      if (btn.isEligible()) {
-        paypalContainerRef.current.innerHTML = '';
-        btn.render(paypalContainerRef.current);
-        setPaypalRendered(true);
-      }
-    } catch (err) { console.error("PayPal render error:", err); }
-  }, [expanded, sdkReady, paypalRendered, createOrderFn, onApprove, t]);
+    // Render CARD button
+    if (cardContainerRef.current && !cardRenderedRef.current) {
+      try {
+        const cardBtn = window.paypal.Buttons({
+          fundingSource: window.paypal.FUNDING.CARD,
+          style: { label: 'pay', height: 55, color: 'black', shape: 'rect', tagline: false },
+          createOrder: createOrderFn,
+          onApprove,
+          onError: (err: any) => { console.error("Card error:", err); toast.error(t("checkout.paypalError")); },
+        });
+        if (cardBtn.isEligible()) {
+          cardContainerRef.current.innerHTML = '';
+          cardBtn.render(cardContainerRef.current);
+          cardRenderedRef.current = true;
+        }
+      } catch (err) { console.error("Card render error:", err); }
+    }
 
-  const handleRedirectFallback = async () => {
-    setIsLoading(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('create-paypal-order', {
-        body: { ...orderPayloadRef.current, paypalFee, paymentMethod: 'paypal' },
-      });
-      if (error) { toast.error(t("checkout.paypalError")); setIsLoading(false); return; }
-      if (data?.url) { window.location.href = data.url; }
-      else { toast.error(t("checkout.paypalOrderError")); setIsLoading(false); }
-    } catch { toast.error(t("checkout.connectionError")); setIsLoading(false); }
-  };
-
-  const handleCardClick = () => {
-    if (isDisabled || isLoading) return;
-    onPaymentMethodChange('paypal');
-    if (!sdkReady) { handleRedirectFallback(); return; }
-    setExpanded(expanded === 'card' ? null : 'card');
-  };
-
-  const handlePayPalClick = () => {
-    if (isDisabled || isLoading) return;
-    onPaymentMethodChange('paypal');
-    if (!sdkReady) { handleRedirectFallback(); return; }
-    setExpanded(expanded === 'paypal' ? null : 'paypal');
-  };
+    // Render PAYPAL button
+    if (paypalContainerRef.current && !paypalRenderedRef.current) {
+      try {
+        const ppBtn = window.paypal.Buttons({
+          fundingSource: window.paypal.FUNDING.PAYPAL,
+          style: { label: 'paypal', height: 55, color: 'gold', shape: 'rect', tagline: false },
+          createOrder: createOrderFn,
+          onApprove,
+          onError: (err: any) => { console.error("PayPal error:", err); toast.error(t("checkout.paypalError")); },
+        });
+        if (ppBtn.isEligible()) {
+          paypalContainerRef.current.innerHTML = '';
+          ppBtn.render(paypalContainerRef.current);
+          paypalRenderedRef.current = true;
+        }
+      } catch (err) { console.error("PayPal render error:", err); }
+    }
+  }, [sdkReady, createOrderFn, onApprove, t]);
 
   const handleTransferClick = () => {
     if (isDisabled) return;
@@ -178,78 +148,36 @@ export const PayPalPayment = ({
   return (
     <div className="space-y-4">
       <div className="flex flex-col gap-3">
-        {/* TARJETA – Black */}
-        <div>
-          <button
-            type="button"
-            onClick={handleCardClick}
-            disabled={isLoading || isDisabled}
-            className={`w-full flex items-center gap-3 px-5 py-4 rounded-xl border-2 font-semibold text-sm transition-all duration-200 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed
-              ${expanded === 'card'
-                ? 'border-neutral-500 bg-neutral-900 text-white shadow-lg'
-                : 'border-neutral-700 bg-neutral-900 text-white hover:bg-neutral-800 hover:border-neutral-500 hover:shadow-lg hover:scale-[1.01]'
-              }`}
-          >
-            <CreditCard className="h-5 w-5 shrink-0" />
-            <span className="flex-1 text-left">{t("checkout.debitOrCredit")}</span>
-            <div className="flex gap-1 shrink-0">
-              <svg className="h-6 w-auto" viewBox="0 0 48 32" fill="none">
+        {/* TARJETA – SDK button rendered directly (single click → card form) */}
+        <div className={`rounded-xl overflow-hidden ${isDisabled ? 'opacity-50 pointer-events-none' : ''}`}>
+          <div className="flex items-center gap-2 px-4 py-2 bg-neutral-900 text-white text-sm font-semibold">
+            <CreditCard className="h-4 w-4 shrink-0" />
+            <span>{t("checkout.debitOrCredit")}</span>
+            <div className="flex gap-1 ml-auto shrink-0">
+              <svg className="h-5 w-auto" viewBox="0 0 48 32" fill="none">
                 <rect width="48" height="32" rx="4" fill="#1A1F71"/>
                 <text x="8" y="22" fontFamily="Arial" fontWeight="bold" fontSize="14" fill="white">VISA</text>
               </svg>
-              <svg className="h-6 w-auto" viewBox="0 0 48 32" fill="none">
+              <svg className="h-5 w-auto" viewBox="0 0 48 32" fill="none">
                 <rect width="48" height="32" rx="4" fill="#252525"/>
                 <circle cx="18" cy="16" r="9" fill="#EB001B"/>
                 <circle cx="30" cy="16" r="9" fill="#F79E1B"/>
                 <path d="M24 9.34A9 9 0 0 1 27 16a9 9 0 0 1-3 6.66A9 9 0 0 1 21 16a9 9 0 0 1 3-6.66z" fill="#FF5F00"/>
               </svg>
             </div>
-          </button>
-          {/* SDK Card button – visible when expanded */}
-          {expanded === 'card' && (
-            <div className="mt-2 px-1">
-              {!cardRendered && sdkLoading && (
-                <div className="flex items-center justify-center py-4 gap-2 text-muted-foreground">
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  <span className="text-sm">{t("checkout.processing")}...</span>
-                </div>
-              )}
-              <div ref={cardContainerRef} className="min-h-[55px]" />
-              <p className="text-xs text-center text-muted-foreground mt-2">{t("checkout.paypalSecureInfo")}</p>
-            </div>
-          )}
+          </div>
+          <div ref={cardContainerRef} className="min-h-[55px] bg-neutral-900" />
         </div>
 
-        {/* PAYPAL – Blue */}
-        <div>
-          <button
-            type="button"
-            onClick={handlePayPalClick}
-            disabled={isLoading || isDisabled}
-            className={`w-full flex items-center gap-3 px-5 py-4 rounded-xl border-2 font-semibold text-sm transition-all duration-200 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed
-              ${expanded === 'paypal'
-                ? 'border-[#002570] bg-[#003087] text-[#ffc439] shadow-lg'
-                : 'border-[#003087] bg-[#003087] text-[#ffc439] hover:bg-[#002570] hover:border-[#002570] hover:shadow-lg hover:scale-[1.01]'
-              }`}
-          >
-            <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="#ffc439">
+        {/* PAYPAL – SDK button rendered directly (single click → PayPal login) */}
+        <div className={`rounded-xl overflow-hidden ${isDisabled ? 'opacity-50 pointer-events-none' : ''}`}>
+          <div className="flex items-center gap-2 px-4 py-2 bg-[#003087] text-[#ffc439] text-sm font-semibold">
+            <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="#ffc439">
               <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .771-.66h6.487c2.025 0 3.538.507 4.497 1.507.921.961 1.261 2.217 1.046 3.849l-.016.112-.012.084.052.028c.628.349 1.115.809 1.446 1.371.35.593.528 1.336.528 2.207 0 1.015-.207 1.913-.616 2.668-.386.71-.93 1.31-1.618 1.783a6.08 6.08 0 0 1-2.167.936c-.772.181-1.635.274-2.562.274H12.2a.967.967 0 0 0-.955.816l-.033.196-.585 3.716-.027.14a.966.966 0 0 1-.955.79H7.076z"/>
             </svg>
-            <span className="flex-1 text-left font-bold tracking-wide">PayPal</span>
-          </button>
-          {/* SDK PayPal button – visible when expanded */}
-          {expanded === 'paypal' && (
-            <div className="mt-2 px-1">
-              {!paypalRendered && sdkLoading && (
-                <div className="flex items-center justify-center py-4 gap-2 text-muted-foreground">
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  <span className="text-sm">{t("checkout.processing")}...</span>
-                </div>
-              )}
-              <div ref={paypalContainerRef} className="min-h-[55px]" />
-              <p className="text-xs text-center text-muted-foreground mt-2">{t("checkout.paypalSecureInfo")}</p>
-            </div>
-          )}
+            <span className="font-bold tracking-wide">PayPal</span>
+          </div>
+          <div ref={paypalContainerRef} className="min-h-[55px] bg-[#003087]" />
         </div>
 
         {/* TRANSFERENCIA – Corporate Gold (sin cambios) */}
