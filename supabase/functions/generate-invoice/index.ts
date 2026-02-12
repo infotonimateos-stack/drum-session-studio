@@ -14,10 +14,9 @@ const logStep = (step: string, details?: any) => {
 // Groove Factory Studios SL fiscal data
 const COMPANY = {
   name: "Groove Factory Studios SL",
-  taxId: "B12345678", // Replace with real CIF
-  address: "Barcelona, España",
+  taxId: "B42915165",
+  address: "C/ Mosteruelo, 2, Litos, Zamora, España",
   email: "info@tonimateos.com",
-  phone: "+34 600 000 000",
 };
 
 function escapeHtml(str: string): string {
