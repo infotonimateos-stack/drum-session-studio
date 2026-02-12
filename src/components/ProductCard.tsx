@@ -68,11 +68,11 @@ export const ProductCard = ({
       {/* Image or Icon */}
       <div className="flex items-center justify-center px-5 py-3">
         {image ? (
-          <div className="w-full h-36 flex items-center justify-center bg-white rounded-xl">
+          <div className="w-full h-44 flex items-center justify-center bg-white rounded-xl">
             <img
               src={image}
               alt={name}
-              className="max-h-32 max-w-full object-contain p-2"
+              className="max-h-40 max-w-full object-contain p-2"
             />
           </div>
         ) : icon ? (
