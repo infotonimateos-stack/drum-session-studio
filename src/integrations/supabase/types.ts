@@ -14,6 +14,21 @@ export type Database = {
   }
   public: {
     Tables: {
+      invoice_counters: {
+        Row: {
+          last_number: number
+          series: string
+        }
+        Insert: {
+          last_number?: number
+          series: string
+        }
+        Update: {
+          last_number?: number
+          series?: string
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
           base_price: number
@@ -22,7 +37,15 @@ export type Database = {
           created_at: string
           currency: string
           id: string
+          invoice_address: string | null
+          invoice_company_name: string | null
+          invoice_email: string | null
+          invoice_number: string | null
+          invoice_phone: string | null
+          invoice_series: string | null
+          invoice_tax_id: string | null
           items: Json
+          needs_invoice: boolean
           payment_id: string | null
           payment_method: string
           payment_status: string
@@ -44,7 +67,15 @@ export type Database = {
           created_at?: string
           currency?: string
           id?: string
+          invoice_address?: string | null
+          invoice_company_name?: string | null
+          invoice_email?: string | null
+          invoice_number?: string | null
+          invoice_phone?: string | null
+          invoice_series?: string | null
+          invoice_tax_id?: string | null
           items?: Json
+          needs_invoice?: boolean
           payment_id?: string | null
           payment_method: string
           payment_status?: string
@@ -66,7 +97,15 @@ export type Database = {
           created_at?: string
           currency?: string
           id?: string
+          invoice_address?: string | null
+          invoice_company_name?: string | null
+          invoice_email?: string | null
+          invoice_number?: string | null
+          invoice_phone?: string | null
+          invoice_series?: string | null
+          invoice_tax_id?: string | null
           items?: Json
+          needs_invoice?: boolean
           payment_id?: string | null
           payment_method?: string
           payment_status?: string
@@ -88,7 +127,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_next_invoice_number: { Args: { p_series?: string }; Returns: string }
     }
     Enums: {
       [_ in never]: never

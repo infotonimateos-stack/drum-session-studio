@@ -50,6 +50,7 @@ serve(async (req) => {
       paypalFee,
       billingCountry, billingPostalCode, clientType,
       vatNumber, viesValid,
+      invoiceData,
     } = requestBody;
 
     logStep("Received data", { itemCount: items?.length, subtotal, taxAmount, paypalFee, total });
@@ -166,6 +167,13 @@ serve(async (req) => {
       const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
       if (supabaseUrl && supabaseServiceKey) {
         const supabase = createClient(supabaseUrl, supabaseServiceKey);
+        
+        // Generate invoice number
+        const { data: invoiceNumber } = await supabase.rpc('get_next_invoice_number', { p_series: 'W' });
+        logStep("Invoice number generated", { invoiceNumber });
+
+        const needsInvoice = invoiceData?.needsInvoice === true;
+        
         await supabase.from("orders").insert({
           payment_method: "paypal",
           payment_id: orderData.id,
@@ -183,6 +191,14 @@ serve(async (req) => {
           vat_number: vatNumber || null,
           vies_valid: viesValid ?? null,
           tax_rule: taxRule || 'spain_peninsula',
+          needs_invoice: needsInvoice,
+          invoice_company_name: needsInvoice ? invoiceData.companyName : null,
+          invoice_address: needsInvoice ? invoiceData.address : null,
+          invoice_tax_id: needsInvoice ? invoiceData.taxId : null,
+          invoice_email: needsInvoice ? invoiceData.email : null,
+          invoice_phone: needsInvoice ? invoiceData.phone : null,
+          invoice_number: invoiceNumber || null,
+          invoice_series: 'W',
         });
         logStep("Order saved to DB");
       }

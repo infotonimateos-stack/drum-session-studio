@@ -568,6 +568,22 @@
     "taxes": "Impuestos:",
     "taxCalcNext": "Los impuestos se calcularán en el siguiente paso"
   },
+  "invoice": {
+    "needsProfessional": "Necesito factura profesional",
+    "simplifiedDefault": "Si no marcas esta casilla, se generará una factura simplificada automáticamente.",
+    "fiscalData": "Datos Fiscales para Factura",
+    "companyName": "Razón Social",
+    "companyNamePlaceholder": "Nombre de la empresa o autónomo",
+    "address": "Dirección Completa",
+    "addressPlaceholder": "Calle, número, ciudad, CP, país",
+    "taxId": "NIF / CIF / VAT Number",
+    "taxIdPlaceholder": "B12345678 o ES-B12345678",
+    "email": "Email de facturación",
+    "emailPlaceholder": "facturacion@empresa.com",
+    "phone": "Teléfono de contacto",
+    "phonePlaceholder": "+34 600 000 000",
+    "fillAllFields": "Completa todos los campos para poder continuar con el pago"
+  },
   "transfer": {
     "title": "Realiza tu Transferencia",
     "subtitle": "Tu pedido ha sido registrado. Completa el pago mediante transferencia bancaria.",
