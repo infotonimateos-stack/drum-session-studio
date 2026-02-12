@@ -56,7 +56,7 @@ export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
                   className={`relative px-3 py-1.5 text-[13px] font-medium rounded-md transition-colors duration-150 ${
                     activeTab === tab.id
                       ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                      : "text-foreground/70 hover:text-primary hover:bg-primary/5"
                   }`}
                 >
                   {tab.label}
@@ -121,10 +121,10 @@ export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
                   <button
                     key={tab.id}
                     onClick={() => handleTabClick(tab.id, onTabChange, () => setMobileOpen(false))}
-                    className={`w-full text-left px-3 py-2.5 rounded-md text-sm font-medium transition-colors ${
+                    className={`w-full text-left px-3 py-3 rounded-md text-base font-semibold transition-colors ${
                       activeTab === tab.id
                         ? "text-primary bg-primary/10"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                        : "text-foreground hover:text-primary hover:bg-primary/5"
                     }`}
                   >
                     {tab.label}
