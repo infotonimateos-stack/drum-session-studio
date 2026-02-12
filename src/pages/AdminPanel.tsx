@@ -294,8 +294,11 @@ export default function AdminPanel() {
             document.body.appendChild(iframe);
             const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
             if (!iframeDoc) { document.body.removeChild(iframe); continue; }
+            // Inject forced light-mode styles to override any dark mode inheritance
+            const forcedStyles = '<style>html,body{background:#ffffff!important;color:#333!important;color-scheme:light!important;}*{color-scheme:light!important;}</style>';
+            const htmlWithStyles = data.html.replace('<head>', '<head>' + forcedStyles);
             iframeDoc.open();
-            iframeDoc.write(data.html);
+            iframeDoc.write(htmlWithStyles);
             iframeDoc.close();
             await new Promise(r => setTimeout(r, 500));
             const pdfBlob = await html2pdf().from(iframeDoc.body).set({
