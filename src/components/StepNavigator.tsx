@@ -22,7 +22,7 @@ export const StepNavigator = ({
   const isLastStep = currentStep === totalSteps - 1;
 
   return (
-    <div className="flex justify-between items-center p-4 sm:p-6 bg-gradient-to-r from-card to-muted border-t border-border">
+    <div className="flex justify-between items-center p-4 sm:p-6 bg-card border-t border-border">
       <Button
         variant="outline"
         onClick={onPreviousStep}

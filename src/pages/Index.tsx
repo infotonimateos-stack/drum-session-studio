@@ -51,7 +51,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-card to-background flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead />
       <Header activeTab={activeTab} onTabChange={setActiveTab} />
       <div className="flex-1">
