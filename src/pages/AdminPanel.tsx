@@ -294,8 +294,20 @@ export default function AdminPanel() {
             document.body.appendChild(iframe);
             const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
             if (!iframeDoc) { document.body.removeChild(iframe); continue; }
-            // Inject forced light-mode styles to override any dark mode inheritance
-            const forcedStyles = '<style>html,body{background:#ffffff!important;color:#333!important;color-scheme:light!important;}*{color-scheme:light!important;}</style>';
+            // Force light-mode: white background, black text, override ALL elements
+            const forcedStyles = `<style>
+              html, body { background-color: #ffffff !important; color: #000000 !important; color-scheme: light !important; -webkit-print-color-adjust: exact !important; }
+              * { color-scheme: light !important; }
+              body *, div, p, span, td, th, h1, h2, h3, h4, h5, h6, tr, table, thead, tbody {
+                color: #000000 !important;
+                background-color: transparent !important;
+              }
+              body { background-color: #ffffff !important; }
+              tr[style*="background:#1a1a2e"], tr[style*="background: #1a1a2e"] { background-color: #1a1a2e !important; }
+              tr[style*="background:#1a1a2e"] th, tr[style*="background:#1a1a2e"] td { color: #ffffff !important; }
+              p[style*="color:#999"], span[style*="color:#999"], p[style*="color: #999"], span[style*="color: #999"] { color: #333333 !important; }
+              p[style*="color:#666"], span[style*="color:#666"] { color: #222222 !important; }
+            </style>`;
             const htmlWithStyles = data.html.replace('<head>', '<head>' + forcedStyles);
             iframeDoc.open();
             iframeDoc.write(htmlWithStyles);
