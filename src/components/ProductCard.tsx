@@ -70,7 +70,7 @@ export const ProductCard = ({
       {/* Image or Icon */}
       <div className="flex items-center justify-center px-5 py-3">
         {image ? (
-          <div className={`w-full flex items-center justify-center bg-white rounded-xl overflow-hidden ${imageContain ? "h-44" : "h-64"}`}>
+          <div className="w-full h-44 flex items-center justify-center bg-white rounded-xl overflow-hidden">
             <img
               src={image}
               alt={name}
