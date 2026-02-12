@@ -18,7 +18,7 @@ export const SEOHead = () => {
       metaDescription.setAttribute("name", "description");
       document.head.appendChild(metaDescription);
     }
-    metaDescription.setAttribute("content", t("seo.description", "Servicio profesional de grabación de baterías online. Más de 30 años de experiencia y 1000+ álbumes grabados."));
+    metaDescription.setAttribute("content", t("seo.description", "Servicio profesional de grabación de baterías online. Más de 35 años de experiencia y 1000+ álbumes grabados."));
 
     // Remove existing hreflang tags
     document.querySelectorAll('link[hreflang]').forEach(el => el.remove());
