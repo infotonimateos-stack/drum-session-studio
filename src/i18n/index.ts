@@ -241,6 +241,44 @@ i18n.on("languageChanged", async (lng) => {
   }
 });
 
+// ─── Dev-mode key integrity checker ───
+if (import.meta.env.DEV) {
+  const getKeys = (obj: Record<string, unknown>, prefix = ""): string[] => {
+    return Object.entries(obj).flatMap(([k, v]) => {
+      const path = prefix ? `${prefix}.${k}` : k;
+      return typeof v === "object" && v !== null
+        ? getKeys(v as Record<string, unknown>, path)
+        : [path];
+    });
+  };
+
+  const baseKeys = new Set(getKeys(esCommon as Record<string, unknown>));
+  const bundles: [string, Record<string, unknown>][] = [
+    ["en-GB", enCommon],
+    ["de-DE", deCommon],
+    ["fr-FR", frCommon],
+    ["ja-JP", jaCommon],
+    ["zh-CN", zhCommon],
+    ["it-IT", itCommon],
+    ["pt-BR", ptCommon],
+    ["nl-NL", nlCommon],
+    ["ko-KR", koCommon],
+    ["sv-SE", svCommon],
+  ];
+
+  for (const [lang, bundle] of bundles) {
+    const langKeys = new Set(getKeys(bundle as Record<string, unknown>));
+    const missing = [...baseKeys].filter(k => !langKeys.has(k));
+    const extra = [...langKeys].filter(k => !baseKeys.has(k));
+    if (missing.length) {
+      console.warn(`[i18n] ${lang} missing ${missing.length} keys:`, missing);
+    }
+    if (extra.length) {
+      console.warn(`[i18n] ${lang} has ${extra.length} extra keys not in es-ES:`, extra);
+    }
+  }
+}
+
 // Export for use in components
 export const changeLanguage = (lng: string) => {
   return i18n.changeLanguage(lng);
