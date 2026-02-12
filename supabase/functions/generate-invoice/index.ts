@@ -24,19 +24,29 @@ function escapeHtml(str: string): string {
 }
 
 function generateInvoiceHtml(order: any): string {
-  const isProfessional = order.needs_invoice === true;
+  const isProfessional = order.is_professional_invoice === true;
   const invoiceNumber = order.invoice_number || 'W-0000';
   const date = new Date(order.created_at).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
   const items = Array.isArray(order.items) ? order.items : [];
 
+  // Build full address string from components
+  const addressParts = [
+    order.full_address,
+    order.city,
+    order.state_province,
+    order.postal_code,
+    order.country_code,
+  ].filter(Boolean);
+  const fullAddressStr = addressParts.join(', ');
+
   const recipientSection = isProfessional ? `
     <div style="flex:1;text-align:right;">
       <h3 style="margin:0 0 8px;color:#333;font-size:14px;">DATOS DEL CLIENTE</h3>
-      <p style="margin:2px 0;font-weight:bold;">${escapeHtml(order.invoice_company_name || '')}</p>
-      <p style="margin:2px 0;">${escapeHtml(order.invoice_tax_id || '')}</p>
-      <p style="margin:2px 0;">${escapeHtml(order.invoice_address || '')}</p>
-      <p style="margin:2px 0;">${escapeHtml(order.invoice_email || '')}</p>
-      <p style="margin:2px 0;">${escapeHtml(order.invoice_phone || '')}</p>
+      <p style="margin:2px 0;font-weight:bold;">${escapeHtml(order.business_name || '')}</p>
+      <p style="margin:2px 0;">${escapeHtml(order.vat_number || '')}</p>
+      <p style="margin:2px 0;">${escapeHtml(fullAddressStr)}</p>
+      <p style="margin:2px 0;">${escapeHtml(order.billing_email || '')}</p>
+      <p style="margin:2px 0;">${escapeHtml(order.billing_phone || '')}</p>
     </div>
   ` : '';
 

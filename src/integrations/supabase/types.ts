@@ -32,25 +32,26 @@ export type Database = {
       orders: {
         Row: {
           base_price: number
+          billing_email: string | null
+          billing_phone: string | null
+          business_name: string | null
+          city: string | null
           client_type: string
           country_code: string
           created_at: string
           currency: string
+          full_address: string | null
           id: string
-          invoice_address: string | null
-          invoice_company_name: string | null
-          invoice_email: string | null
           invoice_number: string | null
-          invoice_phone: string | null
           invoice_series: string | null
-          invoice_tax_id: string | null
+          is_professional_invoice: boolean
           items: Json
-          needs_invoice: boolean
           payment_id: string | null
           payment_method: string
           payment_status: string
           paypal_fee: number
           postal_code: string | null
+          state_province: string | null
           subtotal: number
           tax_amount: number
           tax_rate: number
@@ -62,25 +63,26 @@ export type Database = {
         }
         Insert: {
           base_price: number
+          billing_email?: string | null
+          billing_phone?: string | null
+          business_name?: string | null
+          city?: string | null
           client_type: string
           country_code: string
           created_at?: string
           currency?: string
+          full_address?: string | null
           id?: string
-          invoice_address?: string | null
-          invoice_company_name?: string | null
-          invoice_email?: string | null
           invoice_number?: string | null
-          invoice_phone?: string | null
           invoice_series?: string | null
-          invoice_tax_id?: string | null
+          is_professional_invoice?: boolean
           items?: Json
-          needs_invoice?: boolean
           payment_id?: string | null
           payment_method: string
           payment_status?: string
           paypal_fee?: number
           postal_code?: string | null
+          state_province?: string | null
           subtotal: number
           tax_amount?: number
           tax_rate?: number
@@ -92,25 +94,26 @@ export type Database = {
         }
         Update: {
           base_price?: number
+          billing_email?: string | null
+          billing_phone?: string | null
+          business_name?: string | null
+          city?: string | null
           client_type?: string
           country_code?: string
           created_at?: string
           currency?: string
+          full_address?: string | null
           id?: string
-          invoice_address?: string | null
-          invoice_company_name?: string | null
-          invoice_email?: string | null
           invoice_number?: string | null
-          invoice_phone?: string | null
           invoice_series?: string | null
-          invoice_tax_id?: string | null
+          is_professional_invoice?: boolean
           items?: Json
-          needs_invoice?: boolean
           payment_id?: string | null
           payment_method?: string
           payment_status?: string
           paypal_fee?: number
           postal_code?: string | null
+          state_province?: string | null
           subtotal?: number
           tax_amount?: number
           tax_rate?: number
