@@ -289,15 +289,20 @@ export default function AdminPanel() {
           const data = await apiCall("invoice", "GET", undefined, { orderId: order.id });
           if (data.html) {
             const container = document.createElement("div");
-            container.style.cssText = "position:fixed;left:0;top:0;width:800px;background:#ffffff;color:#1a1a1a;z-index:-9999;opacity:0;pointer-events:none;";
-            container.innerHTML = data.html;
+            container.style.cssText = "position:absolute;left:-9999px;top:0;width:800px;background:#ffffff;color:#1a1a1a;z-index:9999;pointer-events:none;";
+            // Force all child elements to have visible text
+            const style = document.createElement("style");
+            style.textContent = "* { color: #1a1a1a !important; background-color: transparent !important; } body, html, div { background-color: #ffffff !important; }";
+            container.appendChild(style);
+            const content = document.createElement("div");
+            content.innerHTML = data.html;
+            container.appendChild(content);
             document.body.appendChild(container);
-            // Wait for rendering
-            await new Promise(r => setTimeout(r, 100));
+            await new Promise(r => setTimeout(r, 300));
             const pdfBlob = await html2pdf().from(container).set({
               margin: [15, 10, 15, 10],
               filename: `factura-${order.invoice_number || order.id.slice(0, 8)}.pdf`,
-              html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", logging: false },
+              html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", logging: false, scrollX: 0, scrollY: 0, windowWidth: 800 },
               jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
               pagebreak: { mode: ["avoid-all", "css", "legacy"] },
             }).outputPdf("blob");
