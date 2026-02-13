@@ -24,12 +24,12 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
       </CardHeader>
       <CardContent className="flex-1 overflow-y-auto space-y-4">
         {/* Order Total */}
-        <div className="flex justify-between items-center p-3 bg-primary/10 rounded-lg">
-          <div>
+        <div className="flex justify-between items-center gap-3 p-3 bg-primary/10 rounded-lg">
+          <div className="min-w-0">
             <p className="font-medium text-sm">{t("cart.orderTotal")}</p>
             <p className="text-xs text-muted-foreground">{t("cart.basePlusExtras")}</p>
           </div>
-          <span className="font-bold text-primary text-xl whitespace-nowrap">{cartState.total.toFixed(2)} €</span>
+          <span className="font-bold text-primary text-xl whitespace-nowrap shrink-0">{cartState.total.toFixed(2)} €</span>
         </div>
 
         {/* Items List */}
@@ -37,24 +37,24 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
           <Separator />
           <div className="space-y-2">
             {/* Base Package - Always shown first */}
-            <div className="flex justify-between items-center p-2 bg-success/10 rounded-md">
+            <div className="flex justify-between items-center gap-3 p-2 bg-success/10 rounded-md">
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium truncate">{t("cart.basicKit")}</p>
+                <p className="text-sm font-medium">{t("cart.basicKit")}</p>
                 <p className="text-xs text-muted-foreground">{t("cart.microphonesIncluded")}</p>
               </div>
-              <div className="flex items-center gap-2 ml-2">
+              <div className="flex items-center shrink-0">
                 <span className="text-sm font-medium whitespace-nowrap">{cartState.basePrice.toFixed(2)} €</span>
               </div>
             </div>
             
             {/* Additional Items */}
             {cartState.items.map((item) => (
-              <div key={item.id} className="flex justify-between items-center p-2 hover:bg-muted/50 rounded-md group">
+              <div key={item.id} className="flex justify-between items-center gap-3 p-2 hover:bg-muted/50 rounded-md group">
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate">{item.name}</p>
+                  <p className="text-sm font-medium">{item.name}</p>
                   <p className="text-xs text-muted-foreground">{item.category}</p>
                 </div>
-                <div className="flex items-center gap-2 ml-2">
+                <div className="flex items-center gap-2 shrink-0">
                   <span className="text-sm font-medium whitespace-nowrap">{item.price.toFixed(2)} €</span>
                   <Button
                     variant="ghost"
@@ -73,9 +73,9 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
         <Separator />
         
         {/* Total */}
-        <div className="flex justify-between items-center p-3 bg-accent/20 rounded-lg">
+        <div className="flex justify-between items-center gap-3 p-3 bg-accent/20 rounded-lg">
           <span className="font-bold text-lg">{t("cart.total")}</span>
-          <span className="font-bold text-xl text-primary whitespace-nowrap">{cartState.total.toFixed(2)} €</span>
+          <span className="font-bold text-xl text-primary whitespace-nowrap shrink-0">{cartState.total.toFixed(2)} €</span>
         </div>
 
       </CardContent>
