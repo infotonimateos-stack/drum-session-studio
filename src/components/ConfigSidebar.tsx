@@ -23,7 +23,7 @@ export function ConfigSidebar({
   onCheckout,
 }: ConfigSidebarProps) {
   return (
-    <Sidebar className="w-72 border-r border-border bg-card/50 backdrop-blur-sm">
+    <Sidebar className="w-80 border-r border-border bg-card/50 backdrop-blur-sm">
       <SidebarHeader className="border-b border-border p-3">
       </SidebarHeader>
       
