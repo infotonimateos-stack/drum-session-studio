@@ -148,12 +148,12 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
               <CardContent>
                 <div className="space-y-3">
                   {items.map((item) => (
-                    <div key={item.id} className="flex justify-between items-center py-2">
-                      <div>
+                    <div key={item.id} className="flex justify-between items-start gap-4 py-2">
+                      <div className="min-w-0 flex-1">
                         <span className="font-medium">{item.name}</span>
                         {item.description && <p className="text-sm text-muted-foreground">{item.description}</p>}
                       </div>
-                      <Badge variant="outline" className="text-primary font-bold">{item.price.toFixed(2)} €</Badge>
+                      <Badge variant="outline" className="text-primary font-bold whitespace-nowrap shrink-0">{item.price.toFixed(2)} €</Badge>
                     </div>
                   ))}
                 </div>
