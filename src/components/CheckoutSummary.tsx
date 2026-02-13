@@ -173,21 +173,21 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
 
         {/* Price Summary + Payment */}
         <div className="lg:col-span-1">
-          <Card className="sticky top-8">
-            <CardHeader><CardTitle className="text-center">{t("checkout.orderTotal")}</CardTitle></CardHeader>
-            <CardContent className="space-y-4">
+          <Card className="sticky top-8 min-w-[320px]">
+            <CardHeader className="p-6 pb-4"><CardTitle className="text-center">{t("checkout.orderTotal")}</CardTitle></CardHeader>
+            <CardContent className="space-y-4 p-6 pt-0">
               <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span>{t("checkout.basicPackage")}</span>
-                  <span>{cartState.basePrice.toFixed(2)} €</span>
+                <div className="flex justify-between items-baseline gap-4">
+                  <span className="shrink-0">{t("checkout.basicPackage")}</span>
+                  <span className="whitespace-nowrap">{cartState.basePrice.toFixed(2)} €</span>
                 </div>
                 {cartState.items.length > 0 && (
                   <>
                     <Separator />
                     {cartState.items.map((item) => (
-                      <div key={item.id} className="flex justify-between text-sm">
-                        <span>{item.name}:</span>
-                        <span>{item.price.toFixed(2)} €</span>
+                      <div key={item.id} className="flex justify-between items-baseline gap-4 text-sm">
+                        <span className="min-w-0">{item.name}:</span>
+                        <span className="whitespace-nowrap">{item.price.toFixed(2)} €</span>
                       </div>
                     ))}
                   </>
@@ -195,34 +195,34 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
 
                 <Separator className="my-4" />
 
-                <div className="flex justify-between text-sm font-medium">
+                <div className="flex justify-between items-baseline gap-4 text-sm font-medium">
                   <span>{t("billing.subtotal")}</span>
-                  <span>{cartState.total.toFixed(2)} €</span>
+                  <span className="whitespace-nowrap">{cartState.total.toFixed(2)} €</span>
                 </div>
 
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between items-baseline gap-4 text-sm">
                   <span>{billingData.taxResult.taxLabel}</span>
-                  <span>{taxAmount > 0 ? `+${taxAmount.toFixed(2)} €` : '0.00 €'}</span>
+                  <span className="whitespace-nowrap">{taxAmount > 0 ? `+${taxAmount.toFixed(2)} €` : '0.00 €'}</span>
                 </div>
 
                 {paymentMethod === 'paypal' && (
-                  <div className="flex justify-between text-sm text-amber-600 dark:text-amber-400">
+                  <div className="flex justify-between items-baseline gap-4 text-sm text-amber-600 dark:text-amber-400">
                     <span>{t("checkout.paypalFee")}</span>
-                    <span>+{paypalFee.toFixed(2)} €</span>
+                    <span className="whitespace-nowrap">+{paypalFee.toFixed(2)} €</span>
                   </div>
                 )}
 
                 {paymentMethod === 'transfer' && (
-                  <div className="flex justify-between text-sm text-success">
+                  <div className="flex justify-between items-baseline gap-4 text-sm text-success">
                     <span>{t("transfer.noFee")}</span>
-                    <span>0.00 €</span>
+                    <span className="whitespace-nowrap">0.00 €</span>
                   </div>
                 )}
 
                 <Separator className="my-2" />
-                <div className="flex justify-between text-lg font-bold">
+                <div className="flex justify-between items-baseline gap-4 text-lg font-bold">
                   <span>{t("checkout.total")}</span>
-                  <span className="text-primary">{displayTotal.toFixed(2)} €</span>
+                  <span className="text-primary whitespace-nowrap">{displayTotal.toFixed(2)} €</span>
                 </div>
               </div>
 
