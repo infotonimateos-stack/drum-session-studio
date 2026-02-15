@@ -122,7 +122,7 @@ export const AboutTab = () => {
               {t("about.studioArtists")}
             </h3>
             <p className="text-sm text-[#a0a0a0] leading-relaxed">
-              Alejandro Sanz, Jarabe de Palo, Raphael, Melendi, Sergio Dalma, Antonio Orozco, Rozalén, Pastora Soler, Marwán...
+              Alejandro Sanz, Jarabe de Palo, Raphael, Melendi, Sergio Dalma, Antonio Orozco, Rozalén, Pastora Soler, Marwán, John Legend...
             </p>
             <div className="pt-2">
               <p className="text-4xl font-black text-white">{t("about.recordedDiscs")}</p>
