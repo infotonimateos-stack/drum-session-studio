@@ -102,7 +102,7 @@ export const AboutTab = () => {
               {t("about.liveArtists")}
             </h3>
             <p className="text-sm text-[#a0a0a0] leading-relaxed">
-              Alejandro Sanz, Miguel Bosé, Juanes, Antonio Orozco, Ana Torroja, Franco de Vita, Pastora Soler, Manuel Carrasco, Sergio Dalma, Raphael, Rosario Flores...
+              Alejandro Sanz, Miguel Bosé, Juanes, Antonio Orozco, Ana Torroja, Franco de Vita, Pastora Soler, Manuel Carrasco, Sergio Dalma, Raphael, Rosario Flores, La Guardia...
             </p>
             <div className="pt-2">
               <p className="text-4xl font-black text-white">{t("about.liveArtistsCount")}</p>
