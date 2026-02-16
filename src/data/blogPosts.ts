@@ -100,6 +100,16 @@ export const blogPosts: BlogPost[] = [
     imageUrl: "/lovable-uploads/the-voice-logo.png",
     tags: ["La Voz", "televisión", "directo", "experiencia"],
   },
+  {
+    slug: "bateria-de-sergio-dalma",
+    slugEn: "drummer-for-sergio-dalma",
+    titleKey: "blog.post10.title",
+    descriptionKey: "blog.post10.description",
+    contentKey: "blog.post10.content",
+    date: "2025-12-01",
+    imageUrl: "/lovable-uploads/sergio-dalma-treinta-y-tanto.png",
+    tags: ["Sergio Dalma", "sesión", "estudio", "rock"],
+  },
 ];
 
 export const getBlogPostBySlug = (slug: string, lang: string): BlogPost | undefined => {
