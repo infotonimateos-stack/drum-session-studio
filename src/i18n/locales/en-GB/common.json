@@ -155,7 +155,7 @@
     "added": "Added",
     "add": "Add",
     "standardDuration": "Standard Duration",
-    "standardDurationDesc": "Songs between 0 and 4 minutes are already included in the base rate of the selected recording set",
+    "standardDurationDesc": "Songs between 0 and 4 minutes, included in the Basic pack",
     "alreadyIncluded": "ALREADY INCLUDED"
   },
   "video": {
