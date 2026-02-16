@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { MessageCircle } from "lucide-react";
-
-const WHATSAPP_URL = "https://wa.me/34670605604?text=Hola%20Toni!";
+import { useTranslation } from "react-i18next";
 
 export const WhatsAppButton = () => {
+  const { t } = useTranslation();
+  const whatsappUrl = `https://wa.me/34670605604?text=${encodeURIComponent(t("whatsapp.message"))}`;
   const [showTooltip, setShowTooltip] = useState(false);
   const [pulse, setPulse] = useState(false);
 
@@ -31,7 +32,7 @@ export const WhatsAppButton = () => {
           }`}
           style={{ transition: "transform 0.4s ease-in-out" }}
         >
-          Hola, ¿cómo puedo ayudarte?
+          {t("whatsapp.tooltip")}
           {/* Arrow */}
           <div className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-3 h-3 bg-[#1a1a1a] rotate-45" />
         </div>
@@ -39,7 +40,7 @@ export const WhatsAppButton = () => {
 
       {/* WhatsApp Button */}
       <a
-        href={WHATSAPP_URL}
+        href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contactar por WhatsApp"
