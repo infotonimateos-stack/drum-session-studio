@@ -9,6 +9,7 @@ import { TutorialsTab } from "@/components/tabs/TutorialsTab";
 import { FAQTab } from "@/components/tabs/FAQTab";
 import { ContactTab } from "@/components/tabs/ContactTab";
 import { Footer } from "@/components/Footer";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { useCart } from "@/hooks/useCart";
 import { SEOHead } from "@/components/SEOHead";
 
@@ -58,6 +59,7 @@ const Index = () => {
         {renderContent()}
       </div>
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };
