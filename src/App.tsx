@@ -12,6 +12,8 @@ import PoliticaPrivacidad from "./pages/PoliticaPrivacidad";
 import PoliticaCookies from "./pages/PoliticaCookies";
 import AmpliarPedido from "./pages/AmpliarPedido";
 import AdminPanel from "./pages/AdminPanel";
+import BlogIndex from "./pages/BlogIndex";
+import BlogPost from "./pages/BlogPost";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,8 @@ const AppRoutes = () => (
       <Route path="/politica-cookies" element={<PoliticaCookies />} />
       <Route path="/ampliar-pedido" element={<AmpliarPedido />} />
       <Route path="/gfs-admin-2025" element={<AdminPanel />} />
+      <Route path="/blog" element={<BlogIndex />} />
+      <Route path="/blog/:slug" element={<BlogPost />} />
     </Route>
 
     {/* English routes (/en prefix) */}
@@ -37,6 +41,8 @@ const AppRoutes = () => (
       <Route path="politica-cookies" element={<PoliticaCookies />} />
       <Route path="ampliar-pedido" element={<AmpliarPedido />} />
       <Route path="gfs-admin-2025" element={<AdminPanel />} />
+      <Route path="blog" element={<BlogIndex />} />
+      <Route path="blog/:slug" element={<BlogPost />} />
     </Route>
 
     {/* Catch-all */}
