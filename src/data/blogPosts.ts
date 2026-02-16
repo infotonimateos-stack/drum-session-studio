@@ -120,6 +120,16 @@ export const blogPosts: BlogPost[] = [
     imageUrl: "/lovable-uploads/preamp-512c.png",
     tags: ["previo", "preamplificador", "equipo", "estudio"],
   },
+  {
+    slug: "bateria-de-antonio-orozco",
+    slugEn: "drummer-for-antonio-orozco",
+    titleKey: "blog.post12.title",
+    descriptionKey: "blog.post12.description",
+    contentKey: "blog.post12.content",
+    date: "2026-01-15",
+    imageUrl: "/lovable-uploads/antonio-orozco-destino.png",
+    tags: ["Antonio Orozco", "gira", "Destino", "sesión"],
+  },
 ];
 
 export const getBlogPostBySlug = (slug: string, lang: string): BlogPost | undefined => {
