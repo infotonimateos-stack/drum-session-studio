@@ -6,10 +6,12 @@ import { CheckCircle, Home, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Footer } from "@/components/Footer";
 import { useTranslation } from "react-i18next";
+import { useLanguagePrefix } from "@/hooks/useLanguagePrefix";
 
 export default function Success() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { localePath } = useLanguagePrefix();
   const [searchParams] = useSearchParams();
   const [isCapturing, setIsCapturing] = useState(false);
   const [captureComplete, setCaptureComplete] = useState(false);
@@ -98,7 +100,7 @@ export default function Success() {
               </div>
 
               <Button 
-                onClick={() => navigate("/")}
+                onClick={() => navigate(localePath("/"))}
                 className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
                 size="lg"
               >
@@ -194,7 +196,7 @@ export default function Success() {
             </div>
 
             <Button 
-              onClick={() => navigate("/")}
+              onClick={() => navigate(localePath("/"))}
               className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
               size="lg"
             >

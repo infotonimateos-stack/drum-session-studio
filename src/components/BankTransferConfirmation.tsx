@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { Landmark, Copy, Mail, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
+import { useLanguagePrefix } from "@/hooks/useLanguagePrefix";
 
 interface BankTransferConfirmationProps {
   orderId: string;
@@ -14,6 +15,7 @@ interface BankTransferConfirmationProps {
 
 export const BankTransferConfirmation = ({ orderId, total, onBackHome }: BankTransferConfirmationProps) => {
   const { t } = useTranslation();
+  const { localePath } = useLanguagePrefix();
   const iban = "ES84 2100 0125 7602 0068 6553";
 
   const copyToClipboard = (text: string, label: string) => {
@@ -135,7 +137,7 @@ export const BankTransferConfirmation = ({ orderId, total, onBackHome }: BankTra
       </Card>
 
       <div className="text-center">
-        <Button size="lg" className="h-14 px-8" onClick={() => window.location.href = '/'}>{t("success.backHome")}</Button>
+        <Button size="lg" className="h-14 px-8" onClick={() => window.location.href = localePath('/')}>{t("success.backHome")}</Button>
       </div>
     </div>
   );
