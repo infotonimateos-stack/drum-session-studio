@@ -90,6 +90,16 @@ export const blogPosts: BlogPost[] = [
     imageUrl: "/lovable-uploads/46e97fb2-1e58-4f21-b83d-86c1a0f0fa05.png",
     tags: ["Alejandro Sanz", "sesión", "experiencia", "estudio"],
   },
+  {
+    slug: "bateria-de-la-voz",
+    slugEn: "drummer-for-la-voz-the-voice",
+    titleKey: "blog.post9.title",
+    descriptionKey: "blog.post9.description",
+    contentKey: "blog.post9.content",
+    date: "2025-11-01",
+    imageUrl: "/lovable-uploads/c3aae572-234c-41c9-a967-2d00f027d2b3.png",
+    tags: ["La Voz", "televisión", "directo", "experiencia"],
+  },
 ];
 
 export const getBlogPostBySlug = (slug: string, lang: string): BlogPost | undefined => {
