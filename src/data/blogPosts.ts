@@ -57,7 +57,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post5.description",
     contentKey: "blog.post5.content",
     date: "2025-07-10",
-    imageUrl: "/lovable-uploads/903f1003-c2ac-486f-970e-14aeef1bdc43.png",
+    imageUrl: "/lovable-uploads/0de754df-90d3-49fe-b9df-9d10250b037c.png",
     tags: ["DAW", "preparación", "sesión remota"],
   },
   {
@@ -67,7 +67,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post6.description",
     contentKey: "blog.post6.content",
     date: "2025-08-05",
-    imageUrl: "/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.png",
+    imageUrl: "/lovable-uploads/5b4e514d-0c50-42a1-834a-3b4c1d7ab825.png",
     tags: ["batería real", "programación", "producción"],
   },
   {
@@ -77,7 +77,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post7.description",
     contentKey: "blog.post7.content",
     date: "2025-09-01",
-    imageUrl: "/lovable-uploads/890c7bbc-79ba-4df4-8441-4cbf232e9b5c.png",
+    imageUrl: "/lovable-uploads/b68b9884-03e0-40e8-8f4e-21e5ce19fc08.png",
     tags: ["carrera", "experiencia", "artistas internacionales"],
   },
   {
@@ -87,7 +87,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post8.description",
     contentKey: "blog.post8.content",
     date: "2025-10-01",
-    imageUrl: "/lovable-uploads/890c7bbc-79ba-4df4-8441-4cbf232e9b5c.png",
+    imageUrl: "/lovable-uploads/46e97fb2-1e58-4f21-b83d-86c1a0f0fa05.png",
     tags: ["Alejandro Sanz", "sesión", "experiencia", "estudio"],
   },
 ];
