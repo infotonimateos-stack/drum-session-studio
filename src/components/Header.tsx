@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Sun, Moon, MessageCircle, Menu, X } from "lucide-react";
+import { Sun, Moon, Menu, X } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { useTranslation } from "react-i18next";
 
 const logoUrl = "/lovable-uploads/890c7bbc-79ba-4df4-8441-4cbf232e9b5c.png";
-const WHATSAPP_URL = "https://wa.me/34670605604";
 
 interface HeaderProps {
   activeTab: string;
@@ -67,15 +66,6 @@ export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
             {/* Right actions */}
             <div className="flex items-center gap-1.5 flex-shrink-0 ml-auto md:ml-0">
               <LanguageSelector />
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Contactar por WhatsApp"
-                className="inline-flex items-center justify-center h-8 w-8 text-muted-foreground hover:text-foreground hover:bg-muted/60 rounded-md transition-colors"
-              >
-                <MessageCircle className="h-4 w-4" />
-              </a>
               <button
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
                 className="inline-flex items-center justify-center h-8 w-8 text-muted-foreground hover:text-foreground hover:bg-muted/60 rounded-md transition-colors"
