@@ -57,6 +57,9 @@
     "step3Text": "Te enviamos las pistas de batería por Wetransfer con la máxima calidad"
   },
   "config": {
+    "h1": "Grabación de Baterías Online y Baterista de Sesión Profesional Remoto",
+    "h2studio": "Grabación de batería de estudio para producciones internacionales",
+    "h2gear": "Equipamiento grabación baterías: previos Neve y API",
     "steps": {
       "microphones": "Micrófonos",
       "preamps": "Previos",
@@ -67,7 +70,7 @@
       "delivery": "Entrega",
       "extras": "Extras"
     },
-    "heroTitle": "Configura tu Sesión",
+    "heroTitle": "Configura tu grabación de batería remota",
     "priceFrom": "desde 49,90 €",
     "heroP1": "Comienza con nuestra configuración básica que incluye todo lo esencial para una grabación profesional.",
     "heroP2": "💡 Cada elemento se puede actualizar individualmente para crear tu setup perfecto",
@@ -322,6 +325,8 @@
     "title": "Idioma / Language"
   },
   "about": {
+    "h1": "Toni Mateos: Baterista de Alejandro Sanz y Antonio Orozco",
+    "h2career": "Trayectoria en grabaciones y giras internacionales",
     "professionalDrummer": "Baterista Profesional",
     "tagline": "35 años poniendo el ritmo a tus canciones. Desde Barcelona para el mundo.",
     "discs": "+1000 Discos",

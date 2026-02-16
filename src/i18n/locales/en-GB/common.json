@@ -57,6 +57,9 @@
     "step3Text": "We send the drum stems via WeTransfer in maximum quality"
   },
   "config": {
+    "h1": "Online Drum Recording and Professional Remote Session Drummer",
+    "h2studio": "Studio drum recording for international productions",
+    "h2gear": "Elite recording gear: Neve and API preamps",
     "steps": {
       "microphones": "Microphones",
       "preamps": "Preamps",
@@ -67,7 +70,7 @@
       "delivery": "Delivery",
       "extras": "Extras"
     },
-    "heroTitle": "Configure your Session",
+    "heroTitle": "Configure your remote custom drum recording",
     "priceFrom": "from €49.90",
     "heroP1": "Start with our basic setup that includes everything essential for a professional recording.",
     "heroP2": "💡 Each element can be upgraded individually to create your perfect setup",
@@ -325,6 +328,8 @@
     "title": "Language"
   },
   "about": {
+    "h1": "Toni Mateos: Drummer for Alejandro Sanz and Juanes",
+    "h2career": "Career in international recordings and tours",
     "professionalDrummer": "Professional Session Drummer",
     "tagline": "35 years as an online session drummer for the world's top artists. Professional remote drum recording from Barcelona — trusted by John Legend, Alejandro Sanz and Juanes.",
     "discs": "+1000 Records",
