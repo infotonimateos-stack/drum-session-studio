@@ -80,6 +80,16 @@ export const blogPosts: BlogPost[] = [
     imageUrl: "/lovable-uploads/890c7bbc-79ba-4df4-8441-4cbf232e9b5c.png",
     tags: ["carrera", "experiencia", "artistas internacionales"],
   },
+  {
+    slug: "bateria-de-alejandro-sanz",
+    slugEn: "drumming-for-alejandro-sanz",
+    titleKey: "blog.post8.title",
+    descriptionKey: "blog.post8.description",
+    contentKey: "blog.post8.content",
+    date: "2025-10-01",
+    imageUrl: "/lovable-uploads/890c7bbc-79ba-4df4-8441-4cbf232e9b5c.png",
+    tags: ["Alejandro Sanz", "sesión", "experiencia", "estudio"],
+  },
 ];
 
 export const getBlogPostBySlug = (slug: string, lang: string): BlogPost | undefined => {
