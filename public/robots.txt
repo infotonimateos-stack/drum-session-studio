@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://drum-session-studio.lovable.app/sitemap.xml

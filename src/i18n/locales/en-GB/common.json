@@ -621,5 +621,31 @@
   "legal": {
     "tax_exemption_professional": "VAT not applicable. Reverse charge mechanism",
     "tax_exemption_export": "VAT not applicable due to place of supply rules"
+  },
+  "blog": {
+    "heading": "Blog",
+    "subheading": "Articles about drum recording techniques, studio gear and Toni Mateos' career as a professional online session drummer",
+    "notFound": "Article not found",
+    "backToList": "← Back to blog",
+    "post1": {
+      "title": "How to Record Drums Online Professionally",
+      "description": "Discover the complete process to get professional drum tracks recorded remotely — from setup configuration to final delivery by an experienced session drummer.",
+      "content": "Online drum recording has revolutionised music production. You no longer need to book a local studio or coordinate schedules with a session drummer in your city. From Groove Factory Studios in Barcelona, Toni Mateos offers a professional remote drum recording service combining 35 years of experience with world-class gear.\nThe process is simple: configure your session by choosing microphones, preamps and audio interfaces, send your demo with style notes, and receive multitrack stems in high quality (24-bit/48kHz) straight to your inbox.\nThe key to a great result is communication. The more details you provide about the sound you're after — Spotify references, groove indications, exact BPMs — the closer the final tracks will be to your vision. Toni has recorded over 1,000 albums with artists including John Legend, Alejandro Sanz, Juanes, Antonio Orozco and Pastora Soler, and can adapt to any style.\nThe 50 m² room with 3.5-metre ceilings is designed to capture a natural, powerful drum sound. The audio chain features Neumann, AKG and Sennheiser microphones, API, Neve and DAD preamps, and state-of-the-art converters.\nIf you're looking for professional drum tracks without leaving your studio, online session drumming with Toni Mateos is the answer."
+    },
+    "post2": {
+      "title": "Best Microphones for Recording Drums",
+      "description": "A complete guide to the microphones we use at Groove Factory Studios to capture the best drum sound: Neumann, AKG, Sennheiser and more.",
+      "content": "Microphone choice is one of the most decisive factors in the quality of a drum recording. At Groove Factory Studios we use a carefully curated arsenal to cover every element of the kit.\nFor the snare, the industry standard is the Shure SM57, but when we want more body and detail we add an AKG C414 underneath or a Sennheiser MD441 to capture every nuance of the snare wires.\nOn the kick drum, the combination of a Beta 52 with a Beta 91A inside provides attack and definition without losing low end. For a more vintage character, the Neumann U47 FET is unbeatable.\nOverheads are critical for the stereo image. We use a pair of AKG C414s in XY or ORTF configuration, and for a softer texture the Coles 4038 ribbon mics deliver that unmistakable British warmth.\nRoom microphones — a Neumann U87 and an AKG C12 — bring the 50 m² room to life, capturing the natural reflections that make the drums sound three-dimensional.\nEach microphone can be added or removed from the session configurator, letting you tailor the exact setup to your production's needs."
+    },
+    "post3": {
+      "title": "API, Neve and DAD Preamps: What's the Difference?",
+      "description": "A technical comparison of the three legendary preamp families we use in the studio: API for punch, Neve for vintage warmth, DAD for absolute transparency.",
+      "content": "Preamplifiers are the hidden soul of any recording. While microphones capture the sound, preamps give it character and colour. At Groove Factory Studios we have three legendary families: API, Neve and DAD.\nAPI means punch. Its transformers deliver a presence and power that work especially well on rock and pop drums. It's the sound of the great American records: direct, muscular and full-bodied.\nNeve means warmth. Its circuitry adds a smoothness and musicality that rounds off transients without losing definition. It's the go-to preamp for productions seeking a vintage, organic touch. Run a snare through a Neve and the difference is instant.\nDAD (Digital Audio Denmark) represents total transparency. Its preamps add no colouration: what goes in is exactly what comes out, with exceptional dynamic range. It's the choice for productions demanding maximum fidelity — classical music, jazz or film scores.\nIn our session configurator you can choose between the basic MOTU kit (included) or upgrade to the legendary API + Neve + DAD pack. Most of our professional clients choose the upgrade because the difference in the final result is dramatic."
+    },
+    "post4": {
+      "title": "Toni Mateos: 35 Years Setting the Rhythm in Music",
+      "description": "The professional career of Toni Mateos, online session drummer with 1,000+ albums recorded and collaborations with John Legend, Alejandro Sanz, Juanes and more.",
+      "content": "With over 35 years as a professional musician, Toni Mateos is one of the most sought-after session drummers in the Spanish-language music scene — and increasingly on the international stage. His CV includes over 1,000 recorded albums and more than 2,000 live artists.\nHis list of collaborations features names such as John Legend, Alejandro Sanz, Juanes, Antonio Orozco, Ana Torroja, Franco de Vita, Pastora Soler, Manuel Carrasco, Sergio Dalma, Raphael, Rosario Flores and La Guardia, among many others.\nBeyond live performance, Toni has appeared on over 500 television shows and records more than 800 songs a year at his Barcelona studio. His versatility allows him to move naturally between pop, rock, flamenco, Latin ballad and any style that demands groove and musicality.\nGroove Factory Studios was born as the natural extension of this experience. A purpose-built 50 m² space designed specifically for drum recording, equipped with the finest microphones and preamps on the market.\nToday, thanks to his online remote drum recording service, musicians and producers worldwide can access Toni Mateos' sound and expertise without leaving their own studio. From Barcelona to the world."
+    }
   }
 }
