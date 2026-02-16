@@ -110,6 +110,16 @@ export const blogPosts: BlogPost[] = [
     imageUrl: "/lovable-uploads/sergio-dalma-treinta-y-tanto.png",
     tags: ["Sergio Dalma", "sesión", "estudio", "rock"],
   },
+  {
+    slug: "que-es-un-previo-de-micro",
+    slugEn: "what-is-a-microphone-preamp",
+    titleKey: "blog.post11.title",
+    descriptionKey: "blog.post11.description",
+    contentKey: "blog.post11.content",
+    date: "2025-12-15",
+    imageUrl: "/lovable-uploads/preamp-512c.png",
+    tags: ["previo", "preamplificador", "equipo", "estudio"],
+  },
 ];
 
 export const getBlogPostBySlug = (slug: string, lang: string): BlogPost | undefined => {
