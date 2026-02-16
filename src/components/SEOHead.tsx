@@ -1,85 +1,61 @@
-import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
-import { languageConfig } from "@/i18n";
 
 const BASE_URL = "https://drum-session-studio.lovable.app";
 
-export const SEOHead = () => {
+interface SEOHeadProps {
+  titleKey?: string;
+  descriptionKey?: string;
+  image?: string;
+}
+
+export const SEOHead = ({ titleKey, descriptionKey, image }: SEOHeadProps) => {
   const { i18n, t } = useTranslation();
   const location = useLocation();
+  const isEnglish = i18n.language === "en-GB";
 
-  useEffect(() => {
-    // Update document title
-    document.title = t("seo.title", "Toni Mateos - Grabación Profesional de Baterías Online");
+  const title = titleKey ? t(titleKey) : t("seo.title");
+  const description = descriptionKey ? t(descriptionKey) : t("seo.description");
+  const ogImage = image || `${BASE_URL}/lovable-uploads/903f1003-c2ac-486f-970e-14aeef1bdc43.png`;
 
-    // Update meta description
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement("meta");
-      metaDescription.setAttribute("name", "description");
-      document.head.appendChild(metaDescription);
-    }
-    metaDescription.setAttribute("content", t("seo.description"));
+  const pathWithoutLang = location.pathname.replace(/^\/en/, "") || "/";
+  const canonicalUrl = isEnglish
+    ? `${BASE_URL}/en${pathWithoutLang === "/" ? "" : pathWithoutLang}`
+    : `${BASE_URL}${pathWithoutLang}`;
 
-    // Get the path without the language prefix for building alternates
-    const pathWithoutLang = location.pathname.replace(/^\/en/, "") || "/";
+  const esUrl = `${BASE_URL}${pathWithoutLang}`;
+  const enUrl = `${BASE_URL}/en${pathWithoutLang === "/" ? "" : pathWithoutLang}`;
 
-    // Remove existing hreflang tags
-    document.querySelectorAll('link[hreflang]').forEach(el => el.remove());
+  return (
+    <Helmet>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <link rel="canonical" href={canonicalUrl} />
 
-    // Spanish hreflang (default, no prefix)
-    const esLink = document.createElement("link");
-    esLink.rel = "alternate";
-    esLink.hreflang = "es";
-    esLink.href = `${BASE_URL}${pathWithoutLang}`;
-    document.head.appendChild(esLink);
+      {/* hreflang alternates */}
+      <link rel="alternate" hrefLang="es" href={esUrl} />
+      <link rel="alternate" hrefLang="en" href={enUrl} />
+      <link rel="alternate" hrefLang="x-default" href={esUrl} />
 
-    // English hreflang (/en prefix)
-    const enLink = document.createElement("link");
-    enLink.rel = "alternate";
-    enLink.hreflang = "en";
-    enLink.href = `${BASE_URL}/en${pathWithoutLang === "/" ? "" : pathWithoutLang}`;
-    document.head.appendChild(enLink);
+      {/* Open Graph */}
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:locale" content={i18n.language.replace("-", "_")} />
+      <meta property="og:locale:alternate" content={isEnglish ? "es_ES" : "en_GB"} />
+      <meta property="og:site_name" content="Toni Mateos - Drum Recording" />
 
-    // x-default → Spanish
-    const defaultLink = document.createElement("link");
-    defaultLink.rel = "alternate";
-    defaultLink.hreflang = "x-default";
-    defaultLink.href = `${BASE_URL}${pathWithoutLang}`;
-    document.head.appendChild(defaultLink);
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={ogImage} />
 
-    // Update canonical URL (current language version)
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.setAttribute("rel", "canonical");
-      document.head.appendChild(canonical);
-    }
-    const isEnglish = i18n.language === "en-GB";
-    canonical.setAttribute("href", isEnglish
-      ? `${BASE_URL}/en${pathWithoutLang === "/" ? "" : pathWithoutLang}`
-      : `${BASE_URL}${pathWithoutLang}`
-    );
-
-    // Update Open Graph locale
-    let ogLocale = document.querySelector('meta[property="og:locale"]');
-    if (!ogLocale) {
-      ogLocale = document.createElement("meta");
-      ogLocale.setAttribute("property", "og:locale");
-      document.head.appendChild(ogLocale);
-    }
-    ogLocale.setAttribute("content", i18n.language.replace("-", "_"));
-
-    // Add og:locale:alternate
-    document.querySelectorAll('meta[property="og:locale:alternate"]').forEach(el => el.remove());
-    const alternateLang = isEnglish ? "es_ES" : "en_GB";
-    const ogAlt = document.createElement("meta");
-    ogAlt.setAttribute("property", "og:locale:alternate");
-    ogAlt.setAttribute("content", alternateLang);
-    document.head.appendChild(ogAlt);
-
-  }, [i18n.language, t, location.pathname]);
-
-  return null;
+      {/* Language */}
+      <html lang={isEnglish ? "en" : "es"} />
+    </Helmet>
+  );
 };

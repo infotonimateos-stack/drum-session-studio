@@ -60,7 +60,7 @@ export const AboutTab = () => {
             <div className="w-full aspect-[4/3] rounded-lg overflow-hidden">
               <img
                 src="/lovable-uploads/eb4a1907-6a44-44e7-8d78-faa86b62200e.png"
-                alt="Toni Mateos"
+                alt={t("about.photoAlt")}
                 className="w-full h-full object-cover"
               />
             </div>

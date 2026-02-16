@@ -14,7 +14,7 @@ const BlogIndex = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <SEOHead />
+      <SEOHead titleKey="seo.blogTitle" descriptionKey="seo.blogDescription" />
       <Header activeTab={activeTab} onTabChange={setActiveTab} />
       <main className="flex-1 max-w-4xl mx-auto px-4 py-12 w-full">
         <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">

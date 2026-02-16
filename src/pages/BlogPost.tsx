@@ -5,7 +5,7 @@ import { Footer } from "@/components/Footer";
 import { SEOHead } from "@/components/SEOHead";
 import { getBlogPostBySlug } from "@/data/blogPosts";
 import { useLanguagePrefix } from "@/hooks/useLanguagePrefix";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 
 const BlogPost = () => {
@@ -16,11 +16,7 @@ const BlogPost = () => {
 
   const post = slug ? getBlogPostBySlug(slug, i18n.language) : undefined;
 
-  useEffect(() => {
-    if (post) {
-      document.title = t(post.titleKey);
-    }
-  }, [post, t]);
+  // Title is now managed by SEOHead via Helmet
 
   if (!post) {
     return (
@@ -46,7 +42,7 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <SEOHead />
+      <SEOHead titleKey={post.titleKey} descriptionKey={post.descriptionKey} image={`https://drum-session-studio.lovable.app${post.imageUrl}`} />
       <Header activeTab={activeTab} onTabChange={setActiveTab} />
       <main className="flex-1 max-w-3xl mx-auto px-4 py-12 w-full">
         <Link

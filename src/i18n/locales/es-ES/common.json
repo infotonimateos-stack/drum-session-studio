@@ -1,10 +1,13 @@
 {
   "seo": {
-    "title": "Toni Mateos - Grabación Profesional de Baterías Online",
-    "description": "Servicio profesional de grabación de baterías online. Más de 35 años de experiencia y 1000+ álbumes grabados."
+    "title": "Grabación de Baterías Online y Baterista de Sesión Profesional Remoto",
+    "description": "Grabación remota de baterías con previos Neve y API de máxima calidad. Baterista de sesión con 35 años de experiencia, habiendo grabado para John Legend, Alejandro Sanz y Juanes. Pistas de batería personalizadas desde tu estudio.",
+    "blogTitle": "Blog - Grabación de Baterías Online | Toni Mateos",
+    "blogDescription": "Artículos sobre grabación profesional de baterías, equipamiento de estudio, técnicas de microfonía y experiencias con artistas internacionales."
   },
   "header": { 
-    "brand": "Toni Mateos Online Drums Recording" 
+    "brand": "Toni Mateos Online Drums Recording",
+    "logoAlt": "Toni Mateos - Baterista de sesión profesional y grabación de baterías online"
   },
   "nav": {
     "configure": "Configura tu Sesión",
@@ -27,9 +30,9 @@
     "title": "El Estudio",
     "subtitle": "Un espacio diseñado específicamente para capturar el mejor sonido de batería",
     "gallery": "Galería del Estudio",
-    "galleryAlt1": "Estudio de batería: kit microfoneado vista 1",
-    "galleryAlt2": "Estudio de batería: sala tratada vista 2",
-    "galleryAlt3": "Equipamiento profesional de audio: rack con previos API",
+    "galleryAlt1": "Estudio de grabación de baterías online - kit microfoneado con micrófonos profesionales",
+    "galleryAlt2": "Sala de grabación de baterías tratada acústicamente - estudio profesional",
+    "galleryAlt3": "Rack de previos API y Neve para grabación profesional de baterías",
     "featuresTitle": "Características del Estudio",
     "acousticsTitle": "Acústica Profesional",
     "acousticsDesc": "Sala diseñada y tratada acústicamente por los mejores ingenieros acústicos para un sonido profesional impecable.",
@@ -68,7 +71,7 @@
     "priceFrom": "desde 49,90 €",
     "heroP1": "Comienza con nuestra configuración básica que incluye todo lo esencial para una grabación profesional.",
     "heroP2": "💡 Cada elemento se puede actualizar individualmente para crear tu setup perfecto",
-    "imgAlt": "Batería microfoneada en estudio profesional",
+    "imgAlt": "Batería microfoneada en estudio de grabación de baterías online profesional",
     "progress": "Progreso de la configuración"
   },
   "microphones": {
@@ -103,7 +106,9 @@
     "dadDesc": "Claridad y Transparencia Pristina",
     "usedIn": "Usado en discos de platino",
     "addedToCart": "✨ AÑADIDO AL CARRITO",
-    "upgradeFor": "UPGRADE POR"
+    "upgradeFor": "UPGRADE POR",
+    "motuAlt": "Previo MOTU 8Pre incluido en la grabación de baterías online",
+    "proPackAlt": "Pack previos profesionales API Neve y DAD para grabación de baterías"
   },
   "interface": {
     "title": "🎛️ Interface de Audio",
@@ -130,7 +135,9 @@
     "spec4": "Usado en estudios de élite mundial",
     "upgradeText": "🚀 Mejora drástica en claridad y definición",
     "addedToCart": "✨ AÑADIDO AL CARRITO",
-    "upgradeFor": "UPGRADE POR"
+    "upgradeFor": "UPGRADE POR",
+    "motuAlt": "Interfaz MOTU 8Pre para grabación de baterías online",
+    "dadAlt": "Interfaz DAD AX64 para grabación de baterías - conversión de élite"
   },
   "production": {
     "title": "Producción",
@@ -344,6 +351,7 @@
     "recordedDiscs": "+1000",
     "recordedDiscsLabel": "discos grabados",
     "locationBarcelona": "Barcelona, España",
+    "photoAlt": "Toni Mateos - Baterista de sesión profesional con 35 años de experiencia",
     "liveStageAlt": "Batería en escenario con luces dramáticas",
     "studioAlt": "Estudio de grabación profesional con batería acústica"
   },
