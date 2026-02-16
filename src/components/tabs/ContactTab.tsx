@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, Instagram, Youtube, Music } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram, Youtube } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export const ContactTab = () => {
@@ -105,18 +105,18 @@ export const ContactTab = () => {
               <CardTitle>{t("contact.followMe")}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <Button variant="outline" className="w-full justify-start gap-3">
-                <Instagram className="h-5 w-5" />
-                @tonimateos_drums
-              </Button>
-              <Button variant="outline" className="w-full justify-start gap-3">
-                <Youtube className="h-5 w-5" />
-                Toni Mateos Drums
-              </Button>
-              <Button variant="outline" className="w-full justify-start gap-3">
-                <Music className="h-5 w-5" />
-                Spotify Artist Profile
-              </Button>
+              <a href="https://www.instagram.com/tonimateosdrummer" target="_blank" rel="noopener noreferrer" className="w-full">
+                <Button variant="outline" className="w-full justify-start gap-3">
+                  <Instagram className="h-5 w-5" />
+                  @tonimateosdrummer
+                </Button>
+              </a>
+              <a href="https://www.youtube.com/tonimateos" target="_blank" rel="noopener noreferrer" className="w-full">
+                <Button variant="outline" className="w-full justify-start gap-3">
+                  <Youtube className="h-5 w-5" />
+                  Toni Mateos
+                </Button>
+              </a>
             </CardContent>
           </Card>
 
