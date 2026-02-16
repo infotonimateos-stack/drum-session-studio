@@ -87,7 +87,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post8.description",
     contentKey: "blog.post8.content",
     date: "2025-10-01",
-    imageUrl: "/lovable-uploads/46e97fb2-1e58-4f21-b83d-86c1a0f0fa05.png",
+    imageUrl: "/lovable-uploads/alejandro-sanz-es-concierto.png",
     tags: ["Alejandro Sanz", "sesión", "experiencia", "estudio"],
   },
   {
