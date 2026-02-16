@@ -3,9 +3,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "@/components/Footer";
+import { useTranslation } from "react-i18next";
+import { useLanguagePrefix } from "@/hooks/useLanguagePrefix";
 
 export default function AvisoLegal() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { localePath } = useLanguagePrefix();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-warm-cream/30 to-warm-peach/20 flex flex-col">
@@ -13,11 +17,11 @@ export default function AvisoLegal() {
         <div className="max-w-4xl mx-auto">
           <Button 
             variant="ghost" 
-            onClick={() => navigate("/")}
+            onClick={() => navigate(localePath("/"))}
             className="mb-6"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Volver al inicio
+            {t("success.backHome")}
           </Button>
 
           <Card className="bg-background/80 backdrop-blur-sm">

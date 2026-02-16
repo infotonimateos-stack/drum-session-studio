@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import { useTranslation } from "react-i18next";
+import { useLanguagePrefix } from "@/hooks/useLanguagePrefix";
 
 export const Footer = () => {
   const { t } = useTranslation();
+  const { localePath } = useLanguagePrefix();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -13,21 +15,21 @@ export const Footer = () => {
           {/* Legal Links */}
           <nav className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm">
             <Link 
-              to="/aviso-legal" 
+              to={localePath("/aviso-legal")} 
               className="text-muted-foreground hover:text-primary transition-colors"
             >
               {t("footer.legalNotice")}
             </Link>
             <Separator orientation="vertical" className="h-4 hidden md:block" />
             <Link 
-              to="/politica-privacidad" 
+              to={localePath("/politica-privacidad")} 
               className="text-muted-foreground hover:text-primary transition-colors"
             >
               {t("footer.privacyPolicy")}
             </Link>
             <Separator orientation="vertical" className="h-4 hidden md:block" />
             <Link 
-              to="/politica-cookies" 
+              to={localePath("/politica-cookies")} 
               className="text-muted-foreground hover:text-primary transition-colors"
             >
               {t("footer.cookiesPolicy")}
