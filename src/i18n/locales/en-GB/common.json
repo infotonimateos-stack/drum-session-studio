@@ -325,6 +325,10 @@
     "privacyPolicy": "Privacy Policy",
     "cookiesPolicy": "Cookies Policy"
   },
+  "whatsapp": {
+    "tooltip": "Hi, how can I help you?",
+    "message": "Hi Toni!"
+  },
   "language": {
     "title": "Language"
   },
