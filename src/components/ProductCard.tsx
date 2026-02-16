@@ -9,6 +9,7 @@ interface ProductCardProps {
   description?: string;
   descriptionList?: { emoji: string; text: string }[];
   image?: string;
+  imageAlt?: string;
   imageContain?: boolean;
   icon?: ReactNode;
   isSelected: boolean;
@@ -27,6 +28,7 @@ export const ProductCard = ({
   description,
   descriptionList,
   image,
+  imageAlt,
   imageContain = true,
   icon,
   isSelected,
@@ -73,7 +75,7 @@ export const ProductCard = ({
           <div className="w-full aspect-video flex items-center justify-center rounded-xl overflow-hidden bg-white border border-white/20">
             <img
               src={image}
-              alt={name}
+              alt={imageAlt || name}
               className="w-full h-full object-contain p-2"
             />
           </div>

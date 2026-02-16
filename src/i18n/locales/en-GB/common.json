@@ -1,10 +1,13 @@
 {
   "seo": {
-    "title": "Toni Mateos - Online Session Drummer | Professional Remote Drum Recording",
-    "description": "Hire a professional online session drummer with 35+ years of experience. Remote drum recording trusted by John Legend, Alejandro Sanz & Juanes. 1000+ albums recorded from Barcelona."
+    "title": "Online Drum Recording and Professional Remote Session Drummer",
+    "description": "Remote drum recording with top-quality Neve and API preamps. Session drummer with 35 years of experience, having recorded for John Legend, Alejandro Sanz and Juanes. Custom drum tracks delivered from our professional studio.",
+    "blogTitle": "Blog - Online Drum Recording | Toni Mateos",
+    "blogDescription": "Articles about professional drum recording, studio equipment, microphone techniques and experiences with international artists."
   },
   "header": { 
-    "brand": "Toni Mateos Online Drums Recording" 
+    "brand": "Toni Mateos Online Drums Recording",
+    "logoAlt": "Toni Mateos - Professional session drummer and online drum recording"
   },
   "nav": {
     "configure": "Configure your Session",
@@ -27,9 +30,9 @@
     "title": "The Studio",
     "subtitle": "A space designed specifically to capture the best drum sound",
     "gallery": "Studio Gallery",
-    "galleryAlt1": "Drum studio: mic'd kit view 1",
-    "galleryAlt2": "Drum studio: treated room view 2",
-    "galleryAlt3": "Professional audio equipment: API preamp rack",
+    "galleryAlt1": "Professional online drum recording studio - mic'd drum kit with professional microphones",
+    "galleryAlt2": "Acoustically treated drum recording room - professional studio",
+    "galleryAlt3": "API and Neve preamp rack for professional drum recording",
     "featuresTitle": "Studio Features",
     "acousticsTitle": "Professional Acoustics",
     "acousticsDesc": "Room designed and acoustically treated by top acoustic engineers for an impeccable professional sound.",
@@ -68,7 +71,7 @@
     "priceFrom": "from €49.90",
     "heroP1": "Start with our basic setup that includes everything essential for a professional recording.",
     "heroP2": "💡 Each element can be upgraded individually to create your perfect setup",
-    "imgAlt": "Mic'd drum kit in professional studio",
+    "imgAlt": "Mic'd drum kit in professional online drum recording studio",
     "progress": "Configuration progress"
   },
   "microphones": {
@@ -103,7 +106,9 @@
     "dadDesc": "Pristine clarity and transparency",
     "usedIn": "Used in platinum records",
     "addedToCart": "✨ ADDED TO CART",
-    "upgradeFor": "UPGRADE FOR"
+    "upgradeFor": "UPGRADE FOR",
+    "motuAlt": "MOTU 8Pre preamp included in online drum recording",
+    "proPackAlt": "Professional API Neve and DAD preamp pack for drum recording"
   },
   "interface": {
     "title": "🎛️ Audio Interface",
@@ -130,7 +135,9 @@
     "spec4": "Used in elite studios worldwide",
     "upgradeText": "🚀 Dramatic improvement in clarity and definition",
     "addedToCart": "✨ ADDED TO CART",
-    "upgradeFor": "UPGRADE FOR"
+    "upgradeFor": "UPGRADE FOR",
+    "motuAlt": "MOTU 8Pre interface for online drum recording",
+    "dadAlt": "DAD AX64 interface for drum recording - elite conversion"
   },
   "production": {
     "title": "Production",
@@ -347,6 +354,7 @@
     "recordedDiscs": "+1000",
     "recordedDiscsLabel": "recorded albums",
     "locationBarcelona": "Barcelona, Spain",
+    "photoAlt": "Toni Mateos - Professional session drummer with 35 years of experience",
     "liveStageAlt": "Drums on stage with dramatic lighting",
     "studioAlt": "Professional recording studio with acoustic drums"
   },

@@ -41,7 +41,7 @@ export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
           <div className="flex items-center h-14 sm:h-16 gap-6">
             {/* Logo */}
             <div className="flex items-center gap-2.5 flex-shrink-0">
-              <img src={logoUrl} alt="Toni Mateos Logo" className="h-7 w-7" />
+              <img src={logoUrl} alt={t("header.logoAlt")} className="h-7 w-7" />
               <span className="text-base sm:text-lg font-bold text-foreground tracking-tight hidden sm:block">
                 Toni Mateos
               </span>
