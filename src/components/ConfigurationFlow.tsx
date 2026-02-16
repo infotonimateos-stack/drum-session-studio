@@ -132,7 +132,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                       </h1>
                     </div>
                     <h2 className="text-lg sm:text-xl font-semibold text-foreground/80">
-                      {t("config.h2studio")}
+                      {t("config.h2subtitle")}
                     </h2>
                     <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">{t("config.heroP1")}</p>
                     <div className="flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium w-fit">

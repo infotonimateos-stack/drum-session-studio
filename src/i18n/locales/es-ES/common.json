@@ -57,7 +57,8 @@
     "step3Text": "Te enviamos las pistas de batería por Wetransfer con la máxima calidad"
   },
   "config": {
-    "h1": "Grabación de Baterías Online y Baterista de Sesión Profesional Remoto",
+    "h1": "Grabación de Baterías Online",
+    "h2subtitle": "Baterista de Sesión Profesional Remoto",
     "h2studio": "Grabación de batería de estudio para producciones internacionales",
     "h2gear": "Equipamiento grabación baterías: previos Neve y API",
     "steps": {

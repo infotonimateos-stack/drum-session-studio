@@ -57,7 +57,8 @@
     "step3Text": "We send the drum stems via WeTransfer in maximum quality"
   },
   "config": {
-    "h1": "Online Drum Recording and Professional Remote Session Drummer",
+    "h1": "Online Drum Recording",
+    "h2subtitle": "Professional Remote Session Drummer",
     "h2studio": "Studio drum recording for international productions",
     "h2gear": "Elite recording gear: Neve and API preamps",
     "steps": {
