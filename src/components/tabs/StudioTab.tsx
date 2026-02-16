@@ -10,7 +10,7 @@ export const StudioTab = () => {
     <div className="container mx-auto px-4 py-8 space-y-8">
       <div className="text-center space-y-4">
         <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          {t("studio.title")}
+          {t("config.h2gear")}
         </h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           {t("studio.subtitle")}

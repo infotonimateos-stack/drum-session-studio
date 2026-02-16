@@ -28,8 +28,8 @@ export const AboutTab = () => {
           >
             {t("about.professionalDrummer")}
           </p>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight text-white">
-            TONI MATEOS
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white">
+            {t("about.h1")}
           </h1>
           <p className="text-[#a0a0a0] max-w-lg mx-auto leading-relaxed">
             {t("about.tagline")}
@@ -71,7 +71,7 @@ export const AboutTab = () => {
               className="text-lg font-bold uppercase tracking-widest"
               style={{ color: "#c9a54e" }}
             >
-              {t("about.myHistory")}
+              {t("about.h2career")}
             </h2>
             <p className="text-[#b0b0b0] leading-relaxed text-[15px]">
               {t("about.historyText")}

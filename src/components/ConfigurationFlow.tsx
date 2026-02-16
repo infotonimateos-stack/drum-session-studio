@@ -128,14 +128,17 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                   <div className="space-y-3 sm:space-y-4">
                     <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
                       <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                        {t("config.heroTitle")}
+                        {t("config.h1")}
                       </h1>
-                      <div className="flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
-                        <Star className="w-4 h-4 fill-current" />
-                        {t("config.priceFrom")}
-                      </div>
                     </div>
+                    <h2 className="text-lg sm:text-xl font-semibold text-foreground/80">
+                      {t("config.h2studio")}
+                    </h2>
                     <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">{t("config.heroP1")}</p>
+                    <div className="flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium w-fit">
+                      <Star className="w-4 h-4 fill-current" />
+                      {t("config.priceFrom")}
+                    </div>
                     <p className="text-sm text-muted-foreground">{t("config.heroP2")}</p>
                   </div>
                   <div className="flex items-center justify-center">
