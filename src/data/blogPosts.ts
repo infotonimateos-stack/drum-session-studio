@@ -50,6 +50,36 @@ export const blogPosts: BlogPost[] = [
     imageUrl: "/lovable-uploads/890c7bbc-79ba-4df4-8441-4cbf232e9b5c.png",
     tags: ["Toni Mateos", "carrera", "artistas"],
   },
+  {
+    slug: "como-preparar-proyecto-daw-sesion-bateria-remota",
+    slugEn: "how-to-prepare-daw-project-remote-drum-session",
+    titleKey: "blog.post5.title",
+    descriptionKey: "blog.post5.description",
+    contentKey: "blog.post5.content",
+    date: "2025-07-10",
+    imageUrl: "/lovable-uploads/903f1003-c2ac-486f-970e-14aeef1bdc43.png",
+    tags: ["DAW", "preparación", "sesión remota"],
+  },
+  {
+    slug: "bateria-real-vs-ritmos-programados",
+    slugEn: "real-drums-vs-programmed-beats",
+    titleKey: "blog.post6.title",
+    descriptionKey: "blog.post6.description",
+    contentKey: "blog.post6.content",
+    date: "2025-08-05",
+    imageUrl: "/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.png",
+    tags: ["batería real", "programación", "producción"],
+  },
+  {
+    slug: "30-anos-baterista-sesion-lecciones",
+    slugEn: "30-years-session-drumming-lessons-global-stars",
+    titleKey: "blog.post7.title",
+    descriptionKey: "blog.post7.description",
+    contentKey: "blog.post7.content",
+    date: "2025-09-01",
+    imageUrl: "/lovable-uploads/890c7bbc-79ba-4df4-8441-4cbf232e9b5c.png",
+    tags: ["carrera", "experiencia", "artistas internacionales"],
+  },
 ];
 
 export const getBlogPostBySlug = (slug: string, lang: string): BlogPost | undefined => {

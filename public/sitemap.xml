@@ -73,4 +73,25 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://drum-session-studio.lovable.app/blog/como-preparar-proyecto-daw-sesion-bateria-remota</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog/como-preparar-proyecto-daw-sesion-bateria-remota"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog/how-to-prepare-daw-project-remote-drum-session"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drum-session-studio.lovable.app/blog/bateria-real-vs-ritmos-programados</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog/bateria-real-vs-ritmos-programados"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog/real-drums-vs-programmed-beats"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drum-session-studio.lovable.app/blog/30-anos-baterista-sesion-lecciones</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog/30-anos-baterista-sesion-lecciones"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog/30-years-session-drumming-lessons-global-stars"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
