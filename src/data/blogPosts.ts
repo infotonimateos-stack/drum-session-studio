@@ -67,7 +67,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post6.description",
     contentKey: "blog.post6.content",
     date: "2025-08-05",
-    imageUrl: "/lovable-uploads/5b4e514d-0c50-42a1-834a-3b4c1d7ab825.png",
+    imageUrl: "/lovable-uploads/real-drums-vs-programmed.png",
     tags: ["batería real", "programación", "producción"],
   },
   {
