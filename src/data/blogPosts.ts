@@ -97,7 +97,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post9.description",
     contentKey: "blog.post9.content",
     date: "2025-11-01",
-    imageUrl: "/lovable-uploads/c3aae572-234c-41c9-a967-2d00f027d2b3.png",
+    imageUrl: "/lovable-uploads/the-voice-logo.png",
     tags: ["La Voz", "televisión", "directo", "experiencia"],
   },
 ];
