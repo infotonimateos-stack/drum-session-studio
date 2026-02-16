@@ -53,17 +53,17 @@ export const ProductCard = ({
       onClick={included ? undefined : onToggle}
     >
       {/* Top row: category + price */}
-      <div className="flex items-center justify-between px-5 pt-4 pb-1">
-        <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-card-dark-muted/20 text-card-dark-muted">
+      <div className="flex items-center justify-between gap-2 px-5 pt-4 pb-1">
+        <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-card-dark-muted/20 text-card-dark-muted truncate min-w-0">
           {category}
         </span>
         {!included && (
-          <span className="text-xl font-bold text-card-dark-price">
+          <span className="text-xl font-bold text-card-dark-price whitespace-nowrap shrink-0">
             {price.toFixed(2)} €
           </span>
         )}
         {included && (
-          <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-[hsl(var(--card-dark-included))]/20 text-success">
+          <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-[hsl(var(--card-dark-included))]/20 text-success whitespace-nowrap shrink-0">
             0.00 €
           </span>
         )}
