@@ -68,7 +68,7 @@ export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepP
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
         <ProductCard
           category={includedItem.category}
           price={includedItem.price}
