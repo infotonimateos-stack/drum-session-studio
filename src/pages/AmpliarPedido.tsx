@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Clock, Headphones, Video, PlayCircle, Share2,
-  Copy, Plane, Rocket, Smartphone, FileMusic, ShoppingCart, Film, Landmark
+  Copy, Plane, Rocket, Smartphone, FileMusic, ShoppingCart, Film, Landmark, Users
 } from "lucide-react";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
@@ -83,6 +83,7 @@ const AmpliarPedido = () => {
   const extrasItems: CartItem[] = [
     { id: 'videocall-10min', name: t("extras.videocall10"), price: 5.99, category: t("config.steps.extras"), description: t("extras.videocall10Desc") },
     { id: 'partitura-proceso', name: t("extras.partitura"), price: 1.99, category: t("config.steps.extras"), description: t("extras.partituraDesc") },
+    { id: 'presencial', name: t("extras.inPerson"), price: 150.00, category: t("config.steps.extras"), description: t("extras.inPersonDesc") },
   ];
 
   const iconMap: Record<string, React.ReactNode> = {
@@ -94,6 +95,7 @@ const AmpliarPedido = () => {
     'take-exact-copy': <Copy className="h-10 w-10" />,
     'videocall-10min': <Smartphone className="h-10 w-10" />,
     'partitura-proceso': <FileMusic className="h-10 w-10" />,
+    'presencial': <Users className="h-10 w-10" />,
   };
 
   // --- TAX AMOUNTS (once billing is complete) ---
@@ -372,6 +374,17 @@ const AmpliarPedido = () => {
                   icon={iconMap[extrasItems[1].id]}
                   isSelected={hasItem(extrasItems[1].id)}
                   onToggle={() => toggleItem(extrasItems[1])}
+                  addLabel={t("video.addFor")}
+                  addedLabel={t("extras.added")}
+                />
+                <ProductCard
+                  category={extrasItems[2].category}
+                  price={extrasItems[2].price}
+                  name={extrasItems[2].name}
+                  description={extrasItems[2].description}
+                  icon={iconMap[extrasItems[2].id]}
+                  isSelected={hasItem(extrasItems[2].id)}
+                  onToggle={() => toggleItem(extrasItems[2])}
                   addLabel={t("video.addFor")}
                   addedLabel={t("extras.added")}
                 />

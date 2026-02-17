@@ -1,4 +1,4 @@
-import { Smartphone, Video, FileMusic } from "lucide-react";
+import { Smartphone, Video, FileMusic, Users } from "lucide-react";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
@@ -36,6 +36,14 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
       category: t("config.steps.extras"),
       description: t("extras.partituraDesc"),
       icon: <FileMusic className="h-10 w-10" />,
+    },
+    {
+      id: 'presencial',
+      name: t("extras.inPerson"),
+      price: 150.00,
+      category: t("config.steps.extras"),
+      description: t("extras.inPersonDesc"),
+      icon: <Users className="h-10 w-10" />,
     }
   ];
 
@@ -58,7 +66,7 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
         {extrasItems.map((item) => (
           <ProductCard
             key={item.id}

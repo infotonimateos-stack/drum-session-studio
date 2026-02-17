@@ -240,7 +240,9 @@
     "partitura": "Partitura",
     "partituraDesc": "Fotografía del guion original manuscrito usado durante la sesión. Un recuerdo único.",
     "added": "Añadido",
-    "add": "Añadir"
+    "add": "Añadir",
+    "inPerson": "Presencial",
+    "inPersonDesc": "Ven al estudio a producir tu canción de manera presencial."
   },
   "cart": {
     "orderSummary": "Resumen del Pedido",
