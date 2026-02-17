@@ -1,4 +1,3 @@
-import { Zap } from "lucide-react";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
@@ -16,6 +15,14 @@ export const PreampsStep = ({
 }: PreampsStepProps) => {
   const { t } = useTranslation();
 
+  const motuPreamp: CartItem = {
+    id: 'preamps-motu',
+    name: 'MOTU 8Pre',
+    price: 4.99,
+    category: t("config.steps.preamps"),
+    description: `${t("preamps.motuDesc")} · ${t("preamps.cleanSound")} · ${t("preamps.flatResponse")}`
+  };
+
   const proPreampsPack: CartItem = {
     id: 'preamps-pro',
     name: 'Pack Previos Pro: API, Neve y DAD',
@@ -24,7 +31,13 @@ export const PreampsStep = ({
     description: t("preamps.subtitle")
   };
 
+  const isMotuSelected = hasItem(motuPreamp.id);
   const isProSelected = hasItem(proPreampsPack.id);
+
+  const handleToggleMotu = () => {
+    if (isMotuSelected) removeItem(motuPreamp.id);
+    else addItem(motuPreamp);
+  };
 
   const handleTogglePro = () => {
     if (isProSelected) removeItem(proPreampsPack.id);
@@ -43,21 +56,19 @@ export const PreampsStep = ({
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 max-w-6xl mx-auto">
-        {/* Basic Preamps - included */}
         <ProductCard
           category={t("config.steps.preamps")}
-          price={0}
+          price={motuPreamp.price}
           name="MOTU 8Pre"
           description={`${t("preamps.motuDesc")} · ${t("preamps.cleanSound")} · ${t("preamps.flatResponse")}`}
           image="/lovable-uploads/motu-8pre.png"
           imageAlt={t("preamps.motuAlt")}
-          isSelected={false}
-          onToggle={() => {}}
-          included
-          includedLabel={t("preamps.alreadyIncluded")}
+          isSelected={isMotuSelected}
+          onToggle={handleToggleMotu}
+          addLabel={t("video.addFor")}
+          addedLabel={t("preamps.addedToCart")}
         />
 
-        {/* Pro Preamps */}
         <ProductCard
           category={t("config.steps.preamps")}
           price={proPreampsPack.price}

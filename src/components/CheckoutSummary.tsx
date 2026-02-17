@@ -124,23 +124,7 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Order Details */}
         <div className="lg:col-span-2 space-y-6">
-          <Card className="border-success/30 bg-success/5">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-success">{t("checkout.basePackage")}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2 text-sm">
-                <p>• {t("checkout.basePackageDesc1")}</p>
-                <p>• {t("checkout.basePackageDesc2")}</p>
-                <p>• {t("checkout.basePackageDesc3")}</p>
-                <p>• {t("checkout.basePackageDesc4")}</p>
-              </div>
-              <div className="mt-4 flex justify-between items-center">
-                <span className="font-semibold">{t("checkout.basePrice")}</span>
-                <Badge variant="secondary" className="text-lg">{cartState.basePrice.toFixed(2)} €</Badge>
-              </div>
-            </CardContent>
-          </Card>
+          {/* Order Items by Category */}
 
           {Object.entries(groupedItems).map(([category, items]) => (
             <Card key={category}>
@@ -177,10 +161,6 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
             <CardHeader className="p-6 pb-4"><CardTitle className="text-center">{t("checkout.orderTotal")}</CardTitle></CardHeader>
             <CardContent className="space-y-4 p-6 pt-0">
               <div className="space-y-3">
-                <div className="flex justify-between items-baseline gap-4">
-                  <span className="shrink-0">{t("checkout.basicPackage")}</span>
-                  <span className="whitespace-nowrap">{cartState.basePrice.toFixed(2)} €</span>
-                </div>
                 {cartState.items.length > 0 && (
                   <>
                     <Separator />

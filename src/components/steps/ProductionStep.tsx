@@ -12,20 +12,19 @@ interface ProductionStepProps {
 export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepProps) => {
   const { t } = useTranslation();
 
-  const includedItem = {
-    id: 'duracion-estandar',
-    name: t("production.standardDuration"),
-    category: t("config.steps.production"),
-    description: t("production.standardDurationDesc"),
-    icon: <Timer className="h-10 w-10" />,
-    price: 0,
-  };
-
   const productionItems: (CartItem & { icon: React.ReactNode })[] = [
+    {
+      id: 'duracion-estandar',
+      name: t("production.standardDuration"),
+      price: 3.99,
+      category: t("config.steps.production"),
+      description: t("production.standardDurationDesc"),
+      icon: <Timer className="h-10 w-10" />,
+    },
     {
       id: 'tiempo-adicional',
       name: t("production.additionalTime"),
-      price: 2.99,
+      price: 6.99,
       category: t("config.steps.production"),
       description: t("production.additionalTimeDesc"),
       icon: <Clock className="h-10 w-10" />,
@@ -69,17 +68,6 @@ export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepP
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
-        <ProductCard
-          category={includedItem.category}
-          price={includedItem.price}
-          name={includedItem.name}
-          description={includedItem.description}
-          icon={includedItem.icon}
-          isSelected={false}
-          onToggle={() => {}}
-          included
-          includedLabel={t("production.alreadyIncluded")}
-        />
         {productionItems.map((item) => (
           <ProductCard
             key={item.id}
