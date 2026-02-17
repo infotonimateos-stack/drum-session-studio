@@ -56,7 +56,7 @@ export const ExtrasStep = ({ addItem, removeItem, hasItem }: ExtrasStepProps) =>
   };
 
   return (
-    <div className="space-y-8 sm:space-y-12">
+    <div className="space-y-8 sm:space-y-12 bg-gradient-to-br from-warm-blush/20 to-warm-apricot/15 rounded-xl p-4 sm:p-8">
       <div className="text-center space-y-4 sm:space-y-6">
         <h2 className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
           {t("extras.title")}
