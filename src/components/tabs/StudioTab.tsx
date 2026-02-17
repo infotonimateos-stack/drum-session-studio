@@ -26,7 +26,7 @@ export const StudioTab = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <img src="/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.png" alt={t("studio.galleryAlt1")} loading="lazy" className="w-full h-48 object-cover rounded-md" />
             <img src="/lovable-uploads/85028cc6-173f-44cd-a28f-5aeec1c79bed.png" alt={t("studio.galleryAlt2")} loading="lazy" className="w-full h-48 object-cover rounded-md" />
-            <img src="/lovable-uploads/e499070f-a9d9-4586-bc17-dedc7a19da05.png" alt={t("studio.galleryAlt3")} loading="lazy" className="w-full h-48 object-cover object-top rounded-md" />
+            <img src="/lovable-uploads/preamps-pro-pack.png" alt={t("studio.galleryAlt3")} loading="lazy" className="w-full h-48 object-cover object-top rounded-md" />
           </div>
         </CardContent>
       </Card>
