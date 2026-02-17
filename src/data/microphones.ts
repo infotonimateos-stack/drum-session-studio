@@ -58,7 +58,7 @@ export const baseMicrophones: Microphone[] = [
   },
   {
     id: 'akg414-overheads',
-    name: 'Par AKG 414 LTD Overheads',
+    name: 'Par AKG 414 LTD',
     price: 5.99,
     included: false,
     descriptionKey: 'micData.akg414OhPairDesc',
