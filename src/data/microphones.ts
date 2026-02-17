@@ -58,12 +58,12 @@ export const baseMicrophones: Microphone[] = [
   },
   {
     id: 'akg414-overheads',
-    name: 'Par AKG C414 Overheads',
+    name: 'Par AKG 414 LTD Overheads',
     price: 5.99,
     included: false,
     descriptionKey: 'micData.akg414OhPairDesc',
     targetKey: 'micData.overheads',
-    image: '/lovable-uploads/1bdd2634-dd4f-4938-b946-912b2291448e.png'
+    image: '/lovable-uploads/akg-c414-ltd-pair.png'
   },
   {
     id: 'sen441-snare-bottom',
