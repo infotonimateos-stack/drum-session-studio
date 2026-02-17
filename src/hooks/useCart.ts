@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { CartItem, CartState } from '@/types/cart';
 
-const BASE_PRICE = 49.90;
+const BASE_PRICE = 0;
 
 export const useCart = () => {
   const [cartState, setCartState] = useState<CartState>({

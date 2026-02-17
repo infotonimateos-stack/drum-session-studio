@@ -27,7 +27,6 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
         <div className="flex justify-between items-center gap-3 p-3 bg-primary/10 rounded-lg">
           <div className="min-w-0">
             <p className="font-medium text-sm">{t("cart.orderTotal")}</p>
-            <p className="text-xs text-muted-foreground">{t("cart.basePlusExtras")}</p>
           </div>
           <span className="font-bold text-primary text-xl whitespace-nowrap shrink-0">{cartState.total.toFixed(2)} €</span>
         </div>
@@ -36,18 +35,10 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
         <>
           <Separator />
           <div className="space-y-2">
-            {/* Base Package - Always shown first */}
-            <div className="flex justify-between items-center gap-3 p-2 bg-success/10 rounded-md">
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium">{t("cart.basicKit")}</p>
-                <p className="text-xs text-muted-foreground">{t("cart.microphonesIncluded")}</p>
-              </div>
-              <div className="flex items-center shrink-0">
-                <span className="text-sm font-medium whitespace-nowrap">{cartState.basePrice.toFixed(2)} €</span>
-              </div>
-            </div>
-            
             {/* Additional Items */}
+            {cartState.items.length === 0 && (
+              <p className="text-sm text-muted-foreground text-center py-2">{t("cart.emptyCart")}</p>
+            )}
             {cartState.items.map((item) => (
               <div key={item.id} className="flex justify-between items-center gap-3 p-2 hover:bg-muted/50 rounded-md group">
                 <div className="flex-1 min-w-0">

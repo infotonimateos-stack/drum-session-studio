@@ -65,7 +65,7 @@ const AmpliarPedido = () => {
   }));
 
   const productionItems: CartItem[] = [
-    { id: 'tiempo-adicional', name: t("production.additionalTime"), price: 2.99, category: t("config.steps.production"), description: t("production.additionalTimeDesc") },
+    { id: 'tiempo-adicional', name: t("production.additionalTime"), price: 6.99, category: t("config.steps.production"), description: t("production.additionalTimeDesc") },
     { id: 'work-mix', name: t("production.workMix"), price: 2.99, category: t("config.steps.production"), description: t("production.workMixDesc") },
   ];
 

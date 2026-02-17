@@ -1,4 +1,3 @@
-import { Cpu } from "lucide-react";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
@@ -16,6 +15,14 @@ export const InterfaceStep = ({
 }: InterfaceStepProps) => {
   const { t } = useTranslation();
 
+  const motuInterface: CartItem = {
+    id: 'interface-motu',
+    name: 'MOTU 8Pre',
+    price: 4.99,
+    category: t("config.steps.interface"),
+    description: `${t("interface.motuDesc")} · ${t("interface.feat1")} · ${t("interface.feat2")}`
+  };
+
   const dadInterface: CartItem = {
     id: 'interface-dad',
     name: 'DAD AX64',
@@ -24,7 +31,13 @@ export const InterfaceStep = ({
     description: t("interface.dadDesc")
   };
 
+  const isMotuSelected = hasItem(motuInterface.id);
   const isDadSelected = hasItem(dadInterface.id);
+
+  const handleToggleMotu = () => {
+    if (isMotuSelected) removeItem(motuInterface.id);
+    else addItem(motuInterface);
+  };
 
   const handleToggleDad = () => {
     if (isDadSelected) removeItem(dadInterface.id);
@@ -45,15 +58,15 @@ export const InterfaceStep = ({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 max-w-6xl mx-auto">
         <ProductCard
           category={t("config.steps.interface")}
-          price={0}
+          price={motuInterface.price}
           name="MOTU 8Pre"
           description={`${t("interface.motuDesc")} · ${t("interface.feat1")} · ${t("interface.feat2")}`}
           image="/lovable-uploads/motu-8pre.png"
           imageAlt={t("interface.motuAlt")}
-          isSelected={false}
-          onToggle={() => {}}
-          included
-          includedLabel={t("interface.alreadyIncluded")}
+          isSelected={isMotuSelected}
+          onToggle={handleToggleMotu}
+          addLabel={t("video.addFor")}
+          addedLabel={t("interface.addedToCart")}
         />
 
         <ProductCard

@@ -12,6 +12,14 @@ interface DeliveryStepProps {
 export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps) => {
   const { t } = useTranslation();
 
+  const standardDelivery: CartItem = {
+    id: 'delivery-standard',
+    name: t("delivery.standardTitle"),
+    price: 3.99,
+    category: t("config.steps.delivery"),
+    description: `${t("delivery.standard10Days")} · ${t("delivery.idealProjects")}`
+  };
+
   const express5Days: CartItem = {
     id: 'delivery-5days',
     name: t("delivery.express5Name"),
@@ -28,14 +36,30 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
     description: t("delivery.express2Desc")
   };
 
+  const isStandardSelected = hasItem(standardDelivery.id);
   const is5DaysSelected = hasItem(express5Days.id);
   const is2DaysSelected = hasItem(express2Days.id);
+
+  const removeAllDelivery = () => {
+    removeItem(standardDelivery.id);
+    removeItem(express5Days.id);
+    removeItem(express2Days.id);
+  };
+
+  const handleToggleStandard = () => {
+    if (isStandardSelected) {
+      removeItem(standardDelivery.id);
+    } else {
+      removeAllDelivery();
+      addItem(standardDelivery);
+    }
+  };
 
   const handleToggle5Days = () => {
     if (is5DaysSelected) {
       removeItem(express5Days.id);
     } else {
-      if (is2DaysSelected) removeItem(express2Days.id);
+      removeAllDelivery();
       addItem(express5Days);
     }
   };
@@ -44,7 +68,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
     if (is2DaysSelected) {
       removeItem(express2Days.id);
     } else {
-      if (is5DaysSelected) removeItem(express5Days.id);
+      removeAllDelivery();
       addItem(express2Days);
     }
   };
@@ -63,14 +87,14 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         <ProductCard
           category={t("config.steps.delivery")}
-          price={0}
+          price={standardDelivery.price}
           name={t("delivery.standardTitle")}
-          description={`${t("delivery.standard10Days")} · ${t("delivery.noCost")} · ${t("delivery.idealProjects")}`}
+          description={`${t("delivery.standard10Days")} · ${t("delivery.idealProjects")}`}
           icon={<Package className="h-10 w-10" />}
-          isSelected={false}
-          onToggle={() => {}}
-          included
-          includedLabel={t("delivery.includedInKit")}
+          isSelected={isStandardSelected}
+          onToggle={handleToggleStandard}
+          addLabel={t("video.addFor")}
+          addedLabel={t("delivery.selected")}
         />
 
         <ProductCard
