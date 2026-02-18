@@ -69,7 +69,7 @@ export const PreampsStep = ({
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 lg:gap-10 max-w-6xl mx-auto">
         <ProductCard
           category={t("config.steps.preamps")}
           price={motuPreamp.price}

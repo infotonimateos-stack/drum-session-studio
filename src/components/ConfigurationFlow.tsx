@@ -140,7 +140,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
           onCheckout={handleCheckout}
         />
         <main className="flex-1 overflow-x-hidden">
-          <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
+          <div className="container mx-auto px-3 sm:px-6 md:px-8 py-4 sm:py-8">
             <div className="lg:hidden mb-4">
               <SidebarTrigger className="mb-4" />
             </div>
@@ -170,7 +170,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
               </Card>
             </div>
             <Card className="overflow-hidden border-border/60 shadow-sm">
-              <div className="p-3 sm:p-8 min-h-[400px] sm:min-h-[600px]">{steps[currentStep].component}</div>
+              <div className="p-3 sm:p-6 md:p-8 min-h-[400px] sm:min-h-[600px]">{steps[currentStep].component}</div>
               <StepNavigator
                 currentStep={currentStep}
                 totalSteps={steps.length}
