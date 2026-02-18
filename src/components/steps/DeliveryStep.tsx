@@ -84,7 +84,7 @@ export const DeliveryStep = ({ addItem, removeItem, hasItem }: DeliveryStepProps
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
         <ProductCard
           category={t("config.steps.delivery")}
           price={standardDelivery.price}

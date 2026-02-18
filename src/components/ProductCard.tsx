@@ -94,7 +94,7 @@ export const ProductCard = ({
 
       {/* Title */}
       <div className="px-5 pb-1">
-        <h3 className="text-lg font-bold text-card-dark-foreground text-center">
+        <h3 className="text-base md:text-lg font-bold text-card-dark-foreground text-center break-words leading-tight">
           {name}
         </h3>
         {subtitle && (

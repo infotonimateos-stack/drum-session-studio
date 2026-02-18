@@ -59,7 +59,7 @@ export const VideoStep = ({ addItem, removeItem, hasItem }: VideoStepProps) => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 lg:gap-8 max-w-5xl mx-auto">
         {videoItems.map((item) => (
           <ProductCard
             key={item.id}
