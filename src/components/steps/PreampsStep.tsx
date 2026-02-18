@@ -1,6 +1,7 @@
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
+import { PREAMP_IDS } from "@/hooks/useStepValidation";
 
 interface PreampsStepProps {
   addItem: (item: CartItem) => void;
@@ -34,14 +35,27 @@ export const PreampsStep = ({
   const isMotuSelected = hasItem(motuPreamp.id);
   const isProSelected = hasItem(proPreampsPack.id);
 
+  // Exclusive selection: selecting one removes the other
+  const removeAllPreamps = () => {
+    PREAMP_IDS.forEach(id => removeItem(id));
+  };
+
   const handleToggleMotu = () => {
-    if (isMotuSelected) removeItem(motuPreamp.id);
-    else addItem(motuPreamp);
+    if (isMotuSelected) {
+      removeItem(motuPreamp.id);
+    } else {
+      removeAllPreamps();
+      addItem(motuPreamp);
+    }
   };
 
   const handleTogglePro = () => {
-    if (isProSelected) removeItem(proPreampsPack.id);
-    else addItem(proPreampsPack);
+    if (isProSelected) {
+      removeItem(proPreampsPack.id);
+    } else {
+      removeAllPreamps();
+      addItem(proPreampsPack);
+    }
   };
 
   return (

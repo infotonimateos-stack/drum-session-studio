@@ -2,6 +2,7 @@ import { Clock, Headphones, Package, Timer } from "lucide-react";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
+import { DURATION_IDS } from "@/hooks/useStepValidation";
 
 interface ProductionStepProps {
   addItem: (item: CartItem) => void;
@@ -12,47 +13,69 @@ interface ProductionStepProps {
 export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepProps) => {
   const { t } = useTranslation();
 
-  const productionItems: (CartItem & { icon: React.ReactNode })[] = [
-    {
-      id: 'duracion-estandar',
-      name: t("production.standardDuration"),
-      price: 3.99,
-      category: t("config.steps.production"),
-      description: t("production.standardDurationDesc"),
-      icon: <Timer className="h-10 w-10" />,
-    },
-    {
-      id: 'tiempo-adicional',
-      name: t("production.additionalTime"),
-      price: 6.99,
-      category: t("config.steps.production"),
-      description: t("production.additionalTimeDesc"),
-      icon: <Clock className="h-10 w-10" />,
-    },
-    {
-      id: 'work-mix',
-      name: t("production.workMix"),
-      price: 2.99,
-      category: t("config.steps.production"),
-      description: t("production.workMixDesc"),
-      icon: <Headphones className="h-10 w-10" />,
-    },
-    {
-      id: 'sample-pack',
-      name: t("production.samplePack"),
-      price: 4.99,
-      category: t("config.steps.production"),
-      description: t("production.samplePackDesc"),
-      icon: <Package className="h-10 w-10" />,
-    }
-  ];
+  const standardDuration: CartItem = {
+    id: 'duracion-estandar',
+    name: t("production.standardDuration"),
+    price: 3.99,
+    category: t("config.steps.production"),
+    description: t("production.standardDurationDesc"),
+  };
 
-  const handleToggleItem = (item: CartItem) => {
-    if (hasItem(item.id)) {
-      removeItem(item.id);
+  const additionalTime: CartItem = {
+    id: 'tiempo-adicional',
+    name: t("production.additionalTime"),
+    price: 6.99,
+    category: t("config.steps.production"),
+    description: t("production.additionalTimeDesc"),
+  };
+
+  const workMix: CartItem = {
+    id: 'work-mix',
+    name: t("production.workMix"),
+    price: 2.99,
+    category: t("config.steps.production"),
+    description: t("production.workMixDesc"),
+  };
+
+  const samplePack: CartItem = {
+    id: 'sample-pack',
+    name: t("production.samplePack"),
+    price: 4.99,
+    category: t("config.steps.production"),
+    description: t("production.samplePackDesc"),
+  };
+
+  // Exclusive toggle for duration items
+  const removeAllDurations = () => {
+    DURATION_IDS.forEach(id => removeItem(id));
+  };
+
+  const handleToggleStandard = () => {
+    if (hasItem(standardDuration.id)) {
+      removeItem(standardDuration.id);
     } else {
-      addItem(item);
+      removeAllDurations();
+      addItem(standardDuration);
     }
+  };
+
+  const handleToggleAdditional = () => {
+    if (hasItem(additionalTime.id)) {
+      removeItem(additionalTime.id);
+    } else {
+      removeAllDurations();
+      addItem(additionalTime);
+    }
+  };
+
+  const handleToggleWorkMix = () => {
+    if (hasItem(workMix.id)) removeItem(workMix.id);
+    else addItem(workMix);
+  };
+
+  const handleToggleSamplePack = () => {
+    if (hasItem(samplePack.id)) removeItem(samplePack.id);
+    else addItem(samplePack);
   };
 
   return (
@@ -68,20 +91,50 @@ export const ProductionStep = ({ addItem, removeItem, hasItem }: ProductionStepP
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
-        {productionItems.map((item) => (
-          <ProductCard
-            key={item.id}
-            category={item.category}
-            price={item.price}
-            name={item.name}
-            description={item.description}
-            icon={item.icon}
-            isSelected={hasItem(item.id)}
-            onToggle={() => handleToggleItem(item)}
-            addLabel={t("video.addFor")}
-            addedLabel={t("production.added")}
-          />
-        ))}
+        <ProductCard
+          category={standardDuration.category}
+          price={standardDuration.price}
+          name={standardDuration.name}
+          description={standardDuration.description}
+          icon={<Timer className="h-10 w-10" />}
+          isSelected={hasItem(standardDuration.id)}
+          onToggle={handleToggleStandard}
+          addLabel={t("video.addFor")}
+          addedLabel={t("production.added")}
+        />
+        <ProductCard
+          category={additionalTime.category}
+          price={additionalTime.price}
+          name={additionalTime.name}
+          description={additionalTime.description}
+          icon={<Clock className="h-10 w-10" />}
+          isSelected={hasItem(additionalTime.id)}
+          onToggle={handleToggleAdditional}
+          addLabel={t("video.addFor")}
+          addedLabel={t("production.added")}
+        />
+        <ProductCard
+          category={workMix.category}
+          price={workMix.price}
+          name={workMix.name}
+          description={workMix.description}
+          icon={<Headphones className="h-10 w-10" />}
+          isSelected={hasItem(workMix.id)}
+          onToggle={handleToggleWorkMix}
+          addLabel={t("video.addFor")}
+          addedLabel={t("production.added")}
+        />
+        <ProductCard
+          category={samplePack.category}
+          price={samplePack.price}
+          name={samplePack.name}
+          description={samplePack.description}
+          icon={<Package className="h-10 w-10" />}
+          isSelected={hasItem(samplePack.id)}
+          onToggle={handleToggleSamplePack}
+          addLabel={t("video.addFor")}
+          addedLabel={t("production.added")}
+        />
       </div>
     </div>
   );
