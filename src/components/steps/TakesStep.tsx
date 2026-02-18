@@ -112,6 +112,7 @@ export const TakesStep = ({
             category={t("config.steps.takes")}
             price={proUnitPrice * proQuantity}
             name={t("takes.proInterpretation")}
+            subtitle={t("takes.proSubtitle")}
             description={`${t("takes.proFeat1")} · ${t("takes.proFeat2")} · ${t("takes.proFeat3")}`}
             icon={<Crown className="h-10 w-10" />}
             isSelected={isProSelected}
