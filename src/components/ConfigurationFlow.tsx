@@ -15,6 +15,7 @@ import { ExtrasStep } from "@/components/steps/ExtrasStep";
 import { BillingStep, BillingData } from "@/components/BillingStep";
 import { CheckoutSummary } from "@/components/CheckoutSummary";
 import { useCart } from "@/hooks/useCart";
+import { validateStep } from "@/hooks/useStepValidation";
 import { useTranslation } from "react-i18next";
 
 interface ConfigurationFlowProps {
@@ -27,6 +28,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [mode, setMode] = useState<FlowMode>('configuration');
   const [billingData, setBillingData] = useState<BillingData | null>(null);
+  const [validationError, setValidationError] = useState<string | null>(null);
   const { cartState, addItem, removeItem, hasItem } = useCart();
   const { t } = useTranslation();
 
@@ -42,13 +44,33 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   ];
 
   const handlePreviousStep = () => {
-    if (currentStep > 0) { setCurrentStep(currentStep - 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    if (currentStep > 0) {
+      setValidationError(null);
+      setCurrentStep(currentStep - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
+
   const handleNextStep = () => {
-    if (currentStep < steps.length - 1) { setCurrentStep(currentStep + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    const result = validateStep(currentStep, cartState, t);
+    if (!result.valid) {
+      setValidationError(result.error);
+      return;
+    }
+    setValidationError(null);
+    if (currentStep < steps.length - 1) {
+      setCurrentStep(currentStep + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const handleCheckout = () => {
+    const result = validateStep(currentStep, cartState, t);
+    if (!result.valid) {
+      setValidationError(result.error);
+      return;
+    }
+    setValidationError(null);
     setMode('billing');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -149,7 +171,14 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
             </div>
             <Card className="overflow-hidden border-border/60 shadow-sm">
               <div className="p-3 sm:p-8 min-h-[400px] sm:min-h-[600px]">{steps[currentStep].component}</div>
-              <StepNavigator currentStep={currentStep} totalSteps={steps.length} onPreviousStep={handlePreviousStep} onNextStep={handleNextStep} onCheckout={handleCheckout} />
+              <StepNavigator
+                currentStep={currentStep}
+                totalSteps={steps.length}
+                onPreviousStep={handlePreviousStep}
+                onNextStep={handleNextStep}
+                onCheckout={handleCheckout}
+                validationError={validationError}
+              />
             </Card>
           </div>
         </main>

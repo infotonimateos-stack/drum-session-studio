@@ -1,6 +1,7 @@
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
+import { INTERFACE_IDS } from "@/hooks/useStepValidation";
 
 interface InterfaceStepProps {
   addItem: (item: CartItem) => void;
@@ -34,14 +35,27 @@ export const InterfaceStep = ({
   const isMotuSelected = hasItem(motuInterface.id);
   const isDadSelected = hasItem(dadInterface.id);
 
+  // Exclusive selection: selecting one removes the other
+  const removeAllInterfaces = () => {
+    INTERFACE_IDS.forEach(id => removeItem(id));
+  };
+
   const handleToggleMotu = () => {
-    if (isMotuSelected) removeItem(motuInterface.id);
-    else addItem(motuInterface);
+    if (isMotuSelected) {
+      removeItem(motuInterface.id);
+    } else {
+      removeAllInterfaces();
+      addItem(motuInterface);
+    }
   };
 
   const handleToggleDad = () => {
-    if (isDadSelected) removeItem(dadInterface.id);
-    else addItem(dadInterface);
+    if (isDadSelected) {
+      removeItem(dadInterface.id);
+    } else {
+      removeAllInterfaces();
+      addItem(dadInterface);
+    }
   };
 
   return (

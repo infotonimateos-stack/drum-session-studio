@@ -1,0 +1,80 @@
+import { CartState } from '@/types/cart';
+
+// Microphone IDs grouped by category
+const KICK_MIC_IDS = ['beta52-kick', 'beta91-kick', 'subkick-kick', 'u47fet-kick', 'audix-d6'];
+const SNARE_TOP_MIC_IDS = ['sm57-snare', 'akg414-snare'];
+const HIHAT_MIC_IDS = ['km184-hihat', 'm160-hihat'];
+const OVERHEAD_MIC_IDS = ['akg414-overheads', 'coles4038-oh', 'c12-overhead'];
+
+// Exclusive group IDs per step
+export const PREAMP_IDS = ['preamps-motu', 'preamps-pro'];
+export const INTERFACE_IDS = ['interface-motu', 'interface-dad'];
+export const DURATION_IDS = ['duracion-estandar', 'tiempo-adicional'];
+export const DELIVERY_IDS = ['delivery-standard', 'delivery-5days', 'delivery-2days'];
+
+export interface ValidationResult {
+  valid: boolean;
+  error: string | null;
+}
+
+export const validateStep = (
+  stepIndex: number,
+  cartState: CartState,
+  t: (key: string) => string
+): ValidationResult => {
+  const itemIds = cartState.items.map(i => i.id);
+
+  const hasAny = (ids: string[]) => ids.some(id => itemIds.includes(id));
+
+  switch (stepIndex) {
+    case 0: {
+      // Microphones: must have kick, snare top, hihat, overhead
+      const hasKick = hasAny(KICK_MIC_IDS);
+      const hasSnareTop = hasAny(SNARE_TOP_MIC_IDS);
+      const hasHihat = hasAny(HIHAT_MIC_IDS);
+      const hasOverhead = hasAny(OVERHEAD_MIC_IDS);
+      if (!hasKick || !hasSnareTop || !hasHihat || !hasOverhead) {
+        return { valid: false, error: t('validation.microphones') };
+      }
+      return { valid: true, error: null };
+    }
+    case 1: {
+      // Preamps: must have one
+      if (!hasAny(PREAMP_IDS)) {
+        return { valid: false, error: t('validation.preamps') };
+      }
+      return { valid: true, error: null };
+    }
+    case 2: {
+      // Interface: must have one
+      if (!hasAny(INTERFACE_IDS)) {
+        return { valid: false, error: t('validation.interface') };
+      }
+      return { valid: true, error: null };
+    }
+    case 3: {
+      // Production: must have a duration (standard or additional)
+      if (!hasAny(DURATION_IDS)) {
+        return { valid: false, error: t('validation.production') };
+      }
+      return { valid: true, error: null };
+    }
+    case 5: {
+      // Takes: must have at least one take selected
+      const takeIds = ['take-basic', 'take-toni-interpretation', 'take-exact-copy'];
+      if (!hasAny(takeIds)) {
+        return { valid: false, error: t('validation.takes') };
+      }
+      return { valid: true, error: null };
+    }
+    case 6: {
+      // Delivery: must have one selected
+      if (!hasAny(DELIVERY_IDS)) {
+        return { valid: false, error: t('validation.delivery') };
+      }
+      return { valid: true, error: null };
+    }
+    default:
+      return { valid: true, error: null };
+  }
+};
