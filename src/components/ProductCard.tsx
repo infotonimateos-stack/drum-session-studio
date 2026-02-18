@@ -123,7 +123,7 @@ export const ProductCard = ({
           </div>
         ) : (
           <Button
-            className={`w-full h-12 text-base font-bold rounded-xl transition-all duration-200 ${
+            className={`w-full h-12 text-sm font-bold rounded-xl transition-all duration-200 px-4 whitespace-nowrap box-border ${
               isSelected
                 ? "bg-primary text-primary-foreground hover:bg-primary/90"
                 : "bg-gradient-to-r from-[hsl(var(--card-dark-btn-from))] to-[hsl(var(--card-dark-btn-to))] text-white hover:shadow-lg"
@@ -135,13 +135,13 @@ export const ProductCard = ({
           >
             {isSelected ? (
               <>
-                <Check className="h-5 w-5 mr-2" />
-                {addedLabel}
+                <Check className="h-4 w-4 shrink-0" />
+                <span className="whitespace-nowrap">{addedLabel}</span>
               </>
             ) : (
               <>
-                <Plus className="h-5 w-5 mr-2" />
-                {addLabel} {price.toFixed(2)} €
+                <Plus className="h-4 w-4 shrink-0" />
+                <span className="whitespace-nowrap">{addLabel} {price.toFixed(2)} €</span>
               </>
             )}
           </Button>
