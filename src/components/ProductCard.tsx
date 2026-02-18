@@ -6,6 +6,7 @@ interface ProductCardProps {
   category: string;
   price: number;
   name: string;
+  subtitle?: string;
   description?: string;
   descriptionList?: { emoji: string; text: string }[];
   image?: string;
@@ -25,6 +26,7 @@ export const ProductCard = ({
   category,
   price,
   name,
+  subtitle,
   description,
   descriptionList,
   image,
@@ -95,6 +97,11 @@ export const ProductCard = ({
         <h3 className="text-lg font-bold text-card-dark-foreground text-center">
           {name}
         </h3>
+        {subtitle && (
+          <p className="text-xs text-card-dark-muted text-center mt-1 leading-snug">
+            {subtitle}
+          </p>
+        )}
       </div>
 
       {/* Description — grows to fill remaining space */}
