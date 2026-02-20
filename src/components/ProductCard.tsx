@@ -20,6 +20,8 @@ interface ProductCardProps {
   /** When true, renders a non-interactive "✓ YA INCLUIDO" green button */
   included?: boolean;
   includedLabel?: string;
+  /** When true, the card is visually dimmed and the button is disabled */
+  disabled?: boolean;
 }
 
 export const ProductCard = ({
@@ -39,12 +41,15 @@ export const ProductCard = ({
   addedLabel = "Añadido",
   included = false,
   includedLabel = "YA INCLUIDO",
+  disabled = false,
 }: ProductCardProps) => {
   return (
     <div
       className={`relative flex flex-col h-full rounded-2xl overflow-hidden transition-all duration-300 ${
         included
           ? "ring-1 ring-[hsl(var(--card-dark-included))]/40"
+          : disabled
+          ? "opacity-50 cursor-not-allowed"
           : `cursor-pointer hover:shadow-2xl transform hover:scale-[1.03] ${
               isSelected
                 ? "ring-2 ring-primary shadow-2xl scale-[1.03]"
@@ -52,7 +57,7 @@ export const ProductCard = ({
             }`
       }`}
       style={{ background: included ? "hsl(145 25% 18%)" : "hsl(var(--card-dark))" }}
-      onClick={included ? undefined : onToggle}
+      onClick={included || disabled ? undefined : onToggle}
     >
       {/* Top row: category + price */}
       <div className="flex items-center justify-between gap-2 px-5 pt-4 pb-1">
@@ -130,14 +135,17 @@ export const ProductCard = ({
           </div>
         ) : (
           <Button
+            disabled={disabled}
             className={`w-full h-12 text-sm font-bold rounded-xl transition-all duration-200 px-4 whitespace-nowrap box-border ${
               isSelected
                 ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                : disabled
+                ? "bg-muted text-muted-foreground cursor-not-allowed"
                 : "bg-gradient-to-r from-[hsl(var(--card-dark-btn-from))] to-[hsl(var(--card-dark-btn-to))] text-white hover:shadow-lg"
             }`}
             onClick={(e) => {
               e.stopPropagation();
-              onToggle();
+              if (!disabled) onToggle();
             }}
           >
             {isSelected ? (

@@ -92,6 +92,7 @@
   "preamps": {
     "title": "⚡ Previos",
     "subtitle": "El alma de tu sonido. Elige entre nuestros previos disponibles.",
+    "motuBlockedByMics": "No es posible elegir previos Motu 8pre si has elegido más de 8 micrófonos",
     "motuDesc": "8 canales profesionales",
     "cleanSound": "Sonido limpio y transparente",
     "flatResponse": "Respuesta plana",
@@ -106,6 +107,7 @@
   "interface": {
     "title": "🎛️ Interface de Audio",
     "subtitle": "La puerta entre el mundo analógico y digital. La calidad del convertidor define tu sonido final.",
+    "motuBlockedByMics": "No es posible elegir el interface Motu 8pre si has elegido más de 8 micrófonos",
     "motuDesc": "Interface ADAT de 8 canales",
     "feat1": "24-bit / 192kHz máxima resolución",
     "feat2": "Convertidores estándar profesionales",

@@ -1,20 +1,25 @@
-import { CartItem } from "@/types/cart";
+import { useEffect, useState } from "react";
+import { CartItem, CartState } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
-import { PREAMP_IDS } from "@/hooks/useStepValidation";
+import { PREAMP_IDS, isMotuBlockedByMicCount } from "@/hooks/useStepValidation";
+import { AlertCircle } from "lucide-react";
 
 interface PreampsStepProps {
   addItem: (item: CartItem) => void;
   removeItem: (itemId: string) => void;
   hasItem: (itemId: string) => boolean;
+  cartState: CartState;
 }
 
 export const PreampsStep = ({
   addItem,
   removeItem,
-  hasItem
+  hasItem,
+  cartState
 }: PreampsStepProps) => {
   const { t } = useTranslation();
+  const [motuBlockedError, setMotuBlockedError] = useState<string | null>(null);
 
   const motuPreamp: CartItem = {
     id: 'preamps-motu',
@@ -34,6 +39,22 @@ export const PreampsStep = ({
 
   const isMotuSelected = hasItem(motuPreamp.id);
   const isProSelected = hasItem(proPreampsPack.id);
+  const motuBlocked = isMotuBlockedByMicCount(cartState);
+
+  // Auto-deselect MOTU if mic count exceeds 8 after returning from step 0
+  useEffect(() => {
+    if (motuBlocked && isMotuSelected) {
+      removeItem(motuPreamp.id);
+      setMotuBlockedError(t("preamps.motuBlockedByMics"));
+    }
+  }, [motuBlocked, isMotuSelected]);
+
+  // Clear error when user goes below 8 mics
+  useEffect(() => {
+    if (!motuBlocked) {
+      setMotuBlockedError(null);
+    }
+  }, [motuBlocked]);
 
   // Exclusive selection: selecting one removes the other
   const removeAllPreamps = () => {
@@ -43,7 +64,13 @@ export const PreampsStep = ({
   const handleToggleMotu = () => {
     if (isMotuSelected) {
       removeItem(motuPreamp.id);
+      setMotuBlockedError(null);
     } else {
+      if (motuBlocked) {
+        setMotuBlockedError(t("preamps.motuBlockedByMics"));
+        return;
+      }
+      setMotuBlockedError(null);
       removeAllPreamps();
       addItem(motuPreamp);
     }
@@ -69,6 +96,13 @@ export const PreampsStep = ({
         </p>
       </div>
 
+      {motuBlockedError && (
+        <div className="flex items-start gap-3 bg-destructive/10 border border-destructive/30 text-destructive rounded-lg px-4 py-3 max-w-3xl mx-auto">
+          <AlertCircle className="w-5 h-5 mt-0.5 shrink-0" />
+          <p className="text-sm font-medium">{motuBlockedError}</p>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 lg:gap-10 max-w-6xl mx-auto">
         <ProductCard
           category={t("config.steps.preamps")}
@@ -81,6 +115,7 @@ export const PreampsStep = ({
           onToggle={handleToggleMotu}
           addLabel={t("video.addFor")}
           addedLabel={t("preamps.addedToCart")}
+          disabled={motuBlocked && !isMotuSelected}
         />
 
         <ProductCard
