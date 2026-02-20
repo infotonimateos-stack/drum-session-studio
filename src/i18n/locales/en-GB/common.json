@@ -62,6 +62,7 @@
     "h2studio": "Studio drum recording for international productions",
     "h2gear": "Studio gear for drum recording: Neve and API preamps, DAD interface, Telefunken, Neumann, Coles, AKG, Shure microphones...",
     "steps": {
+      "step": "Step",
       "microphones": "Microphones",
       "preamps": "Preamps",
       "interface": "Interface",

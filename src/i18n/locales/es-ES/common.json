@@ -62,6 +62,7 @@
     "h2studio": "Grabación de batería de estudio para producciones internacionales",
     "h2gear": "Equipamiento de estudio para grabación de baterías: previos Neve y API, Interface DAD, Micrófonos Telefunken, Neumann, Coles, AKG, Shure...",
     "steps": {
+      "step": "Paso",
       "microphones": "Micrófonos",
       "preamps": "Previos",
       "interface": "Interface",
