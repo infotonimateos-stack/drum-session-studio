@@ -1,4 +1,8 @@
 import { CartState } from '@/types/cart';
+import { baseMicrophones, upgradeMicrophones } from '@/data/microphones';
+
+// All microphone IDs
+const ALL_MIC_IDS = [...baseMicrophones, ...upgradeMicrophones].map(m => m.id);
 
 // Microphone IDs grouped by category
 const KICK_MIC_IDS = ['beta52-kick', 'beta91-kick', 'subkick-kick', 'u47fet-kick', 'audix-d6'];
@@ -11,6 +15,16 @@ export const PREAMP_IDS = ['preamps-motu', 'preamps-pro'];
 export const INTERFACE_IDS = ['interface-motu', 'interface-dad'];
 export const DURATION_IDS = ['duracion-estandar', 'tiempo-adicional'];
 export const DELIVERY_IDS = ['delivery-standard', 'delivery-5days', 'delivery-2days'];
+
+/** Returns the count of microphones currently in the cart */
+export const countSelectedMicrophones = (cartState: CartState): number => {
+  return cartState.items.filter(item => ALL_MIC_IDS.includes(item.id)).length;
+};
+
+/** Returns true if MOTU is blocked due to more than 8 mics selected */
+export const isMotuBlockedByMicCount = (cartState: CartState): boolean => {
+  return countSelectedMicrophones(cartState) > 8;
+};
 
 export interface ValidationResult {
   valid: boolean;

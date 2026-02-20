@@ -34,8 +34,8 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
 
   const steps = [
     { title: t("config.steps.microphones"), component: <MicrophonesStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} /> },
-    { title: t("config.steps.preamps"), component: <PreampsStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} /> },
-    { title: t("config.steps.interface"), component: <InterfaceStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} /> },
+    { title: t("config.steps.preamps"), component: <PreampsStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} cartState={cartState} /> },
+    { title: t("config.steps.interface"), component: <InterfaceStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} cartState={cartState} /> },
     { title: t("config.steps.production"), component: <ProductionStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} /> },
     { title: t("config.steps.video"), component: <VideoStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} /> },
     { title: t("config.steps.takes"), component: <TakesStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} /> },
