@@ -26,6 +26,16 @@ export const isMotuBlockedByMicCount = (cartState: CartState): boolean => {
   return countSelectedMicrophones(cartState) > 8;
 };
 
+/** Returns true if legendary preamps (preamps-pro) are selected */
+export const hasLegendaryPreamps = (cartState: CartState): boolean => {
+  return cartState.items.some(item => item.id === 'preamps-pro');
+};
+
+/** Returns true if MOTU interface is selected */
+export const hasMotuInterface = (cartState: CartState): boolean => {
+  return cartState.items.some(item => item.id === 'interface-motu');
+};
+
 export interface ValidationResult {
   valid: boolean;
   error: string | null;

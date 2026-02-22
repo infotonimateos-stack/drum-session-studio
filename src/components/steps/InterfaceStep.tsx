@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CartItem, CartState } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
-import { INTERFACE_IDS, isMotuBlockedByMicCount } from "@/hooks/useStepValidation";
+import { INTERFACE_IDS, isMotuBlockedByMicCount, hasLegendaryPreamps } from "@/hooks/useStepValidation";
 import { AlertCircle } from "lucide-react";
 
 interface InterfaceStepProps {
@@ -39,15 +39,17 @@ export const InterfaceStep = ({
 
   const isMotuSelected = hasItem(motuInterface.id);
   const isDadSelected = hasItem(dadInterface.id);
-  const motuBlocked = isMotuBlockedByMicCount(cartState);
+  const motuBlockedByMics = isMotuBlockedByMicCount(cartState);
+  const motuBlockedByLegendary = hasLegendaryPreamps(cartState);
+  const motuBlocked = motuBlockedByMics || motuBlockedByLegendary;
 
   // Auto-deselect MOTU if mic count exceeds 8 after returning from step 0
   useEffect(() => {
     if (motuBlocked && isMotuSelected) {
       removeItem(motuInterface.id);
-      setMotuBlockedError(t("interface.motuBlockedByMics"));
+      setMotuBlockedError(motuBlockedByLegendary ? t("interface.motuBlockedByLegendary") : t("interface.motuBlockedByMics"));
     }
-  }, [motuBlocked, isMotuSelected]);
+  }, [motuBlocked, motuBlockedByLegendary, isMotuSelected]);
 
   // Clear error when user goes below 8 mics
   useEffect(() => {
@@ -67,7 +69,7 @@ export const InterfaceStep = ({
       setMotuBlockedError(null);
     } else {
       if (motuBlocked) {
-        setMotuBlockedError(t("interface.motuBlockedByMics"));
+        setMotuBlockedError(motuBlockedByLegendary ? t("interface.motuBlockedByLegendary") : t("interface.motuBlockedByMics"));
         return;
       }
       setMotuBlockedError(null);
