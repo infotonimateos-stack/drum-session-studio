@@ -98,7 +98,7 @@ export const TakesStep = ({
           category={t("config.steps.takes")}
           price={basicTake.price}
           name={t("takes.basic")}
-          description={`${t("takes.feat1")} · ${t("takes.feat2")} · ${t("takes.feat3")}`}
+          description={`${t("takes.feat1")} · ${t("takes.feat2")}`}
           icon={<Play className="h-10 w-10" />}
           isSelected={isBasicSelected}
           onToggle={handleToggleBasic}
