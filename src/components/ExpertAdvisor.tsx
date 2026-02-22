@@ -154,7 +154,7 @@ export const ExpertAdvisor = ({ addItem, clearCart }: ExpertAdvisorProps) => {
       {/* Floating button */}
         <button
         onClick={handleOpen}
-        className="fixed bottom-24 right-6 z-40 flex items-center gap-2 px-5 py-3 rounded-full bg-accent text-accent-foreground shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold text-sm animate-[pulse_3s_ease-in-out_infinite] hover:animate-none"
+        className="fixed bottom-24 right-6 z-40 flex items-center gap-2 px-5 py-3 rounded-full bg-accent text-accent-foreground shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold text-sm animate-soft-breathe hover:animate-none"
         aria-label={t("advisor.buttonLabel")}
       >
         <HelpCircle className="h-5 w-5" />
