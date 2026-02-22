@@ -213,7 +213,8 @@
     "orderSummary": "Resumen del Pedido",
     "orderTotal": "Total del Pedido",
     "total": "Total",
-    "emptyCart": "No has añadido ningún servicio todavía"
+    "emptyCart": "No has añadido ningún servicio todavía",
+    "taxDisclaimer": "Precios sin IVA e impuestos aplicables"
   },
   "stepNav": {
     "previous": "Anterior",

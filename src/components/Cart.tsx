@@ -69,6 +69,8 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
           <span className="font-bold text-xl text-primary whitespace-nowrap shrink-0">{cartState.total.toFixed(2)} €</span>
         </div>
 
+        <p className="text-xs text-muted-foreground text-center italic">{t("cart.taxDisclaimer")}</p>
+
       </CardContent>
     </Card>
   );

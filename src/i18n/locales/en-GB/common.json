@@ -216,7 +216,8 @@
     "orderSummary": "Order Summary",
     "orderTotal": "Order Total",
     "total": "Total",
-    "emptyCart": "No services added yet"
+    "emptyCart": "No services added yet",
+    "taxDisclaimer": "Prices exclude VAT and applicable taxes"
   },
   "stepNav": {
     "previous": "Previous",

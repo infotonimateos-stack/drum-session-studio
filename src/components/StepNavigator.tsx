@@ -25,6 +25,7 @@ export const StepNavigator = ({
 
   return (
     <div className="border-t border-border">
+      <p className="text-xs text-muted-foreground text-center pt-3 italic">{t("cart.taxDisclaimer")}</p>
       {validationError && (
         <div className="px-4 sm:px-6 pt-4">
           <div className="bg-destructive/10 border border-destructive/30 text-destructive rounded-lg px-4 py-3 text-sm font-medium text-center">
