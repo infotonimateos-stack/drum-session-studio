@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Play, Copy, Crown, Folder, Minus, Plus } from "lucide-react";
+import { Copy, Crown, Folder, Minus, Plus } from "lucide-react";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
@@ -19,14 +19,6 @@ export const TakesStep = ({
   const { t } = useTranslation();
   const [proQuantity, setProQuantity] = useState(1);
 
-  const basicTake: CartItem = {
-    id: 'take-basic',
-    name: t("takes.basic"),
-    price: 5.99,
-    category: t("config.steps.takes"),
-    description: `${t("takes.feat1")} · ${t("takes.feat2")}`
-  };
-
   const exactCopyTake: CartItem = {
     id: 'take-exact-copy',
     name: t("takes.exactCopyName"),
@@ -38,14 +30,8 @@ export const TakesStep = ({
   const proTakeId = 'take-toni-interpretation';
   const proUnitPrice = 19.90;
 
-  const isBasicSelected = hasItem(basicTake.id);
   const isExactCopySelected = hasItem(exactCopyTake.id);
   const isProSelected = hasItem(proTakeId);
-
-  const handleToggleBasic = () => {
-    if (isBasicSelected) removeItem(basicTake.id);
-    else addItem(basicTake);
-  };
 
   const handleToggleExactCopy = () => {
     if (isExactCopySelected) removeItem(exactCopyTake.id);
@@ -93,19 +79,7 @@ export const TakesStep = ({
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
-        <ProductCard
-          category={t("config.steps.takes")}
-          price={basicTake.price}
-          name={t("takes.basic")}
-          description={`${t("takes.feat1")} · ${t("takes.feat2")}`}
-          icon={<Play className="h-10 w-10" />}
-          isSelected={isBasicSelected}
-          onToggle={handleToggleBasic}
-          addLabel={t("video.addFor")}
-          addedLabel={t("takes.added")}
-        />
-
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 lg:gap-10 max-w-4xl mx-auto">
         {/* Pro take with quantity selector */}
         <div className="flex flex-col">
           <ProductCard
