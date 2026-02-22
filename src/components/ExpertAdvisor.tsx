@@ -135,6 +135,13 @@ export const ExpertAdvisor = ({ addItem, clearCart }: ExpertAdvisorProps) => {
       });
     });
     setOpen(false);
+    // Scroll to order summary sidebar after a short delay for DOM update
+    setTimeout(() => {
+      const summary = document.querySelector('[data-cart-summary]');
+      if (summary) {
+        summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 150);
   };
 
   const usageOptions: { key: UsageOption; labelKey: string; descKey: string }[] = [
