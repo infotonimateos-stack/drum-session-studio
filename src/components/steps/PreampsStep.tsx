@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CartItem, CartState } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
 import { PREAMP_IDS, isMotuBlockedByMicCount, hasMotuInterface } from "@/hooks/useStepValidation";
-import { AlertCircle } from "lucide-react";
+import { toast } from "sonner";
 
 interface PreampsStepProps {
   addItem: (item: CartItem) => void;
@@ -19,7 +19,6 @@ export const PreampsStep = ({
   cartState
 }: PreampsStepProps) => {
   const { t } = useTranslation();
-  const [motuBlockedError, setMotuBlockedError] = useState<string | null>(null);
 
   const motuPreamp: CartItem = {
     id: 'preamps-motu',
@@ -45,16 +44,9 @@ export const PreampsStep = ({
   useEffect(() => {
     if (motuBlocked && isMotuSelected) {
       removeItem(motuPreamp.id);
-      setMotuBlockedError(t("preamps.motuBlockedByMics"));
+      toast.warning(t("preamps.motuBlockedByMics"), { duration: 5000 });
     }
   }, [motuBlocked, isMotuSelected]);
-
-  // Clear error when user goes below 8 mics
-  useEffect(() => {
-    if (!motuBlocked) {
-      setMotuBlockedError(null);
-    }
-  }, [motuBlocked]);
 
   // Exclusive selection: selecting one removes the other
   const removeAllPreamps = () => {
@@ -64,13 +56,11 @@ export const PreampsStep = ({
   const handleToggleMotu = () => {
     if (isMotuSelected) {
       removeItem(motuPreamp.id);
-      setMotuBlockedError(null);
     } else {
       if (motuBlocked) {
-        setMotuBlockedError(t("preamps.motuBlockedByMics"));
+        toast.warning(t("preamps.motuBlockedByMics"), { duration: 5000 });
         return;
       }
-      setMotuBlockedError(null);
       removeAllPreamps();
       addItem(motuPreamp);
     }
@@ -85,7 +75,7 @@ export const PreampsStep = ({
       // Auto-deselect MOTU interface if selected (incompatible with legendary preamps)
       if (hasMotuInterface(cartState)) {
         removeItem('interface-motu');
-        setMotuBlockedError(t("preamps.legendaryBlocksMotu"));
+        toast.warning(t("preamps.legendaryBlocksMotu"), { duration: 5000 });
       }
     }
   };
@@ -100,13 +90,6 @@ export const PreampsStep = ({
           {t("preamps.subtitle")}
         </p>
       </div>
-
-      {motuBlockedError && (
-        <div className="flex items-start gap-3 bg-destructive/10 border border-destructive/30 text-destructive rounded-lg px-4 py-3 max-w-3xl mx-auto">
-          <AlertCircle className="w-5 h-5 mt-0.5 shrink-0" />
-          <p className="text-sm font-medium">{motuBlockedError}</p>
-        </div>
-      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 lg:gap-10 max-w-6xl mx-auto">
         <ProductCard
