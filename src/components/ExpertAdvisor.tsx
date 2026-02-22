@@ -97,10 +97,9 @@ const PRESETS: Record<UsageOption, typeof PRESET_PROFESSIONAL> = {
   demo: PRESET_DEMO,
 };
 
-const PRESET_TOTALS: Record<UsageOption, string> = {
-  professional: "198,34",
-  selfproduced: "111,63",
-  demo: "81,76",
+const computePresetTotal = (preset: typeof PRESET_PROFESSIONAL): string => {
+  const sum = preset.reduce((acc, item) => acc + item.price, 0);
+  return sum.toFixed(2).replace('.', ',');
 };
 
 export const ExpertAdvisor = ({ addItem, clearCart }: ExpertAdvisorProps) => {
@@ -153,9 +152,9 @@ export const ExpertAdvisor = ({ addItem, clearCart }: ExpertAdvisorProps) => {
   return (
     <>
       {/* Floating button */}
-      <button
+        <button
         onClick={handleOpen}
-        className="fixed bottom-24 right-6 z-40 flex items-center gap-2 px-5 py-3 rounded-full bg-accent text-accent-foreground shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold text-sm animate-pulse hover:animate-none"
+        className="fixed bottom-24 right-6 z-40 flex items-center gap-2 px-5 py-3 rounded-full bg-accent text-accent-foreground shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold text-sm animate-[pulse_3s_ease-in-out_infinite] hover:animate-none"
         aria-label={t("advisor.buttonLabel")}
       >
         <HelpCircle className="h-5 w-5" />
@@ -268,7 +267,7 @@ export const ExpertAdvisor = ({ addItem, clearCart }: ExpertAdvisorProps) => {
               <div className="bg-muted/50 rounded-xl p-4 space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-foreground">{t(`advisor.preset${usage.charAt(0).toUpperCase() + usage.slice(1)}`)}</span>
-                  <span className="font-bold text-primary text-lg">{PRESET_TOTALS[usage]} €</span>
+                  <span className="font-bold text-primary text-lg">{computePresetTotal(PRESETS[usage])} €</span>
                 </div>
                 <ul className="text-xs text-muted-foreground space-y-1 max-h-48 overflow-y-auto">
                   {PRESETS[usage].map((item) => (
