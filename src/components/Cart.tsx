@@ -15,7 +15,7 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
   const { t } = useTranslation();
 
   return (
-    <Card className="w-full h-full bg-gradient-to-br from-card to-muted border-border shadow-lg flex flex-col overflow-hidden">
+    <Card data-cart-summary className="w-full h-full bg-gradient-to-br from-card to-muted border-border shadow-lg flex flex-col overflow-hidden">
       <CardHeader className="pb-4 flex-shrink-0">
         <CardTitle className="flex items-center gap-2 text-lg">
           <ShoppingCart className="h-5 w-5 text-primary" />
