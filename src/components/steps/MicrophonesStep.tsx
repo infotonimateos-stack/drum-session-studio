@@ -77,7 +77,6 @@ export const MicrophonesStep = ({
           <div className="flex items-center gap-2 sm:gap-3 bg-primary/20 px-4 sm:px-6 py-2 sm:py-3 rounded-full flex-wrap justify-center">
             <Plus className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
             <h3 className="text-xl sm:text-2xl font-bold">{t("microphones.premiumUpgrades")}</h3>
-            <Badge variant="outline" className="text-base sm:text-lg px-3 py-1">{t("microphones.optional")}</Badge>
           </div>
         </div>
         
