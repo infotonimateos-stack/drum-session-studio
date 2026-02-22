@@ -85,7 +85,7 @@ export const validateStep = (
     }
     case 5: {
       // Takes: must have at least one take selected
-      const takeIds = ['take-basic', 'take-toni-interpretation', 'take-exact-copy'];
+      const takeIds = ['take-toni-interpretation', 'take-exact-copy'];
       if (!hasAny(takeIds)) {
         return { valid: false, error: t('validation.takes') };
       }
