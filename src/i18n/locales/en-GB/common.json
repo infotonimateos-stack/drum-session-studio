@@ -672,5 +672,30 @@
     "production": "You must choose the song duration to continue",
     "takes": "You must choose at least one take to continue",
     "delivery": "You must choose a delivery timeframe to continue"
+  },
+  "advisor": {
+    "button": "I'm confused... Choose for me!",
+    "buttonShort": "Choose for me!",
+    "buttonLabel": "Configuration assistant",
+    "title": "Your Configuration Assistant",
+    "welcomeMessage": "Hi, I'm Toni Mateos. I understand that choosing between so many technical options can be overwhelming. I'm going to help you design the ideal setup for your song based on my experience of over thirty years recording drums for major artists. I just need you to answer a couple of very simple questions.",
+    "letsGo": "Let's go!",
+    "usageQuestion": "What will you use the recording for?",
+    "usageProfessional": "Professional",
+    "usageProfessionalDesc": "For albums or high-end projects",
+    "usageSelfproduced": "Self-produced music",
+    "usageSelfproducedDesc": "I want quality but I have a limited budget",
+    "usageDemo": "Demo",
+    "usageDemoDesc": "I need a professional reference for my demo",
+    "styleQuestion": "Musical style",
+    "styleOther": "Other",
+    "styleOtherPlaceholder": "Describe your musical style...",
+    "seeRecommendation": "See my recommendation",
+    "resultMessage": "I've selected this setup for you. You can accept it to load your cart or modify any detail afterwards.",
+    "applyConfig": "Apply configuration",
+    "modifyAfter": "You can modify any detail after applying the configuration.",
+    "presetProfessional": "Professional Setup",
+    "presetSelfproduced": "Self-Production Setup",
+    "presetDemo": "Demo Setup"
   }
 }

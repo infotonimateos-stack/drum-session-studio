@@ -17,6 +17,7 @@ import { CheckoutSummary } from "@/components/CheckoutSummary";
 import { useCart } from "@/hooks/useCart";
 import { validateStep } from "@/hooks/useStepValidation";
 import { useTranslation } from "react-i18next";
+import { ExpertAdvisor } from "@/components/ExpertAdvisor";
 
 interface ConfigurationFlowProps {
   onCheckout: () => void;
@@ -29,7 +30,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   const [mode, setMode] = useState<FlowMode>('configuration');
   const [billingData, setBillingData] = useState<BillingData | null>(null);
   const [validationError, setValidationError] = useState<string | null>(null);
-  const { cartState, addItem, removeItem, hasItem } = useCart();
+  const { cartState, addItem, removeItem, hasItem, clearCart } = useCart();
   const { t } = useTranslation();
 
   const steps = [
@@ -182,6 +183,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
             </Card>
           </div>
         </main>
+        <ExpertAdvisor addItem={addItem} clearCart={clearCart} />
       </div>
     </SidebarProvider>
   );

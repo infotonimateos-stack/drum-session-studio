@@ -669,5 +669,30 @@
     "production": "Debes elegir la duración de la canción para continuar",
     "takes": "Debes elegir al menos una toma para continuar",
     "delivery": "Debes elegir un plazo de entrega para continuar"
+  },
+  "advisor": {
+    "button": "Estoy confundido... ¡Elige por mí!",
+    "buttonShort": "¡Elige por mí!",
+    "buttonLabel": "Asistente de configuración",
+    "title": "Tu Asistente de Configuración",
+    "welcomeMessage": "Hola, soy Toni Mateos. Entiendo que elegir entre tantas opciones técnicas puede ser abrumador. Voy a ayudarte a diseñar el setup ideal para tu canción basándome en mi experiencia de más de treinta años grabando baterías para grandes artistas. Solo necesito que respondas a un par de preguntas muy sencillas.",
+    "letsGo": "¡Vamos allá!",
+    "usageQuestion": "¿Qué utilidad le darás a la grabación?",
+    "usageProfessional": "Profesional",
+    "usageProfessionalDesc": "Para discos o proyectos de alta gama",
+    "usageSelfproduced": "Autoproduzco mi música",
+    "usageSelfproducedDesc": "Quiero calidad pero tengo presupuesto limitado",
+    "usageDemo": "Maqueta",
+    "usageDemoDesc": "Necesito una referencia profesional para mi demo",
+    "styleQuestion": "Estilo musical",
+    "styleOther": "Otros",
+    "styleOtherPlaceholder": "Describe tu estilo musical...",
+    "seeRecommendation": "Ver mi recomendación",
+    "resultMessage": "He seleccionado este setup para ti. Puedes aceptarlo para cargar tu carrito o modificar cualquier detalle después.",
+    "applyConfig": "Aplicar configuración",
+    "modifyAfter": "Puedes modificar cualquier detalle después de aplicar la configuración.",
+    "presetProfessional": "Setup Profesional",
+    "presetSelfproduced": "Setup Autoproducción",
+    "presetDemo": "Setup Maqueta"
   }
 }
