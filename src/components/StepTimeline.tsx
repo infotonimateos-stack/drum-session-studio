@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Progress } from "@/components/ui/progress";
-import { Check, Settings, ChevronDown } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 
@@ -27,7 +27,6 @@ export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => 
   const progress = ((currentStep + 1) / totalSteps) * 100;
   const currentStepLabel = steps[currentStep];
 
-  // Close accordion when step changes
   useEffect(() => {
     setIsOpen(false);
   }, [currentStep]);
@@ -41,12 +40,7 @@ export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => 
         aria-expanded={isOpen}
       >
         <div className="flex items-center gap-2 min-w-0">
-          <div
-            className={cn(
-              "w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold shrink-0",
-              "bg-primary text-primary-foreground"
-            )}
-          >
+          <div className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold shrink-0 bg-primary text-primary-foreground">
             {currentStep + 1}
           </div>
           <span className="text-sm font-semibold text-foreground truncate">
@@ -65,33 +59,18 @@ export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => 
         </div>
       </button>
 
-      {/* Progress bar — always visible inside accordion header on tablet */}
       <div className="xl:hidden px-4 pb-2">
         <Progress value={progress} className="h-1.5" />
       </div>
 
-      {/* Collapsible body on tablet, always open on xl+ */}
       <div
         className={cn(
           "xl:block overflow-hidden transition-all duration-300 ease-in-out",
           isOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0 xl:max-h-none xl:opacity-100"
         )}
       >
-        <div className="p-4 space-y-4">
-          {/* Header for desktop only */}
-          <div className="hidden xl:flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Settings className="h-4 w-4 text-primary" />
-              <h3 className="font-semibold text-sm">{t("config.progress")}</h3>
-              <span className="text-xs font-medium text-primary">{Math.round(progress)}%</span>
-            </div>
-            <span className="text-xs text-muted-foreground">
-              {currentStep + 1}/{totalSteps}
-            </span>
-          </div>
-
-          <Progress value={progress} className="h-2 hidden xl:block" />
-
+        {/* Mobile expanded list */}
+        <div className="xl:hidden p-4 space-y-4">
           <div className="relative">
             {steps.map((step, index) => (
               <div key={index} className="relative flex items-center gap-2 pb-3 last:pb-0">
@@ -127,6 +106,44 @@ export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => 
                 >
                   {step}
                 </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Desktop: ultra-compact horizontal dots ── */}
+        <div className="hidden xl:block p-3 space-y-2">
+          {/* Current step label */}
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-foreground">
+              {currentStep + 1}/{totalSteps} · <span className="text-primary">{currentStepLabel}</span>
+            </span>
+            <span className="text-xs font-medium text-primary">{Math.round(progress)}%</span>
+          </div>
+
+          {/* Progress bar */}
+          <Progress value={progress} className="h-1.5" />
+
+          {/* Compact step indicators */}
+          <div className="flex items-center gap-1 justify-between">
+            {steps.map((step, index) => (
+              <div
+                key={index}
+                className="group relative flex flex-col items-center"
+                title={step}
+              >
+                <div
+                  className={cn(
+                    "w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold transition-colors",
+                    index < currentStep
+                      ? "bg-success text-success-foreground"
+                      : index === currentStep
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted text-muted-foreground"
+                  )}
+                >
+                  {index < currentStep ? <Check className="h-3 w-3" /> : index + 1}
+                </div>
               </div>
             ))}
           </div>
