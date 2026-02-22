@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CartItem, CartState } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
-import { PREAMP_IDS, isMotuBlockedByMicCount } from "@/hooks/useStepValidation";
+import { PREAMP_IDS, isMotuBlockedByMicCount, hasMotuInterface } from "@/hooks/useStepValidation";
 import { AlertCircle } from "lucide-react";
 
 interface PreampsStepProps {
@@ -82,6 +82,11 @@ export const PreampsStep = ({
     } else {
       removeAllPreamps();
       addItem(proPreampsPack);
+      // Auto-deselect MOTU interface if selected (incompatible with legendary preamps)
+      if (hasMotuInterface(cartState)) {
+        removeItem('interface-motu');
+        setMotuBlockedError(t("preamps.legendaryBlocksMotu"));
+      }
     }
   };
 
