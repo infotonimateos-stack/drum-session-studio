@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CartItem, CartState } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
 import { INTERFACE_IDS, isMotuBlockedByMicCount, hasLegendaryPreamps } from "@/hooks/useStepValidation";
-import { AlertCircle } from "lucide-react";
+import { toast } from "sonner";
 
 interface InterfaceStepProps {
   addItem: (item: CartItem) => void;
@@ -19,7 +19,6 @@ export const InterfaceStep = ({
   cartState
 }: InterfaceStepProps) => {
   const { t } = useTranslation();
-  const [motuBlockedError, setMotuBlockedError] = useState<string | null>(null);
 
   const motuInterface: CartItem = {
     id: 'interface-motu',
@@ -43,20 +42,16 @@ export const InterfaceStep = ({
   const motuBlockedByLegendary = hasLegendaryPreamps(cartState);
   const motuBlocked = motuBlockedByMics || motuBlockedByLegendary;
 
-  // Auto-deselect MOTU if mic count exceeds 8 after returning from step 0
+  // Auto-deselect MOTU if blocked after returning from a previous step
   useEffect(() => {
     if (motuBlocked && isMotuSelected) {
       removeItem(motuInterface.id);
-      setMotuBlockedError(motuBlockedByLegendary ? t("interface.motuBlockedByLegendary") : t("interface.motuBlockedByMics"));
+      toast.warning(
+        motuBlockedByLegendary ? t("interface.motuBlockedByLegendary") : t("interface.motuBlockedByMics"),
+        { duration: 5000 }
+      );
     }
   }, [motuBlocked, motuBlockedByLegendary, isMotuSelected]);
-
-  // Clear error when user goes below 8 mics
-  useEffect(() => {
-    if (!motuBlocked) {
-      setMotuBlockedError(null);
-    }
-  }, [motuBlocked]);
 
   // Exclusive selection: selecting one removes the other
   const removeAllInterfaces = () => {
@@ -66,13 +61,14 @@ export const InterfaceStep = ({
   const handleToggleMotu = () => {
     if (isMotuSelected) {
       removeItem(motuInterface.id);
-      setMotuBlockedError(null);
     } else {
       if (motuBlocked) {
-        setMotuBlockedError(motuBlockedByLegendary ? t("interface.motuBlockedByLegendary") : t("interface.motuBlockedByMics"));
+        toast.warning(
+          motuBlockedByLegendary ? t("interface.motuBlockedByLegendary") : t("interface.motuBlockedByMics"),
+          { duration: 5000 }
+        );
         return;
       }
-      setMotuBlockedError(null);
       removeAllInterfaces();
       addItem(motuInterface);
     }
@@ -97,13 +93,6 @@ export const InterfaceStep = ({
           {t("interface.subtitle")}
         </p>
       </div>
-
-      {motuBlockedError && (
-        <div className="flex items-start gap-3 bg-destructive/10 border border-destructive/30 text-destructive rounded-lg px-4 py-3 max-w-3xl mx-auto">
-          <AlertCircle className="w-5 h-5 mt-0.5 shrink-0" />
-          <p className="text-sm font-medium">{motuBlockedError}</p>
-        </div>
-      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 lg:gap-10 max-w-6xl mx-auto">
         <ProductCard
