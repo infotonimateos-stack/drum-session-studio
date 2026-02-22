@@ -22,7 +22,7 @@ export const Cart = ({ cartState, removeItem, onCheckout }: CartProps) => {
           {t("cart.orderSummary")}
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex-1 overflow-y-auto space-y-4">
+      <CardContent className="flex-1 overflow-y-scroll space-y-4 scrollbar-thin scrollbar-track-muted/30 scrollbar-thumb-primary/40 hover:scrollbar-thumb-primary/60 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-muted/30 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-primary/40 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb:hover]:bg-primary/60">
         {/* Order Total */}
         <div className="flex justify-between items-center gap-3 p-3 bg-primary/10 rounded-lg">
           <div className="min-w-0">
