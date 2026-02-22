@@ -57,7 +57,7 @@ export const ProductCard = ({
             }`
       }`}
       style={{ background: included ? "hsl(145 25% 18%)" : "hsl(var(--card-dark))" }}
-      onClick={included || disabled ? undefined : onToggle}
+      onClick={included ? undefined : onToggle}
     >
       {/* Top row: category + price */}
       <div className="flex items-center justify-between gap-2 px-5 pt-4 pb-1">
@@ -135,17 +135,16 @@ export const ProductCard = ({
           </div>
         ) : (
           <Button
-            disabled={disabled}
             className={`w-full h-12 text-sm font-bold rounded-xl transition-all duration-200 px-4 whitespace-nowrap box-border ${
               isSelected
                 ? "bg-primary text-primary-foreground hover:bg-primary/90"
                 : disabled
-                ? "bg-muted text-muted-foreground cursor-not-allowed"
+                ? "bg-muted text-muted-foreground cursor-not-allowed opacity-60"
                 : "bg-gradient-to-r from-[hsl(var(--card-dark-btn-from))] to-[hsl(var(--card-dark-btn-to))] text-white hover:shadow-lg"
             }`}
             onClick={(e) => {
               e.stopPropagation();
-              if (!disabled) onToggle();
+              onToggle();
             }}
           >
             {isSelected ? (
