@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { ConfigSidebar } from "@/components/ConfigSidebar";
 import { StepNavigator } from "@/components/StepNavigator";
+import { DrumKitStep } from "@/components/steps/DrumKitStep";
 import { MicrophonesStep } from "@/components/steps/MicrophonesStep";
 import { PreampsStep } from "@/components/steps/PreampsStep";
 import { InterfaceStep } from "@/components/steps/InterfaceStep";
@@ -34,6 +35,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   const { t } = useTranslation();
 
   const steps = [
+    { title: t("config.steps.drumKit"), component: <DrumKitStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} /> },
     { title: t("config.steps.microphones"), component: <MicrophonesStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} /> },
     { title: t("config.steps.preamps"), component: <PreampsStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} cartState={cartState} /> },
     { title: t("config.steps.interface"), component: <InterfaceStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} cartState={cartState} /> },

@@ -10,6 +10,9 @@ const SNARE_TOP_MIC_IDS = ['sm57-snare', 'akg414-snare'];
 const HIHAT_MIC_IDS = ['km184-hihat', 'm160-hihat'];
 const OVERHEAD_MIC_IDS = ['akg414-overheads', 'coles4038-oh', 'c12-overhead'];
 
+// Drum kit IDs
+export const DRUM_KIT_IDS = ['kit-modern', 'kit-new-vintage', 'kit-jazz', 'kit-antique'];
+
 // Exclusive group IDs per step
 export const PREAMP_IDS = ['preamps-motu', 'preamps-pro'];
 export const INTERFACE_IDS = ['interface-motu', 'interface-dad'];
@@ -52,6 +55,13 @@ export const validateStep = (
 
   switch (stepIndex) {
     case 0: {
+      // Drum Kit: must have one selected
+      if (!hasAny(DRUM_KIT_IDS)) {
+        return { valid: false, error: t('validation.drumKit') };
+      }
+      return { valid: true, error: null };
+    }
+    case 1: {
       // Microphones: must have kick, snare top, hihat, overhead
       const hasKick = hasAny(KICK_MIC_IDS);
       const hasSnareTop = hasAny(SNARE_TOP_MIC_IDS);
@@ -62,28 +72,28 @@ export const validateStep = (
       }
       return { valid: true, error: null };
     }
-    case 1: {
+    case 2: {
       // Preamps: must have one
       if (!hasAny(PREAMP_IDS)) {
         return { valid: false, error: t('validation.preamps') };
       }
       return { valid: true, error: null };
     }
-    case 2: {
+    case 3: {
       // Interface: must have one
       if (!hasAny(INTERFACE_IDS)) {
         return { valid: false, error: t('validation.interface') };
       }
       return { valid: true, error: null };
     }
-    case 3: {
-      // Production: must have a duration (standard or additional)
+    case 4: {
+      // Production: must have a duration
       if (!hasAny(DURATION_IDS)) {
         return { valid: false, error: t('validation.production') };
       }
       return { valid: true, error: null };
     }
-    case 5: {
+    case 6: {
       // Takes: must have at least one take selected
       const takeIds = ['take-toni-interpretation', 'take-exact-copy'];
       if (!hasAny(takeIds)) {
@@ -91,7 +101,7 @@ export const validateStep = (
       }
       return { valid: true, error: null };
     }
-    case 6: {
+    case 7: {
       // Delivery: must have one selected
       if (!hasAny(DELIVERY_IDS)) {
         return { valid: false, error: t('validation.delivery') };
