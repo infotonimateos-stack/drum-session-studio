@@ -14,6 +14,7 @@ export const StepTimeline = ({ currentStep, totalSteps }: StepTimelineProps) => 
   const [isOpen, setIsOpen] = useState(false);
 
   const steps = [
+    t("config.steps.drumKit"),
     t("config.steps.microphones"),
     t("config.steps.preamps"),
     t("config.steps.interface"),

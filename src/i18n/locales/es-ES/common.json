@@ -63,6 +63,7 @@
     "h2gear": "Equipamiento de estudio para grabación de baterías: previos Neve y API, Interface DAD, Micrófonos Telefunken, Neumann, Coles, AKG, Shure...",
     "steps": {
       "step": "Paso",
+      "drumKit": "Instrumento",
       "microphones": "Micrófonos",
       "preamps": "Previos",
       "interface": "Interface",
@@ -663,7 +664,21 @@
       "content": "Ser el batería de Antonio Orozco ha sido una experiencia ilusionante y enriquecedora. Compartir escenario y estudio de grabación con uno de los mejores artistas a nivel nacional me ha permitido vivir momentos únicos.\nTodo se remonta a 2012. En aquella época no era consciente de los increíbles proyectos en los cuales me iba a embarcar. Durante aquellos años, tuve el placer de grabar para artistas como John Legend, Paul Carrack, Manuel Carrasco, etc… Pero si hubo un trabajo que me hizo especial ilusión, fue el de grabar baterías para Antonio Orozco.\nPRIMERA TOMA DE CONTACTO\nA mediados de 2012 recibí una llamada de mi amigo Toni Pagés. Me comentó que necesitaba que le hiciera una sustitución en un concierto de Antonio Orozco. Yo, sin dudarlo ni un segundo, ¡acepté!\nEL CONCIERTO\nAún recuerdo el día del concierto como si fuese ayer. Nos encontrábamos en Granada. 40ºC a la sombra. El estadio a rebosar. Y yo, con los nervios a flor de piel. Delante de mí tenía una prueba de fuego que sabía que iba a cambiar mi vida: tocar para Antonio Orozco ante 5.000 personas.\n¡Todo salió a pedir de boca! Compartir escenario con músicos como Jordi Franco o John Caballés te facilita mucho la tarea. Una vez acabado el «bolo», ya en el camerino, Antonio Orozco me dio un efusivo abrazo, mostrando así su agradecimiento por el trabajo realizado.\nLA SORPRESA\nEl día del concierto fue realmente impresionante. ¡Pero más impactado me quedé cuando días después me ofrecieron el puesto de batería de Antonio Orozco! Toni Pagés iniciaba otros proyectos y necesitaban que me incorporase de inmediato. La misma noche de recibir la llamada de su director musical, brindé con una copa de vino con toda mi familia. ¡Iba a tocar para Orozco durante toda su gira!\nLA GIRA\nRecorrimos España entera dejando huella en todos y cada uno de los conciertos. Éramos una banda muy unida y que sonaba como si lleváramos toda la vida tocando juntos. Una mirada de Orozco era suficiente para saber qué teníamos que hacer. Nos entendíamos a la perfección, y eso era una sensación muy gratificante. Tanto como para que se avecinase otra gran sorpresa… ¡Antonio Orozco decidió grabar su disco «Destino» con nosotros!\nEL DISCO\nUna vez confirmado que iba a ser el batería para el disco de Antonio Orozco, nos pusimos manos a la obra y grabamos dos canciones en un estudio de Barcelona. Cuando ya parecía que no podían llegar mejores noticias, recibí otra llamada… ¡Las baterías del resto del disco se iban a grabar en mi estudio! Tengo que agradecer la confianza depositada en mí por parte de Xavi Pérez y John Caballés, unos profesionales de los pies a la cabeza. Tuve el honor de grabar el álbum «Destino» para Antonio Orozco, el cual se convirtió en «disco de oro» en menos de 48 horas. ¡Fue un auténtico éxito!\nEXPERIENCIA\nA día de hoy (2026), he compartido escenario y he grabado baterías para Antonio Orozco en muchas ocasiones. Ha sido una experiencia muy enriquecedora que me ha hecho crecer como baterista de sesión. Trabajar con un artista de este calibre me hizo mucha ilusión, ¡y espero repetirlo pronto!"
     }
   },
+  "drumKit": {
+    "title": "Elige tu Instrumento",
+    "subtitle": "Selecciona el kit de batería que mejor se adapte a tu estilo y producción.",
+    "category": "Kit de Batería",
+    "modernName": "Moderno · DW Collector's",
+    "modernDesc": "DW Collector's 24, 12, 14, 16 y 18 pulgadas. Diseñada para la mayoría de estilos actuales como rock, pop, blues, worship o ballad. Ofrece un sonido potente con toms muy profundos y un bombo gigante que garantiza una base sólida y moderna.",
+    "newVintageName": "New Vintage · Ludwig Centennial",
+    "newVintageDesc": "Ludwig Centennial 26, 12, 16 y 18 pulgadas. Ideal para producciones de rock o pop clásico que busquen un sonido new vintage. Este kit destaca por su profundidad y una riqueza armónica excepcional, proporcionando un sonido meloso y cálido que empasta perfectamente en la mezcla.",
+    "jazzName": "Jazz/Acoustic · Yamaha Manu Katché",
+    "jazzDesc": "Yamaha Manu Katché 16, 10 y 13 pulgadas. Un kit ideal para obtener un sonido intimista y rico en armónicos. Es el acompañamiento perfecto para estilos como el jazz o proyectos acústicos donde se busca una presencia elegante que acompañe sin invadir el resto de instrumentos.",
+    "antiqueName": "Antique · Ludwig 1938",
+    "antiqueDesc": "Ludwig 1938 de 28, 13 y 16 pulgadas. El sonido de hace cien años recuperado para tu sesión. Ideal para estilos vintage, new vintage, sonido Beatles, british o big band. Su carácter histórico aporta una textura única y auténtica que transporta la producción a otra época."
+  },
   "validation": {
+    "drumKit": "Debes elegir un kit de batería para continuar",
     "microphones": "Debes elegir, al menos, un micro de bombo, uno de snare top, uno de hi-hat, un par overhead",
     "preamps": "Debes elegir un pack de previos para continuar",
     "interface": "Debes elegir una interfaz de audio para continuar",
