@@ -209,157 +209,161 @@ export const ExpertAdvisor = ({ addItem, clearCart }: ExpertAdvisorProps) => {
             </DialogTitle>
           </DialogHeader>
 
-          {/* WELCOME */}
-          {step === "welcome" && (
-            <div className="space-y-6 text-center">
-              <p className="text-muted-foreground leading-relaxed text-sm">
-                {t("advisor.welcomeMessage")}
-              </p>
-              <Button
-                onClick={() => setStep("usage")}
-                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8"
-              >
-                {t("advisor.letsGo")} <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </div>
-          )}
-
-          {/* STEP 1: USAGE */}
-          {step === "usage" && (
-            <div className="space-y-4">
-              <h3 className="font-semibold text-center text-foreground">
-                {t("advisor.usageQuestion")}
-              </h3>
-              <div className="space-y-3">
-                {usageOptions.map((opt) => (
-                  <button
-                    key={opt.key}
-                    onClick={() => setUsage(opt.key)}
-                    className={`w-full p-4 rounded-xl border-2 transition-all text-left ${
-                      usage === opt.key
-                        ? "border-primary bg-primary/10"
-                        : "border-border hover:border-primary/50"
-                    }`}
-                  >
-                    <div className="font-semibold text-sm text-foreground">{t(opt.labelKey)}</div>
-                    <div className="text-xs text-muted-foreground mt-1">{t(opt.descKey)}</div>
-                  </button>
-                ))}
+          <div className="flex-1 overflow-y-auto pr-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted-foreground/20">
+            {/* WELCOME */}
+            {step === "welcome" && (
+              <div className="space-y-6 text-center py-4">
+                <p className="text-muted-foreground leading-relaxed text-sm">
+                  {t("advisor.welcomeMessage")}
+                </p>
+                <Button
+                  onClick={() => setStep("usage")}
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8"
+                >
+                  {t("advisor.letsGo")} <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
               </div>
-              <Button
-                onClick={() => usage && setStep("style")}
-                disabled={!usage}
-                className="w-full bg-primary text-primary-foreground"
-              >
-                {t("stepNav.next")} <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </div>
-          )}
+            )}
 
-          {/* STEP 2: STYLE (assigns drum kit) */}
-          {step === "style" && (
-            <div className="space-y-4">
-              <h3 className="font-semibold text-center text-foreground flex items-center justify-center gap-2">
-                <Music className="h-5 w-5 text-primary" />
-                {t("advisor.styleQuestion")}
-              </h3>
-              <div className="space-y-3">
-                {styleOptions.map((opt) => (
-                  <button
-                    key={opt.key}
-                    onClick={() => setStyle(opt.key)}
-                    className={`w-full p-4 rounded-xl border-2 transition-all text-left ${
-                      style === opt.key
-                        ? "border-primary bg-primary/10"
-                        : "border-border hover:border-primary/50"
-                    }`}
-                  >
-                    <div className="font-semibold text-sm text-foreground">{t(opt.labelKey)}</div>
-                    <div className="text-xs text-muted-foreground mt-1">{t(opt.descKey)}</div>
-                  </button>
-                ))}
-                {style === "other" && (
-                  <Textarea
-                    placeholder={t("advisor.styleOtherPlaceholder")}
-                    value={otherStyle}
-                    onChange={(e) => setOtherStyle(e.target.value)}
-                    className="mt-2"
-                  />
-                )}
-              </div>
-              <Button
-                onClick={() => style && setStep("result")}
-                disabled={!style}
-                className="w-full bg-primary text-primary-foreground"
-              >
-                {t("advisor.seeRecommendation")} <Disc3 className="ml-2 h-4 w-4" />
-              </Button>
-            </div>
-          )}
-
-          {/* RESULT */}
-          {step === "result" && usage && style && (
-            <div className="space-y-5">
-              <p className="text-muted-foreground text-sm text-center leading-relaxed">
-                {t("advisor.resultMessage")}
-              </p>
-
-              {/* Drum Kit */}
-              {selectedKit && (
-                <div className="bg-muted/50 rounded-xl p-4 flex items-center gap-4">
-                  <img src={selectedKit.image} alt={t(selectedKit.nameKey)} className="w-20 h-20 object-contain rounded-lg bg-white" />
-                  <div className="flex-1 min-w-0">
-                    <span className="text-xs uppercase tracking-wider text-muted-foreground">{t("advisor.drumKitLabel")}</span>
-                    <p className="font-bold text-foreground">{t(selectedKit.nameKey)}</p>
-                    <p className="text-primary font-bold">{selectedKit.price.toFixed(2)} €</p>
-                  </div>
-                </div>
-              )}
-
-              {/* Service pack */}
-              <div className="bg-muted/50 rounded-xl p-4 space-y-2">
-                <div className="flex justify-between items-center">
-                  <span className="font-bold text-foreground">{t(`advisor.preset${usage.charAt(0).toUpperCase() + usage.slice(1)}`)}</span>
-                  <span className="font-bold text-primary text-lg">{computeTotal(PRESETS[usage], selectedKit?.price ?? 0)} €</span>
-                </div>
-                <ul className="text-xs text-muted-foreground space-y-1 max-h-48 overflow-y-auto">
-                  {selectedKit && (
-                    <li className="flex justify-between font-semibold text-foreground/80">
-                      <span className="flex items-center gap-1">
-                        <Check className="h-3 w-3 text-primary" />
-                        🥁 {t(selectedKit.nameKey)}
-                      </span>
-                      <span>{selectedKit.price.toFixed(2)} €</span>
-                    </li>
-                  )}
-                  {PRESETS[usage].map((item) => (
-                    <li key={item.id} className="flex justify-between">
-                      <span className="flex items-center gap-1">
-                        <Check className="h-3 w-3 text-primary" />
-                        {item.name}
-                      </span>
-                      <span>{item.price.toFixed(2)} €</span>
-                    </li>
+            {/* STEP 1: USAGE */}
+            {step === "usage" && (
+              <div className="space-y-4 py-4">
+                <h3 className="font-semibold text-center text-foreground">
+                  {t("advisor.usageQuestion")}
+                </h3>
+                <div className="space-y-3">
+                  {usageOptions.map((opt) => (
+                    <button
+                      key={opt.key}
+                      onClick={() => setUsage(opt.key)}
+                      className={`w-full p-4 rounded-xl border-2 transition-all text-left ${
+                        usage === opt.key
+                          ? "border-primary bg-primary/10"
+                          : "border-border hover:border-primary/50"
+                      }`}
+                    >
+                      <div className="font-semibold text-sm text-foreground">{t(opt.labelKey)}</div>
+                      <div className="text-xs text-muted-foreground mt-1">{t(opt.descKey)}</div>
+                    </button>
                   ))}
-                </ul>
+                </div>
+                <Button
+                  onClick={() => usage && setStep("style")}
+                  disabled={!usage}
+                  className="w-full bg-primary text-primary-foreground"
+                >
+                  {t("stepNav.next")} <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
               </div>
+            )}
 
-              <Button
-                onClick={handleApply}
-                className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-bold"
-              >
-                {t("advisor.applyConfig")} <Check className="ml-2 h-4 w-4" />
-              </Button>
-              <p className="text-xs text-muted-foreground text-center">
-                {t("advisor.modifyAfter")}
-              </p>
-            </div>
-          )}
+            {/* STEP 2: STYLE (assigns drum kit) */}
+            {step === "style" && (
+              <div className="space-y-4 py-4">
+                <h3 className="font-semibold text-center text-foreground flex items-center justify-center gap-2">
+                  <Music className="h-5 w-5 text-primary" />
+                  {t("advisor.styleQuestion")}
+                </h3>
+                <div className="space-y-3">
+                  {styleOptions.map((opt) => (
+                    <button
+                      key={opt.key}
+                      onClick={() => setStyle(opt.key)}
+                      className={`w-full p-4 rounded-xl border-2 transition-all text-left ${
+                        style === opt.key
+                          ? "border-primary bg-primary/10"
+                          : "border-border hover:border-primary/50"
+                      }`}
+                    >
+                      <div className="font-semibold text-sm text-foreground">{t(opt.labelKey)}</div>
+                      <div className="text-xs text-muted-foreground mt-1">{t(opt.descKey)}</div>
+                    </button>
+                  ))}
+                  {style === "other" && (
+                    <Textarea
+                      placeholder={t("advisor.styleOtherPlaceholder")}
+                      value={otherStyle}
+                      onChange={(e) => setOtherStyle(e.target.value)}
+                      className="mt-2"
+                    />
+                  )}
+                </div>
+                <Button
+                  onClick={() => style && setStep("result")}
+                  disabled={!style}
+                  className="w-full bg-primary text-primary-foreground"
+                >
+                  {t("advisor.seeRecommendation")} <Disc3 className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            )}
 
-          {/* Tax disclaimer always visible */}
-          <p className="text-xs text-muted-foreground text-center italic border-t border-border pt-3 mt-2">
-            {t("cart.taxDisclaimer")}
-          </p>
+            {/* RESULT */}
+            {step === "result" && usage && style && (
+              <div className="space-y-5 py-4">
+                <p className="text-muted-foreground text-sm text-center leading-relaxed">
+                  {t("advisor.resultMessage")}
+                </p>
+
+                {/* Drum Kit */}
+                {selectedKit && (
+                  <div className="bg-muted/50 rounded-xl p-4 flex items-center gap-4">
+                    <img src={selectedKit.image} alt={t(selectedKit.nameKey)} className="w-20 h-20 object-contain rounded-lg bg-white" />
+                    <div className="flex-1 min-w-0">
+                      <span className="text-xs uppercase tracking-wider text-muted-foreground">{t("advisor.drumKitLabel")}</span>
+                      <p className="font-bold text-foreground">{t(selectedKit.nameKey)}</p>
+                      <p className="text-primary font-bold">{selectedKit.price.toFixed(2)} €</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Service pack */}
+                <div className="bg-muted/50 rounded-xl p-4 space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="font-bold text-foreground">{t(`advisor.preset${usage.charAt(0).toUpperCase() + usage.slice(1)}`)}</span>
+                    <span className="font-bold text-primary text-lg">{computeTotal(PRESETS[usage], selectedKit?.price ?? 0)} €</span>
+                  </div>
+                  <ul className="text-xs text-muted-foreground space-y-1 max-h-48 overflow-y-auto">
+                    {selectedKit && (
+                      <li className="flex justify-between font-semibold text-foreground/80">
+                        <span className="flex items-center gap-1">
+                          <Check className="h-3 w-3 text-primary" />
+                          🥁 {t(selectedKit.nameKey)}
+                        </span>
+                        <span>{selectedKit.price.toFixed(2)} €</span>
+                      </li>
+                    )}
+                    {PRESETS[usage].map((item) => (
+                      <li key={item.id} className="flex justify-between">
+                        <span className="flex items-center gap-1">
+                          <Check className="h-3 w-3 text-primary" />
+                          {item.name}
+                        </span>
+                        <span>{item.price.toFixed(2)} €</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <Button
+                  onClick={handleApply}
+                  className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-bold"
+                >
+                  {t("advisor.applyConfig")} <Check className="ml-2 h-4 w-4" />
+                </Button>
+                <p className="text-xs text-muted-foreground text-center">
+                  {t("advisor.modifyAfter")}
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Tax disclaimer always visible at bottom */}
+          <div className="pt-4 border-t border-border bg-background">
+            <p className="text-[10px] sm:text-xs text-muted-foreground text-center italic leading-tight">
+              {t("cart.taxDisclaimer")}
+            </p>
+          </div>
         </DialogContent>
       </Dialog>
     </>
