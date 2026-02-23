@@ -86,15 +86,11 @@ export const DrumKitStep = ({ addItem, removeItem, hasItem }: DrumKitStepProps) 
               }`}
             >
               {/* Large image */}
-              <div className={`w-full aspect-[4/3] flex items-center justify-center overflow-hidden ${
-                (kit as any).transparentBg ? "bg-card" : "bg-muted/30"
-              }`}>
+              <div className="w-full aspect-[4/3] flex items-center justify-center overflow-hidden bg-white border-b border-border/50">
                 <img
                   src={kit.image}
                   alt={t(kit.nameKey)}
-                  className={`w-full h-full ${
-                    (kit as any).transparentBg ? "object-contain p-4" : "object-cover"
-                  } group-hover:scale-105 transition-transform duration-500`}
+                  className="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
