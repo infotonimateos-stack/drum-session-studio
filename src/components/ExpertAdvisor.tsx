@@ -10,15 +10,25 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
+import { DRUM_KIT_IDS, drumKits } from "@/components/steps/DrumKitStep";
 
 type ModalStep = "welcome" | "usage" | "style" | "result";
 type UsageOption = "professional" | "selfproduced" | "demo";
-type StyleOption = "rock" | "jazz" | "other";
+type StyleOption = "modern" | "newvintage" | "jazz" | "purevintage" | "other";
 
 interface ExpertAdvisorProps {
   addItem: (item: CartItem) => void;
   clearCart: () => void;
 }
+
+// Style → drum kit mapping
+const STYLE_TO_KIT: Record<StyleOption, string> = {
+  modern: "kit-modern",
+  newvintage: "kit-new-vintage",
+  jazz: "kit-jazz",
+  purevintage: "kit-antique",
+  other: "kit-modern",
+};
 
 // Preset definitions using cart item IDs
 const PRESET_PROFESSIONAL: { id: string; name: string; price: number; category: string }[] = [
@@ -97,8 +107,8 @@ const PRESETS: Record<UsageOption, typeof PRESET_PROFESSIONAL> = {
   demo: PRESET_DEMO,
 };
 
-const computePresetTotal = (preset: typeof PRESET_PROFESSIONAL): string => {
-  const sum = preset.reduce((acc, item) => acc + item.price, 0);
+const computeTotal = (preset: typeof PRESET_PROFESSIONAL, kitPrice: number): string => {
+  const sum = preset.reduce((acc, item) => acc + item.price, 0) + kitPrice;
   return sum.toFixed(2).replace('.', ',');
 };
 
@@ -122,9 +132,28 @@ export const ExpertAdvisor = ({ addItem, clearCart }: ExpertAdvisorProps) => {
     setOpen(true);
   };
 
+  const getSelectedKit = () => {
+    if (!style) return null;
+    const kitId = STYLE_TO_KIT[style];
+    return drumKits.find((k) => k.id === kitId) || null;
+  };
+
   const handleApply = () => {
-    if (!usage) return;
+    if (!usage || !style) return;
     clearCart();
+
+    // Add drum kit
+    const kit = getSelectedKit();
+    if (kit) {
+      addItem({
+        id: kit.id,
+        name: t(kit.nameKey),
+        price: kit.price,
+        category: t("drumKit.category"),
+      });
+    }
+
+    // Add preset items
     const preset = PRESETS[usage];
     preset.forEach((item) => {
       addItem({
@@ -135,7 +164,6 @@ export const ExpertAdvisor = ({ addItem, clearCart }: ExpertAdvisorProps) => {
       });
     });
     setOpen(false);
-    // Scroll to order summary sidebar after a short delay for DOM update
     setTimeout(() => {
       const summary = document.querySelector('[data-cart-summary]');
       if (summary) {
@@ -150,16 +178,20 @@ export const ExpertAdvisor = ({ addItem, clearCart }: ExpertAdvisorProps) => {
     { key: "demo", labelKey: "advisor.usageDemo", descKey: "advisor.usageDemoDesc" },
   ];
 
-  const styleOptions: { key: StyleOption; label: string }[] = [
-    { key: "rock", label: "Rock, Pop, Ballad, Country" },
-    { key: "jazz", label: "Jazz, Blues, Reggae, Urban" },
-    { key: "other", label: t("advisor.styleOther") },
+  const styleOptions: { key: StyleOption; labelKey: string; descKey: string }[] = [
+    { key: "modern", labelKey: "advisor.styleModern", descKey: "advisor.styleModernDesc" },
+    { key: "newvintage", labelKey: "advisor.styleNewVintage", descKey: "advisor.styleNewVintageDesc" },
+    { key: "jazz", labelKey: "advisor.styleJazz", descKey: "advisor.styleJazzDesc" },
+    { key: "purevintage", labelKey: "advisor.stylePureVintage", descKey: "advisor.stylePureVintageDesc" },
+    { key: "other", labelKey: "advisor.styleOther", descKey: "advisor.styleOtherDesc" },
   ];
+
+  const selectedKit = getSelectedKit();
 
   return (
     <>
       {/* Floating button */}
-        <button
+      <button
         onClick={handleOpen}
         className="fixed bottom-24 right-6 z-40 flex items-center gap-2 px-5 py-3 rounded-full bg-accent text-accent-foreground shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold text-sm animate-soft-breathe hover:animate-none"
         aria-label={t("advisor.buttonLabel")}
@@ -224,7 +256,7 @@ export const ExpertAdvisor = ({ addItem, clearCart }: ExpertAdvisorProps) => {
             </div>
           )}
 
-          {/* STEP 2: STYLE */}
+          {/* STEP 2: STYLE (assigns drum kit) */}
           {step === "style" && (
             <div className="space-y-4">
               <h3 className="font-semibold text-center text-foreground flex items-center justify-center gap-2">
@@ -242,7 +274,8 @@ export const ExpertAdvisor = ({ addItem, clearCart }: ExpertAdvisorProps) => {
                         : "border-border hover:border-primary/50"
                     }`}
                   >
-                    <div className="font-semibold text-sm text-foreground">{opt.label}</div>
+                    <div className="font-semibold text-sm text-foreground">{t(opt.labelKey)}</div>
+                    <div className="text-xs text-muted-foreground mt-1">{t(opt.descKey)}</div>
                   </button>
                 ))}
                 {style === "other" && (
@@ -265,18 +298,40 @@ export const ExpertAdvisor = ({ addItem, clearCart }: ExpertAdvisorProps) => {
           )}
 
           {/* RESULT */}
-          {step === "result" && usage && (
+          {step === "result" && usage && style && (
             <div className="space-y-5">
               <p className="text-muted-foreground text-sm text-center leading-relaxed">
                 {t("advisor.resultMessage")}
               </p>
 
+              {/* Drum Kit */}
+              {selectedKit && (
+                <div className="bg-muted/50 rounded-xl p-4 flex items-center gap-4">
+                  <img src={selectedKit.image} alt={t(selectedKit.nameKey)} className="w-20 h-20 object-contain rounded-lg bg-white" />
+                  <div className="flex-1 min-w-0">
+                    <span className="text-xs uppercase tracking-wider text-muted-foreground">{t("advisor.drumKitLabel")}</span>
+                    <p className="font-bold text-foreground">{t(selectedKit.nameKey)}</p>
+                    <p className="text-primary font-bold">{selectedKit.price.toFixed(2)} €</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Service pack */}
               <div className="bg-muted/50 rounded-xl p-4 space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-foreground">{t(`advisor.preset${usage.charAt(0).toUpperCase() + usage.slice(1)}`)}</span>
-                  <span className="font-bold text-primary text-lg">{computePresetTotal(PRESETS[usage])} €</span>
+                  <span className="font-bold text-primary text-lg">{computeTotal(PRESETS[usage], selectedKit?.price ?? 0)} €</span>
                 </div>
                 <ul className="text-xs text-muted-foreground space-y-1 max-h-48 overflow-y-auto">
+                  {selectedKit && (
+                    <li className="flex justify-between font-semibold text-foreground/80">
+                      <span className="flex items-center gap-1">
+                        <Check className="h-3 w-3 text-primary" />
+                        🥁 {t(selectedKit.nameKey)}
+                      </span>
+                      <span>{selectedKit.price.toFixed(2)} €</span>
+                    </li>
+                  )}
                   {PRESETS[usage].map((item) => (
                     <li key={item.id} className="flex justify-between">
                       <span className="flex items-center gap-1">
@@ -300,6 +355,11 @@ export const ExpertAdvisor = ({ addItem, clearCart }: ExpertAdvisorProps) => {
               </p>
             </div>
           )}
+
+          {/* Tax disclaimer always visible */}
+          <p className="text-xs text-muted-foreground text-center italic border-t border-border pt-3 mt-2">
+            {t("cart.taxDisclaimer")}
+          </p>
         </DialogContent>
       </Dialog>
     </>
