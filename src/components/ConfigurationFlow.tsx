@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Star } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { ConfigSidebar } from "@/components/ConfigSidebar";
@@ -161,7 +161,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                     </h2>
                     <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">{t("config.heroP1")}</p>
                     <div className="flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium w-fit">
-                      <Star className="w-4 h-4 fill-current" />
+                      <ShoppingCart className="w-4 h-4" />
                       {t("config.priceFrom")}
                     </div>
                     <p className="text-sm text-muted-foreground">{t("config.heroP2")}</p>
