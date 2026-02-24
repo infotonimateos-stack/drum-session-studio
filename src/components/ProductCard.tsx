@@ -67,7 +67,7 @@ export const ProductCard = ({
     >
       {/* Selection checkmark badge */}
       {isSelected && !included && (
-        <div className="absolute top-3 right-3 z-10 w-7 h-7 rounded-full bg-primary flex items-center justify-center shadow-md transition-transform duration-300 animate-in zoom-in-50">
+        <div className="absolute top-3 left-3 z-10 w-7 h-7 rounded-full bg-primary flex items-center justify-center shadow-md transition-transform duration-300 animate-in zoom-in-50">
           <Check className="h-4 w-4 text-primary-foreground" strokeWidth={3} />
         </div>
       )}
