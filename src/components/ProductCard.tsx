@@ -52,13 +52,25 @@ export const ProductCard = ({
           ? "opacity-50 cursor-not-allowed"
           : `cursor-pointer hover:shadow-2xl transform hover:scale-[1.03] ${
               isSelected
-                ? "ring-2 ring-primary shadow-2xl scale-[1.03]"
+                ? "ring-2 ring-primary shadow-[0_4px_24px_-4px_hsl(var(--primary)/0.35)] scale-[1.03]"
                 : "hover:ring-1 hover:ring-card-dark-price/40"
             }`
       }`}
-      style={{ background: included ? "hsl(145 25% 18%)" : "hsl(var(--card-dark))" }}
+      style={{
+        background: included
+          ? "hsl(145 25% 18%)"
+          : isSelected
+          ? "hsl(var(--primary) / 0.08)"
+          : "hsl(var(--card-dark))",
+      }}
       onClick={included ? undefined : onToggle}
     >
+      {/* Selection checkmark badge */}
+      {isSelected && !included && (
+        <div className="absolute top-3 right-3 z-10 w-7 h-7 rounded-full bg-primary flex items-center justify-center shadow-md transition-transform duration-300 animate-in zoom-in-50">
+          <Check className="h-4 w-4 text-primary-foreground" strokeWidth={3} />
+        </div>
+      )}
       {/* Top row: category + price */}
       <div className="flex items-center justify-between gap-2 px-5 pt-4 pb-1">
         <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-card-dark-muted/20 text-card-dark-muted truncate min-w-0">
