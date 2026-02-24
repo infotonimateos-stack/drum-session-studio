@@ -1,3 +1,4 @@
+import { Check } from "lucide-react";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 
@@ -82,10 +83,17 @@ export const DrumKitStep = ({ addItem, removeItem, hasItem }: DrumKitStepProps) 
               onClick={() => handleSelect(kit)}
               className={`group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-300 text-left border-2 ${
                 selected
-                  ? "border-primary shadow-2xl scale-[1.02] bg-primary/5"
+                  ? "border-primary shadow-[0_4px_24px_-4px_hsl(var(--primary)/0.35)] scale-[1.02]"
                   : "border-border hover:border-primary/50 hover:shadow-xl hover:scale-[1.01] bg-card"
               }`}
+              style={{ background: selected ? "hsl(var(--primary) / 0.08)" : undefined }}
             >
+              {/* Selection checkmark badge */}
+              {selected && (
+                <div className="absolute top-3 left-3 z-10 w-7 h-7 rounded-full bg-primary flex items-center justify-center shadow-md transition-transform duration-300 animate-in zoom-in-50">
+                  <Check className="h-4 w-4 text-primary-foreground" strokeWidth={3} />
+                </div>
+              )}
               {/* Large image */}
               <div className="w-full aspect-[4/3] flex items-center justify-center overflow-hidden bg-white border-b border-border/50">
                 <img
