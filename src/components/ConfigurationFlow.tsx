@@ -167,7 +167,15 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                     <p className="text-sm text-muted-foreground">{t("config.heroP2")}</p>
                   </div>
                   <div className="flex items-center justify-center">
-                    <img src="/lovable-uploads/3beb9f76-a64e-4bec-a58b-9b8f4990203b.png" alt={t("config.imgAlt")} className="rounded-lg shadow-lg object-cover object-[center_top_10%] w-full h-40 sm:h-48 lg:h-64" />
+                    <video
+                      src="/videos/big-drums.mp4"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="auto"
+                      className="rounded-lg shadow-lg object-cover w-full h-40 sm:h-48 lg:h-64"
+                    />
                   </div>
                 </div>
               </Card>
