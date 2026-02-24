@@ -119,7 +119,7 @@ export const DrumKitStep = ({ addItem, removeItem, hasItem }: DrumKitStepProps) 
                 <div className={`mt-4 w-full py-2.5 rounded-xl text-center text-sm font-bold transition-all ${
                   selected
                     ? "bg-primary text-primary-foreground"
-                    : "bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary"
+                    : "bg-gradient-to-r from-[hsl(var(--card-dark-btn-from))] to-[hsl(var(--card-dark-btn-to))] text-white group-hover:shadow-lg"
                 }`}>
                   {selected ? `✓ ${t("drumKit.selected")}` : t("drumKit.addFor", { price: kit.price.toFixed(2).replace('.', ',') })}
                 </div>
