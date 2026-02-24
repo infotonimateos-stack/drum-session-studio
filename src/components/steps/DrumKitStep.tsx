@@ -37,7 +37,8 @@ const drumKits = [
     nameKey: "drumKit.antiqueName",
     descKey: "drumKit.antiqueDesc",
     price: 29.90,
-    image: "/lovable-uploads/drum-kit-ludwig-1938.png",
+    image: "/lovable-uploads/drum-kit-ludwig-1938-clean.png",
+    transparentBg: true,
   },
 ];
 
