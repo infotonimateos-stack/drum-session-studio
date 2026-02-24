@@ -174,7 +174,8 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                       muted
                       playsInline
                       preload="auto"
-                      className="rounded-lg shadow-lg object-cover w-full h-40 sm:h-48 lg:h-64"
+                      className="rounded-lg shadow-lg w-full h-auto"
+                      style={{ aspectRatio: '16 / 9', objectFit: 'contain' }}
                     />
                   </div>
                 </div>
