@@ -91,7 +91,7 @@ export const DrumKitStep = ({ addItem, removeItem, hasItem }: DrumKitStepProps) 
                 <img
                   src={kit.image}
                   alt={t(kit.nameKey)}
-                  className="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-contain p-1 group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
