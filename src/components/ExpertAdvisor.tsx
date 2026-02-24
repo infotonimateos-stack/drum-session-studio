@@ -19,6 +19,7 @@ type StyleOption = "modern" | "newvintage" | "jazz" | "purevintage" | "other";
 interface ExpertAdvisorProps {
   addItem: (item: CartItem) => void;
   clearCart: () => void;
+  onApply?: () => void;
 }
 
 // Style → drum kit mapping
@@ -112,7 +113,7 @@ const computeTotal = (preset: typeof PRESET_PROFESSIONAL, kitPrice: number): str
   return sum.toFixed(2).replace('.', ',');
 };
 
-export const ExpertAdvisor = ({ addItem, clearCart }: ExpertAdvisorProps) => {
+export const ExpertAdvisor = ({ addItem, clearCart, onApply }: ExpertAdvisorProps) => {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<ModalStep>("welcome");
   const [usage, setUsage] = useState<UsageOption | null>(null);
@@ -164,12 +165,8 @@ export const ExpertAdvisor = ({ addItem, clearCart }: ExpertAdvisorProps) => {
       });
     });
     setOpen(false);
-    setTimeout(() => {
-      const summary = document.querySelector('[data-cart-summary]');
-      if (summary) {
-        summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 150);
+    if (onApply) onApply();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const usageOptions: { key: UsageOption; labelKey: string; descKey: string }[] = [
