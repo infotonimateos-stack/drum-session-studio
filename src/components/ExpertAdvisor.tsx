@@ -27,7 +27,7 @@ const STYLE_TO_KIT: Record<StyleOption, string> = {
   modern: "kit-modern",
   newvintage: "kit-new-vintage",
   jazz: "kit-jazz",
-  purevintage: "kit-antique",
+  purevintage: "kit-pure-vintage",
   other: "kit-modern",
 };
 

@@ -7,7 +7,7 @@ interface DrumKitStepProps {
   hasItem: (itemId: string) => boolean;
 }
 
-const DRUM_KIT_IDS = ["kit-modern", "kit-new-vintage", "kit-jazz", "kit-antique"];
+const DRUM_KIT_IDS = ["kit-modern", "kit-new-vintage", "kit-jazz", "kit-pure-vintage"];
 
 const drumKits = [
   {
@@ -33,9 +33,9 @@ const drumKits = [
     image: "/lovable-uploads/drum-kit-yamaha-manu-katche.png",
   },
   {
-    id: "kit-antique",
-    nameKey: "drumKit.antiqueName",
-    descKey: "drumKit.antiqueDesc",
+    id: "kit-pure-vintage",
+    nameKey: "drumKit.pureVintageName",
+    descKey: "drumKit.pureVintageDesc",
     price: 29.90,
     image: "/lovable-uploads/drum-kit-ludwig-1938-antique.png",
     transparentBg: true,
