@@ -185,7 +185,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
             </Card>
           </div>
         </main>
-        <ExpertAdvisor addItem={addItem} clearCart={clearCart} />
+        <ExpertAdvisor addItem={addItem} clearCart={clearCart} onApply={() => setCurrentStep(0)} />
       </div>
     </SidebarProvider>
   );
