@@ -11,7 +11,7 @@ const HIHAT_MIC_IDS = ['km184-hihat', 'm160-hihat'];
 const OVERHEAD_MIC_IDS = ['akg414-overheads', 'coles4038-oh', 'c12-overhead'];
 
 // Drum kit IDs
-export const DRUM_KIT_IDS = ['kit-modern', 'kit-new-vintage', 'kit-jazz', 'kit-antique'];
+export const DRUM_KIT_IDS = ['kit-modern', 'kit-new-vintage', 'kit-jazz', 'kit-pure-vintage'];
 
 // Exclusive group IDs per step
 export const PREAMP_IDS = ['preamps-motu', 'preamps-pro'];
