@@ -121,7 +121,7 @@ export const DrumKitStep = ({ addItem, removeItem, hasItem }: DrumKitStepProps) 
                     ? "bg-primary text-primary-foreground"
                     : "bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary"
                 }`}>
-                  {selected ? `✓ ${t("drumKit.selected")}` : t("drumKit.select")}
+                  {selected ? `✓ ${t("drumKit.selected")}` : t("drumKit.addFor", { price: kit.price.toFixed(2).replace('.', ',') })}
                 </div>
               </div>
             </button>

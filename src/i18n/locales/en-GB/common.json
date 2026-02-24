@@ -723,7 +723,7 @@
     "jazzDesc": "Yamaha Manu Katché 16, 10 and 13 inches. An ideal kit for an intimate sound rich in harmonics. It is the perfect accompaniment for styles like jazz or acoustic projects where an elegant presence is sought to accompany without invading the other instruments.",
     "pureVintageName": "Pure Vintage — Ludwig 1938",
     "pureVintageDesc": "Ludwig 1938 28, 13 and 16 inches. The sound of a hundred years ago recovered for your session. Ideal for vintage, new vintage, Beatles sound, british or big band. Its historical character provides a unique and authentic texture that transports the production to another era.",
-    "selected": "Selected",
-    "select": "Select"
+    "selected": "Added",
+    "addFor": "Add for {{price}} €"
   }
 }
