@@ -27,8 +27,9 @@ interface FunnelStep {
   step_name: string;
   step_label: string;
   users: number;
-  events: number;
   dropoff_pct: number;
+  retention_pct: number;
+  cumulative_dropoff_pct: number;
 }
 
 const CHANNEL_COLORS: Record<string, string> = {
@@ -400,11 +401,21 @@ export default function AnalyticsTab({ storedPassword }: Props) {
                       <span className="text-sm flex-1">{s.step_label}</span>
                       <span className="text-sm font-mono">{s.users} usuarios</span>
                       {s.step_number > 1 && (
+                        <Badge variant="outline" className="text-xs font-mono">
+                          Ret. {s.retention_pct}%
+                        </Badge>
+                      )}
+                      {s.step_number > 1 && (
                         <Badge
                           variant={s.dropoff_pct > 30 ? "destructive" : "outline"}
                           className="text-xs font-mono"
                         >
                           -{s.dropoff_pct}%
+                        </Badge>
+                      )}
+                      {s.step_number > 1 && (
+                        <Badge variant="secondary" className="text-xs font-mono">
+                          Acum. -{s.cumulative_dropoff_pct}%
                         </Badge>
                       )}
                     </div>

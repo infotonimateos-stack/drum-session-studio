@@ -71,7 +71,7 @@ serve(async (req) => {
     const url = new URL(req.url);
     const period = url.searchParams.get("period") || "30";
 
-    // Query step_view events grouped by step_number
+    // Query step_view events — use activeUsers metric matching GA response schema
     const reportRes = await fetch(
       `https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runReport`,
       {
@@ -83,14 +83,13 @@ serve(async (req) => {
         body: JSON.stringify({
           dateRanges: [{ startDate: `${period}daysAgo`, endDate: "today" }],
           dimensions: [{ name: "customEvent:step_name" }],
-          metrics: [{ name: "eventCount" }, { name: "totalUsers" }],
+          metrics: [{ name: "activeUsers" }],
           dimensionFilter: {
             filter: {
               fieldName: "eventName",
               stringFilter: { value: "step_view", matchType: "EXACT" },
             },
           },
-          orderBys: [{ metric: { metricName: "eventCount" }, desc: true }],
           limit: 20,
         }),
       }
@@ -99,15 +98,15 @@ serve(async (req) => {
     const reportData = await reportRes.json();
     
     const stepOrder = [
-      "drum_kit", "microphones", "preamps", "interface",
+      "inicio_registro", "detalles_proyecto", "configuracion_presupuesto", "confirmacion_final",
       "production", "video", "takes", "delivery", "extras"
     ];
     
     const stepLabels: Record<string, string> = {
-      drum_kit: "Batería",
-      microphones: "Micrófonos",
-      preamps: "Previos",
-      interface: "Interfaz",
+      inicio_registro: "Inicio / Registro",
+      detalles_proyecto: "Detalles del proyecto",
+      configuracion_presupuesto: "Configuración / Presupuesto",
+      confirmacion_final: "Confirmación final",
       production: "Producción",
       video: "Vídeo",
       takes: "Tomas",
@@ -115,38 +114,38 @@ serve(async (req) => {
       extras: "Extras",
     };
 
-    // Parse rows
-    const rawSteps: Record<string, { events: number; users: number }> = {};
+    // Parse rows from GA response: dimensionValues[0] = step_name, metricValues[0] = activeUsers
+    const rawSteps: Record<string, number> = {};
     for (const row of reportData.rows || []) {
       const stepName = row.dimensionValues[0].value;
-      rawSteps[stepName] = {
-        events: parseInt(row.metricValues[0].value),
-        users: parseInt(row.metricValues[1].value),
-      };
+      const users = parseInt(row.metricValues[0].value);
+      rawSteps[stepName] = users;
     }
 
-    // Build ordered funnel
+    // Build ordered funnel with retention and dropoff calculations
     const funnel = stepOrder.map((name, idx) => {
-      const data = rawSteps[name] || { events: 0, users: 0 };
+      const users = rawSteps[name] || 0;
+      const prevUsers = idx === 0 ? users : (rawSteps[stepOrder[idx - 1]] || 0);
+      const dropoff_pct = idx === 0 ? 0 : (prevUsers > 0 ? Math.round(((prevUsers - users) / prevUsers) * 1000) / 10 : 0);
+      const retention_pct = idx === 0 ? 100 : (prevUsers > 0 ? Math.round((users / prevUsers) * 1000) / 10 : 0);
+      // Cumulative dropoff from step 1
+      const firstUsers = rawSteps[stepOrder[0]] || 0;
+      const cumulative_dropoff_pct = firstUsers > 0 ? Math.round(((firstUsers - users) / firstUsers) * 1000) / 10 : 0;
+
       return {
         step_number: idx + 1,
         step_name: name,
         step_label: stepLabels[name] || name,
-        users: data.users,
-        events: data.events,
+        users,
+        dropoff_pct,
+        retention_pct,
+        cumulative_dropoff_pct,
       };
-    });
-
-    // Calculate drop-off between steps
-    const funnelWithDropoff = funnel.map((step, idx) => {
-      const prevUsers = idx === 0 ? step.users : funnel[idx - 1].users;
-      const dropoff = prevUsers > 0 ? ((prevUsers - step.users) / prevUsers) * 100 : 0;
-      return { ...step, dropoff_pct: Math.round(dropoff * 10) / 10 };
     });
 
     return new Response(JSON.stringify({
       configured: true,
-      funnel: funnelWithDropoff,
+      funnel,
       period: parseInt(period),
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

@@ -25,7 +25,7 @@ serve(async (req) => {
     if (!funnel || !Array.isArray(funnel)) throw new Error("Missing funnel data");
 
     const funnelText = funnel.map((s: any) =>
-      `Paso ${s.step_number} (${s.step_label}): ${s.users} usuarios, ${s.events} eventos, abandono desde paso anterior: ${s.dropoff_pct}%`
+      `Paso ${s.step_number} (${s.step_label}): ${s.users} usuarios, retención vs paso anterior: ${s.retention_pct}%, abandono vs paso anterior: ${s.dropoff_pct}%, abandono acumulado desde paso 1: ${s.cumulative_dropoff_pct}%`
     ).join("\n");
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {

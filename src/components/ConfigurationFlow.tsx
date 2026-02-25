@@ -55,7 +55,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   };
 
   const stepNames = [
-    "drum_kit", "microphones", "preamps", "interface",
+    "inicio_registro", "detalles_proyecto", "configuracion_presupuesto", "confirmacion_final",
     "production", "video", "takes", "delivery", "extras"
   ];
 
