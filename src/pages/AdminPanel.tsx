@@ -5,10 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter, Archive, FileSpreadsheet, FileDown, CalendarIcon } from "lucide-react";
+import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter, Archive, FileSpreadsheet, FileDown, CalendarIcon, BarChart3 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import html2pdf from "html2pdf.js";
+import AnalyticsTab from "@/components/admin/AnalyticsTab";
 
 const ADMIN_ROUTE = true; // marker
 
@@ -77,6 +78,7 @@ export default function AdminPanel() {
   const [selectedOrders, setSelectedOrders] = useState<Set<string>>(new Set());
   const [dateFrom, setDateFrom] = useState<Date | undefined>();
   const [dateTo, setDateTo] = useState<Date | undefined>();
+  const [activeTab, setActiveTab] = useState("billing");
 
   const apiCall = useCallback(async (action: string, method: string = "GET", body?: any, params?: Record<string, string>) => {
     const url = new URL(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-api`);
@@ -288,22 +290,18 @@ export default function AdminPanel() {
         try {
           const data = await apiCall("invoice", "GET", undefined, { orderId: order.id });
           if (data.html) {
-            // Use an iframe to isolate from page CSS/dark theme
             const iframe = document.createElement("iframe");
             iframe.style.cssText = "position:absolute;left:-9999px;top:0;width:800px;height:1200px;border:none;";
             document.body.appendChild(iframe);
             const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
             if (!iframeDoc) { document.body.removeChild(iframe); continue; }
-            // Write clean HTML into isolated iframe — no dark mode classes
             iframeDoc.open();
             iframeDoc.write(data.html);
             iframeDoc.close();
-            // Force light color-scheme at document level
             iframeDoc.documentElement.style.colorScheme = "light";
             iframeDoc.documentElement.style.backgroundColor = "#ffffff";
             iframeDoc.body.style.backgroundColor = "#ffffff";
             iframeDoc.body.style.color = "#000000";
-            // Remove any dark class that could leak
             iframeDoc.documentElement.classList.remove("dark");
             await new Promise(r => setTimeout(r, 600));
             const pdfBlob = await html2pdf().from(iframeDoc.body).set({
@@ -315,7 +313,6 @@ export default function AdminPanel() {
                 backgroundColor: "#ffffff",
                 logging: false,
                 onclone: (clonedDoc: Document) => {
-                  // Force every element to light colors at DOM level
                   clonedDoc.documentElement.style.colorScheme = "light";
                   clonedDoc.body.style.backgroundColor = "#ffffff";
                   clonedDoc.body.style.color = "#000000";
@@ -323,16 +320,13 @@ export default function AdminPanel() {
                   allEls.forEach((el: Element) => {
                     const htmlEl = el as HTMLElement;
                     const cs = htmlEl.style;
-                    // Preserve table header dark background
                     if (cs.background?.includes("#1a1a2e") || cs.backgroundColor?.includes("#1a1a2e")) {
                       cs.backgroundColor = "#1a1a2e";
                       cs.color = "#ffffff";
                       return;
                     }
-                    // Force all text to black, backgrounds to transparent
                     if (cs.color) cs.color = "#000000";
                     if (cs.backgroundColor) cs.backgroundColor = "transparent";
-                    // Also set via computed fallback
                     const computed = clonedDoc.defaultView?.getComputedStyle(htmlEl);
                     if (computed) {
                       const bg = computed.backgroundColor;
@@ -341,7 +335,6 @@ export default function AdminPanel() {
                       }
                       const fg = computed.color;
                       if (fg) {
-                        // Check if text is light (R > 150) → force black
                         const m = fg.match(/rgba?\((\d+)/);
                         if (m && parseInt(m[1]) > 150) {
                           htmlEl.style.color = "#000000";
@@ -448,25 +441,7 @@ export default function AdminPanel() {
               <p className="text-xs text-muted-foreground">{orders.length} pedidos · {completedOrders} completados</p>
             </div>
           </div>
-          <div className="flex items-center gap-2 flex-wrap">
-            {selectedOrders.size > 0 && (
-              <span className="text-xs text-muted-foreground mr-1">{selectedOrders.size} seleccionados</span>
-            )}
-            <Button variant="outline" size="sm" onClick={handleExportCSV}>
-              <FileSpreadsheet className="h-4 w-4 mr-1" /> CSV
-            </Button>
-            <Button variant="outline" size="sm" onClick={handleBulkDownloadZip} disabled={bulkDownloading}>
-              <Archive className={`h-4 w-4 mr-1 ${bulkDownloading ? "animate-spin" : ""}`} /> {bulkDownloading ? "Generando..." : "ZIP HTML"}
-            </Button>
-            <Button variant="outline" size="sm" onClick={handleBulkDownloadPdf} disabled={bulkDownloading}>
-              <FileDown className={`h-4 w-4 mr-1 ${bulkDownloading ? "animate-spin" : ""}`} /> {bulkDownloading ? "Generando..." : "PDF"}
-            </Button>
-            <Button variant="outline" size="sm" onClick={fetchOrders} disabled={loading}>
-              <RefreshCw className={`h-4 w-4 mr-1 ${loading ? "animate-spin" : ""}`} /> Refrescar
-            </Button>
-            <Button variant="destructive" size="sm" onClick={handleDeleteAll}>
-              <AlertTriangle className="h-4 w-4 mr-1" /> Borrar todo
-            </Button>
+          <div className="flex items-center gap-2">
             <Button variant="ghost" size="sm" onClick={() => { setAuthenticated(false); setStoredPassword(""); sessionStorage.removeItem("admin_auth"); }}>
               <LogOut className="h-4 w-4" />
             </Button>
@@ -474,210 +449,253 @@ export default function AdminPanel() {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-6 space-y-6">
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          <Card>
-            <CardContent className="pt-4 pb-3 text-center">
-              <p className="text-2xl font-bold text-primary">{filteredOrders.length}</p>
-              <p className="text-xs text-muted-foreground">Pedidos</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="pt-4 pb-3 text-center">
-              <p className="text-2xl font-bold text-emerald-400">{totalRevenue.toFixed(2)} €</p>
-              <p className="text-xs text-muted-foreground">Facturación total</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="pt-4 pb-3 text-center">
-              <p className="text-2xl font-bold text-amber-400">{totalTax.toFixed(2)} €</p>
-              <p className="text-xs text-muted-foreground">IVA total</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="pt-4 pb-3 text-center">
-              <p className="text-2xl font-bold">{filteredOrders.filter(o => o.is_professional_invoice).length}</p>
-              <p className="text-xs text-muted-foreground">Facturas profesionales</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="pt-4 pb-3 text-center">
-              <p className="text-2xl font-bold">{completedOrders}</p>
-              <p className="text-xs text-muted-foreground">Completados</p>
-            </CardContent>
-          </Card>
-        </div>
+      <div className="container mx-auto px-4 py-6">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+          <TabsList className="grid w-full max-w-md grid-cols-2">
+            <TabsTrigger value="billing" className="gap-2">
+              <FileText className="h-4 w-4" />
+              Facturación
+            </TabsTrigger>
+            <TabsTrigger value="analytics" className="gap-2">
+              <BarChart3 className="h-4 w-4" />
+              Analytics
+            </TabsTrigger>
+          </TabsList>
 
-        {/* Filters */}
-        <Card>
-          <CardContent className="pt-4 pb-3">
-            <div className="flex flex-wrap items-center gap-3">
-              <Filter className="h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Buscar por nº factura, empresa, email..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-64"
-              />
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant="outline" size="sm" className={cn("w-36 justify-start text-left font-normal", !dateFrom && "text-muted-foreground")}>
-                    <CalendarIcon className="h-4 w-4 mr-1" />
-                    {dateFrom ? format(dateFrom, "dd/MM/yy") : "Desde"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar mode="single" selected={dateFrom} onSelect={setDateFrom} locale={es} initialFocus className={cn("p-3 pointer-events-auto")} />
-                </PopoverContent>
-              </Popover>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant="outline" size="sm" className={cn("w-36 justify-start text-left font-normal", !dateTo && "text-muted-foreground")}>
-                    <CalendarIcon className="h-4 w-4 mr-1" />
-                    {dateTo ? format(dateTo, "dd/MM/yy") : "Hasta"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar mode="single" selected={dateTo} onSelect={setDateTo} locale={es} initialFocus className={cn("p-3 pointer-events-auto")} />
-                </PopoverContent>
-              </Popover>
-              {(dateFrom || dateTo) && (
-                <Button variant="ghost" size="sm" onClick={() => { setDateFrom(undefined); setDateTo(undefined); }}>
-                  Limpiar fechas
-                </Button>
+          {/* ===== FACTURACIÓN TAB ===== */}
+          <TabsContent value="billing" className="space-y-6">
+            {/* Billing toolbar */}
+            <div className="flex items-center gap-2 flex-wrap">
+              {selectedOrders.size > 0 && (
+                <span className="text-xs text-muted-foreground mr-1">{selectedOrders.size} seleccionados</span>
               )}
-              <Select value={filterStatus} onValueChange={setFilterStatus}>
-                <SelectTrigger className="w-44"><SelectValue placeholder="Estado" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todos los estados</SelectItem>
-                  <SelectItem value="pending">Pendiente</SelectItem>
-                  <SelectItem value="completed">Completado</SelectItem>
-                  <SelectItem value="awaiting_transfer">Esperando transferencia</SelectItem>
-                  <SelectItem value="cancelled">Cancelado</SelectItem>
-                  <SelectItem value="refunded">Reembolsado</SelectItem>
-                </SelectContent>
-              </Select>
-              <Select value={filterMethod} onValueChange={setFilterMethod}>
-                <SelectTrigger className="w-40"><SelectValue placeholder="Método" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todos los métodos</SelectItem>
-                  <SelectItem value="paypal">PayPal</SelectItem>
-                  <SelectItem value="transfer">Transferencia</SelectItem>
-                </SelectContent>
-              </Select>
-              <Select value={filterInvoice} onValueChange={setFilterInvoice}>
-                <SelectTrigger className="w-44"><SelectValue placeholder="Tipo factura" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todas las facturas</SelectItem>
-                  <SelectItem value="professional">Profesional</SelectItem>
-                  <SelectItem value="simplified">Simplificada</SelectItem>
-                </SelectContent>
-              </Select>
+              <Button variant="outline" size="sm" onClick={handleExportCSV}>
+                <FileSpreadsheet className="h-4 w-4 mr-1" /> CSV
+              </Button>
+              <Button variant="outline" size="sm" onClick={handleBulkDownloadZip} disabled={bulkDownloading}>
+                <Archive className={`h-4 w-4 mr-1 ${bulkDownloading ? "animate-spin" : ""}`} /> {bulkDownloading ? "Generando..." : "ZIP HTML"}
+              </Button>
+              <Button variant="outline" size="sm" onClick={handleBulkDownloadPdf} disabled={bulkDownloading}>
+                <FileDown className={`h-4 w-4 mr-1 ${bulkDownloading ? "animate-spin" : ""}`} /> {bulkDownloading ? "Generando..." : "PDF"}
+              </Button>
+              <Button variant="outline" size="sm" onClick={fetchOrders} disabled={loading}>
+                <RefreshCw className={`h-4 w-4 mr-1 ${loading ? "animate-spin" : ""}`} /> Refrescar
+              </Button>
+              <Button variant="destructive" size="sm" onClick={handleDeleteAll}>
+                <AlertTriangle className="h-4 w-4 mr-1" /> Borrar todo
+              </Button>
             </div>
-          </CardContent>
-        </Card>
 
-        {/* Orders Table */}
-        <Card>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-border bg-muted/30">
-                  <th className="px-3 py-3 w-10">
-                    <Checkbox
-                      checked={filteredOrders.length > 0 && selectedOrders.size === filteredOrders.length}
-                      onCheckedChange={toggleSelectAll}
-                    />
-                  </th>
-                  <th className="text-left px-4 py-3 font-medium">Fecha</th>
-                  <th className="text-left px-4 py-3 font-medium">Nº Factura</th>
-                  <th className="text-left px-4 py-3 font-medium">Tipo</th>
-                  <th className="text-left px-4 py-3 font-medium">Cliente</th>
-                  <th className="text-right px-4 py-3 font-medium">IVA</th>
-                  <th className="text-right px-4 py-3 font-medium">Total</th>
-                  <th className="text-left px-4 py-3 font-medium">Método</th>
-                  <th className="text-left px-4 py-3 font-medium">Estado</th>
-                  <th className="text-center px-4 py-3 font-medium">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredOrders.map((order) => (
-                  <tr key={order.id} className={`border-b border-border/50 hover:bg-muted/20 transition-colors ${selectedOrders.has(order.id) ? "bg-muted/10" : ""}`}>
-                    <td className="px-3 py-3">
-                      <Checkbox
-                        checked={selectedOrders.has(order.id)}
-                        onCheckedChange={() => toggleSelect(order.id)}
-                      />
-                    </td>
-                    <td className="px-4 py-3 whitespace-nowrap">
-                      {new Date(order.created_at).toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "2-digit" })}
-                      <span className="text-muted-foreground ml-1 text-xs">
-                        {new Date(order.created_at).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 font-mono text-xs">
-                      {order.invoice_number || <span className="text-muted-foreground">—</span>}
-                    </td>
-                    <td className="px-4 py-3">
-                      <Badge variant="outline" className={order.is_professional_invoice ? "border-primary/50 text-primary" : "border-muted-foreground/30 text-muted-foreground"}>
-                        {order.is_professional_invoice ? "Profesional" : "Simplificada"}
-                      </Badge>
-                    </td>
-                    <td className="px-4 py-3 max-w-[200px] truncate">
-                      {order.is_professional_invoice ? (
-                        <div>
-                          <p className="font-medium truncate">{order.business_name}</p>
-                          <p className="text-xs text-muted-foreground truncate">{order.vat_number} · {order.billing_email}</p>
-                        </div>
-                      ) : (
-                        <span className="text-muted-foreground text-xs">{order.country_code} · {order.client_type}</span>
-                      )}
-                    </td>
-                    <td className="px-4 py-3 text-right font-mono text-xs">
-                      <span className="text-muted-foreground">{order.tax_rate}%</span>
-                      <br />
-                      {order.tax_amount.toFixed(2)} €
-                    </td>
-                    <td className="px-4 py-3 text-right font-mono font-bold">{order.total.toFixed(2)} €</td>
-                    <td className="px-4 py-3">
-                      <Badge variant="outline" className="text-xs capitalize">{order.payment_method}</Badge>
-                    </td>
-                    <td className="px-4 py-3">
-                      <Select value={order.payment_status} onValueChange={(v) => handleUpdateStatus(order.id, v)}>
-                        <SelectTrigger className={`h-7 text-xs border ${statusColors[order.payment_status] || ""}`}>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {Object.entries(statusLabels).map(([val, label]) => (
-                            <SelectItem key={val} value={val}>{label}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center justify-center gap-1">
-                        <Button variant="ghost" size="icon" className="h-7 w-7" title="Descargar factura" onClick={() => handleDownloadInvoice(order.id, order.invoice_number)}>
-                          <Download className="h-3.5 w-3.5" />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" title="Eliminar" onClick={() => handleDeleteOrder(order.id)}>
-                          <Trash2 className="h-3.5 w-3.5" />
-                        </Button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-                {filteredOrders.length === 0 && (
-                  <tr>
-                    <td colSpan={10} className="px-4 py-12 text-center text-muted-foreground">
-                      {loading ? "Cargando..." : "No se encontraron pedidos"}
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </Card>
+            {/* Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <Card>
+                <CardContent className="pt-4 pb-3 text-center">
+                  <p className="text-2xl font-bold text-primary">{filteredOrders.length}</p>
+                  <p className="text-xs text-muted-foreground">Pedidos</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="pt-4 pb-3 text-center">
+                  <p className="text-2xl font-bold text-emerald-400">{totalRevenue.toFixed(2)} €</p>
+                  <p className="text-xs text-muted-foreground">Facturación total</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="pt-4 pb-3 text-center">
+                  <p className="text-2xl font-bold text-amber-400">{totalTax.toFixed(2)} €</p>
+                  <p className="text-xs text-muted-foreground">IVA total</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="pt-4 pb-3 text-center">
+                  <p className="text-2xl font-bold">{filteredOrders.filter(o => o.is_professional_invoice).length}</p>
+                  <p className="text-xs text-muted-foreground">Facturas profesionales</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="pt-4 pb-3 text-center">
+                  <p className="text-2xl font-bold">{completedOrders}</p>
+                  <p className="text-xs text-muted-foreground">Completados</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Filters */}
+            <Card>
+              <CardContent className="pt-4 pb-3">
+                <div className="flex flex-wrap items-center gap-3">
+                  <Filter className="h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder="Buscar por nº factura, empresa, email..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-64"
+                  />
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="outline" size="sm" className={cn("w-36 justify-start text-left font-normal", !dateFrom && "text-muted-foreground")}>
+                        <CalendarIcon className="h-4 w-4 mr-1" />
+                        {dateFrom ? format(dateFrom, "dd/MM/yy") : "Desde"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar mode="single" selected={dateFrom} onSelect={setDateFrom} locale={es} initialFocus className={cn("p-3 pointer-events-auto")} />
+                    </PopoverContent>
+                  </Popover>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="outline" size="sm" className={cn("w-36 justify-start text-left font-normal", !dateTo && "text-muted-foreground")}>
+                        <CalendarIcon className="h-4 w-4 mr-1" />
+                        {dateTo ? format(dateTo, "dd/MM/yy") : "Hasta"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar mode="single" selected={dateTo} onSelect={setDateTo} locale={es} initialFocus className={cn("p-3 pointer-events-auto")} />
+                    </PopoverContent>
+                  </Popover>
+                  {(dateFrom || dateTo) && (
+                    <Button variant="ghost" size="sm" onClick={() => { setDateFrom(undefined); setDateTo(undefined); }}>
+                      Limpiar fechas
+                    </Button>
+                  )}
+                  <Select value={filterStatus} onValueChange={setFilterStatus}>
+                    <SelectTrigger className="w-44"><SelectValue placeholder="Estado" /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">Todos los estados</SelectItem>
+                      <SelectItem value="pending">Pendiente</SelectItem>
+                      <SelectItem value="completed">Completado</SelectItem>
+                      <SelectItem value="awaiting_transfer">Esperando transferencia</SelectItem>
+                      <SelectItem value="cancelled">Cancelado</SelectItem>
+                      <SelectItem value="refunded">Reembolsado</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Select value={filterMethod} onValueChange={setFilterMethod}>
+                    <SelectTrigger className="w-40"><SelectValue placeholder="Método" /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">Todos los métodos</SelectItem>
+                      <SelectItem value="paypal">PayPal</SelectItem>
+                      <SelectItem value="transfer">Transferencia</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Select value={filterInvoice} onValueChange={setFilterInvoice}>
+                    <SelectTrigger className="w-44"><SelectValue placeholder="Tipo factura" /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">Todas las facturas</SelectItem>
+                      <SelectItem value="professional">Profesional</SelectItem>
+                      <SelectItem value="simplified">Simplificada</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Orders Table */}
+            <Card>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-border bg-muted/30">
+                      <th className="px-3 py-3 w-10">
+                        <Checkbox
+                          checked={filteredOrders.length > 0 && selectedOrders.size === filteredOrders.length}
+                          onCheckedChange={toggleSelectAll}
+                        />
+                      </th>
+                      <th className="text-left px-4 py-3 font-medium">Fecha</th>
+                      <th className="text-left px-4 py-3 font-medium">Nº Factura</th>
+                      <th className="text-left px-4 py-3 font-medium">Tipo</th>
+                      <th className="text-left px-4 py-3 font-medium">Cliente</th>
+                      <th className="text-right px-4 py-3 font-medium">IVA</th>
+                      <th className="text-right px-4 py-3 font-medium">Total</th>
+                      <th className="text-left px-4 py-3 font-medium">Método</th>
+                      <th className="text-left px-4 py-3 font-medium">Estado</th>
+                      <th className="text-center px-4 py-3 font-medium">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredOrders.map((order) => (
+                      <tr key={order.id} className={`border-b border-border/50 hover:bg-muted/20 transition-colors ${selectedOrders.has(order.id) ? "bg-muted/10" : ""}`}>
+                        <td className="px-3 py-3">
+                          <Checkbox
+                            checked={selectedOrders.has(order.id)}
+                            onCheckedChange={() => toggleSelect(order.id)}
+                          />
+                        </td>
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          {new Date(order.created_at).toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "2-digit" })}
+                          <span className="text-muted-foreground ml-1 text-xs">
+                            {new Date(order.created_at).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 font-mono text-xs">
+                          {order.invoice_number || <span className="text-muted-foreground">—</span>}
+                        </td>
+                        <td className="px-4 py-3">
+                          <Badge variant="outline" className={order.is_professional_invoice ? "border-primary/50 text-primary" : "border-muted-foreground/30 text-muted-foreground"}>
+                            {order.is_professional_invoice ? "Profesional" : "Simplificada"}
+                          </Badge>
+                        </td>
+                        <td className="px-4 py-3 max-w-[200px] truncate">
+                          {order.is_professional_invoice ? (
+                            <div>
+                              <p className="font-medium truncate">{order.business_name}</p>
+                              <p className="text-xs text-muted-foreground truncate">{order.vat_number} · {order.billing_email}</p>
+                            </div>
+                          ) : (
+                            <span className="text-muted-foreground text-xs">{order.country_code} · {order.client_type}</span>
+                          )}
+                        </td>
+                        <td className="px-4 py-3 text-right font-mono text-xs">
+                          <span className="text-muted-foreground">{order.tax_rate}%</span>
+                          <br />
+                          {order.tax_amount.toFixed(2)} €
+                        </td>
+                        <td className="px-4 py-3 text-right font-mono font-bold">{order.total.toFixed(2)} €</td>
+                        <td className="px-4 py-3">
+                          <Badge variant="outline" className="text-xs capitalize">{order.payment_method}</Badge>
+                        </td>
+                        <td className="px-4 py-3">
+                          <Select value={order.payment_status} onValueChange={(v) => handleUpdateStatus(order.id, v)}>
+                            <SelectTrigger className={`h-7 text-xs border ${statusColors[order.payment_status] || ""}`}>
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {Object.entries(statusLabels).map(([val, label]) => (
+                                <SelectItem key={val} value={val}>{label}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="flex items-center justify-center gap-1">
+                            <Button variant="ghost" size="icon" className="h-7 w-7" title="Descargar factura" onClick={() => handleDownloadInvoice(order.id, order.invoice_number)}>
+                              <Download className="h-3.5 w-3.5" />
+                            </Button>
+                            <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" title="Eliminar" onClick={() => handleDeleteOrder(order.id)}>
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                    {filteredOrders.length === 0 && (
+                      <tr>
+                        <td colSpan={10} className="px-4 py-12 text-center text-muted-foreground">
+                          {loading ? "Cargando..." : "No se encontraron pedidos"}
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </Card>
+          </TabsContent>
+
+          {/* ===== ANALYTICS TAB ===== */}
+          <TabsContent value="analytics">
+            <AnalyticsTab storedPassword={storedPassword} />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
