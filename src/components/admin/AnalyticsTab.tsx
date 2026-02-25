@@ -19,6 +19,8 @@ interface AnalyticsData {
     newUsers: number;
   };
   sources?: { channel: string; sessions: number }[];
+  topPages?: { path: string; views: number }[];
+  referrals?: { source: string; sessions: number }[];
   period?: number;
 }
 
@@ -176,6 +178,8 @@ export default function AnalyticsTab({ storedPassword }: Props) {
 
   const overview = data?.overview;
   const sources = data?.sources || [];
+  const topPages = data?.topPages || [];
+  const referrals = data?.referrals || [];
   const totalSessions = sources.reduce((s, c) => s + c.sessions, 0);
 
   const pieData = sources.map((s, i) => ({
@@ -351,6 +355,64 @@ export default function AnalyticsTab({ storedPassword }: Props) {
           </CardContent>
         </Card>
       )}
+
+      {/* ===== TOP PAGES, REFERRALS, CHANNELS ===== */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Top 10 Pages */}
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2">
+              <Eye className="h-4 w-4 text-primary" />
+              Páginas más visitadas
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {topPages.length > 0 ? (
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={topPages} layout="vertical" margin={{ left: 10, right: 20 }}>
+                  <XAxis type="number" tick={{ fontSize: 12 }} />
+                  <YAxis dataKey="path" type="category" width={150} tick={{ fontSize: 10 }} />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }}
+                    formatter={(value: number) => [`${value.toLocaleString()} vistas`, ""]}
+                  />
+                  <Bar dataKey="views" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <p className="text-center text-sm text-muted-foreground py-12">Sin datos</p>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Referral Sources */}
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2">
+              <Activity className="h-4 w-4 text-primary" />
+              Sitios web de referencia
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {referrals.length > 0 ? (
+              <div className="space-y-2">
+                {referrals.map((r, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: `hsl(${(i * 37) % 360}, 65%, 55%)` }} />
+                    <span className="text-sm flex-1 truncate">{r.source}</span>
+                    <span className="text-sm font-mono">{r.sessions.toLocaleString()}</span>
+                    <Badge variant="outline" className="text-xs font-mono">
+                      {totalSessions > 0 ? ((r.sessions / totalSessions) * 100).toFixed(1) : "0"}%
+                    </Badge>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-sm text-muted-foreground py-12">Sin datos</p>
+            )}
+          </CardContent>
+        </Card>
+      </div>
 
       {/* ===== FUNNEL SECTION ===== */}
       <div className="border-t border-border pt-6">

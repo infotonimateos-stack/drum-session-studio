@@ -86,46 +86,52 @@ serve(async (req) => {
     const url = new URL(req.url);
     const period = url.searchParams.get("period") || "30"; // days
 
-    // Run two reports in parallel: overview metrics + traffic sources
-    const [overviewRes, sourcesRes] = await Promise.all([
-      // Overview metrics
+    const gaReport = (body: any) =>
       fetch(`https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runReport`, {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          dateRanges: [{ startDate: `${period}daysAgo`, endDate: "today" }],
-          metrics: [
-            { name: "totalUsers" },
-            { name: "sessions" },
-            { name: "averageSessionDuration" },
-            { name: "screenPageViews" },
-            { name: "bounceRate" },
-            { name: "newUsers" },
-          ],
-        }),
+        headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+    const dateRanges = [{ startDate: `${period}daysAgo`, endDate: "today" }];
+
+    // Run all reports in parallel
+    const [overviewRes, sourcesRes, topPagesRes, referralsRes] = await Promise.all([
+      gaReport({
+        dateRanges,
+        metrics: [
+          { name: "totalUsers" }, { name: "sessions" }, { name: "averageSessionDuration" },
+          { name: "screenPageViews" }, { name: "bounceRate" }, { name: "newUsers" },
+        ],
       }),
-      // Traffic sources
-      fetch(`https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runReport`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          dateRanges: [{ startDate: `${period}daysAgo`, endDate: "today" }],
-          dimensions: [{ name: "sessionDefaultChannelGroup" }],
-          metrics: [{ name: "sessions" }],
-          orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
-          limit: 10,
-        }),
+      gaReport({
+        dateRanges,
+        dimensions: [{ name: "sessionDefaultChannelGroup" }],
+        metrics: [{ name: "sessions" }],
+        orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
+        limit: 10,
+      }),
+      // Top 10 pages
+      gaReport({
+        dateRanges,
+        dimensions: [{ name: "pagePath" }],
+        metrics: [{ name: "screenPageViews" }],
+        orderBys: [{ metric: { metricName: "screenPageViews" }, desc: true }],
+        limit: 10,
+      }),
+      // Referral sources
+      gaReport({
+        dateRanges,
+        dimensions: [{ name: "sessionSource" }],
+        metrics: [{ name: "sessions" }],
+        orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
+        limit: 10,
       }),
     ]);
 
-    const overviewData = await overviewRes.json();
-    const sourcesData = await sourcesRes.json();
+    const [overviewData, sourcesData, topPagesData, referralsData] = await Promise.all([
+      overviewRes.json(), sourcesRes.json(), topPagesRes.json(), referralsRes.json(),
+    ]);
 
     // Parse overview
     const metrics = overviewData.rows?.[0]?.metricValues || [];
@@ -138,9 +144,18 @@ serve(async (req) => {
       newUsers: parseInt(metrics[5]?.value || "0"),
     };
 
-    // Parse sources
     const sources = (sourcesData.rows || []).map((row: any) => ({
       channel: row.dimensionValues[0].value,
+      sessions: parseInt(row.metricValues[0].value),
+    }));
+
+    const topPages = (topPagesData.rows || []).map((row: any) => ({
+      path: row.dimensionValues[0].value,
+      views: parseInt(row.metricValues[0].value),
+    }));
+
+    const referrals = (referralsData.rows || []).map((row: any) => ({
+      source: row.dimensionValues[0].value,
       sessions: parseInt(row.metricValues[0].value),
     }));
 
@@ -148,6 +163,8 @@ serve(async (req) => {
       configured: true,
       overview,
       sources,
+      topPages,
+      referrals,
       period: parseInt(period),
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
