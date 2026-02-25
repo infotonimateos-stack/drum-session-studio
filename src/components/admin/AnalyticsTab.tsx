@@ -3,8 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Users, Activity, Clock, Eye, TrendingUp, UserPlus, RefreshCw, BarChart3 } from "lucide-react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, Legend } from "recharts";
+import { Users, Activity, Clock, Eye, TrendingUp, UserPlus, RefreshCw, BarChart3, Brain, Loader2 } from "lucide-react";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, PieChart, Pie } from "recharts";
+import ReactMarkdown from "react-markdown";
+import { toast } from "sonner";
 
 interface AnalyticsData {
   configured: boolean;
@@ -20,6 +22,15 @@ interface AnalyticsData {
   period?: number;
 }
 
+interface FunnelStep {
+  step_number: number;
+  step_name: string;
+  step_label: string;
+  users: number;
+  events: number;
+  dropoff_pct: number;
+}
+
 const CHANNEL_COLORS: Record<string, string> = {
   "Organic Search": "hsl(142, 71%, 45%)",
   "Direct": "hsl(217, 91%, 60%)",
@@ -31,9 +42,8 @@ const CHANNEL_COLORS: Record<string, string> = {
   "Paid Social": "hsl(280, 70%, 55%)",
 };
 
-const getChannelColor = (channel: string, idx: number) => {
-  return CHANNEL_COLORS[channel] || `hsl(${(idx * 47) % 360}, 60%, 55%)`;
-};
+const getChannelColor = (channel: string, idx: number) =>
+  CHANNEL_COLORS[channel] || `hsl(${(idx * 47) % 360}, 60%, 55%)`;
 
 const formatDuration = (seconds: number) => {
   const m = Math.floor(seconds / 60);
@@ -51,19 +61,27 @@ export default function AnalyticsTab({ storedPassword }: Props) {
   const [period, setPeriod] = useState("30");
   const [error, setError] = useState<string | null>(null);
 
+  // Funnel state
+  const [funnel, setFunnel] = useState<FunnelStep[]>([]);
+  const [funnelLoading, setFunnelLoading] = useState(false);
+
+  // AI analysis state
+  const [analysis, setAnalysis] = useState<string | null>(null);
+  const [analysisLoading, setAnalysisLoading] = useState(false);
+
+  const headers = {
+    "x-admin-password": storedPassword,
+    "apikey": import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+    "Content-Type": "application/json",
+  };
+
   const fetchAnalytics = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
       const url = new URL(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analytics-ga`);
       url.searchParams.set("period", period);
-      const res = await fetch(url.toString(), {
-        headers: {
-          "x-admin-password": storedPassword,
-          "apikey": import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(url.toString(), { headers });
       if (!res.ok) throw new Error("Error fetching analytics");
       const json = await res.json();
       setData(json);
@@ -73,9 +91,55 @@ export default function AnalyticsTab({ storedPassword }: Props) {
     setLoading(false);
   }, [storedPassword, period]);
 
-  useEffect(() => {
+  const fetchFunnel = useCallback(async () => {
+    setFunnelLoading(true);
+    try {
+      const url = new URL(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analytics-funnel`);
+      url.searchParams.set("period", period);
+      const res = await fetch(url.toString(), { headers });
+      if (!res.ok) throw new Error("Error fetching funnel");
+      const json = await res.json();
+      if (json.funnel) setFunnel(json.funnel);
+    } catch (e: any) {
+      console.error("Funnel error:", e);
+    }
+    setFunnelLoading(false);
+  }, [storedPassword, period]);
+
+  const fetchAll = useCallback(() => {
+    setAnalysis(null);
     fetchAnalytics();
-  }, [fetchAnalytics]);
+    fetchFunnel();
+  }, [fetchAnalytics, fetchFunnel]);
+
+  useEffect(() => { fetchAll(); }, [fetchAll]);
+
+  const handleAnalyze = async () => {
+    if (funnel.length === 0) {
+      toast.error("No hay datos de embudo para analizar");
+      return;
+    }
+    setAnalysisLoading(true);
+    setAnalysis(null);
+    try {
+      const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analyze-funnel`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify({ funnel }),
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        toast.error(err.error || "Error al analizar");
+        setAnalysisLoading(false);
+        return;
+      }
+      const json = await res.json();
+      setAnalysis(json.analysis);
+    } catch (e: any) {
+      toast.error("Error de conexión con IA");
+    }
+    setAnalysisLoading(false);
+  };
 
   if (loading && !data) {
     return (
@@ -93,7 +157,7 @@ export default function AnalyticsTab({ storedPassword }: Props) {
           <CardTitle>Google Analytics no configurado</CardTitle>
         </CardHeader>
         <CardContent className="text-center text-sm text-muted-foreground space-y-2">
-          <p>Para activar esta sección, configura las credenciales de Google Analytics (cuenta de servicio + Property ID).</p>
+          <p>Para activar esta sección, configura las credenciales de Google Analytics.</p>
         </CardContent>
       </Card>
     );
@@ -120,6 +184,12 @@ export default function AnalyticsTab({ storedPassword }: Props) {
     pct: totalSessions > 0 ? ((s.sessions / totalSessions) * 100).toFixed(1) : "0",
   }));
 
+  const funnelBarData = funnel.map(s => ({
+    name: s.step_label,
+    users: s.users,
+    dropoff: s.dropoff_pct,
+  }));
+
   return (
     <div className="space-y-6">
       {/* Period selector + refresh */}
@@ -140,8 +210,8 @@ export default function AnalyticsTab({ storedPassword }: Props) {
               <SelectItem value="365">Último año</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline" size="sm" onClick={fetchAnalytics} disabled={loading}>
-            <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
+          <Button variant="outline" size="sm" onClick={fetchAll} disabled={loading || funnelLoading}>
+            <RefreshCw className={`h-4 w-4 ${loading || funnelLoading ? "animate-spin" : ""}`} />
           </Button>
         </div>
       </div>
@@ -194,7 +264,6 @@ export default function AnalyticsTab({ storedPassword }: Props) {
 
       {/* Charts: bar + pie */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Bar chart */}
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">Canales de adquisición</CardTitle>
@@ -222,7 +291,6 @@ export default function AnalyticsTab({ storedPassword }: Props) {
           </CardContent>
         </Card>
 
-        {/* Pie chart */}
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">Distribución de tráfico</CardTitle>
@@ -282,6 +350,109 @@ export default function AnalyticsTab({ storedPassword }: Props) {
           </CardContent>
         </Card>
       )}
+
+      {/* ===== FUNNEL SECTION ===== */}
+      <div className="border-t border-border pt-6">
+        <div className="flex items-center gap-3 mb-4">
+          <TrendingUp className="h-5 w-5 text-primary" />
+          <h2 className="font-semibold text-lg">Embudo de conversión — Configurador</h2>
+        </div>
+
+        {funnelLoading ? (
+          <div className="flex items-center justify-center py-12">
+            <RefreshCw className="h-5 w-5 animate-spin text-muted-foreground" />
+          </div>
+        ) : funnel.length > 0 && funnel.some(s => s.users > 0) ? (
+          <>
+            {/* Funnel bar chart */}
+            <Card className="mb-4">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium">Usuarios por paso</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={funnelBarData} margin={{ left: 10, right: 20 }}>
+                    <XAxis dataKey="name" tick={{ fontSize: 11 }} angle={-30} textAnchor="end" height={60} />
+                    <YAxis tick={{ fontSize: 12 }} />
+                    <Tooltip
+                      contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }}
+                      formatter={(value: number, name: string) => {
+                        if (name === "users") return [`${value} usuarios`, "Usuarios"];
+                        return [`${value}%`, "Abandono"];
+                      }}
+                    />
+                    <Bar dataKey="users" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+
+            {/* Funnel table */}
+            <Card className="mb-4">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium">Detalle del embudo</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  {funnel.map((s) => (
+                    <div key={s.step_number} className="flex items-center gap-3">
+                      <Badge variant="outline" className="text-xs w-6 justify-center">{s.step_number}</Badge>
+                      <span className="text-sm flex-1">{s.step_label}</span>
+                      <span className="text-sm font-mono">{s.users} usuarios</span>
+                      {s.step_number > 1 && (
+                        <Badge
+                          variant={s.dropoff_pct > 30 ? "destructive" : "outline"}
+                          className="text-xs font-mono"
+                        >
+                          -{s.dropoff_pct}%
+                        </Badge>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* AI Analysis button */}
+            <Button
+              onClick={handleAnalyze}
+              disabled={analysisLoading}
+              className="gap-2"
+              variant="default"
+            >
+              {analysisLoading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Brain className="h-4 w-4" />
+              )}
+              {analysisLoading ? "Analizando..." : "Explícamelo"}
+            </Button>
+          </>
+        ) : (
+          <Card>
+            <CardContent className="py-8 text-center text-sm text-muted-foreground">
+              Aún no hay datos de embudo. Los eventos <code>step_view</code> se registrarán cuando los usuarios naveguen por el configurador.
+            </CardContent>
+          </Card>
+        )}
+
+        {/* AI Analysis result */}
+        {analysis && (
+          <Card className="mt-4 border-primary/30">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium flex items-center gap-2">
+                <Brain className="h-4 w-4 text-primary" />
+                Diagnóstico de IA
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="prose prose-sm dark:prose-invert max-w-none">
+                <ReactMarkdown>{analysis}</ReactMarkdown>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+      </div>
     </div>
   );
 }
