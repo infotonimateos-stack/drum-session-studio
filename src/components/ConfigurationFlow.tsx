@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "react"; 
 import { ShoppingCart } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
