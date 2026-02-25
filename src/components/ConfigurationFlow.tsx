@@ -54,6 +54,20 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
     }
   };
 
+  const stepNames = [
+    "drum_kit", "microphones", "preamps", "interface",
+    "production", "video", "takes", "delivery", "extras"
+  ];
+
+  const trackStepView = (stepIndex: number) => {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'step_view', {
+        step_number: stepIndex + 1,
+        step_name: stepNames[stepIndex] || `step_${stepIndex + 1}`,
+      });
+    }
+  };
+
   const handleNextStep = () => {
     const result = validateStep(currentStep, cartState, t);
     if (!result.valid) {
@@ -62,7 +76,9 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
     }
     setValidationError(null);
     if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
+      const nextStep = currentStep + 1;
+      setCurrentStep(nextStep);
+      trackStepView(nextStep);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
