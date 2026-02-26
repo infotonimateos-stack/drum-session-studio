@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter, Archive, FileSpreadsheet, FileDown, CalendarIcon, BarChart3 } from "lucide-react";
+import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter, Archive, FileSpreadsheet, FileDown, CalendarIcon, BarChart3, Users } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
@@ -18,6 +18,7 @@ import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import html2pdf from "html2pdf.js";
 import AnalyticsTab from "@/components/admin/AnalyticsTab";
+import ClientsTab from "@/components/admin/ClientsTab";
 
 const ADMIN_ROUTE = true; // marker
 
@@ -451,10 +452,14 @@ export default function AdminPanel() {
 
       <div className="container mx-auto px-4 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full max-w-md grid-cols-2">
+          <TabsList className="grid w-full max-w-lg grid-cols-3">
             <TabsTrigger value="billing" className="gap-2">
               <FileText className="h-4 w-4" />
               Facturación
+            </TabsTrigger>
+            <TabsTrigger value="clients" className="gap-2">
+              <Users className="h-4 w-4" />
+              Clientes
             </TabsTrigger>
             <TabsTrigger value="analytics" className="gap-2">
               <BarChart3 className="h-4 w-4" />
@@ -689,6 +694,11 @@ export default function AdminPanel() {
                 </table>
               </div>
             </Card>
+          </TabsContent>
+
+          {/* ===== CLIENTS TAB ===== */}
+          <TabsContent value="clients">
+            <ClientsTab orders={orders} />
           </TabsContent>
 
           {/* ===== ANALYTICS TAB ===== */}
