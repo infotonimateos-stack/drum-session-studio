@@ -189,16 +189,27 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_20%_40%,hsl(18,80%,52%/0.15),transparent_70%)]" />
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_80%_60%,hsl(28,75%,55%/0.1),transparent_70%)]" />
                 
+                {/* Orbiting glow — animated */}
+                <div className="absolute w-[500px] h-[500px] rounded-full bg-primary/10 blur-[100px] animate-[orbit_8s_linear_infinite] pointer-events-none" style={{ top: '-150px', left: '-150px' }} />
+                <div className="absolute w-[400px] h-[400px] rounded-full bg-accent/8 blur-[80px] animate-[orbit-reverse_10s_linear_infinite] pointer-events-none" style={{ bottom: '-100px', right: '-100px' }} />
+
+                {/* Sweeping light beam */}
+                <div className="absolute inset-0 bg-[linear-gradient(105deg,transparent_40%,hsl(18,80%,52%/0.07)_45%,hsl(18,80%,90%/0.13)_50%,hsl(18,80%,52%/0.07)_55%,transparent_60%)] bg-[length:200%_100%] animate-[sweep_4s_ease-in-out_infinite] pointer-events-none" />
+
                 {/* Top glow bar */}
                 <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary/0 via-primary to-accent via-60% to-accent/0" />
-                {/* Bottom subtle line */}
                 <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-                {/* Side accents */}
                 <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-primary/50 via-primary/10 to-transparent" />
                 <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-accent/50 via-accent/10 to-transparent" />
 
+                {/* Sparkle dots */}
+                <div className="absolute top-[15%] left-[10%] w-1.5 h-1.5 rounded-full bg-primary/60 animate-[pulse_2s_ease-in-out_infinite]" />
+                <div className="absolute top-[70%] left-[25%] w-1 h-1 rounded-full bg-accent/50 animate-[pulse_3s_ease-in-out_infinite_0.5s]" />
+                <div className="absolute top-[30%] right-[15%] w-1 h-1 rounded-full bg-primary/40 animate-[pulse_2.5s_ease-in-out_infinite_1s]" />
+                <div className="absolute bottom-[20%] right-[30%] w-1.5 h-1.5 rounded-full bg-accent/50 animate-[pulse_2s_ease-in-out_infinite_1.5s]" />
+
                 <div className="relative grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 sm:gap-10 p-7 sm:p-14">
-                  <div className="space-y-6 sm:space-y-7 flex flex-col justify-center">
+                  <div className="space-y-5 sm:space-y-6 flex flex-col justify-center">
                     {/* Badge */}
                     <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-primary/80">
                       <span className="w-8 h-px bg-primary/60" />
@@ -209,6 +220,11 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                     <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/60 leading-[1] tracking-tighter">
                       {t("config.h1")}
                     </h1>
+
+                    {/* Subtitle — Configura tu sesión */}
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] animate-[shimmer_3s_ease-in-out_infinite] tracking-tight">
+                      Configura tu sesión de grabación
+                    </h2>
 
                     {/* Description */}
                     <p className="text-lg sm:text-xl text-white/65 leading-relaxed max-w-lg font-medium">
