@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Search, Mail, Copy, ChevronDown, ChevronUp, Users } from "lucide-react";
+import { Search, Mail, Copy, ChevronDown, ChevronUp, Users, FileDown } from "lucide-react";
 import { toast } from "sonner";
+import html2pdf from "html2pdf.js";
 
 interface Order {
   id: string;
@@ -107,6 +108,104 @@ function copyConfig(order: Order) {
   const text = `Configuración de ${order.business_name || order.billing_email || "cliente"} (${new Date(order.created_at).toLocaleDateString("es-ES")}):\n${lines.join("\n")}\nTotal: ${order.total.toFixed(2)} €`;
   navigator.clipboard.writeText(text);
   toast.success("Configuración copiada al portapapeles");
+}
+
+function generateTechSheetPdf(order: Order) {
+  const config = parseConfig(order.items);
+  const date = new Date(order.created_at).toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" });
+  const clientName = order.business_name || order.billing_email || "Cliente";
+  const statusLabel = statusLabels[order.payment_status] || order.payment_status;
+
+  const configSection = (title: string, items: string[], icon: string) => {
+    if (items.length === 0) return "";
+    return `
+      <div style="margin-bottom:14px;">
+        <h3 style="font-size:13px;font-weight:700;color:#c8a45a;margin:0 0 6px 0;text-transform:uppercase;letter-spacing:1px;">${icon} ${title}</h3>
+        <ul style="margin:0;padding:0 0 0 18px;list-style:disc;color:#333;">
+          ${items.map(i => `<li style="font-size:12px;margin-bottom:3px;">${i}</li>`).join("")}
+        </ul>
+      </div>
+    `;
+  };
+
+  const html = `
+    <div style="font-family:'Helvetica Neue',Arial,sans-serif;max-width:600px;margin:0 auto;padding:30px;color:#222;">
+      <!-- Header -->
+      <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #c8a45a;padding-bottom:16px;margin-bottom:24px;">
+        <div>
+          <h1 style="font-size:20px;font-weight:800;margin:0;color:#1a1a2e;letter-spacing:-0.5px;">GROOVE FACTORY STUDIOS</h1>
+          <p style="font-size:11px;color:#888;margin:4px 0 0 0;">Ficha Técnica de Sesión · tonimateos.com</p>
+        </div>
+        <div style="text-align:right;">
+          <p style="font-size:11px;color:#888;margin:0;">Fecha</p>
+          <p style="font-size:13px;font-weight:600;margin:2px 0 0 0;">${date}</p>
+        </div>
+      </div>
+
+      <!-- Client Info -->
+      <div style="background:#f8f7f4;border-radius:8px;padding:16px;margin-bottom:24px;">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+          <div>
+            <p style="font-size:10px;color:#888;margin:0;text-transform:uppercase;letter-spacing:1px;">Cliente</p>
+            <p style="font-size:14px;font-weight:700;margin:3px 0 0 0;">${clientName}</p>
+          </div>
+          ${order.billing_email ? `<div><p style="font-size:10px;color:#888;margin:0;text-transform:uppercase;letter-spacing:1px;">Email</p><p style="font-size:12px;margin:3px 0 0 0;">${order.billing_email}</p></div>` : ""}
+          ${order.billing_phone ? `<div><p style="font-size:10px;color:#888;margin:0;text-transform:uppercase;letter-spacing:1px;">Teléfono</p><p style="font-size:12px;margin:3px 0 0 0;">${order.billing_phone}</p></div>` : ""}
+          <div>
+            <p style="font-size:10px;color:#888;margin:0;text-transform:uppercase;letter-spacing:1px;">Estado</p>
+            <p style="font-size:12px;font-weight:600;margin:3px 0 0 0;color:${order.payment_status === "completed" ? "#16a34a" : "#d97706"};">${statusLabel}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Technical Config -->
+      <h2 style="font-size:15px;font-weight:700;color:#1a1a2e;margin:0 0 16px 0;border-bottom:1px solid #e5e5e5;padding-bottom:8px;">Configuración Técnica</h2>
+      ${configSection("Micrófonos", config.microphones, "🎙")}
+      ${configSection("Previos / Preamplificadores", config.preamps, "🔊")}
+      ${configSection("Interfaz de Audio", config.interfaces, "🎛")}
+      ${configSection("Extras", config.extras, "✨")}
+      ${configSection("Otros", config.other, "📦")}
+      ${config.microphones.length === 0 && config.preamps.length === 0 && config.interfaces.length === 0 && config.extras.length === 0 && config.other.length === 0 ? '<p style="font-size:12px;color:#888;">Configuración base estándar</p>' : ""}
+
+      <!-- Pricing -->
+      <div style="margin-top:24px;border-top:1px solid #e5e5e5;padding-top:16px;">
+        <h2 style="font-size:15px;font-weight:700;color:#1a1a2e;margin:0 0 12px 0;">Desglose Económico</h2>
+        <table style="width:100%;font-size:12px;border-collapse:collapse;">
+          <tr><td style="padding:4px 0;color:#666;">Base</td><td style="text-align:right;padding:4px 0;">${order.base_price.toFixed(2)} €</td></tr>
+          <tr><td style="padding:4px 0;color:#666;">Subtotal</td><td style="text-align:right;padding:4px 0;">${order.subtotal.toFixed(2)} €</td></tr>
+          <tr><td style="padding:4px 0;color:#666;">IVA (${order.tax_rate}%)</td><td style="text-align:right;padding:4px 0;">${order.tax_amount.toFixed(2)} €</td></tr>
+          <tr style="border-top:2px solid #c8a45a;"><td style="padding:8px 0 0;font-weight:800;font-size:14px;">TOTAL</td><td style="text-align:right;padding:8px 0 0;font-weight:800;font-size:14px;">${order.total.toFixed(2)} €</td></tr>
+        </table>
+      </div>
+
+      <!-- Footer -->
+      <div style="margin-top:30px;border-top:1px solid #e5e5e5;padding-top:12px;text-align:center;">
+        <p style="font-size:10px;color:#aaa;margin:0;">Groove Factory Studios SL · info@tonimateos.com · tonimateos.com</p>
+        <p style="font-size:9px;color:#ccc;margin:4px 0 0 0;">Documento generado automáticamente · ${new Date().toLocaleDateString("es-ES")}</p>
+      </div>
+    </div>
+  `;
+
+  const container = document.createElement("div");
+  container.innerHTML = html;
+  container.style.cssText = "position:absolute;left:-9999px;top:0;width:700px;background:#fff;";
+  document.body.appendChild(container);
+
+  const safeName = clientName.replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ ]/g, "").replace(/\s+/g, "-").substring(0, 30);
+  const safeDate = new Date(order.created_at).toISOString().slice(0, 10);
+
+  html2pdf().from(container).set({
+    margin: [15, 12, 15, 12],
+    filename: `ficha-tecnica-${safeName}-${safeDate}.pdf`,
+    html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", logging: false },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+  }).save().then(() => {
+    document.body.removeChild(container);
+    toast.success("Ficha técnica descargada");
+  }).catch(() => {
+    document.body.removeChild(container);
+    toast.error("Error generando PDF");
+  });
 }
 
 export default function ClientsTab({ orders }: Props) {
@@ -281,6 +380,15 @@ export default function ClientsTab({ orders }: Props) {
                               <Mail className="h-3.5 w-3.5" />
                             </span>
                           )}
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7"
+                            title="Descargar ficha técnica"
+                            onClick={() => generateTechSheetPdf(order)}
+                          >
+                            <FileDown className="h-3.5 w-3.5" />
+                          </Button>
                           <Button
                             variant="ghost"
                             size="icon"
