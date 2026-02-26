@@ -47,6 +47,7 @@ interface Order {
   items: any[];
   base_price: number;
   tax_rule: string;
+  song_count: number;
 }
 
 const statusColors: Record<string, string> = {
