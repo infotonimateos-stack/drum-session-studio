@@ -186,26 +186,34 @@ function generateTechSheetPdf(order: Order) {
     </div>
   `;
 
-  const container = document.createElement("div");
-  container.innerHTML = html;
-  container.style.cssText = "position:absolute;left:-9999px;top:0;width:700px;background:#fff;";
-  document.body.appendChild(container);
+  const iframe = document.createElement("iframe");
+  iframe.style.cssText = "position:absolute;left:-9999px;top:0;width:800px;height:1200px;border:none;";
+  document.body.appendChild(iframe);
+
+  const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+  if (!iframeDoc) { document.body.removeChild(iframe); toast.error("Error generando PDF"); return; }
+
+  iframeDoc.open();
+  iframeDoc.write(`<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="margin:0;padding:0;background:#fff;color:#222;">${html}</body></html>`);
+  iframeDoc.close();
 
   const safeName = clientName.replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ ]/g, "").replace(/\s+/g, "-").substring(0, 30);
   const safeDate = new Date(order.created_at).toISOString().slice(0, 10);
 
-  html2pdf().from(container).set({
-    margin: [15, 12, 15, 12],
-    filename: `ficha-tecnica-${safeName}-${safeDate}.pdf`,
-    html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", logging: false },
-    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-  }).save().then(() => {
-    document.body.removeChild(container);
-    toast.success("Ficha técnica descargada");
-  }).catch(() => {
-    document.body.removeChild(container);
-    toast.error("Error generando PDF");
-  });
+  setTimeout(() => {
+    html2pdf().from(iframeDoc.body).set({
+      margin: [15, 12, 15, 12],
+      filename: `ficha-tecnica-${safeName}-${safeDate}.pdf`,
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", logging: false },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    }).save().then(() => {
+      document.body.removeChild(iframe);
+      toast.success("Ficha técnica descargada");
+    }).catch(() => {
+      document.body.removeChild(iframe);
+      toast.error("Error generando PDF");
+    });
+  }, 500);
 }
 
 export default function ClientsTab({ orders }: Props) {
