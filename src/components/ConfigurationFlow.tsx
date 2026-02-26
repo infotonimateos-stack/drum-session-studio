@@ -242,7 +242,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
 
                     {/* Subtitle — Configura tu sesión */}
                     <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] animate-[shimmer_3s_ease-in-out_infinite] tracking-tight">
-                      Configura tu sesión de grabación
+                      {t("config.heroTitle")}
                     </h2>
 
                     {/* Description */}
