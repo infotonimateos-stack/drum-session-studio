@@ -1,6 +1,6 @@
 import { Plus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { baseMicrophones, upgradeMicrophones } from "@/data/microphones";
+import { baseMicrophones, upgradeMicrophones, vintageMicrophones } from "@/data/microphones";
 import { CartItem } from "@/types/cart";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "@/components/ProductCard";
@@ -82,6 +82,33 @@ export const MicrophonesStep = ({
         
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5 lg:gap-8">
           {upgradeMicrophones.map(mic => (
+            <ProductCard
+              key={mic.id}
+              category={t(mic.targetKey)}
+              price={mic.price}
+              name={mic.name}
+              description={t(mic.descriptionKey)}
+              image={mic.image}
+              isSelected={hasItem(mic.id)}
+              onToggle={() => handleToggleItem(mic)}
+              addLabel={t("video.addFor")}
+              addedLabel={t("microphones.added")}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Vintage Microphones */}
+      <div className="space-y-4 sm:space-y-6">
+        <div className="flex items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+          <div className="flex items-center gap-2 sm:gap-3 bg-primary/20 px-4 sm:px-6 py-2 sm:py-3 rounded-full flex-wrap justify-center">
+            <Plus className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+            <h3 className="text-xl sm:text-2xl font-bold">{t("microphones.vintageMics")}</h3>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5 lg:gap-8">
+          {vintageMicrophones.map(mic => (
             <ProductCard
               key={mic.id}
               category={t(mic.targetKey)}
