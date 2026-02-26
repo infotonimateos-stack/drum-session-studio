@@ -718,7 +718,10 @@
     "presetProfessional": "Setup Profesional",
     "presetSelfproduced": "Setup Autoproducción",
     "presetDemo": "Setup Maqueta",
-    "drumKitLabel": "Batería seleccionada"
+    "drumKitLabel": "Batería seleccionada",
+    "groupMics": "Microfonía",
+    "groupPreamps": "Previos e Interfaz",
+    "groupSession": "Detalles de Sesión"
   },
   "drumKit": {
     "title": "Elige tu Instrumento",

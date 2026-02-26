@@ -721,7 +721,10 @@
     "presetProfessional": "Professional Setup",
     "presetSelfproduced": "Self-Production Setup",
     "presetDemo": "Demo Setup",
-    "drumKitLabel": "Selected drum kit"
+    "drumKitLabel": "Selected drum kit",
+    "groupMics": "Microphones",
+    "groupPreamps": "Preamps & Interface",
+    "groupSession": "Session Details"
   },
   "drumKit": {
     "title": "Choose your Instrument",

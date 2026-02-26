@@ -341,72 +341,92 @@ export const ExpertAdvisor = ({ addItem, clearCart, onApply }: ExpertAdvisorProp
             )}
 
             {/* RESULT */}
-            {step === "result" && usage && style && (
-              <div className="space-y-5 py-4">
-                <p className="text-muted-foreground text-sm text-center leading-relaxed">
-                  {t("advisor.resultMessage")}
-                </p>
+            {step === "result" && usage && style && (() => {
+              const preset = getEffectivePreset(usage, style);
+              const vintageMics = style === "purevintage" ? VINTAGE_MIC_ITEMS : [];
+              const allItems = [...preset, ...vintageMics];
 
-                {/* Drum Kit */}
-                {selectedKit && (
-                  <div className="bg-muted/50 rounded-xl p-4 flex items-center gap-4">
-                    <img src={selectedKit.image} alt={t(selectedKit.nameKey)} className="w-20 h-20 object-contain rounded-lg bg-white" />
-                    <div className="flex-1 min-w-0">
-                      <span className="text-xs uppercase tracking-wider text-muted-foreground">{t("advisor.drumKitLabel")}</span>
-                      <p className="font-bold text-foreground">{t(selectedKit.nameKey)}</p>
-                      <p className="text-primary font-bold">{selectedKit.price.toFixed(2)} €</p>
+              // Group items by category
+              const micItems = allItems.filter(i => i.category === "mic");
+              const preampItems = allItems.filter(i => i.category === "preamps" || i.category === "interface");
+              const sessionItems = allItems.filter(i => !["mic", "preamps", "interface"].includes(i.category));
+
+              const groups: { labelKey: string; emoji: string; colorClass: string; checkColor: string; items: typeof allItems }[] = [
+                { labelKey: "advisor.groupMics", emoji: "🎙️", colorClass: "text-sky-400", checkColor: "text-sky-400", items: micItems },
+                { labelKey: "advisor.groupPreamps", emoji: "🎛️", colorClass: "text-amber-400", checkColor: "text-amber-400", items: preampItems },
+                { labelKey: "advisor.groupSession", emoji: "🎬", colorClass: "text-emerald-400", checkColor: "text-emerald-400", items: sessionItems },
+              ];
+
+              const kitPrice = selectedKit?.price ?? 0;
+              const totalStr = computeTotal(preset, kitPrice, style);
+
+              return (
+                <div className="space-y-5 py-4">
+                  <p className="text-muted-foreground text-sm text-center leading-relaxed">
+                    {t("advisor.resultMessage")}
+                  </p>
+
+                  {/* Drum Kit hero */}
+                  {selectedKit && (
+                    <div className="bg-muted/50 rounded-xl p-4 flex items-center gap-4">
+                      <img src={selectedKit.image} alt={t(selectedKit.nameKey)} className="w-20 h-20 object-contain rounded-lg bg-white" />
+                      <div className="flex-1 min-w-0">
+                        <span className="text-xs uppercase tracking-wider text-muted-foreground">{t("advisor.drumKitLabel")}</span>
+                        <p className="font-bold text-foreground">{t(selectedKit.nameKey)}</p>
+                        <p className="text-primary font-bold">{selectedKit.price.toFixed(2)} €</p>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {/* Service pack */}
-                <div className="bg-muted/50 rounded-xl p-4 space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="font-bold text-foreground">{t(`advisor.preset${usage.charAt(0).toUpperCase() + usage.slice(1)}`)}</span>
-                    <span className="font-bold text-primary text-lg">{computeTotal(getEffectivePreset(usage, style), selectedKit?.price ?? 0, style)} €</span>
-                  </div>
-                  <ul className="text-xs text-muted-foreground space-y-1 max-h-48 overflow-y-auto">
-                    {selectedKit && (
-                      <li className="flex justify-between font-semibold text-foreground/80">
-                        <span className="flex items-center gap-1">
-                          <Check className="h-3 w-3 text-primary" />
-                          🥁 {t(selectedKit.nameKey)}
-                        </span>
-                        <span>{selectedKit.price.toFixed(2)} €</span>
-                      </li>
+                  {/* Grouped breakdown */}
+                  <div className="space-y-3">
+                    {groups.map((group) =>
+                      group.items.length > 0 && (
+                        <div key={group.labelKey} className="rounded-xl border border-border/50 overflow-hidden">
+                          {/* Group header */}
+                          <div className="flex items-center justify-between px-4 py-2.5 bg-muted/60">
+                            <span className={`text-xs font-bold uppercase tracking-wider ${group.colorClass} flex items-center gap-1.5`}>
+                              <span>{group.emoji}</span> {t(group.labelKey)}
+                            </span>
+                            <span className={`text-xs font-semibold ${group.colorClass}`}>
+                              {group.items.reduce((s, i) => s + i.price, 0).toFixed(2)} €
+                            </span>
+                          </div>
+                          {/* Group items */}
+                          <ul className="px-4 py-2 space-y-1">
+                            {group.items.map((item) => (
+                              <li key={item.id} className={`flex justify-between text-xs ${group.colorClass}/80`}>
+                                <span className="flex items-center gap-1.5">
+                                  <Check className={`h-3 w-3 ${group.checkColor}`} />
+                                  <span>{item.name}</span>
+                                </span>
+                                <span className="whitespace-nowrap shrink-0">{item.price.toFixed(2)} €</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )
                     )}
-                    {getEffectivePreset(usage, style).map((item) => (
-                      <li key={item.id} className="flex justify-between">
-                        <span className="flex items-center gap-1">
-                          <Check className="h-3 w-3 text-primary" />
-                          {item.name}
-                        </span>
-                        <span>{item.price.toFixed(2)} €</span>
-                      </li>
-                    ))}
-                    {style === "purevintage" && VINTAGE_MIC_ITEMS.map((item) => (
-                      <li key={item.id} className="flex justify-between text-amber-400/80">
-                        <span className="flex items-center gap-1">
-                          <Check className="h-3 w-3 text-amber-400" />
-                          🎙️ {item.name}
-                        </span>
-                        <span>{item.price.toFixed(2)} €</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                  </div>
 
-                <Button
-                  onClick={handleApply}
-                  className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-bold"
-                >
-                  {t("advisor.applyConfig")} <Check className="ml-2 h-4 w-4" />
-                </Button>
-                <p className="text-xs text-muted-foreground text-center">
-                  {t("advisor.modifyAfter")}
-                </p>
-              </div>
-            )}
+                  {/* Total */}
+                  <div className="flex justify-between items-center px-4 py-3 rounded-xl bg-primary/10 border border-primary/30">
+                    <span className="font-bold text-foreground text-sm">{t(`advisor.preset${usage.charAt(0).toUpperCase() + usage.slice(1)}`)}</span>
+                    <span className="font-bold text-primary text-lg">{totalStr} €</span>
+                  </div>
+
+                  <Button
+                    onClick={handleApply}
+                    className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-bold"
+                  >
+                    {t("advisor.applyConfig")} <Check className="ml-2 h-4 w-4" />
+                  </Button>
+                  <p className="text-xs text-muted-foreground text-center">
+                    {t("advisor.modifyAfter")}
+                  </p>
+                </div>
+              );
+            })()}
           </div>
 
           {/* Tax disclaimer always visible at bottom */}
