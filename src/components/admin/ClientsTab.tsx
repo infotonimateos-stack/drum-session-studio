@@ -171,7 +171,6 @@ function generateTechSheetPdf(order: Order) {
       <div style="margin-top:24px;border-top:1px solid #e5e5e5;padding-top:16px;">
         <h2 style="font-size:15px;font-weight:700;color:#1a1a2e;margin:0 0 12px 0;">Desglose Económico</h2>
         <table style="width:100%;font-size:12px;border-collapse:collapse;">
-          <tr><td style="padding:4px 0;color:#666;">Base</td><td style="text-align:right;padding:4px 0;">${order.base_price.toFixed(2)} €</td></tr>
           <tr><td style="padding:4px 0;color:#666;">Subtotal</td><td style="text-align:right;padding:4px 0;">${order.subtotal.toFixed(2)} €</td></tr>
           <tr><td style="padding:4px 0;color:#666;">IVA (${order.tax_rate}%)</td><td style="text-align:right;padding:4px 0;">${order.tax_amount.toFixed(2)} €</td></tr>
           <tr style="border-top:2px solid #c8a45a;"><td style="padding:8px 0 0;font-weight:800;font-size:14px;">TOTAL</td><td style="text-align:right;padding:8px 0 0;font-weight:800;font-size:14px;">${order.total.toFixed(2)} €</td></tr>
