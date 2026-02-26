@@ -71,58 +71,76 @@ function parseConfig(items: any[]) {
   return { microphones, preamps, interfaces, extras, other };
 }
 
-function buildGmailLink(order: Order) {
+function openGmailCompose(order: Order) {
   const config = parseConfig(order.items);
   const date = new Date(order.created_at).toLocaleDateString("es-ES");
   const clientName = order.business_name || order.billing_email || "Cliente";
+  const songs = order.song_count || 1;
 
   const configLines: string[] = [];
-  if (config.microphones.length) configLines.push(`🎙 Micrófonos: ${config.microphones.join(", ")}`);
-  if (config.preamps.length) configLines.push(`🔊 Previos: ${config.preamps.join(", ")}`);
-  if (config.interfaces.length) configLines.push(`🎛 Interfaz: ${config.interfaces.join(", ")}`);
-  if (config.extras.length) configLines.push(`✨ Extras: ${config.extras.join(", ")}`);
-  if (config.other.length) configLines.push(`📦 Otros: ${config.other.join(", ")}`);
+  if (config.microphones.length) configLines.push("Microfonos: " + config.microphones.join(", "));
+  if (config.preamps.length) configLines.push("Previos: " + config.preamps.join(", "));
+  if (config.interfaces.length) configLines.push("Interfaz: " + config.interfaces.join(", "));
+  if (config.extras.length) configLines.push("Extras: " + config.extras.join(", "));
+  if (config.other.length) configLines.push("Otros: " + config.other.join(", "));
+  if (songs > 1) configLines.push("Canciones: " + songs);
 
-  const songs = order.song_count || 1;
-  if (songs > 1) configLines.push(`🎵 Canciones: ${songs}`);
+  // PayPal link
+  const paypalItemName = "Grabacion bateria online - " + clientName + " - " + date;
+  const paypalLink = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40tonimateos.com&item_name=" + encodeURIComponent(paypalItemName) + "&amount=" + order.total.toFixed(2) + "&currency_code=EUR&no_shipping=1";
 
-  // Tax breakdown
-  const taxLabel = order.tax_rate > 0 ? `IVA (${order.tax_rate}%)` : "IVA (exento)";
-  const breakdownLines = [];
+  // Build body text (plain ASCII-safe)
+  const bodyParts = [
+    "Hola " + clientName + ",",
+    "",
+    "Muchas gracias por tu confianza. Vamos a procesar tu grabacion utilizando la configuracion de la sesion anterior que detallamos a continuacion:",
+    "",
+    ...configLines,
+    "",
+    "---",
+    "DESGLOSE ECONOMICO",
+  ];
+
   if (songs > 1) {
     const pricePerSong = order.subtotal / songs;
-    breakdownLines.push(`Precio por canción: ${pricePerSong.toFixed(2)} € × ${songs} = ${order.subtotal.toFixed(2)} €`);
+    bodyParts.push("Precio por cancion: " + pricePerSong.toFixed(2) + " EUR x " + songs + " = " + order.subtotal.toFixed(2) + " EUR");
   } else {
-    breakdownLines.push(`Base imponible: ${order.subtotal.toFixed(2)} €`);
+    bodyParts.push("Base imponible: " + order.subtotal.toFixed(2) + " EUR");
   }
-  breakdownLines.push(`${taxLabel}: ${order.tax_amount.toFixed(2)} €`);
-  breakdownLines.push(`TOTAL: ${order.total.toFixed(2)} €`);
-  const breakdown = breakdownLines.join("\n");
 
-  // PayPal payment link
-  const paypalItemName = `Grabación batería online - ${clientName} - ${date}`;
-  const paypalLink = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40tonimateos.com&item_name=${encodeURIComponent(paypalItemName)}&amount=${order.total.toFixed(2)}&currency_code=EUR&no_shipping=1`;
+  const taxLabel = order.tax_rate > 0 ? "IVA (" + order.tax_rate + "%)" : "IVA (exento)";
+  bodyParts.push(taxLabel + ": " + order.tax_amount.toFixed(2) + " EUR");
+  bodyParts.push("TOTAL: " + order.total.toFixed(2) + " EUR");
+  bodyParts.push("---");
+  bodyParts.push("");
+  bodyParts.push("Puedes realizar el pago correspondiente a " + (songs > 1 ? "las " + songs + " canciones" : "la sesion") + " en el siguiente enlace:");
+  bodyParts.push("");
+  bodyParts.push(paypalLink);
+  bodyParts.push("");
+  bodyParts.push("Si prefieres transferencia bancaria, contactame y te facilito los datos.");
+  bodyParts.push("");
+  bodyParts.push("Un saludo,");
+  bodyParts.push("Toni Mateos");
+  bodyParts.push("Groove Factory Studios - tonimateos.com");
 
-  const subject = encodeURIComponent(`Confirmación de grabación y detalles técnicos - tonimateos.com`);
-  const body = encodeURIComponent(
-    `Hola ${clientName},\n\n` +
-    `Muchas gracias por confiar en Groove Factory Studios para tu sesión de grabación.\n\n` +
-    `Te confirmo que tu grabación se procesará con la siguiente configuración técnica:\n\n` +
-    `${configLines.join("\n")}\n\n` +
-    `─────────────────────────────\n` +
-    `DESGLOSE ECONÓMICO\n` +
-    `${breakdown}\n` +
-    `─────────────────────────────\n\n` +
-    `Para completar el pago de forma segura, puedes utilizar el siguiente enlace:\n\n` +
-    `💳 Pagar con PayPal o Tarjeta:\n${paypalLink}\n\n` +
-    `Si prefieres realizar una transferencia bancaria, no dudes en contactarme y te facilito los datos.\n\n` +
-    `¡Un saludo!\n` +
-    `Toni Mateos\n` +
-    `Groove Factory Studios · tonimateos.com`
-  );
-
+  const subject = encodeURIComponent("Confirmacion de grabacion y detalles tecnicos - tonimateos.com");
+  const body = encodeURIComponent(bodyParts.join("\n"));
   const to = encodeURIComponent(order.billing_email || "");
-  return `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&authuser=web@tonimateos.com&su=${subject}&body=${body}`;
+
+  const url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + to + "&authuser=web@tonimateos.com&su=" + subject + "&body=" + body;
+
+  // Use window.open inside the synchronous click handler to avoid popup blocker
+  const win = window.open(url, "_blank", "noopener,noreferrer");
+  if (!win) {
+    // Fallback: create a temporary <a> and click it
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
 }
 
 function copyConfig(order: Order) {
@@ -404,15 +422,15 @@ export default function ClientsTab({ orders }: Props) {
                       <TableCell>
                         <div className="flex items-center justify-center gap-1" onClick={(e) => e.stopPropagation()}>
                           {order.billing_email ? (
-                            <a
-                              href={buildGmailLink(order)}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center h-7 w-7 rounded-md hover:bg-accent hover:text-accent-foreground"
-                              title="Enviar recordatorio"
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-7 w-7"
+                              title="Enviar email via Gmail"
+                              onClick={() => openGmailCompose(order)}
                             >
                               <Mail className="h-3.5 w-3.5" />
-                            </a>
+                            </Button>
                           ) : (
                             <span className="inline-flex items-center justify-center h-7 w-7 opacity-30" title="Sin email">
                               <Mail className="h-3.5 w-3.5" />
