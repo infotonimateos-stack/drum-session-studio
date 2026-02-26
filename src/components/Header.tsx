@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { useTranslation } from "react-i18next";
+import { getTabPath, getFullPath } from "@/config/routes";
 
 const logoUrl = "/lovable-uploads/890c7bbc-79ba-4df4-8441-4cbf232e9b5c.png";
 
@@ -12,16 +13,12 @@ interface HeaderProps {
   onTabChange: (tab: string) => void;
 }
 
-const handleTabClick = (tab: string, onTabChange: (tab: string) => void, closeMobile?: () => void) => {
-  onTabChange(tab);
-  closeMobile?.();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
 export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
   const { theme, setTheme } = useTheme();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
+  const lang = i18n.language || "es-ES";
 
   const tabs = [
     { id: "configure", label: t("nav.configure") },
@@ -30,8 +27,13 @@ export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
     { id: "samples", label: t("nav.samples") },
     { id: "tutorials", label: t("nav.tutorials") },
     { id: "faq", label: t("nav.faq") },
-    { id: "contact", label: t("nav.contact") }
+    { id: "contact", label: t("nav.contact") },
   ];
+
+  const handleTabClick = (tab: string, closeMobile?: () => void) => {
+    onTabChange(tab);
+    closeMobile?.();
+  };
 
   return (
     <>
@@ -51,7 +53,7 @@ export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => handleTabClick(tab.id, onTabChange)}
+                  onClick={() => handleTabClick(tab.id)}
                   className={`relative px-3 py-2 text-base font-semibold rounded-md transition-colors duration-150 ${
                     activeTab === tab.id
                       ? "text-primary bg-primary/10"
@@ -110,7 +112,7 @@ export const Header = ({ activeTab, onTabChange }: HeaderProps) => {
                 {tabs.map((tab) => (
                   <button
                     key={tab.id}
-                    onClick={() => handleTabClick(tab.id, onTabChange, () => setMobileOpen(false))}
+                    onClick={() => handleTabClick(tab.id, () => setMobileOpen(false))}
                     className={`w-full text-left px-3 py-3 rounded-md text-lg font-semibold transition-colors ${
                       activeTab === tab.id
                         ? "text-primary bg-primary/10"

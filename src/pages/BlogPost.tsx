@@ -6,12 +6,14 @@ import { SEOHead } from "@/components/SEOHead";
 import { getBlogPostBySlug } from "@/data/blogPosts";
 import { useLanguagePrefix } from "@/hooks/useLanguagePrefix";
 import { useState } from "react";
+import { blogPaths } from "@/config/routes";
 import { ArrowLeft } from "lucide-react";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const { t, i18n } = useTranslation();
   const { localePath } = useLanguagePrefix();
+  const blogPath = blogPaths[i18n.language] || blogPaths["es-ES"];
   const [activeTab, setActiveTab] = useState("blog");
 
   const post = slug ? getBlogPostBySlug(slug, i18n.language) : undefined;
@@ -27,7 +29,7 @@ const BlogPost = () => {
             <h1 className="text-2xl font-bold text-foreground mb-4">
               {t("blog.notFound", "Artículo no encontrado")}
             </h1>
-            <Link to={localePath("/blog")} className="text-primary hover:underline">
+            <Link to={localePath(`/${blogPath}`)} className="text-primary hover:underline">
               {t("blog.backToList", "← Volver al blog")}
             </Link>
           </div>
@@ -46,7 +48,7 @@ const BlogPost = () => {
       <Header activeTab={activeTab} onTabChange={setActiveTab} />
       <main className="flex-1 max-w-3xl mx-auto px-4 py-12 w-full">
         <Link
-          to={localePath("/blog")}
+          to={localePath(`/${blogPath}`)}
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary mb-6 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />

@@ -1,6 +1,15 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useCallback } from "react";
+import {
+  extractPathSegment,
+  getTabFromPath,
+  getStepFromPath,
+  getTabPath,
+  getStepPath,
+  getFullPath,
+  getAlternateLanguagePathFromRoutes,
+} from "@/config/routes";
 
 /**
  * Returns the current language prefix for building links.
@@ -25,17 +34,8 @@ export const useLanguagePrefix = () => {
 
 /**
  * Get the equivalent path in the other language.
- * Used by the language selector to navigate without losing route.
+ * Uses the route config to properly map tab/step paths between languages.
  */
 export const getAlternateLanguagePath = (currentPath: string, currentLang: string): string => {
-  const isEnglish = currentLang === "en-GB";
-  
-  if (isEnglish) {
-    // Currently English → switch to Spanish: remove /en prefix
-    const pathWithoutPrefix = currentPath.replace(/^\/en/, "") || "/";
-    return pathWithoutPrefix;
-  } else {
-    // Currently Spanish → switch to English: add /en prefix
-    return `/en${currentPath === "/" ? "" : currentPath}`;
-  }
+  return getAlternateLanguagePathFromRoutes(currentPath, currentLang);
 };
