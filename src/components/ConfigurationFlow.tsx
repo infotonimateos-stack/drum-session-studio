@@ -183,23 +183,26 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
               <SidebarTrigger className="mb-4" />
             </div>
             <div className="mb-6 sm:mb-8">
-              <Card className="overflow-hidden border-border/60 shadow-sm">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8 p-4 sm:p-8">
-                  <div className="space-y-3 sm:space-y-4">
-                    <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
-                      <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                        {t("config.h1")}
-                      </h1>
-                    </div>
-                    <h2 className="text-lg sm:text-xl font-semibold text-foreground/80">
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[hsl(220,15%,8%)] via-[hsl(220,12%,12%)] to-[hsl(220,10%,16%)] shadow-[0_8px_40px_-8px_hsl(0,0%,0%/0.5)]">
+                {/* Subtle glow accent */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+                <div className="absolute -top-20 -right-20 w-60 h-60 bg-primary/8 rounded-full blur-3xl" />
+                <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-accent/6 rounded-full blur-3xl" />
+
+                <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8 p-5 sm:p-10">
+                  <div className="space-y-4 sm:space-y-5 flex flex-col justify-center">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] tracking-tight">
+                      {t("config.h1")}
+                    </h1>
+                    <h2 className="text-lg sm:text-xl font-semibold text-white/70">
                       {t("config.h2subtitle")}
                     </h2>
-                    <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">{t("config.heroP1")}</p>
-                    <div className="flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium w-fit">
+                    <p className="text-base sm:text-lg text-white/60 leading-relaxed max-w-lg">{t("config.heroP1")}</p>
+                    <div className="flex items-center gap-2 bg-gradient-to-r from-primary to-accent text-white px-4 py-2 rounded-full text-sm font-bold w-fit shadow-[0_4px_16px_-2px_hsl(18,80%,52%/0.4)]">
                       <ShoppingCart className="w-4 h-4" />
                       {t("config.priceFrom")}
                     </div>
-                    <p className="text-sm text-muted-foreground">{t("config.heroP2")}</p>
+                    <p className="text-sm text-white/50 font-medium">{t("config.heroP2")}</p>
                   </div>
                   <div className="flex items-center justify-center">
                     <video
@@ -209,12 +212,12 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                       muted
                       playsInline
                       preload="auto"
-                      className="rounded-lg shadow-lg w-full h-auto"
+                      className="rounded-xl shadow-2xl w-full h-auto ring-1 ring-white/10"
                       style={{ aspectRatio: "16 / 9", objectFit: "contain" }}
                     />
                   </div>
                 </div>
-              </Card>
+              </div>
             </div>
             <Card className="overflow-hidden border-border/60 shadow-sm">
               <div className="p-3 sm:p-6 md:p-8 min-h-[400px] sm:min-h-[600px]">{steps[currentStep].component}</div>
