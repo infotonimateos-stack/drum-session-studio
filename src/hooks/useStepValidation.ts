@@ -8,7 +8,7 @@ const ALL_MIC_IDS = [...baseMicrophones, ...upgradeMicrophones, ...vintageMicrop
 const KICK_MIC_IDS = ['beta52-kick', 'beta91-kick', 'subkick-kick', 'u47fet-kick', 'audix-d6'];
 const SNARE_TOP_MIC_IDS = ['sm57-snare', 'akg414-snare'];
 const HIHAT_MIC_IDS = ['km184-hihat', 'm160-hihat'];
-const OVERHEAD_MIC_IDS = ['akg414-overheads', 'coles4038-oh', 'c12-overhead'];
+const OVERHEAD_MIC_IDS = ['akg414-overheads', 'coles4038-oh', 'c12-overhead', 'aea-r88-vintage'];
 
 // Drum kit IDs
 export const DRUM_KIT_IDS = ['kit-modern', 'kit-new-vintage', 'kit-jazz', 'kit-pure-vintage'];
