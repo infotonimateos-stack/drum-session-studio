@@ -47,11 +47,13 @@ serve(async (req) => {
     const {
       items, basePrice, subtotal, total,
       taxRate, taxAmount, taxRule, taxLabel,
-      paypalFee,
+      paypalFee, songCount,
       billingCountry, billingPostalCode, clientType,
       vatNumber, viesValid,
       invoiceData,
     } = requestBody;
+    
+    const safeSongCount = typeof songCount === "number" && songCount >= 1 ? songCount : 1;
 
     logStep("Received data", { itemCount: items?.length, subtotal, taxAmount, paypalFee, total });
 
@@ -68,9 +70,9 @@ serve(async (req) => {
     if (basePrice > 0) {
       paypalItems.push({
         name: "Paquete Básico - Grabación de Batería",
-        description: "Grabación profesional de batería",
+        description: `Grabación profesional de batería (${safeSongCount} canción${safeSongCount > 1 ? 'es' : ''})`,
         unit_amount: { currency_code: "EUR", value: basePrice.toFixed(2) },
-        quantity: "1",
+        quantity: String(safeSongCount),
       });
     }
 
@@ -81,13 +83,14 @@ serve(async (req) => {
           name: String(item.name).substring(0, 127),
           description: String(item.description || item.category || "").substring(0, 127),
           unit_amount: { currency_code: "EUR", value: item.price.toFixed(2) },
-          quantity: "1",
+          quantity: String(safeSongCount),
         });
       }
     }
 
-    // Calculate item_total (base + addons)
-    const itemTotal = basePrice + (items || []).reduce((s: number, i: any) => s + (i.price || 0), 0);
+    // Calculate item_total (base + addons) × songCount
+    const singleSongTotal = basePrice + (items || []).reduce((s: number, i: any) => s + (i.price || 0), 0);
+    const itemTotal = singleSongTotal * safeSongCount;
     const safeTaxAmount = typeof taxAmount === "number" ? taxAmount : 0;
     const safePaypalFee = typeof paypalFee === "number" && paypalFee > 0 ? paypalFee : 0;
 
@@ -181,6 +184,7 @@ serve(async (req) => {
           items: items || [],
           base_price: basePrice,
           subtotal: subtotal || itemTotal,
+          song_count: safeSongCount,
           tax_amount: safeTaxAmount,
           tax_rate: taxRate || 0,
           paypal_fee: safePaypalFee,

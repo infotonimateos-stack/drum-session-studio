@@ -51,6 +51,7 @@ export type Database = {
           payment_status: string
           paypal_fee: number
           postal_code: string | null
+          song_count: number
           state_province: string | null
           subtotal: number
           tax_amount: number
@@ -82,6 +83,7 @@ export type Database = {
           payment_status?: string
           paypal_fee?: number
           postal_code?: string | null
+          song_count?: number
           state_province?: string | null
           subtotal: number
           tax_amount?: number
@@ -113,6 +115,7 @@ export type Database = {
           payment_status?: string
           paypal_fee?: number
           postal_code?: string | null
+          song_count?: number
           state_province?: string | null
           subtotal?: number
           tax_amount?: number

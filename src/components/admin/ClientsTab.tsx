@@ -27,6 +27,7 @@ interface Order {
   client_type: string;
   items: any[];
   base_price: number;
+  song_count: number;
 }
 
 interface Props {
@@ -82,13 +83,21 @@ function buildGmailLink(order: Order) {
   if (config.extras.length) configLines.push(`✨ Extras: ${config.extras.join(", ")}`);
   if (config.other.length) configLines.push(`📦 Otros: ${config.other.join(", ")}`);
 
+  const songs = order.song_count || 1;
+  if (songs > 1) configLines.push(`🎵 Canciones: ${songs}`);
+
   // Tax breakdown
   const taxLabel = order.tax_rate > 0 ? `IVA (${order.tax_rate}%)` : "IVA (exento)";
-  const breakdown = [
-    `Base imponible: ${order.subtotal.toFixed(2)} €`,
-    `${taxLabel}: ${order.tax_amount.toFixed(2)} €`,
-    `TOTAL: ${order.total.toFixed(2)} €`,
-  ].join("\n");
+  const breakdownLines = [];
+  if (songs > 1) {
+    const pricePerSong = order.subtotal / songs;
+    breakdownLines.push(`Precio por canción: ${pricePerSong.toFixed(2)} € × ${songs} = ${order.subtotal.toFixed(2)} €`);
+  } else {
+    breakdownLines.push(`Base imponible: ${order.subtotal.toFixed(2)} €`);
+  }
+  breakdownLines.push(`${taxLabel}: ${order.tax_amount.toFixed(2)} €`);
+  breakdownLines.push(`TOTAL: ${order.total.toFixed(2)} €`);
+  const breakdown = breakdownLines.join("\n");
 
   // PayPal payment link
   const paypalItemName = `Grabación batería online - ${clientName} - ${date}`;
@@ -191,6 +200,8 @@ function generateTechSheetPdf(order: Order) {
       <div style="margin-top:24px;border-top:1px solid #e5e5e5;padding-top:16px;">
         <h2 style="font-size:15px;font-weight:700;color:#1a1a2e;margin:0 0 12px 0;">Desglose Económico</h2>
         <table style="width:100%;font-size:12px;border-collapse:collapse;">
+          ${(order.song_count || 1) > 1 ? `<tr><td style="padding:4px 0;color:#666;">Canciones</td><td style="text-align:right;padding:4px 0;">${order.song_count}</td></tr>
+          <tr><td style="padding:4px 0;color:#666;">Precio por canción</td><td style="text-align:right;padding:4px 0;">${(order.subtotal / (order.song_count || 1)).toFixed(2)} €</td></tr>` : ''}
           <tr><td style="padding:4px 0;color:#666;">Subtotal</td><td style="text-align:right;padding:4px 0;">${order.subtotal.toFixed(2)} €</td></tr>
           <tr><td style="padding:4px 0;color:#666;">IVA (${order.tax_rate}%)</td><td style="text-align:right;padding:4px 0;">${order.tax_amount.toFixed(2)} €</td></tr>
           <tr style="border-top:2px solid #c8a45a;"><td style="padding:8px 0 0;font-weight:800;font-size:14px;">TOTAL</td><td style="text-align:right;padding:8px 0 0;font-weight:800;font-size:14px;">${order.total.toFixed(2)} €</td></tr>
@@ -475,7 +486,9 @@ export default function ClientsTab({ orders }: Props) {
                             <div>
                               <p className="text-xs font-medium text-muted-foreground mb-1">💰 Desglose</p>
                               <ul className="text-sm space-y-0.5">
-                                <li>Base: {order.base_price.toFixed(2)} €</li>
+                                {(order.song_count || 1) > 1 && (
+                                  <li>🎵 Canciones: {order.song_count} × {(order.subtotal / order.song_count).toFixed(2)} €</li>
+                                )}
                                 <li>Subtotal: {order.subtotal.toFixed(2)} €</li>
                                 <li>IVA ({order.tax_rate}%): {order.tax_amount.toFixed(2)} €</li>
                                 <li className="font-bold">Total: {order.total.toFixed(2)} €</li>

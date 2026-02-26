@@ -24,6 +24,7 @@ export interface BillingData {
   viesValid?: boolean;
   viesResponse?: any;
   taxResult: TaxResult;
+  songCount: number;
 }
 
 interface BillingStepProps {
@@ -46,6 +47,7 @@ export const BillingStep = ({
   const [postalCode, setPostalCode] = useState("");
   const [clientType, setClientType] = useState<'particular' | 'empresa'>('particular');
   const [vatNumber, setVatNumber] = useState("");
+  const [songCount, setSongCount] = useState(1);
   const [viesLoading, setViesLoading] = useState(false);
   const [viesResult, setViesResult] = useState<{ valid: boolean; companyName?: string; error?: string } | null>(null);
   const [taxResult, setTaxResult] = useState<TaxResult | null>(null);
@@ -102,9 +104,10 @@ export const BillingStep = ({
   const showVatField = clientType === 'empresa' && isEU;
   const needsViesValidation = showVatField && vatNumber.length >= 4 && !viesResult;
 
-  // Calculate amounts
-  const taxAmount = taxResult ? subtotal * (taxResult.taxRate / 100) : 0;
-  const subtotalWithTax = subtotal + taxAmount;
+  // Calculate amounts with song multiplier
+  const multipliedSubtotal = subtotal * songCount;
+  const taxAmount = taxResult ? multipliedSubtotal * (taxResult.taxRate / 100) : 0;
+  const subtotalWithTax = multipliedSubtotal + taxAmount;
   const paypalFee = paymentMethod === 'paypal' ? subtotalWithTax * paypalFeePercent : 0;
   const finalTotal = subtotalWithTax + paypalFee;
 
@@ -124,6 +127,7 @@ export const BillingStep = ({
       viesValid: viesResult?.valid,
       viesResponse: viesResult,
       taxResult,
+      songCount,
     });
   };
 
@@ -281,9 +285,46 @@ export const BillingStep = ({
             </h3>
 
             <div className="space-y-3 text-sm">
+              {/* Song count selector */}
+              <div className="space-y-2">
+                <Label className="text-card-dark-foreground text-xs font-semibold uppercase tracking-wider">
+                  🎵 ¿Cuántas canciones quieres grabar?
+                </Label>
+                <div className="flex items-center gap-3">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="icon"
+                    className="h-9 w-9 border-card-dark-muted/30 text-card-dark-foreground hover:bg-card-dark-muted/20"
+                    onClick={() => setSongCount(Math.max(1, songCount - 1))}
+                    disabled={songCount <= 1}
+                  >
+                    −
+                  </Button>
+                  <Input
+                    type="number"
+                    min={1}
+                    value={songCount}
+                    onChange={e => setSongCount(Math.max(1, parseInt(e.target.value) || 1))}
+                    className="w-16 text-center bg-card-dark/80 border-card-dark-muted/30 text-card-dark-foreground h-9 text-base font-bold"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="icon"
+                    className="h-9 w-9 border-card-dark-muted/30 text-card-dark-foreground hover:bg-card-dark-muted/20"
+                    onClick={() => setSongCount(songCount + 1)}
+                  >
+                    +
+                  </Button>
+                </div>
+              </div>
+
+              <Separator className="bg-card-dark-muted/20" />
+
               <div className="flex justify-between text-card-dark-muted">
-                <span>{t("billing.subtotal")}</span>
-                <span className="text-card-dark-foreground">{subtotal.toFixed(2)} €</span>
+                <span>{t("billing.subtotal")} ({subtotal.toFixed(2)} € × {songCount})</span>
+                <span className="text-card-dark-foreground">{multipliedSubtotal.toFixed(2)} €</span>
               </div>
 
               {taxResult && (

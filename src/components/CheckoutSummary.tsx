@@ -30,9 +30,11 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
   const [transferOrderId, setTransferOrderId] = useState<string | null>(null);
   const [invoiceData, setInvoiceData] = useState<InvoiceData>(emptyInvoiceData);
 
+  const songCount = billingData.songCount || 1;
   const taxRate = billingData.taxResult.taxRate;
-  const taxAmount = cartState.total * (taxRate / 100);
-  const subtotalWithTax = cartState.total + taxAmount;
+  const multipliedSubtotal = cartState.total * songCount;
+  const taxAmount = multipliedSubtotal * (taxRate / 100);
+  const subtotalWithTax = multipliedSubtotal + taxAmount;
 
   const PAYPAL_FEE_PERCENTAGE = 0.05;
   const paypalFee = paymentMethod === 'paypal' ? subtotalWithTax * PAYPAL_FEE_PERCENTAGE : 0;
@@ -47,7 +49,8 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
   const buildOrderPayload = () => ({
     items: cartState.items,
     basePrice: cartState.basePrice,
-    subtotal: cartState.total,
+    subtotal: multipliedSubtotal,
+    songCount,
     taxRate,
     taxAmount,
     taxRule: billingData.taxResult.taxRule,
@@ -73,6 +76,7 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
         items: orderPayload.items as any,
         base_price: orderPayload.basePrice,
         subtotal: orderPayload.subtotal,
+        song_count: songCount,
         tax_rate: orderPayload.taxRate,
         tax_amount: orderPayload.taxAmount,
         tax_rule: orderPayload.taxRule,
@@ -94,7 +98,7 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
         billing_phone: invoiceData.isProfessionalInvoice ? invoiceData.billingPhone : null,
         invoice_number: invoiceNumber || null,
         invoice_series: 'W',
-      }).select('id').single();
+      } as any).select('id').single();
 
       if (error) { toast.error(t("checkout.connectionError")); setIsLoading(false); return; }
       setTransferOrderId(data.id);
@@ -176,8 +180,8 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
                 <Separator className="my-4" />
 
                 <div className="flex justify-between items-baseline gap-4 text-sm font-medium">
-                  <span>{t("billing.subtotal")}</span>
-                  <span className="whitespace-nowrap">{cartState.total.toFixed(2)} €</span>
+                  <span>{t("billing.subtotal")}{songCount > 1 ? ` (${cartState.total.toFixed(2)} € × ${songCount} canciones)` : ''}</span>
+                  <span className="whitespace-nowrap">{multipliedSubtotal.toFixed(2)} €</span>
                 </div>
 
                 <div className="flex justify-between items-baseline gap-4 text-sm">
