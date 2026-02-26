@@ -182,31 +182,54 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
             <div className="lg:hidden mb-4">
               <SidebarTrigger className="mb-4" />
             </div>
-            <div className="mb-6 sm:mb-8">
-              <div className="relative overflow-hidden rounded-2xl border-2 border-primary/40 bg-gradient-to-br from-[hsl(18,30%,8%)] via-[hsl(220,15%,10%)] to-[hsl(220,12%,14%)] shadow-[0_0_60px_-12px_hsl(18,80%,52%/0.3),0_8px_40px_-8px_hsl(0,0%,0%/0.6)]">
-                {/* Top glow line */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
-                {/* Corner glows */}
-                <div className="absolute -top-24 -right-24 w-80 h-80 bg-primary/15 rounded-full blur-3xl" />
-                <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
+            <div className="mb-8 sm:mb-12">
+              <div className="relative overflow-hidden rounded-3xl border border-primary/50 shadow-[0_0_80px_-10px_hsl(18,80%,52%/0.35),0_0_30px_-5px_hsl(28,75%,55%/0.2)]">
+                {/* Animated background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[hsl(18,40%,6%)] via-[hsl(220,20%,8%)] to-[hsl(18,20%,4%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_20%_40%,hsl(18,80%,52%/0.15),transparent_70%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_80%_60%,hsl(28,75%,55%/0.1),transparent_70%)]" />
+                
+                {/* Top glow bar */}
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary/0 via-primary to-accent via-60% to-accent/0" />
+                {/* Bottom subtle line */}
+                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+                {/* Side accents */}
+                <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-primary/50 via-primary/10 to-transparent" />
+                <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-accent/50 via-accent/10 to-transparent" />
 
-                <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 p-6 sm:p-12">
-                  <div className="space-y-5 sm:space-y-6 flex flex-col justify-center">
-                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight drop-shadow-[0_2px_12px_hsl(18,80%,52%/0.3)]">
+                <div className="relative grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 sm:gap-10 p-7 sm:p-14">
+                  <div className="space-y-6 sm:space-y-7 flex flex-col justify-center">
+                    {/* Badge */}
+                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-primary/80">
+                      <span className="w-8 h-px bg-primary/60" />
+                      {t("config.h2subtitle")}
+                    </div>
+
+                    {/* Main title */}
+                    <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/60 leading-[1] tracking-tighter">
                       {t("config.h1")}
                     </h1>
-                    <h2 className="text-xl sm:text-2xl font-bold text-primary/90">
-                      {t("config.h2subtitle")}
-                    </h2>
-                    <p className="text-base sm:text-lg text-white/75 leading-relaxed max-w-lg font-medium">{t("config.heroP1")}</p>
-                    <div className="flex items-center gap-2.5 bg-gradient-to-r from-primary to-accent text-white px-5 py-2.5 rounded-full text-base font-bold w-fit shadow-[0_4px_24px_-4px_hsl(18,80%,52%/0.5)] hover:shadow-[0_4px_32px_-4px_hsl(18,80%,52%/0.7)] transition-shadow">
-                      <ShoppingCart className="w-5 h-5" />
-                      {t("config.priceFrom")}
+
+                    {/* Description */}
+                    <p className="text-lg sm:text-xl text-white/65 leading-relaxed max-w-lg font-medium">
+                      {t("config.heroP1")}
+                    </p>
+
+                    {/* CTA button */}
+                    <div className="pt-1">
+                      <div className="inline-flex items-center gap-3 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] animate-[shimmer_3s_ease-in-out_infinite] text-white px-7 py-3.5 rounded-full text-lg font-black shadow-[0_6px_30px_-6px_hsl(18,80%,52%/0.6)] hover:shadow-[0_8px_40px_-6px_hsl(18,80%,52%/0.8)] hover:scale-105 transition-all duration-300 cursor-default">
+                        <ShoppingCart className="w-5 h-5" />
+                        {t("config.priceFrom")}
+                      </div>
                     </div>
-                    <p className="text-sm text-white/55 font-medium">{t("config.heroP2")}</p>
+
+                    {/* Tip */}
+                    <p className="text-sm text-white/40 font-medium">{t("config.heroP2")}</p>
                   </div>
+
+                  {/* Video side */}
                   <div className="flex items-center justify-center">
-                    <div className="relative w-full rounded-xl overflow-hidden ring-1 ring-white/15 shadow-2xl">
+                    <div className="relative w-full rounded-2xl overflow-hidden ring-1 ring-white/15 shadow-[0_20px_60px_-15px_hsl(0,0%,0%/0.7)]">
                       <video
                         src="/videos/big-drums.mp4"
                         autoPlay
@@ -217,7 +240,8 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                         className="w-full h-auto"
                         style={{ aspectRatio: "16 / 9", objectFit: "cover" }}
                       />
-                      <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-xl pointer-events-none" />
+                      <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,20%,8%/0.3)] via-transparent to-transparent pointer-events-none" />
                     </div>
                   </div>
                 </div>
