@@ -266,18 +266,21 @@ export default function ClientsTab({ orders }: Props) {
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center justify-center gap-1" onClick={(e) => e.stopPropagation()}>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-7 w-7"
-                            title="Enviar recordatorio"
-                            onClick={() => {
-                              window.open(buildMailtoLink(order), "_blank");
-                            }}
-                            disabled={!order.billing_email}
-                          >
-                            <Mail className="h-3.5 w-3.5" />
-                          </Button>
+                          {order.billing_email ? (
+                            <a
+                              href={buildMailtoLink(order)}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center h-7 w-7 rounded-md hover:bg-accent hover:text-accent-foreground"
+                              title="Enviar recordatorio"
+                            >
+                              <Mail className="h-3.5 w-3.5" />
+                            </a>
+                          ) : (
+                            <span className="inline-flex items-center justify-center h-7 w-7 opacity-30" title="Sin email">
+                              <Mail className="h-3.5 w-3.5" />
+                            </span>
+                          )}
                           <Button
                             variant="ghost"
                             size="icon"
