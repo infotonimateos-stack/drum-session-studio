@@ -1,6 +1,8 @@
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, useContext, ReactNode, useState, useCallback } from "react";
 import { useCart } from "@/hooks/useCart";
 import { CartItem, CartState } from "@/types/cart";
+
+export type AdvisorProfile = "professional" | "selfproduced" | "demo" | null;
 
 interface CartContextType {
   cartState: CartState;
@@ -8,13 +10,21 @@ interface CartContextType {
   removeItem: (itemId: string) => void;
   clearCart: () => void;
   hasItem: (itemId: string) => boolean;
+  advisorProfile: AdvisorProfile;
+  setAdvisorProfile: (profile: AdvisorProfile) => void;
 }
 
 const CartContext = createContext<CartContextType | null>(null);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const cart = useCart();
-  return <CartContext.Provider value={cart}>{children}</CartContext.Provider>;
+  const [advisorProfile, setAdvisorProfile] = useState<AdvisorProfile>(null);
+
+  return (
+    <CartContext.Provider value={{ ...cart, advisorProfile, setAdvisorProfile }}>
+      {children}
+    </CartContext.Provider>
+  );
 };
 
 export const useCartContext = () => {

@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { CartItem } from "@/types/cart";
+import { useCartContext, AdvisorProfile } from "@/contexts/CartContext";
 import { useTranslation } from "react-i18next";
 import { DRUM_KIT_IDS, drumKits } from "@/components/steps/DrumKitStep";
 
@@ -92,14 +93,21 @@ const PRESET_DEMO: { id: string; name: string; price: number; category: string }
   { id: "sen421-tom2", name: "Sennheiser 421", price: 2.99, category: "mic" },
   { id: "akg414-overheads", name: "Par AKG 414 LTD", price: 5.99, category: "mic" },
   { id: "sen441-snare-bottom", name: "Sennheiser 441", price: 2.99, category: "mic" },
-  { id: "km184-ride", name: "Neumann KM184", price: 2.99, category: "mic" },
-  { id: "u87-room", name: "Neumann U87 Stereo Set", price: 6.99, category: "mic" },
-  { id: "preamps-pro", name: "Pack Previos Pro", price: 6.99, category: "preamps" },
-  { id: "interface-dad", name: "DAD AX64", price: 6.99, category: "interface" },
+  { id: "preamps-motu", name: "MOTU 8pre", price: 4.99, category: "preamps" },
+  { id: "interface-motu", name: "MOTU 8pre", price: 4.99, category: "interface" },
   { id: "duracion-estandar", name: "Duración Estándar", price: 3.99, category: "production" },
   { id: "take-toni-interpretation", name: "Versión Toni Mateos x1", price: 19.90, category: "takes" },
   { id: "delivery-standard", name: "Entrega Estándar", price: 3.99, category: "delivery" },
-  { id: "videocall-10min", name: "Videollamada 10 min", price: 5.99, category: "extras" },
+];
+
+// Vintage microphones added when style is "purevintage"
+const VINTAGE_MIC_ITEMS: { id: string; name: string; price: number; category: string }[] = [
+  { id: "sm57-unidyne-vintage", name: "Shure SM 57 Unidyne", price: 2.99, category: "mic" },
+  { id: "akg-d12-vintage", name: "AKG D12", price: 5.99, category: "mic" },
+  { id: "aea-r88-vintage", name: "AEA R88", price: 6.99, category: "mic" },
+  { id: "akg-d19c-vintage", name: "AKG D19C 200", price: 4.99, category: "mic" },
+  { id: "sen-md421n-vintage-tom1", name: "Sennheiser MD 421-N", price: 3.99, category: "mic" },
+  { id: "sen-md421n-vintage-tom2", name: "Sennheiser MD 421-N", price: 3.99, category: "mic" },
 ];
 
 const PRESETS: Record<UsageOption, typeof PRESET_PROFESSIONAL> = {
@@ -108,8 +116,11 @@ const PRESETS: Record<UsageOption, typeof PRESET_PROFESSIONAL> = {
   demo: PRESET_DEMO,
 };
 
-const computeTotal = (preset: typeof PRESET_PROFESSIONAL, kitPrice: number): string => {
-  const sum = preset.reduce((acc, item) => acc + item.price, 0) + kitPrice;
+const computeTotal = (preset: typeof PRESET_PROFESSIONAL, kitPrice: number, style?: StyleOption | null): string => {
+  let sum = preset.reduce((acc, item) => acc + item.price, 0) + kitPrice;
+  if (style === "purevintage") {
+    sum += VINTAGE_MIC_ITEMS.reduce((acc, item) => acc + item.price, 0);
+  }
   return sum.toFixed(2).replace('.', ',');
 };
 
@@ -120,6 +131,7 @@ export const ExpertAdvisor = ({ addItem, clearCart, onApply }: ExpertAdvisorProp
   const [style, setStyle] = useState<StyleOption | null>(null);
   const [otherStyle, setOtherStyle] = useState("");
   const { t } = useTranslation();
+  const { setAdvisorProfile } = useCartContext();
 
   const reset = () => {
     setStep("welcome");
@@ -164,6 +176,22 @@ export const ExpertAdvisor = ({ addItem, clearCart, onApply }: ExpertAdvisorProp
         category: item.category,
       });
     });
+
+    // Add vintage mics when style is purevintage
+    if (style === "purevintage") {
+      VINTAGE_MIC_ITEMS.forEach((item) => {
+        addItem({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          category: item.category,
+        });
+      });
+    }
+
+    // Store advisor profile for filtering
+    setAdvisorProfile(usage as AdvisorProfile);
+
     setOpen(false);
     if (onApply) onApply();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -318,7 +346,7 @@ export const ExpertAdvisor = ({ addItem, clearCart, onApply }: ExpertAdvisorProp
                 <div className="bg-muted/50 rounded-xl p-4 space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="font-bold text-foreground">{t(`advisor.preset${usage.charAt(0).toUpperCase() + usage.slice(1)}`)}</span>
-                    <span className="font-bold text-primary text-lg">{computeTotal(PRESETS[usage], selectedKit?.price ?? 0)} €</span>
+                    <span className="font-bold text-primary text-lg">{computeTotal(PRESETS[usage], selectedKit?.price ?? 0, style)} €</span>
                   </div>
                   <ul className="text-xs text-muted-foreground space-y-1 max-h-48 overflow-y-auto">
                     {selectedKit && (
@@ -335,6 +363,15 @@ export const ExpertAdvisor = ({ addItem, clearCart, onApply }: ExpertAdvisorProp
                         <span className="flex items-center gap-1">
                           <Check className="h-3 w-3 text-primary" />
                           {item.name}
+                        </span>
+                        <span>{item.price.toFixed(2)} €</span>
+                      </li>
+                    ))}
+                    {style === "purevintage" && VINTAGE_MIC_ITEMS.map((item) => (
+                      <li key={item.id} className="flex justify-between text-amber-400/80">
+                        <span className="flex items-center gap-1">
+                          <Check className="h-3 w-3 text-amber-400" />
+                          🎙️ {item.name}
                         </span>
                         <span>{item.price.toFixed(2)} €</span>
                       </li>
