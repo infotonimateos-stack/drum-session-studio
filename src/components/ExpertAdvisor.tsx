@@ -100,6 +100,15 @@ const PRESET_DEMO: { id: string; name: string; price: number; category: string }
   { id: "delivery-standard", name: "Entrega Estándar", price: 3.99, category: "delivery" },
 ];
 
+// Special preset for demo + purevintage: only vintage mics, no basic mics
+const PRESET_DEMO_VINTAGE: { id: string; name: string; price: number; category: string }[] = [
+  { id: "preamps-motu", name: "MOTU 8pre", price: 4.99, category: "preamps" },
+  { id: "interface-motu", name: "MOTU 8pre", price: 4.99, category: "interface" },
+  { id: "duracion-estandar", name: "Duración Estándar", price: 3.99, category: "production" },
+  { id: "take-toni-interpretation", name: "Versión Toni Mateos x1", price: 19.90, category: "takes" },
+  { id: "delivery-standard", name: "Entrega Estándar", price: 3.99, category: "delivery" },
+];
+
 // Vintage microphones added when style is "purevintage"
 const VINTAGE_MIC_ITEMS: { id: string; name: string; price: number; category: string }[] = [
   { id: "sm57-unidyne-vintage", name: "Shure SM 57 Unidyne", price: 2.99, category: "mic" },
@@ -114,6 +123,14 @@ const PRESETS: Record<UsageOption, typeof PRESET_PROFESSIONAL> = {
   professional: PRESET_PROFESSIONAL,
   selfproduced: PRESET_SELFPRODUCED,
   demo: PRESET_DEMO,
+};
+
+const getEffectivePreset = (usage: UsageOption, style: StyleOption | null) => {
+  // Demo + purevintage = special preset with only vintage mics
+  if (usage === "demo" && style === "purevintage") {
+    return PRESET_DEMO_VINTAGE;
+  }
+  return PRESETS[usage];
 };
 
 const computeTotal = (preset: typeof PRESET_PROFESSIONAL, kitPrice: number, style?: StyleOption | null): string => {
@@ -166,8 +183,8 @@ export const ExpertAdvisor = ({ addItem, clearCart, onApply }: ExpertAdvisorProp
       });
     }
 
-    // Add preset items
-    const preset = PRESETS[usage];
+    // Add preset items (uses special preset for demo+purevintage)
+    const preset = getEffectivePreset(usage, style);
     preset.forEach((item) => {
       addItem({
         id: item.id,
@@ -346,7 +363,7 @@ export const ExpertAdvisor = ({ addItem, clearCart, onApply }: ExpertAdvisorProp
                 <div className="bg-muted/50 rounded-xl p-4 space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="font-bold text-foreground">{t(`advisor.preset${usage.charAt(0).toUpperCase() + usage.slice(1)}`)}</span>
-                    <span className="font-bold text-primary text-lg">{computeTotal(PRESETS[usage], selectedKit?.price ?? 0, style)} €</span>
+                    <span className="font-bold text-primary text-lg">{computeTotal(getEffectivePreset(usage, style), selectedKit?.price ?? 0, style)} €</span>
                   </div>
                   <ul className="text-xs text-muted-foreground space-y-1 max-h-48 overflow-y-auto">
                     {selectedKit && (
@@ -358,7 +375,7 @@ export const ExpertAdvisor = ({ addItem, clearCart, onApply }: ExpertAdvisorProp
                         <span>{selectedKit.price.toFixed(2)} €</span>
                       </li>
                     )}
-                    {PRESETS[usage].map((item) => (
+                    {getEffectivePreset(usage, style).map((item) => (
                       <li key={item.id} className="flex justify-between">
                         <span className="flex items-center gap-1">
                           <Check className="h-3 w-3 text-primary" />
