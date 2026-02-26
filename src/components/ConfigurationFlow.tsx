@@ -1,4 +1,5 @@
-import { useState } from "react"; 
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
@@ -15,23 +16,37 @@ import { DeliveryStep } from "@/components/steps/DeliveryStep";
 import { ExtrasStep } from "@/components/steps/ExtrasStep";
 import { BillingStep, BillingData } from "@/components/BillingStep";
 import { CheckoutSummary } from "@/components/CheckoutSummary";
-import { useCart } from "@/hooks/useCart";
+import { useCartContext } from "@/contexts/CartContext";
 import { validateStep } from "@/hooks/useStepValidation";
 import { useTranslation } from "react-i18next";
 import { ExpertAdvisor } from "@/components/ExpertAdvisor";
+import {
+  extractPathSegment,
+  getStepFromPath,
+  getStepPath,
+  getFullPath,
+} from "@/config/routes";
 
 interface ConfigurationFlowProps {
   onCheckout: () => void;
 }
 
-type FlowMode = 'configuration' | 'billing' | 'checkout';
+type FlowMode = "configuration" | "billing" | "checkout";
 
 export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [mode, setMode] = useState<FlowMode>('configuration');
+  const { i18n } = useTranslation();
+  const lang = i18n.language || "es-ES";
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Derive current step from URL
+  const pathSegment = extractPathSegment(location.pathname);
+  const currentStep = getStepFromPath(pathSegment, lang) ?? 0;
+
+  const [mode, setMode] = useState<FlowMode>("configuration");
   const [billingData, setBillingData] = useState<BillingData | null>(null);
   const [validationError, setValidationError] = useState<string | null>(null);
-  const { cartState, addItem, removeItem, hasItem, clearCart } = useCart();
+  const { cartState, addItem, removeItem, hasItem, clearCart } = useCartContext();
   const { t } = useTranslation();
 
   const steps = [
@@ -46,22 +61,27 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
     { title: t("config.steps.extras"), component: <ExtrasStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} /> },
   ];
 
+  const goToStep = (stepIndex: number) => {
+    const path = getFullPath(getStepPath(stepIndex, lang), lang);
+    navigate(path);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const handlePreviousStep = () => {
     if (currentStep > 0) {
       setValidationError(null);
-      setCurrentStep(currentStep - 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      goToStep(currentStep - 1);
     }
   };
 
   const stepNames = [
     "inicio_registro", "detalles_proyecto", "configuracion_presupuesto", "confirmacion_final",
-    "production", "video", "takes", "delivery", "extras"
+    "production", "video", "takes", "delivery", "extras",
   ];
 
   const trackStepView = (stepIndex: number) => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'step_view', {
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "step_view", {
         step_number: stepIndex + 1,
         step_name: stepNames[stepIndex] || `step_${stepIndex + 1}`,
       });
@@ -77,9 +97,8 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
     setValidationError(null);
     if (currentStep < steps.length - 1) {
       const nextStep = currentStep + 1;
-      setCurrentStep(nextStep);
+      goToStep(nextStep);
       trackStepView(nextStep);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -90,33 +109,33 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
       return;
     }
     setValidationError(null);
-    setMode('billing');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMode("billing");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleBillingComplete = (data: BillingData) => {
     setBillingData(data);
-    setMode('checkout');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMode("checkout");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleBackToConfiguration = () => {
-    setMode('configuration');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMode("configuration");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleBackToBilling = () => {
-    setMode('billing');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMode("billing");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleConfirmOrder = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     onCheckout();
   };
 
   // Billing step
-  if (mode === 'billing') {
+  if (mode === "billing") {
     return (
       <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-8">
@@ -133,7 +152,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   }
 
   // Checkout
-  if (mode === 'checkout' && billingData) {
+  if (mode === "checkout" && billingData) {
     return (
       <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-8">
@@ -191,7 +210,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                       playsInline
                       preload="auto"
                       className="rounded-lg shadow-lg w-full h-auto"
-                      style={{ aspectRatio: '16 / 9', objectFit: 'contain' }}
+                      style={{ aspectRatio: "16 / 9", objectFit: "contain" }}
                     />
                   </div>
                 </div>
@@ -210,7 +229,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
             </Card>
           </div>
         </main>
-        <ExpertAdvisor addItem={addItem} clearCart={clearCart} onApply={() => setCurrentStep(0)} />
+        <ExpertAdvisor addItem={addItem} clearCart={clearCart} onApply={() => goToStep(0)} />
       </div>
     </SidebarProvider>
   );

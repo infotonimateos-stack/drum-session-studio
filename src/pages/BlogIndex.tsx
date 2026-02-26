@@ -6,10 +6,12 @@ import { SEOHead } from "@/components/SEOHead";
 import { blogPosts, getSlugForLang } from "@/data/blogPosts";
 import { useLanguagePrefix } from "@/hooks/useLanguagePrefix";
 import { useState } from "react";
+import { blogPaths } from "@/config/routes";
 
 const BlogIndex = () => {
   const { t, i18n } = useTranslation();
   const { localePath } = useLanguagePrefix();
+  const blogPath = blogPaths[i18n.language] || blogPaths["es-ES"];
   const [activeTab, setActiveTab] = useState("blog");
 
   return (
@@ -28,7 +30,7 @@ const BlogIndex = () => {
             return (
               <Link
                 key={post.slug}
-                to={localePath(`/blog/${slug}`)}
+                to={localePath(`/${blogPath}/${slug}`)}
                 className="group flex flex-col sm:flex-row gap-5 rounded-xl border border-border bg-card p-4 hover:border-primary/40 transition-colors"
               >
                 <img
