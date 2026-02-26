@@ -209,13 +209,13 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                   }}
                 />
 
-                {/* Sweeping light beam */}
+                {/* Sweeping light beam — piano-like specular reflection */}
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{
-                    background: 'linear-gradient(105deg, transparent 35%, hsl(18 80% 70% / 0.08) 42%, hsl(0 0% 100% / 0.14) 50%, hsl(18 80% 70% / 0.08) 58%, transparent 65%)',
-                    backgroundSize: '250% 100%',
-                    animation: 'sweep 4s ease-in-out infinite',
+                    background: 'linear-gradient(105deg, transparent 42%, hsl(0 0% 100% / 0.06) 46%, hsl(0 0% 100% / 0.18) 50%, hsl(0 0% 100% / 0.06) 54%, transparent 58%)',
+                    backgroundSize: '300% 100%',
+                    animation: 'sweep 12s cubic-bezier(0.4,0,0.6,1) infinite',
                   }}
                 />
 
@@ -225,13 +225,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                 <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-primary/50 via-primary/10 to-transparent" />
                 <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-accent/50 via-accent/10 to-transparent" />
 
-                {/* Sparkle dots with inline animation */}
-                <div className="absolute top-[15%] left-[10%] w-2 h-2 rounded-full bg-primary/80" style={{ animation: 'sparkle 2s ease-in-out infinite' }} />
-                <div className="absolute top-[70%] left-[25%] w-1.5 h-1.5 rounded-full bg-accent/70" style={{ animation: 'sparkle 3s ease-in-out infinite 0.5s' }} />
-                <div className="absolute top-[30%] right-[15%] w-2 h-2 rounded-full bg-primary/60" style={{ animation: 'sparkle 2.5s ease-in-out infinite 1s' }} />
-                <div className="absolute bottom-[20%] right-[30%] w-2.5 h-2.5 rounded-full bg-accent/70" style={{ animation: 'sparkle 2s ease-in-out infinite 1.5s' }} />
-                <div className="absolute top-[50%] left-[50%] w-1.5 h-1.5 rounded-full bg-white/40" style={{ animation: 'sparkle 3.5s ease-in-out infinite 0.8s' }} />
-                <div className="absolute top-[85%] left-[60%] w-1 h-1 rounded-full bg-primary/50" style={{ animation: 'sparkle 2.8s ease-in-out infinite 2s' }} />
+
 
                 <div className="relative grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 sm:gap-10 p-7 sm:p-14">
                   <div className="space-y-5 sm:space-y-6 flex flex-col justify-center">
