@@ -76,6 +76,63 @@ export const baseMicrophones: Microphone[] = [
   }
 ];
 
+export const vintageMicrophones: Microphone[] = [
+  {
+    id: 'aea-r88-vintage',
+    name: 'AEA R88',
+    price: 6.99,
+    included: false,
+    descriptionKey: 'micData.aeaR88Desc',
+    targetKey: 'micData.vintage',
+    image: '/lovable-uploads/aea-r88-vintage.jpg'
+  },
+  {
+    id: 'sm57-unidyne-vintage',
+    name: 'Shure SM 57 Unidyne',
+    price: 2.99,
+    included: false,
+    descriptionKey: 'micData.sm57UnidyneDesc',
+    targetKey: 'micData.vintage',
+    image: '/lovable-uploads/shure-sm57-unidyne-vintage.png'
+  },
+  {
+    id: 'akg-d19c-vintage',
+    name: 'AKG D19C 200',
+    price: 4.99,
+    included: false,
+    descriptionKey: 'micData.akgD19cDesc',
+    targetKey: 'micData.vintage',
+    image: '/lovable-uploads/akg-d19c-vintage.jpeg'
+  },
+  {
+    id: 'ev-re20-vintage',
+    name: 'Electro-Voice RE20',
+    price: 5.99,
+    included: false,
+    descriptionKey: 'micData.evRe20Desc',
+    targetKey: 'micData.vintage',
+    image: '/lovable-uploads/electrovoice-re20-vintage.jpg'
+  },
+  {
+    id: 'sen-md421n-vintage',
+    name: 'Sennheiser MD 421-N',
+    price: 3.99,
+    included: false,
+    descriptionKey: 'micData.senMd421nDesc',
+    targetKey: 'micData.vintage',
+    image: '/lovable-uploads/sennheiser-md421n-vintage.png'
+  },
+  {
+    id: 'akg-d12-vintage',
+    name: 'AKG D12',
+    price: 5.99,
+    included: false,
+    descriptionKey: 'micData.akgD12Desc',
+    targetKey: 'micData.vintage',
+    image: '/lovable-uploads/akg-d12-vintage.png'
+  }
+];
+
 export const upgradeMicrophones: Microphone[] = [
   // BOMBO upgrades
   {

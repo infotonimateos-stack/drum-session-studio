@@ -85,6 +85,7 @@
     "subtitle": "Choose the microphones you need for your recording. Each microphone is added individually.",
     "basicMics": "Basic Microphones",
     "premiumUpgrades": "Premium Microphones",
+    "vintageMics": "Vintage Microphones",
     "added": "✨ ADDED",
     "add": "ADD",
     "category": "Microphone"
@@ -364,7 +365,14 @@
     "km184RideDesc": "Ride with impeccable brightness and definition",
     "coles4038Desc": "Vintage texture, depth and that UK touch",
     "c12Desc": "The room sound of the great records",
-    "u87Desc": "The world legend of stereo room"
+    "u87Desc": "The world legend of stereo room",
+    "vintage": "Vintage",
+    "aeaR88Desc": "Unmatched stereo depth and the natural warmth of classic ribbons",
+    "sm57UnidyneDesc": "The raw, articulate sound that defined the golden age of rock",
+    "akgD19cDesc": "The mythical Beatles Mic: British brilliance and punch from the sixties",
+    "evRe20Desc": "Flat response and total proximity effect control for impeccable clarity",
+    "senMd421nDesc": "Legendary German versatility with outstanding dynamic character",
+    "akgD12Desc": "The historic kick drum standard with unbeatable organic body and punch"
   },
   "checkoutForm": {
     "back": "Back",

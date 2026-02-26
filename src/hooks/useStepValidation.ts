@@ -1,8 +1,8 @@
 import { CartState } from '@/types/cart';
-import { baseMicrophones, upgradeMicrophones } from '@/data/microphones';
+import { baseMicrophones, upgradeMicrophones, vintageMicrophones } from '@/data/microphones';
 
 // All microphone IDs
-const ALL_MIC_IDS = [...baseMicrophones, ...upgradeMicrophones].map(m => m.id);
+const ALL_MIC_IDS = [...baseMicrophones, ...upgradeMicrophones, ...vintageMicrophones].map(m => m.id);
 
 // Microphone IDs grouped by category
 const KICK_MIC_IDS = ['beta52-kick', 'beta91-kick', 'subkick-kick', 'u47fet-kick', 'audix-d6'];

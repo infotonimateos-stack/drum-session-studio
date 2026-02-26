@@ -85,6 +85,7 @@
     "subtitle": "Elige los micrófonos que necesitas para tu grabación. Cada micrófono se suma individualmente.",
     "basicMics": "Micrófonos Básicos",
     "premiumUpgrades": "Micrófonos Premium",
+    "vintageMics": "Micrófonos Vintage",
     "added": "✨ AÑADIDO",
     "add": "AÑADIR",
     "category": "Micrófono"
@@ -497,7 +498,14 @@
     "km184RideDesc": "Ride con brillo y definición impecable",
     "coles4038Desc": "Textura vintage, profundidad y ese toque UK",
     "c12Desc": "El room de los grandes discos",
-    "u87Desc": "La leyenda mundial del room estéreo"
+    "u87Desc": "La leyenda mundial del room estéreo",
+    "vintage": "Vintage",
+    "aeaR88Desc": "Profundidad estéreo inigualable y la calidez natural de las cintas clásicas",
+    "sm57UnidyneDesc": "El sonido crudo y articulado que definió la era dorada del rock",
+    "akgD19cDesc": "El mítico Beatles Mic: brillantez y pegada británica de los sesenta",
+    "evRe20Desc": "Respuesta plana y control total del efecto de proximidad para una claridad impecable",
+    "senMd421nDesc": "Versatilidad alemana legendaria con un carácter dinámico sobresaliente",
+    "akgD12Desc": "El estándar histórico para bombos con cuerpo y punch orgánico insuperable"
   },
   "checkoutForm": {
     "back": "Volver",
