@@ -183,38 +183,42 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
               <SidebarTrigger className="mb-4" />
             </div>
             <div className="mb-6 sm:mb-8">
-              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[hsl(220,15%,8%)] via-[hsl(220,12%,12%)] to-[hsl(220,10%,16%)] shadow-[0_8px_40px_-8px_hsl(0,0%,0%/0.5)]">
-                {/* Subtle glow accent */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
-                <div className="absolute -top-20 -right-20 w-60 h-60 bg-primary/8 rounded-full blur-3xl" />
-                <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-accent/6 rounded-full blur-3xl" />
+              <div className="relative overflow-hidden rounded-2xl border-2 border-primary/40 bg-gradient-to-br from-[hsl(18,30%,8%)] via-[hsl(220,15%,10%)] to-[hsl(220,12%,14%)] shadow-[0_0_60px_-12px_hsl(18,80%,52%/0.3),0_8px_40px_-8px_hsl(0,0%,0%/0.6)]">
+                {/* Top glow line */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
+                {/* Corner glows */}
+                <div className="absolute -top-24 -right-24 w-80 h-80 bg-primary/15 rounded-full blur-3xl" />
+                <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
 
-                <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8 p-5 sm:p-10">
-                  <div className="space-y-4 sm:space-y-5 flex flex-col justify-center">
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] tracking-tight">
+                <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 p-6 sm:p-12">
+                  <div className="space-y-5 sm:space-y-6 flex flex-col justify-center">
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight drop-shadow-[0_2px_12px_hsl(18,80%,52%/0.3)]">
                       {t("config.h1")}
                     </h1>
-                    <h2 className="text-lg sm:text-xl font-semibold text-white/70">
+                    <h2 className="text-xl sm:text-2xl font-bold text-primary/90">
                       {t("config.h2subtitle")}
                     </h2>
-                    <p className="text-base sm:text-lg text-white/60 leading-relaxed max-w-lg">{t("config.heroP1")}</p>
-                    <div className="flex items-center gap-2 bg-gradient-to-r from-primary to-accent text-white px-4 py-2 rounded-full text-sm font-bold w-fit shadow-[0_4px_16px_-2px_hsl(18,80%,52%/0.4)]">
-                      <ShoppingCart className="w-4 h-4" />
+                    <p className="text-base sm:text-lg text-white/75 leading-relaxed max-w-lg font-medium">{t("config.heroP1")}</p>
+                    <div className="flex items-center gap-2.5 bg-gradient-to-r from-primary to-accent text-white px-5 py-2.5 rounded-full text-base font-bold w-fit shadow-[0_4px_24px_-4px_hsl(18,80%,52%/0.5)] hover:shadow-[0_4px_32px_-4px_hsl(18,80%,52%/0.7)] transition-shadow">
+                      <ShoppingCart className="w-5 h-5" />
                       {t("config.priceFrom")}
                     </div>
-                    <p className="text-sm text-white/50 font-medium">{t("config.heroP2")}</p>
+                    <p className="text-sm text-white/55 font-medium">{t("config.heroP2")}</p>
                   </div>
                   <div className="flex items-center justify-center">
-                    <video
-                      src="/videos/big-drums.mp4"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload="auto"
-                      className="rounded-xl shadow-2xl w-full h-auto ring-1 ring-white/10"
-                      style={{ aspectRatio: "16 / 9", objectFit: "contain" }}
-                    />
+                    <div className="relative w-full rounded-xl overflow-hidden ring-1 ring-white/15 shadow-2xl">
+                      <video
+                        src="/videos/big-drums.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="auto"
+                        className="w-full h-auto"
+                        style={{ aspectRatio: "16 / 9", objectFit: "cover" }}
+                      />
+                      <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-xl pointer-events-none" />
+                    </div>
                   </div>
                 </div>
               </div>
