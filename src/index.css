@@ -163,24 +163,27 @@
 }
 
 @keyframes sweep {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0%, 100% { background-position: 250% 0; }
+  50% { background-position: -250% 0; }
 }
 
 @keyframes orbit {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  25% { transform: translate(60%, 30%); }
-  50% { transform: translate(120%, 0); }
-  75% { transform: translate(60%, -30%); }
-  100% { transform: translate(0, 0); }
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(80%, 40%); }
+  50% { transform: translate(160%, 0); }
+  75% { transform: translate(80%, -40%); }
 }
 
 @keyframes orbit-reverse {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(-50%, -20%); }
-  50% { transform: translate(-100%, 0); }
-  75% { transform: translate(-50%, 20%); }
-  100% { transform: translate(0, 0); }
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-60%, -30%); }
+  50% { transform: translate(-120%, 0); }
+  75% { transform: translate(-60%, 30%); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 8px 2px currentColor; }
 }
 
 .animate-soft-breathe {
