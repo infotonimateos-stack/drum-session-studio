@@ -70,7 +70,7 @@ function parseConfig(items: any[]) {
   return { microphones, preamps, interfaces, extras, other };
 }
 
-function buildMailtoLink(order: Order) {
+function buildGmailLink(order: Order) {
   const config = parseConfig(order.items);
   const date = new Date(order.created_at).toLocaleDateString("es-ES");
   const clientName = order.business_name || order.billing_email || "Cliente";
@@ -82,18 +82,38 @@ function buildMailtoLink(order: Order) {
   if (config.extras.length) configLines.push(`✨ Extras: ${config.extras.join(", ")}`);
   if (config.other.length) configLines.push(`📦 Otros: ${config.other.join(", ")}`);
 
-  const subject = encodeURIComponent(`Tu configuración de grabación — Groove Factory Studios`);
+  // Tax breakdown
+  const taxLabel = order.tax_rate > 0 ? `IVA (${order.tax_rate}%)` : "IVA (exento)";
+  const breakdown = [
+    `Base imponible: ${order.subtotal.toFixed(2)} €`,
+    `${taxLabel}: ${order.tax_amount.toFixed(2)} €`,
+    `TOTAL: ${order.total.toFixed(2)} €`,
+  ].join("\n");
+
+  // PayPal payment link
+  const paypalItemName = `Grabación batería online - ${clientName} - ${date}`;
+  const paypalLink = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40tonimateos.com&item_name=${encodeURIComponent(paypalItemName)}&amount=${order.total.toFixed(2)}&currency_code=EUR&no_shipping=1`;
+
+  const subject = encodeURIComponent(`Confirmación de grabación y detalles técnicos - tonimateos.com`);
   const body = encodeURIComponent(
     `Hola ${clientName},\n\n` +
-    `Te escribo desde Groove Factory Studios respecto a tu sesión del ${date}.\n\n` +
-    `Tu configuración fue:\n${configLines.join("\n")}\n\n` +
-    `Total: ${order.total.toFixed(2)} €\n\n` +
-    `Si deseas repetir esta configuración o realizar una nueva sesión, puedes hacerlo directamente desde:\n` +
-    `https://tonimateos.com/grabacion-baterias-online\n\n` +
-    `¡Un saludo!\nToni Mateos — Groove Factory Studios`
+    `Muchas gracias por confiar en Groove Factory Studios para tu sesión de grabación.\n\n` +
+    `Te confirmo que tu grabación se procesará con la siguiente configuración técnica:\n\n` +
+    `${configLines.join("\n")}\n\n` +
+    `─────────────────────────────\n` +
+    `DESGLOSE ECONÓMICO\n` +
+    `${breakdown}\n` +
+    `─────────────────────────────\n\n` +
+    `Para completar el pago de forma segura, puedes utilizar el siguiente enlace:\n\n` +
+    `💳 Pagar con PayPal o Tarjeta:\n${paypalLink}\n\n` +
+    `Si prefieres realizar una transferencia bancaria, no dudes en contactarme y te facilito los datos.\n\n` +
+    `¡Un saludo!\n` +
+    `Toni Mateos\n` +
+    `Groove Factory Studios · tonimateos.com`
   );
 
-  return `mailto:${order.billing_email || ""}?subject=${subject}&body=${body}`;
+  const to = encodeURIComponent(order.billing_email || "");
+  return `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&authuser=web@tonimateos.com&su=${subject}&body=${body}`;
 }
 
 function copyConfig(order: Order) {
@@ -374,7 +394,7 @@ export default function ClientsTab({ orders }: Props) {
                         <div className="flex items-center justify-center gap-1" onClick={(e) => e.stopPropagation()}>
                           {order.billing_email ? (
                             <a
-                              href={buildMailtoLink(order)}
+                              href={buildGmailLink(order)}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center justify-center h-7 w-7 rounded-md hover:bg-accent hover:text-accent-foreground"
