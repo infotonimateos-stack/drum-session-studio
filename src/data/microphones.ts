@@ -83,7 +83,7 @@ export const vintageMicrophones: Microphone[] = [
     price: 6.99,
     included: false,
     descriptionKey: 'micData.aeaR88Desc',
-    targetKey: 'micData.vintage',
+    targetKey: 'micData.stereoRoom',
     image: '/lovable-uploads/aea-r88-vintage.jpg'
   },
   {
@@ -92,7 +92,7 @@ export const vintageMicrophones: Microphone[] = [
     price: 2.99,
     included: false,
     descriptionKey: 'micData.sm57UnidyneDesc',
-    targetKey: 'micData.vintage',
+    targetKey: 'micData.snareTop',
     image: '/lovable-uploads/shure-sm57-unidyne-vintage.png'
   },
   {
@@ -101,7 +101,7 @@ export const vintageMicrophones: Microphone[] = [
     price: 4.99,
     included: false,
     descriptionKey: 'micData.akgD19cDesc',
-    targetKey: 'micData.vintage',
+    targetKey: 'micData.roomMono',
     image: '/lovable-uploads/akg-d19c-vintage.jpeg'
   },
   {
@@ -110,16 +110,34 @@ export const vintageMicrophones: Microphone[] = [
     price: 5.99,
     included: false,
     descriptionKey: 'micData.evRe20Desc',
-    targetKey: 'micData.vintage',
+    targetKey: 'micData.kick',
     image: '/lovable-uploads/electrovoice-re20-vintage.jpg'
   },
   {
-    id: 'sen-md421n-vintage',
+    id: 'sen-md421n-vintage-tom1',
     name: 'Sennheiser MD 421-N',
     price: 3.99,
     included: false,
     descriptionKey: 'micData.senMd421nDesc',
-    targetKey: 'micData.vintage',
+    targetKey: 'micData.tom1',
+    image: '/lovable-uploads/sennheiser-md421n-vintage.png'
+  },
+  {
+    id: 'sen-md421n-vintage-tom2',
+    name: 'Sennheiser MD 421-N',
+    price: 3.99,
+    included: false,
+    descriptionKey: 'micData.senMd421nDesc',
+    targetKey: 'micData.tom2',
+    image: '/lovable-uploads/sennheiser-md421n-vintage.png'
+  },
+  {
+    id: 'sen-md421n-vintage-tom3',
+    name: 'Sennheiser MD 421-N',
+    price: 3.99,
+    included: false,
+    descriptionKey: 'micData.senMd421nDesc',
+    targetKey: 'micData.tom3',
     image: '/lovable-uploads/sennheiser-md421n-vintage.png'
   },
   {
@@ -128,7 +146,7 @@ export const vintageMicrophones: Microphone[] = [
     price: 5.99,
     included: false,
     descriptionKey: 'micData.akgD12Desc',
-    targetKey: 'micData.vintage',
+    targetKey: 'micData.kick',
     image: '/lovable-uploads/akg-d12-vintage.png'
   }
 ];
