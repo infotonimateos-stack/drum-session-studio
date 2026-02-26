@@ -69,8 +69,8 @@ serve(async (req) => {
 
     const accessToken = await getAccessToken(serviceAccountJson);
     const url = new URL(req.url);
-    const period = url.searchParams.get("period") || "30";
-
+    const period = url.searchParams.get("period") || "1";
+    const startDate = period === "all" ? "2024-01-01" : `${period}daysAgo`;
     // Query step_view events — use activeUsers metric matching GA response schema
     const reportRes = await fetch(
       `https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runReport`,
@@ -81,7 +81,7 @@ serve(async (req) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          dateRanges: [{ startDate: `${period}daysAgo`, endDate: "today" }],
+          dateRanges: [{ startDate, endDate: "today" }],
           dimensions: [{ name: "customEvent:step_name" }],
           metrics: [{ name: "activeUsers" }],
           dimensionFilter: {
