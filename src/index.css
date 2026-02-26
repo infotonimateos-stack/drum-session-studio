@@ -22,7 +22,7 @@
     --secondary-foreground: 220 15% 25%;
 
     --muted: 220 10% 95%;
-    --muted-foreground: 220 10% 38%;
+    --muted-foreground: 220 12% 28%;
 
     --accent: 28 75% 55%;
     --accent-foreground: 0 0% 100%;
@@ -36,8 +36,8 @@
 
     /* Dark product card tokens */
     --card-dark: 220 10% 10%;
-    --card-dark-foreground: 220 10% 88%;
-    --card-dark-muted: 220 8% 55%;
+    --card-dark-foreground: 220 10% 95%;
+    --card-dark-muted: 220 8% 72%;
     --card-dark-price: 35 70% 65%;
     --card-dark-btn-from: 18 80% 52%;
     --card-dark-btn-to: 28 75% 55%;
@@ -91,7 +91,7 @@
     --secondary-foreground: 220 10% 90%;
 
     --muted: 220 10% 15%;
-    --muted-foreground: 220 10% 68%;
+    --muted-foreground: 220 10% 78%;
 
     --accent: 22 80% 58%;
     --accent-foreground: 220 10% 95%;
@@ -139,6 +139,11 @@
 
   body {
     @apply bg-background text-foreground;
+    font-weight: 450;
+  }
+
+  p, li, span, td, th, label, dd, dt {
+    font-weight: 450;
   }
 
   h1, h2, h3, h4, h5, h6 {
