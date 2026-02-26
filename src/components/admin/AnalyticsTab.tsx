@@ -61,7 +61,7 @@ interface Props {
 export default function AnalyticsTab({ storedPassword }: Props) {
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(false);
-  const [period, setPeriod] = useState("30");
+  const [period, setPeriod] = useState("1");
   const [error, setError] = useState<string | null>(null);
 
   // Funnel state
@@ -205,14 +205,15 @@ export default function AnalyticsTab({ storedPassword }: Props) {
         </div>
         <div className="flex items-center gap-2">
           <Select value={period} onValueChange={setPeriod}>
-            <SelectTrigger className="w-40">
+            <SelectTrigger className="w-44">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="7">Últimos 7 días</SelectItem>
-              <SelectItem value="30">Últimos 30 días</SelectItem>
-              <SelectItem value="90">Últimos 90 días</SelectItem>
+              <SelectItem value="1">Últimas 24 horas</SelectItem>
+              <SelectItem value="7">Última semana</SelectItem>
+              <SelectItem value="30">Último mes</SelectItem>
               <SelectItem value="365">Último año</SelectItem>
+              <SelectItem value="all">Siempre</SelectItem>
             </SelectContent>
           </Select>
           <Button variant="outline" size="sm" onClick={fetchAll} disabled={loading || funnelLoading}>

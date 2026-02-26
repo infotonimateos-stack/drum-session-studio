@@ -84,7 +84,8 @@ serve(async (req) => {
 
     const accessToken = await getAccessToken(serviceAccountJson);
     const url = new URL(req.url);
-    const period = url.searchParams.get("period") || "30"; // days
+    const period = url.searchParams.get("period") || "1"; // days or "all"
+    const startDate = period === "all" ? "2024-01-01" : `${period}daysAgo`;
 
     const gaReport = (body: any) =>
       fetch(`https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runReport`, {
@@ -93,7 +94,7 @@ serve(async (req) => {
         body: JSON.stringify(body),
       });
 
-    const dateRanges = [{ startDate: `${period}daysAgo`, endDate: "today" }];
+    const dateRanges = [{ startDate, endDate: "today" }];
 
     // Run all reports in parallel
     const [overviewRes, sourcesRes, topPagesRes, referralsRes] = await Promise.all([
