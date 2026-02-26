@@ -37,7 +37,8 @@ export const FAQTab = () => {
         { questionKey: "faq.q12", answerKey: "faq.a12" },
         { questionKey: "faq.q13", answerKey: "faq.a13" },
         { questionKey: "faq.q14", answerKey: "faq.a14" },
-        { questionKey: "faq.q15", answerKey: "faq.a15" }
+        { questionKey: "faq.q15", answerKey: "faq.a15" },
+        { questionKey: "faq.q25", answerKey: "faq.a25" }
       ]
     },
     {
@@ -90,7 +91,7 @@ export const FAQTab = () => {
                     <AccordionTrigger className="text-left hover:text-primary">
                       {t(faq.questionKey)}
                     </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground leading-relaxed">
+                    <AccordionContent className="text-muted-foreground leading-relaxed whitespace-pre-line">
                       {t(faq.answerKey)}
                     </AccordionContent>
                   </AccordionItem>

@@ -554,6 +554,8 @@
     "a14": "Yes, you can download sample tracks in the 'Download a Sample' section.",
     "q15": "How long will it take to receive the tracks?",
     "a15": "You can decide in our price configurator.",
+    "q25": "What files do I need to send for you to start recording?",
+    "a25": "Once you've configured your recording session and completed the payment, you'll need to send the following materials to info@tonimateos.com:\n\n• A stereo WAV file of your song WITHOUT drums.\n• A stereo WAV file with ONLY the demo drums (if you have one. Otherwise, we'll create it for you from scratch).\n• The sample rate and bit depth of your project.\n• The exact tempo in BPMs, or a MIDI file with the tempo map if there are tempo changes.\n• Any notes on the sound or style you're looking for, with the option to include YouTube or Spotify links as references.",
     "q16": "Are the tracks processed with any EQ, compression or effects?",
     "a16": "No. You'll receive the tracks 'raw'.",
     "q17": "What format are the drum tracks in? Are they compatible with my DAW?",

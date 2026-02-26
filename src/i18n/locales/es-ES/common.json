@@ -422,6 +422,8 @@
     "a14": "Sí, puedes descargar pistas de muestra en el apartado \"Descarga una muestra\"",
     "q15": "¿Cuánto tardaré en recibir las pistas?",
     "a15": "Puedes decidirlo tú, en nuestro configurador de precios.",
+    "q25": "¿Qué archivos debo enviar para que empecéis la grabación?",
+    "a25": "Una vez hayas configurado tu sesión de grabación y realizado el pago, deberás enviar los siguientes materiales a info@tonimateos.com:\n\n• Un archivo WAV estéreo de tu canción SIN batería.\n• Un archivo WAV estéreo únicamente con la batería demo (si la tienes. De lo contrario, la crearemos para ti desde cero).\n• La frecuencia de muestreo (sample rate) y profundidad de bits (bit depth) de tu proyecto.\n• El tempo exacto en BPMs, o un archivo MIDI con el mapa de tempo si existen cambios de velocidad.\n• Cualquier indicación sobre la sonoridad o el estilo que buscas, con la posibilidad de adjuntar enlaces de YouTube o Spotify como referencia.",
     "q16": "¿Las pistas están procesadas con algún tipo de EQ, compresión o efecto?",
     "a16": "No. Recibirás las pistas \"en crudo\".",
     "q17": "¿Qué formato tienen las pistas de batería? ¿Son compatibles con mi DAW?",
