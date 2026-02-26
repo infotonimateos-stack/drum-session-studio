@@ -67,8 +67,8 @@ const AppRoutes = () => {
         <Route path="drum-recording-blog/:slug" element={<BlogPost />} />
       </Route>
 
-      {/* Catch-all */}
-      <Route path="*" element={<NotFound />} />
+      {/* Catch-all: redirect to home silently */}
+      <Route path="*" element={<Navigate to="/grabacion-baterias-online" replace />} />
     </Routes>
   );
 };
