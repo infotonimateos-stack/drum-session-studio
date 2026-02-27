@@ -62,14 +62,7 @@ export const validateStep = (
       return { valid: true, error: null };
     }
     case 1: {
-      // Microphones: must have kick, snare top, hihat, overhead
-      const hasKick = hasAny(KICK_MIC_IDS);
-      const hasSnareTop = hasAny(SNARE_TOP_MIC_IDS);
-      const hasHihat = hasAny(HIHAT_MIC_IDS);
-      const hasOverhead = hasAny(OVERHEAD_MIC_IDS);
-      if (!hasKick || !hasSnareTop || !hasHihat || !hasOverhead) {
-        return { valid: false, error: t('validation.microphones') };
-      }
+      // Microphones: no mandatory selection required
       return { valid: true, error: null };
     }
     case 2: {
