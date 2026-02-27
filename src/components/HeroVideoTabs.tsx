@@ -29,9 +29,6 @@ export const HeroVideoDual = ({ youtubeVideoId }: HeroVideoDualProps) => {
           <div className={overlay1} />
           <div className={overlay2} />
         </div>
-        <p className="mt-1.5 text-[11px] text-white/35 text-center font-medium">
-          {t("config.videoLabelPromo")}
-        </p>
       </div>
 
       {/* Tutorial video */}
