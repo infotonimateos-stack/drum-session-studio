@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { HelpCircle, ArrowRight, Check, Music, Disc3 } from "lucide-react";
+import { HelpCircle, ArrowRight, Check, Music, Disc3, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,6 +12,7 @@ import { CartItem } from "@/types/cart";
 import { useCartContext, AdvisorProfile } from "@/contexts/CartContext";
 import { useTranslation } from "react-i18next";
 import { DRUM_KIT_IDS, drumKits } from "@/components/steps/DrumKitStep";
+import { baseMicrophones, upgradeMicrophones, vintageMicrophones } from "@/data/microphones";
 
 type ModalStep = "welcome" | "usage" | "style" | "result";
 type UsageOption = "professional" | "selfproduced" | "demo";
@@ -126,7 +127,6 @@ const PRESETS: Record<UsageOption, typeof PRESET_PROFESSIONAL> = {
 };
 
 const getEffectivePreset = (usage: UsageOption, style: StyleOption | null) => {
-  // Demo + purevintage = special preset with only vintage mics
   if (usage === "demo" && style === "purevintage") {
     return PRESET_DEMO_VINTAGE;
   }
@@ -139,6 +139,144 @@ const computeTotal = (preset: typeof PRESET_PROFESSIONAL, kitPrice: number, styl
     sum += VINTAGE_MIC_ITEMS.reduce((acc, item) => acc + item.price, 0);
   }
   return sum.toFixed(2).replace('.', ',');
+};
+
+// ─── Complete catalog of ALL available items per step ───
+interface CatalogItem {
+  id: string;
+  name: string;
+  price: number;
+}
+
+interface CatalogGroup {
+  labelKey: string;
+  emoji: string;
+  colorClass: string;
+  checkColor: string;
+  items: CatalogItem[];
+}
+
+const buildFullCatalog = (t: (key: string) => string): CatalogGroup[] => {
+  const allMics: CatalogItem[] = [
+    ...baseMicrophones.map(m => ({ id: m.id, name: m.name, price: m.price })),
+    ...upgradeMicrophones.map(m => ({ id: m.id, name: m.name, price: m.price })),
+    ...vintageMicrophones.map(m => ({ id: m.id, name: m.name, price: m.price })),
+  ];
+
+  return [
+    {
+      labelKey: "advisor.groupMics",
+      emoji: "🎙️",
+      colorClass: "text-sky-400",
+      checkColor: "text-sky-400",
+      items: allMics,
+    },
+    {
+      labelKey: "advisor.groupPreamps",
+      emoji: "🎛️",
+      colorClass: "text-amber-400",
+      checkColor: "text-amber-400",
+      items: [
+        { id: "preamps-motu", name: "MOTU 8Pre", price: 4.99 },
+        { id: "preamps-pro", name: t("preamps.legendaryPack"), price: 6.99 },
+        { id: "interface-motu", name: "MOTU 8Pre (Interface)", price: 4.99 },
+        { id: "interface-dad", name: "DAD AX64", price: 6.99 },
+      ],
+    },
+    {
+      labelKey: "advisor.groupSession",
+      emoji: "🎬",
+      colorClass: "text-emerald-400",
+      checkColor: "text-emerald-400",
+      items: [
+        { id: "duracion-estandar", name: t("production.standardDuration"), price: 3.99 },
+        { id: "tiempo-adicional", name: t("production.additionalTime"), price: 6.99 },
+        { id: "work-mix", name: t("production.workMix"), price: 2.99 },
+        { id: "sample-pack", name: t("production.samplePack"), price: 4.99 },
+        { id: "social-greeting", name: t("video.socialGreeting"), price: 4.99 },
+        { id: "playing-video", name: t("video.playingVideo"), price: 29.90 },
+        { id: "instagram-share", name: t("video.instagramShare"), price: 29.90 },
+        { id: "take-toni-interpretation", name: t("takes.proInterpretation"), price: 19.90 },
+        { id: "take-exact-copy", name: t("takes.exactCopy"), price: 49.90 },
+        { id: "delivery-standard", name: t("delivery.standardTitle"), price: 3.99 },
+        { id: "delivery-5days", name: t("delivery.express5Name"), price: 5.90 },
+        { id: "delivery-2days", name: t("delivery.express2Name"), price: 39.90 },
+        { id: "videocall-10min", name: t("extras.videocall10"), price: 5.99 },
+        { id: "videocall-premium", name: t("extras.multicam"), price: 100.00 },
+        { id: "partitura-proceso", name: t("extras.partitura"), price: 1.99 },
+        { id: "presencial", name: t("extras.inPerson"), price: 150.00 },
+      ],
+    },
+  ];
+};
+
+// ─── Collapsible group sub-component ───
+const CollapsibleCatalogGroup = ({
+  group,
+  selectedIds,
+  defaultOpen,
+}: {
+  group: CatalogGroup;
+  selectedIds: Set<string>;
+  defaultOpen: boolean;
+}) => {
+  const { t } = useTranslation();
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+  const selectedInGroup = group.items.filter(i => selectedIds.has(i.id));
+  const selectedTotal = selectedInGroup.reduce((s, i) => s + i.price, 0);
+
+  return (
+    <div className="rounded-xl border border-border/50 overflow-hidden">
+      {/* Group header — clickable */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between px-4 py-2.5 bg-muted/60 hover:bg-muted/80 transition-colors"
+      >
+        <span className={`text-xs font-bold uppercase tracking-wider ${group.colorClass} flex items-center gap-1.5`}>
+          <span>{group.emoji}</span> {t(group.labelKey)}
+          <span className="text-muted-foreground font-normal ml-1">
+            ({selectedInGroup.length}/{group.items.length})
+          </span>
+        </span>
+        <span className="flex items-center gap-2">
+          <span className={`text-xs font-semibold ${group.colorClass}`}>
+            {selectedTotal.toFixed(2)} €
+          </span>
+          {isOpen ? (
+            <ChevronUp className="h-3.5 w-3.5 text-muted-foreground" />
+          ) : (
+            <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />
+          )}
+        </span>
+      </button>
+      {/* Group items */}
+      {isOpen && (
+        <ul className="px-4 py-2 space-y-1">
+          {group.items.map((item) => {
+            const isSelected = selectedIds.has(item.id);
+            return (
+              <li
+                key={item.id}
+                className={`flex justify-between text-xs transition-opacity ${
+                  isSelected ? `${group.colorClass}/90` : "text-muted-foreground/50"
+                }`}
+              >
+                <span className="flex items-center gap-1.5">
+                  {isSelected ? (
+                    <Check className={`h-3 w-3 ${group.checkColor}`} />
+                  ) : (
+                    <span className="w-3 h-3 rounded-full border border-muted-foreground/30 inline-block shrink-0" />
+                  )}
+                  <span className={isSelected ? "font-medium" : ""}>{item.name}</span>
+                </span>
+                <span className="whitespace-nowrap shrink-0">{item.price.toFixed(2)} €</span>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
 };
 
 export const ExpertAdvisor = ({ addItem, clearCart, onApply }: ExpertAdvisorProps) => {
@@ -340,25 +478,23 @@ export const ExpertAdvisor = ({ addItem, clearCart, onApply }: ExpertAdvisorProp
               </div>
             )}
 
-            {/* RESULT */}
+            {/* RESULT — shows ALL items, selected highlighted */}
             {step === "result" && usage && style && (() => {
               const preset = getEffectivePreset(usage, style);
               const vintageMics = style === "purevintage" ? VINTAGE_MIC_ITEMS : [];
-              const allItems = [...preset, ...vintageMics];
+              const allPresetItems = [...preset, ...vintageMics];
+              const selectedIds = new Set(allPresetItems.map(i => i.id));
 
-              // Group items by category
-              const micItems = allItems.filter(i => i.category === "mic");
-              const preampItems = allItems.filter(i => i.category === "preamps" || i.category === "interface");
-              const sessionItems = allItems.filter(i => !["mic", "preamps", "interface"].includes(i.category));
+              // Also add selected kit id
+              if (selectedKit) selectedIds.add(selectedKit.id);
 
-              const groups: { labelKey: string; emoji: string; colorClass: string; checkColor: string; items: typeof allItems }[] = [
-                { labelKey: "advisor.groupMics", emoji: "🎙️", colorClass: "text-sky-400", checkColor: "text-sky-400", items: micItems },
-                { labelKey: "advisor.groupPreamps", emoji: "🎛️", colorClass: "text-amber-400", checkColor: "text-amber-400", items: preampItems },
-                { labelKey: "advisor.groupSession", emoji: "🎬", colorClass: "text-emerald-400", checkColor: "text-emerald-400", items: sessionItems },
-              ];
+              const fullCatalog = buildFullCatalog(t);
 
               const kitPrice = selectedKit?.price ?? 0;
               const totalStr = computeTotal(preset, kitPrice, style);
+
+              // Non-selected drum kits
+              const otherKits = drumKits.filter(k => k.id !== selectedKit?.id);
 
               return (
                 <div className="space-y-5 py-4">
@@ -366,47 +502,44 @@ export const ExpertAdvisor = ({ addItem, clearCart, onApply }: ExpertAdvisorProp
                     {t("advisor.resultMessage")}
                   </p>
 
-                  {/* Drum Kit hero */}
+                  {/* Drum Kit hero — selected */}
                   {selectedKit && (
-                    <div className="bg-muted/50 rounded-xl p-4 flex items-center gap-4">
+                    <div className="bg-muted/50 rounded-xl p-4 flex items-center gap-4 ring-2 ring-primary/40">
                       <img src={selectedKit.image} alt={t(selectedKit.nameKey)} className="w-20 h-20 object-contain rounded-lg bg-white" />
                       <div className="flex-1 min-w-0">
                         <span className="text-xs uppercase tracking-wider text-muted-foreground">{t("advisor.drumKitLabel")}</span>
-                        <p className="font-bold text-foreground">{t(selectedKit.nameKey)}</p>
+                        <p className="font-bold text-foreground flex items-center gap-1.5">
+                          <Check className="h-3.5 w-3.5 text-primary" />
+                          {t(selectedKit.nameKey)}
+                        </p>
                         <p className="text-primary font-bold">{selectedKit.price.toFixed(2)} €</p>
                       </div>
                     </div>
                   )}
 
-                  {/* Grouped breakdown */}
-                  <div className="space-y-3">
-                    {groups.map((group) =>
-                      group.items.length > 0 && (
-                        <div key={group.labelKey} className="rounded-xl border border-border/50 overflow-hidden">
-                          {/* Group header */}
-                          <div className="flex items-center justify-between px-4 py-2.5 bg-muted/60">
-                            <span className={`text-xs font-bold uppercase tracking-wider ${group.colorClass} flex items-center gap-1.5`}>
-                              <span>{group.emoji}</span> {t(group.labelKey)}
-                            </span>
-                            <span className={`text-xs font-semibold ${group.colorClass}`}>
-                              {group.items.reduce((s, i) => s + i.price, 0).toFixed(2)} €
-                            </span>
-                          </div>
-                          {/* Group items */}
-                          <ul className="px-4 py-2 space-y-1">
-                            {group.items.map((item) => (
-                              <li key={item.id} className={`flex justify-between text-xs ${group.colorClass}/80`}>
-                                <span className="flex items-center gap-1.5">
-                                  <Check className={`h-3 w-3 ${group.checkColor}`} />
-                                  <span>{item.name}</span>
-                                </span>
-                                <span className="whitespace-nowrap shrink-0">{item.price.toFixed(2)} €</span>
-                              </li>
-                            ))}
-                          </ul>
+                  {/* Other drum kits — not selected */}
+                  {otherKits.length > 0 && (
+                    <div className="grid grid-cols-3 gap-2">
+                      {otherKits.map(kit => (
+                        <div key={kit.id} className="rounded-lg border border-border/30 p-2 opacity-40 flex flex-col items-center text-center">
+                          <img src={kit.image} alt={t(kit.nameKey)} className="w-12 h-12 object-contain rounded bg-white mb-1" />
+                          <span className="text-[10px] text-muted-foreground leading-tight">{t(kit.nameKey)}</span>
+                          <span className="text-[10px] text-muted-foreground">{kit.price.toFixed(2)} €</span>
                         </div>
-                      )
-                    )}
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Full catalog grouped — collapsible */}
+                  <div className="space-y-3">
+                    {fullCatalog.map((group) => (
+                      <CollapsibleCatalogGroup
+                        key={group.labelKey}
+                        group={group}
+                        selectedIds={selectedIds}
+                        defaultOpen={group.labelKey === "advisor.groupMics"}
+                      />
+                    ))}
                   </div>
 
                   {/* Total */}
