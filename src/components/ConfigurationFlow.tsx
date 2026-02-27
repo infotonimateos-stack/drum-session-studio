@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ShoppingCart, GraduationCap } from "lucide-react";
-import { HeroVideoTabs } from "@/components/HeroVideoTabs";
+import { HeroVideoDual } from "@/components/HeroVideoTabs";
 import { FloatingVideoPlayer } from "@/components/FloatingVideoPlayer";
 import { Card } from "@/components/ui/card";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
@@ -266,7 +266,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                   </div>
 
                   <div className="flex items-center justify-center">
-                    <HeroVideoTabs youtubeVideoId="y3ItF1koMLA" />
+                    <HeroVideoDual youtubeVideoId="y3ItF1koMLA" />
                   </div>
                 </div>
               </div>
