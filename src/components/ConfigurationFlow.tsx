@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, GraduationCap } from "lucide-react";
+import { HeroVideoTabs } from "@/components/HeroVideoTabs";
+import { FloatingVideoPlayer } from "@/components/FloatingVideoPlayer";
 import { Card } from "@/components/ui/card";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { ConfigSidebar } from "@/components/ConfigSidebar";
@@ -46,6 +48,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   const [mode, setMode] = useState<FlowMode>("configuration");
   const [billingData, setBillingData] = useState<BillingData | null>(null);
   const [validationError, setValidationError] = useState<string | null>(null);
+  const [floatingVideo, setFloatingVideo] = useState(false);
   const { cartState, addItem, removeItem, hasItem, clearCart } = useCartContext();
   const { t } = useTranslation();
 
@@ -262,26 +265,21 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                     <p className="text-sm text-white/40 font-medium">{t("config.heroP2")}</p>
                   </div>
 
-                  {/* Video side */}
                   <div className="flex items-center justify-center">
-                    <div className="relative w-full rounded-2xl overflow-hidden ring-1 ring-white/15 shadow-[0_20px_60px_-15px_hsl(0,0%,0%/0.7)]">
-                      <video
-                        src="/videos/big-drums.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="auto"
-                        className="w-full h-auto"
-                        style={{ aspectRatio: "16 / 9", objectFit: "cover" }}
-                      />
-                      <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl pointer-events-none" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,20%,8%/0.3)] via-transparent to-transparent pointer-events-none" />
-                    </div>
+                    <HeroVideoTabs youtubeVideoId="y3ItF1koMLA" />
                   </div>
                 </div>
               </div>
             </div>
+            {!floatingVideo && (
+              <button
+                onClick={() => setFloatingVideo(true)}
+                className="mb-3 inline-flex items-center gap-2 text-xs font-bold text-primary hover:text-accent transition-colors"
+              >
+                <GraduationCap className="w-4 h-4" />
+                {t("config.videoTabTutorial")} — {t("config.videoLabelTutorial")}
+              </button>
+            )}
             <Card className="overflow-hidden border-border/60 shadow-sm">
               <div className="p-3 sm:p-6 md:p-8 min-h-[400px] sm:min-h-[600px]">{steps[currentStep].component}</div>
               <StepNavigator
@@ -296,6 +294,11 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
           </div>
         </main>
         <ExpertAdvisor addItem={addItem} clearCart={clearCart} onApply={() => goToStep(0)} />
+        <FloatingVideoPlayer
+          videoId="y3ItF1koMLA"
+          visible={floatingVideo}
+          onClose={() => setFloatingVideo(false)}
+        />
       </div>
     </SidebarProvider>
   );

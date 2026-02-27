@@ -77,6 +77,11 @@
     "priceFrom": "añade lo que necesites",
     "heroP1": "Selecciona los elementos que necesitas para tu grabación profesional. Cada servicio se suma individualmente.",
     "heroP2": "💡 Cada elemento se puede añadir individualmente para crear tu setup perfecto",
+    "videoTabPromo": "Promo",
+    "videoTabTutorial": "Tutorial",
+    "videoLabelPromo": "Vídeo promocional del estudio",
+    "videoLabelTutorial": "Tutorial: cómo configurar tu sesión de grabación",
+    "floatingTutorial": "Tutorial",
     "imgAlt": "Batería microfoneada en estudio de grabación de baterías online profesional",
     "progress": "Progreso de la configuración"
   },

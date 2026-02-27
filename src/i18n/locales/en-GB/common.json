@@ -77,6 +77,11 @@
     "priceFrom": "add what you need",
     "heroP1": "Select the elements you need for your professional recording. Each service is added individually.",
     "heroP2": "💡 Each element can be added individually to create your perfect setup",
+    "videoTabPromo": "Promo",
+    "videoTabTutorial": "Tutorial",
+    "videoLabelPromo": "Studio promotional video",
+    "videoLabelTutorial": "Tutorial: how to configure your recording session",
+    "floatingTutorial": "Tutorial",
     "imgAlt": "Mic'd drum kit in professional online drum recording studio",
     "progress": "Configuration progress"
   },
