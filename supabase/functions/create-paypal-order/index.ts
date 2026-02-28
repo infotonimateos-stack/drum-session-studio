@@ -51,6 +51,7 @@ serve(async (req) => {
       billingCountry, billingPostalCode, clientType,
       vatNumber, viesValid,
       invoiceData,
+      firstName, lastName, contactEmail,
     } = requestBody;
     
     const safeSongCount = typeof songCount === "number" && songCount >= 1 ? songCount : 1;
@@ -204,6 +205,9 @@ serve(async (req) => {
           billing_phone: isProfessional ? invoiceData.billingPhone : null,
           invoice_number: invoiceNumber || null,
           invoice_series: 'W',
+          first_name: firstName || null,
+          last_name: lastName || null,
+          contact_email: contactEmail || null,
         });
         logStep("Order saved to DB");
       }

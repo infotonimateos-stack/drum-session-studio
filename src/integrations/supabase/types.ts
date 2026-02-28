@@ -37,15 +37,18 @@ export type Database = {
           business_name: string | null
           city: string | null
           client_type: string
+          contact_email: string | null
           country_code: string
           created_at: string
           currency: string
+          first_name: string | null
           full_address: string | null
           id: string
           invoice_number: string | null
           invoice_series: string | null
           is_professional_invoice: boolean
           items: Json
+          last_name: string | null
           payment_id: string | null
           payment_method: string
           payment_status: string
@@ -69,15 +72,18 @@ export type Database = {
           business_name?: string | null
           city?: string | null
           client_type: string
+          contact_email?: string | null
           country_code: string
           created_at?: string
           currency?: string
+          first_name?: string | null
           full_address?: string | null
           id?: string
           invoice_number?: string | null
           invoice_series?: string | null
           is_professional_invoice?: boolean
           items?: Json
+          last_name?: string | null
           payment_id?: string | null
           payment_method: string
           payment_status?: string
@@ -101,15 +107,18 @@ export type Database = {
           business_name?: string | null
           city?: string | null
           client_type?: string
+          contact_email?: string | null
           country_code?: string
           created_at?: string
           currency?: string
+          first_name?: string | null
           full_address?: string | null
           id?: string
           invoice_number?: string | null
           invoice_series?: string | null
           is_professional_invoice?: boolean
           items?: Json
+          last_name?: string | null
           payment_id?: string | null
           payment_method?: string
           payment_status?: string

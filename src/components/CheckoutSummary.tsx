@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ShoppingCart } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { ShoppingCart, User } from "lucide-react";
 import { CartState } from "@/types/cart";
 import { BillingData } from "@/components/BillingStep";
 import { InvoiceForm, InvoiceData, isInvoiceDataValid, emptyInvoiceData } from "@/components/InvoiceForm";
@@ -29,6 +31,9 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
   const [acceptedPrivacyPolicy, setAcceptedPrivacyPolicy] = useState(false);
   const [transferOrderId, setTransferOrderId] = useState<string | null>(null);
   const [invoiceData, setInvoiceData] = useState<InvoiceData>(emptyInvoiceData);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
 
   const songCount = billingData.songCount || 1;
   const taxRate = billingData.taxResult.taxRate;
@@ -46,6 +51,8 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
     return acc;
   }, {} as Record<string, typeof cartState.items>);
 
+  const personalDataValid = firstName.trim().length >= 2 && lastName.trim().length >= 2 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmail);
+
   const buildOrderPayload = () => ({
     items: cartState.items,
     basePrice: cartState.basePrice,
@@ -62,6 +69,9 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
     vatNumber: billingData.vatNumber || null,
     viesValid: billingData.viesValid ?? null,
     invoiceData: invoiceData.isProfessionalInvoice ? invoiceData : { isProfessionalInvoice: false },
+    firstName: firstName.trim(),
+    lastName: lastName.trim(),
+    contactEmail: contactEmail.trim(),
   });
 
   const handleBankTransfer = async () => {
@@ -98,6 +108,9 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
         billing_phone: invoiceData.isProfessionalInvoice ? invoiceData.billingPhone : null,
         invoice_number: invoiceNumber || null,
         invoice_series: 'W',
+        first_name: firstName.trim() || null,
+        last_name: lastName.trim() || null,
+        contact_email: contactEmail.trim() || null,
       } as any).select('id').single();
 
       if (error) { toast.error(t("checkout.connectionError")); setIsLoading(false); return; }
@@ -210,6 +223,47 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
                 </div>
               </div>
 
+              {/* Personal Data */}
+              <div className="space-y-3 pt-2 border-t border-border">
+                <h3 className="text-sm font-bold flex items-center gap-2">
+                  <User className="h-4 w-4 text-primary" />
+                  Datos personales
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <Label className="text-xs">Nombre *</Label>
+                    <Input
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value.substring(0, 50))}
+                      placeholder="Tu nombre"
+                      className="h-10"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <Label className="text-xs">Apellidos *</Label>
+                    <Input
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value.substring(0, 80))}
+                      placeholder="Tus apellidos"
+                      className="h-10"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">Correo electrónico *</Label>
+                  <Input
+                    type="email"
+                    value={contactEmail}
+                    onChange={(e) => setContactEmail(e.target.value.substring(0, 100))}
+                    placeholder="tu@email.com"
+                    className="h-10"
+                  />
+                </div>
+                {!personalDataValid && (firstName || lastName || contactEmail) && (
+                  <p className="text-xs text-amber-400 text-center">Completa nombre, apellidos y email válido</p>
+                )}
+              </div>
+
               {/* Invoice Form */}
               <InvoiceForm data={invoiceData} onChange={setInvoiceData} />
 
@@ -231,7 +285,7 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
                 orderPayload={buildOrderPayload()}
                 displayTotal={displayTotal}
                 paypalFee={paypalFee}
-                isDisabled={!acceptedPrivacyPolicy || !isInvoiceDataValid(invoiceData)}
+                isDisabled={!acceptedPrivacyPolicy || !isInvoiceDataValid(invoiceData) || !personalDataValid}
                 paymentMethod={paymentMethod}
                 onPaymentMethodChange={setPaymentMethod}
                 onTransferPayment={handleBankTransfer}

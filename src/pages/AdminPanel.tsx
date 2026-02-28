@@ -48,6 +48,9 @@ interface Order {
   base_price: number;
   tax_rule: string;
   song_count: number;
+  first_name: string | null;
+  last_name: string | null;
+  contact_email: string | null;
 }
 
 const statusColors: Record<string, string> = {

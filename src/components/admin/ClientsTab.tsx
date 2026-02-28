@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Search, Mail, Copy, ChevronDown, ChevronUp, Users, FileDown } from "lucide-react";
+import { Search, Mail, Copy, ChevronDown, ChevronUp, Users, FileDown, ArrowUpDown } from "lucide-react";
 import { toast } from "sonner";
 import html2pdf from "html2pdf.js";
 
@@ -28,6 +28,9 @@ interface Order {
   items: any[];
   base_price: number;
   song_count: number;
+  first_name: string | null;
+  last_name: string | null;
+  contact_email: string | null;
 }
 
 interface Props {
@@ -267,17 +270,31 @@ function generateTechSheetPdf(order: Order) {
 export default function ClientsTab({ orders }: Props) {
   const [search, setSearch] = useState("");
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
+  const [sortByLastName, setSortByLastName] = useState<'asc' | 'desc' | null>(null);
 
   const filtered = useMemo(() => {
-    if (!search.trim()) return orders;
-    const s = search.toLowerCase();
-    return orders.filter(o =>
-      (o.business_name || "").toLowerCase().includes(s) ||
-      (o.billing_email || "").toLowerCase().includes(s) ||
-      (o.billing_phone || "").toLowerCase().includes(s) ||
-      (o.vat_number || "").toLowerCase().includes(s)
-    );
-  }, [orders, search]);
+    let result = orders;
+    if (search.trim()) {
+      const s = search.toLowerCase();
+      result = result.filter(o =>
+        (o.business_name || "").toLowerCase().includes(s) ||
+        (o.billing_email || "").toLowerCase().includes(s) ||
+        (o.billing_phone || "").toLowerCase().includes(s) ||
+        (o.vat_number || "").toLowerCase().includes(s) ||
+        (o.first_name || "").toLowerCase().includes(s) ||
+        (o.last_name || "").toLowerCase().includes(s) ||
+        (o.contact_email || "").toLowerCase().includes(s)
+      );
+    }
+    if (sortByLastName) {
+      result = [...result].sort((a, b) => {
+        const aName = (a.last_name || "").toLowerCase();
+        const bName = (b.last_name || "").toLowerCase();
+        return sortByLastName === 'asc' ? aName.localeCompare(bName) : bName.localeCompare(aName);
+      });
+    }
+    return result;
+  }, [orders, search, sortByLastName]);
 
   const uniqueClients = useMemo(() => {
     const emails = new Set(filtered.map(o => o.billing_email).filter(Boolean));
@@ -343,8 +360,17 @@ export default function ClientsTab({ orders }: Props) {
             <TableHeader>
               <TableRow className="bg-muted/30">
                 <TableHead>Fecha</TableHead>
-                <TableHead>Cliente</TableHead>
-                <TableHead>Contacto</TableHead>
+                <TableHead>Nombre</TableHead>
+                <TableHead>
+                  <button
+                    className="flex items-center gap-1 hover:text-foreground transition-colors"
+                    onClick={(e) => { e.stopPropagation(); setSortByLastName(prev => prev === 'asc' ? 'desc' : 'asc'); }}
+                  >
+                    Apellidos
+                    <ArrowUpDown className="h-3 w-3" />
+                  </button>
+                </TableHead>
+                <TableHead className="min-w-[200px]">Email</TableHead>
                 <TableHead>Configuración</TableHead>
                 <TableHead className="text-right">Total</TableHead>
                 <TableHead>Estado</TableHead>
@@ -368,21 +394,13 @@ export default function ClientsTab({ orders }: Props) {
                         {new Date(order.created_at).toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "2-digit" })}
                       </TableCell>
                       <TableCell>
-                        <div>
-                          <p className="font-medium text-sm truncate max-w-[160px]">
-                            {order.business_name || order.billing_email || "—"}
-                          </p>
-                          {order.vat_number && (
-                            <p className="text-xs text-muted-foreground">{order.vat_number}</p>
-                          )}
-                        </div>
+                        <span className="text-sm font-medium">{order.first_name || "—"}</span>
                       </TableCell>
                       <TableCell>
-                        <div className="text-xs text-muted-foreground">
-                          {order.billing_email && <p className="truncate max-w-[180px]">{order.billing_email}</p>}
-                          {order.billing_phone && <p>{order.billing_phone}</p>}
-                          <p className="uppercase">{order.country_code}</p>
-                        </div>
+                        <span className="text-sm font-medium">{order.last_name || "—"}</span>
+                      </TableCell>
+                      <TableCell className="min-w-[200px]">
+                        <span className="text-sm text-muted-foreground break-all">{order.contact_email || order.billing_email || "—"}</span>
                       </TableCell>
                       <TableCell>
                         <div className="flex flex-wrap gap-1 max-w-[250px]">
@@ -459,7 +477,7 @@ export default function ClientsTab({ orders }: Props) {
                     </TableRow>
                     {isExpanded && (
                       <TableRow key={`${order.id}-detail`} className="bg-muted/10">
-                        <TableCell colSpan={7}>
+                        <TableCell colSpan={8}>
                           <div className="py-3 px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {config.microphones.length > 0 && (
                               <div>
@@ -521,7 +539,7 @@ export default function ClientsTab({ orders }: Props) {
               })}
               {filtered.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center py-12 text-muted-foreground">
+                  <TableCell colSpan={8} className="text-center py-12 text-muted-foreground">
                     {search ? "No se encontraron clientes con esa búsqueda" : "No hay pedidos registrados"}
                   </TableCell>
                 </TableRow>
