@@ -313,45 +313,65 @@ export default function AdminPanel() {
             iframeDoc.documentElement.classList.remove("dark");
             await new Promise(r => setTimeout(r, 600));
 
-            // --- DEFINITIVE FIX: Programmatic spacer insertion ---
-            // html2pdf.js renders to canvas then slices at fixed pixel intervals.
-            // CSS page-break is IGNORED. We must manually push the summary block
-            // to the next page by inserting a spacer div with exact height.
-            const pushSummaryToNextPageIfNeeded = (doc: Document, marginMm: number, scale: number) => {
+            // Mantener el bloque de totales como una unidad atómica
+            const enforceAtomicSummaryBlock = (doc: Document) => {
               const summaryBlock = doc.querySelector(".invoice-summary-block") as HTMLElement | null;
+              if (!summaryBlock) return null;
+
+              summaryBlock.style.setProperty("display", "block", "important");
+              summaryBlock.style.setProperty("break-inside", "avoid-page", "important");
+              summaryBlock.style.setProperty("page-break-inside", "avoid", "important");
+              summaryBlock.style.setProperty("-webkit-column-break-inside", "avoid", "important");
+
+              const atomicRows = summaryBlock.querySelectorAll(".invoice-summary-row, .invoice-summary-total");
+              atomicRows.forEach((row) => {
+                const el = row as HTMLElement;
+                el.style.setProperty("display", "flex", "important");
+                el.style.setProperty("break-inside", "avoid-page", "important");
+                el.style.setProperty("page-break-inside", "avoid", "important");
+                el.style.setProperty("-webkit-column-break-inside", "avoid", "important");
+              });
+
+              return summaryBlock;
+            };
+
+            // html2pdf divide por proporción ancho/alto del canvas, no por 96dpi real.
+            // Usamos esa misma proporción para detectar cortes reales y empujar el bloque.
+            const pushSummaryToNextPageIfNeeded = (doc: Document, marginMm: number) => {
+              const summaryBlock = enforceAtomicSummaryBlock(doc);
               if (!summaryBlock) return;
 
-              // Remove any previously inserted spacer
               const existingSpacer = doc.getElementById("invoice-page-spacer");
               if (existingSpacer) existingSpacer.remove();
 
-              // A4 = 297mm height. Content area = 297 - top margin - bottom margin
-              // html2canvas captures at `scale` but positions are in CSS px
-              const a4HeightPx = (297 - marginMm * 2) * (96 / 25.4); // usable content height in CSS px
-              const blockTop = summaryBlock.offsetTop;
+              const pageWidthMm = 210 - marginMm * 2;
+              const pageHeightMm = 297 - marginMm * 2;
+              if (pageWidthMm <= 0 || pageHeightMm <= 0) return;
+
+              const contentWidthPx = Math.max(
+                doc.body.scrollWidth,
+                doc.documentElement.scrollWidth,
+                1,
+              );
+              const pageHeightPx = contentWidthPx * (pageHeightMm / pageWidthMm);
+
+              const blockTop = summaryBlock.getBoundingClientRect().top + (doc.defaultView?.scrollY ?? 0);
               const blockHeight = summaryBlock.offsetHeight;
-              const blockBottom = blockTop + blockHeight;
+              const currentPage = Math.floor(blockTop / pageHeightPx);
+              const currentPageBottom = (currentPage + 1) * pageHeightPx;
+              const remainingSpace = currentPageBottom - blockTop;
 
-              // Which page does the block START on? (0-indexed)
-              const pageStart = Math.floor(blockTop / a4HeightPx);
-              // Which page does the block END on?
-              const pageEnd = Math.floor((blockBottom - 1) / a4HeightPx);
-
-              // If start and end are on different pages, it's being split
-              if (pageEnd > pageStart) {
-                // Calculate how many px we need to push it to the next page
-                const nextPageTop = (pageStart + 1) * a4HeightPx;
-                const spacerHeight = nextPageTop - blockTop + 4; // +4px safety margin
-
+              if (blockHeight > remainingSpace) {
+                const spacerHeight = Math.ceil(currentPageBottom - blockTop + 2);
                 const spacer = doc.createElement("div");
                 spacer.id = "invoice-page-spacer";
-                spacer.style.cssText = `height:${spacerHeight}px;width:100%;display:block;`;
+                spacer.style.cssText = `display:block;width:100%;height:${spacerHeight}px;break-inside:avoid-page;page-break-inside:avoid;`;
                 summaryBlock.parentNode?.insertBefore(spacer, summaryBlock);
               }
             };
 
-            // Apply spacer in the live iframe first (for measurement)
-            pushSummaryToNextPageIfNeeded(iframeDoc, 5, 1.5);
+            // Aplicar en el iframe fuente
+            pushSummaryToNextPageIfNeeded(iframeDoc, 5);
 
             const pdfBlob = await html2pdf().from(iframeDoc.body).set({
               margin: [5, 5, 5, 5],
@@ -396,8 +416,8 @@ export default function AdminPanel() {
                       }
                     }
                   });
-                  // Re-apply in the cloned doc (html2canvas clones the DOM)
-                  pushSummaryToNextPageIfNeeded(clonedDoc, 5, 1.5);
+                  // Reaplicar en el DOM clonado (html2canvas clona antes de renderizar)
+                  pushSummaryToNextPageIfNeeded(clonedDoc, 5);
                 },
               },
               jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
