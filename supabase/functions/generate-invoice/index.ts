@@ -106,23 +106,27 @@ function generateInvoiceHtml(order: any): string {
     </tbody>
   </table>
 
-  <div style="page-break-inside:avoid;break-inside:avoid;">
-    <div style="display:flex;justify-content:flex-end;">
-      <table style="width:300px;">
-        <tr><td style="padding:6px 0;">Base Imponible:</td><td style="text-align:right;padding:6px 0;">${subtotal} €</td></tr>
-        <tr><td style="padding:6px 0;">${taxLabel}:</td><td style="text-align:right;padding:6px 0;">${taxAmount} €</td></tr>
-        ${paypalFee > 0 ? `<tr><td style="padding:6px 0;">Gastos de gestión:</td><td style="text-align:right;padding:6px 0;">${paypalFee.toFixed(2)} €</td></tr>` : ''}
-        <tr style="border-top:2px solid #1a1a2e;font-weight:bold;font-size:18px;">
-          <td style="padding:10px 0;">TOTAL:</td>
-          <td style="text-align:right;padding:10px 0;">${total} €</td>
-        </tr>
-      </table>
+  <div class="invoice-summary-block" style="display:flex;justify-content:flex-end;margin-top:8px;page-break-inside:avoid !important;break-inside:avoid-page !important;-webkit-column-break-inside:avoid !important;">
+    <div style="width:320px;page-break-inside:avoid !important;break-inside:avoid-page !important;">
+      <div class="invoice-summary-row" style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;page-break-inside:avoid !important;break-inside:avoid-page !important;">
+        <span>Base Imponible:</span>
+        <span>${subtotal} €</span>
+      </div>
+      <div class="invoice-summary-row" style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;page-break-inside:avoid !important;break-inside:avoid-page !important;">
+        <span>${taxLabel}:</span>
+        <span>${taxAmount} €</span>
+      </div>
+      ${paypalFee > 0 ? `<div class="invoice-summary-row" style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;page-break-inside:avoid !important;break-inside:avoid-page !important;"><span>Gastos de gestión:</span><span>${paypalFee.toFixed(2)} €</span></div>` : ''}
+      <div class="invoice-summary-total" style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:2px solid #1a1a2e;font-weight:bold;font-size:18px;page-break-inside:avoid !important;break-inside:avoid-page !important;">
+        <span>TOTAL:</span>
+        <span>${total} €</span>
+      </div>
     </div>
+  </div>
 
-    <div style="margin-top:60px;padding-top:20px;border-top:1px solid #ddd;text-align:center;color:#999;font-size:11px;">
-      <p>${COMPANY.name} · CIF: ${COMPANY.taxId} · ${COMPANY.address}</p>
-      <p>Serie: ${order.invoice_series || 'W'} · Documento generado automáticamente</p>
-    </div>
+  <div style="margin-top:60px;padding-top:20px;border-top:1px solid #ddd;text-align:center;color:#999;font-size:11px;">
+    <p>${COMPANY.name} · CIF: ${COMPANY.taxId} · ${COMPANY.address}</p>
+    <p>Serie: ${order.invoice_series || 'W'} · Documento generado automáticamente</p>
   </div>
 </body>
 </html>`;
