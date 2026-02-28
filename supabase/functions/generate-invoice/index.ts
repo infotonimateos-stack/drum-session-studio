@@ -106,7 +106,7 @@ function generateInvoiceHtml(order: any): string {
     </tbody>
   </table>
 
-  <div style="display:flex;justify-content:flex-end;">
+  <div style="display:flex;justify-content:flex-end;page-break-inside:avoid;break-inside:avoid;">
     <table style="width:300px;">
       <tr><td style="padding:6px 0;">Base Imponible:</td><td style="text-align:right;padding:6px 0;">${subtotal} €</td></tr>
       <tr><td style="padding:6px 0;">${taxLabel}:</td><td style="text-align:right;padding:6px 0;">${taxAmount} €</td></tr>
@@ -118,7 +118,7 @@ function generateInvoiceHtml(order: any): string {
     </table>
   </div>
 
-  <div style="margin-top:60px;padding-top:20px;border-top:1px solid #ddd;text-align:center;color:#999;font-size:11px;">
+  <div style="margin-top:60px;padding-top:20px;border-top:1px solid #ddd;text-align:center;color:#999;font-size:11px;page-break-inside:avoid;break-inside:avoid;">
     <p>${COMPANY.name} · CIF: ${COMPANY.taxId} · ${COMPANY.address}</p>
     <p>Serie: ${order.invoice_series || 'W'} · Documento generado automáticamente</p>
   </div>
