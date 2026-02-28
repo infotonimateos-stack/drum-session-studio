@@ -358,7 +358,7 @@ iframe.style.cssText = "position:absolute;left:-9999px;top:0;width:794px;height:
                 },
               },
               jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-              pagebreak: { mode: ["avoid-all", "css", "legacy"] },
+              pagebreak: { mode: ["css", "legacy"], avoid: ["div", "table", "tr"] },
             }).outputPdf("blob");
             document.body.removeChild(iframe);
             zip.file(`factura-${order.invoice_number || order.id.slice(0, 8)}.pdf`, pdfBlob);

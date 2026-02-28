@@ -106,21 +106,23 @@ function generateInvoiceHtml(order: any): string {
     </tbody>
   </table>
 
-  <div style="display:flex;justify-content:flex-end;page-break-inside:avoid;break-inside:avoid;">
-    <table style="width:300px;">
-      <tr><td style="padding:6px 0;">Base Imponible:</td><td style="text-align:right;padding:6px 0;">${subtotal} €</td></tr>
-      <tr><td style="padding:6px 0;">${taxLabel}:</td><td style="text-align:right;padding:6px 0;">${taxAmount} €</td></tr>
-      ${paypalFee > 0 ? `<tr><td style="padding:6px 0;">Gastos de gestión:</td><td style="text-align:right;padding:6px 0;">${paypalFee.toFixed(2)} €</td></tr>` : ''}
-      <tr style="border-top:2px solid #1a1a2e;font-weight:bold;font-size:18px;">
-        <td style="padding:10px 0;">TOTAL:</td>
-        <td style="text-align:right;padding:10px 0;">${total} €</td>
-      </tr>
-    </table>
-  </div>
+  <div style="page-break-inside:avoid;break-inside:avoid;">
+    <div style="display:flex;justify-content:flex-end;">
+      <table style="width:300px;">
+        <tr><td style="padding:6px 0;">Base Imponible:</td><td style="text-align:right;padding:6px 0;">${subtotal} €</td></tr>
+        <tr><td style="padding:6px 0;">${taxLabel}:</td><td style="text-align:right;padding:6px 0;">${taxAmount} €</td></tr>
+        ${paypalFee > 0 ? `<tr><td style="padding:6px 0;">Gastos de gestión:</td><td style="text-align:right;padding:6px 0;">${paypalFee.toFixed(2)} €</td></tr>` : ''}
+        <tr style="border-top:2px solid #1a1a2e;font-weight:bold;font-size:18px;">
+          <td style="padding:10px 0;">TOTAL:</td>
+          <td style="text-align:right;padding:10px 0;">${total} €</td>
+        </tr>
+      </table>
+    </div>
 
-  <div style="margin-top:60px;padding-top:20px;border-top:1px solid #ddd;text-align:center;color:#999;font-size:11px;page-break-inside:avoid;break-inside:avoid;">
-    <p>${COMPANY.name} · CIF: ${COMPANY.taxId} · ${COMPANY.address}</p>
-    <p>Serie: ${order.invoice_series || 'W'} · Documento generado automáticamente</p>
+    <div style="margin-top:60px;padding-top:20px;border-top:1px solid #ddd;text-align:center;color:#999;font-size:11px;">
+      <p>${COMPANY.name} · CIF: ${COMPANY.taxId} · ${COMPANY.address}</p>
+      <p>Serie: ${order.invoice_series || 'W'} · Documento generado automáticamente</p>
+    </div>
   </div>
 </body>
 </html>`;
