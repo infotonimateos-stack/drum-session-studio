@@ -222,7 +222,7 @@ export const upgradeMicrophones: Microphone[] = [
   // OVERHEADS upgrades
   {
     id: 'coles4038-oh',
-    name: 'Coles 4038',
+    name: 'Coles 4038 Stereo Set',
     price: 4.99,
     included: false,
     descriptionKey: 'micData.coles4038Desc',
