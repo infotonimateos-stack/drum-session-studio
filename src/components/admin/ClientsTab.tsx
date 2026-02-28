@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -384,9 +384,8 @@ export default function ClientsTab({ orders }: Props) {
                 const hasConfig = config.microphones.length > 0 || config.preamps.length > 0 || config.interfaces.length > 0;
 
                 return (
-                  <>
+                  <React.Fragment key={order.id}>
                     <TableRow
-                      key={order.id}
                       className="cursor-pointer hover:bg-muted/20"
                       onClick={() => setExpandedRow(isExpanded ? null : order.id)}
                     >
@@ -534,7 +533,7 @@ export default function ClientsTab({ orders }: Props) {
                         </TableCell>
                       </TableRow>
                     )}
-                  </>
+                  </React.Fragment>
                 );
               })}
               {filtered.length === 0 && (
