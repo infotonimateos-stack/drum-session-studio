@@ -613,7 +613,10 @@ export default function AdminPanel() {
                       <th className="text-left px-4 py-3 font-medium">Fecha</th>
                       <th className="text-left px-4 py-3 font-medium">Nº Factura</th>
                       <th className="text-left px-4 py-3 font-medium">Tipo</th>
-                      <th className="text-left px-4 py-3 font-medium">Cliente</th>
+                      <th className="text-left px-4 py-3 font-medium">Nombre</th>
+                      <th className="text-left px-4 py-3 font-medium">Apellidos</th>
+                      <th className="text-left px-4 py-3 font-medium min-w-[200px]">Email</th>
+                      <th className="text-left px-4 py-3 font-medium">Cliente / Empresa</th>
                       <th className="text-right px-4 py-3 font-medium">IVA</th>
                       <th className="text-right px-4 py-3 font-medium">Total</th>
                       <th className="text-left px-4 py-3 font-medium">Método</th>
@@ -644,11 +647,24 @@ export default function AdminPanel() {
                             {order.is_professional_invoice ? "Profesional" : "Simplificada"}
                           </Badge>
                         </td>
-                        <td className="px-4 py-3 max-w-[200px] truncate">
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          {order.first_name || <span className="text-muted-foreground">—</span>}
+                        </td>
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          {order.last_name || <span className="text-muted-foreground">—</span>}
+                        </td>
+                        <td className="px-4 py-3 min-w-[200px]">
+                          {order.contact_email ? (
+                            <span className="text-xs">{order.contact_email}</span>
+                          ) : (
+                            <span className="text-muted-foreground">—</span>
+                          )}
+                        </td>
+                        <td className="px-4 py-3 max-w-[180px] truncate">
                           {order.is_professional_invoice ? (
                             <div>
-                              <p className="font-medium truncate">{order.business_name}</p>
-                              <p className="text-xs text-muted-foreground truncate">{order.vat_number} · {order.billing_email}</p>
+                              <p className="font-medium truncate text-xs">{order.business_name}</p>
+                              <p className="text-xs text-muted-foreground truncate">{order.vat_number}</p>
                             </div>
                           ) : (
                             <span className="text-muted-foreground text-xs">{order.country_code} · {order.client_type}</span>
@@ -689,7 +705,7 @@ export default function AdminPanel() {
                     ))}
                     {filteredOrders.length === 0 && (
                       <tr>
-                        <td colSpan={10} className="px-4 py-12 text-center text-muted-foreground">
+                        <td colSpan={13} className="px-4 py-12 text-center text-muted-foreground">
                           {loading ? "Cargando..." : "No se encontraron pedidos"}
                         </td>
                       </tr>
