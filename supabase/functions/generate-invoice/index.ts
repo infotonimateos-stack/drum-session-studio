@@ -106,8 +106,8 @@ function generateInvoiceHtml(order: any): string {
     </tbody>
   </table>
 
-  <div class="invoice-summary-block" style="display:flex;justify-content:flex-end;margin-top:8px;page-break-inside:avoid !important;break-inside:avoid-page !important;-webkit-column-break-inside:avoid !important;">
-    <div style="width:320px;page-break-inside:avoid !important;break-inside:avoid-page !important;">
+  <div class="invoice-summary-block" style="display:block;width:100%;margin-top:8px;page-break-inside:avoid !important;break-inside:avoid-page !important;-webkit-column-break-inside:avoid !important;">
+    <div style="display:block;width:320px;margin-left:auto;page-break-inside:avoid !important;break-inside:avoid-page !important;">
       <div class="invoice-summary-row" style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;page-break-inside:avoid !important;break-inside:avoid-page !important;">
         <span>Base Imponible:</span>
         <span>${subtotal} €</span>

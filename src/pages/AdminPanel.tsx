@@ -311,7 +311,32 @@ iframe.style.cssText = "position:absolute;left:-9999px;top:0;width:794px;height:
             iframeDoc.body.style.margin = "0";
             iframeDoc.body.style.maxWidth = "100%";
             iframeDoc.documentElement.classList.remove("dark");
+
+            const enforceSummaryBlockPagination = (doc: Document) => {
+              const summaryBlock = doc.querySelector(".invoice-summary-block") as HTMLElement | null;
+              if (!summaryBlock) return;
+
+              summaryBlock.style.setProperty("display", "block", "important");
+              summaryBlock.style.setProperty("break-inside", "avoid-page", "important");
+              summaryBlock.style.setProperty("page-break-inside", "avoid", "important");
+              summaryBlock.style.setProperty("-webkit-column-break-inside", "avoid", "important");
+              summaryBlock.style.setProperty("page-break-before", "auto");
+
+              const pxPerMm = 96 / 25.4;
+              const pageContentHeightPx = (297 - 10) * pxPerMm;
+              const blockTop = summaryBlock.offsetTop;
+              const blockHeight = summaryBlock.offsetHeight;
+              const usedInCurrentPage = blockTop % pageContentHeightPx;
+              const remainingPx = pageContentHeightPx - usedInCurrentPage;
+
+              if (blockHeight + 8 > remainingPx) {
+                summaryBlock.style.setProperty("page-break-before", "always", "important");
+              }
+            };
+
             await new Promise(r => setTimeout(r, 600));
+            enforceSummaryBlockPagination(iframeDoc);
+
             const pdfBlob = await html2pdf().from(iframeDoc.body).set({
               margin: [5, 5, 5, 5],
               filename: `factura-${order.invoice_number || order.id.slice(0, 8)}.pdf`,
@@ -355,6 +380,7 @@ iframe.style.cssText = "position:absolute;left:-9999px;top:0;width:794px;height:
                       }
                     }
                   });
+                  enforceSummaryBlockPagination(clonedDoc);
                 },
               },
               jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
