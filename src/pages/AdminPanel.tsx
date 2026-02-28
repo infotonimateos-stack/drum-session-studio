@@ -296,7 +296,7 @@ export default function AdminPanel() {
           const data = await apiCall("invoice", "GET", undefined, { orderId: order.id });
           if (data.html) {
             const iframe = document.createElement("iframe");
-iframe.style.cssText = "position:absolute;left:-9999px;top:0;width:794px;height:1123px;border:none;";
+            iframe.style.cssText = "position:absolute;left:-9999px;top:0;width:794px;border:none;";
             document.body.appendChild(iframe);
             const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
             if (!iframeDoc) { document.body.removeChild(iframe); continue; }
@@ -311,31 +311,47 @@ iframe.style.cssText = "position:absolute;left:-9999px;top:0;width:794px;height:
             iframeDoc.body.style.margin = "0";
             iframeDoc.body.style.maxWidth = "100%";
             iframeDoc.documentElement.classList.remove("dark");
+            await new Promise(r => setTimeout(r, 600));
 
-            const enforceSummaryBlockPagination = (doc: Document) => {
+            // --- DEFINITIVE FIX: Programmatic spacer insertion ---
+            // html2pdf.js renders to canvas then slices at fixed pixel intervals.
+            // CSS page-break is IGNORED. We must manually push the summary block
+            // to the next page by inserting a spacer div with exact height.
+            const pushSummaryToNextPageIfNeeded = (doc: Document, marginMm: number, scale: number) => {
               const summaryBlock = doc.querySelector(".invoice-summary-block") as HTMLElement | null;
               if (!summaryBlock) return;
 
-              summaryBlock.style.setProperty("display", "block", "important");
-              summaryBlock.style.setProperty("break-inside", "avoid-page", "important");
-              summaryBlock.style.setProperty("page-break-inside", "avoid", "important");
-              summaryBlock.style.setProperty("-webkit-column-break-inside", "avoid", "important");
-              summaryBlock.style.setProperty("page-break-before", "auto");
+              // Remove any previously inserted spacer
+              const existingSpacer = doc.getElementById("invoice-page-spacer");
+              if (existingSpacer) existingSpacer.remove();
 
-              const pxPerMm = 96 / 25.4;
-              const pageContentHeightPx = (297 - 10) * pxPerMm;
+              // A4 = 297mm height. Content area = 297 - top margin - bottom margin
+              // html2canvas captures at `scale` but positions are in CSS px
+              const a4HeightPx = (297 - marginMm * 2) * (96 / 25.4); // usable content height in CSS px
               const blockTop = summaryBlock.offsetTop;
               const blockHeight = summaryBlock.offsetHeight;
-              const usedInCurrentPage = blockTop % pageContentHeightPx;
-              const remainingPx = pageContentHeightPx - usedInCurrentPage;
+              const blockBottom = blockTop + blockHeight;
 
-              if (blockHeight + 8 > remainingPx) {
-                summaryBlock.style.setProperty("page-break-before", "always", "important");
+              // Which page does the block START on? (0-indexed)
+              const pageStart = Math.floor(blockTop / a4HeightPx);
+              // Which page does the block END on?
+              const pageEnd = Math.floor((blockBottom - 1) / a4HeightPx);
+
+              // If start and end are on different pages, it's being split
+              if (pageEnd > pageStart) {
+                // Calculate how many px we need to push it to the next page
+                const nextPageTop = (pageStart + 1) * a4HeightPx;
+                const spacerHeight = nextPageTop - blockTop + 4; // +4px safety margin
+
+                const spacer = doc.createElement("div");
+                spacer.id = "invoice-page-spacer";
+                spacer.style.cssText = `height:${spacerHeight}px;width:100%;display:block;`;
+                summaryBlock.parentNode?.insertBefore(spacer, summaryBlock);
               }
             };
 
-            await new Promise(r => setTimeout(r, 600));
-            enforceSummaryBlockPagination(iframeDoc);
+            // Apply spacer in the live iframe first (for measurement)
+            pushSummaryToNextPageIfNeeded(iframeDoc, 5, 1.5);
 
             const pdfBlob = await html2pdf().from(iframeDoc.body).set({
               margin: [5, 5, 5, 5],
@@ -380,11 +396,11 @@ iframe.style.cssText = "position:absolute;left:-9999px;top:0;width:794px;height:
                       }
                     }
                   });
-                  enforceSummaryBlockPagination(clonedDoc);
+                  // Re-apply in the cloned doc (html2canvas clones the DOM)
+                  pushSummaryToNextPageIfNeeded(clonedDoc, 5, 1.5);
                 },
               },
               jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-              pagebreak: { mode: ["css", "legacy"], avoid: [".invoice-summary-block", ".invoice-summary-row", ".invoice-summary-total"] },
             }).outputPdf("blob");
             document.body.removeChild(iframe);
             zip.file(`factura-${order.invoice_number || order.id.slice(0, 8)}.pdf`, pdfBlob);
