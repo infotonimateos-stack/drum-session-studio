@@ -29,3 +29,6 @@ verify_jwt = false
 
 [functions.analyze-funnel]
 verify_jwt = false
+
+[functions.paypal-lookup]
+verify_jwt = false
