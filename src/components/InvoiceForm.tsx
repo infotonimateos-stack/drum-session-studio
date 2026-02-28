@@ -112,9 +112,11 @@ export const InvoiceForm = ({ data, onChange }: InvoiceFormProps) => {
             <Select
               value={data.countryCode}
               onValueChange={(v) => {
-                update("countryCode", v);
-                // Reset vatNumber when country changes
-                if (v !== data.countryCode) update("vatNumber", "");
+                if (v !== data.countryCode) {
+                  onChange({ ...data, countryCode: v, vatNumber: "" });
+                } else {
+                  update("countryCode", v);
+                }
               }}
             >
               <SelectTrigger className="bg-card-dark/80 border-card-dark-muted/30 text-card-dark-foreground h-11">
