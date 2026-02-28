@@ -296,7 +296,7 @@ export default function AdminPanel() {
           const data = await apiCall("invoice", "GET", undefined, { orderId: order.id });
           if (data.html) {
             const iframe = document.createElement("iframe");
-            iframe.style.cssText = "position:absolute;left:-9999px;top:0;width:800px;height:1200px;border:none;";
+iframe.style.cssText = "position:absolute;left:-9999px;top:0;width:794px;height:1123px;border:none;";
             document.body.appendChild(iframe);
             const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
             if (!iframeDoc) { document.body.removeChild(iframe); continue; }
@@ -307,20 +307,28 @@ export default function AdminPanel() {
             iframeDoc.documentElement.style.backgroundColor = "#ffffff";
             iframeDoc.body.style.backgroundColor = "#ffffff";
             iframeDoc.body.style.color = "#000000";
+            iframeDoc.body.style.padding = "20px";
+            iframeDoc.body.style.margin = "0";
+            iframeDoc.body.style.maxWidth = "100%";
             iframeDoc.documentElement.classList.remove("dark");
             await new Promise(r => setTimeout(r, 600));
             const pdfBlob = await html2pdf().from(iframeDoc.body).set({
-              margin: [15, 10, 15, 10],
+              margin: [5, 5, 5, 5],
               filename: `factura-${order.invoice_number || order.id.slice(0, 8)}.pdf`,
               html2canvas: {
-                scale: 2,
+                scale: 1.5,
                 useCORS: true,
                 backgroundColor: "#ffffff",
                 logging: false,
+                width: 794,
+                windowWidth: 794,
                 onclone: (clonedDoc: Document) => {
                   clonedDoc.documentElement.style.colorScheme = "light";
                   clonedDoc.body.style.backgroundColor = "#ffffff";
                   clonedDoc.body.style.color = "#000000";
+                  clonedDoc.body.style.padding = "20px";
+                  clonedDoc.body.style.margin = "0";
+                  clonedDoc.body.style.maxWidth = "100%";
                   const allEls = clonedDoc.body.querySelectorAll("*");
                   allEls.forEach((el: Element) => {
                     const htmlEl = el as HTMLElement;
