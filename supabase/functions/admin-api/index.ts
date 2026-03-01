@@ -11,11 +11,57 @@ const logStep = (step: string, details?: any) => {
   console.log(`[ADMIN-API] ${step}${detailsStr}`);
 };
 
+// --- Rate Limiting ---
+const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
+const MAX_FAILED_ATTEMPTS = 5;
+const failedAttempts = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const record = failedAttempts.get(ip);
+
+  if (!record || now > record.resetAt) {
+    return true; // allowed
+  }
+
+  return record.count < MAX_FAILED_ATTEMPTS;
+}
+
+function recordFailedAttempt(ip: string) {
+  const now = Date.now();
+  const record = failedAttempts.get(ip);
+
+  if (!record || now > record.resetAt) {
+    failedAttempts.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+  } else {
+    record.count++;
+  }
+}
+
+function clearFailedAttempts(ip: string) {
+  failedAttempts.delete(ip);
+}
+
+// Periodic cleanup to prevent memory leak
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, record] of failedAttempts) {
+    if (now > record.resetAt) failedAttempts.delete(ip);
+  }
+}, 300_000); // every 5 min
+
 function validateAdmin(req: Request): boolean {
   const password = req.headers.get("x-admin-password");
   const adminPassword = Deno.env.get("ADMIN_PASSWORD");
   if (!adminPassword || !password) return false;
-  return password === adminPassword;
+
+  // Constant-time comparison to prevent timing attacks
+  if (password.length !== adminPassword.length) return false;
+  let result = 0;
+  for (let i = 0; i < password.length; i++) {
+    result |= password.charCodeAt(i) ^ adminPassword.charCodeAt(i);
+  }
+  return result === 0;
 }
 
 serve(async (req) => {
@@ -23,13 +69,29 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+
   try {
+    // Check rate limit before auth
+    if (!checkRateLimit(clientIp)) {
+      logStep("RATE_LIMITED", { ip: clientIp });
+      return new Response(JSON.stringify({ error: "Too many attempts. Try again later." }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 429,
+      });
+    }
+
     if (!validateAdmin(req)) {
+      recordFailedAttempt(clientIp);
+      logStep("AUTH_FAILED", { ip: clientIp });
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 401,
       });
     }
+
+    // Successful auth — clear failed attempts
+    clearFailedAttempts(clientIp);
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
@@ -161,7 +223,7 @@ serve(async (req) => {
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error);
     logStep("ERROR", { message: msg });
-    return new Response(JSON.stringify({ error: msg }), {
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,
     });
