@@ -236,7 +236,7 @@ const handler = async (req: Request): Promise<Response> => {
 </head>
 <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.7; color: #333; max-width: 640px; margin: 0 auto; padding: 0; background-color: #f4f4f4;">
   <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 32px; text-align: center;">
-    <h1 style="color: #c8a45a; margin: 0; font-size: 22px; letter-spacing: 1px;">🥁 GROOVE FACTORY STUDIOS</h1>
+    <h1 style="color: #c8a45a; margin: 0; font-size: 22px; letter-spacing: 1px;">🥁 Toni Mateos - Online Drum Tracks</h1>
     <p style="color: rgba(255,255,255,0.7); margin: 8px 0 0 0; font-size: 13px;">Grabación de Batería Profesional</p>
   </div>
 
@@ -270,7 +270,7 @@ const handler = async (req: Request): Promise<Response> => {
     </div>
 
     <div style="text-align: center; margin: 28px 0;">
-      <a href="https://tonimateos.com/ampliar-pedido" style="display: inline-block; background: linear-gradient(135deg, #c8a45a, #d4b06a); color: #1a1a2e; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 15px; letter-spacing: 0.5px;">➕ Añadir extras a mi pedido</a>
+      <a href="https://tonimateos.com/ampliar-pedido" style="display: inline-block; background: #e85d26; color: #ffffff; padding: 16px 40px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 16px; letter-spacing: 0.5px; box-shadow: 0 4px 14px rgba(232,93,38,0.4);">➕ Añadir extras a mi pedido</a>
     </div>
 
     <p>Si tienes dudas, responde a este correo.</p>
