@@ -296,7 +296,7 @@ const handler = async (req: Request): Promise<Response> => {
     const emailResponse = await resend.emails.send({
       from: "Groove Factory Studios <web@tonimateos.com>",
       to: [recipientEmail],
-      subject: `Tu factura ${order.invoice_number || ''} - Groove Factory Studios`,
+      subject: `Resumen de tu pedido - tonimateos.com`,
       html: emailHtml,
       attachments: [
         {
