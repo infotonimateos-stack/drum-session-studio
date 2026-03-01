@@ -157,6 +157,24 @@ async function sendConfirmationEmail(email: string, name: string | undefined, or
       return;
     }
 
+    // First, find the DB order by payment_id or use orderId to look up
+    // The orderId here is the PayPal order ID, we need to find the DB order
+    const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2.49.2");
+    const supabase = createClient(supabaseUrl, serviceRoleKey);
+    
+    // Look up the DB order that matches this PayPal orderId
+    const { data: dbOrder } = await supabase
+      .from("orders")
+      .select("id")
+      .eq("payment_id", orderId)
+      .single();
+
+    const dbOrderId = dbOrder?.id;
+    if (!dbOrderId) {
+      logStep("Could not find DB order for PayPal orderId", { orderId });
+      return;
+    }
+
     const emailResponse = await fetch(`${supabaseUrl}/functions/v1/send-order-email`, {
       method: "POST",
       headers: {
@@ -164,10 +182,9 @@ async function sendConfirmationEmail(email: string, name: string | undefined, or
         "Authorization": `Bearer ${serviceRoleKey}`,
       },
       body: JSON.stringify({
+        orderId: dbOrderId,
         customerEmail: email,
         customerName: name,
-        paymentMethod: "paypal",
-        orderId,
       }),
     });
 

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Search, Mail, Copy, ChevronDown, ChevronUp, Users, FileDown, ArrowUpDown } from "lucide-react";
+import { Search, Mail, Copy, ChevronDown, ChevronUp, Users, FileDown, ArrowUpDown, MailCheck, MailOpen, Clock } from "lucide-react";
 import { toast } from "sonner";
 import html2pdf from "html2pdf.js";
 
@@ -31,6 +31,8 @@ interface Order {
   first_name: string | null;
   last_name: string | null;
   contact_email: string | null;
+  email_status?: string;
+  email_sent_at?: string | null;
 }
 
 interface Props {
@@ -374,6 +376,7 @@ export default function ClientsTab({ orders }: Props) {
                 <TableHead>Configuración</TableHead>
                 <TableHead className="text-right">Total</TableHead>
                 <TableHead>Estado</TableHead>
+                <TableHead>Email</TableHead>
                 <TableHead className="text-center">Acciones</TableHead>
               </TableRow>
             </TableHeader>
@@ -437,6 +440,26 @@ export default function ClientsTab({ orders }: Props) {
                         </Badge>
                       </TableCell>
                       <TableCell>
+                        {(() => {
+                          const es = order.email_status || 'pending';
+                          if (es === 'read') return (
+                            <Badge variant="outline" className="text-xs bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
+                              <MailOpen className="h-3 w-3 mr-1" /> Leído
+                            </Badge>
+                          );
+                          if (es === 'sent') return (
+                            <Badge variant="outline" className="text-xs bg-blue-500/20 text-blue-400 border-blue-500/30">
+                              <MailCheck className="h-3 w-3 mr-1" /> Enviado
+                            </Badge>
+                          );
+                          return (
+                            <Badge variant="outline" className="text-xs bg-amber-500/20 text-amber-400 border-amber-500/30">
+                              <Clock className="h-3 w-3 mr-1" /> Pendiente
+                            </Badge>
+                          );
+                        })()}
+                      </TableCell>
+                      <TableCell>
                         <div className="flex items-center justify-center gap-1" onClick={(e) => e.stopPropagation()}>
                           {order.billing_email ? (
                             <Button
@@ -476,7 +499,7 @@ export default function ClientsTab({ orders }: Props) {
                     </TableRow>
                     {isExpanded && (
                       <TableRow key={`${order.id}-detail`} className="bg-muted/10">
-                        <TableCell colSpan={8}>
+                        <TableCell colSpan={9}>
                           <div className="py-3 px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {config.microphones.length > 0 && (
                               <div>

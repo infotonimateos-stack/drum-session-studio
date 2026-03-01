@@ -41,6 +41,8 @@ export type Database = {
           country_code: string
           created_at: string
           currency: string
+          email_sent_at: string | null
+          email_status: string
           first_name: string | null
           full_address: string | null
           id: string
@@ -76,6 +78,8 @@ export type Database = {
           country_code: string
           created_at?: string
           currency?: string
+          email_sent_at?: string | null
+          email_status?: string
           first_name?: string | null
           full_address?: string | null
           id?: string
@@ -111,6 +115,8 @@ export type Database = {
           country_code?: string
           created_at?: string
           currency?: string
+          email_sent_at?: string | null
+          email_status?: string
           first_name?: string | null
           full_address?: string | null
           id?: string
