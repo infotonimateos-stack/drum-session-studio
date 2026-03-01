@@ -1,0 +1,1 @@
+DROP POLICY "Allow public select on orders" ON public.orders;
