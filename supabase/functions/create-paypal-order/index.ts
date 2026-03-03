@@ -172,11 +172,9 @@ serve(async (req) => {
       if (supabaseUrl && supabaseServiceKey) {
         const supabase = createClient(supabaseUrl, supabaseServiceKey);
         
-        // Generate invoice number
-        const { data: invoiceNumber } = await supabase.rpc('get_next_invoice_number', { p_series: 'W' });
-        logStep("Invoice number generated", { invoiceNumber });
-
-         const isProfessional = invoiceData?.isProfessionalInvoice === true;
+        // Invoice number will be assigned ONLY after successful payment capture
+        // This prevents consuming invoice numbers for abandoned/incomplete orders
+        const isProfessional = invoiceData?.isProfessionalInvoice === true;
         
         await supabase.from("orders").insert({
           payment_method: "paypal",
@@ -203,8 +201,8 @@ serve(async (req) => {
           state_province: isProfessional ? invoiceData.stateProvince : null,
           billing_email: isProfessional ? invoiceData.billingEmail : null,
           billing_phone: isProfessional ? invoiceData.billingPhone : null,
-          invoice_number: invoiceNumber || null,
-          invoice_series: 'W',
+          invoice_number: null,
+          invoice_series: null,
           first_name: firstName || null,
           last_name: lastName || null,
           contact_email: contactEmail || null,

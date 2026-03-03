@@ -120,8 +120,34 @@ serve(async (req) => {
 
     logStep("Payer info", { payerEmail, payerName });
 
-    if (captureData.status === "COMPLETED" && payerEmail) {
-      await sendConfirmationEmail(payerEmail, payerName, orderId);
+    if (captureData.status === "COMPLETED") {
+      // Assign invoice number NOW that payment is confirmed
+      try {
+        const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2.49.2");
+        const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+        const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+        const supabase = createClient(supabaseUrl, serviceRoleKey);
+
+        const { data: invoiceNumber } = await supabase.rpc('get_next_invoice_number', { p_series: 'W' });
+        logStep("Invoice number assigned after payment", { invoiceNumber });
+
+        await supabase
+          .from("orders")
+          .update({ 
+            payment_status: "completed",
+            invoice_number: invoiceNumber,
+            invoice_series: 'W',
+          })
+          .eq("payment_id", orderId);
+
+        logStep("Order updated with invoice number and completed status");
+      } catch (dbErr) {
+        logStep("ERROR updating order after capture", { error: (dbErr as Error).message });
+      }
+
+      if (payerEmail) {
+        await sendConfirmationEmail(payerEmail, payerName, orderId);
+      }
     }
 
     return new Response(JSON.stringify({ 

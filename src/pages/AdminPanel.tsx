@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter, Archive, FileSpreadsheet, FileDown, CalendarIcon, BarChart3, Users } from "lucide-react";
+import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter, Archive, FileSpreadsheet, FileDown, CalendarIcon, BarChart3, Users, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
@@ -19,6 +19,7 @@ import { saveAs } from "file-saver";
 import html2pdf from "html2pdf.js";
 import AnalyticsTab from "@/components/admin/AnalyticsTab";
 import ClientsTab from "@/components/admin/ClientsTab";
+import IncompleteOrdersTab from "@/components/admin/IncompleteOrdersTab";
 
 const ADMIN_ROUTE = true; // marker
 
@@ -207,7 +208,8 @@ export default function AdminPanel() {
   };
 
   const filteredOrders = orders.filter((o) => {
-    if (filterStatus !== "all" && o.payment_status !== filterStatus) return false;
+    // Billing tab only shows completed orders
+    if (o.payment_status !== "completed") return false;
     if (filterMethod !== "all" && o.payment_method !== filterMethod) return false;
     if (filterInvoice === "professional" && !o.is_professional_invoice) return false;
     if (filterInvoice === "simplified" && o.is_professional_invoice) return false;
@@ -235,7 +237,8 @@ export default function AdminPanel() {
 
   const totalRevenue = filteredOrders.reduce((s, o) => s + o.total, 0);
   const totalTax = filteredOrders.reduce((s, o) => s + o.tax_amount, 0);
-  const completedOrders = filteredOrders.filter((o) => o.payment_status === "completed").length;
+  const completedOrders = filteredOrders.length;
+  const incompleteCount = orders.filter(o => o.payment_status !== "completed").length;
 
   const getTargetOrders = () => {
     if (selectedOrders.size > 0) return filteredOrders.filter(o => selectedOrders.has(o.id));
@@ -526,10 +529,17 @@ export default function AdminPanel() {
 
       <div className="container mx-auto px-4 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full max-w-lg grid-cols-3">
+          <TabsList className="grid w-full max-w-2xl grid-cols-4">
             <TabsTrigger value="billing" className="gap-2">
               <FileText className="h-4 w-4" />
               Facturación
+            </TabsTrigger>
+            <TabsTrigger value="incomplete" className="gap-2">
+              <AlertCircle className="h-4 w-4" />
+              No completados
+              {incompleteCount > 0 && (
+                <span className="ml-1 bg-amber-500/20 text-amber-400 text-xs px-1.5 py-0.5 rounded-full">{incompleteCount}</span>
+              )}
             </TabsTrigger>
             <TabsTrigger value="clients" className="gap-2">
               <Users className="h-4 w-4" />
@@ -637,17 +647,7 @@ export default function AdminPanel() {
                       Limpiar fechas
                     </Button>
                   )}
-                  <Select value={filterStatus} onValueChange={setFilterStatus}>
-                    <SelectTrigger className="w-44"><SelectValue placeholder="Estado" /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">Todos los estados</SelectItem>
-                      <SelectItem value="pending">Pendiente</SelectItem>
-                      <SelectItem value="completed">Completado</SelectItem>
-                      <SelectItem value="awaiting_transfer">Esperando transferencia</SelectItem>
-                      <SelectItem value="cancelled">Cancelado</SelectItem>
-                      <SelectItem value="refunded">Reembolsado</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  
                   <Select value={filterMethod} onValueChange={setFilterMethod}>
                     <SelectTrigger className="w-40"><SelectValue placeholder="Método" /></SelectTrigger>
                     <SelectContent>
@@ -784,6 +784,11 @@ export default function AdminPanel() {
                 </table>
               </div>
             </Card>
+          </TabsContent>
+
+          {/* ===== PEDIDOS NO COMPLETADOS TAB ===== */}
+          <TabsContent value="incomplete">
+            <IncompleteOrdersTab orders={orders} onDeleteOrder={handleDeleteOrder} />
           </TabsContent>
 
           {/* ===== CLIENTS TAB ===== */}
