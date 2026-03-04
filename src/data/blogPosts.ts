@@ -17,7 +17,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post1.description",
     contentKey: "blog.post1.content",
     date: "2025-06-15",
-    imageUrl: "/lovable-uploads/903f1003-c2ac-486f-970e-14aeef1bdc43.png",
+    imageUrl: "/lovable-uploads/903f1003-c2ac-486f-970e-14aeef1bdc43.webp",
     tags: ["grabación", "batería", "online"],
   },
   {
@@ -27,7 +27,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post2.description",
     contentKey: "blog.post2.content",
     date: "2025-05-20",
-    imageUrl: "/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.png",
+    imageUrl: "/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.webp",
     tags: ["micrófonos", "equipo", "técnica"],
   },
   {
@@ -37,7 +37,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post3.description",
     contentKey: "blog.post3.content",
     date: "2025-04-10",
-    imageUrl: "/lovable-uploads/preamps-pro-pack.png",
+    imageUrl: "/lovable-uploads/preamps-pro-pack.webp",
     tags: ["previos", "API", "Neve", "DAD"],
   },
   {
@@ -47,7 +47,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post4.description",
     contentKey: "blog.post4.content",
     date: "2025-03-01",
-    imageUrl: "/lovable-uploads/890c7bbc-79ba-4df4-8441-4cbf232e9b5c.png",
+    imageUrl: "/lovable-uploads/890c7bbc-79ba-4df4-8441-4cbf232e9b5c.webp",
     tags: ["Toni Mateos", "carrera", "artistas"],
   },
   {
@@ -57,7 +57,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post5.description",
     contentKey: "blog.post5.content",
     date: "2025-07-10",
-    imageUrl: "/lovable-uploads/0de754df-90d3-49fe-b9df-9d10250b037c.png",
+    imageUrl: "/lovable-uploads/0de754df-90d3-49fe-b9df-9d10250b037c.webp",
     tags: ["DAW", "preparación", "sesión remota"],
   },
   {
@@ -67,7 +67,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post6.description",
     contentKey: "blog.post6.content",
     date: "2025-08-05",
-    imageUrl: "/lovable-uploads/real-drums-vs-programmed.png",
+    imageUrl: "/lovable-uploads/real-drums-vs-programmed.webp",
     tags: ["batería real", "programación", "producción"],
   },
   {
@@ -77,7 +77,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post7.description",
     contentKey: "blog.post7.content",
     date: "2025-09-01",
-    imageUrl: "/lovable-uploads/b68b9884-03e0-40e8-8f4e-21e5ce19fc08.png",
+    imageUrl: "/lovable-uploads/b68b9884-03e0-40e8-8f4e-21e5ce19fc08.webp",
     tags: ["carrera", "experiencia", "artistas internacionales"],
   },
   {
@@ -87,7 +87,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post8.description",
     contentKey: "blog.post8.content",
     date: "2025-10-01",
-    imageUrl: "/lovable-uploads/alejandro-sanz-es-concierto.png",
+    imageUrl: "/lovable-uploads/alejandro-sanz-es-concierto.webp",
     tags: ["Alejandro Sanz", "sesión", "experiencia", "estudio"],
   },
   {
@@ -97,7 +97,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post9.description",
     contentKey: "blog.post9.content",
     date: "2025-11-01",
-    imageUrl: "/lovable-uploads/the-voice-logo.png",
+    imageUrl: "/lovable-uploads/the-voice-logo.webp",
     tags: ["La Voz", "televisión", "directo", "experiencia"],
   },
   {
@@ -107,7 +107,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post10.description",
     contentKey: "blog.post10.content",
     date: "2025-12-01",
-    imageUrl: "/lovable-uploads/sergio-dalma-treinta-y-tanto.png",
+    imageUrl: "/lovable-uploads/sergio-dalma-treinta-y-tanto.webp",
     tags: ["Sergio Dalma", "sesión", "estudio", "rock"],
   },
   {
@@ -117,7 +117,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post11.description",
     contentKey: "blog.post11.content",
     date: "2025-12-15",
-    imageUrl: "/lovable-uploads/preamp-512c.png",
+    imageUrl: "/lovable-uploads/preamp-512c.webp",
     tags: ["previo", "preamplificador", "equipo", "estudio"],
   },
   {
@@ -127,7 +127,7 @@ export const blogPosts: BlogPost[] = [
     descriptionKey: "blog.post12.description",
     contentKey: "blog.post12.content",
     date: "2026-01-15",
-    imageUrl: "/lovable-uploads/antonio-orozco-destino.png",
+    imageUrl: "/lovable-uploads/antonio-orozco-destino.webp",
     tags: ["Antonio Orozco", "gira", "Destino", "sesión"],
   },
   {

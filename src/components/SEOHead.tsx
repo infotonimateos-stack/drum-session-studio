@@ -17,7 +17,7 @@ export const SEOHead = ({ titleKey, descriptionKey, image }: SEOHeadProps) => {
 
   const title = titleKey ? t(titleKey) : t("seo.title");
   const description = descriptionKey ? t(descriptionKey) : t("seo.description");
-  const ogImage = image || `${BASE_URL}/lovable-uploads/903f1003-c2ac-486f-970e-14aeef1bdc43.png`;
+  const ogImage = image || `${BASE_URL}/lovable-uploads/903f1003-c2ac-486f-970e-14aeef1bdc43.webp`;
 
   const pathWithoutLang = location.pathname.replace(/^\/en/, "") || "/";
   const canonicalUrl = isEnglish

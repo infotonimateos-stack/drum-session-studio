@@ -23,7 +23,7 @@ const drumKits = [
     nameKey: "drumKit.newVintageName",
     descKey: "drumKit.newVintageDesc",
     price: 19.99,
-    image: "/lovable-uploads/drum-kit-ludwig-centennial.png",
+    image: "/lovable-uploads/drum-kit-ludwig-centennial.webp",
     transparentBg: true,
   },
   {
@@ -31,14 +31,14 @@ const drumKits = [
     nameKey: "drumKit.jazzName",
     descKey: "drumKit.jazzDesc",
     price: 19.90,
-    image: "/lovable-uploads/drum-kit-yamaha-manu-katche.png",
+    image: "/lovable-uploads/drum-kit-yamaha-manu-katche.webp",
   },
   {
     id: "kit-pure-vintage",
     nameKey: "drumKit.pureVintageName",
     descKey: "drumKit.pureVintageDesc",
     price: 29.90,
-    image: "/lovable-uploads/drum-kit-ludwig-1938-antique.png",
+    image: "/lovable-uploads/drum-kit-ludwig-1938-antique.webp",
     transparentBg: true,
   },
 ];

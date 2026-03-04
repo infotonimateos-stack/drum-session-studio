@@ -20,7 +20,7 @@ export const TutorialsTab = () => {
       },
       descriptionKey: "tutorials.advancedMixingDesc",
       url: "https://store.payloadz.com/details/2677048-music-other-curso-avanzado-mezcla-de-baterias.html",
-      image: "/lovable-uploads/47653ee7-a23b-4807-80f6-1f266435b83a.png"
+      image: "/lovable-uploads/47653ee7-a23b-4807-80f6-1f266435b83a.webp"
     },
     {
       id: "grabacion-baterias",
@@ -35,7 +35,7 @@ export const TutorialsTab = () => {
       },
       descriptionKey: "tutorials.recordingDesc",
       url: "https://store.payloadz.com/details/2666816-music-popular-curso-grabacion-de-baterias.html",
-      image: "/lovable-uploads/be94b2c6-9a7e-4eb4-bafc-5059556359a3.png"
+      image: "/lovable-uploads/be94b2c6-9a7e-4eb4-bafc-5059556359a3.webp"
     },
     {
       id: "mezcla-baterias",
@@ -63,7 +63,7 @@ export const TutorialsTab = () => {
       },
       descriptionKey: "tutorials.mixingDesc",
       url: "https://store.payloadz.com/details/2667272-music-other-curso-mezcla-de-baterias.html",
-      image: "/lovable-uploads/b68b9884-03e0-40e8-8f4e-21e5ce19fc08.png"
+      image: "/lovable-uploads/b68b9884-03e0-40e8-8f4e-21e5ce19fc08.webp"
     },
     {
       id: "beat-detective",
@@ -94,7 +94,7 @@ export const TutorialsTab = () => {
       },
       descriptionKey: "tutorials.beatDetectiveDesc",
       url: "https://store.payloadz.com/details/2655204-music-rock-curso-beat-detective.html",
-      image: "/lovable-uploads/2c18e9ea-d4a6-4ca0-9525-525a6b9943cb.png"
+      image: "/lovable-uploads/2c18e9ea-d4a6-4ca0-9525-525a6b9943cb.webp"
     }
   ];
 

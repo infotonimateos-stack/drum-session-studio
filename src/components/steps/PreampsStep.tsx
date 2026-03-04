@@ -97,7 +97,7 @@ export const PreampsStep = ({
           price={motuPreamp.price}
           name="MOTU 8Pre"
           description={`${t("preamps.motuDesc")} · ${t("preamps.cleanSound")} · ${t("preamps.flatResponse")}`}
-          image="/lovable-uploads/motu-8pre.png"
+          image="/lovable-uploads/motu-8pre.webp"
           imageAlt={t("preamps.motuAlt")}
           isSelected={isMotuSelected}
           onToggle={handleToggleMotu}
@@ -115,7 +115,7 @@ export const PreampsStep = ({
             { emoji: "", text: `Neve: ${t("preamps.neveDesc")}` },
             { emoji: "", text: `DAD: ${t("preamps.dadDesc")}` },
           ]}
-          image="/lovable-uploads/preamps-pro-pack.png"
+          image="/lovable-uploads/preamps-pro-pack.webp"
           imageAlt={t("preamps.proPackAlt")}
           imageContain={false}
           isSelected={isProSelected}
