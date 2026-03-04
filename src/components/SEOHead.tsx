@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-const BASE_URL = "https://drum-session-studio.lovable.app";
+const BASE_URL = "https://tonimateos.com";
 
 interface SEOHeadProps {
   titleKey?: string;

@@ -4,128 +4,223 @@
 
   <!-- Home -->
   <url>
-    <loc>https://drum-session-studio.lovable.app/</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://drum-session-studio.lovable.app/"/>
+    <loc>https://tonimateos.com/grabacion-baterias-online</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/grabacion-baterias-online"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/remote-custom-drum-tracks"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tonimateos.com/grabacion-baterias-online"/>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
+  <!-- Main tabs ES/EN -->
+  <url>
+    <loc>https://tonimateos.com/baterista-online</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/baterista-online"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/remote-drummer"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://tonimateos.com/estudio-grabacion-baterias</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/estudio-grabacion-baterias"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drums-recording-studio"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://tonimateos.com/descarga-muestra-bateria-online</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/descarga-muestra-bateria-online"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/download-remote-drum-sample"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tonimateos.com/tutorial-mezcla-grabacion-bateria</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/tutorial-mezcla-grabacion-bateria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-mixing-recording-tutorial"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tonimateos.com/faq-grabacion-bateria-online</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/faq-grabacion-bateria-online"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/online-drum-recording-faq"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tonimateos.com/contacto-baterista-remoto</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/contacto-baterista-remoto"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/contact-remote-drummer"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Configurator steps ES/EN -->
+  <url>
+    <loc>https://tonimateos.com/elegir-bateria-online</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/elegir-bateria-online"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/choose-remote-drum-kit"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tonimateos.com/microfonos-grabacion-bateria</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/microfonos-grabacion-bateria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-microphones"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tonimateos.com/previos-grabacion-bateria</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/previos-grabacion-bateria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-preamps"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tonimateos.com/interfaz-grabacion-bateria</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/interfaz-grabacion-bateria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-interface"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tonimateos.com/produccion-grabacion-bateria</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/produccion-grabacion-bateria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-production"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tonimateos.com/entrega-grabacion-bateria-online</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/entrega-grabacion-bateria-online"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/remote-drum-recording-delivery"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tonimateos.com/extras-grabacion-bateria</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/extras-grabacion-bateria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-extras"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Legal pages -->
   <url>
-    <loc>https://drum-session-studio.lovable.app/aviso-legal</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/aviso-legal"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/aviso-legal"/>
+    <loc>https://tonimateos.com/aviso-legal</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/aviso-legal"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/aviso-legal"/>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://drum-session-studio.lovable.app/politica-privacidad</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/politica-privacidad"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/politica-privacidad"/>
+    <loc>https://tonimateos.com/politica-privacidad</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/politica-privacidad"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/politica-privacidad"/>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://drum-session-studio.lovable.app/politica-cookies</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/politica-cookies"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/politica-cookies"/>
+    <loc>https://tonimateos.com/politica-cookies</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/politica-cookies"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/politica-cookies"/>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <!-- Blog index -->
   <url>
-    <loc>https://drum-session-studio.lovable.app/blog</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog"/>
+    <loc>https://tonimateos.com/blog-grabacion-bateria</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/blog-grabacion-bateria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-blog"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Blog posts -->
   <url>
-    <loc>https://drum-session-studio.lovable.app/blog/como-grabar-baterias-online-profesionalmente</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog/como-grabar-baterias-online-profesionalmente"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog/how-to-record-drums-online-professionally"/>
+    <loc>https://tonimateos.com/blog-grabacion-bateria/como-grabar-baterias-online-profesionalmente</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/blog-grabacion-bateria/como-grabar-baterias-online-profesionalmente"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-blog/how-to-record-drums-online-professionally"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drum-session-studio.lovable.app/blog/mejores-microfonos-para-bateria</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog/mejores-microfonos-para-bateria"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog/best-microphones-for-drums"/>
+    <loc>https://tonimateos.com/blog-grabacion-bateria/mejores-microfonos-para-bateria</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/blog-grabacion-bateria/mejores-microfonos-para-bateria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-blog/best-microphones-for-drums"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drum-session-studio.lovable.app/blog/previos-api-neve-dad-diferencias</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog/previos-api-neve-dad-diferencias"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog/api-neve-dad-preamps-differences"/>
+    <loc>https://tonimateos.com/blog-grabacion-bateria/previos-api-neve-dad-diferencias</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/blog-grabacion-bateria/previos-api-neve-dad-diferencias"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-blog/api-neve-dad-preamps-differences"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drum-session-studio.lovable.app/blog/toni-mateos-35-anos-de-carrera</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog/toni-mateos-35-anos-de-carrera"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog/toni-mateos-35-years-career"/>
+    <loc>https://tonimateos.com/blog-grabacion-bateria/toni-mateos-35-anos-de-carrera</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/blog-grabacion-bateria/toni-mateos-35-anos-de-carrera"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-blog/toni-mateos-35-years-career"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drum-session-studio.lovable.app/blog/como-preparar-proyecto-daw-sesion-bateria-remota</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog/como-preparar-proyecto-daw-sesion-bateria-remota"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog/how-to-prepare-daw-project-remote-drum-session"/>
+    <loc>https://tonimateos.com/blog-grabacion-bateria/como-preparar-proyecto-daw-sesion-bateria-remota</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/blog-grabacion-bateria/como-preparar-proyecto-daw-sesion-bateria-remota"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-blog/how-to-prepare-daw-project-remote-drum-session"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drum-session-studio.lovable.app/blog/bateria-real-vs-ritmos-programados</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog/bateria-real-vs-ritmos-programados"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog/real-drums-vs-programmed-beats"/>
+    <loc>https://tonimateos.com/blog-grabacion-bateria/bateria-real-vs-ritmos-programados</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/blog-grabacion-bateria/bateria-real-vs-ritmos-programados"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-blog/real-drums-vs-programmed-beats"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drum-session-studio.lovable.app/blog/30-anos-baterista-sesion-lecciones</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog/30-anos-baterista-sesion-lecciones"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog/30-years-session-drumming-lessons-global-stars"/>
+    <loc>https://tonimateos.com/blog-grabacion-bateria/30-anos-baterista-sesion-lecciones</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/blog-grabacion-bateria/30-anos-baterista-sesion-lecciones"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-blog/30-years-session-drumming-lessons-global-stars"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drum-session-studio.lovable.app/blog/bateria-de-alejandro-sanz</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog/bateria-de-alejandro-sanz"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog/drumming-for-alejandro-sanz"/>
+    <loc>https://tonimateos.com/blog-grabacion-bateria/bateria-de-alejandro-sanz</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/blog-grabacion-bateria/bateria-de-alejandro-sanz"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-blog/drumming-for-alejandro-sanz"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drum-session-studio.lovable.app/blog/bateria-de-la-voz</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog/bateria-de-la-voz"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog/drummer-for-la-voz-the-voice"/>
+    <loc>https://tonimateos.com/blog-grabacion-bateria/bateria-de-la-voz</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/blog-grabacion-bateria/bateria-de-la-voz"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-blog/drummer-for-la-voz-the-voice"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drum-session-studio.lovable.app/blog/bateria-de-sergio-dalma</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog/bateria-de-sergio-dalma"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog/drummer-for-sergio-dalma"/>
+    <loc>https://tonimateos.com/blog-grabacion-bateria/bateria-de-sergio-dalma</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/blog-grabacion-bateria/bateria-de-sergio-dalma"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-blog/drummer-for-sergio-dalma"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drum-session-studio.lovable.app/blog/que-es-un-previo-de-micro</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog/que-es-un-previo-de-micro"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog/what-is-a-microphone-preamp"/>
+    <loc>https://tonimateos.com/blog-grabacion-bateria/que-es-un-previo-de-micro</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/blog-grabacion-bateria/que-es-un-previo-de-micro"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-blog/what-is-a-microphone-preamp"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drum-session-studio.lovable.app/blog/bateria-de-antonio-orozco</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://drum-session-studio.lovable.app/blog/bateria-de-antonio-orozco"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drum-session-studio.lovable.app/en/blog/drummer-for-antonio-orozco"/>
+    <loc>https://tonimateos.com/blog-grabacion-bateria/bateria-de-antonio-orozco</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/blog-grabacion-bateria/bateria-de-antonio-orozco"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-blog/drummer-for-antonio-orozco"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

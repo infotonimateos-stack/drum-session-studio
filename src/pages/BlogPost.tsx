@@ -44,7 +44,7 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <SEOHead titleKey={post.titleKey} descriptionKey={post.descriptionKey} image={`https://drum-session-studio.lovable.app${post.imageUrl}`} />
+      <SEOHead titleKey={post.titleKey} descriptionKey={post.descriptionKey} image={`https://tonimateos.com${post.imageUrl}`} />
       <Header activeTab={activeTab} onTabChange={setActiveTab} />
       <main className="flex-1 max-w-3xl mx-auto px-4 py-12 w-full">
         <Link
