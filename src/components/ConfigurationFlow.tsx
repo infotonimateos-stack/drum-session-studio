@@ -234,7 +234,6 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
                   <div className="space-y-5 sm:space-y-6 flex flex-col justify-center">
                     {/* Badge */}
                     <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-primary/80">
-                      <span className="w-8 h-px bg-primary/60" />
                       {t("config.h2subtitle")}
                     </div>
 
