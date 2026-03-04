@@ -24,7 +24,7 @@
     "cardTitle": "Descarga las pistas de muestra",
     "cardDesc": "Descarga las pistas en alta calidad (24-bit/48kHz)",
     "button": "Descargar pistas de muestra",
-    "imageAlt": "Imagen hiperrealista de una sesión de Pro Tools con pistas de colores"
+    "imageAlt": "Sesión de grabación de baterías en Pro Tools con pistas multipista profesionales"
   },
   "studio": {
     "title": "El Estudio",
@@ -108,7 +108,7 @@
     "neveDesc": "Calidez vintage legendaria",
     "dadDesc": "Claridad y Transparencia Pristina",
     "addedToCart": "✨ AÑADIDO AL CARRITO",
-    "motuAlt": "Previo MOTU 8Pre para grabación de baterías online",
+    "motuAlt": "Previo de gama estándar incluido en la grabación de baterías online",
     "proPackAlt": "Pack previos profesionales API Neve y DAD para grabación de baterías"
   },
   "interface": {
@@ -122,7 +122,7 @@
     "dadDesc": "Interface premium profesional",
     "dadFullDesc": "Conversión de élite · Transparencia sonora absoluta con tecnología líder de Digital Audio Denmark · Precisión excepcional · Máximo rango dinámico · Utilizado en las producciones más exigentes del mundo",
     "addedToCart": "✨ AÑADIDO AL CARRITO",
-    "motuAlt": "Interfaz MOTU 8Pre para grabación de baterías online",
+    "motuAlt": "Interfaz de audio estándar incluida en el servicio de grabación de baterías",
     "dadAlt": "Interfaz DAD AX64 para grabación de baterías - conversión de élite"
   },
   "production": {
@@ -331,7 +331,7 @@
     "recordedDiscsLabel": "discos grabados",
     "locationBarcelona": "Barcelona, España",
     "photoAlt": "Toni Mateos - Baterista de sesión profesional con 35 años de experiencia",
-    "liveStageAlt": "Batería en escenario con luces dramáticas",
+    "liveStageAlt": "Toni Mateos tocando la batería en directo en escenario profesional",
     "studioAlt": "Estudio de grabación profesional con batería acústica"
   },
   "tutorials": {

@@ -24,7 +24,7 @@
     "cardTitle": "Download the sample stems",
     "cardDesc": "Download high-quality stems (24-bit/48kHz)",
     "button": "Download sample stems",
-    "imageAlt": "Hyper-realistic Pro Tools session with colorful tracks"
+    "imageAlt": "Professional drum recording session in Pro Tools with multitrack audio"
   },
   "studio": {
     "title": "The Studio",
@@ -108,7 +108,7 @@
     "neveDesc": "Legendary vintage warmth",
     "dadDesc": "Pristine clarity and transparency",
     "addedToCart": "✨ ADDED TO CART",
-    "motuAlt": "MOTU 8Pre preamp for online drum recording",
+    "motuAlt": "Standard preamp included with online drum recording service",
     "proPackAlt": "Professional API Neve and DAD preamp pack for drum recording"
   },
   "interface": {
@@ -122,7 +122,7 @@
     "dadDesc": "Premium professional interface",
     "dadFullDesc": "Elite conversion · Absolute sonic transparency with Digital Audio Denmark's leading technology · Exceptional precision · Maximum dynamic range · Used in the world's most demanding productions",
     "addedToCart": "✨ ADDED TO CART",
-    "motuAlt": "MOTU 8Pre interface for online drum recording",
+    "motuAlt": "Standard audio interface included with drum recording service",
     "dadAlt": "DAD AX64 interface for drum recording - elite conversion"
   },
   "production": {
@@ -332,7 +332,7 @@
     "recordedDiscsLabel": "recorded albums",
     "locationBarcelona": "Barcelona, Spain",
     "photoAlt": "Toni Mateos - Professional session drummer with 35 years of experience",
-    "liveStageAlt": "Drums on stage with dramatic lighting",
+    "liveStageAlt": "Toni Mateos playing drums live on professional stage",
     "studioAlt": "Professional recording studio with acoustic drums"
   },
   "micData": {
