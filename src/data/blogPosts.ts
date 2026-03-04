@@ -150,6 +150,16 @@ export const blogPosts: BlogPost[] = [
     imageUrl: "/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.webp",
     tags: ["micrófonos", "dinámicos", "condensador", "cinta", "estudio"],
   },
+  {
+    slug: "tecnicas-afinacion-bateria-grabacion-estudio",
+    slugEn: "drum-tuning-techniques-studio-recording",
+    titleKey: "blog.post15.title",
+    descriptionKey: "blog.post15.description",
+    contentKey: "blog.post15.content",
+    date: "2026-03-11",
+    imageUrl: "/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.webp",
+    tags: ["afinación de batería","drum tuning","grabación de batería","técnicas de estudio","producción musical","batería profesional"],
+  },
 ];
 
 export const getBlogPostBySlug = (slug: string, lang: string): BlogPost | undefined => {
