@@ -173,4 +173,28 @@ const updatedSitemap = sitemapContent.replace(
 writeFileSync(SITEMAP_PATH, updatedSitemap);
 console.log("Updated sitemap.xml");
 
+// --- Send email notification via n8n ---
+const N8N_WEBHOOK = "https://n8n.cardeseo.com/webhook/blog-post-notification";
+const contentPreview = article.es.content.substring(0, 1500).replace(/\n/g, "<br>");
+
+try {
+  const emailRes = await fetch(N8N_WEBHOOK, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      postNum: nextPostNum,
+      title: article.es.title,
+      description: article.es.description,
+      slug: article.slug,
+      slugEn: article.slugEn,
+      date: dateStr,
+      contentPreview,
+    }),
+  });
+  const emailResult = await emailRes.json();
+  console.log("Email notification:", emailResult.message);
+} catch (e) {
+  console.warn("Email notification failed (non-blocking):", e.message);
+}
+
 console.log(`\nBlog post #${nextPostNum} generated successfully!`);
