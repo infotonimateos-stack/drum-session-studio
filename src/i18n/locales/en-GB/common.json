@@ -1,9 +1,9 @@
 {
   "seo": {
-    "title": "Online Drum Recording and Professional Remote Session Drummer",
-    "description": "Remote drum recording with top-quality Neve and API preamps. Session drummer with 35 years of experience, having recorded for John Legend, Alejandro Sanz and Juanes. Custom drum tracks delivered from our professional studio.",
-    "blogTitle": "Blog - Online Drum Recording | Toni Mateos",
-    "blogDescription": "Articles about professional drum recording, studio equipment, microphone techniques and experiences with international artists."
+    "title": "Online Drum Recording | Hire a Professional Session Drummer for Custom Drum Tracks",
+    "description": "Hire a session drummer for professional custom drum tracks online. Remote drum recording with Neve and API preamps. 35 years of experience recording for John Legend, Alejandro Sanz and Juanes. Live drum tracks delivered worldwide.",
+    "blogTitle": "Blog - Online Drum Recording & Professional Drum Tracks | Toni Mateos",
+    "blogDescription": "Articles about online drum recording, custom drum tracks, session drumming, studio equipment, microphone techniques and working with international artists."
   },
   "header": { 
     "brand": "Toni Mateos Online Drums Recording",
@@ -28,7 +28,7 @@
   },
   "studio": {
     "title": "The Studio",
-    "subtitle": "A space designed specifically to capture the best drum sound",
+    "subtitle": "A professional studio designed for online drum recording with the best possible sound",
     "gallery": "Studio Gallery",
     "galleryAlt1": "Professional online drum recording studio - mic'd drum kit with professional microphones",
     "galleryAlt2": "Acoustically treated drum recording room - professional studio",
@@ -54,13 +54,13 @@
     "step2Title": "Send us your materials",
     "step2Text": "Send everything we need to start your recording",
     "step3Title": "Recording and delivery",
-    "step3Text": "We send the drum stems via WeTransfer in maximum quality"
+    "step3Text": "We deliver your custom drum tracks via WeTransfer in maximum quality"
   },
   "config": {
-    "h1": "Online Drum Recording",
-    "h2subtitle": "Professional Remote Session Drummer",
-    "h2studio": "Studio drum recording for international productions",
-    "h2gear": "Studio gear for drum recording: Neve and API preamps, DAD interface, Telefunken, Neumann, Coles, AKG, Shure microphones...",
+    "h1": "Online Drum Recording — Custom Drum Tracks by a Professional Session Drummer",
+    "h2subtitle": "Hire a Session Drummer for Remote Drum Recording",
+    "h2studio": "Remote drum recording service for international productions — custom drum tracks delivered worldwide",
+    "h2gear": "Professional studio gear for online drum recording: Neve and API preamps, DAD interface, Telefunken, Neumann, Coles, AKG, Shure microphones...",
     "steps": {
       "step": "Step",
       "drumKit": "Instrument",
@@ -73,7 +73,7 @@
       "delivery": "Delivery",
       "extras": "Extras"
     },
-    "heroTitle": "Configure your remote custom drum recording",
+    "heroTitle": "Configure your custom drum tracks online",
     "priceFrom": "add what you need",
     "heroP1": "Select the elements you need for your professional recording. Each service is added individually.",
     "heroP2": "💡 Each element can be added individually to create your perfect setup",
@@ -308,7 +308,7 @@
     "tvShows": "+500 TV Shows",
     "songsYear": "+800 Songs/Year",
     "myHistory": "My Story",
-    "historyText": "With 35 years of professional experience as a session drummer, I have had the privilege of recording with international artists including John Legend, Alejandro Sanz, and Juanes. My professional remote recording service delivers world-class drum tracks from my acoustically designed studio in Barcelona.",
+    "historyText": "With 35 years of experience as a professional session drummer, I have recorded drum tracks for international artists including John Legend, Alejandro Sanz, and Juanes. Today I offer online drum recording and custom drum tracks delivered worldwide from my professionally designed studio in Barcelona. Hire a session drummer with real credits and real experience.",
     "maritalStatus": "Marital Status",
     "married": "Married",
     "children": "Children",
@@ -528,8 +528,8 @@
     }
   },
   "faq": {
-    "heading": "Frequently Asked Questions",
-    "subheading": "Find answers to the most common questions about the recording process",
+    "heading": "Frequently Asked Questions About Online Drum Recording",
+    "subheading": "Answers about our remote drum recording service and custom drum tracks",
     "serviceGeneral": "Service & General",
     "pricePayment": "Price & Payment",
     "processRecording": "Process & Recording",
@@ -540,11 +540,11 @@
     "sendMessage": "Send Message",
     "whatsappDirect": "WhatsApp Direct",
     "q1": "What does the online drum recording service consist of?",
-    "a1": "It consists of professionally recording acoustic drums for your songs. We can record drums for your tracks. Using modern technology, we can do this from our studio with maximum quality and deliver the recording online anywhere in the world, saving up to 70% of costs while achieving professional sound.",
+    "a1": "Our remote drum recording service delivers professional custom drum tracks for your songs. A professional session drummer records live drum tracks in our studio in Barcelona and delivers them online anywhere in the world. Hire a session drummer and save up to 70% compared to traditional in-studio sessions while getting professional drum tracks.",
     "q2": "What studio equipment do you use?",
     "a2": "The best. Microphones, drums, snares, etc. You can see it in our 'Studio' section.",
-    "q3": "Who records the drums?",
-    "a3": "Toni Mateos. With over 35 years of experience and more than 1000 recorded albums, including John Legend, Alejandro Sanz, Jarabe de Palo, Raphael, Rozalén, Antonio Orozco, Pastora Soler...",
+    "q3": "Who is the session drummer recording the drum tracks?",
+    "a3": "Toni Mateos, a professional session drummer with over 35 years of experience and more than 1000 recorded albums. He has recorded drum tracks for artists like John Legend, Alejandro Sanz, Jarabe de Palo, Raphael, Rozalén, Antonio Orozco and Pastora Soler.",
     "q4": "What styles can you record?",
     "a4": "Most styles: pop, rock, funk, jazz, blues, swing, R&B, hip hop, rap, folk, country, ballad, salsa, samba, bossa nova, Latin rhythms, etc. We currently do not record metal.",
     "q5": "Do you offer a satisfaction guarantee?",

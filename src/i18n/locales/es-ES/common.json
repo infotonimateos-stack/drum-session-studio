@@ -1,9 +1,9 @@
 {
   "seo": {
-    "title": "Grabación de Baterías Online y Baterista de Sesión Profesional Remoto",
-    "description": "Grabación remota de baterías con previos Neve y API de máxima calidad. Baterista de sesión con 35 años de experiencia, habiendo grabado para John Legend, Alejandro Sanz y Juanes. Pistas de batería personalizadas desde tu estudio.",
-    "blogTitle": "Blog - Grabación de Baterías Online | Toni Mateos",
-    "blogDescription": "Artículos sobre grabación profesional de baterías, equipamiento de estudio, técnicas de microfonía y experiencias con artistas internacionales."
+    "title": "Grabación de Baterías Online | Contratar Baterista de Sesión Profesional Remoto",
+    "description": "Graba baterías online con un baterista de sesión profesional. Pistas de batería personalizadas a distancia con previos Neve y API. 35 años de experiencia grabando para Alejandro Sanz, Juanes y John Legend. Grabación remota desde Barcelona.",
+    "blogTitle": "Blog - Grabación de Baterías Online y Pistas de Batería Profesionales | Toni Mateos",
+    "blogDescription": "Artículos sobre grabación profesional de baterías online, pistas de batería a distancia, técnicas de microfonía, equipamiento de estudio y experiencias como baterista de sesión con artistas internacionales."
   },
   "header": { 
     "brand": "Toni Mateos Online Drums Recording",
@@ -28,7 +28,7 @@
   },
   "studio": {
     "title": "El Estudio",
-    "subtitle": "Un espacio diseñado específicamente para capturar el mejor sonido de batería",
+    "subtitle": "Un estudio profesional diseñado para la grabación de baterías online con el mejor sonido",
     "gallery": "Galería del Estudio",
     "galleryAlt1": "Estudio de grabación de baterías online - kit microfoneado con micrófonos profesionales",
     "galleryAlt2": "Sala de grabación de baterías tratada acústicamente - estudio profesional",
@@ -54,13 +54,13 @@
     "step2Title": "Envíanos el material",
     "step2Text": "Envíanos todo el material que necesitamos para empezar tu grabación",
     "step3Title": "Grabación y envío de pistas",
-    "step3Text": "Te enviamos las pistas de batería por Wetransfer con la máxima calidad"
+    "step3Text": "Te enviamos las pistas de batería personalizadas por Wetransfer con la máxima calidad"
   },
   "config": {
-    "h1": "Grabación de Baterías Online",
-    "h2subtitle": "Baterista de Sesión Profesional Remoto",
-    "h2studio": "Grabación de batería de estudio para producciones internacionales",
-    "h2gear": "Equipamiento de estudio para grabación de baterías: previos Neve y API, Interface DAD, Micrófonos Telefunken, Neumann, Coles, AKG, Shure...",
+    "h1": "Grabación de Baterías Online — Pistas de Batería Profesionales a Distancia",
+    "h2subtitle": "Contratar Baterista de Sesión Profesional Remoto",
+    "h2studio": "Grabación de baterías a distancia para producciones internacionales — pistas personalizadas",
+    "h2gear": "Equipamiento profesional para grabar baterías online: previos Neve y API, Interface DAD, Micrófonos Telefunken, Neumann, Coles, AKG, Shure...",
     "steps": {
       "step": "Paso",
       "drumKit": "Instrumento",
@@ -73,7 +73,7 @@
       "delivery": "Entrega",
       "extras": "Extras"
     },
-    "heroTitle": "Configura tu grabación de batería remota",
+    "heroTitle": "Configura tu grabación de baterías online a tu medida",
     "priceFrom": "añade lo que necesites",
     "heroP1": "Selecciona los elementos que necesitas para tu grabación profesional. Cada servicio se suma individualmente.",
     "heroP2": "💡 Cada elemento se puede añadir individualmente para crear tu setup perfecto",
@@ -307,7 +307,7 @@
     "tvShows": "+500 Shows TV",
     "songsYear": "+800 Canciones/Año",
     "myHistory": "Mi Historia",
-    "historyText": "Con 35 años de experiencia profesional, he tenido el privilegio de trabajar con algunos de los artistas más reconocidos de la música en español.",
+    "historyText": "Con 35 años de experiencia como baterista de sesión profesional, he tenido el privilegio de grabar baterías y tocar en directo con algunos de los artistas más reconocidos de la música internacional. Hoy ofrezco grabación de baterías online a distancia desde mi estudio en Barcelona.",
     "maritalStatus": "Estado Civil",
     "married": "Casado",
     "children": "Hijos",
@@ -387,8 +387,8 @@
     }
   },
   "faq": {
-    "heading": "Preguntas Frecuentes",
-    "subheading": "Encuentra respuestas a las preguntas más comunes sobre el proceso de grabación",
+    "heading": "Preguntas Frecuentes sobre Grabación de Baterías Online",
+    "subheading": "Respuestas sobre nuestro servicio de grabación de baterías a distancia y pistas de batería profesionales",
     "serviceGeneral": "Servicio y General",
     "pricePayment": "Precio y Pago",
     "processRecording": "Proceso y Grabación",
@@ -399,11 +399,11 @@
     "sendMessage": "Enviar Mensaje",
     "whatsappDirect": "WhatsApp Directo",
     "q1": "¿En qué consiste el servicio de grabación de baterías online?",
-    "a1": "Consiste en la grabación profesional de baterías acústicas para tus canciones. Podemos grabar baterías para tus canciones. Aprovechando las nuevas tecnologías, podemos hacerlo desde nuestro estudio con la máxima calidad y probar la grabación por internet a cualquier parte del mundo. De esa manera se aprovechan hasta un 70% de los costes, obteniendo un sonido profesional.",
+    "a1": "Nuestro servicio de grabación de baterías online consiste en la grabación profesional de baterías acústicas para tus canciones, de forma remota y a distancia. Un baterista de sesión profesional graba pistas de batería personalizadas desde nuestro estudio en Barcelona con la máxima calidad y las envía por internet a cualquier parte del mundo. De esa manera se ahorran hasta un 70% de los costes, obteniendo pistas de batería profesionales.",
     "q2": "¿Cuál es el equipamiento de estudio que usan las baterías?",
     "a2": "Con el mejor. Micrófonos, baterías, cajas, etc. Puedes verlo en nuestra sección \"Estudio\"",
-    "q3": "¿Quién graba las baterías?",
-    "a3": "Toni Mateos. Cuenta con más de 35 años de experiencia y más de 1000 álbumes grabados, entre los que se encuentran John Legend, Alejandro Sanz, Jarabe de Palo, Raphael, Rozalén, Antonio Orozco, Pastora Soler...",
+    "q3": "¿Quién es el baterista de sesión que graba las pistas?",
+    "a3": "Toni Mateos, baterista de sesión profesional con más de 35 años de experiencia y más de 1000 álbumes grabados. Ha grabado baterías para artistas como John Legend, Alejandro Sanz, Jarabe de Palo, Raphael, Rozalén, Antonio Orozco y Pastora Soler.",
     "q4": "¿Qué estilos pueden grabar?",
     "a4": "La mayoría: pop, rock, funk, jazz, blues, swing, R&B, hip hop, rap, folk, country, ballad, salsa, samba, bossa nova, ritmos latinos, etc... Por el momento no grabamos metal.",
     "q5": "¿Ofrecen garantía de satisfacción?",
