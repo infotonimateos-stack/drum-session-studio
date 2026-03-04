@@ -140,6 +140,16 @@ export const blogPosts: BlogPost[] = [
     imageUrl: "/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.webp",
     tags: ["patrones polares", "micrófonos", "grabación", "técnica", "estudio"],
   },
+  {
+    slug: "tipos-microfonos-dinamicos-condensador-cinta",
+    slugEn: "microphone-types-dynamic-condenser-ribbon",
+    titleKey: "blog.post14.title",
+    descriptionKey: "blog.post14.description",
+    contentKey: "blog.post14.content",
+    date: "2026-03-11",
+    imageUrl: "/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.webp",
+    tags: ["micrófonos", "dinámicos", "condensador", "cinta", "estudio"],
+  },
 ];
 
 export const getBlogPostBySlug = (slug: string, lang: string): BlogPost | undefined => {
