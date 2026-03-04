@@ -130,6 +130,16 @@ export const blogPosts: BlogPost[] = [
     imageUrl: "/lovable-uploads/antonio-orozco-destino.png",
     tags: ["Antonio Orozco", "gira", "Destino", "sesión"],
   },
+  {
+    slug: "patrones-polares-microfonos-guia-grabacion",
+    slugEn: "microphone-polar-patterns-studio-recording-guide",
+    titleKey: "blog.post13.title",
+    descriptionKey: "blog.post13.description",
+    contentKey: "blog.post13.content",
+    date: "2026-03-04",
+    imageUrl: "/lovable-uploads/55fddddd-e10a-4c7d-9852-36db51337402.webp",
+    tags: ["patrones polares", "micrófonos", "grabación", "técnica", "estudio"],
+  },
 ];
 
 export const getBlogPostBySlug = (slug: string, lang: string): BlogPost | undefined => {

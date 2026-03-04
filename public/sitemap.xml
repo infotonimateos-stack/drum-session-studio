@@ -224,4 +224,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://tonimateos.com/blog-grabacion-bateria/patrones-polares-microfonos-guia-grabacion</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tonimateos.com/blog-grabacion-bateria/patrones-polares-microfonos-guia-grabacion"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tonimateos.com/en/drum-recording-blog/microphone-polar-patterns-studio-recording-guide"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
