@@ -94,13 +94,13 @@ export const DrumKitStep = ({ addItem, removeItem, hasItem }: DrumKitStepProps) 
                   <Check className="h-4 w-4 text-primary-foreground" strokeWidth={3} />
                 </div>
               )}
-              {/* Large image */}
-              <div className="w-full aspect-[4/3] flex items-center justify-center overflow-hidden bg-white border-b border-border/50">
+              {/* Image — aspect-video to match microphone cards */}
+              <div className="w-full aspect-video flex items-center justify-center overflow-hidden bg-white border-b border-border/50">
                 <img
                   src={kit.image}
                   alt={t(kit.nameKey)}
                   className={`w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 ${
-                    kit.id === 'kit-new-vintage' ? 'scale-125' : 'p-1'
+                    kit.id === 'kit-new-vintage' ? 'scale-110' : 'p-2'
                   }`}
                 />
               </div>
