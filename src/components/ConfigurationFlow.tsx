@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ShoppingCart, GraduationCap } from "lucide-react";
 import { HeroVideoDual } from "@/components/HeroVideoTabs";
@@ -49,6 +49,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   const [billingData, setBillingData] = useState<BillingData | null>(null);
   const [validationError, setValidationError] = useState<string | null>(null);
   const [floatingVideo, setFloatingVideo] = useState(false);
+  const stepContainerRef = useRef<HTMLDivElement>(null);
   const { cartState, addItem, removeItem, hasItem, clearCart } = useCartContext();
   const { t } = useTranslation();
 
@@ -64,10 +65,20 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
     { title: t("config.steps.extras"), component: <ExtrasStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} /> },
   ];
 
+  const scrollToStepContent = () => {
+    requestAnimationFrame(() => {
+      if (stepContainerRef.current) {
+        const headerOffset = 80; // compensate for fixed nav on mobile/tablet
+        const elementPosition = stepContainerRef.current.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: elementPosition - headerOffset, behavior: "smooth" });
+      }
+    });
+  };
+
   const goToStep = (stepIndex: number) => {
     const path = getFullPath(getStepPath(stepIndex, lang), lang);
     navigate(path);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollToStepContent();
   };
 
   const handlePreviousStep = () => {
@@ -280,7 +291,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
               </button>
             )}
             <Card className="overflow-hidden border-border/60 shadow-sm">
-              <div className="p-3 sm:p-6 md:p-8 min-h-[400px] sm:min-h-[600px]">{steps[currentStep].component}</div>
+              <div ref={stepContainerRef} className="p-3 sm:p-6 md:p-8 min-h-[400px] sm:min-h-[600px]">{steps[currentStep].component}</div>
               <StepNavigator
                 currentStep={currentStep}
                 totalSteps={steps.length}
