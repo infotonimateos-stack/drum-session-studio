@@ -174,7 +174,7 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
 
         {/* Price Summary + Payment */}
         <div className="lg:col-span-1">
-          <Card className="sticky top-8 min-w-[320px]">
+          <Card className="lg:sticky lg:top-8 min-w-0 sm:min-w-[320px] relative z-10">
             <CardHeader className="p-6 pb-4"><CardTitle className="text-center">{t("checkout.orderTotal")}</CardTitle></CardHeader>
             <CardContent className="space-y-4 p-6 pt-0">
               <div className="space-y-3">

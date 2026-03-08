@@ -23,7 +23,7 @@ export const WhatsAppButton = () => {
   }, [showTooltip]);
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-end gap-3 sm:bottom-6 bottom-[calc(1.5rem+env(safe-area-inset-bottom))]">
+    <div className="fixed bottom-6 right-6 z-40 flex items-end gap-3 sm:bottom-6 bottom-[calc(1.5rem+env(safe-area-inset-bottom))] pointer-events-auto">
       {/* Tooltip */}
       {showTooltip && (
         <div

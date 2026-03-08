@@ -146,11 +146,11 @@ export const PayPalPayment = ({
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 relative z-20">
       <div className="flex flex-col gap-3">
         {/* TARJETA – SDK button rendered directly (single click → card form) */}
-        <div className={`rounded-xl overflow-hidden ${isDisabled ? 'opacity-50 pointer-events-none' : ''}`}>
-          <div className="flex items-center gap-2 px-4 py-2 bg-neutral-900 text-white text-sm font-semibold">
+        <div className={`rounded-xl overflow-visible ${isDisabled ? 'opacity-50 pointer-events-none' : ''}`}>
+          <div className="flex items-center gap-2 px-4 py-2 bg-neutral-900 text-white text-sm font-semibold rounded-t-xl">
             <CreditCard className="h-4 w-4 shrink-0" />
             <span>{t("checkout.debitOrCredit")}</span>
             <div className="flex gap-1 ml-auto shrink-0">
@@ -166,26 +166,27 @@ export const PayPalPayment = ({
               </svg>
             </div>
           </div>
-          <div ref={cardContainerRef} className="min-h-[55px] bg-neutral-900" />
+          <div ref={cardContainerRef} className="relative z-30 min-h-[55px] bg-neutral-900 rounded-b-xl [&_iframe]{position:relative;z-index:30}" style={{ touchAction: 'manipulation' }} />
         </div>
 
         {/* PAYPAL – SDK button rendered directly (single click → PayPal login) */}
-        <div className={`rounded-xl overflow-hidden ${isDisabled ? 'opacity-50 pointer-events-none' : ''}`}>
-          <div className="flex items-center gap-2 px-4 py-2 bg-[#003087] text-[#ffc439] text-sm font-semibold">
+        <div className={`rounded-xl overflow-visible ${isDisabled ? 'opacity-50 pointer-events-none' : ''}`}>
+          <div className="flex items-center gap-2 px-4 py-2 bg-[#003087] text-[#ffc439] text-sm font-semibold rounded-t-xl">
             <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="#ffc439">
               <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .771-.66h6.487c2.025 0 3.538.507 4.497 1.507.921.961 1.261 2.217 1.046 3.849l-.016.112-.012.084.052.028c.628.349 1.115.809 1.446 1.371.35.593.528 1.336.528 2.207 0 1.015-.207 1.913-.616 2.668-.386.71-.93 1.31-1.618 1.783a6.08 6.08 0 0 1-2.167.936c-.772.181-1.635.274-2.562.274H12.2a.967.967 0 0 0-.955.816l-.033.196-.585 3.716-.027.14a.966.966 0 0 1-.955.79H7.076z"/>
             </svg>
             <span className="font-bold tracking-wide">PayPal</span>
           </div>
-          <div ref={paypalContainerRef} className="min-h-[55px] bg-[#003087]" />
+          <div ref={paypalContainerRef} className="relative z-30 min-h-[55px] bg-[#003087] rounded-b-xl [&_iframe]{position:relative;z-index:30}" style={{ touchAction: 'manipulation' }} />
         </div>
 
-        {/* TRANSFERENCIA – Corporate Gold (sin cambios) */}
+        {/* TRANSFERENCIA – Corporate Gold */}
         <button
           type="button"
           onClick={handleTransferClick}
           disabled={isLoading || isDisabled}
-          className="w-full flex items-center gap-3 px-5 py-4 rounded-xl border-2 border-[#d4a017] bg-gradient-to-r from-[#d4a017] to-[#e6b422] text-neutral-900 font-semibold text-sm transition-all duration-200 hover:from-[#c49215] hover:to-[#d4a017] hover:shadow-lg hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="relative z-20 w-full flex items-center gap-3 px-5 py-4 rounded-xl border-2 border-[#d4a017] bg-gradient-to-r from-[#d4a017] to-[#e6b422] text-neutral-900 font-semibold text-sm transition-all duration-200 hover:from-[#c49215] hover:to-[#d4a017] hover:shadow-lg hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed"
+          style={{ touchAction: 'manipulation' }}
         >
           <Landmark className="h-5 w-5 shrink-0" />
           <span className="flex-1 text-left">{t("transfer.bankTransfer")}</span>
