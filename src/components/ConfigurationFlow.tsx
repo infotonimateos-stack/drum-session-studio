@@ -65,10 +65,20 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
     { title: t("config.steps.extras"), component: <ExtrasStep addItem={addItem} removeItem={removeItem} hasItem={hasItem} /> },
   ];
 
+  const scrollToStepContent = () => {
+    requestAnimationFrame(() => {
+      if (stepContainerRef.current) {
+        const headerOffset = 80; // compensate for fixed nav on mobile/tablet
+        const elementPosition = stepContainerRef.current.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: elementPosition - headerOffset, behavior: "smooth" });
+      }
+    });
+  };
+
   const goToStep = (stepIndex: number) => {
     const path = getFullPath(getStepPath(stepIndex, lang), lang);
     navigate(path);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollToStepContent();
   };
 
   const handlePreviousStep = () => {
