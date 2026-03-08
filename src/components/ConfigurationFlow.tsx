@@ -291,7 +291,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
               </button>
             )}
             <Card className="overflow-hidden border-border/60 shadow-sm">
-              <div className="p-3 sm:p-6 md:p-8 min-h-[400px] sm:min-h-[600px]">{steps[currentStep].component}</div>
+              <div ref={stepContainerRef} className="p-3 sm:p-6 md:p-8 min-h-[400px] sm:min-h-[600px]">{steps[currentStep].component}</div>
               <StepNavigator
                 currentStep={currentStep}
                 totalSteps={steps.length}
