@@ -203,7 +203,7 @@ export const PayPalPayment = ({
 
       {/* Transfer Modal */}
       <Dialog open={showTransferModal} onOpenChange={setShowTransferModal}>
-        <DialogContent className="max-w-lg" style={{ background: "hsl(var(--card-dark, var(--card)))" }}>
+        <DialogContent className="max-w-lg z-[60]" style={{ background: "hsl(var(--card-dark, var(--card)))" }}>
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Landmark className="h-5 w-5" />
