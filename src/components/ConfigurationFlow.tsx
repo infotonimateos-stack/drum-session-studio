@@ -49,6 +49,7 @@ export const ConfigurationFlow = ({ onCheckout }: ConfigurationFlowProps) => {
   const [billingData, setBillingData] = useState<BillingData | null>(null);
   const [validationError, setValidationError] = useState<string | null>(null);
   const [floatingVideo, setFloatingVideo] = useState(false);
+  const stepContainerRef = useRef<HTMLDivElement>(null);
   const { cartState, addItem, removeItem, hasItem, clearCart } = useCartContext();
   const { t } = useTranslation();
 
