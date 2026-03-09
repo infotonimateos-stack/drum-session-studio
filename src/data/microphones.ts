@@ -111,7 +111,7 @@ export const microphoneCategories: MicrophoneCategory[] = [
         price: 5.99,
         included: false,
         descriptionKey: 'micData.evRe20Desc',
-        targetKey: 'micData.kick',
+        targetKey: 'micData.kickOut',
         image: '/lovable-uploads/electrovoice-re20-vintage.jpg',
       },
       {
