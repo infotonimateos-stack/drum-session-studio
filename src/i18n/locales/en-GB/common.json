@@ -355,6 +355,7 @@
     "ride": "Ride",
     "roomMono": "Room Mono",
     "room": "Room",
+    "ohMono": "OH Mono",
     "sm57Desc": "Dynamic microphone for snare",
     "beta52Desc": "Dynamic microphone for kick drum",
     "km184HihatDesc": "Condenser microphone for hi-hat",
@@ -368,6 +369,7 @@
     "u47fetDesc": "The kick sounds better with a legend in front",
     "audixD6Desc": "Modern punch with American character",
     "akg414SnareDesc": "Clarity, naturalness and punch",
+    "akg414SnareSubtitle": "Clarity, naturalness and punch",
     "sen441Desc": "The classic that captures every snare wire whisper",
     "m160Desc": "The ribbon that tames the highs",
     "km184RideDesc": "Ride with impeccable brightness and definition",
@@ -381,7 +383,8 @@
     "akgD19cDesc": "The mythical Beatles Mic: British brilliance and punch from the sixties",
     "evRe20Desc": "Flat response and total proximity effect control for impeccable clarity",
     "senMd421nDesc": "Legendary German versatility with outstanding dynamic character",
-    "akgD12Desc": "The historic kick drum standard with unbeatable organic body and punch"
+    "akgD12Desc": "The historic kick drum standard with unbeatable organic body and punch",
+    "akgD112Desc": "The classic standard for a kick drum with body and defined attack"
   },
   "checkoutForm": {
     "back": "Back",

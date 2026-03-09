@@ -486,6 +486,7 @@
     "ride": "Ride",
     "roomMono": "Room Mono",
     "room": "Room",
+    "ohMono": "OH Mono",
     "sm57Desc": "Micrófono dinámico para caja",
     "beta52Desc": "Micrófono dinámico para bombo",
     "km184HihatDesc": "Micrófono de condensador para hi-hat",
@@ -499,6 +500,7 @@
     "u47fetDesc": "El bombo suena mejor con una leyenda delante",
     "audixD6Desc": "Punch moderno con carácter yankee",
     "akg414SnareDesc": "Claridad, naturalidad y pegada",
+    "akg414SnareSubtitle": "Claridad, naturalidad y pegada",
     "sen441Desc": "El clásico que capta cada susurro del bordón",
     "m160Desc": "El ribbon que doma los agudos",
     "km184RideDesc": "Ride con brillo y definición impecable",
@@ -512,7 +514,8 @@
     "akgD19cDesc": "El mítico Beatles Mic: brillantez y pegada británica de los sesenta",
     "evRe20Desc": "Respuesta plana y control total del efecto de proximidad para una claridad impecable",
     "senMd421nDesc": "Versatilidad alemana legendaria con un carácter dinámico sobresaliente",
-    "akgD12Desc": "El estándar histórico para bombos con cuerpo y punch orgánico insuperable"
+    "akgD12Desc": "El estándar histórico para bombos con cuerpo y punch orgánico insuperable",
+    "akgD112Desc": "El estándar clásico para un bombo con cuerpo y ataque definido"
   },
   "checkoutForm": {
     "back": "Volver",
