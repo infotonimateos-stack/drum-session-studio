@@ -4468,7 +4468,9 @@
   },
   {
     "name": "Carlos Manzanares",
-    "emails": [],
+    "emails": [
+      "c.mugarli@diagonalproducciones.com"
+    ],
     "phones": [],
     "organization": "",
     "city": "Barcelona",
@@ -4483,7 +4485,8 @@
     "first_session": "05/03/2020",
     "last_session": "25/02/2020",
     "sources": [
-      "filemaker_grabaciones"
+      "filemaker_grabaciones",
+      "gmail_tonidrummer"
     ],
     "notes": [],
     "facturado": false
@@ -7108,7 +7111,9 @@
   },
   {
     "name": "César Pírez",
-    "emails": [],
+    "emails": [
+      "cepirez@hotmail.com"
+    ],
     "phones": [],
     "organization": "",
     "city": "Madrid",
@@ -7124,7 +7129,8 @@
     "first_session": "13/03/2015",
     "last_session": "26/03/2015",
     "sources": [
-      "filemaker_grabaciones"
+      "filemaker_grabaciones",
+      "gmail_tonidrummer"
     ],
     "notes": [],
     "facturado": false
@@ -17183,7 +17189,9 @@
   },
   {
     "name": "Antonio jimenez",
-    "emails": [],
+    "emails": [
+      "AJimenez@ajsabadell.cat"
+    ],
     "phones": [],
     "organization": "",
     "city": "El Vendrell ",
@@ -17197,7 +17205,8 @@
     "last_session": "24/08/2022",
     "sources": [
       "filemaker_grabaciones",
-      "filemaker_clientes"
+      "filemaker_clientes",
+      "gmail_tonidrummer"
     ],
     "notes": [],
     "facturado": true
@@ -19241,7 +19250,9 @@
   },
   {
     "name": "Wyke van Weelden",
-    "emails": [],
+    "emails": [
+      "wyke@hotmail.nl"
+    ],
     "phones": [],
     "organization": "",
     "city": "",
@@ -19256,7 +19267,8 @@
     "first_session": "19/07/2024",
     "last_session": "19/07/2024",
     "sources": [
-      "filemaker_grabaciones"
+      "filemaker_grabaciones",
+      "gmail_tonidrummer"
     ],
     "notes": [],
     "facturado": false
