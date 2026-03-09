@@ -59,7 +59,7 @@ export const MicrophonesStep = ({
       {visibleCategories.map((category) => (
         <section key={category.id} className="space-y-4 sm:space-y-6">
           {/* Sticky category header */}
-          <div className="sticky top-0 z-20 py-2 -mx-4 px-4 sm:-mx-8 sm:px-8 bg-gradient-to-r from-warm-cream/95 to-warm-peach/80 backdrop-blur-md rounded-b-xl">
+          <div className="sticky top-0 z-20 py-2 -mx-4 px-4 sm:-mx-8 sm:px-8 backdrop-blur-md rounded-b-xl">
             <div className="flex items-center justify-center">
               <div className="flex items-center gap-2 sm:gap-3 bg-primary/20 px-4 sm:px-6 py-2 sm:py-3 rounded-full">
                 <h3 className="text-lg sm:text-2xl font-bold">
