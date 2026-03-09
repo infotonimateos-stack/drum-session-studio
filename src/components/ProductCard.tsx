@@ -44,6 +44,7 @@ export const ProductCard = ({
   included = false,
   includedLabel = "YA INCLUIDO",
   disabled = false,
+  vintageBadge,
 }: ProductCardProps) => {
   return (
     <div
