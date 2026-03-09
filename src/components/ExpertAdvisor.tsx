@@ -12,7 +12,7 @@ import { CartItem } from "@/types/cart";
 import { useCartContext, AdvisorProfile } from "@/contexts/CartContext";
 import { useTranslation } from "react-i18next";
 import { DRUM_KIT_IDS, drumKits } from "@/components/steps/DrumKitStep";
-import { baseMicrophones, upgradeMicrophones, vintageMicrophones } from "@/data/microphones";
+import { allMicrophones } from "@/data/microphones";
 
 type ModalStep = "welcome" | "usage" | "style" | "result";
 type UsageOption = "professional" | "selfproduced" | "demo";
@@ -157,11 +157,7 @@ interface CatalogGroup {
 }
 
 const buildFullCatalog = (t: (key: string) => string): CatalogGroup[] => {
-  const allMics: CatalogItem[] = [
-    ...baseMicrophones.map(m => ({ id: m.id, name: m.name, price: m.price })),
-    ...upgradeMicrophones.map(m => ({ id: m.id, name: m.name, price: m.price })),
-    ...vintageMicrophones.map(m => ({ id: m.id, name: m.name, price: m.price })),
-  ];
+  const allMics: CatalogItem[] = allMicrophones.map(m => ({ id: m.id, name: m.name, price: m.price }));
 
   return [
     {

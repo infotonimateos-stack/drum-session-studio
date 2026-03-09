@@ -13,7 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { LanguageSelector } from "@/components/LanguageSelector";
-import { upgradeMicrophones } from "@/data/microphones";
+import { allMicrophones } from "@/data/microphones";
 import { ProductCard } from "@/components/ProductCard";
 import { BillingStep, BillingData } from "@/components/BillingStep";
 import { BankTransferConfirmation } from "@/components/BankTransferConfirmation";
@@ -56,7 +56,7 @@ const AmpliarPedido = () => {
   };
 
   // --- CATALOG ---
-  const micItems: CartItem[] = upgradeMicrophones.map(mic => ({
+  const micItems: CartItem[] = allMicrophones.map(mic => ({
     id: mic.id,
     name: mic.name,
     price: mic.price,
@@ -229,7 +229,7 @@ const AmpliarPedido = () => {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {micItems.map(item => {
-                  const mic = upgradeMicrophones.find(m => m.id === item.id);
+                  const mic = allMicrophones.find(m => m.id === item.id);
                   return (
                     <ProductCard
                       key={item.id}
