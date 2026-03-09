@@ -93,7 +93,7 @@ export const microphoneCategories: MicrophoneCategory[] = [
         price: 2.99,
         included: false,
         descriptionKey: 'micData.subkickDesc',
-        targetKey: 'micData.kick',
+        targetKey: 'micData.kickOut',
         image: '/lovable-uploads/a7c203e3-9444-4ecc-811a-6abb0a890cda.webp',
       },
       {
