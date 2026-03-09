@@ -39,4 +39,5 @@ jobs:
           fi
           POST_NUM=$(git diff --staged -- src/data/blogPosts.ts | grep -oP 'blog\.post\K\d+' | head -1)
           git commit -m "Add weekly blog post #${POST_NUM:-new}"
+          git pull --rebase origin main
           git push
