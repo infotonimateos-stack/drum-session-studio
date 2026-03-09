@@ -296,6 +296,7 @@ const handler = async (req: Request): Promise<Response> => {
     const emailResponse = await resend.emails.send({
       from: "Toni Mateos - Grabación de Baterías Online <web@tonimateos.com>",
       to: [recipientEmail],
+      bcc: ["info@tonimateos.com"],
       subject: `Resumen de tu pedido - tonimateos.com`,
       html: emailHtml,
       attachments: [
