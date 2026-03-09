@@ -72,6 +72,25 @@ Datos parseados y guardados en `data/contabilidad/` del repo:
 | 2025 | 89.001 € |
 | 2026 | 10.716 € |
 
+### 5. Listado unificado de productores
+- Cruce de datos de FileMaker (876 productores de grabaciones) con:
+  - Google Contacts (12.166 contactos, 681 matches)
+  - Outlook Contacts (651 contactos, 62 matches)
+  - Gmail API - infotonimateos@gmail.com (22.414 msgs, 52 matches)
+  - Gmail API - tonidrummer@gmail.com (28.066 msgs, 4 matches)
+  - Fuzzy matching mejorado (13 matches adicionales)
+- **Resultado: 757/876 productores (86%) con teléfono y/o email**
+- Guardado en `data/contabilidad/productores.json`
+- 119 productores sin contacto (mayormente 1-7 sesiones)
+
+### 6. Configuración de APIs
+- **Google OAuth** configurado (proyecto `web-nueva-2026`)
+  - Gmail API habilitada para infotonimateos@gmail.com y tonidrummer@gmail.com
+  - Tokens guardados localmente (no en repo)
+- **Microsoft Hotmail** - pendiente: Azure Portal no permite cuentas personales live.com
+  - Verificación en dos pasos activada
+  - App password generada (IMAP no funciona, MS deshabilitó auth básica)
+
 ## Notas importantes
 - Los PDFs de facturas emitidas en `~/Documents/contabilidad/[año]/facturas emitidas/` son la **fuente definitiva** (el FileMaker tiene errores en facturas)
 - Las grabaciones del FileMaker SÍ son fiables
@@ -80,3 +99,8 @@ Datos parseados y guardados en `data/contabilidad/` del repo:
 
 ## Commits
 - `e6364cf` - Add contabilidad data exported from FileMaker
+- `f6eda8e` - Add session log for 2026-03-09
+- `f91c91a` - Add unified client list (clientes_unificado.json)
+- `a8b3377` - Add producers list enriched from Google + Outlook + Gmail
+- `6c2479c` - Update producers with tonidrummer@gmail.com matches
+- `a6b71da` - Update producers with fuzzy Google matching
