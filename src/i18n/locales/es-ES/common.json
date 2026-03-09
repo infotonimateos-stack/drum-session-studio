@@ -91,6 +91,13 @@
     "basicMics": "Micrófonos Básicos",
     "premiumUpgrades": "Micrófonos Premium",
     "vintageMics": "Micrófonos Vintage",
+    "snareMics": "Micrófonos de Snare",
+    "kickMics": "Micrófonos de Bombo",
+    "hihatMics": "Micrófonos de Hi-hat",
+    "tomMics": "Micrófonos de Tom",
+    "rideMics": "Micrófonos de Ride",
+    "overheadMics": "Micrófonos de Overheads",
+    "roomMics": "Micrófonos de Room",
     "added": "✨ AÑADIDO",
     "add": "AÑADIR",
     "category": "Micrófono"
