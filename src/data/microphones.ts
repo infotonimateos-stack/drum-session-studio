@@ -57,7 +57,7 @@ export const microphoneCategories: MicrophoneCategory[] = [
         price: 2.99,
         included: false,
         descriptionKey: 'micData.beta52Desc',
-        targetKey: 'micData.kick',
+        targetKey: 'micData.kickIn',
         image: '/lovable-uploads/ca2e274f-b7d9-43bc-becb-7c13d65def45.webp',
       },
       {
@@ -66,7 +66,7 @@ export const microphoneCategories: MicrophoneCategory[] = [
         price: 2.99,
         included: false,
         descriptionKey: 'micData.audixD6Desc',
-        targetKey: 'micData.kickOut',
+        targetKey: 'micData.kickIn',
         image: '/lovable-uploads/28ff47cf-fb28-405a-b5ae-f8351abb1a14.webp',
       },
       {
@@ -93,7 +93,7 @@ export const microphoneCategories: MicrophoneCategory[] = [
         price: 2.99,
         included: false,
         descriptionKey: 'micData.subkickDesc',
-        targetKey: 'micData.kick',
+        targetKey: 'micData.kickOut',
         image: '/lovable-uploads/a7c203e3-9444-4ecc-811a-6abb0a890cda.webp',
       },
       {
@@ -111,7 +111,7 @@ export const microphoneCategories: MicrophoneCategory[] = [
         price: 5.99,
         included: false,
         descriptionKey: 'micData.evRe20Desc',
-        targetKey: 'micData.kick',
+        targetKey: 'micData.kickOut',
         image: '/lovable-uploads/electrovoice-re20-vintage.jpg',
       },
       {
@@ -120,7 +120,7 @@ export const microphoneCategories: MicrophoneCategory[] = [
         price: 5.99,
         included: false,
         descriptionKey: 'micData.akgD12Desc',
-        targetKey: 'micData.kick',
+        targetKey: 'micData.kickOut',
         image: '/lovable-uploads/akg-d12-vintage.webp',
         vintage: true,
       },
