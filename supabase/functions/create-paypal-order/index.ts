@@ -103,7 +103,7 @@ serve(async (req) => {
 
     logStep("Breakdown", { itemTotalRounded, taxRounded, feeRounded, calculatedTotal, clientTotal: total });
 
-    const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
+    const origin = req.headers.get("origin") || "https://tonimateos.com";
     const sdkMode = Boolean(requestBody.sdkMode);
 
     const orderBody: any = {

@@ -90,7 +90,7 @@ serve(async (req) => {
 
     logStep("Line items created", { count: lineItems.length });
 
-    const origin = req.headers.get("origin") || "https://drum-session-studio.lovable.app";
+    const origin = req.headers.get("origin") || "https://tonimateos.com";
 
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
       line_items: lineItems,
