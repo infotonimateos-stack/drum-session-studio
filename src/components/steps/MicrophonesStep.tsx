@@ -84,9 +84,9 @@ export const MicrophonesStep = ({
                   addLabel={t("video.addFor")}
                   addedLabel={t("microphones.added")}
                 />
-                {/* Vintage badge */}
+                {/* Vintage badge - positioned at top-left to avoid covering price */}
                 {mic.vintage && (
-                  <Badge className="absolute top-3 right-3 z-10 bg-amber-700 hover:bg-amber-700 text-amber-100 border-amber-500/50 text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2 py-0.5 shadow-lg">
+                  <Badge className="absolute top-3 left-3 z-10 bg-amber-700 hover:bg-amber-700 text-amber-100 border-amber-500/50 text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2 py-0.5 shadow-lg">
                     {t("micData.vintage")}
                   </Badge>
                 )}

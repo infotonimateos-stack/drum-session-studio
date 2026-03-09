@@ -120,7 +120,7 @@ export const microphoneCategories: MicrophoneCategory[] = [
         price: 5.99,
         included: false,
         descriptionKey: 'micData.akgD12Desc',
-        targetKey: 'micData.kick',
+        targetKey: 'micData.kickOut',
         image: '/lovable-uploads/akg-d12-vintage.webp',
         vintage: true,
       },
