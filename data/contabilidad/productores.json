@@ -2825,7 +2825,9 @@
   {
     "name": "Joaquín Belmonte",
     "emails": [],
-    "phones": [],
+    "phones": [
+      "+34640993416"
+    ],
     "organization": "",
     "city": "Barcelona",
     "country": "",
@@ -2840,7 +2842,8 @@
     "last_session": "22/09/2025",
     "sources": [
       "filemaker_grabaciones",
-      "google"
+      "google",
+      "google_fuzzy"
     ],
     "notes": [],
     "facturado": false
@@ -4866,7 +4869,9 @@
   {
     "name": "Javi Scrig",
     "emails": [],
-    "phones": [],
+    "phones": [
+      "+34674331608"
+    ],
     "organization": "",
     "city": "",
     "country": "",
@@ -4878,7 +4883,8 @@
     "first_session": "01/06/2024",
     "last_session": "31/08/2024",
     "sources": [
-      "filemaker_grabaciones"
+      "filemaker_grabaciones",
+      "google_fuzzy"
     ],
     "notes": [],
     "facturado": false
@@ -8314,7 +8320,9 @@
   {
     "name": "Santiago Clement",
     "emails": [],
-    "phones": [],
+    "phones": [
+      "+34687932207"
+    ],
     "organization": "",
     "city": "",
     "country": "",
@@ -8328,7 +8336,8 @@
     "first_session": "03/05/2022",
     "last_session": "15/09/2022",
     "sources": [
-      "filemaker_grabaciones"
+      "filemaker_grabaciones",
+      "google_fuzzy"
     ],
     "notes": [],
     "facturado": false
@@ -8643,7 +8652,9 @@
   {
     "name": "Ale Romero",
     "emails": [],
-    "phones": [],
+    "phones": [
+      "667684816"
+    ],
     "organization": "",
     "city": "",
     "country": "",
@@ -8657,7 +8668,8 @@
     "first_session": "06/02/2024",
     "last_session": "22/05/2024",
     "sources": [
-      "filemaker_grabaciones"
+      "filemaker_grabaciones",
+      "google_fuzzy"
     ],
     "notes": [],
     "facturado": false
@@ -8711,7 +8723,9 @@
   {
     "name": "Jose Habana",
     "emails": [],
-    "phones": [],
+    "phones": [
+      "+34636307632"
+    ],
     "organization": "",
     "city": "",
     "country": "",
@@ -8723,7 +8737,8 @@
     "first_session": "01/11/2024",
     "last_session": "22/09/2025",
     "sources": [
-      "filemaker_grabaciones"
+      "filemaker_grabaciones",
+      "google_fuzzy"
     ],
     "notes": [],
     "facturado": false
@@ -11703,7 +11718,9 @@
   {
     "name": "javi wiloo",
     "emails": [],
-    "phones": [],
+    "phones": [
+      "+34658340716"
+    ],
     "organization": "",
     "city": "",
     "country": "",
@@ -11715,7 +11732,8 @@
     "first_session": "01/11/2024",
     "last_session": "23/10/2025",
     "sources": [
-      "filemaker_grabaciones"
+      "filemaker_grabaciones",
+      "google_fuzzy"
     ],
     "notes": [],
     "facturado": false
@@ -13896,7 +13914,9 @@
   {
     "name": "Alex Lemot",
     "emails": [],
-    "phones": [],
+    "phones": [
+      "622750695"
+    ],
     "organization": "",
     "city": "Barcelona",
     "country": "",
@@ -13910,7 +13930,8 @@
     "first_session": "22/04/2020",
     "last_session": "22/04/2020",
     "sources": [
-      "filemaker_grabaciones"
+      "filemaker_grabaciones",
+      "google_fuzzy"
     ],
     "notes": [],
     "facturado": false
@@ -14247,7 +14268,9 @@
   {
     "name": "Bernie tapetone",
     "emails": [],
-    "phones": [],
+    "phones": [
+      "626788272"
+    ],
     "organization": "",
     "city": "Barcelona",
     "country": "",
@@ -14259,7 +14282,8 @@
     "first_session": "10/07/2020",
     "last_session": "10/07/2020",
     "sources": [
-      "filemaker_grabaciones"
+      "filemaker_grabaciones",
+      "google_fuzzy"
     ],
     "notes": [],
     "facturado": false
@@ -17490,7 +17514,9 @@
   },
   {
     "name": "Juanpa Mejía",
-    "emails": [],
+    "emails": [
+      "juanpamc@gmail.com"
+    ],
     "phones": [],
     "organization": "",
     "city": "",
@@ -17503,7 +17529,8 @@
     "first_session": "20/01/2023",
     "last_session": "20/01/2023",
     "sources": [
-      "filemaker_grabaciones"
+      "filemaker_grabaciones",
+      "google_fuzzy"
     ],
     "notes": [],
     "facturado": false
@@ -17748,7 +17775,9 @@
   {
     "name": "Kike Altez",
     "emails": [],
-    "phones": [],
+    "phones": [
+      "+34635462018"
+    ],
     "organization": "",
     "city": "",
     "country": "",
@@ -17762,7 +17791,8 @@
     "first_session": "14/06/2023",
     "last_session": "14/06/2023",
     "sources": [
-      "filemaker_grabaciones"
+      "filemaker_grabaciones",
+      "google_fuzzy"
     ],
     "notes": [],
     "facturado": false
@@ -18395,7 +18425,9 @@
   {
     "name": "Fernando Cobo",
     "emails": [],
-    "phones": [],
+    "phones": [
+      "+34619464037"
+    ],
     "organization": "",
     "city": "",
     "country": "",
@@ -18409,7 +18441,8 @@
     "first_session": "24/01/2024",
     "last_session": "24/01/2024",
     "sources": [
-      "filemaker_grabaciones"
+      "filemaker_grabaciones",
+      "google_fuzzy"
     ],
     "notes": [],
     "facturado": false
@@ -19276,7 +19309,9 @@
   {
     "name": "Nicolás Saavedra",
     "emails": [],
-    "phones": [],
+    "phones": [
+      "+34643205891"
+    ],
     "organization": "",
     "city": "",
     "country": "",
@@ -19290,7 +19325,8 @@
     "first_session": "22/07/2024",
     "last_session": "22/07/2024",
     "sources": [
-      "filemaker_grabaciones"
+      "filemaker_grabaciones",
+      "google_fuzzy"
     ],
     "notes": [],
     "facturado": false
@@ -19645,8 +19681,12 @@
   },
   {
     "name": "biel records",
-    "emails": [],
-    "phones": [],
+    "emails": [
+      "bielrecords@gmail.com"
+    ],
+    "phones": [
+      "+1 209-300-9792"
+    ],
     "organization": "",
     "city": "",
     "country": "",
@@ -19660,7 +19700,8 @@
     "first_session": "30/09/2024",
     "last_session": "30/09/2024",
     "sources": [
-      "filemaker_grabaciones"
+      "filemaker_grabaciones",
+      "google_fuzzy"
     ],
     "notes": [],
     "facturado": false
