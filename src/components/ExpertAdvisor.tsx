@@ -12,7 +12,7 @@ import { CartItem } from "@/types/cart";
 import { useCartContext, AdvisorProfile } from "@/contexts/CartContext";
 import { useTranslation } from "react-i18next";
 import { DRUM_KIT_IDS, drumKits } from "@/components/steps/DrumKitStep";
-import { baseMicrophones, upgradeMicrophones, vintageMicrophones } from "@/data/microphones";
+import { allMicrophones } from "@/data/microphones";
 
 type ModalStep = "welcome" | "usage" | "style" | "result";
 type UsageOption = "professional" | "selfproduced" | "demo";
