@@ -295,7 +295,7 @@ export const microphoneCategories: MicrophoneCategory[] = [
         included: false,
         descriptionKey: 'micData.aeaR88Desc',
         targetKey: 'micData.stereoRoom',
-        image: '/lovable-uploads/aea-r88-vintage.webp',
+        image: '/lovable-uploads/aea-r88-vintage.jpg',
       },
       {
         id: 'akg-d19c-vintage',
