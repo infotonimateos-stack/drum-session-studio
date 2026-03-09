@@ -22,6 +22,8 @@ interface ProductCardProps {
   includedLabel?: string;
   /** When true, the card is visually dimmed and the button is disabled */
   disabled?: boolean;
+  /** If provided, renders a vintage-style badge next to the category label */
+  vintageBadge?: string;
 }
 
 export const ProductCard = ({
@@ -42,6 +44,7 @@ export const ProductCard = ({
   included = false,
   includedLabel = "YA INCLUIDO",
   disabled = false,
+  vintageBadge,
 }: ProductCardProps) => {
   return (
     <div
@@ -71,11 +74,18 @@ export const ProductCard = ({
           <Check className="h-4 w-4 text-primary-foreground" strokeWidth={3} />
         </div>
       )}
-      {/* Top row: category + price */}
+      {/* Top row: category + vintage badge + price */}
       <div className="flex items-center justify-between gap-2 px-5 pt-4 pb-1">
-        <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-card-dark-muted/20 text-card-dark-muted truncate min-w-0">
-          {category}
-        </span>
+        <div className="flex items-center gap-1.5 min-w-0">
+          <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-card-dark-muted/20 text-card-dark-muted truncate min-w-0">
+            {category}
+          </span>
+          {vintageBadge && (
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-700 text-amber-100 border border-amber-500/50 whitespace-nowrap shrink-0">
+              {vintageBadge}
+            </span>
+          )}
+        </div>
         {!included && (
           <span className="text-xl font-bold text-card-dark-price whitespace-nowrap shrink-0">
             {price.toFixed(2)} €
