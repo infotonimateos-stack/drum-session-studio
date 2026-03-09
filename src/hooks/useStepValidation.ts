@@ -1,14 +1,14 @@
 import { CartState } from '@/types/cart';
-import { baseMicrophones, upgradeMicrophones, vintageMicrophones } from '@/data/microphones';
+import { allMicrophones } from '@/data/microphones';
 
 // All microphone IDs
-const ALL_MIC_IDS = [...baseMicrophones, ...upgradeMicrophones, ...vintageMicrophones].map(m => m.id);
+const ALL_MIC_IDS = allMicrophones.map(m => m.id);
 
 // Microphone IDs grouped by category
-const KICK_MIC_IDS = ['beta52-kick', 'beta91-kick', 'subkick-kick', 'u47fet-kick', 'audix-d6', 'akg-d12-vintage', 'ev-re20-vintage'];
+const KICK_MIC_IDS = ['beta52-kick', 'beta91-kick', 'subkick-kick', 'u47fet-kick', 'audix-d6', 'akg-d112-kick', 'akg-d12-vintage', 'ev-re20-vintage'];
 const SNARE_TOP_MIC_IDS = ['sm57-snare', 'akg414-snare', 'sm57-unidyne-vintage'];
 const HIHAT_MIC_IDS = ['km184-hihat', 'm160-hihat'];
-const OVERHEAD_MIC_IDS = ['akg414-overheads', 'coles4038-oh', 'c12-overhead', 'aea-r88-vintage'];
+const OVERHEAD_MIC_IDS = ['akg414-overheads', 'coles4038-oh', 'akg414-oh-mono', 'c12-overhead', 'aea-r88-vintage'];
 
 // Drum kit IDs
 export const DRUM_KIT_IDS = ['kit-modern', 'kit-new-vintage', 'kit-jazz', 'kit-pure-vintage'];

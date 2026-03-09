@@ -157,11 +157,7 @@ interface CatalogGroup {
 }
 
 const buildFullCatalog = (t: (key: string) => string): CatalogGroup[] => {
-  const allMics: CatalogItem[] = [
-    ...baseMicrophones.map(m => ({ id: m.id, name: m.name, price: m.price })),
-    ...upgradeMicrophones.map(m => ({ id: m.id, name: m.name, price: m.price })),
-    ...vintageMicrophones.map(m => ({ id: m.id, name: m.name, price: m.price })),
-  ];
+  const allMics: CatalogItem[] = allMicrophones.map(m => ({ id: m.id, name: m.name, price: m.price }));
 
   return [
     {

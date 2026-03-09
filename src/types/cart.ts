@@ -29,6 +29,14 @@ export interface Microphone {
   descriptionKey: string;
   targetKey: string;
   image?: string;
+  vintage?: boolean;
+  subtitleKey?: string;
+}
+
+export interface MicrophoneCategory {
+  id: string;
+  titleKey: string;
+  microphones: Microphone[];
 }
 
 export interface OrderForm {
