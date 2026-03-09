@@ -56,7 +56,7 @@ const AmpliarPedido = () => {
   };
 
   // --- CATALOG ---
-  const micItems: CartItem[] = allophones.map(mic => ({
+  const micItems: CartItem[] = allMicrophones.map(mic => ({
     id: mic.id,
     name: mic.name,
     price: mic.price,
