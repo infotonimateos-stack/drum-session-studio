@@ -66,7 +66,7 @@ export const microphoneCategories: MicrophoneCategory[] = [
         price: 2.99,
         included: false,
         descriptionKey: 'micData.audixD6Desc',
-        targetKey: 'micData.kickOut',
+        targetKey: 'micData.kickIn',
         image: '/lovable-uploads/28ff47cf-fb28-405a-b5ae-f8351abb1a14.webp',
       },
       {
