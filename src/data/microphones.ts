@@ -54,7 +54,7 @@ export const baseMicrophones: Microphone[] = [
     included: false,
     descriptionKey: 'micData.sen602Desc',
     targetKey: 'micData.tom3',
-    image: '/lovable-uploads/fe5dd1af-916b-40b6-a0ef-839268dcefe9.webp'
+    image: '/lovable-uploads/sennheiser-e602.webp'
   },
   {
     id: 'akg414-overheads',
