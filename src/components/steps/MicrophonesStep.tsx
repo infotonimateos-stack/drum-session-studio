@@ -71,26 +71,20 @@ export const MicrophonesStep = ({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
             {category.microphones.map((mic) => (
-              <div key={mic.id} className="relative">
-                <ProductCard
-                  category={t(mic.targetKey)}
-                  price={mic.price}
-                  name={mic.name}
-                  subtitle={mic.subtitleKey ? t(mic.subtitleKey) : undefined}
-                  description={t(mic.descriptionKey)}
-                  image={mic.image}
-                  isSelected={hasItem(mic.id)}
-                  onToggle={() => handleToggleItem(mic)}
-                  addLabel={t("video.addFor")}
-                  addedLabel={t("microphones.added")}
-                />
-                {/* Vintage badge - positioned at top-left to avoid covering price */}
-                {mic.vintage && (
-                  <Badge className="absolute top-3 left-3 z-10 bg-amber-700 hover:bg-amber-700 text-amber-100 border-amber-500/50 text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2 py-0.5 shadow-lg">
-                    {t("micData.vintage")}
-                  </Badge>
-                )}
-              </div>
+              <ProductCard
+                key={mic.id}
+                category={t(mic.targetKey)}
+                price={mic.price}
+                name={mic.name}
+                subtitle={mic.subtitleKey ? t(mic.subtitleKey) : undefined}
+                description={t(mic.descriptionKey)}
+                image={mic.image}
+                isSelected={hasItem(mic.id)}
+                onToggle={() => handleToggleItem(mic)}
+                addLabel={t("video.addFor")}
+                addedLabel={t("microphones.added")}
+                vintageBadge={mic.vintage ? t("micData.vintage") : undefined}
+              />
             ))}
           </div>
         </section>

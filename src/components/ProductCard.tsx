@@ -22,6 +22,8 @@ interface ProductCardProps {
   includedLabel?: string;
   /** When true, the card is visually dimmed and the button is disabled */
   disabled?: boolean;
+  /** If provided, renders a vintage-style badge next to the category label */
+  vintageBadge?: string;
 }
 
 export const ProductCard = ({
