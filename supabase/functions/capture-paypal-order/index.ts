@@ -141,6 +141,21 @@ serve(async (req) => {
           .eq("payment_id", orderId);
 
         logStep("Order updated with invoice number and completed status");
+
+        // Send Telegram notification via n8n webhook
+        try {
+          const { data: orderData } = await supabase
+            .from("orders")
+            .select("*")
+            .eq("payment_id", orderId)
+            .single();
+
+          if (orderData) {
+            await notifyNewOrder(orderData);
+          }
+        } catch (notifyErr) {
+          logStep("ERROR sending Telegram notification", { error: (notifyErr as Error).message });
+        }
       } catch (dbErr) {
         logStep("ERROR updating order after capture", { error: (dbErr as Error).message });
       }
@@ -218,5 +233,36 @@ async function sendConfirmationEmail(email: string, name: string | undefined, or
     logStep("Email function response", emailResult);
   } catch (error) {
     logStep("Failed to send confirmation email", { error: (error as Error).message });
+  }
+}
+
+async function notifyNewOrder(order: any) {
+  const logStep = (step: string, details?: any) => {
+    const detailsStr = details ? ` - ${JSON.stringify(details)}` : '';
+    console.log(`[CAPTURE-PAYPAL-ORDER] ${step}${detailsStr}`);
+  };
+
+  try {
+    const response = await fetch("https://n8n.cardeseo.com/webhook/tonimateos-nuevo-pedido", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        first_name: order.first_name,
+        last_name: order.last_name,
+        contact_email: order.contact_email,
+        country_code: order.country_code,
+        items: order.items,
+        song_count: order.song_count,
+        total: order.total,
+        payment_method: order.payment_method,
+        invoice_number: order.invoice_number,
+        created_at: order.created_at,
+      }),
+    });
+
+    const result = await response.json();
+    logStep("Telegram notification sent", result);
+  } catch (error) {
+    logStep("Failed to send Telegram notification", { error: (error as Error).message });
   }
 }

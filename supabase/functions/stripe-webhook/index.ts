@@ -57,10 +57,47 @@ serve(async (req) => {
         const customerEmail = session.customer_email || session.customer_details?.email;
         const customerName = session.customer_details?.name;
 
-        if (customerEmail) {
-          const supabaseUrl = Deno.env.get("SUPABASE_URL");
-          const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+        const supabaseUrl = Deno.env.get("SUPABASE_URL");
+        const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
+        // Send Telegram notification via n8n webhook
+        if (supabaseUrl && serviceRoleKey) {
+          try {
+            const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2.49.2");
+            const supabase = createClient(supabaseUrl, serviceRoleKey);
+
+            const { data: orderData } = await supabase
+              .from("orders")
+              .select("*")
+              .eq("payment_id", session.id)
+              .single();
+
+            if (orderData) {
+              const notifyResponse = await fetch("https://n8n.cardeseo.com/webhook/tonimateos-nuevo-pedido", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  first_name: orderData.first_name,
+                  last_name: orderData.last_name,
+                  contact_email: orderData.contact_email,
+                  country_code: orderData.country_code,
+                  items: orderData.items,
+                  song_count: orderData.song_count,
+                  total: orderData.total,
+                  payment_method: orderData.payment_method,
+                  invoice_number: orderData.invoice_number,
+                  created_at: orderData.created_at,
+                }),
+              });
+              const notifyResult = await notifyResponse.json();
+              logStep("Telegram notification sent", notifyResult);
+            }
+          } catch (notifyErr) {
+            logStep("ERROR sending Telegram notification", { error: (notifyErr as Error).message });
+          }
+        }
+
+        if (customerEmail) {
           if (supabaseUrl && serviceRoleKey) {
             const emailResponse = await fetch(`${supabaseUrl}/functions/v1/send-order-email`, {
               method: "POST",
