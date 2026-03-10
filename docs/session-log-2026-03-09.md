@@ -33,44 +33,44 @@ Datos parseados y guardados en `data/contabilidad/` del repo:
 
 ### 4. Estadísticas generadas
 
-**Ingresos totales por grabaciones:** 677.444,74 €
+**Ingresos totales por grabaciones:** 338.722,37 €
 **Total sesiones:** 3.758
 **Artistas únicos:** 1.016
-**Productores únicos:** 890
+**Productores únicos:** 876
 
-**Top 10 productores (por nº sesiones):**
+**Top 10 productores (por ingresos):**
 
-| # | Productor | Sesiones | Importe | Artistas |
+| # | Productor | Ingresos | Sesiones | Artistas |
 |---|---|---|---|---|
-| 1 | Alex Vélez | 75 | 7.680 € | 1 |
-| 2 | David Santisteban | 66 | 18.480 € | 19 |
-| 3 | Koen Moeyaert | 56 | 6.782 € | 1 |
-| 4 | Jorge Villaescusa | 50 | 46.760 € | 26 |
-| 5 | Jacobo Calderón | 48 | 9.920 € | 5 |
-| 6 | Marc Martin | 41 | 22.419 € | 17 |
-| 7 | Isma Romero | 38 | 5.040 € | 7 |
-| 8 | Santi Ibarretxe | 37 | 5.860 € | 11 |
-| 9 | Marc Ferrando | 37 | 5.520 € | 7 |
-| 10 | Marc Quintillà | 36 | 5.500 € | 14 |
+| 1 | Jorge Villaescusa | 23.380 € | 50 | 27 |
+| 2 | Marc Martin | 11.210 € | 41 | 17 |
+| 3 | David Santisteban | 9.240 € | 66 | 20 |
+| 4 | Roque Baños | 7.250 € | 25 | 4 |
+| 5 | Jacobo Calderón | 4.960 € | 48 | 6 |
+| 6 | Alex Vélez | 3.840 € | 75 | 2 |
+| 7 | John Caballés | 3.700 € | 34 | 9 |
+| 8 | Koen Moeyaert | 3.391 € | 56 | 1 |
+| 9 | Fabián Rincón | 3.192 € | 23 | 5 |
+| 10 | Ten Productions | 3.030 € | 29 | 9 |
 
 **Ingresos por año:**
 
-| Año | Ingresos |
-|---|---|
-| 2013 | 2.000 € |
-| 2014 | 4.520 € |
-| 2015 | 13.748 € |
-| 2016 | 21.600 € |
-| 2017 | 31.604 € |
-| 2018 | 40.960 € |
-| 2019 | 45.164 € |
-| 2020 | 82.872 € |
-| 2021 | 94.128 € |
-| 2022 | 73.856 € |
-| 2023 | 69.980 € |
-| 2024 | 97.294 € |
-| 2025 | 89.001 € |
-| 2026 | 10.716 € |
+| Año | Ingresos | Sesiones |
+|---|---|---|
+| 2013 | 1.000 € | 1 |
+| 2014 | 2.260 € | 24 |
+| 2015 | 6.874 € | 54 |
+| 2016 | 10.800 € | 117 |
+| 2017 | 15.802 € | 144 |
+| 2018 | 20.480 € | 256 |
+| 2019 | 22.582 € | 238 |
+| 2020 | 41.436 € | 506 |
+| 2021 | 47.064 € | 531 |
+| 2022 | 36.928 € | 406 |
+| 2023 | 34.990 € | 396 |
+| 2024 | 48.647 € | 527 |
+| 2025 | 44.501 € | 477 |
+| 2026 | 5.358 € | 77 |
 
 ### 5. Listado unificado de productores
 - Cruce de datos de FileMaker (876 productores de grabaciones) con:
@@ -90,6 +90,13 @@ Datos parseados y guardados en `data/contabilidad/` del repo:
 - **Microsoft Hotmail** - pendiente: Azure Portal no permite cuentas personales live.com
   - Verificación en dos pasos activada
   - App password generada (IMAP no funciona, MS deshabilitó auth básica)
+
+### 7. Corrección de datos y gráficos
+- **Bug corregido:** El campo CSV[1] era "Sumatorio" (total acumulado), NO el precio de sesión. El campo correcto es CSV[23] = "total grabación"
+- Total correcto: **338.722,37 €** (antes estaba duplicado a 677.444€)
+- Campos de grabaciones.json renombrados para coincidir con FileMaker: fecha_grabacion, artista, productor, disco, temas, precios_tema, total_grabacion, ciudad, estudio, cobrado, con_factura, notas
+- 14 productores con total_revenue corregido en productores.json
+- Gráficos regenerados: `data/charts/top10_ingresos.html`, `data/charts/evolucion_anual.html`
 
 ## Notas importantes
 - Los PDFs de facturas emitidas en `~/Documents/contabilidad/[año]/facturas emitidas/` son la **fuente definitiva** (el FileMaker tiene errores en facturas)

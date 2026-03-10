@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Evolución Anual - Drum Session Studio</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+body { margin: 0; padding: 20px; background: #1a1a2e; color: #eee; font-family: system-ui; }
+h1 { text-align: center; color: #e94560; }
+.container { max-width: 900px; margin: 0 auto; }
+canvas { background: #16213e; border-radius: 12px; padding: 15px; margin-bottom: 30px; }
+h2 { color: #533483; margin-top: 30px; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Evolución Anual - Grabaciones</h1>
+<h2>Ingresos por año</h2>
+<canvas id="revenue"></canvas>
+<h2>Sesiones por año</h2>
+<canvas id="sessions"></canvas>
+</div>
+<script>
+const years = ['2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025','2026'];
+const revenue = [1000,2260,6874,10800,15802,20480,22582,41436,47064,36928,34990,48647,44501,5358];
+const sessions = [1,24,54,117,144,256,238,506,531,406,396,527,477,77];
+
+new Chart(document.getElementById('revenue'), {
+  type: 'bar',
+  data: {
+    labels: years,
+    datasets: [{
+      label: 'Ingresos (€)',
+      data: revenue,
+      backgroundColor: '#e94560',
+      borderRadius: 6
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ctx.raw.toLocaleString('es-ES') + ' €' } }
+    },
+    scales: {
+      y: { ticks: { color: '#aaa', callback: v => (v/1000).toFixed(0) + 'k€' }, grid: { color: '#333' } },
+      x: { ticks: { color: '#eee' }, grid: { display: false } }
+    }
+  }
+});
+
+new Chart(document.getElementById('sessions'), {
+  type: 'line',
+  data: {
+    labels: years,
+    datasets: [{
+      label: 'Sesiones',
+      data: sessions,
+      borderColor: '#533483',
+      backgroundColor: 'rgba(83,52,131,0.2)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 5,
+      pointBackgroundColor: '#e94560'
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { ticks: { color: '#aaa' }, grid: { color: '#333' } },
+      x: { ticks: { color: '#eee' }, grid: { display: false } }
+    }
+  }
+});
+</script>
+</body>
+</html>

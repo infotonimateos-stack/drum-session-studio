@@ -186,7 +186,7 @@
     "address": "",
     "nif": "",
     "sessions": 44,
-    "total_revenue": 12909.9,
+    "total_revenue": 1700.0,
     "bands": [
       "ice crime",
       "destemps",
@@ -300,7 +300,7 @@
     "address": "",
     "nif": "",
     "sessions": 37,
-    "total_revenue": 4150.0,
+    "total_revenue": 3700.0,
     "bands": [
       "Davinia Pastor",
       "Antonio José",
@@ -409,7 +409,7 @@
     "address": "",
     "nif": "",
     "sessions": 34,
-    "total_revenue": 2620.0,
+    "total_revenue": 2380.0,
     "bands": [
       "Joaquín Pantoja",
       "Merche Rico",
@@ -450,7 +450,7 @@
     "address": "",
     "nif": "",
     "sessions": 34,
-    "total_revenue": 2640.0,
+    "total_revenue": 2580.0,
     "bands": [
       "Tu Cara Me Suena",
       "TCMS gala 10",
@@ -1284,7 +1284,7 @@
     "address": "",
     "nif": "",
     "sessions": 17,
-    "total_revenue": 1060.0,
+    "total_revenue": 1000.0,
     "bands": [
       "juhma",
       "faulin mendez",
@@ -2860,7 +2860,7 @@
     "address": "",
     "nif": "",
     "sessions": 9,
-    "total_revenue": 620.0,
+    "total_revenue": 320.0,
     "bands": [
       "Uri Plana",
       "Jon Oyster",
@@ -2890,7 +2890,7 @@
     "address": "",
     "nif": "",
     "sessions": 9,
-    "total_revenue": 1530.0,
+    "total_revenue": 170.0,
     "bands": [
       "Son Amar Show"
     ],
@@ -3290,7 +3290,7 @@
     "address": "",
     "nif": "",
     "sessions": 8,
-    "total_revenue": 480.0,
+    "total_revenue": 300.0,
     "bands": [
       "Antonio Poyatos",
       "Pijamas azules"
@@ -4349,7 +4349,7 @@
     "address": "",
     "nif": "",
     "sessions": 6,
-    "total_revenue": 440.0,
+    "total_revenue": 380.0,
     "bands": [
       "Ángel Pina",
       "Angel Pina"
@@ -4613,7 +4613,7 @@
     "address": "",
     "nif": "",
     "sessions": 6,
-    "total_revenue": 360.0,
+    "total_revenue": 180.0,
     "bands": [
       "Nando Cohen"
     ],
@@ -5498,7 +5498,7 @@
     "address": "",
     "nif": "",
     "sessions": 5,
-    "total_revenue": 610.0,
+    "total_revenue": 450.0,
     "bands": [
       "Samantha",
       "Adrià Roy",
@@ -6063,7 +6063,7 @@
     "address": "",
     "nif": "",
     "sessions": 4,
-    "total_revenue": 420.0,
+    "total_revenue": 270.0,
     "bands": [
       "Operacion Triunfo 2020",
       "TCMS 2020 gala 17",
@@ -8045,7 +8045,7 @@
     "address": "",
     "nif": "",
     "sessions": 3,
-    "total_revenue": 680.0,
+    "total_revenue": 380.0,
     "bands": [
       "Santi",
       "javier quilis"
@@ -9115,7 +9115,7 @@
     "address": "Rua Guilherme Volpe, 552\u000bJardim Recreio",
     "nif": "14177060",
     "sessions": 2,
-    "total_revenue": 160.0,
+    "total_revenue": 80.0,
     "bands": [
       "david soriano",
       "David Soriano"
@@ -12561,7 +12561,7 @@
     "address": "",
     "nif": "",
     "sessions": 1,
-    "total_revenue": 0.0,
+    "total_revenue": 0,
     "bands": [
       "Miquel Porcel"
     ],
@@ -12584,7 +12584,7 @@
     "address": "",
     "nif": "",
     "sessions": 1,
-    "total_revenue": 0.0,
+    "total_revenue": 0,
     "bands": [
       "Juan Mena"
     ],
@@ -13336,7 +13336,7 @@
     "address": "",
     "nif": "",
     "sessions": 1,
-    "total_revenue": 0.0,
+    "total_revenue": 0,
     "bands": [
       "Miquel Moya"
     ],
@@ -14202,7 +14202,7 @@
     "address": "",
     "nif": "",
     "sessions": 1,
-    "total_revenue": 0.0,
+    "total_revenue": 0,
     "bands": [],
     "first_session": "10/07/2020",
     "last_session": "10/07/2020",
@@ -14963,7 +14963,7 @@
     "address": "",
     "nif": "",
     "sessions": 1,
-    "total_revenue": 0.0,
+    "total_revenue": 0,
     "bands": [
       "Noé Santamaría"
     ],
@@ -21549,7 +21549,7 @@
     "address": "",
     "nif": "",
     "sessions": 1,
-    "total_revenue": 0.0,
+    "total_revenue": 0,
     "bands": [
       "La Guardia"
     ],
