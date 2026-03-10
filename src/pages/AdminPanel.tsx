@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter, Archive, FileSpreadsheet, FileDown, CalendarIcon, BarChart3, Users, AlertCircle } from "lucide-react";
+import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter, Archive, FileSpreadsheet, FileDown, CalendarIcon, BarChart3, Users, AlertCircle, Package } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
@@ -20,6 +20,7 @@ import html2pdf from "html2pdf.js";
 import AnalyticsTab from "@/components/admin/AnalyticsTab";
 import ClientsTab from "@/components/admin/ClientsTab";
 import IncompleteOrdersTab from "@/components/admin/IncompleteOrdersTab";
+import OrdersWorkflowTab from "@/components/admin/OrdersWorkflowTab";
 
 const ADMIN_ROUTE = true; // marker
 
@@ -52,6 +53,9 @@ interface Order {
   first_name: string | null;
   last_name: string | null;
   contact_email: string | null;
+  work_status: string;
+  deadline: string | null;
+  work_notes: string | null;
 }
 
 const statusColors: Record<string, string> = {
@@ -84,7 +88,7 @@ export default function AdminPanel() {
   const [selectedOrders, setSelectedOrders] = useState<Set<string>>(new Set());
   const [dateFrom, setDateFrom] = useState<Date | undefined>();
   const [dateTo, setDateTo] = useState<Date | undefined>();
-  const [activeTab, setActiveTab] = useState("billing");
+  const [activeTab, setActiveTab] = useState("orders");
 
   const apiCall = useCallback(async (action: string, method: string = "GET", body?: any, params?: Record<string, string>) => {
     const url = new URL(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-api`);
@@ -529,7 +533,11 @@ export default function AdminPanel() {
 
       <div className="container mx-auto px-4 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full max-w-2xl grid-cols-4">
+          <TabsList className="grid w-full max-w-3xl grid-cols-5">
+            <TabsTrigger value="orders" className="gap-2">
+              <Package className="h-4 w-4" />
+              Pedidos
+            </TabsTrigger>
             <TabsTrigger value="billing" className="gap-2">
               <FileText className="h-4 w-4" />
               Facturación
@@ -550,6 +558,11 @@ export default function AdminPanel() {
               Analytics
             </TabsTrigger>
           </TabsList>
+
+          {/* ===== PEDIDOS TAB ===== */}
+          <TabsContent value="orders" className="space-y-6">
+            <OrdersWorkflowTab orders={orders} onRefresh={fetchOrders} apiCall={apiCall} />
+          </TabsContent>
 
           {/* ===== FACTURACIÓN TAB ===== */}
           <TabsContent value="billing" className="space-y-6">

@@ -186,6 +186,60 @@ serve(async (req) => {
       });
     }
 
+    // POST: update work status
+    if (req.method === "POST" && action === "update-work-status") {
+      const { orderId, workStatus } = await req.json();
+      if (!orderId || !workStatus) throw new Error("Missing orderId or workStatus");
+
+      const validStatuses = ["new", "in_progress", "delivered"];
+      if (!validStatuses.includes(workStatus)) throw new Error("Invalid work status");
+
+      logStep("Updating work status", { orderId, workStatus });
+      const { error } = await supabase
+        .from("orders")
+        .update({ work_status: workStatus })
+        .eq("id", orderId);
+
+      if (error) throw error;
+      return new Response(JSON.stringify({ success: true }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // POST: update deadline
+    if (req.method === "POST" && action === "update-deadline") {
+      const { orderId, deadline } = await req.json();
+      if (!orderId) throw new Error("Missing orderId");
+
+      logStep("Updating deadline", { orderId, deadline });
+      const { error } = await supabase
+        .from("orders")
+        .update({ deadline: deadline || null })
+        .eq("id", orderId);
+
+      if (error) throw error;
+      return new Response(JSON.stringify({ success: true }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // POST: update work notes
+    if (req.method === "POST" && action === "update-work-notes") {
+      const { orderId, notes } = await req.json();
+      if (!orderId) throw new Error("Missing orderId");
+
+      logStep("Updating work notes", { orderId });
+      const { error } = await supabase
+        .from("orders")
+        .update({ work_notes: notes || null })
+        .eq("id", orderId);
+
+      if (error) throw error;
+      return new Response(JSON.stringify({ success: true }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     // GET: generate invoice HTML
     if (req.method === "GET" && action === "invoice") {
       const orderId = url.searchParams.get("orderId");
