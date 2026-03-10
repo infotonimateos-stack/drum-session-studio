@@ -60,6 +60,8 @@ interface Order {
   files_detected_at: string | null;
   files_detection_method: string | null;
   files_last_checked_at: string | null;
+  paypal_payer_info: any | null;
+  postal_code: string | null;
 }
 
 const statusColors: Record<string, string> = {
