@@ -41,8 +41,13 @@ export type Database = {
           country_code: string
           created_at: string
           currency: string
+          deadline: string | null
           email_sent_at: string | null
           email_status: string
+          files_detected_at: string | null
+          files_detection_method: string | null
+          files_last_checked_at: string | null
+          files_status: string
           first_name: string | null
           full_address: string | null
           id: string
@@ -55,6 +60,7 @@ export type Database = {
           payment_method: string
           payment_status: string
           paypal_fee: number
+          paypal_payer_info: Json | null
           postal_code: string | null
           song_count: number
           state_province: string | null
@@ -66,6 +72,8 @@ export type Database = {
           vat_number: string | null
           vies_response: Json | null
           vies_valid: boolean | null
+          work_notes: string | null
+          work_status: string
         }
         Insert: {
           base_price: number
@@ -78,8 +86,13 @@ export type Database = {
           country_code: string
           created_at?: string
           currency?: string
+          deadline?: string | null
           email_sent_at?: string | null
           email_status?: string
+          files_detected_at?: string | null
+          files_detection_method?: string | null
+          files_last_checked_at?: string | null
+          files_status?: string
           first_name?: string | null
           full_address?: string | null
           id?: string
@@ -92,6 +105,7 @@ export type Database = {
           payment_method: string
           payment_status?: string
           paypal_fee?: number
+          paypal_payer_info?: Json | null
           postal_code?: string | null
           song_count?: number
           state_province?: string | null
@@ -103,6 +117,8 @@ export type Database = {
           vat_number?: string | null
           vies_response?: Json | null
           vies_valid?: boolean | null
+          work_notes?: string | null
+          work_status?: string
         }
         Update: {
           base_price?: number
@@ -115,8 +131,13 @@ export type Database = {
           country_code?: string
           created_at?: string
           currency?: string
+          deadline?: string | null
           email_sent_at?: string | null
           email_status?: string
+          files_detected_at?: string | null
+          files_detection_method?: string | null
+          files_last_checked_at?: string | null
+          files_status?: string
           first_name?: string | null
           full_address?: string | null
           id?: string
@@ -129,6 +150,7 @@ export type Database = {
           payment_method?: string
           payment_status?: string
           paypal_fee?: number
+          paypal_payer_info?: Json | null
           postal_code?: string | null
           song_count?: number
           state_province?: string | null
@@ -140,6 +162,8 @@ export type Database = {
           vat_number?: string | null
           vies_response?: Json | null
           vies_valid?: boolean | null
+          work_notes?: string | null
+          work_status?: string
         }
         Relationships: []
       }
