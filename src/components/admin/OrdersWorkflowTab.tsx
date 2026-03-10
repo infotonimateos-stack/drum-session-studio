@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon, Play, CheckCircle2, ChevronDown, ChevronRight, Mail, Package, Music } from "lucide-react";
+import { CalendarIcon, Play, CheckCircle2, ChevronDown, ChevronRight, Mail, Package, Music, Phone, MapPin, User, History } from "lucide-react";
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
@@ -27,6 +27,16 @@ interface Order {
   work_status: string;
   deadline: string | null;
   work_notes: string | null;
+  paypal_payer_info: any | null;
+  billing_phone: string | null;
+  full_address: string | null;
+  city: string | null;
+  state_province: string | null;
+  postal_code: string | null;
+  billing_email: string | null;
+  business_name: string | null;
+  vat_number: string | null;
+  is_professional_invoice: boolean;
 }
 
 interface Props {
@@ -135,9 +145,34 @@ export default function OrdersWorkflowTab({ orders, onRefresh, apiCall }: Props)
     const deadlineDate = order.deadline ? new Date(order.deadline + "T00:00:00") : undefined;
     const status = (order.work_status || "new") as keyof typeof workStatusConfig;
 
+    // Detect recurring client by email
+    const email = order.contact_email || order.billing_email;
+    const previousOrders = email
+      ? completedOrders.filter(o => o.id !== order.id && (o.contact_email === email || o.billing_email === email))
+      : [];
+
+    // Build client info from PayPal payer data + form data
+    const pp = order.paypal_payer_info || {};
+    const clientPhone = order.billing_phone || pp.phone || null;
+    const clientAddress = order.full_address || (pp.address ? [pp.address.line1, pp.address.line2].filter(Boolean).join(", ") : null);
+    const clientCity = order.city || pp.address?.city || null;
+    const clientState = order.state_province || pp.address?.state || null;
+    const clientPostal = order.postal_code || pp.address?.postal_code || null;
+    const paypalEmail = pp.email && pp.email !== order.contact_email ? pp.email : null;
+    const paypalName = pp.first_name && pp.last_name ? `${pp.first_name} ${pp.last_name}` : null;
+    const paypalPayerId = pp.payer_id || null;
+
     return (
       <Card key={order.id} className="hover:border-primary/30 transition-colors">
         <CardContent className="pt-4 pb-4 space-y-3">
+          {/* Recurring client badge */}
+          {previousOrders.length > 0 && (
+            <Badge variant="outline" className="bg-purple-500/10 text-purple-400 border-purple-500/30 gap-1 text-xs">
+              <History className="h-3 w-3" />
+              Cliente recurrente - {previousOrders.length} pedido{previousOrders.length > 1 ? "s" : ""} anterior{previousOrders.length > 1 ? "es" : ""}
+            </Badge>
+          )}
+
           {/* Header: name + country + date */}
           <div className="flex items-start justify-between">
             <div>
@@ -150,6 +185,18 @@ export default function OrdersWorkflowTab({ orders, onRefresh, apiCall }: Props)
                   {order.contact_email}
                 </a>
               )}
+              {paypalEmail && (
+                <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
+                  <User className="h-3 w-3" />
+                  PayPal: {paypalEmail}
+                </p>
+              )}
+              {clientPhone && (
+                <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
+                  <Phone className="h-3 w-3" />
+                  {clientPhone}
+                </p>
+              )}
             </div>
             <div className="text-right">
               <p className="text-xs text-muted-foreground">
@@ -158,8 +205,19 @@ export default function OrdersWorkflowTab({ orders, onRefresh, apiCall }: Props)
               {order.invoice_number && (
                 <p className="text-xs font-mono text-muted-foreground">{order.invoice_number}</p>
               )}
+              {order.is_professional_invoice && order.business_name && (
+                <p className="text-xs text-muted-foreground">{order.business_name}</p>
+              )}
             </div>
           </div>
+
+          {/* Address if available */}
+          {(clientAddress || clientCity) && (
+            <p className="text-xs text-muted-foreground flex items-center gap-1">
+              <MapPin className="h-3 w-3 flex-shrink-0" />
+              {[clientAddress, clientCity, clientState, clientPostal].filter(Boolean).join(", ")}
+            </p>
+          )}
 
           {/* Summary: songs + total + method */}
           <div className="flex items-center gap-2 flex-wrap">

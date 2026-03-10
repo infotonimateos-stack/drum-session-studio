@@ -118,7 +118,43 @@ serve(async (req) => {
     const payerEmail = captureData.payer?.email_address;
     const payerName = captureData.payer?.name?.given_name;
 
-    logStep("Payer info", { payerEmail, payerName });
+    // Extract all available payer info from PayPal
+    const paypalPayerInfo: Record<string, any> = {};
+    if (captureData.payer) {
+      const p = captureData.payer;
+      if (p.name?.given_name) paypalPayerInfo.first_name = p.name.given_name;
+      if (p.name?.surname) paypalPayerInfo.last_name = p.name.surname;
+      if (p.email_address) paypalPayerInfo.email = p.email_address;
+      if (p.payer_id) paypalPayerInfo.payer_id = p.payer_id;
+      if (p.phone?.phone_number?.national_number) paypalPayerInfo.phone = p.phone.phone_number.national_number;
+      if (p.address) {
+        paypalPayerInfo.address = {};
+        if (p.address.address_line_1) paypalPayerInfo.address.line1 = p.address.address_line_1;
+        if (p.address.address_line_2) paypalPayerInfo.address.line2 = p.address.address_line_2;
+        if (p.address.admin_area_2) paypalPayerInfo.address.city = p.address.admin_area_2;
+        if (p.address.admin_area_1) paypalPayerInfo.address.state = p.address.admin_area_1;
+        if (p.address.postal_code) paypalPayerInfo.address.postal_code = p.address.postal_code;
+        if (p.address.country_code) paypalPayerInfo.address.country_code = p.address.country_code;
+      }
+    }
+    // Also check shipping info from purchase units
+    const shipping = captureData.purchase_units?.[0]?.shipping;
+    if (shipping) {
+      if (shipping.name?.full_name && !paypalPayerInfo.shipping_name) {
+        paypalPayerInfo.shipping_name = shipping.name.full_name;
+      }
+      if (shipping.address) {
+        paypalPayerInfo.shipping_address = {};
+        if (shipping.address.address_line_1) paypalPayerInfo.shipping_address.line1 = shipping.address.address_line_1;
+        if (shipping.address.address_line_2) paypalPayerInfo.shipping_address.line2 = shipping.address.address_line_2;
+        if (shipping.address.admin_area_2) paypalPayerInfo.shipping_address.city = shipping.address.admin_area_2;
+        if (shipping.address.admin_area_1) paypalPayerInfo.shipping_address.state = shipping.address.admin_area_1;
+        if (shipping.address.postal_code) paypalPayerInfo.shipping_address.postal_code = shipping.address.postal_code;
+        if (shipping.address.country_code) paypalPayerInfo.shipping_address.country_code = shipping.address.country_code;
+      }
+    }
+
+    logStep("Payer info", { payerEmail, payerName, paypalPayerInfo });
 
     if (captureData.status === "COMPLETED") {
       // Assign invoice number NOW that payment is confirmed
@@ -133,10 +169,11 @@ serve(async (req) => {
 
         await supabase
           .from("orders")
-          .update({ 
+          .update({
             payment_status: "completed",
             invoice_number: invoiceNumber,
             invoice_series: 'W',
+            paypal_payer_info: Object.keys(paypalPayerInfo).length > 0 ? paypalPayerInfo : null,
           })
           .eq("payment_id", orderId);
 
