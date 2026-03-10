@@ -67,6 +67,9 @@ export type Database = {
           vat_number: string | null
           vies_response: Json | null
           vies_valid: boolean | null
+          work_notes: string | null
+          work_status: string
+          deadline: string | null
         }
         Insert: {
           base_price: number
@@ -105,6 +108,9 @@ export type Database = {
           vat_number?: string | null
           vies_response?: Json | null
           vies_valid?: boolean | null
+          work_notes?: string | null
+          work_status?: string
+          deadline?: string | null
         }
         Update: {
           base_price?: number
@@ -143,6 +149,9 @@ export type Database = {
           vat_number?: string | null
           vies_response?: Json | null
           vies_valid?: boolean | null
+          work_notes?: string | null
+          work_status?: string
+          deadline?: string | null
         }
         Relationships: []
       }
