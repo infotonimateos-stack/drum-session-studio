@@ -41,7 +41,6 @@ export type Database = {
           country_code: string
           created_at: string
           currency: string
-          deadline: string | null
           email_sent_at: string | null
           email_status: string
           first_name: string | null
@@ -67,8 +66,6 @@ export type Database = {
           vat_number: string | null
           vies_response: Json | null
           vies_valid: boolean | null
-          work_notes: string | null
-          work_status: string
         }
         Insert: {
           base_price: number
@@ -81,7 +78,6 @@ export type Database = {
           country_code: string
           created_at?: string
           currency?: string
-          deadline?: string | null
           email_sent_at?: string | null
           email_status?: string
           first_name?: string | null
@@ -107,8 +103,6 @@ export type Database = {
           vat_number?: string | null
           vies_response?: Json | null
           vies_valid?: boolean | null
-          work_notes?: string | null
-          work_status?: string
         }
         Update: {
           base_price?: number
@@ -121,7 +115,6 @@ export type Database = {
           country_code?: string
           created_at?: string
           currency?: string
-          deadline?: string | null
           email_sent_at?: string | null
           email_status?: string
           first_name?: string | null
@@ -147,8 +140,6 @@ export type Database = {
           vat_number?: string | null
           vies_response?: Json | null
           vies_valid?: boolean | null
-          work_notes?: string | null
-          work_status?: string
         }
         Relationships: []
       }
