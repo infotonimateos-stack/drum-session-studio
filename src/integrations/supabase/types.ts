@@ -66,13 +66,6 @@ export type Database = {
           vat_number: string | null
           vies_response: Json | null
           vies_valid: boolean | null
-          work_notes: string | null
-          work_status: string
-          deadline: string | null
-          files_status: string
-          files_detected_at: string | null
-          files_detection_method: string | null
-          files_last_checked_at: string | null
         }
         Insert: {
           base_price: number
@@ -110,13 +103,6 @@ export type Database = {
           vat_number?: string | null
           vies_response?: Json | null
           vies_valid?: boolean | null
-          work_notes?: string | null
-          work_status?: string
-          deadline?: string | null
-          files_status?: string
-          files_detected_at?: string | null
-          files_detection_method?: string | null
-          files_last_checked_at?: string | null
         }
         Update: {
           base_price?: number
@@ -154,13 +140,6 @@ export type Database = {
           vat_number?: string | null
           vies_response?: Json | null
           vies_valid?: boolean | null
-          work_notes?: string | null
-          work_status?: string
-          deadline?: string | null
-          files_status?: string
-          files_detected_at?: string | null
-          files_detection_method?: string | null
-          files_last_checked_at?: string | null
         }
         Relationships: []
       }
