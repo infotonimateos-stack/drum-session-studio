@@ -240,6 +240,118 @@ serve(async (req) => {
       });
     }
 
+    // POST: check files status via Gmail (Google Apps Script)
+    if (req.method === "POST" && action === "check-files") {
+      logStep("Checking files status via Gmail");
+
+      const { data: pendingOrders, error: fetchError } = await supabase
+        .from("orders")
+        .select("id, contact_email, billing_email, paypal_payer_info, created_at")
+        .eq("payment_status", "completed")
+        .eq("files_status", "pending");
+
+      if (fetchError) throw fetchError;
+      if (!pendingOrders || pendingOrders.length === 0) {
+        return new Response(JSON.stringify({ checked: 0, newlyReceived: 0 }), {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      const checks = pendingOrders.map((order: any) => {
+        const emails = new Set<string>();
+        if (order.contact_email) emails.add(order.contact_email.toLowerCase());
+        if (order.billing_email) emails.add(order.billing_email.toLowerCase());
+        const pp = order.paypal_payer_info as Record<string, any> | null;
+        if (pp?.email) emails.add((pp.email as string).toLowerCase());
+        return {
+          orderId: order.id,
+          emails: Array.from(emails),
+          afterDate: order.created_at.split("T")[0],
+        };
+      });
+
+      const gmailCheckerUrl = Deno.env.get("GMAIL_CHECKER_URL");
+      const gmailCheckerSecret = Deno.env.get("GMAIL_CHECKER_SECRET");
+      if (!gmailCheckerUrl || !gmailCheckerSecret) {
+        throw new Error("Gmail checker not configured");
+      }
+
+      const gmailResponse = await fetch(gmailCheckerUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ secret: gmailCheckerSecret, checks }),
+      });
+
+      if (!gmailResponse.ok) {
+        const errText = await gmailResponse.text();
+        logStep("Gmail checker error", { status: gmailResponse.status, error: errText });
+        throw new Error(`Gmail checker error: ${gmailResponse.status}`);
+      }
+
+      const gmailData = await gmailResponse.json();
+      const results = gmailData.results || [];
+
+      let newlyReceived = 0;
+      const now = new Date().toISOString();
+
+      for (const result of results) {
+        if (result.filesReceived) {
+          await supabase
+            .from("orders")
+            .update({
+              files_status: "received",
+              files_detected_at: result.detectedAt || now,
+              files_detection_method: result.method || "unknown",
+              files_last_checked_at: now,
+            })
+            .eq("id", result.orderId);
+          newlyReceived++;
+        }
+      }
+
+      const allIds = pendingOrders.map((o: any) => o.id);
+      await supabase
+        .from("orders")
+        .update({ files_last_checked_at: now })
+        .in("id", allIds);
+
+      logStep("Files check completed", { checked: pendingOrders.length, newlyReceived });
+
+      return new Response(JSON.stringify({
+        checked: pendingOrders.length,
+        newlyReceived,
+        results: results.filter((r: any) => r.filesReceived),
+      }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // POST: update files status (manual override)
+    if (req.method === "POST" && action === "update-files-status") {
+      const { orderId, filesStatus } = await req.json();
+      if (!orderId || !filesStatus) throw new Error("Missing orderId or filesStatus");
+
+      const validStatuses = ["pending", "received"];
+      if (!validStatuses.includes(filesStatus)) throw new Error("Invalid files status");
+
+      logStep("Updating files status", { orderId, filesStatus });
+      const updateData: Record<string, any> = { files_status: filesStatus };
+      if (filesStatus === "received") {
+        updateData.files_detected_at = new Date().toISOString();
+        updateData.files_detection_method = "manual";
+      } else {
+        updateData.files_detected_at = null;
+        updateData.files_detection_method = null;
+      }
+
+      const { error } = await supabase.from("orders").update(updateData).eq("id", orderId);
+      if (error) throw error;
+
+      return new Response(JSON.stringify({ success: true }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     // GET: generate invoice HTML
     if (req.method === "GET" && action === "invoice") {
       const orderId = url.searchParams.get("orderId");
@@ -277,7 +389,7 @@ serve(async (req) => {
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error);
     logStep("ERROR", { message: msg });
-    return new Response(JSON.stringify({ error: "Internal server error" }), {
+    return new Response(JSON.stringify({ error: msg }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,
     });

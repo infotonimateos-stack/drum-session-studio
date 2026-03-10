@@ -56,6 +56,10 @@ interface Order {
   work_status: string;
   deadline: string | null;
   work_notes: string | null;
+  files_status: string;
+  files_detected_at: string | null;
+  files_detection_method: string | null;
+  files_last_checked_at: string | null;
 }
 
 const statusColors: Record<string, string> = {

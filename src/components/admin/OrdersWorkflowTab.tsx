@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon, Play, CheckCircle2, ChevronDown, ChevronRight, Mail, Package, Music, Phone, MapPin, User, History } from "lucide-react";
+import { CalendarIcon, Play, CheckCircle2, ChevronDown, ChevronRight, Mail, Package, Music, Phone, MapPin, User, History, Paperclip, Clock } from "lucide-react";
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
@@ -37,6 +37,10 @@ interface Order {
   business_name: string | null;
   vat_number: string | null;
   is_professional_invoice: boolean;
+  files_status: string;
+  files_detected_at: string | null;
+  files_detection_method: string | null;
+  files_last_checked_at: string | null;
 }
 
 interface Props {
@@ -116,6 +120,19 @@ export default function OrdersWorkflowTab({ orders, onRefresh, apiCall }: Props)
       onRefresh();
     } catch {
       toast.error("Error actualizando fecha");
+    } finally {
+      setSavingField(null);
+    }
+  };
+
+  const handleUpdateFilesStatus = async (orderId: string, filesStatus: string) => {
+    try {
+      setSavingField(`files-${orderId}`);
+      await apiCall("update-files-status", "POST", { orderId, filesStatus });
+      toast.success(filesStatus === "received" ? "Archivos marcados como recibidos" : "Marcado como pendiente");
+      onRefresh();
+    } catch {
+      toast.error("Error actualizando estado de archivos");
     } finally {
       setSavingField(null);
     }
@@ -232,6 +249,40 @@ export default function OrdersWorkflowTab({ orders, onRefresh, apiCall }: Props)
               {order.payment_method}
             </Badge>
           </div>
+
+          {/* Files status */}
+          {status !== "delivered" && (
+            <div className="flex items-center gap-2">
+              {(order.files_status || "pending") === "received" ? (
+                <Badge variant="outline" className="bg-emerald-500/10 text-emerald-400 border-emerald-500/30 gap-1 text-xs">
+                  <Paperclip className="h-3 w-3" />
+                  Archivos recibidos
+                  {order.files_detection_method && order.files_detection_method !== "manual" && (
+                    <span className="text-[10px] opacity-70 ml-1">
+                      ({order.files_detection_method === "attachment" ? "adjunto" :
+                        order.files_detection_method === "wetransfer_link" ? "WeTransfer" :
+                        order.files_detection_method === "drive_link" ? "Drive" :
+                        order.files_detection_method === "dropbox_link" ? "Dropbox" : ""})
+                    </span>
+                  )}
+                </Badge>
+              ) : (
+                <Badge variant="outline" className="bg-amber-500/10 text-amber-400 border-amber-500/30 gap-1 text-xs">
+                  <Clock className="h-3 w-3" />
+                  Esperando archivos
+                </Badge>
+              )}
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-6 text-[10px] px-2"
+                onClick={() => handleUpdateFilesStatus(order.id, (order.files_status || "pending") === "received" ? "pending" : "received")}
+                disabled={savingField === `files-${order.id}`}
+              >
+                {(order.files_status || "pending") === "received" ? "Desmarcar" : "Marcar recibido"}
+              </Button>
+            </div>
+          )}
 
           {/* Items grouped by category */}
           {(config.microphones.length > 0 || config.preamps.length > 0 || config.interfaces.length > 0 || config.extras.length > 0) && (
@@ -358,7 +409,7 @@ export default function OrdersWorkflowTab({ orders, onRefresh, apiCall }: Props)
   return (
     <div className="space-y-6">
       {/* Summary stats */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-4 gap-4">
         <Card>
           <CardContent className="pt-4 pb-3 text-center">
             <div className="flex items-center justify-center gap-2">
@@ -375,6 +426,14 @@ export default function OrdersWorkflowTab({ orders, onRefresh, apiCall }: Props)
               <p className="text-2xl font-bold text-blue-400">{grouped.in_progress.length}</p>
             </div>
             <p className="text-xs text-muted-foreground">En proceso</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="pt-4 pb-3 text-center">
+            <p className="text-2xl font-bold text-amber-400">
+              {completedOrders.filter(o => (o.files_status || "pending") === "pending" && (o.work_status || "new") !== "delivered").length}
+            </p>
+            <p className="text-xs text-muted-foreground">Esperando archivos</p>
           </CardContent>
         </Card>
         <Card>
