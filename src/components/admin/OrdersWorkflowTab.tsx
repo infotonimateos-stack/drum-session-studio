@@ -261,8 +261,10 @@ export default function OrdersWorkflowTab({ orders, onRefresh, apiCall }: Props)
                     <span className="text-[10px] opacity-70 ml-1">
                       ({order.files_detection_method === "attachment" ? "adjunto" :
                         order.files_detection_method === "wetransfer_link" ? "WeTransfer" :
+                        order.files_detection_method === "swisstransfer_link" ? "SwissTransfer" :
                         order.files_detection_method === "drive_link" ? "Drive" :
-                        order.files_detection_method === "dropbox_link" ? "Dropbox" : ""})
+                        order.files_detection_method === "dropbox_link" ? "Dropbox" :
+                        order.files_detection_method === "manual" ? "manual" : order.files_detection_method})
                     </span>
                   )}
                 </Badge>

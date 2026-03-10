@@ -39,13 +39,26 @@ function doPost(e) {
       continue;
     }
 
-    // Build Gmail search query
-    var emailQuery = check.emails.map(function(email) { return "from:" + email; }).join(" OR ");
+    // Build Gmail search queries
     var dateStr = check.afterDate.replace(/-/g, "/");
-    var query = "(" + emailQuery + ") after:" + dateStr + " to:info@tonimateos.com";
+
+    // Query 1: emails directly FROM the client
+    var emailQuery = check.emails.map(function(email) { return "from:" + email; }).join(" OR ");
+    var query1 = "(" + emailQuery + ") after:" + dateStr + " to:info@tonimateos.com";
+
+    // Query 2: WeTransfer/Dropbox/SwissTransfer notifications that mention the client's email in body
+    var transferQuery = check.emails.map(function(email) {
+      return "(from:wetransfer.com " + email + ") OR (from:dropbox.com " + email + ") OR (from:swisstransfer.com " + email + ")";
+    }).join(" OR ");
+    var query2 = "(" + transferQuery + ") after:" + dateStr + " to:info@tonimateos.com";
 
     try {
-      var threads = GmailApp.search(query, 0, 20);
+      var threads = GmailApp.search(query1, 0, 20);
+      // Also search for transfer service notifications
+      var transferThreads = GmailApp.search(query2, 0, 20);
+      for (var tt = 0; tt < transferThreads.length; tt++) {
+        threads.push(transferThreads[tt]);
+      }
 
       for (var t = 0; t < threads.length && !found; t++) {
         var messages = threads[t].getMessages();
@@ -80,6 +93,9 @@ function doPost(e) {
           if (body.indexOf("wetransfer.com") !== -1) {
             found = true;
             method = "wetransfer_link";
+          } else if (body.indexOf("swisstransfer.com") !== -1) {
+            found = true;
+            method = "swisstransfer_link";
           } else if (body.indexOf("drive.google.com") !== -1) {
             found = true;
             method = "drive_link";
