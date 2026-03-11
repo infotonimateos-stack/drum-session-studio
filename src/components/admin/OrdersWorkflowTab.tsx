@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon, Play, CheckCircle2, ChevronDown, ChevronRight, Mail, Package, Music, Phone, MapPin, User, History, Paperclip, Clock } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { CalendarIcon, Play, CheckCircle2, ChevronDown, ChevronRight, Mail, Package, Music, Phone, MapPin, User, History, Paperclip, Clock, Mic, Sliders, Monitor, Sparkles, Building, CreditCard } from "lucide-react";
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
@@ -202,18 +204,6 @@ export default function OrdersWorkflowTab({ orders, onRefresh, apiCall }: Props)
                   {order.contact_email}
                 </a>
               )}
-              {paypalEmail && (
-                <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
-                  <User className="h-3 w-3" />
-                  PayPal: {paypalEmail}
-                </p>
-              )}
-              {clientPhone && (
-                <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
-                  <Phone className="h-3 w-3" />
-                  {clientPhone}
-                </p>
-              )}
             </div>
             <div className="text-right">
               <p className="text-xs text-muted-foreground">
@@ -222,18 +212,57 @@ export default function OrdersWorkflowTab({ orders, onRefresh, apiCall }: Props)
               {order.invoice_number && (
                 <p className="text-xs font-mono text-muted-foreground">{order.invoice_number}</p>
               )}
-              {order.is_professional_invoice && order.business_name && (
-                <p className="text-xs text-muted-foreground">{order.business_name}</p>
-              )}
             </div>
           </div>
 
-          {/* Address if available */}
-          {(clientAddress || clientCity) && (
-            <p className="text-xs text-muted-foreground flex items-center gap-1">
-              <MapPin className="h-3 w-3 flex-shrink-0" />
-              {[clientAddress, clientCity, clientState, clientPostal].filter(Boolean).join(", ")}
-            </p>
+          {/* Client info - collapsible */}
+          {(clientPhone || clientAddress || clientCity || paypalEmail || paypalPayerId || (order.is_professional_invoice && order.business_name)) && (
+            <Collapsible>
+              <CollapsibleTrigger className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors group">
+                <User className="h-3 w-3" />
+                <span>Info cliente</span>
+                <ChevronRight className="h-3 w-3 transition-transform group-data-[state=open]:rotate-90" />
+              </CollapsibleTrigger>
+              <CollapsibleContent className="mt-1.5 space-y-1 text-xs text-muted-foreground pl-4 border-l border-border">
+                {clientPhone && (
+                  <p className="flex items-center gap-1.5">
+                    <Phone className="h-3 w-3 flex-shrink-0" />
+                    {clientPhone}
+                  </p>
+                )}
+                {(clientAddress || clientCity) && (
+                  <p className="flex items-center gap-1.5">
+                    <MapPin className="h-3 w-3 flex-shrink-0" />
+                    {[clientAddress, clientCity, clientState, clientPostal].filter(Boolean).join(", ")}
+                  </p>
+                )}
+                {order.is_professional_invoice && order.business_name && (
+                  <p className="flex items-center gap-1.5">
+                    <Building className="h-3 w-3 flex-shrink-0" />
+                    {order.business_name}
+                    {order.vat_number && <span className="font-mono">({order.vat_number})</span>}
+                  </p>
+                )}
+                {order.billing_email && order.billing_email !== order.contact_email && (
+                  <p className="flex items-center gap-1.5">
+                    <Mail className="h-3 w-3 flex-shrink-0" />
+                    Facturación: {order.billing_email}
+                  </p>
+                )}
+                {paypalEmail && (
+                  <p className="flex items-center gap-1.5">
+                    <CreditCard className="h-3 w-3 flex-shrink-0" />
+                    PayPal: {paypalEmail}
+                    {paypalName && <span>({paypalName})</span>}
+                  </p>
+                )}
+                {paypalPayerId && (
+                  <p className="flex items-center gap-1.5 font-mono text-[10px]">
+                    Payer ID: {paypalPayerId}
+                  </p>
+                )}
+              </CollapsibleContent>
+            </Collapsible>
           )}
 
           {/* Summary: songs + total + method */}
@@ -286,34 +315,62 @@ export default function OrdersWorkflowTab({ orders, onRefresh, apiCall }: Props)
             </div>
           )}
 
-          {/* Items grouped by category */}
+          {/* Items grouped by category - Accordion */}
           {(config.microphones.length > 0 || config.preamps.length > 0 || config.interfaces.length > 0 || config.extras.length > 0) && (
-            <div className="space-y-1 text-xs">
+            <Accordion type="multiple" className="w-full">
               {config.microphones.length > 0 && (
-                <div className="flex items-start gap-2">
-                  <span className="text-muted-foreground whitespace-nowrap">Micros:</span>
-                  <span>{config.microphones.join(", ")}</span>
-                </div>
+                <AccordionItem value="micros" className="border-b-0">
+                  <AccordionTrigger className="py-1.5 text-xs hover:no-underline">
+                    <span className="flex items-center gap-1.5">
+                      <Mic className="h-3 w-3 text-muted-foreground" />
+                      Micros ({config.microphones.length})
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-1.5 text-xs text-muted-foreground">
+                    {config.microphones.join(", ")}
+                  </AccordionContent>
+                </AccordionItem>
               )}
               {config.preamps.length > 0 && (
-                <div className="flex items-start gap-2">
-                  <span className="text-muted-foreground whitespace-nowrap">Previos:</span>
-                  <span>{config.preamps.join(", ")}</span>
-                </div>
+                <AccordionItem value="previos" className="border-b-0">
+                  <AccordionTrigger className="py-1.5 text-xs hover:no-underline">
+                    <span className="flex items-center gap-1.5">
+                      <Sliders className="h-3 w-3 text-muted-foreground" />
+                      Previos ({config.preamps.length})
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-1.5 text-xs text-muted-foreground">
+                    {config.preamps.join(", ")}
+                  </AccordionContent>
+                </AccordionItem>
               )}
               {config.interfaces.length > 0 && (
-                <div className="flex items-start gap-2">
-                  <span className="text-muted-foreground whitespace-nowrap">Interfaz:</span>
-                  <span>{config.interfaces.join(", ")}</span>
-                </div>
+                <AccordionItem value="interfaz" className="border-b-0">
+                  <AccordionTrigger className="py-1.5 text-xs hover:no-underline">
+                    <span className="flex items-center gap-1.5">
+                      <Monitor className="h-3 w-3 text-muted-foreground" />
+                      Interfaz ({config.interfaces.length})
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-1.5 text-xs text-muted-foreground">
+                    {config.interfaces.join(", ")}
+                  </AccordionContent>
+                </AccordionItem>
               )}
               {config.extras.length > 0 && (
-                <div className="flex items-start gap-2">
-                  <span className="text-muted-foreground whitespace-nowrap">Extras:</span>
-                  <span>{config.extras.join(", ")}</span>
-                </div>
+                <AccordionItem value="extras" className="border-b-0">
+                  <AccordionTrigger className="py-1.5 text-xs hover:no-underline">
+                    <span className="flex items-center gap-1.5">
+                      <Sparkles className="h-3 w-3 text-muted-foreground" />
+                      Extras ({config.extras.length})
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-1.5 text-xs text-muted-foreground">
+                    {config.extras.join(", ")}
+                  </AccordionContent>
+                </AccordionItem>
               )}
-            </div>
+            </Accordion>
           )}
 
           {/* Deadline */}
