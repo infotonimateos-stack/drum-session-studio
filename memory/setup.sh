@@ -1,25 +1,22 @@
 #!/bin/bash
 # Setup de memoria compartida para Claude Code
 # Ejecutar desde la raíz del repo: bash memory/setup.sh
-# Crea symlinks en TODOS los contextos de proyecto posibles
+# Crea symlinks + configura hooks de auto-sync
 
 REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 CLAUDE_DIR="$HOME/.claude/projects"
+SETTINGS="$HOME/.claude/settings.json"
 
 echo "=== Setup de memoria compartida de Claude Code ==="
 echo "Repo: $REPO_DIR"
 echo ""
 
-# Lista de directorios de memoria donde crear symlinks:
-# 1. El contexto global (-) = cuando Claude se abre desde /
-# 2. El contexto del repo = cuando Claude se abre desde ~/drum-session-studio
+# --- 1. SYMLINKS ---
 MEMORY_DIRS=("$CLAUDE_DIR/-/memory")
 
-# Buscar si ya existen otros contextos de proyecto
 if [ -d "$CLAUDE_DIR" ]; then
     for dir in "$CLAUDE_DIR"/*/memory; do
         if [ -d "$dir" ]; then
-            # Añadir solo si no está ya en la lista
             already=false
             for existing in "${MEMORY_DIRS[@]}"; do
                 [ "$existing" = "$dir" ] && already=true
@@ -29,7 +26,6 @@ if [ -d "$CLAUDE_DIR" ]; then
     done
 fi
 
-# Crear symlinks en cada contexto
 for MEMORY_DIR in "${MEMORY_DIRS[@]}"; do
     echo "--- $MEMORY_DIR ---"
     mkdir -p "$MEMORY_DIR"
@@ -61,7 +57,29 @@ for MEMORY_DIR in "${MEMORY_DIRS[@]}"; do
     echo ""
 done
 
+# --- 2. HOOKS AUTO-SYNC ---
+echo "--- Configurando hooks de auto-sync ---"
+
+if [ -f "$SETTINGS" ]; then
+    # Check if hooks already configured
+    if grep -q "UserPromptSubmit" "$SETTINGS" 2>/dev/null; then
+        echo "  ✓ Hooks ya configurados en settings.json"
+    else
+        echo "  ⚠ settings.json existe pero sin hooks."
+        echo "  Copia los hooks de: $REPO_DIR/memory/settings-template.json"
+        echo "  O añade manualmente la sección 'hooks' a $SETTINGS"
+    fi
+else
+    echo "  Creando settings.json con hooks..."
+    cp "$REPO_DIR/memory/settings-template.json" "$SETTINGS"
+    echo "  ✓ settings.json creado con hooks de auto-sync"
+fi
+
+echo ""
 echo "=== Setup completado ==="
 echo ""
-echo "Si abres Claude desde otro directorio y la memoria no se carga,"
-echo "ejecuta este script de nuevo para actualizar los symlinks."
+echo "Hooks configurados:"
+echo "  • UserPromptSubmit → git pull (sincroniza antes de cada petición)"
+echo "  • Stop → git push memory/ + docs/ (sincroniza al terminar)"
+echo ""
+echo "Si abres Claude desde otro directorio, ejecuta este script de nuevo."

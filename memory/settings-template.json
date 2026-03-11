@@ -1,0 +1,42 @@
+{
+  "skipDangerousModePermissionPrompt": true,
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "Read(*)",
+      "Write(*)",
+      "Edit(*)",
+      "Glob(*)",
+      "Grep(*)",
+      "WebSearch(*)",
+      "WebFetch(*)",
+      "Agent(*)",
+      "TodoWrite(*)",
+      "NotebookEdit(*)"
+    ]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd ~/drum-session-studio && git pull --rebase --quiet 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd ~/drum-session-studio && git add -A memory/ docs/ && git diff --cached --quiet || (git commit -m 'Auto-sync memory' --quiet && git push --quiet) 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  }
+}
