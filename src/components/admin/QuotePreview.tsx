@@ -38,6 +38,9 @@ interface Props {
   saving: boolean;
 }
 
+// TM logo as inline SVG for PDF embedding (no external URL dependency)
+const TM_LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="60" height="60"><circle cx="100" cy="100" r="95" fill="#000" stroke="#000" stroke-width="5"/><circle cx="100" cy="100" r="85" fill="#000" stroke="#fff" stroke-width="0"/><path d="M50 55 L150 55 L150 75 L115 75 L115 150 L130 150 L130 95 L150 95 L150 150 L165 150 L165 45 L35 45 L35 150 L50 150 L50 95 L70 95 L70 150 L85 150 L85 75 L50 75 Z" fill="#fff"/></svg>`;
+
 function generateQuoteHtml(
   clientData: QuoteClientData,
   cartState: CartState,
@@ -56,12 +59,16 @@ function generateQuoteHtml(
   const total = subtotal + taxAmount;
   const taxLabel = taxRate > 0 ? `IVA ${taxRate}%` : "IVA 0% (Exento)";
 
+  // Format quote number: ensure 4 digits (0001, 0002...)
+  const numOnly = quoteNumber.replace(/\D/g, "");
+  const displayNumber = numOnly ? numOnly.padStart(4, "0") : quoteNumber;
+
   const items = cartState.items;
   let itemRows = "";
   for (const item of items) {
     const name = escapeHtml(String(item.name || "Servicio"));
     const price = typeof item.price === "number" ? item.price.toFixed(2) : "0.00";
-    itemRows += `<tr><td style="padding:8px 12px;border-bottom:1px solid #eee;">${name}</td><td style="padding:8px 12px;border-bottom:1px solid #eee;text-align:center;">${songCount}</td><td style="padding:8px 12px;border-bottom:1px solid #eee;text-align:right;">${price} €</td></tr>`;
+    itemRows += `<tr><td style="padding:8px 12px;border-bottom:1px solid #ddd;color:#000;">${name}</td><td style="padding:8px 12px;border-bottom:1px solid #ddd;text-align:center;color:#000;">${songCount}</td><td style="padding:8px 12px;border-bottom:1px solid #ddd;text-align:right;color:#000;">${price} €</td></tr>`;
   }
 
   const addressParts = [clientData.fullAddress, clientData.city, clientData.stateProvince, clientData.postalCode].filter(Boolean);
@@ -71,54 +78,61 @@ function generateQuoteHtml(
     clientData.clientType === "empresa"
       ? `
     <div style="flex:1;text-align:right;">
-      <h3 style="margin:0 0 8px;color:#333;font-size:14px;">CLIENTE</h3>
-      <p style="margin:2px 0;font-weight:bold;">${escapeHtml(clientData.businessName || `${clientData.firstName} ${clientData.lastName}`)}</p>
-      ${clientData.vatNumber ? `<p style="margin:2px 0;">NIF/VAT: ${escapeHtml(clientData.vatNumber)}</p>` : ""}
-      ${fullAddressStr ? `<p style="margin:2px 0;">${escapeHtml(fullAddressStr)}</p>` : ""}
-      <p style="margin:2px 0;">${escapeHtml(clientData.contactEmail)}</p>
-      ${clientData.phone ? `<p style="margin:2px 0;">${escapeHtml(clientData.phone)}</p>` : ""}
+      <h3 style="margin:0 0 8px;color:#000;font-size:14px;font-weight:bold;">CLIENTE</h3>
+      <p style="margin:2px 0;font-weight:bold;color:#000;">${escapeHtml(clientData.businessName || `${clientData.firstName} ${clientData.lastName}`)}</p>
+      ${clientData.vatNumber ? `<p style="margin:2px 0;color:#000;">NIF/VAT: ${escapeHtml(clientData.vatNumber)}</p>` : ""}
+      ${fullAddressStr ? `<p style="margin:2px 0;color:#000;">${escapeHtml(fullAddressStr)}</p>` : ""}
+      <p style="margin:2px 0;color:#000;">${escapeHtml(clientData.contactEmail)}</p>
+      ${clientData.phone ? `<p style="margin:2px 0;color:#000;">${escapeHtml(clientData.phone)}</p>` : ""}
     </div>
   `
       : `
     <div style="flex:1;text-align:right;">
-      <h3 style="margin:0 0 8px;color:#333;font-size:14px;">CLIENTE</h3>
-      <p style="margin:2px 0;font-weight:bold;">${escapeHtml(clientData.firstName)} ${escapeHtml(clientData.lastName)}</p>
-      ${fullAddressStr ? `<p style="margin:2px 0;">${escapeHtml(fullAddressStr)}</p>` : ""}
-      <p style="margin:2px 0;">${escapeHtml(clientData.contactEmail)}</p>
-      ${clientData.phone ? `<p style="margin:2px 0;">${escapeHtml(clientData.phone)}</p>` : ""}
+      <h3 style="margin:0 0 8px;color:#000;font-size:14px;font-weight:bold;">CLIENTE</h3>
+      <p style="margin:2px 0;font-weight:bold;color:#000;">${escapeHtml(clientData.firstName)} ${escapeHtml(clientData.lastName)}</p>
+      ${fullAddressStr ? `<p style="margin:2px 0;color:#000;">${escapeHtml(fullAddressStr)}</p>` : ""}
+      <p style="margin:2px 0;color:#000;">${escapeHtml(clientData.contactEmail)}</p>
+      ${clientData.phone ? `<p style="margin:2px 0;color:#000;">${escapeHtml(clientData.phone)}</p>` : ""}
     </div>
   `;
 
   return `<!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><title>PRESUPUESTO ${quoteNumber}</title></head>
-<body style="font-family:'Helvetica Neue',Arial,sans-serif;max-width:800px;margin:0 auto;padding:40px;color:#333;">
+<head><meta charset="UTF-8"><title>PRESUPUESTO ${displayNumber}</title>
+<style>* { color: #000 !important; } body { background: #fff !important; }</style>
+</head>
+<body style="font-family:'Helvetica Neue',Arial,sans-serif;max-width:800px;margin:0 auto;padding:40px;color:#000;background:#fff;">
   <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:40px;">
-    <div>
-      <h1 style="margin:0;color:#1a1a2e;font-size:28px;">PRESUPUESTO</h1>
-      <p style="margin:4px 0;color:#666;">Nº: <strong>${quoteNumber}</strong></p>
-      <p style="margin:4px 0;color:#666;">Fecha: ${date}</p>
-      <p style="margin:4px 0;color:#666;">Válido hasta: ${validUntilStr}</p>
+    <div style="display:flex;align-items:center;gap:16px;">
+      ${TM_LOGO_SVG}
+      <div>
+        <h1 style="margin:0;color:#1a1a2e !important;font-size:28px;">PRESUPUESTO</h1>
+        <p style="margin:4px 0;color:#333 !important;">Nº: <strong>${displayNumber}</strong></p>
+      </div>
+    </div>
+    <div style="text-align:right;">
+      <p style="margin:4px 0;color:#333 !important;">Fecha: ${date}</p>
+      <p style="margin:4px 0;color:#333 !important;">Válido hasta: ${validUntilStr}</p>
     </div>
   </div>
 
   <div style="display:flex;gap:40px;margin-bottom:40px;">
     <div style="flex:1;">
-      <h3 style="margin:0 0 8px;color:#333;font-size:14px;">EMISOR</h3>
-      <p style="margin:2px 0;font-weight:bold;">${COMPANY.name}</p>
-      <p style="margin:2px 0;">CIF: ${COMPANY.taxId}</p>
-      <p style="margin:2px 0;">${COMPANY.address}</p>
-      <p style="margin:2px 0;">${COMPANY.email}</p>
+      <h3 style="margin:0 0 8px;color:#000 !important;font-size:14px;font-weight:bold;">EMISOR</h3>
+      <p style="margin:2px 0;font-weight:bold;color:#000 !important;">${COMPANY.name}</p>
+      <p style="margin:2px 0;color:#000 !important;">CIF: ${COMPANY.taxId}</p>
+      <p style="margin:2px 0;color:#000 !important;">${COMPANY.address}</p>
+      <p style="margin:2px 0;color:#000 !important;">${COMPANY.email}</p>
     </div>
     ${clientSection}
   </div>
 
   <table style="width:100%;border-collapse:collapse;margin-bottom:30px;">
     <thead>
-      <tr style="background:#1a1a2e;color:white;">
-        <th style="padding:10px 12px;text-align:left;">Concepto</th>
-        <th style="padding:10px 12px;text-align:center;">Canciones</th>
-        <th style="padding:10px 12px;text-align:right;">Precio/canción</th>
+      <tr style="background:#1a1a2e;color:#fff !important;">
+        <th style="padding:10px 12px;text-align:left;color:#fff !important;">Concepto</th>
+        <th style="padding:10px 12px;text-align:center;color:#fff !important;">Canciones</th>
+        <th style="padding:10px 12px;text-align:right;color:#fff !important;">Precio/canción</th>
       </tr>
     </thead>
     <tbody>
@@ -128,34 +142,34 @@ function generateQuoteHtml(
 
   <div style="display:block;width:100%;margin-top:8px;">
     <div style="display:block;width:320px;margin-left:auto;">
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;">
-        <span>Subtotal${songCount > 1 ? ` (×${songCount} canciones)` : ""}:</span>
-        <span>${subtotal.toFixed(2)} €</span>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;color:#000 !important;">
+        <span style="color:#000 !important;">Subtotal${songCount > 1 ? ` (×${songCount} canciones)` : ""}:</span>
+        <span style="color:#000 !important;">${subtotal.toFixed(2)} €</span>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;">
-        <span>${taxLabel}:</span>
-        <span>${taxAmount.toFixed(2)} €</span>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;color:#000 !important;">
+        <span style="color:#000 !important;">${taxLabel}:</span>
+        <span style="color:#000 !important;">${taxAmount.toFixed(2)} €</span>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:2px solid #1a1a2e;font-weight:bold;font-size:18px;">
-        <span>TOTAL:</span>
-        <span>${total.toFixed(2)} €</span>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:2px solid #1a1a2e;font-weight:bold;font-size:18px;color:#000 !important;">
+        <span style="color:#000 !important;">TOTAL:</span>
+        <span style="color:#000 !important;">${total.toFixed(2)} €</span>
       </div>
     </div>
   </div>
 
-  <div style="margin-top:40px;padding:20px;background:#f8f9fa;border-radius:8px;">
-    <h3 style="margin:0 0 12px;color:#1a1a2e;font-size:14px;">CONDICIONES</h3>
-    <ul style="margin:0;padding-left:20px;color:#555;font-size:13px;line-height:1.8;">
-      <li>Validez del presupuesto: ${pricing.validityDays} días desde la fecha de emisión.</li>
-      <li>Forma de pago: ${escapeHtml(pricing.paymentTerms)}.</li>
-      <li>Los precios incluyen la grabación profesional de batería según la configuración indicada.</li>
+  <div style="margin-top:40px;padding:20px;background:#f5f5f5;border-radius:8px;">
+    <h3 style="margin:0 0 12px;color:#1a1a2e !important;font-size:14px;">CONDICIONES</h3>
+    <ul style="margin:0;padding-left:20px;color:#000 !important;font-size:13px;line-height:1.8;">
+      <li style="color:#000 !important;">Validez del presupuesto: ${pricing.validityDays} días desde la fecha de emisión.</li>
+      <li style="color:#000 !important;">Forma de pago: ${escapeHtml(pricing.paymentTerms)}.</li>
+      <li style="color:#000 !important;">Los precios incluyen la grabación profesional de batería según la configuración indicada.</li>
     </ul>
-    ${pricing.notes ? `<p style="margin:12px 0 0;color:#555;font-size:13px;"><strong>Notas:</strong> ${escapeHtml(pricing.notes)}</p>` : ""}
+    ${pricing.notes ? `<p style="margin:12px 0 0;color:#000 !important;font-size:13px;"><strong>Notas:</strong> ${escapeHtml(pricing.notes)}</p>` : ""}
   </div>
 
-  <div style="margin-top:60px;padding-top:20px;border-top:1px solid #ddd;text-align:center;color:#999;font-size:11px;">
-    <p>${COMPANY.name} · CIF: ${COMPANY.taxId} · ${COMPANY.address}</p>
-    <p>Serie: P · Presupuesto generado automáticamente · www.tonimateos.com</p>
+  <div style="margin-top:60px;padding-top:20px;border-top:1px solid #ccc;text-align:center;color:#666 !important;font-size:11px;">
+    <p style="color:#666 !important;">${COMPANY.name} · CIF: ${COMPANY.taxId} · ${COMPANY.address}</p>
+    <p style="color:#666 !important;">www.tonimateos.com</p>
   </div>
 </body>
 </html>`;
