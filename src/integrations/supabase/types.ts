@@ -167,6 +167,110 @@ export type Database = {
         }
         Relationships: []
       }
+      quotes: {
+        Row: {
+          base_price: number
+          business_name: string | null
+          city: string | null
+          client_type: string
+          contact_email: string | null
+          converted_order_id: string | null
+          country_code: string
+          created_at: string
+          first_name: string | null
+          full_address: string | null
+          id: string
+          items: Json
+          last_name: string | null
+          notes: string | null
+          payment_terms: string | null
+          phone: string | null
+          postal_code: string | null
+          quote_number: string
+          song_count: number
+          state_province: string | null
+          status: string
+          subtotal: number
+          tax_amount: number
+          tax_rate: number
+          tax_rule: string
+          total: number
+          valid_until: string | null
+          validity_days: number
+          vat_number: string | null
+        }
+        Insert: {
+          base_price?: number
+          business_name?: string | null
+          city?: string | null
+          client_type?: string
+          contact_email?: string | null
+          converted_order_id?: string | null
+          country_code?: string
+          created_at?: string
+          first_name?: string | null
+          full_address?: string | null
+          id?: string
+          items?: Json
+          last_name?: string | null
+          notes?: string | null
+          payment_terms?: string | null
+          phone?: string | null
+          postal_code?: string | null
+          quote_number: string
+          song_count?: number
+          state_province?: string | null
+          status?: string
+          subtotal?: number
+          tax_amount?: number
+          tax_rate?: number
+          tax_rule?: string
+          total?: number
+          valid_until?: string | null
+          validity_days?: number
+          vat_number?: string | null
+        }
+        Update: {
+          base_price?: number
+          business_name?: string | null
+          city?: string | null
+          client_type?: string
+          contact_email?: string | null
+          converted_order_id?: string | null
+          country_code?: string
+          created_at?: string
+          first_name?: string | null
+          full_address?: string | null
+          id?: string
+          items?: Json
+          last_name?: string | null
+          notes?: string | null
+          payment_terms?: string | null
+          phone?: string | null
+          postal_code?: string | null
+          quote_number?: string
+          song_count?: number
+          state_province?: string | null
+          status?: string
+          subtotal?: number
+          tax_amount?: number
+          tax_rate?: number
+          tax_rule?: string
+          total?: number
+          valid_until?: string | null
+          validity_days?: number
+          vat_number?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quotes_converted_order_id_fkey"
+            columns: ["converted_order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
