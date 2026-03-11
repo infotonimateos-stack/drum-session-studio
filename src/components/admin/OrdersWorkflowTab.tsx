@@ -257,14 +257,14 @@ export default function OrdersWorkflowTab({ orders, onRefresh, apiCall }: Props)
                 <Badge variant="outline" className="bg-emerald-500/10 text-emerald-400 border-emerald-500/30 gap-1 text-xs">
                   <Paperclip className="h-3 w-3" />
                   Archivos recibidos
-                  {order.files_detection_method && order.files_detection_method !== "manual" && (
+                  {order.files_detection_method && (
                     <span className="text-[10px] opacity-70 ml-1">
-                      ({order.files_detection_method === "attachment" ? "adjunto" :
+                      vía {order.files_detection_method === "attachment" ? "adjunto" :
                         order.files_detection_method === "wetransfer_link" ? "WeTransfer" :
                         order.files_detection_method === "swisstransfer_link" ? "SwissTransfer" :
-                        order.files_detection_method === "drive_link" ? "Drive" :
+                        order.files_detection_method === "drive_link" ? "Google Drive" :
                         order.files_detection_method === "dropbox_link" ? "Dropbox" :
-                        order.files_detection_method === "manual" ? "manual" : order.files_detection_method})
+                        order.files_detection_method === "manual" ? "manual" : order.files_detection_method}
                     </span>
                   )}
                 </Badge>
