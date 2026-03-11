@@ -382,6 +382,166 @@ serve(async (req) => {
       });
     }
 
+    // ===== QUOTES =====
+
+    // GET: list quotes
+    if (req.method === "GET" && action === "list-quotes") {
+      logStep("Listing quotes");
+      const { data, error } = await supabase
+        .from("quotes")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+      return new Response(JSON.stringify({ quotes: data }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // POST: create quote
+    if (req.method === "POST" && action === "create-quote") {
+      const body = await req.json();
+      logStep("Creating quote", { email: body.contactEmail });
+
+      // Generate quote number
+      const { data: quoteNumber } = await supabase.rpc("get_next_invoice_number", { p_series: "P" });
+
+      const { data, error } = await supabase.from("quotes").insert({
+        quote_number: quoteNumber || "P-0000",
+        first_name: body.firstName || null,
+        last_name: body.lastName || null,
+        contact_email: body.contactEmail || null,
+        phone: body.phone || null,
+        business_name: body.businessName || null,
+        vat_number: body.vatNumber || null,
+        full_address: body.fullAddress || null,
+        city: body.city || null,
+        state_province: body.stateProvince || null,
+        postal_code: body.postalCode || null,
+        country_code: body.countryCode || "ES",
+        client_type: body.clientType || "particular",
+        items: body.items || [],
+        base_price: body.basePrice || 0,
+        subtotal: body.subtotal || 0,
+        song_count: body.songCount || 1,
+        tax_rate: body.taxRate || 0,
+        tax_amount: body.taxAmount || 0,
+        tax_rule: body.taxRule || "spain_peninsula",
+        total: body.total || 0,
+        validity_days: body.validityDays || 30,
+        valid_until: body.validUntil || null,
+        notes: body.notes || null,
+        payment_terms: body.paymentTerms || "PayPal o transferencia bancaria",
+        status: "draft",
+      }).select("id, quote_number").single();
+
+      if (error) throw error;
+      return new Response(JSON.stringify({ success: true, quote: data }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // POST: update quote status
+    if (req.method === "POST" && action === "update-quote-status") {
+      const { quoteId, status } = await req.json();
+      if (!quoteId || !status) throw new Error("Missing quoteId or status");
+
+      const validStatuses = ["draft", "sent", "accepted", "expired", "converted"];
+      if (!validStatuses.includes(status)) throw new Error("Invalid quote status");
+
+      logStep("Updating quote status", { quoteId, status });
+      const { error } = await supabase
+        .from("quotes")
+        .update({ status })
+        .eq("id", quoteId);
+
+      if (error) throw error;
+      return new Response(JSON.stringify({ success: true }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // POST: delete quote
+    if (req.method === "POST" && action === "delete-quote") {
+      const { quoteId } = await req.json();
+      if (!quoteId) throw new Error("Missing quoteId");
+
+      logStep("Deleting quote", { quoteId });
+      const { error } = await supabase
+        .from("quotes")
+        .delete()
+        .eq("id", quoteId);
+
+      if (error) throw error;
+      return new Response(JSON.stringify({ success: true }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // POST: convert quote to order
+    if (req.method === "POST" && action === "convert-quote-to-order") {
+      const { quoteId } = await req.json();
+      if (!quoteId) throw new Error("Missing quoteId");
+
+      logStep("Converting quote to order", { quoteId });
+
+      // Fetch quote
+      const { data: quote, error: fetchError } = await supabase
+        .from("quotes")
+        .select("*")
+        .eq("id", quoteId)
+        .single();
+
+      if (fetchError || !quote) throw new Error("Quote not found");
+      if (quote.status === "converted") throw new Error("Quote already converted");
+
+      // Generate invoice number for the new order
+      const { data: invoiceNumber } = await supabase.rpc("get_next_invoice_number", { p_series: "W" });
+
+      // Create order from quote data
+      const { data: order, error: insertError } = await supabase.from("orders").insert({
+        invoice_number: invoiceNumber || null,
+        invoice_series: "W",
+        items: quote.items,
+        base_price: quote.base_price,
+        subtotal: quote.subtotal,
+        song_count: quote.song_count,
+        tax_rate: quote.tax_rate,
+        tax_amount: quote.tax_amount,
+        tax_rule: quote.tax_rule,
+        total: quote.total,
+        paypal_fee: 0,
+        country_code: quote.country_code,
+        postal_code: quote.postal_code,
+        client_type: quote.client_type,
+        vat_number: quote.vat_number,
+        payment_method: "transfer",
+        payment_status: "awaiting_transfer",
+        is_professional_invoice: !!quote.business_name,
+        business_name: quote.business_name,
+        full_address: quote.full_address,
+        city: quote.city,
+        state_province: quote.state_province,
+        billing_email: quote.contact_email,
+        billing_phone: quote.phone,
+        first_name: quote.first_name,
+        last_name: quote.last_name,
+        contact_email: quote.contact_email,
+      }).select("id").single();
+
+      if (insertError) throw insertError;
+
+      // Mark quote as converted
+      await supabase
+        .from("quotes")
+        .update({ status: "converted", converted_order_id: order.id })
+        .eq("id", quoteId);
+
+      return new Response(JSON.stringify({ success: true, orderId: order.id }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     return new Response(JSON.stringify({ error: "Unknown action" }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 400,

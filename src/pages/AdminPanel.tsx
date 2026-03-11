@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter, Archive, FileSpreadsheet, FileDown, CalendarIcon, BarChart3, Users, AlertCircle, Package } from "lucide-react";
+import { Lock, LogOut, Trash2, Download, RefreshCw, AlertTriangle, FileText, Filter, Archive, FileSpreadsheet, FileDown, CalendarIcon, BarChart3, Users, AlertCircle, Package, Calculator } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
@@ -21,6 +21,7 @@ import AnalyticsTab from "@/components/admin/AnalyticsTab";
 import ClientsTab from "@/components/admin/ClientsTab";
 import IncompleteOrdersTab from "@/components/admin/IncompleteOrdersTab";
 import OrdersWorkflowTab from "@/components/admin/OrdersWorkflowTab";
+import QuotesTab from "@/components/admin/QuotesTab";
 
 const ADMIN_ROUTE = true; // marker
 
@@ -539,7 +540,7 @@ export default function AdminPanel() {
 
       <div className="container mx-auto px-4 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full max-w-3xl grid-cols-5">
+          <TabsList className="grid w-full max-w-4xl grid-cols-6">
             <TabsTrigger value="orders" className="gap-2">
               <Package className="h-4 w-4" />
               Pedidos
@@ -547,6 +548,10 @@ export default function AdminPanel() {
             <TabsTrigger value="billing" className="gap-2">
               <FileText className="h-4 w-4" />
               Facturación
+            </TabsTrigger>
+            <TabsTrigger value="quotes" className="gap-2">
+              <Calculator className="h-4 w-4" />
+              Presupuestos
             </TabsTrigger>
             <TabsTrigger value="incomplete" className="gap-2">
               <AlertCircle className="h-4 w-4" />
@@ -803,6 +808,11 @@ export default function AdminPanel() {
                 </table>
               </div>
             </Card>
+          </TabsContent>
+
+          {/* ===== PRESUPUESTOS TAB ===== */}
+          <TabsContent value="quotes">
+            <QuotesTab orders={orders} storedPassword={storedPassword} apiCall={apiCall} />
           </TabsContent>
 
           {/* ===== PEDIDOS NO COMPLETADOS TAB ===== */}
