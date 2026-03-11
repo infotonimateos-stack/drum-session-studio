@@ -16,6 +16,7 @@ const PoliticaPrivacidad = lazy(() => import("./pages/PoliticaPrivacidad"));
 const PoliticaCookies = lazy(() => import("./pages/PoliticaCookies"));
 const AmpliarPedido = lazy(() => import("./pages/AmpliarPedido"));
 const AdminPanel = lazy(() => import("./pages/AdminPanel"));
+const ConfirmQuote = lazy(() => import("./pages/ConfirmQuote"));
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -45,6 +46,7 @@ const AppRoutes = () => {
           <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
           <Route path="/politica-cookies" element={<PoliticaCookies />} />
           <Route path="/ampliar-pedido" element={<AmpliarPedido />} />
+          <Route path="/presupuesto/:quoteId" element={<ConfirmQuote />} />
           <Route path="/gfs-admin-2025" element={<AdminPanel />} />
           <Route path="/blog-grabacion-bateria" element={<BlogIndex />} />
           <Route path="/blog-grabacion-bateria/:slug" element={<BlogPost />} />
@@ -66,6 +68,7 @@ const AppRoutes = () => {
           <Route path="politica-privacidad" element={<PoliticaPrivacidad />} />
           <Route path="politica-cookies" element={<PoliticaCookies />} />
           <Route path="ampliar-pedido" element={<AmpliarPedido />} />
+          <Route path="quote/:quoteId" element={<ConfirmQuote />} />
           <Route path="gfs-admin-2025" element={<AdminPanel />} />
           <Route path="drum-recording-blog" element={<BlogIndex />} />
           <Route path="drum-recording-blog/:slug" element={<BlogPost />} />

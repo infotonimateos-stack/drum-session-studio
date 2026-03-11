@@ -203,7 +203,7 @@ export default function QuotesTab({ orders, storedPassword, apiCall }: Props) {
       validityDays: quote.validity_days,
       notes: quote.notes || "",
       paymentTerms: quote.payment_terms || "PayPal o transferencia bancaria",
-    }, quote.quote_number);
+    }, quote.quote_number, quote.id);
 
     const container = document.createElement("div");
     container.innerHTML = html;

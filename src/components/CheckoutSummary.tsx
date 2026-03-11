@@ -22,18 +22,22 @@ interface CheckoutSummaryProps {
   billingData: BillingData;
   onConfirmOrder: () => void;
   onBack: () => void;
+  initialFirstName?: string;
+  initialLastName?: string;
+  initialContactEmail?: string;
+  quoteId?: string;
 }
 
-export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack }: CheckoutSummaryProps) => {
+export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack, initialFirstName, initialLastName, initialContactEmail, quoteId }: CheckoutSummaryProps) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<'paypal' | 'transfer'>('paypal');
   const [acceptedPrivacyPolicy, setAcceptedPrivacyPolicy] = useState(false);
   const [transferOrderId, setTransferOrderId] = useState<string | null>(null);
   const [invoiceData, setInvoiceData] = useState<InvoiceData>(emptyInvoiceData);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
+  const [firstName, setFirstName] = useState(initialFirstName || "");
+  const [lastName, setLastName] = useState(initialLastName || "");
+  const [contactEmail, setContactEmail] = useState(initialContactEmail || "");
 
   const songCount = billingData.songCount || 1;
   const taxRate = billingData.taxResult.taxRate;
@@ -114,6 +118,9 @@ export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack
       } as any).select('id').single();
 
       if (error) { toast.error(t("checkout.connectionError")); setIsLoading(false); return; }
+      if (quoteId) {
+        await supabase.from('quotes').update({ status: 'converted', converted_order_id: data.id } as any).eq('id', quoteId);
+      }
       setTransferOrderId(data.id);
     } catch { toast.error(t("checkout.connectionError")); }
     setIsLoading(false);

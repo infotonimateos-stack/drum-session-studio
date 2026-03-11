@@ -52,7 +52,8 @@ function generateQuoteHtml(
   clientData: QuoteClientData,
   cartState: CartState,
   pricing: QuotePricingData,
-  quoteNumber: string
+  quoteNumber: string,
+  quoteId?: string
 ): string {
   const date = new Date().toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   const validUntil = new Date();
@@ -214,6 +215,13 @@ function generateQuoteHtml(
     </ul>
     ${pricing.notes ? `<p style="margin:12px 0 0;color:#000 !important;font-size:13px;"><strong>Notas:</strong> ${escapeHtml(pricing.notes)}</p>` : ""}
   </div>
+
+  ${quoteId ? `
+  <div style="text-align:center;margin-top:40px;">
+    <a href="https://tonimateos.com/presupuesto/${quoteId}" style="display:inline-block;padding:14px 40px;background:#1a1a2e;color:#fff !important;text-decoration:none;border-radius:8px;font-weight:bold;font-size:16px;">CONFIRMAR PRESUPUESTO Y PAGAR</a>
+    <p style="margin-top:8px;font-size:11px;color:#666 !important;">Al hacer click serás redirigido a tonimateos.com para completar el pago de forma segura.</p>
+  </div>
+  ` : ""}
 
   <div style="margin-top:60px;padding-top:20px;border-top:1px solid #ccc;text-align:center;color:#666 !important;font-size:11px;">
     <p style="color:#666 !important;">${COMPANY.name} · CIF: ${COMPANY.taxId} · ${COMPANY.address}</p>
