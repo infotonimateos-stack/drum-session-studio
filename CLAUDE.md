@@ -7,19 +7,27 @@
 - Ejecutar Bash, Edit y Write SIN pedir permiso al usuario
 - No preguntar antes de ejecutar comandos de terminal
 
-## Sesiones
-- Al inicio: pull del repo y leer docs/session-log-*.md y memory/*.md
-- Al final: actualizar session-log y push al repo
-- Siempre commit + push después de cualquier cambio
-- Documentar todo sobre la marcha, no esperar a que el usuario lo pida
+## Al inicio de cada sesión (OBLIGATORIO)
+1. `git pull` para tener los últimos cambios
+2. Leer `memory/MEMORY.md` (contexto principal)
+3. Leer `memory/system-info.md` y `memory/drum-session-studio.md`
+4. Leer los session logs más recientes en `docs/session-log-*.md`
+5. Si existe `~/.claude/projects/-/memory/api-keys.md`, leerlo (datos sensibles, solo local)
 
-## Memoria compartida entre dispositivos
-- Los archivos de memoria están en `memory/` dentro de este repo
-- `memory/MEMORY.md` = archivo principal (se carga automáticamente si hay symlink)
-- `memory/system-info.md`, `memory/drum-session-studio.md` = contexto adicional
-- `api-keys.md` NO está en el repo (datos sensibles) → solo existe local en cada dispositivo
-- **Setup en nuevo dispositivo:** crear symlinks desde `~/.claude/projects/-/memory/` a `memory/` del repo (ver memory/SETUP.md)
+## Al final de cada sesión
+- Actualizar o crear session-log del día en `docs/`
+- Commit + push de todos los cambios
+
+## Reglas
+- Siempre commit + push después de cualquier cambio
+- Documentar todo sobre la marcha
+- Los archivos de memoria están en `memory/` de este repo
+- `api-keys.md` NUNCA se sube al repo (datos sensibles)
+- Para setup de symlinks en nuevo dispositivo: ver `memory/SETUP.md`
 
 ## Contexto
 - Usuario: Toni Mateos (grabación de baterías / producción musical)
-- Logs de sesión: docs/session-log-*.md
+- Repo: https://github.com/infotonimateos-stack/drum-session-studio
+- Datos contabilidad: `data/contabilidad/` (grabaciones, productores, facturas, etc.)
+- Gráficos: `data/charts/`
+- Gmail API configurada: infotonimateos@gmail.com + tonidrummer@gmail.com (tokens locales)
