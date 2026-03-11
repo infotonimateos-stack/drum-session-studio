@@ -106,5 +106,7 @@
 - **2026-03-09:** Facturas Q1 Monday.com (49), extracción FileMaker (6 tablas), listado productores (876, 86% con contacto), config Gmail API + Microsoft 2FA
 - **2026-03-10/11:** Admin panel: detección archivos (Apps Script + Supabase), rediseño tarjetas pedidos (Accordion/Collapsible), sincronización memoria entre PCs
 
-## Código de verificación sincronización
-- **Código**: 877977 (para verificar que el otro PC puede leer esta memoria)
+## Sincronización verificada
+- Verificado 2026-03-11: ambos PCs (iMac + MacBook Air) leen y escriben esta memoria
+- Symlinks configurados en ambos dispositivos via `bash memory/setup.sh`
+- CLAUDE.md tiene instrucciones de auto-sync (git pull al inicio, git push tras cambios)
