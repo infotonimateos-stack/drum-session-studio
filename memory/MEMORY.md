@@ -68,7 +68,43 @@
 - nsattributedstringagent crash (pendiente update macOS 13.7.8)
 - Dispositivo phantom USB (A-FOUR TECH) siempre presente
 
+## Admin Panel & Detección de archivos
+- Ver detalle completo en [drum-session-admin.md](drum-session-admin.md)
+- **Admin URL**: https://tonimateos.com/gfs-admin-2025 (pss: 44012883-zZZAAA)
+- **Supabase**: xxftvsejuwkgmemciswl
+- **Detección archivos**: Apps Script (Gmail) + n8n cron (pendiente activar)
+- **Google Apps Script URL**: https://script.google.com/macros/s/AKfycbyn839L6p8o2nGe3G5VP4ivpVTLXfOL11LcOUV5J5TJIMvilKLBKm3XnFLiESuYsjwE/exec
+- **Apps Script secret**: gfs-files-2026-drum
+- **n8n workflow**: ID ZCP5O6Pt2xNw0uP5 (10:00 y 18:00, pendiente activar)
+
+## Telegram Bot (notificaciones pedidos)
+- **Bot**: @tonimateos_pedidos_bot
+- **Token**: 8630112518:AAEba96f177th4ido50WEsodegPFZZmbcy0
+- **Chat ID Toni**: 8729149012
+
+## n8n
+- **URL**: https://n8n.cardeseo.com
+- **API Key**: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwZjY4NzNhNy1iMTNmLTQ2ZDItODAzYy1kZTZlMjJlM2ZjN2UiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwiaWF0IjoxNzczMTI0NTA3fQ.Z_3QsXU6G06PgMhBgBy7ikaJnRzcF2qf5lDgh-WeaS0
+- **Header**: `X-N8N-API-KEY`
+- **Workflows**: Securitas→Monday, Stripe, Renovaciones, Blog Notification, Telegram→Billin→Monday, Aircall→Monday
+
+## Monday.com
+- **API Token**: eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjYyNzg2ODI1NywiYWFpIjoxMSwidWlkIjo1NTY2MDI0NCwiaWFkIjoiMjAyNi0wMy0wMlQyMDo0NDo0OC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MjEyMDgzMDksInJnbiI6ImV1YzEifQ.9eoaEjFHxFBSvgKI_wL5F-wwJsqyY4JlxBHXaYm60w4
+- **Board Gastos**: ID 1392885945
+- **NUNCA crear entradas automáticamente desde correo/email**
+- **Telefonía**: O2 (Telefónica), NO Movistar
+
+## Blog semanal SEO
+- **Calendario**: ver blog-editorial-calendar.md (en memoria local)
+- **Flujo**: Claude redacta + push a GitHub → usuario Publish en Lovable
+- **Formato**: bilingüe ES/EN, i18n keys en common.json, datos en blogPosts.ts
+- **Último post publicado**: #14
+
 ## Historial de sesiones
 - **2026-03-03:** Diagnóstico sistema, eliminación malware (CleanMyMac TNT), OBS cámaras USB, Demucs, limpieza RAM
 - **2026-03-04:** Clonado repo drum-session-studio, exploración completa arquitectura, setup memoria persistente
 - **2026-03-09:** Facturas Q1 Monday.com (49), extracción FileMaker (6 tablas), listado productores (876, 86% con contacto), config Gmail API + Microsoft 2FA
+- **2026-03-10/11:** Admin panel: detección archivos (Apps Script + Supabase), rediseño tarjetas pedidos (Accordion/Collapsible), sincronización memoria entre PCs
+
+## Código de verificación sincronización
+- **Código**: 877977 (para verificar que el otro PC puede leer esta memoria)
