@@ -63,12 +63,48 @@ function generateQuoteHtml(
   const numOnly = quoteNumber.replace(/\D/g, "");
   const displayNumber = numOnly ? numOnly.padStart(4, "0") : quoteNumber;
 
+  // Group items by category, preserving insertion order
   const items = cartState.items;
-  let itemRows = "";
+  const grouped: { category: string; items: typeof items; isTakes: boolean; isDelivery: boolean }[] = [];
+  const categoryMap = new Map<string, (typeof grouped)[0]>();
+
   for (const item of items) {
-    const name = escapeHtml(String(item.name || "Servicio"));
-    const price = typeof item.price === "number" ? item.price.toFixed(2) : "0.00";
-    itemRows += `<tr><td style="padding:8px 12px;border-bottom:1px solid #ddd;color:#000;">${name}</td><td style="padding:8px 12px;border-bottom:1px solid #ddd;text-align:center;color:#000;">${songCount}</td><td style="padding:8px 12px;border-bottom:1px solid #ddd;text-align:right;color:#000;">${price} €</td></tr>`;
+    const cat = item.category || "Otros";
+    if (!categoryMap.has(cat)) {
+      const group = { category: cat, items: [] as typeof items, isTakes: false, isDelivery: false };
+      categoryMap.set(cat, group);
+      grouped.push(group);
+    }
+    const group = categoryMap.get(cat)!;
+    group.items.push(item);
+    if (item.id?.startsWith("take-")) group.isTakes = true;
+    if (item.id?.startsWith("delivery-")) group.isDelivery = true;
+  }
+
+  let itemRows = "";
+  for (const group of grouped) {
+    let headerLabel = group.category.toUpperCase();
+    let headerNote = "";
+    if (group.isTakes) {
+      headerLabel = "NÚMERO DE TOMAS";
+      headerNote = "Cada canción incluye las siguientes tomas de grabación:";
+    } else if (group.isDelivery) {
+      headerLabel = "PLAZO DE ENTREGA";
+      headerNote = "Los plazos indicados se cuentan desde la confirmación del pago.";
+    }
+
+    itemRows += `<tr><td colspan="3" style="padding:10px 12px 4px;font-weight:bold;font-size:12px;color:#1a1a2e !important;border-bottom:2px solid #1a1a2e;letter-spacing:0.5px;">${headerLabel}</td></tr>`;
+
+    if (headerNote) {
+      itemRows += `<tr><td colspan="3" style="padding:2px 12px 6px;font-size:11px;color:#444 !important;font-style:italic;">${headerNote}</td></tr>`;
+    }
+
+    for (const item of group.items) {
+      const name = escapeHtml(String(item.name || "Servicio"));
+      const desc = (group.isTakes && item.description) ? `<br><span style="font-size:11px;color:#444 !important;font-style:italic;">${escapeHtml(item.description)}</span>` : "";
+      const price = typeof item.price === "number" ? item.price.toFixed(2) : "0.00";
+      itemRows += `<tr><td style="padding:6px 12px 6px 24px;border-bottom:1px solid #ddd;color:#000;">${name}${desc}</td><td style="padding:6px 12px;border-bottom:1px solid #ddd;text-align:center;color:#000;">${songCount}</td><td style="padding:6px 12px;border-bottom:1px solid #ddd;text-align:right;color:#000;">${price} €</td></tr>`;
+    }
   }
 
   const addressParts = [clientData.fullAddress, clientData.city, clientData.stateProvince, clientData.postalCode].filter(Boolean);
