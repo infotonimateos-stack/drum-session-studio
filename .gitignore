@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 data/*.pickle
 memory/api-keys.md
+data/client_secret.json
