@@ -106,6 +106,17 @@
 - **Formato**: bilingüe ES/EN, i18n keys en common.json, datos en blogPosts.ts
 - **Último post publicado**: #14
 
+## Recording Sheet Automation (pendiente)
+- [Detalle completo](recording-sheet-automation.md)
+- Ficha técnica personalizada por pedido + upsell pistas extra
+- Entrega WAVs por Google Drive (tonidrummer, 2TB) con tracking de descarga
+- **Bloqueado por:** activar Sheets API + Drive API (necesita móvil para 2FA)
+
+## Feedback importante
+- [Guardar TODO en memoria automáticamente](feedback_save_everything.md) — no esperar a que lo pida
+- [Sincronización total iMac ↔ MacBook](feedback_sync_devices.md) — TODA info accesible desde ambos
+- [SIEMPRE subir al repo](feedback_always_repo.md) — NUNCA guardar solo en local de Claude Code
+
 ## Historial de sesiones
 - **2026-03-03:** Diagnóstico sistema, eliminación malware (CleanMyMac TNT), OBS cámaras USB, Demucs, limpieza RAM
 - **2026-03-04:** Clonado repo drum-session-studio, exploración completa arquitectura, setup memoria persistente
