@@ -101,22 +101,25 @@ function generateQuoteHtml(
       headerNote = "Los plazos indicados se cuentan desde la confirmación del pago.";
     }
 
-    itemRows += `<tr><td colspan="3" style="padding:10px 12px 4px;font-weight:bold;font-size:12px;color:#1a1a2e !important;border-bottom:2px solid #1a1a2e;letter-spacing:0.5px;">${headerLabel}</td></tr>`;
+    itemRows += `<tr><td colspan="3" style="padding:12px 14px 5px;font-weight:700;font-size:11px;color:#6c63ff;border-bottom:2px solid #e5e7eb;letter-spacing:1px;text-transform:uppercase;">${headerLabel}</td></tr>`;
 
     if (headerNote) {
-      itemRows += `<tr><td colspan="3" style="padding:2px 12px 6px;font-size:11px;color:#444 !important;font-style:italic;">${headerNote}</td></tr>`;
+      itemRows += `<tr><td colspan="3" style="padding:2px 14px 6px;font-size:11px;color:#888;font-style:italic;">${headerNote}</td></tr>`;
     }
 
+    let rowIdx = 0;
     for (const item of group.items) {
       const name = escapeHtml(String(item.name || "Servicio"));
       let desc = "";
       if (group.isTakes && item.description) {
-        desc = `<br><span style="font-size:11px;color:#444 !important;font-style:italic;">${escapeHtml(item.description)}</span>`;
+        desc = `<br><span style="font-size:11px;color:#888;font-style:italic;">${escapeHtml(item.description)}</span>`;
       } else if (group.isDelivery && item.id && DELIVERY_DAYS[item.id]) {
-        desc = `<br><span style="font-size:11px;color:#444 !important;font-weight:500;">${DELIVERY_DAYS[item.id]}</span>`;
+        desc = `<br><span style="font-size:11px;color:#6c63ff;font-weight:600;">${DELIVERY_DAYS[item.id]}</span>`;
       }
       const price = typeof item.price === "number" ? item.price.toFixed(2) : "0.00";
-      itemRows += `<tr><td style="padding:6px 12px 6px 24px;border-bottom:1px solid #ddd;color:#000;">${name}${desc}</td><td style="padding:6px 12px;border-bottom:1px solid #ddd;text-align:center;color:#000;">${songCount}</td><td style="padding:6px 12px;border-bottom:1px solid #ddd;text-align:right;color:#000;">${price} €</td></tr>`;
+      const rowBg = rowIdx % 2 === 0 ? "#fff" : "#fafafd";
+      itemRows += `<tr style="background:${rowBg};"><td style="padding:8px 14px 8px 24px;border-bottom:1px solid #eee;color:#1a1a2e;font-size:13px;">${name}${desc}</td><td style="padding:8px 14px;border-bottom:1px solid #eee;text-align:center;color:#1a1a2e;font-size:13px;">${songCount}</td><td style="padding:8px 14px;border-bottom:1px solid #eee;text-align:right;color:#1a1a2e;font-size:13px;font-weight:600;">${price} €</td></tr>`;
+      rowIdx++;
     }
   }
 
@@ -126,106 +129,123 @@ function generateQuoteHtml(
   const clientSection =
     clientData.clientType === "empresa"
       ? `
-    <div style="flex:1;text-align:right;">
-      <h3 style="margin:0 0 8px;color:#000;font-size:14px;font-weight:bold;">CLIENTE</h3>
-      <p style="margin:2px 0;font-weight:bold;color:#000;">${escapeHtml(clientData.businessName || `${clientData.firstName} ${clientData.lastName}`)}</p>
-      ${clientData.vatNumber ? `<p style="margin:2px 0;color:#000;">NIF/VAT: ${escapeHtml(clientData.vatNumber)}</p>` : ""}
-      ${fullAddressStr ? `<p style="margin:2px 0;color:#000;">${escapeHtml(fullAddressStr)}</p>` : ""}
-      <p style="margin:2px 0;color:#000;">${escapeHtml(clientData.contactEmail)}</p>
-      ${clientData.phone ? `<p style="margin:2px 0;color:#000;">${escapeHtml(clientData.phone)}</p>` : ""}
+    <div style="flex:1;padding:16px 20px;background:#f8f9fc;border-radius:8px;border-left:4px solid #6c63ff;text-align:right;">
+      <h3 style="margin:0 0 8px;color:#1a1a2e;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Cliente</h3>
+      <p style="margin:2px 0;font-weight:600;color:#1a1a2e;font-size:13px;">${escapeHtml(clientData.businessName || `${clientData.firstName} ${clientData.lastName}`)}</p>
+      ${clientData.vatNumber ? `<p style="margin:2px 0;color:#555;font-size:12px;">NIF/VAT: ${escapeHtml(clientData.vatNumber)}</p>` : ""}
+      ${fullAddressStr ? `<p style="margin:2px 0;color:#555;font-size:12px;">${escapeHtml(fullAddressStr)}</p>` : ""}
+      <p style="margin:2px 0;color:#555;font-size:12px;">${escapeHtml(clientData.contactEmail)}</p>
+      ${clientData.phone ? `<p style="margin:2px 0;color:#555;font-size:12px;">${escapeHtml(clientData.phone)}</p>` : ""}
     </div>
   `
       : `
-    <div style="flex:1;text-align:right;">
-      <h3 style="margin:0 0 8px;color:#000;font-size:14px;font-weight:bold;">CLIENTE</h3>
-      <p style="margin:2px 0;font-weight:bold;color:#000;">${escapeHtml(clientData.firstName)} ${escapeHtml(clientData.lastName)}</p>
-      ${fullAddressStr ? `<p style="margin:2px 0;color:#000;">${escapeHtml(fullAddressStr)}</p>` : ""}
-      <p style="margin:2px 0;color:#000;">${escapeHtml(clientData.contactEmail)}</p>
-      ${clientData.phone ? `<p style="margin:2px 0;color:#000;">${escapeHtml(clientData.phone)}</p>` : ""}
+    <div style="flex:1;padding:16px 20px;background:#f8f9fc;border-radius:8px;border-left:4px solid #6c63ff;text-align:right;">
+      <h3 style="margin:0 0 8px;color:#1a1a2e;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Cliente</h3>
+      <p style="margin:2px 0;font-weight:600;color:#1a1a2e;font-size:13px;">${escapeHtml(clientData.firstName)} ${escapeHtml(clientData.lastName)}</p>
+      ${fullAddressStr ? `<p style="margin:2px 0;color:#555;font-size:12px;">${escapeHtml(fullAddressStr)}</p>` : ""}
+      <p style="margin:2px 0;color:#555;font-size:12px;">${escapeHtml(clientData.contactEmail)}</p>
+      ${clientData.phone ? `<p style="margin:2px 0;color:#555;font-size:12px;">${escapeHtml(clientData.phone)}</p>` : ""}
     </div>
   `;
 
   return `<!DOCTYPE html>
 <html>
 <head><meta charset="UTF-8"><title>PRESUPUESTO ${displayNumber}</title>
-<style>* { color: #000 !important; } body { background: #fff !important; }</style>
+<style>
+  * { color: #1a1a2e; }
+  body { background: #fff; margin: 0; padding: 0; }
+</style>
 </head>
-<body style="font-family:'Helvetica Neue',Arial,sans-serif;max-width:800px;margin:0 auto;padding:40px;color:#000;background:#fff;">
-  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:40px;">
+<body style="font-family:'Helvetica Neue',Arial,sans-serif;max-width:800px;margin:0 auto;padding:0;color:#1a1a2e;background:#fff;">
+
+  <!-- Header bar -->
+  <div style="background:linear-gradient(135deg,#1a1a2e 0%,#2d2d4e 100%);padding:28px 36px;display:flex;justify-content:space-between;align-items:center;">
     <div style="display:flex;align-items:center;gap:16px;">
-      <img src="${TM_LOGO_BASE64}" width="60" height="60" style="border-radius:50%;" alt="TM" />
+      <img src="${TM_LOGO_BASE64}" width="52" height="52" style="display:block;object-fit:contain;border-radius:6px;" alt="TM" />
       <div>
-        <h1 style="margin:0;color:#1a1a2e !important;font-size:28px;">PRESUPUESTO</h1>
-        <p style="margin:4px 0;color:#333 !important;">Nº: <strong>${displayNumber}</strong></p>
+        <h1 style="margin:0;color:#fff;font-size:24px;font-weight:700;letter-spacing:1px;">PRESUPUESTO</h1>
+        <p style="margin:3px 0 0;color:rgba(255,255,255,0.7);font-size:13px;">Nº ${displayNumber}</p>
       </div>
     </div>
     <div style="text-align:right;">
-      <p style="margin:4px 0;color:#333 !important;">Fecha: ${date}</p>
-      <p style="margin:4px 0;color:#333 !important;">Válido hasta: ${validUntilStr}</p>
+      <p style="margin:2px 0;color:rgba(255,255,255,0.85);font-size:13px;">Fecha: ${date}</p>
+      <p style="margin:2px 0;color:rgba(255,255,255,0.85);font-size:13px;">Válido hasta: ${validUntilStr}</p>
     </div>
   </div>
 
-  <div style="display:flex;gap:40px;margin-bottom:40px;">
-    <div style="flex:1;">
-      <h3 style="margin:0 0 8px;color:#000 !important;font-size:14px;font-weight:bold;">EMISOR</h3>
-      <p style="margin:2px 0;font-weight:bold;color:#000 !important;">${COMPANY.name}</p>
-      <p style="margin:2px 0;color:#000 !important;">CIF: ${COMPANY.taxId}</p>
-      <p style="margin:2px 0;color:#000 !important;">${COMPANY.address}</p>
-      <p style="margin:2px 0;color:#000 !important;">${COMPANY.email}</p>
+  <div style="padding:32px 36px 40px;">
+
+    <!-- Emisor / Cliente -->
+    <div style="display:flex;gap:40px;margin-bottom:32px;">
+      <div style="flex:1;padding:16px 20px;background:#f8f9fc;border-radius:8px;border-left:4px solid #1a1a2e;">
+        <h3 style="margin:0 0 8px;color:#1a1a2e;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Emisor</h3>
+        <p style="margin:2px 0;font-weight:600;color:#1a1a2e;font-size:13px;">${COMPANY.name}</p>
+        <p style="margin:2px 0;color:#555;font-size:12px;">CIF: ${COMPANY.taxId}</p>
+        <p style="margin:2px 0;color:#555;font-size:12px;">${COMPANY.address}</p>
+        <p style="margin:2px 0;color:#555;font-size:12px;">${COMPANY.email}</p>
+      </div>
+      ${clientSection}
     </div>
-    ${clientSection}
-  </div>
 
-  <table style="width:100%;border-collapse:collapse;margin-bottom:30px;">
-    <thead>
-      <tr style="background:#1a1a2e;color:#fff !important;">
-        <th style="padding:10px 12px;text-align:left;color:#fff !important;">Concepto</th>
-        <th style="padding:10px 12px;text-align:center;color:#fff !important;">Canciones</th>
-        <th style="padding:10px 12px;text-align:right;color:#fff !important;">Precio/canción</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${itemRows}
-    </tbody>
-  </table>
+    <!-- Items table -->
+    <table style="width:100%;border-collapse:collapse;margin-bottom:28px;">
+      <thead>
+        <tr style="background:#1a1a2e;">
+          <th style="padding:11px 14px;text-align:left;color:#fff;font-size:12px;font-weight:600;letter-spacing:0.5px;">Concepto</th>
+          <th style="padding:11px 14px;text-align:center;color:#fff;font-size:12px;font-weight:600;letter-spacing:0.5px;">Canciones</th>
+          <th style="padding:11px 14px;text-align:right;color:#fff;font-size:12px;font-weight:600;letter-spacing:0.5px;">Precio/canción</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${itemRows}
+      </tbody>
+    </table>
 
-  <div style="display:block;width:100%;margin-top:8px;">
-    <div style="display:block;width:320px;margin-left:auto;">
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;color:#000 !important;">
-        <span style="color:#000 !important;">Subtotal${songCount > 1 ? ` (×${songCount} canciones)` : ""}:</span>
-        <span style="color:#000 !important;">${subtotal.toFixed(2)} €</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;color:#000 !important;">
-        <span style="color:#000 !important;">${taxLabel}:</span>
-        <span style="color:#000 !important;">${taxAmount.toFixed(2)} €</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:2px solid #1a1a2e;font-weight:bold;font-size:18px;color:#000 !important;">
-        <span style="color:#000 !important;">TOTAL:</span>
-        <span style="color:#000 !important;">${total.toFixed(2)} €</span>
+    <!-- Totals -->
+    <div style="display:block;width:100%;margin-top:8px;">
+      <div style="display:block;width:320px;margin-left:auto;background:#f8f9fc;border-radius:8px;padding:16px 20px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;color:#444;font-size:13px;">
+          <span>Subtotal${songCount > 1 ? ` (×${songCount} canciones)` : ""}:</span>
+          <span>${subtotal.toFixed(2)} €</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;color:#444;font-size:13px;">
+          <span>${taxLabel}:</span>
+          <span>${taxAmount.toFixed(2)} €</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 4px;border-top:2px solid #1a1a2e;font-weight:700;font-size:18px;color:#1a1a2e;margin-top:6px;">
+          <span>TOTAL:</span>
+          <span>${total.toFixed(2)} €</span>
+        </div>
+        <p style="margin:4px 0 0;font-size:10px;color:#888;text-align:right;">* Pago con PayPal: recargo del 5%. Transferencia bancaria: sin recargos.</p>
       </div>
     </div>
+
+    <!-- Conditions -->
+    <div style="margin-top:32px;padding:18px 22px;background:#f8f9fc;border-radius:8px;border-left:4px solid #6c63ff;">
+      <h3 style="margin:0 0 10px;color:#1a1a2e;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Condiciones</h3>
+      <ul style="margin:0;padding-left:18px;color:#444;font-size:12px;line-height:1.9;">
+        <li>Validez del presupuesto: ${pricing.validityDays} días desde la fecha de emisión.</li>
+        <li>Forma de pago: ${escapeHtml(pricing.paymentTerms)}.</li>
+        <li>Los precios incluyen la grabación profesional de batería según la configuración indicada.</li>
+      </ul>
+      ${pricing.notes ? `<p style="margin:10px 0 0;color:#444;font-size:12px;"><strong>Notas:</strong> ${escapeHtml(pricing.notes)}</p>` : ""}
+    </div>
+
+    <!-- CTA Button -->
+    ${quoteId ? `
+    <div style="text-align:center;margin-top:36px;">
+      <a href="https://tonimateos.com/presupuesto/${quoteId}" style="display:inline-block;padding:16px 48px;background:linear-gradient(135deg,#6c63ff 0%,#1a1a2e 100%);color:#fff;text-decoration:none;border-radius:10px;font-weight:700;font-size:15px;letter-spacing:0.5px;box-shadow:0 4px 14px rgba(108,99,255,0.35);">CONFIRMAR PRESUPUESTO Y PAGAR</a>
+      <p style="margin-top:10px;font-size:11px;color:#888;">Al hacer click serás redirigido a tonimateos.com para completar el pago de forma segura.</p>
+    </div>
+    ` : ""}
+
   </div>
 
-  <div style="margin-top:40px;padding:20px;background:#f5f5f5;border-radius:8px;">
-    <h3 style="margin:0 0 12px;color:#1a1a2e !important;font-size:14px;">CONDICIONES</h3>
-    <ul style="margin:0;padding-left:20px;color:#000 !important;font-size:13px;line-height:1.8;">
-      <li style="color:#000 !important;">Validez del presupuesto: ${pricing.validityDays} días desde la fecha de emisión.</li>
-      <li style="color:#000 !important;">Forma de pago: ${escapeHtml(pricing.paymentTerms)}.</li>
-      <li style="color:#000 !important;">Los precios incluyen la grabación profesional de batería según la configuración indicada.</li>
-    </ul>
-    ${pricing.notes ? `<p style="margin:12px 0 0;color:#000 !important;font-size:13px;"><strong>Notas:</strong> ${escapeHtml(pricing.notes)}</p>` : ""}
-  </div>
-
-  ${quoteId ? `
-  <div style="text-align:center;margin-top:40px;">
-    <a href="https://tonimateos.com/presupuesto/${quoteId}" style="display:inline-block;padding:14px 40px;background:#1a1a2e;color:#fff !important;text-decoration:none;border-radius:8px;font-weight:bold;font-size:16px;">CONFIRMAR PRESUPUESTO Y PAGAR</a>
-    <p style="margin-top:8px;font-size:11px;color:#666 !important;">Al hacer click serás redirigido a tonimateos.com para completar el pago de forma segura.</p>
-  </div>
-  ` : ""}
-
-  <div style="margin-top:60px;padding-top:20px;border-top:1px solid #ccc;text-align:center;color:#666 !important;font-size:11px;">
-    <p style="color:#666 !important;">${COMPANY.name} · CIF: ${COMPANY.taxId} · ${COMPANY.address}</p>
-    <p style="color:#666 !important;">www.tonimateos.com</p>
+  <!-- Footer -->
+  <div style="padding:16px 36px;border-top:1px solid #e5e7eb;text-align:center;color:#999;font-size:10px;background:#fafafa;">
+    <p style="margin:2px 0;">${COMPANY.name} · CIF: ${COMPANY.taxId}</p>
+    <p style="margin:2px 0;">${COMPANY.address}</p>
+    <p style="margin:2px 0;">www.tonimateos.com</p>
   </div>
 </body>
 </html>`;

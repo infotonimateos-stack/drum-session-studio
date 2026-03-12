@@ -31,7 +31,7 @@ interface CheckoutSummaryProps {
 export const CheckoutSummary = ({ cartState, billingData, onConfirmOrder, onBack, initialFirstName, initialLastName, initialContactEmail, quoteId }: CheckoutSummaryProps) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<'paypal' | 'transfer'>('paypal');
+  const [paymentMethod, setPaymentMethod] = useState<'paypal' | 'transfer'>(quoteId ? 'transfer' : 'paypal');
   const [acceptedPrivacyPolicy, setAcceptedPrivacyPolicy] = useState(false);
   const [transferOrderId, setTransferOrderId] = useState<string | null>(null);
   const [invoiceData, setInvoiceData] = useState<InvoiceData>(emptyInvoiceData);
