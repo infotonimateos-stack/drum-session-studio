@@ -41,25 +41,25 @@
     "sessions": 66,
     "total_revenue": 9240.0,
     "bands": [
-      "Antonio José",
-      "María Parrado",
-      "Maria Parrado",
       "Antonia Fernandez",
-      "José Ruiz",
-      "María Mazuecos",
-      "Fela Domínguez",
-      "Cepeda",
+      "Antonio José",
       "Berrocal",
-      "Vanesa Martín",
-      "Jesús Rendón",
-      "Gon Abril",
       "Bertín Osborne",
-      "Pastora soler",
-      "Lorena gómez + poveda",
       "Cayetana",
-      "Tamara",
+      "Cepeda",
       "Elena Bella",
-      "Ezequiel Montoya"
+      "Ezequiel Montoya",
+      "Fela Domínguez",
+      "Gon Abril",
+      "Jesús Rendón",
+      "José Ruiz",
+      "Lorena gómez + poveda",
+      "Maria Parrado",
+      "María Mazuecos",
+      "María Parrado",
+      "Pastora soler",
+      "Tamara",
+      "Vanesa Martín"
     ],
     "first_session": "01/02/2021",
     "last_session": "30/06/2021",
@@ -109,30 +109,30 @@
     "sessions": 50,
     "total_revenue": 23380.0,
     "bands": [
-      "baldsense",
       "La Voz 2020",
       "La Voz 2021 audiciones adultos",
-      "La Voz 2021 audiciones senior",
       "La Voz 2021 audiciones kids",
-      "la voz 2021 adultos gran batalla",
-      "la voz 2021 adultos asaltos",
-      "la voz 2021 senior asaltos",
-      "la voz 2021 adultos asalto final",
-      "la voz 2021 kids semifinal",
-      "la voz 2021 kids final",
-      "la voz 2021 final senior",
-      "la voz 2021 adultos directo 1",
-      "la voz 2021 final",
-      "Veo cómo cantas",
+      "La Voz 2021 audiciones senior",
       "La Voz 2022",
-      "la voz 2022",
-      "la voz 2022 finales kids",
       "La Voz 2022 directo 1 adultos",
+      "La Voz 2025",
       "La voz 2023",
       "La voz 2024",
       "La voz kids 2024",
+      "Veo cómo cantas",
+      "baldsense",
+      "la voz 2021 adultos asalto final",
+      "la voz 2021 adultos asaltos",
+      "la voz 2021 adultos directo 1",
+      "la voz 2021 adultos gran batalla",
+      "la voz 2021 final",
+      "la voz 2021 final senior",
+      "la voz 2021 kids final",
+      "la voz 2021 kids semifinal",
+      "la voz 2021 senior asaltos",
+      "la voz 2022",
+      "la voz 2022 finales kids",
       "la voz 2024",
-      "La Voz 2025",
       "la voz 2025 maquetas y extras batallas, asaltos, gran batalla adultos y kids",
       "la voz kids 2025"
     ],
@@ -159,11 +159,11 @@
     "sessions": 48,
     "total_revenue": 4960.0,
     "bands": [
-      "Myriam Hernández",
       "Bustamante",
-      "Nuria Fergó",
       "Mocedades",
-      "Mocedades fet. Il Divo"
+      "Mocedades fet. Il Divo",
+      "Myriam Hernández",
+      "Nuria Fergó"
     ],
     "first_session": "02/09/2021",
     "last_session": "26/11/2019",
@@ -185,28 +185,11 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 44,
+    "sessions": 3,
     "total_revenue": 1700.0,
     "bands": [
-      "ice crime",
-      "destemps",
-      "cancun",
-      "moonlit",
-      "the targarians",
-      "Bipolar",
-      "Sergi Ramirez",
-      "Maria Jacobs",
-      "Su amigo que se casa",
-      "sara roy",
-      "Otra Historia",
       "Ben Marcus",
-      "Williams Ortiz",
-      "Lucía Martín",
-      "David Arjona",
-      "Kalvin",
-      "Álvaro Blanco",
-      "Daniel Viloria",
-      "Jo mai mai"
+      "Su amigo que se casa"
     ],
     "first_session": "02/07/2021",
     "last_session": "30/10/2017",
@@ -228,16 +211,17 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 38,
-    "total_revenue": 2520.0,
+    "sessions": 39,
+    "total_revenue": 2580.0,
     "bands": [
-      "Víctor González",
-      "Isaak",
       "Brisa Fenoy",
+      "Iago",
+      "Isaak",
+      "Jesús",
+      "Jesús Lorenzo",
       "Luis",
       "Noe",
-      "Jesús Lorenzo",
-      "Jesús"
+      "Víctor González"
     ],
     "first_session": "01/09/2023",
     "last_session": "31/03/2023",
@@ -264,17 +248,17 @@
     "sessions": 37,
     "total_revenue": 2930.0,
     "bands": [
-      "Primital",
-      "The Hole",
-      "alanah",
-      "Pedro Grande",
-      "Ultima",
-      "fani, su prima",
       "Alex Cuadrado",
+      "Pedro Grande",
+      "Primital",
+      "Primital Madness",
       "Santi Ibarretxe",
-      "miele",
+      "The Hole",
+      "Ultima",
+      "alanah",
+      "fani, su prima",
       "fany su prima",
-      "Primital Madness"
+      "miele"
     ],
     "first_session": "02/07/2015",
     "last_session": "31/07/2018",
@@ -299,17 +283,17 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 37,
+    "sessions": 34,
     "total_revenue": 3700.0,
     "bands": [
-      "Davinia Pastor",
       "Antonio José",
       "Antonio Orozco",
       "Buenaventura",
       "Cepeda",
+      "Davinia Pastor",
+      "Eder López",
       "Javier Sanz",
-      "Roger Padrós",
-      "Eder López"
+      "Roger Padrós"
     ],
     "first_session": "01/05/2016",
     "last_session": "30/10/2020",
@@ -337,12 +321,12 @@
     "total_revenue": 2760.0,
     "bands": [
       "Cinema America",
+      "Dani Llandrich",
       "El niño del paraguas",
       "Joaky",
-      "Dani Llandrich",
-      "Raul Marquez",
       "Marc Guillem Ballester",
-      "Marcus"
+      "Marcus",
+      "Raul Marquez"
     ],
     "first_session": "02/10/2019",
     "last_session": "30/03/2021",
@@ -370,19 +354,19 @@
     "sessions": 36,
     "total_revenue": 2750.0,
     "bands": [
-      "Fran Gómez",
-      "Dani Ramirez",
-      "Raul Pulido",
-      "Carol Domínguez",
-      "Raúl Pulido",
-      "Le Nais",
-      "Carmine Parisi",
       "Alex Fossas",
-      "La Caja de Pandora",
-      "Mario Ruiz",
+      "Carmine Parisi",
+      "Carol Domínguez",
+      "Dani Ramirez",
       "Daniel Maza",
       "Eufòria",
+      "Fran Gómez",
+      "La Caja de Pandora",
+      "Le Nais",
       "Lucas Dalman",
+      "Mario Ruiz",
+      "Raul Pulido",
+      "Raúl Pulido",
       "Valentina Duk"
     ],
     "first_session": "02/02/2024",
@@ -408,24 +392,24 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 34,
+    "sessions": 31,
     "total_revenue": 2380.0,
     "bands": [
-      "Joaquín Pantoja",
-      "Merche Rico",
-      "Anna Velasco",
-      "Sixko Durán",
       "Alex Vázquez",
-      "Míriam Sáez",
-      "Raquel Ardila",
-      "Manuel Malabé",
-      "Voces al alba",
-      "Juan Carlos Berrocal",
-      "Uve Maya Bejarano",
-      "Pablo Cutiño",
-      "José Balsera",
+      "Anna Velasco",
       "Bral",
-      "Miriam Saez"
+      "Joaquín Pantoja",
+      "José Balsera",
+      "Juan Carlos Berrocal",
+      "Manuel Malabé",
+      "Merche Rico",
+      "Miriam Saez",
+      "Míriam Sáez",
+      "Pablo Cutiño",
+      "Raquel Ardila",
+      "Sixko Durán",
+      "Uve Maya Bejarano",
+      "Voces al alba"
     ],
     "first_session": "01/12/2015",
     "last_session": "31/12/2019",
@@ -449,33 +433,33 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 34,
+    "sessions": 33,
     "total_revenue": 2580.0,
     "bands": [
-      "Tu Cara Me Suena",
+      "El disc de la marato 2021",
+      "El disc de la marato 2022",
+      "El disc de la marato 2024",
+      "Operación Triunfo 2018 Gala 2",
+      "TCMS  gala 14",
+      "TCMS 2018 Gala 6",
+      "TCMS 2018 Gala 7",
+      "TCMS 2020",
+      "TCMS Gala Año Nuevo",
       "TCMS gala 10",
       "TCMS gala 12",
-      "TCMS gala fin de año",
-      "TCMS gala Eurovisión",
       "TCMS gala 16",
-      "TCMS gala 20",
       "TCMS gala 19?",
-      "Operación Triunfo 2018 Gala 2",
-      "Tcms 2018 gala 4",
-      "TCMS 2018 Gala 7",
-      "TCMS 2018 Gala 6",
-      "TCms 2018 gala 8",
+      "TCMS gala 20",
+      "TCMS gala 5",
+      "TCMS gala Eurovisión",
+      "TCMS gala fin de año",
       "TCms 2018",
       "TCms 2018 gala 11",
       "TCms 2018 gala 12",
-      "TCMS  gala 14",
-      "Victor Manuel",
-      "TCMS Gala Año Nuevo",
-      "TCMS 2020",
-      "TCMS gala 5",
-      "El disc de la marato 2021",
-      "El disc de la marato 2022",
-      "El disc de la marato 2024"
+      "TCms 2018 gala 8",
+      "Tcms 2018 gala 4",
+      "Tu Cara Me Suena",
+      "Victor Manuel"
     ],
     "first_session": "01/10/2024",
     "last_session": "30/05/2019",
@@ -502,13 +486,13 @@
     "sessions": 34,
     "total_revenue": 1980.0,
     "bands": [
+      "Blake",
+      "Carlos Cuevas",
       "Carlos Macías",
-      "varios",
       "Ricardo Caballero",
       "Ricardo Casas",
-      "Carlos Cuevas",
       "daril",
-      "Blake"
+      "varios"
     ],
     "first_session": "02/09/2021",
     "last_session": "31/01/2020",
@@ -539,10 +523,10 @@
     "sessions": 31,
     "total_revenue": 2820.0,
     "bands": [
-      "Víctor Arás",
       "Alberto Comesaña/Francisca Sfeir",
       "David Albala",
-      "Fanny Becerra"
+      "Fanny Becerra",
+      "Víctor Arás"
     ],
     "first_session": "01/04/2019",
     "last_session": "30/09/2021",
@@ -570,15 +554,15 @@
     "sessions": 29,
     "total_revenue": 3030.0,
     "bands": [
+      "Alex Ubago",
+      "Ana Belén",
+      "Crossing",
       "La Marató",
       "Musical",
-      "Crossing",
-      "Tu cara me suena",
-      "Ana Belén",
-      "Tu Cara Me Suena",
+      "Nico",
       "Tcms 2018 gala 0",
-      "Alex Ubago",
-      "Nico"
+      "Tu Cara Me Suena",
+      "Tu cara me suena"
     ],
     "first_session": "01/05/2017",
     "last_session": "29/09/2015",
@@ -603,21 +587,21 @@
     "sessions": 26,
     "total_revenue": 1800.0,
     "bands": [
-      "Tu Cara Me Suena",
-      "tu cara me suena",
+      "La Folie i Jordi Ninus",
+      "Mosaic",
       "TCMS gala 10",
       "TCMS gala 13",
       "TCMS gala 14",
-      "TCMS gala fin de año",
       "TCMS gala 15",
       "TCMS gala 16",
       "TCMS gala 20",
-      "Tcms 2018 gala 2",
-      "TCms 2018 gala 8",
-      "TCms 2018",
-      "La Folie i Jordi Ninus",
       "TCMS gala 6",
-      "Mosaic"
+      "TCMS gala fin de año",
+      "TCms 2018",
+      "TCms 2018 gala 8",
+      "Tcms 2018 gala 2",
+      "Tu Cara Me Suena",
+      "tu cara me suena"
     ],
     "first_session": "01/12/2025",
     "last_session": "30/05/2019",
@@ -673,9 +657,9 @@
     "sessions": 25,
     "total_revenue": 7250.0,
     "bands": [
+      "After Burn",
       "BSO \"Explota\"",
-      "Killer's Game",
-      "After Burn"
+      "Killer's Game"
     ],
     "first_session": "14/02/2024",
     "last_session": "31/10/2024",
@@ -700,12 +684,12 @@
     "sessions": 25,
     "total_revenue": 2820.0,
     "bands": [
-      "Marta Quintero",
-      "Violeta Arriaza",
-      "Riki Rivera",
       "Antón Cortés",
+      "Marta Quintero",
+      "Riki Rivera",
       "Tania García",
-      "Vanesa Martín"
+      "Vanesa Martín",
+      "Violeta Arriaza"
     ],
     "first_session": "02/02/2022",
     "last_session": "30/03/2021",
@@ -755,8 +739,8 @@
     "country": "",
     "address": "Travessera de Gracia 371 bajos 4",
     "nif": "Y4309060R",
-    "sessions": 23,
-    "total_revenue": 1840.0,
+    "sessions": 24,
+    "total_revenue": 1989.6,
     "bands": [
       "José Luis Lozano",
       "Kike"
@@ -812,10 +796,10 @@
     "sessions": 23,
     "total_revenue": 3192.0,
     "bands": [
+      "Carolina Ross LP",
       "Cuitla Vega",
       "Jero Sada",
       "Kevin Aguilar LP",
-      "Carolina Ross LP",
       "Rayito colombiano"
     ],
     "first_session": "11/05/2024",
@@ -842,10 +826,10 @@
     "total_revenue": 1610.0,
     "bands": [
       "Eloi Ortells",
-      "Javy Ramírez",
-      "Juan Quiroz",
       "Jaime Pinto",
-      "Jaime pinto"
+      "Jaime pinto",
+      "Javy Ramírez",
+      "Juan Quiroz"
     ],
     "first_session": "02/06/2014",
     "last_session": "31/03/2025",
@@ -870,9 +854,9 @@
     "sessions": 22,
     "total_revenue": 1830.0,
     "bands": [
-      "Il Divo",
       "Daniel Skyler",
-      "Hermana Glenda"
+      "Hermana Glenda",
+      "Il Divo"
     ],
     "first_session": "03/01/2020",
     "last_session": "29/04/2019",
@@ -900,12 +884,12 @@
     "sessions": 22,
     "total_revenue": 1060.0,
     "bands": [
-      "Blown away",
-      "Lemote",
       "Annabella",
-      "Colourshop",
+      "Blown away",
       "Cherison",
       "Christine Steller",
+      "Colourshop",
+      "Lemote",
       "mel brennan"
     ],
     "first_session": "02/12/2018",
@@ -935,8 +919,8 @@
     "sessions": 21,
     "total_revenue": 2400.0,
     "bands": [
-      "Manuel gonzález",
-      "Manu Pilas"
+      "Manu Pilas",
+      "Manuel gonzález"
     ],
     "first_session": "05/03/2025",
     "last_session": "31/03/2025",
@@ -965,11 +949,11 @@
     "sessions": 21,
     "total_revenue": 1260.0,
     "bands": [
-      "Operación Triunfo 2018",
       "La Mejor Canción",
-      "Operación Triunfo 2019 Gala 0",
       "OT 2023",
       "OT 2024",
+      "Operación Triunfo 2018",
+      "Operación Triunfo 2019 Gala 0",
       "Sonall"
     ],
     "first_session": "02/01/2024",
@@ -1023,8 +1007,8 @@
     "sessions": 20,
     "total_revenue": 1350.0,
     "bands": [
-      "Joselito Cortés",
       "Domi Serralbo",
+      "Joselito Cortés",
       "Paco Candela"
     ],
     "first_session": "01/08/2025",
@@ -1077,11 +1061,11 @@
     "sessions": 18,
     "total_revenue": 2260.0,
     "bands": [
-      "Laura Ordóñez",
-      "Israel Durán",
-      "Pedro Javier Hermosilla",
+      "FC Barcelona",
       "Henry Semler",
-      "FC Barcelona"
+      "Israel Durán",
+      "Laura Ordóñez",
+      "Pedro Javier Hermosilla"
     ],
     "first_session": "04/08/2019",
     "last_session": "28/12/2017",
@@ -1106,11 +1090,11 @@
     "sessions": 18,
     "total_revenue": 1890.0,
     "bands": [
-      "Federico Jusid",
       "45R",
-      "Invisibles (de Gracia Querejeta)",
+      "Federico Jusid",
       "Gracia Querejeta",
       "INV",
+      "Invisibles (de Gracia Querejeta)",
       "PI_ID16 Impish_ALT 9_v1.4 FJ"
     ],
     "first_session": "01/11/2018",
@@ -1138,13 +1122,13 @@
     "total_revenue": 1110.0,
     "bands": [
       "Jordi Campoy",
-      "TCMS 2020 gala 7",
-      "muca fai late",
-      "TCMS 2020",
       "Mucca fai latte",
-      "Tu cara me suena",
+      "OT 2025 gala 8",
       "Pinocho el musical",
-      "OT 2025 gala 8"
+      "TCMS 2020",
+      "TCMS 2020 gala 7",
+      "Tu cara me suena",
+      "muca fai late"
     ],
     "first_session": "02/10/2023",
     "last_session": "31/10/2025",
@@ -1169,12 +1153,12 @@
     "sessions": 18,
     "total_revenue": 1050.0,
     "bands": [
-      "Alenoise",
-      "Gambarrotti",
-      "Laura & Juan",
-      "E iree",
       "Alejandro Herrera Alenoise",
-      "Benú"
+      "Alenoise",
+      "Benú",
+      "E iree",
+      "Gambarrotti",
+      "Laura & Juan"
     ],
     "first_session": "02/02/2024",
     "last_session": "29/11/2019",
@@ -1202,8 +1186,8 @@
     "sessions": 18,
     "total_revenue": 1099.0,
     "bands": [
-      "Santiago Cercavins",
-      "Kiara"
+      "Kiara",
+      "Santiago Cercavins"
     ],
     "first_session": "06/04/2021",
     "last_session": "29/01/2025",
@@ -1229,12 +1213,12 @@
     "sessions": 18,
     "total_revenue": 1120.0,
     "bands": [
-      "Linde Torenvlied",
-      "Linde Torenvlied LNDE",
+      "Jodie Stienstra",
       "Jordi Tambillo",
       "Juan Carlos Ramonet",
+      "Linde Torenvlied",
+      "Linde Torenvlied LNDE",
       "delaney",
-      "Jodie Stienstra",
       "romy"
     ],
     "first_session": "05/05/2025",
@@ -1283,13 +1267,13 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 17,
+    "sessions": 16,
     "total_revenue": 1000.0,
     "bands": [
-      "juhma",
-      "faulin mendez",
+      "Aneuri Queliz",
       "D'FE",
-      "Aneuri Queliz"
+      "faulin mendez",
+      "juhma"
     ],
     "first_session": "06/08/2017",
     "last_session": "31/10/2025",
@@ -1314,16 +1298,16 @@
     "sessions": 16,
     "total_revenue": 1060.0,
     "bands": [
-      "Alvaro Digué",
-      "Salvador Bertrán",
-      "Ella Baila Sola",
-      "Platón",
       "Alejandra Gómez",
-      "varios",
-      "María Sáez",
-      "Hugo Salazar",
+      "Alvaro Digué",
+      "Ella Baila Sola",
       "Fernando Acosta",
-      "Javier de Pecos feat. David Summers"
+      "Hugo Salazar",
+      "Javier de Pecos feat. David Summers",
+      "María Sáez",
+      "Platón",
+      "Salvador Bertrán",
+      "varios"
     ],
     "first_session": "01/04/2019",
     "last_session": "29/01/2021",
@@ -1407,10 +1391,10 @@
     "sessions": 15,
     "total_revenue": 1040.0,
     "bands": [
+      "Gabriella",
       "Manresa basket",
       "Pedro Balañá",
-      "Pele MacLeod",
-      "Gabriella"
+      "Pele MacLeod"
     ],
     "first_session": "01/08/2018",
     "last_session": "31/07/2018",
@@ -1505,8 +1489,8 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 15,
-    "total_revenue": 960.0,
+    "sessions": 18,
+    "total_revenue": 1140.0,
     "bands": [
       "Cabo cope"
     ],
@@ -1561,9 +1545,9 @@
     "total_revenue": 1220.0,
     "bands": [
       "Diego Martin",
+      "Divans",
       "Pablo Perea",
-      "Sananda LC",
-      "Divans"
+      "Sananda LC"
     ],
     "first_session": "03/03/2023",
     "last_session": "24/11/2016",
@@ -1589,14 +1573,14 @@
     "sessions": 14,
     "total_revenue": 1410.0,
     "bands": [
-      "Nelo Bel",
-      "LODVG",
       "Ducholux",
       "Edu Gil",
       "Eloy Delez",
       "Gonçal",
-      "Rythm & Brothers Band",
+      "LODVG",
+      "Nelo Bel",
       "Raoul",
+      "Rythm & Brothers Band",
       "Sweet California"
     ],
     "first_session": "07/02/2017",
@@ -1649,8 +1633,8 @@
     "sessions": 14,
     "total_revenue": 840.0,
     "bands": [
-      "Florencia Altimira",
-      "Flops"
+      "Flops",
+      "Florencia Altimira"
     ],
     "first_session": "07/04/2020",
     "last_session": "27/10/2021",
@@ -1675,13 +1659,13 @@
     "sessions": 14,
     "total_revenue": 840.0,
     "bands": [
-      "Renato",
       "Alex Burbano",
       "Camilo Hoyo",
       "Franky Acosta y Alexa Barruet",
-      "Luis Miguel Ruiz",
       "Jhon Alex Rosero",
-      "Otero Rivera"
+      "Luis Miguel Ruiz",
+      "Otero Rivera",
+      "Renato"
     ],
     "first_session": "05/05/2020",
     "last_session": "31/10/2023",
@@ -1813,8 +1797,8 @@
     "sessions": 13,
     "total_revenue": 780.0,
     "bands": [
-      "iñaqui marques rubio",
-      "Cristina Santos"
+      "Cristina Santos",
+      "iñaqui marques rubio"
     ],
     "first_session": "01/02/2018",
     "last_session": "29/12/2017",
@@ -1888,11 +1872,11 @@
     "sessions": 12,
     "total_revenue": 1518.0,
     "bands": [
-      "Lagarto Amarillo",
-      "Pablo Mora",
       "Amar es para siempre 2022",
       "Isabel Ayún",
-      "Isabel Ayún + Joaquín Sabina"
+      "Isabel Ayún + Joaquín Sabina",
+      "Lagarto Amarillo",
+      "Pablo Mora"
     ],
     "first_session": "02/04/2025",
     "last_session": "30/06/2019",
@@ -1917,10 +1901,10 @@
     "sessions": 12,
     "total_revenue": 740.0,
     "bands": [
-      "Mauricio R",
-      "Callejón del Sastre",
-      "Sirope",
       "Aaron Ross",
+      "Callejón del Sastre",
+      "Mauricio R",
+      "Sirope",
       "un mono con tirantes"
     ],
     "first_session": "05/10/2018",
@@ -1946,8 +1930,8 @@
     "sessions": 12,
     "total_revenue": 900.0,
     "bands": [
-      "Juan Marrón",
-      "David Borrego"
+      "David Borrego",
+      "Juan Marrón"
     ],
     "first_session": "01/03/2018",
     "last_session": "29/05/2020",
@@ -2051,8 +2035,8 @@
     "total_revenue": 1320.0,
     "bands": [
       "Efren Ruben",
-      "Valiente",
-      "Nestor"
+      "Nestor",
+      "Valiente"
     ],
     "first_session": "02/07/2021",
     "last_session": "30/08/2024",
@@ -2178,8 +2162,8 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 12,
-    "total_revenue": 720.0,
+    "sessions": 15,
+    "total_revenue": 1005.57,
     "bands": [
       "Andrés y Colina",
       "rammar"
@@ -2232,8 +2216,8 @@
     "sessions": 12,
     "total_revenue": 720.0,
     "bands": [
-      "diego white",
-      "Tony Valret"
+      "Tony Valret",
+      "diego white"
     ],
     "first_session": "01/09/2023",
     "last_session": "30/04/2024",
@@ -2260,8 +2244,8 @@
     "sessions": 11,
     "total_revenue": 1460.0,
     "bands": [
-      "Antonio Orozco",
-      "Antonio José"
+      "Antonio José",
+      "Antonio Orozco"
     ],
     "first_session": "03/09/2015",
     "last_session": "28/09/2015",
@@ -2315,10 +2299,10 @@
     "sessions": 11,
     "total_revenue": 1500.0,
     "bands": [
-      "Guillem Ogayar",
       "Antonio Orozco",
-      "José Mercé",
-      "Delpuerto"
+      "Delpuerto",
+      "Guillem Ogayar",
+      "José Mercé"
     ],
     "first_session": "02/06/2020",
     "last_session": "28/09/2020",
@@ -2344,8 +2328,8 @@
     "sessions": 11,
     "total_revenue": 1650.0,
     "bands": [
-      "Dani Maroto",
-      "Alex Gallardo"
+      "Alex Gallardo",
+      "Dani Maroto"
     ],
     "first_session": "01/02/2023",
     "last_session": "31/01/2023",
@@ -2427,8 +2411,8 @@
       "Erre de Rafa",
       "Ignacio Serrano",
       "Irene Santos",
-      "Juanje",
       "Jaime Sancho",
+      "Juanje",
       "Rochi"
     ],
     "first_session": "01/10/2019",
@@ -2483,8 +2467,8 @@
     "sessions": 11,
     "total_revenue": 660.0,
     "bands": [
-      "Erik Jiménez",
       "Apolo del Templo",
+      "Erik Jiménez",
       "Juan carlos florez"
     ],
     "first_session": "05/11/2022",
@@ -2536,8 +2520,8 @@
     "sessions": 10,
     "total_revenue": 620.0,
     "bands": [
-      "Anuncio Estrella Damm",
-      "Alvians"
+      "Alvians",
+      "Anuncio Estrella Damm"
     ],
     "first_session": "03/04/2014",
     "last_session": "26/04/2017",
@@ -2591,11 +2575,11 @@
     "sessions": 10,
     "total_revenue": 740.0,
     "bands": [
-      "Malú Molina",
       "Alvarotti",
-      "Vicente díaz",
+      "Fran Fernández",
+      "Malú Molina",
       "Vicente Díaz",
-      "Fran Fernández"
+      "Vicente díaz"
     ],
     "first_session": "02/07/2023",
     "last_session": "30/04/2025",
@@ -2775,11 +2759,11 @@
     "total_revenue": 1120.0,
     "bands": [
       "Daniel Royo",
-      "Miguel Torres",
-      "Laura Rey",
-      "Maka Parro",
       "Hugo Salazar",
+      "Laura Rey",
       "Lunati-K",
+      "Maka Parro",
+      "Miguel Torres",
       "bombai"
     ],
     "first_session": "01/04/2016",
@@ -2808,8 +2792,8 @@
     "sessions": 9,
     "total_revenue": 920.0,
     "bands": [
-      "Viento del Norte",
-      "Ernesto González"
+      "Ernesto González",
+      "Viento del Norte"
     ],
     "first_session": "02/07/2018",
     "last_session": "19/08/2017",
@@ -2859,15 +2843,14 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 9,
+    "sessions": 7,
     "total_revenue": 320.0,
     "bands": [
-      "Uri Plana",
-      "Jon Oyster",
-      "Àlex Carretero",
       "Aitor Cugat",
+      "Jon Oyster",
       "Ricard Martínez",
-      "nahuel"
+      "Uri Plana",
+      "Àlex Carretero"
     ],
     "first_session": "04/09/2020",
     "last_session": "30/03/2020",
@@ -2889,7 +2872,7 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 9,
+    "sessions": 1,
     "total_revenue": 170.0,
     "bands": [
       "Son Amar Show"
@@ -3027,8 +3010,8 @@
     "total_revenue": 540.0,
     "bands": [
       "Aquarius",
-      "Renzzo",
-      "Fraile"
+      "Fraile",
+      "Renzzo"
     ],
     "first_session": "01/03/2024",
     "last_session": "30/09/2024",
@@ -3265,8 +3248,8 @@
     "sessions": 8,
     "total_revenue": 640.0,
     "bands": [
-      "Jorge Dinares",
       "Jani Pilhman",
+      "Jorge Dinares",
       "Kuñien Fontalvo"
     ],
     "first_session": "02/09/2016",
@@ -3289,11 +3272,10 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 8,
+    "sessions": 5,
     "total_revenue": 300.0,
     "bands": [
-      "Antonio Poyatos",
-      "Pijamas azules"
+      "Antonio Poyatos"
     ],
     "first_session": "06/08/2017",
     "last_session": "24/07/2024",
@@ -3396,8 +3378,8 @@
     "total_revenue": 600.0,
     "bands": [
       "Carlos Right",
-      "Tamara + Olga Tañón",
-      "IGL"
+      "IGL",
+      "Tamara + Olga Tañón"
     ],
     "first_session": "01/09/2021",
     "last_session": "29/09/2021",
@@ -3524,8 +3506,8 @@
     "sessions": 8,
     "total_revenue": 540.0,
     "bands": [
-      "Rut Marcos Rudy Black",
-      "Pablo Verdeguer"
+      "Pablo Verdeguer",
+      "Rut Marcos Rudy Black"
     ],
     "first_session": "13/03/2025",
     "last_session": "25/05/2022",
@@ -3623,8 +3605,8 @@
     "sessions": 8,
     "total_revenue": 500.0,
     "bands": [
-      "Techi",
-      "Roger"
+      "Roger",
+      "Techi"
     ],
     "first_session": "23/03/2022",
     "last_session": "25/03/2024",
@@ -3728,8 +3710,8 @@
     "total_revenue": 480.0,
     "bands": [
       "ERA'O",
-      "Miriam Flores",
-      "Joseph"
+      "Joseph",
+      "Miriam Flores"
     ],
     "first_session": "05/12/2023",
     "last_session": "20/12/2023",
@@ -3754,8 +3736,8 @@
     "sessions": 8,
     "total_revenue": 640.0,
     "bands": [
-      "Dani Márquez",
       "Antonio Campano",
+      "Dani Márquez",
       "Ricky Prats"
     ],
     "first_session": "03/02/2026",
@@ -3832,10 +3814,10 @@
     "total_revenue": 400.0,
     "bands": [
       "24K magic tribute",
-      "Franco Tiznado",
-      "lorena",
       "Casandra Paz",
-      "Macarena Middleton"
+      "Franco Tiznado",
+      "Macarena Middleton",
+      "lorena"
     ],
     "first_session": "04/01/2021",
     "last_session": "23/12/2025",
@@ -3886,8 +3868,8 @@
     "sessions": 7,
     "total_revenue": 480.0,
     "bands": [
-      "Jere",
-      "Jarabe de Palo"
+      "Jarabe de Palo",
+      "Jere"
     ],
     "first_session": "01/12/2020",
     "last_session": "23/01/2021",
@@ -4097,8 +4079,8 @@
     "total_revenue": 420.0,
     "bands": [
       "Carlos donoso",
-      "rafa blas",
-      "Julia"
+      "Julia",
+      "rafa blas"
     ],
     "first_session": "04/03/2022",
     "last_session": "29/09/2022",
@@ -4348,11 +4330,11 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 6,
+    "sessions": 5,
     "total_revenue": 380.0,
     "bands": [
-      "Ángel Pina",
-      "Angel Pina"
+      "Angel Pina",
+      "Ángel Pina"
     ],
     "first_session": "05/02/2019",
     "last_session": "30/07/2018",
@@ -4377,8 +4359,8 @@
     "sessions": 6,
     "total_revenue": 440.0,
     "bands": [
-      "Serio Vellido",
-      "Sergio Vellido"
+      "Sergio Vellido",
+      "Serio Vellido"
     ],
     "first_session": "02/08/2019",
     "last_session": "27/11/2017",
@@ -4454,9 +4436,9 @@
     "sessions": 6,
     "total_revenue": 630.0,
     "bands": [
-      "TCMS 2020",
-      "Operacion Triunfo 2020",
       "Francisco",
+      "Operacion Triunfo 2020",
+      "TCMS 2020",
       "diana navarro",
       "la marató de tv3 2025"
     ],
@@ -4612,7 +4594,7 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 6,
+    "sessions": 3,
     "total_revenue": 180.0,
     "bands": [
       "Nando Cohen"
@@ -4772,11 +4754,11 @@
     "sessions": 6,
     "total_revenue": 460.0,
     "bands": [
-      "Mari",
-      "Álvaro Montón",
+      "Ali",
       "Andrés Labrador",
       "Javier Santacruz",
-      "Ali"
+      "Mari",
+      "Álvaro Montón"
     ],
     "first_session": "11/04/2023",
     "last_session": "25/06/2021",
@@ -4993,8 +4975,8 @@
     "sessions": 5,
     "total_revenue": 400.0,
     "bands": [
-      "Dani Sevilla",
-      "Carles Ribes"
+      "Carles Ribes",
+      "Dani Sevilla"
     ],
     "first_session": "01/03/2023",
     "last_session": "30/04/2018",
@@ -5497,12 +5479,11 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 5,
+    "sessions": 3,
     "total_revenue": 450.0,
     "bands": [
-      "Samantha",
-      "Adrià Roy",
-      "Mariona Escoda"
+      "Mariona Escoda",
+      "Samantha"
     ],
     "first_session": "07/02/2022",
     "last_session": "24/08/2022",
@@ -5670,8 +5651,8 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 5,
-    "total_revenue": 400.0,
+    "sessions": 6,
+    "total_revenue": 529.23,
     "bands": [
       "Dacil Santana",
       "Salvador Beltrán"
@@ -5724,9 +5705,9 @@
     "sessions": 5,
     "total_revenue": 340.0,
     "bands": [
-      "Wistimber",
+      "Jan Boots",
       "Jorge Tylki",
-      "Jan Boots"
+      "Wistimber"
     ],
     "first_session": "05/06/2024",
     "last_session": "30/04/2025",
@@ -5932,8 +5913,8 @@
     "sessions": 4,
     "total_revenue": 600.0,
     "bands": [
-      "merche",
-      "Malú"
+      "Malú",
+      "merche"
     ],
     "first_session": "12/08/2017",
     "last_session": "24/08/2017",
@@ -6062,12 +6043,11 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 4,
+    "sessions": 3,
     "total_revenue": 270.0,
     "bands": [
       "Operacion Triunfo 2020",
       "TCMS 2020 gala 17",
-      "la marató de tv3 2025",
       "makuka"
     ],
     "first_session": "09/12/2020",
@@ -6300,9 +6280,9 @@
     "sessions": 4,
     "total_revenue": 320.0,
     "bands": [
-      "Michelle Neri",
+      "Adri Ahumada",
       "Mariana del Roble Omaña",
-      "Adri Ahumada"
+      "Michelle Neri"
     ],
     "first_session": "04/03/2021",
     "last_session": "23/03/2022",
@@ -6807,8 +6787,8 @@
     "sessions": 4,
     "total_revenue": 600.0,
     "bands": [
-      "Pablo Lacadiere",
-      "Belén Barroso"
+      "Belén Barroso",
+      "Pablo Lacadiere"
     ],
     "first_session": "06/02/2026",
     "last_session": "23/05/2024",
@@ -6835,8 +6815,8 @@
     "sessions": 4,
     "total_revenue": 240.0,
     "bands": [
-      "Ismael",
-      "Augusto"
+      "Augusto",
+      "Ismael"
     ],
     "first_session": "11/06/2025",
     "last_session": "26/04/2024",
@@ -7155,8 +7135,8 @@
     "sessions": 3,
     "total_revenue": 440.0,
     "bands": [
-      "Reber",
       "John Legend",
+      "Reber",
       "merche"
     ],
     "first_session": "12/06/2014",
@@ -7371,8 +7351,8 @@
     "sessions": 3,
     "total_revenue": 270.0,
     "bands": [
-      "Moises Losada",
       "Delpuerto",
+      "Moises Losada",
       "Naiara López"
     ],
     "first_session": "08/05/2024",
@@ -7606,8 +7586,8 @@
     "sessions": 3,
     "total_revenue": 315.0,
     "bands": [
-      "Liana Polanco",
       "Kairy Márquez",
+      "Liana Polanco",
       "Manuela y Omar"
     ],
     "first_session": "08/05/2020",
@@ -7765,8 +7745,8 @@
     "sessions": 3,
     "total_revenue": 240.0,
     "bands": [
-      "Rosa López",
-      "Patricia Manterola"
+      "Patricia Manterola",
+      "Rosa López"
     ],
     "first_session": "08/01/2021",
     "last_session": "19/01/2021",
@@ -7921,9 +7901,9 @@
     "sessions": 3,
     "total_revenue": 530.0,
     "bands": [
-      "Marta Soto",
       "Abraham Mateo y Sebastián Yatra",
-      "Antonio"
+      "Antonio",
+      "Marta Soto"
     ],
     "first_session": "11/01/2021",
     "last_session": "26/10/2023",
@@ -7995,8 +7975,8 @@
     "sessions": 3,
     "total_revenue": 180.0,
     "bands": [
-      "Izzy Rock",
-      "Fraile"
+      "Fraile",
+      "Izzy Rock"
     ],
     "first_session": "10/02/2021",
     "last_session": "26/02/2021",
@@ -8044,11 +8024,10 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 3,
+    "sessions": 1,
     "total_revenue": 380.0,
     "bands": [
-      "Santi",
-      "javier quilis"
+      "Santi"
     ],
     "first_session": "18/02/2021",
     "last_session": "30/09/2024",
@@ -8356,9 +8335,9 @@
     "sessions": 3,
     "total_revenue": 200.0,
     "bands": [
-      "Jorge Afonso",
+      "Jesús Lorenzo y Kutxi Romero",
       "Jesús Lorenzo",
-      "Jesús Lorenzo y Kutxi Romero"
+      "Jorge Afonso"
     ],
     "first_session": "05/10/2022",
     "last_session": "28/01/2026",
@@ -8435,8 +8414,8 @@
     "sessions": 3,
     "total_revenue": 180.0,
     "bands": [
-      "Josh Bolaño",
-      "David Camargo"
+      "David Camargo",
+      "Josh Bolaño"
     ],
     "first_session": "10/01/2024",
     "last_session": "28/11/2022",
@@ -8804,9 +8783,9 @@
     "sessions": 3,
     "total_revenue": 240.0,
     "bands": [
+      "Maki",
       "Maki & María Artés",
-      "María Artés",
-      "Maki"
+      "María Artés"
     ],
     "first_session": "03/01/2025",
     "last_session": "26/01/2026",
@@ -8856,8 +8835,8 @@
     "sessions": 3,
     "total_revenue": 240.0,
     "bands": [
-      "Tania García",
-      "Fitasha"
+      "Fitasha",
+      "Tania García"
     ],
     "first_session": "12/08/2025",
     "last_session": "28/02/2025",
@@ -9114,10 +9093,9 @@
     "country": "",
     "address": "Rua Guilherme Volpe, 552\u000bJardim Recreio",
     "nif": "14177060",
-    "sessions": 2,
+    "sessions": 1,
     "total_revenue": 80.0,
     "bands": [
-      "david soriano",
       "David Soriano"
     ],
     "first_session": "10/08/2021",
@@ -9220,8 +9198,8 @@
     "sessions": 2,
     "total_revenue": 140.0,
     "bands": [
-      "Nada de nadie",
-      "Mike Martin"
+      "Mike Martin",
+      "Nada de nadie"
     ],
     "first_session": "25/10/2018",
     "last_session": "29/12/2017",
@@ -10311,8 +10289,8 @@
     "sessions": 2,
     "total_revenue": 100.0,
     "bands": [
-      "Nicolás Cobo",
-      "Mariana Rojas"
+      "Mariana Rojas",
+      "Nicolás Cobo"
     ],
     "first_session": "06/04/2021",
     "last_session": "22/01/2024",
@@ -10547,8 +10525,8 @@
     "sessions": 2,
     "total_revenue": 160.0,
     "bands": [
-      "Resi",
-      "Charlie"
+      "Charlie",
+      "Resi"
     ],
     "first_session": "10/03/2022",
     "last_session": "14/01/2022",
@@ -11114,8 +11092,8 @@
     "sessions": 2,
     "total_revenue": 160.0,
     "bands": [
-      "Gastón Jáuregui",
-      "Alan Moreno"
+      "Alan Moreno",
+      "Gastón Jáuregui"
     ],
     "first_session": "08/10/2024",
     "last_session": "18/10/2023",
@@ -11555,8 +11533,8 @@
     "sessions": 2,
     "total_revenue": 160.0,
     "bands": [
-      "roi álvarez",
-      "Omar"
+      "Omar",
+      "roi álvarez"
     ],
     "first_session": "22/07/2024",
     "last_session": "24/07/2024",
@@ -11680,8 +11658,8 @@
     "sessions": 2,
     "total_revenue": 230.0,
     "bands": [
-      "Rober Calvo",
-      "Fernando Montesinos"
+      "Fernando Montesinos",
+      "Rober Calvo"
     ],
     "first_session": "11/10/2024",
     "last_session": "29/09/2025",
@@ -12179,8 +12157,8 @@
     "sessions": 2,
     "total_revenue": 140.0,
     "bands": [
-      "Karla Kanora",
-      "Chikyband"
+      "Chikyband",
+      "Karla Kanora"
     ],
     "first_session": "03/12/2025",
     "last_session": "27/05/2025",
@@ -12561,7 +12539,7 @@
     "address": "",
     "nif": "",
     "sessions": 1,
-    "total_revenue": 0,
+    "total_revenue": 0.0,
     "bands": [
       "Miquel Porcel"
     ],
@@ -12584,7 +12562,7 @@
     "address": "",
     "nif": "",
     "sessions": 1,
-    "total_revenue": 0,
+    "total_revenue": 0.0,
     "bands": [
       "Juan Mena"
     ],
@@ -13336,7 +13314,7 @@
     "address": "",
     "nif": "",
     "sessions": 1,
-    "total_revenue": 0,
+    "total_revenue": 0.0,
     "bands": [
       "Miquel Moya"
     ],
@@ -14202,7 +14180,7 @@
     "address": "",
     "nif": "",
     "sessions": 1,
-    "total_revenue": 0,
+    "total_revenue": 0.0,
     "bands": [],
     "first_session": "10/07/2020",
     "last_session": "10/07/2020",
@@ -14963,7 +14941,7 @@
     "address": "",
     "nif": "",
     "sessions": 1,
-    "total_revenue": 0,
+    "total_revenue": 0.0,
     "bands": [
       "Noé Santamaría"
     ],
@@ -21549,7 +21527,7 @@
     "address": "",
     "nif": "",
     "sessions": 1,
-    "total_revenue": 0,
+    "total_revenue": 0.0,
     "bands": [
       "La Guardia"
     ],
@@ -22113,8 +22091,8 @@
     "country": "",
     "address": "",
     "nif": "",
-    "sessions": 1,
-    "total_revenue": 60.0,
+    "sessions": 2,
+    "total_revenue": 181.62,
     "bands": [
       "Rammar Rivero"
     ],
@@ -22194,6 +22172,328 @@
     "sources": [
       "filemaker_grabaciones",
       "google"
+    ],
+    "notes": [],
+    "facturado": false
+  },
+  {
+    "name": "david soriano",
+    "emails": [],
+    "phones": [],
+    "organization": "",
+    "city": "",
+    "country": "",
+    "address": "",
+    "nif": "",
+    "sessions": 1,
+    "total_revenue": 80.0,
+    "bands": [
+      "david soriano"
+    ],
+    "first_session": "",
+    "last_session": "",
+    "sources": [
+      "filemaker_grabaciones"
+    ],
+    "notes": [],
+    "facturado": false
+  },
+  {
+    "name": "Angel Pina",
+    "emails": [],
+    "phones": [],
+    "organization": "",
+    "city": "",
+    "country": "",
+    "address": "",
+    "nif": "",
+    "sessions": 1,
+    "total_revenue": 60.0,
+    "bands": [
+      "Ángel Pina"
+    ],
+    "first_session": "",
+    "last_session": "",
+    "sources": [
+      "filemaker_grabaciones"
+    ],
+    "notes": [],
+    "facturado": false
+  },
+  {
+    "name": "marc martin",
+    "emails": [],
+    "phones": [],
+    "organization": "",
+    "city": "",
+    "country": "",
+    "address": "",
+    "nif": "",
+    "sessions": 41,
+    "total_revenue": 11209.9,
+    "bands": [
+      "Bipolar",
+      "Daniel Viloria",
+      "David Arjona",
+      "Jo mai mai",
+      "Kalvin",
+      "Lucía Martín",
+      "Maria Jacobs",
+      "Otra Historia",
+      "Sergi Ramirez",
+      "Williams Ortiz",
+      "cancun",
+      "destemps",
+      "ice crime",
+      "moonlit",
+      "sara roy",
+      "the targarians",
+      "Álvaro Blanco"
+    ],
+    "first_session": "",
+    "last_session": "",
+    "sources": [
+      "filemaker_grabaciones"
+    ],
+    "notes": [],
+    "facturado": false
+  },
+  {
+    "name": "Ten Productions (Toni)",
+    "emails": [],
+    "phones": [],
+    "organization": "",
+    "city": "",
+    "country": "",
+    "address": "",
+    "nif": "",
+    "sessions": 1,
+    "total_revenue": 60.0,
+    "bands": [
+      "TCMS  gala 14"
+    ],
+    "first_session": "",
+    "last_session": "",
+    "sources": [
+      "filemaker_grabaciones"
+    ],
+    "notes": [],
+    "facturado": false
+  },
+  {
+    "name": "john Caballés",
+    "emails": [],
+    "phones": [],
+    "organization": "",
+    "city": "",
+    "country": "",
+    "address": "",
+    "nif": "",
+    "sessions": 3,
+    "total_revenue": 450.0,
+    "bands": [
+      "Cepeda"
+    ],
+    "first_session": "",
+    "last_session": "",
+    "sources": [
+      "filemaker_grabaciones"
+    ],
+    "notes": [],
+    "facturado": false
+  },
+  {
+    "name": "Ricard Gamez",
+    "emails": [],
+    "phones": [],
+    "organization": "",
+    "city": "",
+    "country": "",
+    "address": "",
+    "nif": "",
+    "sessions": 8,
+    "total_revenue": 1360.0,
+    "bands": [
+      "Son Amar Show"
+    ],
+    "first_session": "",
+    "last_session": "",
+    "sources": [
+      "filemaker_grabaciones"
+    ],
+    "notes": [],
+    "facturado": false
+  },
+  {
+    "name": "Raul Velasco",
+    "emails": [],
+    "phones": [],
+    "organization": "",
+    "city": "",
+    "country": "",
+    "address": "",
+    "nif": "",
+    "sessions": 3,
+    "total_revenue": 240.0,
+    "bands": [
+      "Bral"
+    ],
+    "first_session": "",
+    "last_session": "",
+    "sources": [
+      "filemaker_grabaciones"
+    ],
+    "notes": [],
+    "facturado": false
+  },
+  {
+    "name": "Faulin mendez",
+    "emails": [],
+    "phones": [],
+    "organization": "",
+    "city": "",
+    "country": "",
+    "address": "",
+    "nif": "",
+    "sessions": 1,
+    "total_revenue": 60.0,
+    "bands": [],
+    "first_session": "",
+    "last_session": "",
+    "sources": [
+      "filemaker_grabaciones"
+    ],
+    "notes": [],
+    "facturado": false
+  },
+  {
+    "name": "fernando morillo",
+    "emails": [],
+    "phones": [],
+    "organization": "",
+    "city": "",
+    "country": "",
+    "address": "",
+    "nif": "",
+    "sessions": 3,
+    "total_revenue": 180.0,
+    "bands": [
+      "Nando Cohen"
+    ],
+    "first_session": "",
+    "last_session": "",
+    "sources": [
+      "filemaker_grabaciones"
+    ],
+    "notes": [],
+    "facturado": false
+  },
+  {
+    "name": "Alex carretero",
+    "emails": [],
+    "phones": [],
+    "organization": "",
+    "city": "",
+    "country": "",
+    "address": "",
+    "nif": "",
+    "sessions": 2,
+    "total_revenue": 300.0,
+    "bands": [
+      "nahuel"
+    ],
+    "first_session": "",
+    "last_session": "",
+    "sources": [
+      "filemaker_grabaciones"
+    ],
+    "notes": [],
+    "facturado": false
+  },
+  {
+    "name": "Alex perez",
+    "emails": [],
+    "phones": [],
+    "organization": "",
+    "city": "",
+    "country": "",
+    "address": "",
+    "nif": "",
+    "sessions": 2,
+    "total_revenue": 160.0,
+    "bands": [
+      "Adrià Roy"
+    ],
+    "first_session": "",
+    "last_session": "",
+    "sources": [
+      "filemaker_grabaciones"
+    ],
+    "notes": [],
+    "facturado": false
+  },
+  {
+    "name": "antonio Poyatos",
+    "emails": [],
+    "phones": [],
+    "organization": "",
+    "city": "",
+    "country": "",
+    "address": "",
+    "nif": "",
+    "sessions": 3,
+    "total_revenue": 180.0,
+    "bands": [
+      "Pijamas azules"
+    ],
+    "first_session": "",
+    "last_session": "",
+    "sources": [
+      "filemaker_grabaciones"
+    ],
+    "notes": [],
+    "facturado": false
+  },
+  {
+    "name": "luis del toro",
+    "emails": [],
+    "phones": [],
+    "organization": "",
+    "city": "",
+    "country": "",
+    "address": "",
+    "nif": "",
+    "sessions": 2,
+    "total_revenue": 300.0,
+    "bands": [
+      "javier quilis"
+    ],
+    "first_session": "",
+    "last_session": "",
+    "sources": [
+      "filemaker_grabaciones"
+    ],
+    "notes": [],
+    "facturado": false
+  },
+  {
+    "name": "Xasqui Ten",
+    "emails": [],
+    "phones": [],
+    "organization": "",
+    "city": "",
+    "country": "",
+    "address": "",
+    "nif": "",
+    "sessions": 1,
+    "total_revenue": 150.0,
+    "bands": [
+      "la marató de tv3 2025"
+    ],
+    "first_session": "",
+    "last_session": "",
+    "sources": [
+      "filemaker_grabaciones"
     ],
     "notes": [],
     "facturado": false
