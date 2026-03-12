@@ -222,30 +222,58 @@ const AmpliarPedido = () => {
 
         {phase === 'select' && (
           <>
-            {/* MICROPHONES */}
-            <section className="space-y-6">
-              <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                🎤 {t("microphones.premiumUpgrades")}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {micItems.map(item => {
-                  const mic = allMicrophones.find(m => m.id === item.id);
-                  return (
-                    <ProductCard
-                      key={item.id}
-                      category={mic ? t(mic.targetKey) : t("microphones.category")}
-                      price={item.price}
-                      name={item.name}
-                      description={mic ? t(mic.descriptionKey) : item.description}
-                      image={mic?.image}
-                      isSelected={hasItem(item.id)}
-                      onToggle={() => toggleItem(item)}
-                      addLabel={t("video.addFor")}
-                      addedLabel={t("microphones.added")}
-                    />
-                  );
-                })}
+            {/* MICROPHONES — organized by category */}
+            <section className="space-y-8 sm:space-y-12 bg-gradient-to-br from-warm-cream/20 to-warm-peach/10 rounded-xl p-4 sm:p-8">
+              <div className="text-center space-y-4 sm:space-y-6">
+                <h2 className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  {t("microphones.title")}
+                </h2>
+                <p className="text-muted-foreground text-base sm:text-xl max-w-3xl mx-auto leading-relaxed">
+                  {t("microphones.subtitle")}
+                </p>
               </div>
+
+              {microphoneCategories.map((category) => (
+                <div key={category.id} className="space-y-4 sm:space-y-6">
+                  <div className="sticky top-0 z-20 py-2 -mx-4 px-4 sm:-mx-8 sm:px-8 backdrop-blur-md rounded-b-xl">
+                    <div className="flex items-center justify-center">
+                      <div className="flex items-center gap-2 sm:gap-3 bg-primary/20 px-4 sm:px-6 py-2 sm:py-3 rounded-full">
+                        <h3 className="text-lg sm:text-2xl font-bold">
+                          {t(category.titleKey)}
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
+                    {category.microphones.map((mic) => {
+                      const cartItem: CartItem = {
+                        id: mic.id,
+                        name: mic.name,
+                        price: mic.price,
+                        category: t("microphones.category"),
+                        description: `${t(mic.descriptionKey)} - ${t(mic.targetKey)}`,
+                      };
+                      return (
+                        <ProductCard
+                          key={mic.id}
+                          category={t(mic.targetKey)}
+                          price={mic.price}
+                          name={mic.name}
+                          subtitle={mic.subtitleKey ? t(mic.subtitleKey) : undefined}
+                          description={t(mic.descriptionKey)}
+                          image={mic.image}
+                          isSelected={hasItem(mic.id)}
+                          onToggle={() => toggleItem(cartItem)}
+                          addLabel={t("video.addFor")}
+                          addedLabel={t("microphones.added")}
+                          vintageBadge={mic.vintage ? t("micData.vintage") : undefined}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </section>
 
             {/* PRODUCTION */}
