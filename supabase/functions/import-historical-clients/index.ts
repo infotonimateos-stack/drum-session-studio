@@ -11,7 +11,6 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // Auth check with admin password
     const authHeader = req.headers.get("x-admin-password");
     const adminPassword = Deno.env.get("ADMIN_PASSWORD");
     if (!authHeader || authHeader !== adminPassword) {
@@ -21,20 +20,23 @@ Deno.serve(async (req) => {
       });
     }
 
-    const data: any[] = await req.json();
-    if (!Array.isArray(data)) {
-      return new Response(JSON.stringify({ error: "Body must be a JSON array" }), {
-        status: 400,
+    // Fetch JSON from GitHub repo
+    const ghUrl = "https://raw.githubusercontent.com/infotonimateos-stack/drum-session-studio/main/data/contabilidad/clientes_unificado.json";
+    const ghResp = await fetch(ghUrl);
+    if (!ghResp.ok) {
+      return new Response(JSON.stringify({ error: `GitHub fetch failed: ${ghResp.status}` }), {
+        status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
+
+    const data: any[] = await ghResp.json();
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    // Parse dates DD/MM/YYYY -> YYYY-MM-DD
     function parseDate(d: string | null | undefined): string | null {
       if (!d || !d.trim()) return null;
       const parts = d.trim().split("/");
@@ -76,7 +78,7 @@ Deno.serve(async (req) => {
       const batch = rows.slice(i, i + BATCH);
       const { error } = await supabase.from("historical_clients").insert(batch);
       if (error) {
-        return new Response(JSON.stringify({ error: error.message, inserted }), {
+        return new Response(JSON.stringify({ error: error.message, inserted, at_batch: i }), {
           status: 500,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
@@ -84,7 +86,7 @@ Deno.serve(async (req) => {
       inserted += batch.length;
     }
 
-    return new Response(JSON.stringify({ success: true, inserted }), {
+    return new Response(JSON.stringify({ success: true, inserted, total_source: data.length }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (err) {
