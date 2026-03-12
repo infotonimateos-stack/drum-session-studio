@@ -159,9 +159,9 @@ function generateQuoteHtml(
 <body style="font-family:'Helvetica Neue',Arial,sans-serif;max-width:800px;margin:0 auto;padding:0;color:#1a1a2e;background:#fff;">
 
   <!-- Header bar -->
-  <div style="background:linear-gradient(135deg,#1a1a2e 0%,#2d2d4e 100%);padding:28px 36px;display:flex;justify-content:space-between;align-items:center;">
-    <div style="display:flex;align-items:center;gap:16px;">
-      <img src="${TM_LOGO_BASE64}" width="52" height="52" style="display:block;object-fit:contain;border-radius:6px;" alt="TM" />
+  <div style="background:linear-gradient(135deg,#1a1a2e 0%,#2d2d4e 100%);padding:28px 36px;display:flex;justify-content:space-between;align-items:center;overflow:visible;">
+    <div style="display:flex;align-items:center;gap:16px;overflow:visible;">
+      <div style="width:52px;height:52px;min-width:52px;flex-shrink:0;overflow:visible;"><img src="${TM_LOGO_BASE64}" width="52" height="52" style="display:block;width:52px;height:52px;border-radius:6px;" alt="TM" /></div>
       <div>
         <h1 style="margin:0;color:#fff;font-size:24px;font-weight:700;letter-spacing:1px;">PRESUPUESTO</h1>
         <p style="margin:3px 0 0;color:rgba(255,255,255,0.7);font-size:13px;">Nº ${displayNumber}</p>
