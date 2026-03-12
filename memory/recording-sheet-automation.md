@@ -60,12 +60,25 @@ type: project
 - `r88-room` → ROOM AEA R88
 - `d19c-room` → (vintage, pendiente mapear)
 
+### Trigger de entrega: Botón en Admin Panel (decidido 2026-03-12)
+- Botón **"Entregar pistas"** en la tarjeta de cada pedido del admin panel
+- Toni selecciona la carpeta de WAVs desde el navegador (input file/folder)
+- El sistema hace el resto automáticamente:
+  1. Sube WAVs a Google Drive (carpeta por pedido)
+  2. Genera ficha técnica (Google Sheets) con micros del pedido + upsell
+  3. Crea enlace intermedio tonimateos.com/descargar?id=XXX
+  4. Envía email al cliente con enlace descarga + ficha técnica
+  5. Actualiza estado del pedido en Supabase (delivery_status: 'sent')
+
 ### Pendiente para implementar:
-1. Activar Google Sheets API + Google Drive API en Cloud Console
+1. Activar Google Sheets API + Google Drive API en Cloud Console (necesita móvil 2FA)
 2. Autenticar tonidrummer@gmail.com con scopes: gmail.readonly + spreadsheets + drive
-3. Crear script Python que genere el spreadsheet desde datos de Supabase
-4. Crear página tonimateos.com/descargar con tracking en Supabase
-5. Email automático de seguimiento si no descarga en X días
+3. Crear Supabase Edge Function `deliver-tracks` que:
+   - Reciba WAVs + orderId
+   - Suba a Drive, genere sheet, envíe email
+4. Añadir botón "Entregar pistas" al admin panel (React)
+5. Crear página tonimateos.com/descargar con tracking en Supabase
+6. Email automático de seguimiento si no descarga en X días
 
 **Why:** Automatizar la entrega de pistas + ficha técnica ahorra tiempo y genera upsell automático
 **How to apply:** Cuando se implemente la entrega de pedidos, seguir este flujo
