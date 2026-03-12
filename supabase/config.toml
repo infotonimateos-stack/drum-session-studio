@@ -32,3 +32,6 @@ verify_jwt = false
 
 [functions.email-open-tracker]
 verify_jwt = false
+
+[functions.import-historical-clients]
+verify_jwt = false
