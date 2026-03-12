@@ -14,6 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
+      historical_clients: {
+        Row: {
+          address: string | null
+          alt_names: string[] | null
+          bands: string[] | null
+          city: string | null
+          country: string | null
+          created_at: string | null
+          emails: string[] | null
+          first_session: string | null
+          id: number
+          last_session: string | null
+          name: string
+          nif: string | null
+          notes: string[] | null
+          organization: string | null
+          phones: string[] | null
+          roles: string[] | null
+          sessions: number | null
+          sources: string[] | null
+          total_revenue: number | null
+        }
+        Insert: {
+          address?: string | null
+          alt_names?: string[] | null
+          bands?: string[] | null
+          city?: string | null
+          country?: string | null
+          created_at?: string | null
+          emails?: string[] | null
+          first_session?: string | null
+          id?: number
+          last_session?: string | null
+          name: string
+          nif?: string | null
+          notes?: string[] | null
+          organization?: string | null
+          phones?: string[] | null
+          roles?: string[] | null
+          sessions?: number | null
+          sources?: string[] | null
+          total_revenue?: number | null
+        }
+        Update: {
+          address?: string | null
+          alt_names?: string[] | null
+          bands?: string[] | null
+          city?: string | null
+          country?: string | null
+          created_at?: string | null
+          emails?: string[] | null
+          first_session?: string | null
+          id?: number
+          last_session?: string | null
+          name?: string
+          nif?: string | null
+          notes?: string[] | null
+          organization?: string | null
+          phones?: string[] | null
+          roles?: string[] | null
+          sessions?: number | null
+          sources?: string[] | null
+          total_revenue?: number | null
+        }
+        Relationships: []
+      }
       invoice_counters: {
         Row: {
           last_number: number
@@ -277,6 +343,36 @@ export type Database = {
     }
     Functions: {
       get_next_invoice_number: { Args: { p_series?: string }; Returns: string }
+      match_historical_clients: {
+        Args: { p_emails: string[]; p_phones: string[] }
+        Returns: {
+          address: string | null
+          alt_names: string[] | null
+          bands: string[] | null
+          city: string | null
+          country: string | null
+          created_at: string | null
+          emails: string[] | null
+          first_session: string | null
+          id: number
+          last_session: string | null
+          name: string
+          nif: string | null
+          notes: string[] | null
+          organization: string | null
+          phones: string[] | null
+          roles: string[] | null
+          sessions: number | null
+          sources: string[] | null
+          total_revenue: number | null
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "historical_clients"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
     }
     Enums: {
       [_ in never]: never
