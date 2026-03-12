@@ -45,15 +45,16 @@
 ## Contabilidad
 - Archivo FileMaker: `~/Documents/contabilidad/contabilidad.fmp12` (FileMaker Pro 18)
 - **IMPORTANTE:** Los PDFs de facturas emitidas en `~/Documents/contabilidad/[año]/facturas emitidas/` son la fuente DEFINITIVA (no el FileMaker, que tiene errores)
-- Grabaciones del FileMaker SÍ son fiables (3758 sesiones, 1016 artistas, 876 productores normalizados)
-- Resumen: 338.722€ total grabaciones (2013-2026), top productor por sesiones: Alex Vélez (75), por ingresos: Jorge Villaescusa (23.380€)
+- Grabaciones del FileMaker SÍ son fiables (3768 sesiones, actualizado 12/03/2026)
+- Resumen: 339.648€ total grabaciones (2013-2026), top productor por sesiones: Alex Vélez (75), por ingresos: Jorge Villaescusa (23.380€)
+- **Export automático vía UI scripting** (AppleScript): navega a layout "grabaciones", exporta CSV, parsea y actualiza JSON
 - Datos en `data/contabilidad/` del repo:
-  - `grabaciones.json` (3758 sesiones)
+  - `grabaciones.json` (3768 sesiones, actualizado 12/03/2026)
   - `facturas_emitidas.json` (1499)
   - `clientes.json` (497 FM clients)
   - `gastos.json` (1599), `proveedores.json` (211), `servicios.json` (7)
   - `clientes_unificado.json` (1980 contactos cruzados - incluye bandas, NO usar para productores)
-  - **`productores.json`** (876 productores, 86% con contacto) ← LISTADO PRINCIPAL
+  - **`productores.json`** (890 productores, 86% con contacto) ← LISTADO PRINCIPAL
 - Fuentes contacto exportadas: `~/Downloads/contacts.csv` (Google), `~/Downloads/contactos.csv` (Outlook)
 
 ## Gmail API
@@ -110,6 +111,8 @@
 - **2026-03-04:** Clonado repo drum-session-studio, exploración completa arquitectura, setup memoria persistente
 - **2026-03-09:** Facturas Q1 Monday.com (49), extracción FileMaker (6 tablas), listado productores (876, 86% con contacto), config Gmail API + Microsoft 2FA
 - **2026-03-10/11:** Admin panel: detección archivos (Apps Script + Supabase), rediseño tarjetas pedidos (Accordion/Collapsible), sincronización memoria entre PCs
+- **2026-03-12 (MacBook):** Presupuesto PDF (logo, importes, diseño), SEO Google Search Console (redirects, sitemap, noindex 404), caso legal Orbidi (análisis jurídico, requerimiento, contrarréplica), Gmail OAuth cardeseo@gmail.com, Recording Sheet plan
+- **2026-03-12 (iMac):** Corrección grabaciones.json (campos FMP correctos, 338.722→339.648€), renombrado archivos wav, SSH entre PCs, FileMaker ODBC+UI scripting (export automático), actualización datos marzo 2026 (23 sesiones, 1.854€)
 
 ## Sincronización verificada
 - Verificado 2026-03-11: ambos PCs (iMac + MacBook Air) leen y escriben esta memoria
