@@ -99,3 +99,22 @@ Emails detectados con 4 tipos de error:
 - [ ] Toni: enviar requerimiento formal mañana (13/03/2026) vía Signaturit
 - [ ] Plazo de respuesta Orbidi: 10 días hábiles (~25/03/2026)
 - [ ] Si no responden: diligencias preliminares (Art. 256 LEC) + demanda
+
+---
+
+## Sesión 3 (tarde-noche, iMac)
+
+### Tareas completadas
+1. **Corrección grabaciones.json** — campos renombrados a nombres reales de FileMaker, bug precio corregido (338.722→339.648€ con datos actualizados)
+2. **Renombrado archivos wav** — carpetas "vivir así", "volver a empezar", "fuera de plano" (eliminado sufijo .01)
+3. **SSH entre PCs** — Sesión remota activada en iMac, clave SSH del MacBook Air autorizada
+4. **FileMaker UI scripting** — Export automático de grabaciones vía AppleScript (navega a layout, exporta CSV, parsea)
+5. **Actualización datos marzo 2026** — 3768 registros, 339.648€ total, marzo 2026: 23 sesiones, 1.854€
+6. **Gráficos generados** — top10_ingresos, evolucion_anual, marzo_comparativa, marzo_solo (Chart.js)
+
+### PREGUNTA PENDIENTE PARA MACBOOK AIR
+> Toni dice que hablaron sobre **enviar pistas por Google Drive** y un **Recording Sheet**. Esa conversación NO se documentó. La próxima sesión en el MacBook debe documentar:
+> - ¿Qué plan se definió para enviar pistas via Drive?
+> - ¿Qué es el Recording Sheet y cómo se automatizaría?
+> - ¿Se usa cardeseo@gmail.com o info@tonimateos.com para Drive?
+> - Script `google_auth_cardeseo_full.py` tiene scopes de Sheets — ¿para qué exactamente?
