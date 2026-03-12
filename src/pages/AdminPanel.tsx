@@ -63,6 +63,7 @@ interface Order {
   files_last_checked_at: string | null;
   paypal_payer_info: any | null;
   postal_code: string | null;
+  historical_client: any | null;
 }
 
 const statusColors: Record<string, string> = {

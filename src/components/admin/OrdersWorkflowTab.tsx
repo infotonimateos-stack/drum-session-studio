@@ -13,6 +13,22 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 
+interface HistoricalClient {
+  id: number;
+  name: string;
+  emails: string[];
+  phones: string[];
+  organization: string | null;
+  nif: string | null;
+  city: string | null;
+  sessions: number;
+  total_revenue: number;
+  bands: string[];
+  first_session: string | null;
+  last_session: string | null;
+  roles: string[];
+}
+
 interface Order {
   id: string;
   created_at: string;
@@ -43,6 +59,7 @@ interface Order {
   files_detected_at: string | null;
   files_detection_method: string | null;
   files_last_checked_at: string | null;
+  historical_client: HistoricalClient | null;
 }
 
 interface Props {
@@ -164,9 +181,12 @@ export default function OrdersWorkflowTab({ orders, onRefresh, apiCall }: Props)
     const deadlineDate = order.deadline ? new Date(order.deadline + "T00:00:00") : undefined;
     const status = (order.work_status || "new") as keyof typeof workStatusConfig;
 
-    // Detect recurring client by email
+    // Historical client match (from API)
+    const hc = order.historical_client;
+
+    // Detect recurring web client by email (fallback if no historical match)
     const email = order.contact_email || order.billing_email;
-    const previousOrders = email
+    const previousWebOrders = email
       ? completedOrders.filter(o => o.id !== order.id && (o.contact_email === email || o.billing_email === email))
       : [];
 
@@ -184,11 +204,42 @@ export default function OrdersWorkflowTab({ orders, onRefresh, apiCall }: Props)
     return (
       <Card key={order.id} className="hover:border-primary/30 transition-colors">
         <CardContent className="pt-4 pb-4 space-y-3">
-          {/* Recurring client badge */}
-          {previousOrders.length > 0 && (
-            <Badge variant="outline" className="bg-purple-500/10 text-purple-400 border-purple-500/30 gap-1 text-xs">
+          {/* Historical recurring client badge */}
+          {hc && hc.sessions > 0 && (
+            <Collapsible>
+              <CollapsibleTrigger className="w-full">
+                <Badge variant="outline" className="bg-purple-500/10 text-purple-400 border-purple-500/30 gap-1 text-xs cursor-pointer hover:bg-purple-500/20 w-full justify-start">
+                  <History className="h-3 w-3" />
+                  Cliente recurrente - {hc.sessions} sesiones, {Math.round(hc.total_revenue)}€ total
+                  {hc.last_session && <span className="opacity-70 ml-1">· última: {hc.last_session}</span>}
+                  <ChevronDown className="h-3 w-3 ml-auto" />
+                </Badge>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="mt-1.5 text-xs text-muted-foreground pl-4 border-l-2 border-purple-500/30 space-y-1">
+                {hc.bands.length > 0 && (
+                  <p><Music className="h-3 w-3 inline mr-1" />Bandas: {hc.bands.slice(0, 5).join(", ")}{hc.bands.length > 5 ? ` (+${hc.bands.length - 5} más)` : ""}</p>
+                )}
+                {hc.first_session && <p>Primera sesión: {hc.first_session}</p>}
+                {hc.organization && <p><Building className="h-3 w-3 inline mr-1" />{hc.organization}</p>}
+                {/* Auto-fill suggestions for missing data */}
+                {!order.billing_phone && hc.phones.length > 0 && (
+                  <p className="text-amber-400"><Phone className="h-3 w-3 inline mr-1" />Sugerencia tel.: {hc.phones[0]}</p>
+                )}
+                {!order.full_address && hc.city && (
+                  <p className="text-amber-400"><MapPin className="h-3 w-3 inline mr-1" />Ciudad: {hc.city}</p>
+                )}
+                {!order.vat_number && hc.nif && (
+                  <p className="text-amber-400"><Building className="h-3 w-3 inline mr-1" />NIF: {hc.nif}</p>
+                )}
+              </CollapsibleContent>
+            </Collapsible>
+          )}
+
+          {/* Fallback: web-only recurrence (no historical match) */}
+          {!hc && previousWebOrders.length > 0 && (
+            <Badge variant="outline" className="bg-blue-500/10 text-blue-400 border-blue-500/30 gap-1 text-xs">
               <History className="h-3 w-3" />
-              Cliente recurrente - {previousOrders.length} pedido{previousOrders.length > 1 ? "s" : ""} anterior{previousOrders.length > 1 ? "es" : ""}
+              {previousWebOrders.length} pedido{previousWebOrders.length > 1 ? "s" : ""} anterior{previousWebOrders.length > 1 ? "es" : ""} (web)
             </Badge>
           )}
 

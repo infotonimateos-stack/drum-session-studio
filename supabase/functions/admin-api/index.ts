@@ -100,16 +100,59 @@ serve(async (req) => {
     const url = new URL(req.url);
     const action = url.searchParams.get("action");
 
-    // GET: list orders
+    // GET: list orders (enriched with historical client data)
     if (req.method === "GET" && action === "list") {
-      logStep("Listing orders");
-      const { data, error } = await supabase
+      logStep("Listing orders with historical enrichment");
+      const { data: ordersData, error } = await supabase
         .from("orders")
         .select("*")
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      return new Response(JSON.stringify({ orders: data }), {
+
+      // Collect unique emails and phones from all orders for batch matching
+      const allEmails: string[] = [];
+      const allPhones: string[] = [];
+      for (const order of ordersData || []) {
+        if (order.contact_email) allEmails.push(order.contact_email.toLowerCase());
+        if (order.billing_email) allEmails.push(order.billing_email.toLowerCase());
+        if (order.billing_phone) allPhones.push(order.billing_phone.replace(/\s/g, ""));
+        // Also check PayPal payer email
+        const pp = order.paypal_payer_info as Record<string, any> | null;
+        if (pp?.email) allEmails.push((pp.email as string).toLowerCase());
+      }
+
+      // Batch match against historical clients via RPC
+      let historicalMap: Record<string, any> = {};
+      if (allEmails.length > 0 || allPhones.length > 0) {
+        const { data: matches } = await supabase.rpc("match_historical_clients", {
+          p_emails: [...new Set(allEmails)],
+          p_phones: [...new Set(allPhones)],
+        });
+
+        if (matches) {
+          for (const hc of matches) {
+            for (const email of hc.emails || []) {
+              historicalMap[email.toLowerCase()] = hc;
+            }
+            for (const phone of hc.phones || []) {
+              historicalMap[phone.replace(/\s/g, "")] = hc;
+            }
+          }
+        }
+      }
+
+      // Attach historical match to each order
+      const enrichedOrders = (ordersData || []).map((order: any) => {
+        const email = (order.contact_email || order.billing_email || "").toLowerCase();
+        const billingEmail = (order.billing_email || "").toLowerCase();
+        const phone = (order.billing_phone || "").replace(/\s/g, "");
+        const ppEmail = ((order.paypal_payer_info as any)?.email || "").toLowerCase();
+        const match = historicalMap[email] || historicalMap[billingEmail] || historicalMap[ppEmail] || historicalMap[phone] || null;
+        return { ...order, historical_client: match };
+      });
+
+      return new Response(JSON.stringify({ orders: enrichedOrders }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
