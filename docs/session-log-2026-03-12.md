@@ -68,3 +68,34 @@ Emails detectados con 4 tipos de error:
 - Re-enviar sitemap en Google Search Console
 - Validar correcciones en GSC cuando se indexen
 - Test completo del flujo presupuesto → confirmación → pago
+
+---
+
+## Sesión 2 (tarde) — Caso legal Orbidi
+
+### Consulta jurídica: Resolución unilateral contrato Orbidi
+
+**Contexto:** Orbidi (G97 Tech Marketing SL) comunicó resolución unilateral del Acuerdo de Colaboración (Kit Digital) con 30 días de preaviso, restringiendo indebidamente nuevas operaciones durante el preaviso. +1.000 clientes referidos, información sobre cobros sistemáticamente negada.
+
+### Trabajo realizado
+1. **Análisis jurídico completo** del contrato (9 páginas + anexo)
+2. **Dictamen sobre vigencia durante preaviso:** Contrato sigue vigente 30 días con todos los derechos (Cláusula 9.3, Art. 1256 CC)
+3. **Calificación como contrato de agencia** (Ley 12/1992): cumple todos los requisitos del Art. 1 LCA
+4. **Derecho de información:** Art. 15 LCA (norma imperativa) obliga a Orbidi a facilitar relación de comisiones y exhibir libros contables
+5. **Redacción de email breve** de respuesta inmediata (reserva de derechos)
+6. **Redacción de requerimiento formal** para envío certificado vía Signaturit
+7. **Contrarréplica completa** a 9 posibles argumentos de defensa de Orbidi
+8. **Análisis estratégico** sobre email vs burofax vs Signaturit (validez del email certificado: Reglamento eIDAS, Ley 6/2020, Art. 299.2 LEC)
+
+### Documentación creada
+- `docs/legal/orbidi/README.md` — Índice del caso con cronología
+- `docs/legal/orbidi/01-analisis-juridico.md` — Análisis jurídico completo
+- `docs/legal/orbidi/02-email-breve-respuesta.md` — Email breve para envío HOY
+- `docs/legal/orbidi/03-requerimiento-formal.md` — Requerimiento formal (Signaturit)
+- `docs/legal/orbidi/04-contrareplica-defensa-orbidi.md` — Contrarréplica a defensa
+
+### Pendiente caso Orbidi
+- [ ] Toni: enviar email breve HOY (12/03/2026)
+- [ ] Toni: enviar requerimiento formal mañana (13/03/2026) vía Signaturit
+- [ ] Plazo de respuesta Orbidi: 10 días hábiles (~25/03/2026)
+- [ ] Si no responden: diligencias preliminares (Art. 256 LEC) + demanda
