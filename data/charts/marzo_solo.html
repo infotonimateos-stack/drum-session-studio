@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Marzo — Comparativa anual</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+body { margin: 0; padding: 20px; background: #1a1a2e; color: #eee; font-family: system-ui; }
+h1 { text-align: center; color: #e94560; margin-bottom: 5px; }
+.subtitle { text-align: center; color: #888; margin-bottom: 20px; }
+.container { max-width: 900px; margin: 0 auto; }
+canvas { background: #16213e; border-radius: 12px; padding: 15px; margin-bottom: 30px; }
+h2 { color: #533483; margin-top: 30px; }
+.stats { text-align: center; margin: 20px 0; font-size: 16px; line-height: 1.8; }
+.highlight { color: #e94560; font-weight: bold; }
+.proj { color: #6c63ff; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Marzo — Comparativa anual</h1>
+<div class="stats">
+  2026 (12 días): <span class="highlight">1.854 € / 23 sesiones</span><br>
+  <span class="proj">Proyección mes completo: ~4.790 € / ~59 sesiones</span><br>
+  Mejor marzo: <span class="highlight">2021 con 4.837 € (71 sesiones)</span>
+</div>
+<h2>Ingresos en marzo</h2>
+<canvas id="revenue"></canvas>
+<h2>Sesiones en marzo</h2>
+<canvas id="sessions"></canvas>
+<h2>Precio medio por sesión en marzo</h2>
+<canvas id="avgprice"></canvas>
+</div>
+<script>
+const years = ['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025','2026*'];
+const revenue = [520,800,1420,1510,1390,2250,4837,3825,3690,3950,4292,1854];
+const sessions = [4,8,12,20,13,31,71,49,46,55,58,23];
+const avg = revenue.map((r,i) => Math.round(r/sessions[i]));
+
+const colors = years.map(y => y.includes('2026') ? '#e94560' : '#533483');
+
+function makeChart(id, label, data, fmt) {
+  new Chart(document.getElementById(id), {
+    type: 'bar',
+    data: { labels: years, datasets: [{ label, data, backgroundColor: colors, borderRadius: 6 }] },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } } },
+      scales: {
+        y: { ticks: { color: '#aaa', callback: v => fmt(v) }, grid: { color: '#333' } },
+        x: { ticks: { color: '#eee' }, grid: { display: false } }
+      }
+    }
+  });
+}
+
+makeChart('revenue', 'Ingresos', revenue, v => v.toLocaleString('es-ES') + ' €');
+makeChart('sessions', 'Sesiones', sessions, v => v + ' ses');
+makeChart('avgprice', '€/sesión', avg, v => v + ' €/ses');
+</script>
+</body>
+</html>
