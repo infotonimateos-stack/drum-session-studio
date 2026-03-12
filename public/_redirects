@@ -1,1 +1,19 @@
+# ==============================================
+# Old WordPress URL redirects (SEO 301)
+# ==============================================
+/about                                                      /baterista-online                           301
+/pricing                                                    /grabacion-baterias-online                   301
+/online-drum-tracks                                         /grabacion-baterias-online                   301
+/examples                                                   /descarga-muestra-bateria-online             301
+/f-a-q                                                      /faq-grabacion-bateria-online                301
+/blog                                                       /blog-grabacion-bateria                      301
+/tutoriales                                                 /tutorial-mezcla-grabacion-bateria            301
+/discography                                                /baterista-online                            301
+/the-benefits-of-online-drums-recording                     /grabacion-baterias-online                   301
+/looking-for-a-studio-to-record-drums-the-keys-you-should-know /estudio-grabacion-baterias               301
+/how-to-set-up-your-own-home-studio                         /tutorial-mezcla-grabacion-bateria            301
+
+# ==============================================
+# SPA catch-all (must be LAST)
+# ==============================================
 /* /index.html 200

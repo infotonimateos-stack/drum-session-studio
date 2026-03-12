@@ -87,8 +87,8 @@ const AppRoutes = () => {
         <Route path="/looking-for-a-studio-to-record-drums-the-keys-you-should-know" element={<Navigate to="/estudio-grabacion-baterias" replace />} />
         <Route path="/how-to-set-up-your-own-home-studio" element={<Navigate to="/tutorial-mezcla-grabacion-bateria" replace />} />
 
-        {/* Catch-all: redirect to home silently */}
-        <Route path="*" element={<Navigate to="/grabacion-baterias-online" replace />} />
+        {/* Catch-all: show 404 page with noindex */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
   );
