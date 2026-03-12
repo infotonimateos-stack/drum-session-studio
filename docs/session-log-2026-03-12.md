@@ -112,9 +112,89 @@ Emails detectados con 4 tipos de error:
 5. **Actualización datos marzo 2026** — 3768 registros, 339.648€ total, marzo 2026: 23 sesiones, 1.854€
 6. **Gráficos generados** — top10_ingresos, evolucion_anual, marzo_comparativa, marzo_solo (Chart.js)
 
-### PREGUNTA PENDIENTE PARA MACBOOK AIR
-> Toni dice que hablaron sobre **enviar pistas por Google Drive** y un **Recording Sheet**. Esa conversación NO se documentó. La próxima sesión en el MacBook debe documentar:
-> - ¿Qué plan se definió para enviar pistas via Drive?
-> - ¿Qué es el Recording Sheet y cómo se automatizaría?
-> - ¿Se usa cardeseo@gmail.com o info@tonimateos.com para Drive?
-> - Script `google_auth_cardeseo_full.py` tiene scopes de Sheets — ¿para qué exactamente?
+---
+
+## Sesión 4 (noche) — MacBook Air
+> Responde a las preguntas pendientes del iMac sobre Recording Sheet y Google Drive
+
+### 1. SSH MacBook Air → iMac configurado
+- Generada clave ed25519 en MacBook Air
+- `ssh-copy-id tonimateos@iMac-de-Toni.local` ejecutado por Toni
+- Verificado: conexión sin contraseña funcional
+- SCP funcional para copiar archivos entre PCs
+
+### 2. Gmail API — info@cardeseo.com
+- Añadido info@cardeseo.com como usuario de prueba en Google Cloud Console (proyecto "web nueva 2026")
+- Script `scripts/gmail_auth_cardeseo.py` creado y ejecutado (puerto 8090)
+- Token generado: `data/gmail_token_cardeseo.pickle`
+- Tokens y client_secret.json sincronizados entre MacBook Air ↔ iMac vía SCP
+- **Test OK:** lectura de emails de Cardina Naveira (Signaturit)
+
+### 3. Resumen emails Cardina Naveira (Signaturit) — info@cardeseo.com
+- Account Manager: Cardina Naveira (cardina.naveira@signaturit.com)
+- May-Oct 2025: gestión créditos SMS y firma simple (cuenta Kit Digital, +40 cuentas)
+- Nov 2025: Toni pidió cancelación de cuenta (solo respuesta automática)
+- Feb 2026: cargo indebido renovación (factura INV-IV-000009420) a pesar de baja solicitada
+- Cardina se disculpa: migración de correos perdió el email de noviembre
+- 12 Mar 2026: confirma recepción de baja, pone billing@signaturit.com en copia
+- **Estado:** reclamación abierta, pendiente reembolso. También factura pendiente octubre INV-000097745
+
+### 4. Consulta contabilidad: Jairo Alberto Moreno
+- 13 canciones grabadas (jun 2021 — feb 2026)
+- Total: 780€ (60€/canción), siempre vía Facebook
+- Cliente fiel: 5 años colaborando
+
+### 5. Recording Sheet Automation — Diseño completo
+**Concepto:** Ficha técnica personalizada por pedido + upsell pistas extra + entrega WAVs por Google Drive
+
+**Decisiones:**
+- Spreadsheet separado por cada cliente
+- Google Drive con tonidrummer@gmail.com (2TB) — WeTransfer API cerrada para nuevos registros
+- Enlace público ("cualquiera con el enlace"), sin necesidad de login Google
+- Enlace intermedio tonimateos.com/descargar?id=XXX → tracking visita en Supabase → redirect a Drive
+- Upsell: pistas extra no compradas con enlace a tonimateos.com/ampliar-pedido (sin parámetros)
+- Trigger de entrega: pendiente decisión (botón admin panel recomendado)
+
+**Estructura ficha:**
+1. Micros incluidos en el pedido (channel, microphone, preamp)
+2. Pistas extra disponibles (upsell) con botón compra
+3. Datos cliente + equipo + contacto
+
+**Flujo completo post-grabación:**
+1. Toni graba con TODOS los micros
+2. Trigger (botón admin / carpeta / manual)
+3. Script genera ficha técnica personalizada (Google Sheets)
+4. WAVs se suben a Google Drive
+5. Email al cliente: enlace descarga (con tracking) + ficha técnica
+6. Si no descarga en X días → email recordatorio
+
+**Bloqueado por:** activar Google Sheets API + Google Drive API (necesita móvil para 2FA)
+
+### 6. Spreadsheet plantilla analizado
+- ID: 1d8vxQ4QSU2xJbYxmtYjgPi40RC6L8DyuAvkiYX7SjmE (gid: 1663095704)
+- Cuenta: tonidrummer@gmail.com
+- Estructura: 30 canales, datos cliente, equipamiento, procesamiento, contacto
+- Mapeo completo mic IDs de Supabase → canales del spreadsheet documentado
+
+### 7. Flujo actual verificado (send-order-email)
+- Confirmado: Resend envía email con resumen pedido + factura HTML adjunta + instrucciones envío archivos
+- BCC a info@tonimateos.com
+- Incluye upsell de extras + botón "Añadir extras" → tonimateos.com/ampliar-pedido
+- Tracking pixel para apertura de email
+- Actualiza email_status en Supabase
+
+### Archivos creados/modificados
+- `scripts/gmail_auth_cardeseo.py` — auth OAuth para info@cardeseo.com
+- `scripts/google_auth_cardeseo_full.py` — auth con scopes Gmail + Sheets (preparado)
+- `data/gmail_token_cardeseo.pickle` — token OAuth (local, .gitignore)
+- `data/client_secret.json` — credenciales OAuth (local, .gitignore)
+- `memory/recording-sheet-automation.md` — plan completo automatización
+- `memory/MEMORY.md` — actualizado (Gmail cardeseo, Recording Sheet, sesión)
+
+### Pendiente
+- [ ] Activar Google Sheets API + Google Drive API en Cloud Console
+- [ ] Autenticar tonidrummer@gmail.com con scopes: sheets + drive + gmail
+- [ ] Construir script de generación de ficha técnica
+- [ ] Crear página tonimateos.com/descargar con tracking
+- [ ] Decidir trigger de entrega (botón admin panel recomendado)
+- [ ] Email de seguimiento si cliente no descarga en X días
