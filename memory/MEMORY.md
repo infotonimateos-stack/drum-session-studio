@@ -16,6 +16,11 @@
 - Usa Pro Tools (.ptx)
 - ISP: O2, fibra 1 Gbps
 - Discos externos: LaCie, My Book (5)
+- **Estudios**: Derecho y Humanidades (en curso)
+- **Mercantil**: Groove Factory Studios SL (engloba todos los negocios)
+  - Negocio 1: Grabación de baterías online (tonimateos.com)
+  - Negocio 2: Empresa de marketing
+- **Contexto conversaciones**: Discernir si pregunta sobre sus negocios (consultas jurídicas aplicadas a la empresa) o sobre contenidos académicos de Derecho/Humanidades
 
 ## Archivos de referencia
 - [Sistema (hardware, software, problemas)](system-info.md)
